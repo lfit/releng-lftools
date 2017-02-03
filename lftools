@@ -21,6 +21,7 @@ echo $SCRIPT_DIR
 print_usage() {
     echo "Usage:"
     echo "    lftools -h"
+    echo "    lftools version        Run the version bumping script."
 }
 
 # Print the usage statement if the user provides no options
@@ -54,6 +55,8 @@ case "$subcommand" in
         ;;
     version )
         echo "Now we run the version command."
+        source $SCRIPT_DIR/version
+        version $@
         exit 0
         ;;
     * )
