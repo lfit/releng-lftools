@@ -1,0 +1,12 @@
+appdirs==1.4.0
+ecdsa==0.11
+httplib2==0.10.3
+packaging==16.8
+paramiko==1.16.0
+pbr==1.10.0
+pycrypto==2.6.1
+pygerrit==1.0.0
+pyparsing==2.1.10
+PyYAML==3.12
+requests==2.9.1
+six==1.10.0
