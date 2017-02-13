@@ -1,0 +1,16 @@
+---
+# vim: sw=2 ts=2 sts=2 et :
+base_groupId: 'org.example'
+repositories:
+  foo:
+    password: 'foo user pass'
+    repositories:
+      bar:
+        password: 'foo-bar user pass'
+        repositories:
+          baz:
+            password: 'foo-bar-baz user pass'
+            extra_privs:
+              # extra roles that should be assigned to the user
+              # These need to be the full display name and not the roleId
+              - 'Staging: Deployer (autorelease)'
