@@ -1,0 +1,14 @@
+---
+# vim: sw=2 ts=2 sts=2 et :
+
+# ldap basedn
+ldap:
+   groups_base: 'ou=Groups,dc=lf,dc=org'
+   users_base: 'ou=Users,dc=lf,dc=org'
+   # new project name
+   project_name: 'new-project'
+   # list of members to be added into the project
+   members:
+     - user3
+     - user2
+     - user1

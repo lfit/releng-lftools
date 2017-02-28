@@ -1,0 +1,9 @@
+---
+# vim: sw=2 ts=2 sts=3 et :
+
+# LDAP Server URL
+ldap: 'ldaps://ldap1.linux-foundation.org:636'
+
+# Administrative LDAP user account credentials
+admin_dn: 'cn=admin,dc=lf,dc=org'
+password: 'admin123'
