@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_cdf0fecb",
+        "filename": "project_builder/config-ldap.example.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-03-02T21:34:05Z",
+      "side": 1,
+      "message": "make this example not lf",
+      "range": {
+        "startLine": 6,
+        "startChar": 30,
+        "endLine": 6,
+        "endChar": 32
+      },
+      "revId": "ca33eb1619c4844c6c2f855f1e4e85960f183767",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_adedbaf1",
+        "filename": "project_builder/config-ldap.example.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-03-02T21:34:05Z",
+      "side": 1,
+      "message": "make this example not lf",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "ca33eb1619c4844c6c2f855f1e4e85960f183767",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_6dbfd2d1",
+        "filename": "project_builder/settings-ldap.example.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-03-02T21:34:05Z",
+      "side": 1,
+      "message": "This should be ldaps://ldap.example.org:636",
+      "range": {
+        "startLine": 5,
+        "startChar": 7,
+        "endLine": 5,
+        "endChar": 45
+      },
+      "revId": "ca33eb1619c4844c6c2f855f1e4e85960f183767",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_8dbaf6df",
+        "filename": "project_builder/settings-ldap.example.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-03-02T21:34:05Z",
+      "side": 1,
+      "message": "make this example not lf",
+      "range": {
+        "startLine": 8,
+        "startChar": 23,
+        "endLine": 8,
+        "endChar": 25
+      },
+      "revId": "ca33eb1619c4844c6c2f855f1e4e85960f183767",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
