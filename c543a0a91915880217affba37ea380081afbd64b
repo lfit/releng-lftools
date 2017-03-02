@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_17ddf370",
+        "filename": "project_builder/.gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5
+      },
+      "writtenOn": "2017-03-02T22:22:07Z",
+      "side": 1,
+      "message": "should config.example.yaml also be ignored?",
+      "revId": "c543a0a91915880217affba37ea380081afbd64b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
