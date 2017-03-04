@@ -1,8 +1,0 @@
-#!/bin/bash
-
-command -v shellcheck >/dev/null 2>&1 || {
-    echo >&2 "ShellCheck is not installed. Please install using your favourite package manager."
-    exit 1
-}
-
-shellcheck shell/*

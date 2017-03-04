@@ -1,0 +1,4 @@
+[ShellCheck]
+bears = ShellCheckBear
+files = shell/*
+shell = bash
