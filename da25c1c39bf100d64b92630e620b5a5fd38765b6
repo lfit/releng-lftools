@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_6d659244",
+        "filename": "lftools",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-04T16:54:56Z",
+      "side": 1,
+      "message": "Maybe unneeded if we want to go the route of using python subprocess. Let me think about this a bit more.",
+      "revId": "da25c1c39bf100d64b92630e620b5a5fd38765b6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_4d5ace84",
+        "filename": "version",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-04T16:54:56Z",
+      "side": 1,
+      "message": "Some of this change is probably still useful though as I think using functions like this cleans up the code a bit.",
+      "revId": "da25c1c39bf100d64b92630e620b5a5fd38765b6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
