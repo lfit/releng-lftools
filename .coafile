@@ -1,3 +1,11 @@
+[default]
+bears = SpaceConsistencyBear
+files = shell/*
+allow_trailing_whitespace = False
+enforce_newline_at_EOF = True
+indent_size = 4
+use_spaces = yeah
+
 [ShellCheck]
 bears = ShellCheckBear
 files = shell/*
