@@ -48,6 +48,29 @@
     },
     {
       "key": {
+        "uuid": "ba3e81b7_cd76be06",
+        "filename": "project_builder/ldap_create_project.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-04T16:50:26Z",
+      "side": 1,
+      "message": "This is a good start but if we\u0027re writing consolidated tools. I think we should consider consolidating libraries and components we will be using as well.\n\nPersonally I like to use Click [0] for argument parsing as I find it more simple syntax and powerful.\n\nWe should probably standardize the layout of our tools too. We will need to figure that out moving forward (Doesn\u0027t have to be in this patch) so that all of our tools can be compiled and packaged as one unit.\n\n[0] http://click.pocoo.org/5/",
+      "range": {
+        "startLine": 14,
+        "startChar": 7,
+        "endLine": 14,
+        "endChar": 15
+      },
+      "revId": "ca33eb1619c4844c6c2f855f1e4e85960f183767",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba3e81b7_6dbfd2d1",
         "filename": "project_builder/settings-ldap.example.yaml",
         "patchSetId": 1
