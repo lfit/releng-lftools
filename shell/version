@@ -59,6 +59,7 @@ version() {
         release )
             RELEASE_TAG=$1
             echo "Bumping SNAPSHOTS to $RELEASE_TAG"
+            version_release
             exit 0
             ;;
         * )

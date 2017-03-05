@@ -15,6 +15,8 @@ target/
 .project
 
 # Python
+.cache/
+.eggs/
 .tox/
 __pycache__/
 *.egg-info/
