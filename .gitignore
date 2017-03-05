@@ -17,6 +17,7 @@ target/
 # Python
 .tox/
 __pycache__/
+*.egg-info/
 *.pyc
 docs/_build/
 dist/
