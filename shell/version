@@ -101,3 +101,9 @@ version_release() {
         find . -type f -name "$name" -exec perl -i -pe "s/SNAPSHOT/$RELEASE_TAG/g" {} +
     done
 }
+
+# Only run the script if it is being called directly and not sourced.
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
+then
+    version "$@"
+fi

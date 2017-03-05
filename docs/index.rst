@@ -9,9 +9,9 @@ Linux Foundation Release Engineering Tools
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-
+    shell
 
 Indices and tables
 ==================
@@ -19,4 +19,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
