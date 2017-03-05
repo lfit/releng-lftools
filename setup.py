@@ -6,7 +6,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='lftools',
-    version='0.0.5',
+    version='0.0.6',
     author='Thanh Ha',
     author_email='thanh.ha@linuxfoundation.org',
     url='',
