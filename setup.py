@@ -1,8 +1,12 @@
-from distutils.core import setup
+from setuptools import find_packages
+from setuptools import setup
+
+with open('requirements.txt') as f:
+    install_reqs = f.read().splitlines()
 
 setup(
     name='lftools',
-    version='0.0.2',
+    version='0.0.5',
     author='Thanh Ha',
     author_email='thanh.ha@linuxfoundation.org',
     url='',
@@ -21,6 +25,17 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.5',
     ],
+    install_requires=install_reqs,
+    packages=find_packages(exclude=[
+        '*.tests',
+        '*.tests.*',
+        'tests.*',
+        'tests'
+    ]),
+    entry_points='''
+        [console_scripts]
+        lftools=lftools.cli:cli
+    ''',
     scripts=[
         'shell/patch-odl-release',
         'shell/version',
