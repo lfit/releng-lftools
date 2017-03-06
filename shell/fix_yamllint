@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+
+# @License EPL-1.0 <http://spdx.org/licenses/EPL-1.0>
+##############################################################################
+# Copyright (c) 2016, 2017 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+
+# TODO: The script should fix all the rules in http://yamllint.readthedocs.io/en/latest/rules.html
+# function loop_log_file takes care of the most common problems so far
+
+function start_script {
+    while getopts 'af:h' opt "$@"; do
+      case $opt in
+      'a')
+        option=1
+        ;;
+      'f')
+        option=2
+        FILES="$OPTARG"
+        ;;
+      'h')
+        option=3
+        ;;
+      esac
+    done
+
+    if [[ -z "$option" || "$option" -eq 3 ]]; then
+      echo Usage:
+      echo "./fix_yamlint -a (to run for all files)"
+      echo "./fix_yamllint -f "file1 file2 file3" (to fix for only the provided files)"
+      exit
+    elif [ $option -eq 1 ]; then
+        echo "Running yamllint for all yaml files ..."
+        ALL_FILES=`find . \( -name '*.yaml' -o -name '*.yml' \)`
+        for FILE in $ALL_FILES; do
+          process_file "$FILE"
+        done
+        exit 0
+    elif [ $option -eq 2 ]; then
+        # TODO: Allow the script take non full paths of files
+        for FILE in $FILES; do
+          process_file "$FILE"
+        done
+        exit 0
+    fi
+}
+
+function loop_log_file {
+    # loop through the file
+    # TODO below line fixes all lines that contain a project-name definition
+    # sed -i '/{project-name}/s/ */      /' $FILE
+    # Need to add this case to the loop
+    while read line; do
+      LINE_NUMBER=$( echo "$line" | cut -d ":" -f2 | cut -d ":" -f1 )
+      if [[ $line == *error* ]] && [[ $line == *"wrong indentation"* ]]; then
+        EXPECTED=$( echo "$line" | sed -e 's#.*expected \(\)#\1#' | sed 's/\s.*$//' )
+        # FOUND=$( echo "$line" | sed -e 's#.*found \(\)#\1#' | sed 's/\s.*$//' )
+        # Remove all blanks from the beginning of the line
+        sed -i "${LINE_NUMBER}s/^ *//g" "$FILE"
+        # Making a loop to add "EXPECTED" spaces in the beginning of the line
+        # this is just temporary meanwhile i figure something smarter
+        # shellcheck disable=SC2034
+        for space in $(seq 1 "$EXPECTED"); do
+          sed -i "${LINE_NUMBER}s/^/ /g" "$FILE"
+        done
+      elif [[ $line == *line-length* ]]; then
+        # TODO Handle/fix the line-lenght problem, if there is anything we can do manually
+        echo "==========LINE TOO LONG, FIX MANUALLY=========="
+        echo "$line"
+        echo "==============================================="
+      elif [[ $line == *new-line-at-end-of-file* ]]; then
+        # TODO handle this case on a proper manner. Reopening the file corrects it for now
+        ed "$FILE"
+        w
+        q
+      elif [[ $line == *"too many spaces"* ]] && [[ $line == *braces* ]]; then
+        sed -i "${LINE_NUMBER}s/ *{ */{/g" "$FILE"
+        sed -i "${LINE_NUMBER}s/ *} */}/g" "$FILE"
+      fi
+        # Remove the line with the error from the output log file
+        sed -i '1d' /tmp/temp_lint.txt
+        # Cat the log file (can be muted, I liked seeing it for debugging purposes)
+        echo the log file looks like this now...
+        cat /tmp/temp_lint.txt
+      done </tmp/temp_lint.txt
+}
+
+function process_file {
+    # Making sure the file is a yaml file
+    if [[ "$1" == *.yaml ]] || [[ "$1" == *.yml ]]; then
+      echo "Processing $1"
+      check_beginning_yaml
+      run_yamllint "$1"
+      loop_log_file
+    else
+      echo "Skipping $1, it is not a yaml file"
+    fi
+}
+
+function check_beginning_yaml {
+    # Missing the beginning of the file is a common mistake
+    # Adding it now before running yamllint so that the line numbers
+    # in the output file are accurate for processing other errors
+    read -r firstline < "$FILE"
+    if [[ $firstline != "---" ]]; then
+      sed -i "1s/^/---\n/g" "$FILE"
+    fi
+}
+
+function run_yamllint {
+    # Run yamllint and extract output into a temp file
+    yamllint -f parsable "$1" | tee /tmp/temp_lint.txt
+}
+
+########## BEGINNING OF THE SCRIPT ##########
+
+# Only run the script if it is being called directly and not sourced.
+    if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+      start_script "$@"
+    fi
