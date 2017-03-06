@@ -1,0 +1,5 @@
+This test checks that version bump order is maintained:
+
+1) bump date-based versions
+2) bump -SNAPSHOT versions
+3) bump -RELEASE versions

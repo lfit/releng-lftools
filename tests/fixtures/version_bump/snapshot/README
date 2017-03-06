@@ -1,0 +1,2 @@
+This test checks that a SNAPSHOT artifact is properly bumped by
+x.(y+1).z-SNAPSHOT when version bump is run.

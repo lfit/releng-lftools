@@ -1,0 +1,2 @@
+This test checks that SNAPSHOT artifacts properly get converted to a
+RELEASE_TAG as passed in by the user.
