@@ -40,6 +40,7 @@ setup(
         lftools=lftools.cli:main
     ''',
     scripts=[
+        'shell/deploy',
         'shell/version',
     ],
 )

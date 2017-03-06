@@ -13,6 +13,7 @@ __author__ = 'Thanh Ha'
 
 
 import click
+from lftools.cli.deploy import deploy
 from lftools.cli.nexus import nexus
 from lftools.cli.version import version
 from lftools.openstack.cmd import openstack
@@ -26,6 +27,7 @@ def cli(ctx):
     pass
 
 
+cli.add_command(deploy)
 cli.add_command(openstack)
 cli.add_command(nexus)
 cli.add_command(version)
