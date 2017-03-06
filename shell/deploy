@@ -1,0 +1,118 @@
+#!/bin/bash -x
+
+# @License EPL-1.0 <http://spdx.org/licenses/EPL-1.0>
+##############################################################################
+# Copyright (c) 2016, 2017 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+
+deploy() {
+    # Entry point for the deploy command.
+    subcommand=$1; shift
+
+    case "$subcommand" in
+        archive )
+            echo "Deploying archives..."
+            deploy_archives_to_nexus "$@"
+            exit 0
+            ;;
+        * )
+            echo "Invalid command: $subcommand" 1>&2
+            exit 1
+            ;;
+    esac
+}
+
+deploy_archives_to_nexus() {
+    # Archives files provided by the user.
+    #
+    # Provides 2 ways to archive files:
+    #     1) globstar pattern provided by the user via the ARTIFACTS
+    #        global variable.
+    #     2) $WORKSPACE/archives directory provided by the user.
+
+    local OPTIND opt a
+    while getopts ":p:" opt; do
+        case ${opt} in
+            p )
+                PREFIX_PATH="$OPTARG"
+                ;;
+            \? )
+                echo "Invalid Option: -$OPTARG" 1>&2
+                exit 1
+                ;;
+        esac
+    done
+    shift $((OPTIND-1))
+
+    if [ -z "$2" ]; then
+        echo "Missing required arguments."
+        exit 1
+    fi
+
+
+    # Workspace of where to search for files to archive.
+    WORKSPACE="$1"
+
+    # Pattern to archive (globstar allowed). Recommended to double quote the
+    # input so that the full pattern can be passed into the function.
+    ARCHIVE_PATTERN="$2"
+
+    # In some cases we need to zip up a prefix path such as OpenDaylight log
+    # servers want us to store logs in a path representing
+    # $JENKINS_SILO/$JENKINS_HOSTNAME/$JOB_NAME
+    PREFIX_PATH=${PREFIX_PATH:-""}
+    ARCHIVE_DIR="$WORKSPACE/.archives/$PREFIX_PATH"
+
+    ###################
+    # BEGIN ARCHIVING #
+    ###################
+    WORK_DIR="$WORKSPACE/.archives"
+    mkdir -p "$WORK_DIR"
+    cd "$WORK_DIR" || exit 404
+
+    mkdir -p "$PREFIX_PATH"
+    mkdir -p "$WORKSPACE/archives"
+    copy_archives "$WORKSPACE" "$ARCHIVE_PATTERN"
+    mv "$WORKSPACE/archives" "$ARCHIVE_DIR"
+
+    # find and gzip any 'text' files
+    find "$ARCHIVE_DIR" -type f -print0 \
+        | xargs -0r file \
+        | egrep -e ':.*text.*' \
+        | cut -d: -f1 \
+        | xargs -d'\n' -r gzip
+
+    zip -qr "$WORKSPACE/archives.zip" .
+    du -sh "$WORKSPACE/archives.zip"
+}
+
+copy_archives() {
+    WORKSPACE="$1"
+    ARTIFACTS="$2"
+
+    DEST_DIR="$WORKSPACE/archives"
+    if [ ! -z "$ARTIFACTS" ]; then
+        pushd "$WORKSPACE"
+        shopt -s globstar  # Enable globstar to copy archives
+        for f in $ARTIFACTS; do
+            [[ -e $f ]] || continue  # handle the case of no files to archive
+            echo "Archiving $f"
+            dir=$(dirname "$f")
+            mkdir -p "$DEST_DIR/$dir"
+            mv "$f" "$DEST_DIR/$f"
+        done
+        shopt -u globstar  # Disable globstar once archives are copied
+        popd
+    fi
+}
+
+# Only run the script if it is being called directly and not sourced.
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
+then
+    deploy "$@"
+fi
