@@ -1,0 +1,172 @@
+#!/bin/bash
+
+# @License EPL-1.0 <http://spdx.org/licenses/EPL-1.0>
+##############################################################################
+# Copyright (c) 2016, 2017 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+
+# This script handles sending files to a Nexus site repo for archiving. Mainly
+# useful for storing logs for example on logs.opendaylight.org.
+
+deploy() {
+    # Entry point for the deploy command.
+    subcommand=$1; shift
+
+    case "$subcommand" in
+        archives )
+            echo "Deploying archives..."
+            deploy_archives_to_nexus "$@"
+            exit 0
+            ;;
+        files )
+            echo "Deploying files..."
+            exit 0
+            ;;
+        logs )
+            echo "Deploying logs..."
+            deploy_logs
+            exit 0
+            ;;
+        * )
+            echo "Invalid command: $subcommand" 1>&2
+            exit 1
+            ;;
+    esac
+}
+
+deploy_archives_to_nexus() {
+    # Archives files provided by the user.
+    #
+    # Provides 2 ways to archive files:
+    #     1) globstar pattern provided by the user via the ARTIFACTS
+    #        global variable.
+    #     2) $WORKSPACE/archives directory provided by the user.
+
+    local OPTIND opt a
+    while getopts ":p:" opt; do
+        case ${opt} in
+            p )
+                PREFIX_PATH="$OPTARG"
+                ;;
+            \? )
+                echo "Invalid Option: -$OPTARG" 1>&2
+                exit 1
+                ;;
+        esac
+    done
+    shift $((OPTIND-1))
+
+    if [ -z "$2" ]; then
+        echo "Missing required arguments."
+        exit 1
+    fi
+
+
+    # Workspace of where to search for files to archive.
+    WORKSPACE="$1"
+
+    # Pattern to archive (globstar allowed). Recommended to double quote the
+    # input so that the full pattern can be passed into the function.
+    ARCHIVE_PATTERN="$2"
+
+    # In some cases we need to zip up a prefix path such as OpenDaylight log
+    # servers want us to store logs in a path representing
+    # $JENKINS_SILO/$JENKINS_HOSTNAME/$JOB_NAME
+    PREFIX_PATH=${PREFIX_PATH:-""}
+    ARCHIVE_DIR="$WORKSPACE/.archives/$PREFIX_PATH"
+
+    ###################
+    # BEGIN ARCHIVING #
+    ###################
+    WORK_DIR="$WORKSPACE/.archives"
+    mkdir -p "$WORK_DIR"
+    cd "$WORK_DIR" || exit 404
+
+    mkdir -p "$PREFIX_PATH"
+    mkdir -p "$WORKSPACE/archives"
+    copy_archives "$WORKSPACE" "$ARCHIVE_PATTERN"
+    mv "$WORKSPACE/archives" "$ARCHIVE_DIR"
+
+    # find and gzip any 'text' files
+    find "$ARCHIVE_DIR" -type f -print0 \
+        | xargs -0r file \
+        | egrep -e ':.*text.*' \
+        | cut -d: -f1 \
+        | xargs -d'\n' -r gzip
+
+    zip -qr "$WORKSPACE/archives.zip" .
+    du -sh "$WORKSPACE/archives.zip"
+}
+
+deploy_logs() {
+    # Fetches logs and other relevant information and pushes them to archives.
+    tmpdir=$(mktemp -d)
+    pushd "$tmpdir"
+
+    touch "$ARCHIVES_DIR/_build-details.log"
+    {
+        echo "build-url: ${BUILD_URL}"
+    } 2>&1 | tee -a "_build-details.log"
+    env | grep -v PASSWORD | sort > "_build-enviroment-variables.log"
+
+    # Print system info before collecting logs
+    touch "_sys-info.log"
+    {
+        echo -e "---> uname -a:\n $(uname -a) \n"
+        echo -e "---> lscpu:\n $(lscpu) \n"
+        echo -e "---> nproc:\n $(nproc) \n"
+        echo -e "---> df -h:\n $(df -h) \n"
+        echo -e "---> free -m:\n $(free -m) \n"
+        echo -e "---> ip addr:\n $(/sbin/ip addr) \n"
+    } 2>&1 | tee -a "_sys-info.log"
+
+    # Magic string used to trim console logs at the appropriate level during wget
+    MAGIC_STRING="-----END_OF_BUILD-----"
+    echo "$MAGIC_STRING"
+
+    wget --no-verbose -O "console.log" "${BUILD_URL}consoleText"
+    wget --no-verbose -O "console-timestamp.log" "${BUILD_URL}/timestamps?time=HH:mm:ss&appendLog"
+    sed -i "/^$MAGIC_STRING$/q" "console.log"
+    sed -i "/^.*$MAGIC_STRING$/q" "console-timestamp.log"
+
+    gzip *.log
+    zip -r console-logs.zip *.log.gz
+
+    nexus_path="$SILO/$JENKINS_HOSTNAME/$JOB_NAME/$BUILD_NUMBER"
+    curl --netrc --upload-file console-logs.zip \
+        "$NEXUSPROXY/service/local/repositories/logs/content-compressed/$nexus_path"
+
+    popd
+    rm -rf "$tmpdir"
+}
+
+copy_archives() {
+    WORKSPACE="$1"
+    ARTIFACTS="$2"
+
+    DEST_DIR="$WORKSPACE/archives"
+    if [ ! -z "$ARTIFACTS" ]; then
+        pushd "$WORKSPACE"
+        shopt -s globstar  # Enable globstar to copy archives
+        for f in $ARTIFACTS; do
+            [[ -e $f ]] || continue  # handle the case of no files to archive
+            echo "Archiving $f"
+            dir=$(dirname "$f")
+            mkdir -p "$DEST_DIR/$dir"
+            mv "$f" "$DEST_DIR/$f"
+        done
+        shopt -u globstar  # Disable globstar once archives are copied
+        popd
+    fi
+}
+
+# Only run the script if it is being called directly and not sourced.
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
+then
+    deploy "$@"
+fi
