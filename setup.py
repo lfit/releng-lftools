@@ -39,7 +39,6 @@ setup(
         lftools=lftools.cli:cli
     ''',
     scripts=[
-        'shell/patch-odl-release',
         'shell/version',
     ],
 )
