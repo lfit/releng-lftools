@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_f0f5d5cb",
+        "filename": "project_builder/nexus/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T18:27:21Z",
+      "side": 1,
+      "message": "Does not pass linting. Use coala to run linting suite.",
+      "revId": "d5429177489227b3e177cace64692828ebdd816b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_b0ff4daa",
+        "filename": "project_builder/nexus/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T18:27:21Z",
+      "side": 1,
+      "message": "Unnecessary since the parameters list already provides a default of None. So simply:\n\n self.baseurl \u003d baseurl",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 31
+      },
+      "revId": "d5429177489227b3e177cace64692828ebdd816b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_902c494c",
+        "filename": "project_builder/nexus/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T18:27:21Z",
+      "side": 1,
+      "message": "Meant to use url?",
+      "range": {
+        "startLine": 47,
+        "startChar": 23,
+        "endLine": 47,
+        "endChar": 30
+      },
+      "revId": "d5429177489227b3e177cace64692828ebdd816b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_30147df4",
+        "filename": "project_builder/reorder_staging_repo.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T18:27:21Z",
+      "side": 1,
+      "message": "Does not pass linting. Use coala to run linting suite.",
+      "revId": "d5429177489227b3e177cace64692828ebdd816b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_10f979c8",
+        "filename": "project_builder/reorder_staging_repo.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T18:27:21Z",
+      "side": 1,
+      "message": "Can be simplified to. (I\u0027ve seen this used at least twice now, maybe make a reusable utility function?)\n\n for setting in [\u0027nexus\u0027, \u0027user\u0027, \u0027password\u0027]:\n     if not setting in settings:\n         print(\u0027{} needs to be defined\u0027.format(setting))\n         sys.exit(1)",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 15
+      },
+      "revId": "d5429177489227b3e177cace64692828ebdd816b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_d06bf183",
+        "filename": "project_builder/repo_build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T18:27:21Z",
+      "side": 1,
+      "message": "Does not pass linting. Run coala against this to get full errors.",
+      "revId": "d5429177489227b3e177cace64692828ebdd816b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_b0686d88",
+        "filename": "project_builder/repo_build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T18:27:21Z",
+      "side": 1,
+      "message": "Using Click will simplify our argument parsing logic.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 26
+      },
+      "revId": "d5429177489227b3e177cace64692828ebdd816b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_700a05d4",
+        "filename": "project_builder/repo_build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T18:27:21Z",
+      "side": 1,
+      "message": "Can be simplified to.\n\n for setting in [\u0027nexus\u0027, \u0027user\u0027, \u0027password\u0027, \u0027email_domain\u0027]:\n     if not setting in settings:\n         print(\u0027{} needs to be defined\u0027.format(setting))\n         sys.exit(1)",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 15
+      },
+      "revId": "d5429177489227b3e177cace64692828ebdd816b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_500f01e2",
+        "filename": "project_builder/repo_build.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T18:27:21Z",
+      "side": 1,
+      "message": "Use print()",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 53
+      },
+      "revId": "d5429177489227b3e177cace64692828ebdd816b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_f06ef595",
+        "filename": "project_builder/settings.example.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T18:27:21Z",
+      "side": 1,
+      "message": "Doesn\u0027t pass yamllint:\n\n project_builder/settings.example.yaml\n   14:1      error    syntax error: found unexpected end of stream",
+      "revId": "d5429177489227b3e177cace64692828ebdd816b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
