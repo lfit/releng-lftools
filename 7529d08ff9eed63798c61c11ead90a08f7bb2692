@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_50ca61a2",
+        "filename": "project_builder/ldap_create_project.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T15:03:38Z",
+      "side": 1,
+      "message": "Missing copyright header.",
+      "revId": "7529d08ff9eed63798c61c11ead90a08f7bb2692",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_30cfddb2",
+        "filename": "project_builder/ldap_create_project.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-06T15:03:38Z",
+      "side": 1,
+      "message": "This is not a proper docstring. The first line of a docstring is typically a summary line followed by a description.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "7529d08ff9eed63798c61c11ead90a08f7bb2692",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
