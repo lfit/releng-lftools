@@ -1,12 +1,14 @@
 from setuptools import find_packages
 from setuptools import setup
 
+from lftools import __version__
+
 with open('requirements.txt') as f:
     install_reqs = f.read().splitlines()
 
 setup(
     name='lftools',
-    version='0.0.7',
+    version=__version__,
     author='Thanh Ha',
     author_email='thanh.ha@linuxfoundation.org',
     url='',
