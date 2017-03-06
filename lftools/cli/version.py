@@ -10,38 +10,20 @@
 # Contributors:
 #   Thanh Ha - Initial implementation
 ##############################################################################
-"""CLI main for lftools."""
+"""Wrapper for version bash script."""
+import os
 import subprocess
+import sys
 
 import click
 
 
 @click.group()
 @click.pass_context
-@click.version_option()
-def cli(ctx):
-    """CLI entry point for lftools."""
-    pass
-
-
-###############################################################################
-# Shell
-###############################################################################
-
-@click.command()
-@click.argument('command', type=click.Choice(['bump', 'release']))
-@click.argument('release-tag')
-@click.pass_context
-def version(ctx, command, release_tag):
+def version(ctx):
     """Version bump script for Maven based projects.
 
     Uses *release-tag* to bump versions for Maven projects.
-
-    :arg str command: Version subcommand to call (bump|release)
-    :arg str release-tag: When used for the 'release' command it is the
-        tag to use to bump all the versions to. When used for the 'bump'
-        command it is the tag to determine if a version should be bumped by
-        x.1.z.
 
     In general, versions should be: <major>.<minor>.<micro>[-<human-readable-tag>]
 
@@ -70,11 +52,61 @@ def version(ctx, command, release_tag):
     #. take all x.y.z-SNAPSHOT to x.y.z-Helium
     #. take all x.y.z-Helium versions to x.y.(z+1)-SNAPSHOT and
     #. take all x.y.z-SNAPSHOT versions to x.(y+1).0-SNAPSHOT
+
+    Commands:
+
+        .. autofunction:: lftools.cli.version.bump
+        .. autofunction:: lftools.cli.version.release
+        .. autofunction:: lftools.cli.version.patch
     """
-    subprocess.call(['version', command, release_tag])
+    pass
+
+@click.command()
+@click.argument('release-tag')
+@click.pass_context
+def bump(ctx, release_tag):
+    """Version bump pom files in a Maven project by x.(y+1).z.
+
+    :arg str release-tag: When used for the 'bump' command it is the tag to
+        determine if a version should be bumped by x.(y+1).z (SNAPSHOT) or by
+        x.y.(z+1) (release-tag).
+    """
+    subprocess.call(['version', 'bump', release_tag])
 
 
-cli.add_command(version)
+@click.command()
+@click.argument('release-tag')
+@click.pass_context
+def release(ctx, release_tag):
+    """Version bump pom files in a Maven project by x.y.(z+1).
 
-if __name__ == '__main__':
-    cli(obj={})
+    :arg str release-tag: When used for the 'release' command it is the
+        tag to use to bump all the versions to.
+    """
+    subprocess.call(['version', 'release', release_tag])
+
+
+@click.command()
+@click.argument('release-tag')
+@click.argument('patch-dir')
+@click.option('--project', default='OpenDaylight')
+@click.pass_context
+def patch(ctx, release_tag, patch_dir, project):
+    """Patch a project with git.bundles and then version bump by x.y.(z+1).
+
+    :arg str release-tag: When used for the 'release' command it is the
+        tag to use to bump all the versions to. When used for the 'bump'
+        command it is the tag to determine if a version should be bumped by
+        x.1.z.
+    :arg str patch-dir: Path to where the taglist.log and git.bundles are
+        stored in the file system.
+    """
+    if not os.path.isdir(patch_dir):
+        print("{} is not a valid directory.".format(patch_dir))
+        sys.exit(404)
+    subprocess.call(['version', 'patch', release_tag, patch_dir, project])
+
+
+version.add_command(bump)
+version.add_command(patch)
+version.add_command(release)

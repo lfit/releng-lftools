@@ -6,7 +6,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='lftools',
-    version='0.0.6',
+    version='0.0.7',
     author='Thanh Ha',
     author_email='thanh.ha@linuxfoundation.org',
     url='',
@@ -39,7 +39,6 @@ setup(
         lftools=lftools.cli:cli
     ''',
     scripts=[
-        'shell/patch-odl-release',
         'shell/version',
     ],
 )
