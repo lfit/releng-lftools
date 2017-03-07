@@ -13,6 +13,7 @@ __author__ = 'Thanh Ha'
 
 
 import click
+from lftools.cli.nexus import nexus
 from lftools.cli.version import version
 
 
@@ -24,6 +25,7 @@ def cli(ctx):
     pass
 
 
+cli.add_command(nexus)
 cli.add_command(version)
 
 
