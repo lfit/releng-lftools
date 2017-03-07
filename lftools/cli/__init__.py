@@ -6,11 +6,12 @@
 # are made available under the terms of the Eclipse Public License v1.0
 # which accompanies this distribution, and is available at
 # http://www.eclipse.org/legal/epl-v10.html
-#
-# Contributors:
-#   Thanh Ha - Initial implementation
 ##############################################################################
 """CLI main for lftools."""
+
+__author__ = 'Thanh Ha'
+
+
 import click
 from lftools.cli.version import version
 
