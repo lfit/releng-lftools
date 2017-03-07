@@ -9,7 +9,7 @@ use_spaces = yeah
 [Python]
 bears = BanditBear,PyCommentedCodeBear,PyDocStyleBear,PyFlakesBear,PyImportSortBear
 files = lftools/**/*.py
-pydocstyle_ignore = D213, D301
+pydocstyle_ignore = D203, D213, D301
 
 [ShellCheck]
 bears = ShellCheckBear
