@@ -11,7 +11,7 @@ Contents:
 .. toctree::
     :maxdepth: 2
 
-    shell
+    commands/index
 
 Indices and tables
 ==================

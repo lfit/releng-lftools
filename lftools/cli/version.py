@@ -7,7 +7,7 @@
 # which accompanies this distribution, and is available at
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
-"""Wrapper for version bash script."""
+"""Version bump script for Maven based projects."""
 
 __author__ = 'Thanh Ha'
 
@@ -24,15 +24,15 @@ import click
 def version(ctx):
     """Version bump script for Maven based projects.
 
-    Uses *release-tag* to bump versions for Maven projects.
-
     In general, versions should be: <major>.<minor>.<micro>[-<human-readable-tag>]
 
-    * Human readable tag should not have any dots in it
-    * SNAPSHOT is used for development
+    \b
+    - Human readable tag should not have any dots in it
+    - SNAPSHOT is used for development
 
-    Scenarios::
+    Scenarios:
 
+        \b
         master before release:        x.y.z-SNAPSHOT (or x.y-SNAPSHOT in which case we treat it as x.y.0-SNAPSHOT)
         at release:                   x.y.z-Helium
         stable/helium after release:  x.y.(z+1)-SNAPSHOT
@@ -44,21 +44,10 @@ def version(ctx):
 
     Some things have a date for a version, e.g., 2014.09.24.4
 
+    \b
     * We treat this as YYYY.MM.DD.<minor>
     * Note that all such dates currently in ODL are in YANG tools
     * They are all now YYYY.MM.DD.7 since 7 is the minor version for yangtools
-
-    The goal of this script is to:
-
-    #. take all x.y.z-SNAPSHOT to x.y.z-Helium
-    #. take all x.y.z-Helium versions to x.y.(z+1)-SNAPSHOT and
-    #. take all x.y.z-SNAPSHOT versions to x.(y+1).0-SNAPSHOT
-
-    Commands:
-
-        .. autofunction:: lftools.cli.version.bump
-        .. autofunction:: lftools.cli.version.release
-        .. autofunction:: lftools.cli.version.patch
     """
     pass
 
@@ -66,11 +55,15 @@ def version(ctx):
 @click.argument('release-tag')
 @click.pass_context
 def bump(ctx, release_tag):
-    """Version bump pom files in a Maven project by x.(y+1).z.
+    """Version bump pom files in a Maven project by x.(y+1).z or x.y.(z+1).
 
-    :arg str release-tag: When used for the 'bump' command it is the tag to
-        determine if a version should be bumped by x.(y+1).z (SNAPSHOT) or by
-        x.y.(z+1) (release-tag).
+    This script performs version bumping as follows:
+
+    \b
+    1. Change YYYY.MM.DD.y.z-SNAPSHOT to YYYY.MM.DD.(y+1).0-SNAPSHOT
+    2. Change YYYY.MM.DD.y.z-Helium to YYMMDD.y.(z+1)-SNAPSHOT
+    3. Change x.y.z-SNAPSHOT versions to x.(y+1).0-SNAPSHOT
+    4. Change x.y.z-RELEASE_TAG versions to x.y.(z+1)-SNAPSHOT and
     """
     subprocess.call(['version', 'bump', release_tag])
 
@@ -79,10 +72,10 @@ def bump(ctx, release_tag):
 @click.argument('release-tag')
 @click.pass_context
 def release(ctx, release_tag):
-    """Version bump pom files in a Maven project by x.y.(z+1).
+    """Version bump pom files in a Maven project from SNAPSHOT to RELEASE_TAG.
 
-    :arg str release-tag: When used for the 'release' command it is the
-        tag to use to bump all the versions to.
+    Searches poms for all instances of SNAPSHOT version and changes it to
+    RELEASE_TAG.
     """
     subprocess.call(['version', 'release', release_tag])
 
@@ -90,17 +83,14 @@ def release(ctx, release_tag):
 @click.command()
 @click.argument('release-tag')
 @click.argument('patch-dir')
-@click.option('--project', default='OpenDaylight')
+@click.option('--project', default='OpenDaylight',
+    help='Project name to use when tagging. (Default: OpenDaylight)')
 @click.pass_context
 def patch(ctx, release_tag, patch_dir, project):
-    """Patch a project with git.bundles and then version bump by x.y.(z+1).
+    """Patch a project with git.bundles and then version bump.
 
-    :arg str release-tag: When used for the 'release' command it is the
-        tag to use to bump all the versions to. When used for the 'bump'
-        command it is the tag to determine if a version should be bumped by
-        x.1.z.
-    :arg str patch-dir: Path to where the taglist.log and git.bundles are
-        stored in the file system.
+    Applies git.bundle patches to the project and then performs a version bump
+    using RELEASE_TAG in order to version bump by x.y.(z+1)-SNAPSHOT.
     """
     if not os.path.isdir(patch_dir):
         print("{} is not a valid directory.".format(patch_dir))
