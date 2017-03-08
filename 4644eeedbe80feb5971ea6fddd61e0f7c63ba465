@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_f0d715be",
+        "filename": "project_builder/ldap_create_project.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-08T15:08:05Z",
+      "side": 1,
+      "message": "Contributors list can be pulled from git log. Eclipse no longer requires projects to add this line.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 39
+      },
+      "revId": "4644eeedbe80feb5971ea6fddd61e0f7c63ba465",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
