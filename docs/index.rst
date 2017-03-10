@@ -11,6 +11,7 @@ Contents:
 .. toctree::
     :maxdepth: 2
 
+    best-practices
     commands/index
 
 Indices and tables
