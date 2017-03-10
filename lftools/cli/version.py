@@ -51,6 +51,7 @@ def version(ctx):
     """
     pass
 
+
 @click.command()
 @click.argument('release-tag')
 @click.pass_context
@@ -83,7 +84,8 @@ def release(ctx, release_tag):
 @click.command()
 @click.argument('release-tag')
 @click.argument('patch-dir')
-@click.option('--project', default='OpenDaylight',
+@click.option(
+    '--project', default='OpenDaylight',
     help='Project name to use when tagging. (Default: OpenDaylight)')
 @click.pass_context
 def patch(ctx, release_tag, patch_dir, project):

@@ -99,7 +99,7 @@ class Nexus:
         delete
         update
         """
-        url = '/'.join([self.baseurl,'service/local/privileges_target'])
+        url = '/'.join([self.baseurl, 'service/local/privileges_target'])
 
         privileges = {
             'data': {

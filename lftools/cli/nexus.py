@@ -30,6 +30,7 @@ def reorder_staged_repos(ctx, settings):
     """
     nexuscmd.reorder_staged_repos(settings)
 
+
 nexus.add_command(reorder_staged_repos)
 
 
@@ -41,9 +42,11 @@ def create(ctx):
 
 
 @create.command()
-@click.option('-c', '--config', type=str, required=True,
+@click.option(
+    '-c', '--config', type=str, required=True,
     help='Repo config file for how to the Nexus repository should be created.')
-@click.option('-s', '--settings', type=str, required=True,
+@click.option(
+    '-s', '--settings', type=str, required=True,
     help='Config file containing administrative settings.')
 @click.pass_context
 def repo(ctx, config, settings):

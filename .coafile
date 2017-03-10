@@ -8,15 +8,14 @@ ignore_length_regex = Signed-off-by,
 
 [Python]
 bears = BanditBear,
+    PEP8Bear,
     PyCommentedCodeBear,
     PyDocStyleBear,
     PyFlakesBear,
-    PyImportSortBear,
-    SpaceConsistencyBear
+    PyImportSortBear
 files = lftools/**/*.py
 pydocstyle_ignore = D203, D213, D301
-indent_size = 4
-use_spaces = yeah
+max_line_length = 120
 
 [Shell]
 bears = ShellCheckBear,
@@ -25,4 +24,3 @@ files = shell/*
 shell = bash
 indent_size = 4
 use_spaces = yeah
-
