@@ -7,34 +7,6 @@
 # which accompanies this distribution, and is available at
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
-"""CLI main for lftools."""
+"""lftools openstack package."""
 
 __author__ = 'Thanh Ha'
-
-
-import click
-from lftools.cli.nexus import nexus
-from lftools.cli.version import version
-from lftools.openstack.cmd import openstack
-
-
-@click.group()
-@click.pass_context
-@click.version_option()
-def cli(ctx):
-    """CLI entry point for lftools."""
-    pass
-
-
-cli.add_command(openstack)
-cli.add_command(nexus)
-cli.add_command(version)
-
-
-def main():
-    """Entry point for lftools CLI."""
-    cli(obj={})
-
-
-if __name__ == '__main__':
-    main()
