@@ -22,7 +22,8 @@ def reorder_staged_repos(settings_file):
     to be in the correct reverse sorted order. There is a problem with
     Nexus where it is not doing this like it should be.
     """
-    with open(settings_file, 'r') as f: settings = yaml.safe_load(f)
+    with open(settings_file, 'r') as f:
+        settings = yaml.safe_load(f)
 
     for setting in ['nexus', 'user', 'password']:
         if not setting in settings:
@@ -59,8 +60,10 @@ def create_repos(config_file, settings_file):
     :arg str settings: Settings file containing administrative credentials and
         information.
     """
-    with open(config_file, 'r') as f: config = yaml.safe_load(f)
-    with open(settings_file, 'r') as f: settings = yaml.safe_load(f)
+    with open(config_file, 'r') as f:
+        config = yaml.safe_load(f)
+    with open(settings_file, 'r') as f:
+        settings = yaml.safe_load(f)
 
     for setting in ['nexus', 'user', 'password', 'email_domain']:
         if not setting in settings:
@@ -106,16 +109,26 @@ def create_repos(config_file, settings_file):
         print('Building for %s.%s' % (base_groupId, repo))
         groupId = '%s.%s' % (base_groupId, repo)
         target = '^/%s/.*' % groupId.replace('.', '[/\.]')
+
         if 'extra_privs' in config:
             extra_privs = config['extra_privs']
         else:
             extra_privs = []
-        create_nexus_perms(repoId, [target], settings['email_domain'],
-            config['password'], extra_privs)
+
+        create_nexus_perms(
+            repoId,
+            [target],
+            settings['email_domain'],
+            config['password'],
+            extra_privs)
+
         if 'repositories' in config:
             for sub_repo in config['repositories']:
                 sub_repo_id = '%s-%s' % (repoId, sub_repo)
-                build_repo(sub_repo, sub_repo_id, config['repositories'][sub_repo],
+                build_repo(
+                    sub_repo,
+                    sub_repo_id,
+                    config['repositories'][sub_repo],
                     groupId)
 
     for repo in config['repositories']:
