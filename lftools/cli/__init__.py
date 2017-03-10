@@ -15,6 +15,7 @@ __author__ = 'Thanh Ha'
 import click
 from lftools.cli.nexus import nexus
 from lftools.cli.version import version
+from lftools.openstack.cmd import openstack
 
 
 @click.group()
@@ -25,9 +26,14 @@ def cli(ctx):
     pass
 
 
+cli.add_command(openstack)
 cli.add_command(nexus)
 cli.add_command(version)
 
 
-if __name__ == '__main__':
+def main():
     cli(obj={})
+
+
+if __name__ == '__main__':
+    main()

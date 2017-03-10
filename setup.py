@@ -38,7 +38,7 @@ setup(
     tests_require=['pytest'],
     entry_points='''
         [console_scripts]
-        lftools=lftools.cli:cli
+        lftools=lftools.cli:main
     ''',
     scripts=[
         'shell/version',
