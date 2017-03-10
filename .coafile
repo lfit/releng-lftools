@@ -1,17 +1,28 @@
-[default]
-bears = SpaceConsistencyBear,GitCommitBear
-files = shell/*
-allow_trailing_whitespace = False
-enforce_newline_at_EOF = True
+[Git]
+bears = GitCommitBear
+ignore_length_regex = Signed-off-by,
+    Also-by,
+    Co-authored-by,
+    http://,
+    https://
+
+[Python]
+bears = BanditBear,
+    PyCommentedCodeBear,
+    PyDocStyleBear,
+    PyFlakesBear,
+    PyImportSortBear,
+    SpaceConsistencyBear
+files = lftools/**/*.py
+pydocstyle_ignore = D203, D213, D301
 indent_size = 4
 use_spaces = yeah
 
-[Python]
-bears = BanditBear,PyCommentedCodeBear,PyDocStyleBear,PyFlakesBear,PyImportSortBear
-files = lftools/**/*.py
-pydocstyle_ignore = D203, D213, D301
-
-[ShellCheck]
-bears = ShellCheckBear
+[Shell]
+bears = ShellCheckBear,
+    SpaceConsistencyBear
 files = shell/*
 shell = bash
+indent_size = 4
+use_spaces = yeah
+
