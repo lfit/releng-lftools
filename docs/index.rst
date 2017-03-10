@@ -12,6 +12,7 @@ Contents:
     :maxdepth: 2
 
     commands/index
+    tips
 
 Indices and tables
 ==================
