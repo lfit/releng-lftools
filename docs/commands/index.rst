@@ -8,4 +8,6 @@ bash. It supports the following commands.
 .. toctree::
     :maxdepth: 2
 
+    nexus
+    openstack
     version
