@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_8152bd11",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-03-13T21:07:45Z",
+      "side": 1,
+      "message": "Not that we\u0027re likely to go for a long time without updates to images, but it might be good to have an option for a minimum number to keep, even if they exceed the time.",
+      "revId": "8016842244541a15a98446779febefa788548c12",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
