@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba3e81b7_e1198923",
+        "filename": "scripts/fix_yamllint.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-14T20:32:22Z",
+      "side": 1,
+      "message": "Should call the script like this (see version) script for example:\n\n # Only run the script if it is being called directly and not sourced.\n if [[ \"${BASH_SOURCE[0]}\" \u003d\u003d \"${0}\" ]]\n then\n     version \"$@\"\n fi\n\nThis allows the script to be used independently and also be called as a library via lftools. Please also move this script into the shell directory and fix any shellcheck issues.\n\nI\u0027d also hook this into lftools cli as well so we can produce a release for it when it\u0027s ready.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 12
+      },
+      "revId": "2e6691043ed2931703d3333bf04b4945973e78e1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
