@@ -16,6 +16,24 @@
       "revId": "8016842244541a15a98446779febefa788548c12",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3e81b7_415df5e8",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-03-14T15:30:30Z",
+      "side": 1,
+      "message": "Created a enhancement todo here:\nhttps://gerrit.linuxfoundation.org/infra/3823",
+      "parentUuid": "ba3e81b7_8152bd11",
+      "revId": "8016842244541a15a98446779febefa788548c12",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
