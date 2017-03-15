@@ -17,7 +17,7 @@ setup(
         'LF Tools is a collection of scripts and utilities that are useful '
         'to multiple Linux Foundation project CI and Releng related '
         'activities. We try to create these tools to be generic as possible '
-        'such that they can be deployed in other environments.'
+        'such that they can be deployed in other environments.'),
     license='EPL',
     classifiers=[
         'Development Status :: 1 - Planning',
