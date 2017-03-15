@@ -14,17 +14,16 @@ setup(
     url='',
     description='',
     long_description=(
-        'The main purpose of Spectrometer is to deliver transparent '
-        'statistics of contributions to OpenDaylight Project. It collects '
-        'activity data such as 1. commits and number of code lines changed '
-        'from ODL Git repositories, 2. reviews from Gerrit, or 3. activities '
-        'related to each project from mailing lists and presents the '
-        'statistics in a user-friendly manner.'),
+        'LF Tools is a collection of scripts and utilities that are useful '
+        'to multiple Linux Foundation project CI and Releng related '
+        'activities. We try to create these tools to be generic as possible '
+        'such that they can be deployed in other environments.'
     license='EPL',
     classifiers=[
         'Development Status :: 1 - Planning',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.5',
     ],
     install_requires=install_reqs,
