@@ -1,5 +1,5 @@
 [gerrit]
 host=gerrit.linuxfoundation.org
 port=29418
-project=releng/releng-tools.git
+project=releng/lftools.git
 defaultbranch=master
