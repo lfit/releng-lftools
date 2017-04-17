@@ -79,3 +79,72 @@ the tox.ini file the interesting bits are under [testenv:coala].
 
 .. literalinclude:: ../tox.ini
     :language: ini
+
+
+Jenkins Job Builder
+===================
+
+Passing parameters to shell scripts
+-----------------------------------
+
+In a shell script there are 2 types of parameters that can be passed in via JJB.
+
+1) JJB variables in the format {var}
+2) Environment variables in the format ${VAR}
+
+One of the issues one may run into when using JJB variables in shell scripts is
+that curly braces ``{var}`` need to be escaped for not JJB variables such as
+``${VAR}`` which would become ``${{VAR}}`` and would not pass ShellCheck. It
+also makes scripts more difficult to debug when something has gone wrong.
+
+Instead it is best practice to not pass in JJB variables into shell scripts and
+instead always use Enviornment variables when a parameter is needed. This method
+requires 2 steps:
+
+1) Declare a parameter section
+2) Use the parameter in shell script
+
+What is nice about this is since parameters in a job are listed at the top of
+the job page as well as when running a build we can also very clearly see what
+parameters are being passed into the job. We can review the parameters
+retro-actively by visiting the job parameters page
+``job/lastSuccessfulBuild/parameters/``.
+
+Usage of config-file-provider
+-----------------------------
+
+When using the config-file-provider plugin in Jenkins to provide a config file
+we should create a macro such that the builder that needs the config file
+removes the config file immediately after it is done using it. This ensures
+that credentials do not exist on the system for longer than it needs to.
+
+ship-logs example:
+
+.. code-block:: yaml
+
+    - builder:
+        name: lf-ship-logs
+        builders:
+          - config-file-provider:
+              files:
+                - file-id: 'jenkins-log-archives-settings'
+                  variable: 'SETTINGS_FILE'
+          - shell: !include-raw:
+              - ../shell/logs-get-credentials.sh
+          - shell: !include-raw:
+              - ../shell/lftools-install.sh
+              - ../shell/logs-deploy.sh
+          - shell: !include-raw:
+              - ../shell/logs-clear-credentials.sh
+          - description-setter:
+              regexp: '^Build logs: .*'
+
+In this example the script logs-deploy requires a config file to authenticate
+with Nexus to push logs up. We declare a macro here so that we can ensure that
+the credentials are removed from the system immediately after the scripts are
+complete running via the logs-clear-credentials.sh script. This script contains
+3 basic steps:
+
+1. Provide credentials via config-file-provider
+2. Run the build scripts in this case lftools-install.sh and logs-deploy.sh
+3. Remove credentials provided by config-file-provider
