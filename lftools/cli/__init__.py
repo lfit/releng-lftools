@@ -16,7 +16,7 @@ import click
 from lftools.cli.nexus import nexus
 from lftools.cli.version import version
 from lftools.openstack.cmd import openstack
-
+from lftools.ldap.cmd import ldap
 
 @click.group()
 @click.pass_context
@@ -29,7 +29,7 @@ def cli(ctx):
 cli.add_command(openstack)
 cli.add_command(nexus)
 cli.add_command(version)
-
+cli.add_command(ldap)
 
 def main():
     """Entry point for lftools CLI."""
