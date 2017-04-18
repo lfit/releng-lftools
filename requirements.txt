@@ -1,4 +1,5 @@
 click
+python-ldap
 pyyaml
 requests!=2.13.0
 setuptools>=11.3
