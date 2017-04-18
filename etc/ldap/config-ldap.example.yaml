@@ -1,0 +1,15 @@
+---
+# vim: sw=2 ts=2 sts=2 et :
+
+# ldap basedn
+groups_base: 'ou=Groups,dc=example,dc=org'
+users_base: 'ou=Users,dc=example,dc=org'
+# project prefix
+master_project: 'foo'
+# new project name
+project_name: 'new-project-suffix'
+# list of members to be added into the project
+members:
+  - user3
+  - user2
+  - user1

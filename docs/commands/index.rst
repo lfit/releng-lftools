@@ -9,6 +9,7 @@ bash. It supports the following commands.
     :maxdepth: 2
 
     deploy
+    ldap
     nexus
     openstack
     version
