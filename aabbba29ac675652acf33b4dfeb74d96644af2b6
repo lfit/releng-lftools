@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_699a2916",
+        "filename": "etc/ldap/.gitignore",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-04-19T13:25:02Z",
+      "side": 1,
+      "message": "This file should be removed and the the file at etc/nexus/.gitignore should be moved to etc/.gitignore",
+      "revId": "aabbba29ac675652acf33b4dfeb74d96644af2b6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_499f6504",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-04-19T13:25:02Z",
+      "side": 1,
+      "message": "While this is presently ODL specific it shouldn\u0027t be directly named. It\u0027s more generic than this. Instead this should read:\n\nCreate LDAP groups",
+      "revId": "aabbba29ac675652acf33b4dfeb74d96644af2b6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_29a42156",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-04-19T13:25:02Z",
+      "side": 1,
+      "message": "Do not mention ODL",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "aabbba29ac675652acf33b4dfeb74d96644af2b6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_09895dca",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-04-19T13:25:02Z",
+      "side": 1,
+      "message": "This makes this too ODL specific. All of the LFID groups are \u003cmaster_project\u003e-\u003cservice\u003e-(\u003cproject\u003e-)?\u003crole\u003e.\n\nExample:\n\nfoo-gerrit-bar-committers\nfoo-jenkins-sandbox-access\n\nvs ODL which is just:\n\ngerrit-bar-committers\njenkins-sandbox-access",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 64
+      },
+      "revId": "aabbba29ac675652acf33b4dfeb74d96644af2b6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_e985f9ad",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-04-19T13:25:02Z",
+      "side": 1,
+      "message": "As already mentioned, this is extremely ODL specific.\n\nIt would be better to have attributes in the yaml that specify any special prefixes and suffixes needed and have them overridable at the definition level\n\nThis will become pretty important later this year when ODL moves off of it\u0027s own independent identity tree and into LFID.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 35
+      },
+      "revId": "aabbba29ac675652acf33b4dfeb74d96644af2b6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
