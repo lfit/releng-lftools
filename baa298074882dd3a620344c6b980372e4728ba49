@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_29d661c6",
+        "filename": "lftools/ldap/odlldap.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-19T03:12:42Z",
+      "side": 1,
+      "message": "If you want your module to be just called ldap then you can put it inside of __init__.py which can be imported as lftools.ldap.",
+      "parentUuid": "9a437d4f_a94a51aa",
+      "revId": "baa298074882dd3a620344c6b980372e4728ba49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_69658944",
         "filename": "requirements.txt",
         "patchSetId": 6
