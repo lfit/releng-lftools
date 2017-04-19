@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_c94d95c6",
+        "filename": "docs/commands/ldap.rst",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-04-19T03:09:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_495ac584",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 5
+      },
+      "revId": "baa298074882dd3a620344c6b980372e4728ba49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_295f8174",
         "filename": "lftools/ldap/odlldap.py",
         "patchSetId": 6
@@ -36,6 +60,24 @@
       "writtenOn": "2017-04-19T02:54:00Z",
       "side": 1,
       "message": "Why is this called odlldap? is it specifically designed for ODL?",
+      "revId": "baa298074882dd3a620344c6b980372e4728ba49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_a94a51aa",
+        "filename": "lftools/ldap/odlldap.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-04-19T03:09:59Z",
+      "side": 1,
+      "message": "module Namespace conflicts with python-ldap module and returns Attribute not found error. I will rename this to lfldap",
+      "parentUuid": "9a437d4f_295f8174",
       "revId": "baa298074882dd3a620344c6b980372e4728ba49",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
