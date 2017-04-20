@@ -92,6 +92,30 @@
       "revId": "1d32c032c19ad81caa44e0da5fb949d69b86ebb6",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_183ac4cd",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-04-20T22:19:25Z",
+      "side": 1,
+      "message": "agreed, i\u0027ll rename this to \"ldapcon\"",
+      "parentUuid": "9a437d4f_84ee548a",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 12
+      },
+      "revId": "1d32c032c19ad81caa44e0da5fb949d69b86ebb6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
