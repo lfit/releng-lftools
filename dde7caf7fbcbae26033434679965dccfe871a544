@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_e4d760be",
+        "filename": "etc/ldap/config-ldap.example.yaml",
+        "patchSetId": 11
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T14:23:19Z",
+      "side": 1,
+      "message": "If it\u0027s always going to be ldap. then I don\u0027t see a point of having this as a root. It would be better to just remove this line and unindent the rest of the file.",
+      "parentUuid": "9a437d4f_6465b044",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 5
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_047ca41f",
         "filename": "lftools/cli/__init__.py",
         "patchSetId": 11
@@ -289,6 +313,24 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_c4e45cae",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T14:23:19Z",
+      "side": 1,
+      "message": "This comment still applies.",
+      "parentUuid": "9a437d4f_4482ac01",
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_842bf4ea",
         "filename": "lftools/ldap/lfldap.py",
         "patchSetId": 11
@@ -324,6 +366,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "9a437d4f_842bf4ea",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_a4e1589c",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T14:23:19Z",
+      "side": 1,
+      "message": "How is this done? I don\u0027t see a unit test?",
+      "parentUuid": "9a437d4f_c41fbcb6",
       "range": {
         "startLine": 23,
         "startChar": 4,
