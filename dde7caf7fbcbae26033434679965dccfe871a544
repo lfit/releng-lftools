@@ -1,0 +1,429 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_a4727847",
+        "filename": "etc/ldap/config-ldap.example.yaml",
+        "patchSetId": 11
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "Will it ever not be ldap?\n\nIf not we can probably simplify this by not having this and just everything starting off of root.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 5
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_047ca41f",
+        "filename": "lftools/cli/__init__.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "Alphabetical order please.",
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_c4f1fc96",
+        "filename": "lftools/ldap/cmd.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "identities.",
+      "range": {
+        "startLine": 11,
+        "startChar": 29,
+        "endLine": 11,
+        "endChar": 37
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_24b568cd",
+        "filename": "lftools/ldap/cmd.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "For ODL?",
+      "range": {
+        "startLine": 23,
+        "startChar": 31,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_44b06cdd",
+        "filename": "lftools/ldap/cmd.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "For ODL?",
+      "range": {
+        "startLine": 36,
+        "startChar": 43,
+        "endLine": 36,
+        "endChar": 46
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_64bb70c5",
+        "filename": "lftools/ldap/cmd.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "identities",
+      "range": {
+        "startLine": 36,
+        "startChar": 30,
+        "endLine": 36,
+        "endChar": 38
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_4482ac01",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "I still don\u0027t like that this file is called lfldap. Since this file appears to be about ldap groups. How about we call it \"groups\". Then when we add a new function for deleting groups or updating groups we can add it into this file.",
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_842bf4ea",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "Can we provide a unit test for this?",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_a4eef8b2",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "creation",
+      "range": {
+        "startLine": 28,
+        "startChar": 12,
+        "endLine": 28,
+        "endChar": 21
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_e478802d",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "It\u0027s more Pythonic to use with when opening files as it guarantees the file will be closed outside of the with block. For example:\n\n with open(settings_file, \u0027r\u0027) as f:\n     settings \u003d yaml.load(f)",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 13
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_c4757c33",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "Same as above",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_848f7423",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "I think this can be simplified. Maybe something like this?\n\n required_fields \u003d [\n     \u0027groups_base\u0027,\n     \u0027users_base\u0027,\n     \u0027project_name\u0027,\n     \u0027master_project\u0027,\n     \u0027members\u0027,\n ]\n \n for field in required_fields:\n     if not config.get(field):\n         print(\u0027ERROR: {} needs to be defined.\u0027.format(field))\n         sys.exit(1)\n\nNote I have not tested this, recalling from memory so some bits might need to be tweaked slightly to get it working but I think this basically works.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 19
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_c4ac5c8f",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "Better to use format imo.\n\n print(\"Connecting to LDAP Server {}\".format(settings[\u0027ldap\u0027]))",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 58
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_e49f604f",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "It\u0027s not Pythonic to use 1 letter variables as you can forget what it represents later on. Better to give it a full name that indicates it\u0027s purpose.",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 9
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_04a3849f",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "Backslashes are not required inside of parenthesis.\n\nHowever it would be cleaner for the text to be formatted rather than using + everywhere.\n\n dn \u003d \"cn\u003d{}-gerrit-{}-committers,{}\".format(\n     str(config[\u0027ldap\u0027][\u0027master_project\u0027]),\n     str(config[\u0027ldap\u0027][\u0027project_name\u0027]),\n     str(config[\u0027ldap\u0027][\u0027group_base\u0027]),",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 64
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_a4a9587d",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "Similar to above use string.format() as it makes the template string more readable.",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 73
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_84b654db",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "string.format()",
+      "range": {
+        "startLine": 95,
+        "startChar": 21,
+        "endLine": 95,
+        "endChar": 79
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_44998c6d",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "Is there more specific errors we can catch?",
+      "range": {
+        "startLine": 109,
+        "startChar": 11,
+        "endLine": 109,
+        "endChar": 25
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_64949037",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 1,
+      "message": "This is not a Python 3 compatible print statement.",
+      "range": {
+        "startLine": 110,
+        "startChar": 7,
+        "endLine": 110,
+        "endChar": 15
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}

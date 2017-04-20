@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_2487a811",
+        "filename": "requirements.txt",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T03:28:21Z",
+      "side": 0,
+      "message": "Please don\u0027t remove this blank line.",
+      "revId": "0cb5e036f9052bd4ca07f665539d208905f8b397",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
