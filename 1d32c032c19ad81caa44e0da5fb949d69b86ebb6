@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_44d18ccc",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T14:23:19Z",
+      "side": 1,
+      "message": "With auto closes so this line is redundant.",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "1d32c032c19ad81caa44e0da5fb949d69b86ebb6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_24d688c6",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T14:23:19Z",
+      "side": 1,
+      "message": "With auto closes so this line is redundant.",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "1d32c032c19ad81caa44e0da5fb949d69b86ebb6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_84ee548a",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-04-20T14:23:19Z",
+      "side": 1,
+      "message": "What\u0027s lcon? ldap connection?",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 12
+      },
+      "revId": "1d32c032c19ad81caa44e0da5fb949d69b86ebb6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
