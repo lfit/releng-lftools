@@ -402,6 +402,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_f836e0e6",
+        "filename": "lftools/ldap/lfldap.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-04-20T22:19:25Z",
+      "side": 1,
+      "message": "I only realized later that we need to mock ldap for adding the tests",
+      "parentUuid": "9a437d4f_a4e1589c",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "dde7caf7fbcbae26033434679965dccfe871a544",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_a4eef8b2",
         "filename": "lftools/ldap/lfldap.py",
         "patchSetId": 11
