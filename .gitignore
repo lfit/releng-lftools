@@ -14,6 +14,9 @@ target/
 # Eclipse
 .project
 
+# VSCode
+.vscode
+
 # Python
 .cache/
 .eggs/
