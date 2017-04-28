@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: EPL-1.0
+# @License EPL-1.0 <http://spdx.org/licenses/EPL-1.0>
 ##############################################################################
 # Copyright (c) 2017 The Linux Foundation and others.
 #
@@ -13,16 +13,12 @@ __author__ = 'Thanh Ha'
 
 
 import click
-
 from lftools.cli.deploy import deploy
-from lftools.cli.github import github
 from lftools.cli.jenkins import jenkins_cli
-from lftools.cli.license import license
 from lftools.cli.nexus import nexus
-from lftools.cli.sign import sign
 from lftools.cli.version import version
 from lftools.openstack.cmd import openstack
-
+from lftools.cli.github import github
 
 @click.group()
 @click.pass_context
@@ -33,11 +29,9 @@ def cli(ctx):
 
 
 cli.add_command(deploy)
-cli.add_command(jenkins_cli, name='jenkins')
-cli.add_command(license)
-cli.add_command(nexus)
 cli.add_command(openstack)
-cli.add_command(sign)
+cli.add_command(nexus)
+cli.add_command(jenkins_cli, name='jenkins')
 cli.add_command(version)
 cli.add_command(github)
 

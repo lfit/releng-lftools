@@ -1,0 +1,226 @@
+#!/bin/bash
+
+# @License EPL-1.0 <http://spdx.org/licenses/EPL-1.0>
+##############################################################################
+# Copyright (c) 2016, 2017 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+
+# This script handles sending files to a Nexus site repo for archiving. Mainly
+# useful for storing logs for example on logs.opendaylight.org.
+
+copy_archives() {
+    # Find all files matching $pattern in a $workspace and copies it to the
+    # current directory. The best way to use this function is to cd into the
+    # directory you wish to store the files first before calling the function.
+    #
+    # To use this script the Nexus server must have a site repository configured
+    # with the name "logs" as this is a hardcoded path. Also this script uses
+    # ~/.netrc for it's authentication which must be provided.
+    #
+    # Usage: copy_archives <workspace> <archive_pattern>
+    #
+    #   <workspace>: Directory in which to search, typically in Jenkins this is
+    #                $WORKSPACE
+    #   <pattern>: Globstar pattern that is space separated of files that should
+    #              be archived. (optional)
+    local workspace="$1"
+    local archive_pattern="${2:-}"
+    local dest_dir
+    dest_dir="$(pwd)"
+
+    pushd "$workspace"
+
+    # First copy all archives provided by user if any
+    if [ "$(ls -A "$workspace/archives/")" ]; then
+        mv "$workspace/archives/"* "$dest_dir"
+    fi
+
+    # Copy all files matching pattern provided by user
+    if [ ! -z "$archive_pattern" ]; then
+        shopt -s globstar  # Enable globstar to copy archives
+        for pattern in $archive_pattern; do
+            [[ -e $pattern ]] || continue  # handle the case of no files to archive
+            echo "Archiving $pattern" >> "$workspace/archives.log"
+            dir=$(dirname "$pattern")
+            mkdir -p "$dest_dir/$dir"
+            mv "$pattern" "$dest_dir/$pattern"
+        done
+        shopt -u globstar  # Disable globstar once archives are copied
+    fi
+    popd
+}
+
+deploy() {
+    # Entry point for the deploy command.
+    subcommand=$1; shift
+
+    case "$subcommand" in
+        archives )
+            echo "Deploying archives..."
+            deploy_archives "$@"
+            exit 0
+            ;;
+        files )
+            echo "Deploying files..."
+            echo "ERROR: Unimplemented."
+            exit 1
+            ;;
+        logs )
+            echo "Deploying logs..."
+            deploy_logs "$@"
+            exit 0
+            ;;
+        * )
+            echo "Invalid command: $subcommand" 1>&2
+            exit 1
+            ;;
+    esac
+}
+
+deploy_archives() {
+    # Archive files provided by the user to a Nexus site repository named logs.
+    #
+    # Provides 2 ways to archive files:
+    #     1) globstar pattern provided by the user.
+    #     2) $WORKSPACE/archives directory provided by the user.
+    #
+    # To use this script the Nexus server must have a site repository configured
+    # with the name "logs" as this is a hardcoded path. Also this script uses
+    # ~/.netrc for it's authentication which must be provided.
+    #
+    # Usage: deploy_archives <nexus_url> <nexus_path> <workspace> <archive_pattern>
+    #
+    #   <nexus_url>: URL of Nexus server. Eg: https://nexus.opendaylight.org
+    #   <nexus_path>: Path on nexus logs repo to place the logs. Eg:
+    #                 $SILO/$JENKINS_HOSTNAME/$JOB_NAME/$BUILD_NUMBER
+    #   <workspace>: Directory in which to search, typically in Jenkins this is
+    #                $WORKSPACE
+    #   <pattern>: Globstar pattern that is space separated of files that should
+    #              be archived. (optional)
+
+    if [ -z "$3" ]; then
+        echo "Missing required arguments."
+        exit 1
+    fi
+
+    local nexus_url="$1"
+    local nexus_path="$2"
+    # Workspace of where to search for files to archive.
+    local workspace="$3"
+    # Pattern to archive (globstar allowed). Recommended to double quote the
+    # input so that the full pattern can be passed into the function.
+    local archive_pattern="${4:-}"
+
+    tmpdir=$(mktemp -d)
+    pushd "$tmpdir"
+
+    ###################
+    # BEGIN ARCHIVING #
+    ###################
+    touch "$workspace/archives.log"
+    copy_archives "$workspace" "$archive_pattern"
+
+    # Find and gzip any 'text' files
+    find "$tmpdir" -type f -print0 \
+        | xargs -0r file \
+        | grep --extended-regexp --regexp ':.*text.*' \
+        | cut -d: -f1 \
+        | xargs -d'\n' -r gzip
+
+    if [ "$(ls -A)" ]; then
+        zip -qr "$workspace/archives.zip" . >> "$workspace/archives.log"
+        du -sh "$workspace/archives.zip"
+        gzip --force "$workspace/archives.log"
+
+        echo "Pushing archives.log.gz"
+        curl --netrc --upload-file "$workspace/archives.log.gz" \
+            "${nexus_url}/content/repositories/logs/${nexus_path}/archives.log.gz"
+
+        echo "Pushing archives.zip"
+        curl --netrc --upload-file "$workspace/archives.zip" \
+            "${nexus_url}/service/local/repositories/logs/content-compressed/${nexus_path}"
+    else
+        echo "Nothing to archive."
+    fi
+
+    popd
+    rm -rf "$tmpdir"
+}
+
+deploy_logs() {
+    # Deploy logs to a Nexus site repository named logs.
+    #
+    # This script fetches logs and system information and pushes them to Nexus
+    # for log archiving.
+    #
+    # To use this script the Nexus server must have a site repository configured
+    # with the name "logs" as this is a hardcoded path. Also this script uses
+    # ~/.netrc for it's authentication which must be provided.
+    #
+    # Usage: deploy <nexus_url> <nexus_path> <build_url>
+    #
+    #   <nexus_url>: URL of Nexus server. Eg: https://nexus.opendaylight.org
+    #   <nexus_path>: Path on nexus logs repo to place the logs. Eg:
+    #                 $SILO/$JENKINS_HOSTNAME/$JOB_NAME/$BUILD_NUMBER
+    #   <build_url>: URL of the Jenkins build. Jenkins typicallyi provides this
+    #                via the $BUILD_URL environment variable.
+
+    if [ -z "$3" ]; then
+        echo "Missing required arguments."
+        echo "Usage: deploy <nexus_url> <nexus_path> <build_url>"
+        exit 1
+    fi
+
+    local nexus_url="$1"
+    local nexus_path="$2"
+    local build_url="$3"
+
+    tmpdir=$(mktemp -d)
+    pushd "$tmpdir"
+
+    touch "_build-details.log"
+    {
+        echo "build-url: ${build_url}"
+    } 2>&1 | tee -a "_build-details.log"
+    env | grep -v PASSWORD | sort > "_build-enviroment-variables.log"
+
+    # Print system info before collecting logs
+    touch "_sys-info.log"
+    {
+        echo -e "---> uname -a:\n $(uname -a) \n"
+        echo -e "---> lscpu:\n $(lscpu) \n"
+        echo -e "---> nproc:\n $(nproc) \n"
+        echo -e "---> df -h:\n $(df -h) \n"
+        echo -e "---> free -m:\n $(free -m) \n"
+        echo -e "---> ip addr:\n $(/sbin/ip addr) \n"
+    } 2>&1 | tee -a "_sys-info.log"
+
+    # Magic string used to trim console logs at the appropriate level during wget
+    MAGIC_STRING="-----END_OF_BUILD-----"
+    echo "$MAGIC_STRING"
+
+    wget --no-verbose -O "console.log" "${build_url}consoleText"
+    wget --no-verbose -O "console-timestamp.log" "${build_url}/timestamps?time=HH:mm:ss&appendLog"
+    sed -i "/^$MAGIC_STRING$/q" "console.log"
+    sed -i "/^.*$MAGIC_STRING$/q" "console-timestamp.log"
+
+    gzip -- *.log
+    zip -r console-logs.zip -- *.log.gz
+
+    curl --netrc --upload-file console-logs.zip \
+        "${nexus_url}/service/local/repositories/logs/content-compressed/${nexus_path}"
+
+    popd
+    rm -rf "$tmpdir"
+}
+
+# Only run the script if it is being called directly and not sourced.
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
+then
+    deploy "$@"
+fi

@@ -1,0 +1,30 @@
+---
+# vim: sw=2 ts=2 sts=2 et :
+# Options to configure a Github Webhook
+# Note that 'name' and 'config' are required.
+# Additionally name has to be `web` for webhooks.
+- hook1:
+    name: web
+    enabled: true
+    config:
+      url: https://google.com/
+      content-type: json # or `form`
+      secret: YourSecret
+    events:
+      - event1
+      - event2
+      - etc
+    active: false
+
+- hook2:
+    name: web
+    enabled: false
+    config:
+      url: https://apple.com/
+      content-type: json # or `form`
+      secret: YourSecret
+    events:
+      - event1
+      - event2
+      - etc
+    active: true
