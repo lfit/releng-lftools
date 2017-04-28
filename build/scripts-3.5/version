@@ -1,0 +1,177 @@
+#!/bin/bash
+
+# @License EPL-1.0 <http://spdx.org/licenses/EPL-1.0>
+##############################################################################
+# Copyright (c) 2014, 2017 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+#
+# Contributors:
+#   Colin Dixon - Initial implementation
+#   Thanh Ha - Convert to functions
+##############################################################################
+
+# In general, versions should be: <major>.<minor>.<micro>[-<human-readable-tag>]
+# * Human readable tag should not have any dots in it
+# * SNAPSHOT is used for development
+#
+# Master before release:        x.y.z-SNAPSHOT (or x.y-SNAPSHOT in which case we treat it as x.y.0-SNAPSHOT)
+# at release:                   x.y.z-Helium
+# stable/helium after release:  x.y.(z+1)-SNAPSHOT
+# master after release:         x.(y+1).0-SNAPSHOT
+# Autorelease on master:        <human-readable-tag> is "PreLithium-<date>"
+# Autorelease on stable/helium: <human-readable-tag> is "PreHeliumSR1-<date>"
+# Release job on master:        <human-readable-tag> is "Lithium"
+# Release job on stable/helium: <human-readable-tag> is "HeliumSR1"
+#
+# Some things have a date for a version, e.g., 2014.09.24.4
+# * We treat this as YYYY.MM.DD.<minor>
+# * Note that all such dates currently in ODL are in YANG tools
+# * They are all now YYYY.MM.DD.7 since 7 is the minor version for yangtools
+
+
+# The goal of this script is to:
+#   1.) take all x.y.z-SNAPSHOT to x.y.z-Helium
+#   2.) take all x.y.z-Helium versions to x.y.(z+1)-SNAPSHOT and
+#   3.) take all x.y.z-SNAPSHOT versions to x.(y+1).0-SNAPSHOT
+
+print_version_usage() {
+    echo "Usage:"
+    echo "    version bump <release-tag>       Bump all versions in pom files"
+    echo "    version release <release-tag>    Convert all SNAPSHOTS to <release-tag>"
+    echo "        example-tag: Helium-SR1"
+}
+
+version() {
+    subcommand=$1; shift
+    FILENAMES="pom.xml repo-pom.xml features.xml"
+
+    case "$subcommand" in
+        bump )
+            RELEASE_TAG=$1
+            echo "Bumping versions..."
+            version_bump
+            exit 0
+            ;;
+        release )
+            RELEASE_TAG=$1
+            echo "Bumping SNAPSHOTS to $RELEASE_TAG"
+            version_release
+            exit 0
+            ;;
+        patch )
+            RELEASE_TAG=$1
+            PATCH_DIR=$2
+            PROJECT=${3:-"OpenDaylight"}
+            version_patch
+            ;;
+        * )
+            echo "Invalid command: $subcommand" 1>&2
+            print_version_usage
+            exit 1
+            ;;
+    esac
+}
+
+version_bump() {
+    # Notes:
+    #   * bump date-based versions first to avoid date-only versions from being caught as x.y.z,
+    #   * this assumes that a normal x.y.z version can't match YYYY.MM.DD, which is probably true
+    #   * bump -SNAPSHOT versions first so that we don't double bump versions
+    for name in $FILENAMES; do
+        # Changes YYYY.MM.DD.y.z-SNAPSHOT to YYYY.MM.DD.(y+1).0-SNAPSHOT in pom.xml files (if y or z is missing treat as 0)
+        find . -type f -name "$name" -exec perl -i -pe "s/(\d\d\d\d\.\d\d\.\d\d)\.(\d+)\.(\d+)-SNAPSHOT/\$1.@{[1+\$2]}.0-SNAPSHOT/g" {} +
+        find . -type f -name "$name" -exec perl -i -pe "s/(\d\d\d\d\.\d\d\.\d\d)\.(\d+)-SNAPSHOT/\$1.@{[1+\$2]}.0-SNAPSHOT/g" {} +
+        find . -type f -name "$name" -exec perl -i -pe "s/(\d\d\d\d\.\d\d\.\d\d)-SNAPSHOT/\$1.1.0-SNAPSHOT/g" {} +
+
+        # Changes YYYY.MM.DD.y.z-Helium to YYMMDD.y.(z+1)-SNAPSHOT in pom.xml files (if y or z is missing treat as 0)
+        find . -type f -name "$name" -exec perl -i -pe "s/(\d\d\d\d\.\d\d\.\d\d)\.(\d+)\.(\d+)-$RELEASE_TAG/\$1.\$2.@{[1+\$3]}-SNAPSHOT/g" {} +
+        find . -type f -name "$name" -exec perl -i -pe "s/(\d\d\d\d\.\d\d\.\d\d)\.(\d+)-$RELEASE_TAG/\$1.\$2.1-SNAPSHOT/g" {} +
+        find . -type f -name "$name" -exec perl -i -pe "s/(\d\d\d\d\.\d\d\.\d\d)-$RELEASE_TAG/\$1.0.1-SNAPSHOT/g" {} +
+
+        # Changes x.y.z-SNAPSHOT to x.(y+1).0-SNAPSHOT in pom.xml files (if z is missing treat as 0)
+        find . -type f -name "$name" -exec perl -i -pe "s/([^\d.]\d+)\.(\d+)\.(\d+)-SNAPSHOT/\$1.@{[1+\$2]}.0-SNAPSHOT/g" {} +
+        find . -type f -name "$name" -exec perl -i -pe "s/([^\d.]\d+)\.(\d+)-SNAPSHOT/\$1.@{[1+\$2]}.0-SNAPSHOT/g" {} +
+
+        # Changes x.y.z-Helium to x.y.(z+1)-SNAPSHOT in pom.xml files (if z is missing treat as 0)
+        find . -type f -name "$name" -exec perl -i -pe "s/([^\d.]\d+)\.(\d+)\.(\d+)-$RELEASE_TAG/\$1.\$2.@{[1+\$3]}-SNAPSHOT/g" {} +
+        find . -type f -name "$name" -exec perl -i -pe "s/([^\d.]\d+)\.(\d+)-$RELEASE_TAG/\$1.\$2.1-SNAPSHOT/g" {} +
+    done
+}
+
+version_release() {
+    for name in $FILENAMES
+    do
+        find . -type f -name "$name" -exec perl -i -pe "s/SNAPSHOT/$RELEASE_TAG/g" {} +
+    done
+}
+
+version_patch() {
+    # Patches a git repo using bundle files and creates a version bump commit
+    #
+    # This command is a macro to perform 3 actions:
+    #
+    #  1) Apply a git.bundle patch to the current repo
+    #  2) Create a git tag against the commit provided by the git.bundle
+    #  3) Version bumps by x.y.(z+1)-SNAPSHOT to prepare repo for next dev cycle
+    #
+    # The original purpose of patch is to:
+    #
+    #  1) Apply autorelease patches for a ODL Release
+    #  2) Create version bump commit for post-release dev cycle
+    #
+    # However we  try to ensure the code here is not specific to the OpenDaylight
+    # project in case it is useful for other projects that need to patch multiple
+    # repos in a quick way using git.bundle files.
+    #
+    # Expected variables:
+    #     RELEASE_TAG - The release tag of the release being performed
+    #     PATCH_DIR   - The directory path containing the git.bundle files (and taglist.log)
+    #     PROJECT     - The top level project that we're patching eg. OpenDaylight
+
+    # OpenDaylight uses the format Boron-SR1 as a release tag where "boron" is
+    # the branch name of the maintenance branch and SR1 (if exists) is the
+    # service release. Strip out the branch from the tag and set the stable release
+    # branch.
+    subproject="${PWD##*/}"
+
+    # Validate that we're patching at the same commit level as when autorelease
+    # built the release. Basically ensuring that no new patches snuck into the
+    # project during code freeze.
+    EXPECTED_HASH=$(grep "^${subproject} " "$PATCH_DIR/taglist.log" | awk '{ print $2 }')
+    if [ "$EXPECTED_HASH" == "" ]; then
+        parent_dir="$(dirname "$(pwd)")"
+        subproject="${parent_dir##*/}/$subproject"
+        EXPECTED_HASH=$(grep "^${subproject} " "$PATCH_DIR/taglist.log" | awk '{ print $2 }')
+    fi
+
+    git checkout "$EXPECTED_HASH"
+    CURRENT_HASH=$(git rev-parse HEAD)
+
+    echo "Current Hash: $CURRENT_HASH"
+    echo "Expected Hash: $EXPECTED_HASH"
+    if [ "$CURRENT_HASH" != "$EXPECTED_HASH" ]
+    then
+        echo "ERROR: Current project hash does not match expected hash"
+        exit 1
+    fi
+
+    #######################
+    # Start apply patches #
+    #######################
+    git fetch "${PATCH_DIR}/${subproject/\//-}.bundle"
+    git merge FETCH_HEAD
+    git tag -asm "$PROJECT $RELEASE_TAG release" "release/${RELEASE_TAG,,}"
+    find . -name pom.xml -print0 | xargs -0 grep SNAPSHOT
+
+    echo "Tagging complete"
+}
+
+# Only run the script if it is being called directly and not sourced.
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
+then
+    version "$@"
+fi
