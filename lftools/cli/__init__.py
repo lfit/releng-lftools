@@ -15,6 +15,7 @@ __author__ = 'Thanh Ha'
 import click
 
 from lftools.cli.deploy import deploy
+from lftools.cli.github import github
 from lftools.cli.jenkins import jenkins_cli
 from lftools.cli.license import license
 from lftools.cli.nexus import nexus
@@ -38,6 +39,7 @@ cli.add_command(nexus)
 cli.add_command(openstack)
 cli.add_command(sign)
 cli.add_command(version)
+cli.add_command(github)
 
 
 def main():
