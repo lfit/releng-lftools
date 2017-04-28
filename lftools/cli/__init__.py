@@ -18,7 +18,7 @@ from lftools.cli.jenkins import jenkins_cli
 from lftools.cli.nexus import nexus
 from lftools.cli.version import version
 from lftools.openstack.cmd import openstack
-
+from lftools.cli.github import github
 
 @click.group()
 @click.pass_context
@@ -33,6 +33,7 @@ cli.add_command(openstack)
 cli.add_command(nexus)
 cli.add_command(jenkins_cli, name='jenkins')
 cli.add_command(version)
+cli.add_command(github)
 
 
 def main():
