@@ -1,0 +1,9 @@
+---
+# vim: sw=2 ts=2 sts=3 et :
+
+# Github instance to work against
+github: 'http://github.com/'
+org: 'lfit'
+user: 'admin'
+password: 'admin123'
+token: '123456789101112...'
