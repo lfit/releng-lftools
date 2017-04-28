@@ -1,0 +1,6 @@
+---
+# vim: sw=2 ts=2 sts=3 et :
+# Github instance  and creds to work against
+base_url: 'https://api.github.com'
+token: 'secret access key'
+username: 'your GitHub username'
