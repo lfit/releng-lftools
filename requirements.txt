@@ -7,6 +7,7 @@ sphinx>=1.4.9
 sphinxcontrib-programoutput
 sphinx_bootstrap_theme>=0.4.14
 python-jenkins
+PyGithub
 
 # workarounds to prevent upstream from breaking us
 babel<2.4.0
