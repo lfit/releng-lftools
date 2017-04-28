@@ -1,0 +1,5 @@
+---
+# vim: sw=2 ts=2 sts=3 et :
+# Github instance  and creds to work against
+github: 'https://api.github.com/'
+token: '123456789101112...'
