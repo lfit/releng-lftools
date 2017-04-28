@@ -1,0 +1,46 @@
+---
+# vim: sw=2 ts=2 sts=3 et :
+# Github branch protection configuration
+- branch1:
+    name: master 
+    enabled: true
+    required_status_checks:
+      enforcement_level: everyone
+      contexts:
+        - DCO
+        - 'JJB Verify'
+
+## Currently not supported by PyGithub lib
+#    required_pull_request_reviews:
+#      dismissal_restrictions:
+#        users: []
+#        teams: []
+#      dismiss_stale_reviews: true
+
+#    enforce_admins: true
+
+#    restrictions:
+#      users: []
+#      teams: []
+
+- branch2:
+    name: master
+    enabled: false
+    required_status_checks:
+      enforcement_level: everyone
+      contexts:
+        - DCO
+        - 'JJB Verify'
+
+## Currently not supported by PyGithub lib
+#    required_pull_request_reviews:
+#      dismissal_restrictions:
+#        users: []
+#        teams: []
+#      dismiss_stale_reviews: true
+
+#    enforce_admins: true
+
+#    restrictions:
+#      users: []
+#      teams: []

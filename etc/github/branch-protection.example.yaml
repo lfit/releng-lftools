@@ -1,0 +1,42 @@
+---
+# vim: sw=2 ts=2 sts=3 et :
+# Github branch protection configuration
+- branch1:
+    name: BranchName
+    required_status_checks:
+      enforcement_level: everyone
+      contexts:
+        - DCO
+        - 'JJB Verify'
+
+    required_pull_request_reviews:
+      dismissal_restrictions:
+        users: []
+        teams: []
+      dismiss_stale_reviews: true
+
+    enforce_admins: true
+
+    restrictions:
+      users: []
+      teams: []
+
+- branch2:
+    name: BranchName
+    required_status_checks:
+      enforcement_level: everyone
+      contexts:
+        - DCO
+        - 'JJB Verify'
+
+    required_pull_request_reviews:
+      dismissal_restrictions:
+        users: []
+        teams: []
+      dismiss_stale_reviews: true
+
+    enforce_admins: true
+
+    restrictions:
+      users: []
+      teams: []
