@@ -15,6 +15,7 @@ __author__ = 'Thanh Ha'
 
 import click
 from lftools.openstack import image as os_image
+from lftools.openstack import server as os_server
 
 
 @click.group()
@@ -71,3 +72,43 @@ def list(ctx, days, hide_public):
 
 image.add_command(cleanup)
 image.add_command(list)
+
+
+@openstack.group()
+@click.pass_context
+def server(ctx):
+    """Command for manipulating servers."""
+    pass
+
+
+@click.command()
+@click.option(
+    '--days', type=int, default=0,
+    help='Find servers older than or equal to days.')
+@click.option(
+    '--clouds', type=str, default=None,
+    help=('Clouds (as defined in clouds.yaml) to remove servers from. If not'
+          'passed will assume from os-cloud parameter. (optional)'))
+@click.pass_context
+def cleanup(ctx, days, clouds):
+    """Cleanup old servers."""
+    os_server.cleanup(
+        ctx.obj['os_cloud'],
+        days=days,
+        clouds=clouds)
+
+
+@click.command()
+@click.option(
+    '--days', type=int, default=0,
+    help='Find servers older than or equal to days.')
+@click.pass_context
+def list(ctx, days):
+    """List cloud servers."""
+    os_server.list(
+        ctx.obj['os_cloud'],
+        days=days)
+
+
+server.add_command(cleanup)
+server.add_command(list)
