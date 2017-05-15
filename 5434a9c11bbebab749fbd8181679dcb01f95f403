@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_07e4a10b",
+        "filename": "lftools/openstack/server.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-05-15T16:46:21Z",
+      "side": 1,
+      "message": "@Anil This ought to be your name since you wrote it",
+      "range": {
+        "startLine": 13,
+        "startChar": 14,
+        "endLine": 13,
+        "endChar": 22
+      },
+      "revId": "5434a9c11bbebab749fbd8181679dcb01f95f403",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
