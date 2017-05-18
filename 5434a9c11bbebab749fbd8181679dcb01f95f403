@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "9a437d4f_e254ebcb",
+        "filename": "lftools/openstack/cmd.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-05-18T21:11:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure this option is useful in the context of a server. With images we want to remove images across all clouds however with servers there are no identical servers between the cloudes so there\u0027s no point providing a list of clouds to the server command imo.",
+      "range": {
+        "startLine": 89,
+        "startChar": 5,
+        "endLine": 89,
+        "endChar": 13
+      },
+      "revId": "5434a9c11bbebab749fbd8181679dcb01f95f403",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_07e4a10b",
         "filename": "lftools/openstack/server.py",
         "patchSetId": 2
@@ -42,6 +65,52 @@
         "startChar": 14,
         "endLine": 13,
         "endChar": 22
+      },
+      "revId": "5434a9c11bbebab749fbd8181679dcb01f95f403",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_a25ee3e7",
+        "filename": "lftools/openstack/server.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-05-18T21:11:41Z",
+      "side": 1,
+      "message": "No need to support multi-cloud.",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 61
+      },
+      "revId": "5434a9c11bbebab749fbd8181679dcb01f95f403",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_c251e7d9",
+        "filename": "lftools/openstack/server.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-05-18T21:11:41Z",
+      "side": 1,
+      "message": "There is no usefulness in removing a server across multiple clouds as servers are unique unlike images.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 59
       },
       "revId": "5434a9c11bbebab749fbd8181679dcb01f95f403",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
