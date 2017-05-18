@@ -22,6 +22,30 @@
       "revId": "5434a9c11bbebab749fbd8181679dcb01f95f403",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_224b132d",
+        "filename": "lftools/openstack/server.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-05-18T21:04:57Z",
+      "side": 1,
+      "message": "Doesn\u0027t bother me either way but this is mostly a copy paste of images.py. :)",
+      "parentUuid": "9a437d4f_07e4a10b",
+      "range": {
+        "startLine": 13,
+        "startChar": 14,
+        "endLine": 13,
+        "endChar": 22
+      },
+      "revId": "5434a9c11bbebab749fbd8181679dcb01f95f403",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
