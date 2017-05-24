@@ -170,14 +170,7 @@ version_patch() {
     git tag -asm "$PROJECT $RELEASE_TAG release" "release/${RELEASE_TAG,,}"
     find . -name pom.xml -print0 | xargs -0 grep SNAPSHOT
 
-    git checkout "${STABLE_BRANCH}"
-    # Release and then Bump so that the version.sh script creates the right patches
-    version_release "$RELEASE_TAG"
-    version_bump "$RELEASE_TAG"
-    git commit -asm "Bumping versions by x.y.(z+1) for next dev cycle"
-    find . -name pom.xml -print0 | xargs -0 grep "$RELEASE_TAG"
-
-    echo "Tagging and version bumping complete"
+    echo "Tagging complete"
 }
 
 # Only run the script if it is being called directly and not sourced.
