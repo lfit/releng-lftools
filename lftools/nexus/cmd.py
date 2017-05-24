@@ -108,7 +108,8 @@ def create_repos(config_file, settings_file):
     def build_repo(repo, repoId, config, base_groupId):
         print('Building for %s.%s' % (base_groupId, repo))
         groupId = '%s.%s' % (base_groupId, repo)
-        target = '^/%s/.*' % groupId.replace('.', '[/\.]')
+        target1 = '^/%s/.*' % groupId.replace('.', '[/\.]')
+        target2 = '^/%s[\.].*' % groupId.replace('.', '[/\.]')
 
         if 'extra_privs' in config:
             extra_privs = config['extra_privs']
@@ -117,7 +118,7 @@ def create_repos(config_file, settings_file):
 
         create_nexus_perms(
             repoId,
-            [target],
+            [target1, target2],
             settings['email_domain'],
             config['password'],
             extra_privs)
