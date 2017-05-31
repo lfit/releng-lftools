@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_e173c813",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-05-31T21:54:03Z",
+      "side": 1,
+      "message": "This is RELENG-121 and is related to RELENG-120",
+      "revId": "12784fa64a51b8c28fd8bbdc37ddb33b43a6eab9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_a165c046",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-05-31T21:54:03Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this just be a curl call, not an echo?",
+      "range": {
+        "startLine": 258,
+        "startChar": 8,
+        "endLine": 258,
+        "endChar": 12
+      },
+      "revId": "12784fa64a51b8c28fd8bbdc37ddb33b43a6eab9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
