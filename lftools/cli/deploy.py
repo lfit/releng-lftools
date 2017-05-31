@@ -64,5 +64,23 @@ def logs(ctx, nexus_url, nexus_path, build_url):
     subprocess.call(['deploy', 'logs', nexus_url, nexus_path, build_url])
 
 
+@click.command()
+@click.argument('nexus-repo-url', envvar='NEXUS_REPO_URL')
+@click.argument('deploy-dir', envvar='DEPLOY_DIR')
+@click.pass_context
+def maven(ctx, nexus_repo_url, deploy_dir):
+    """Deploys a Maven repository to a specified Nexus repository.
+
+    This script takes a local Maven repository and deploys it to a Nexus
+    repository.
+
+    Example Repository:
+
+        https://nexus.opendaylight.org/content/repositories/opendaylight.snapshot
+    """
+    subprocess.call(['deploy', 'maven', nexus_repo_url, deploy_dir])
+
+
 deploy.add_command(archives)
 deploy.add_command(logs)
+deploy.add_command(maven)
