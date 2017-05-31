@@ -75,6 +75,11 @@ deploy() {
             deploy_logs "$@"
             exit 0
             ;;
+        maven )
+            echo "Deploying Maven artifacts..."
+            deploy_maven "$@"
+            exit 0
+            ;;
         * )
             echo "Invalid command: $subcommand" 1>&2
             exit 1
@@ -217,6 +222,42 @@ deploy_logs() {
 
     popd
     rm -rf "$tmpdir"
+}
+
+deploy_maven() {
+    # Deploy Maven artifacts using curl instead of Maven
+    #
+    # The purpose of this is so that we can get around the problematic
+    # deploy-at-end configuration with upstream Maven.
+    # https://issues.apache.org/jira/browse/MDEPLOY-193
+
+    local nexus_repo_url="$1"
+    local maven_repo_path="$2"
+
+    if [ -z "$2" ]; then
+        echo "Missing required arguments."
+        echo "Usage: deploy maven <nexus_repo_url> <maven_repo_path>"
+        exit 1
+    fi
+
+    pushd "$maven_repo_path"
+    file_list=($(find . -type f \
+                ! -name "maven-metadata*" \
+                ! -name _remote.repositories \
+                ! -name resolver-status.properties \
+                | cut -c 3-))
+
+    for file in "${file_list[@]}"; do
+        echo "Uploading ${file}"
+
+        status=$(curl -s -w "%{http_code}" --netrc --upload-file "$file" "$nexus_repo_url/$file")
+
+        if [ "$status" != "201" ]; then
+            echo "Failed to upload to Nexus. Aborting..."
+            exit 1
+        fi
+    done
+    popd
 }
 
 # Only run the script if it is being called directly and not sourced.
