@@ -67,5 +67,24 @@ def logs(ctx, nexus_url, nexus_path, build_url):
     sys.exit(status)
 
 
+@click.command()
+@click.argument('nexus-repo-url', envvar='NEXUS_REPO_URL')
+@click.argument('deploy-dir', envvar='DEPLOY_DIR')
+@click.pass_context
+def nexus(ctx, nexus_repo_url, deploy_dir):
+    """Deploy a Maven repository to a specified Nexus repository.
+
+    This script takes a local Maven repository and deploys it to a Nexus
+    repository.
+
+    Example Repository:
+
+        https://nexus.example.org/content/repositories/release
+    """
+    status = subprocess.call(['deploy', 'nexus', nexus_repo_url, deploy_dir])
+    sys.exit(status)
+
+
 deploy.add_command(archives)
 deploy.add_command(logs)
+deploy.add_command(nexus)
