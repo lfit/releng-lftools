@@ -3,6 +3,18 @@ from setuptools import setup
 
 from lftools import __version__
 
+long_desc = '''
+LF Tools is a collection of scripts and utilities that are useful to multiple
+Linux Foundation project CI and Releng related activities. We try to create
+these tools to be as generic as possible such that they can be deployed in
+other environments.
+
+Ubuntu Dependencies:
+
+    - build-essentials
+    - python-dev
+'''
+
 with open('requirements.txt') as f:
     install_reqs = f.read().splitlines()
 
@@ -12,12 +24,9 @@ setup(
     author='Thanh Ha',
     author_email='thanh.ha@linuxfoundation.org',
     url='',
-    description='',
-    long_description=(
-        'LF Tools is a collection of scripts and utilities that are useful '
-        'to multiple Linux Foundation project CI and Releng related '
-        'activities. We try to create these tools to be generic as possible '
-        'such that they can be deployed in other environments.'),
+    description=('Linux Foundation Release Engineering Tools'
+        'Website: https://lf-releng-tools.readthedocs.io/en/latest/'),
+    long_description=long_desc,
     license='EPL',
     classifiers=[
         'Development Status :: 1 - Planning',
