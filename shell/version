@@ -136,9 +136,6 @@ version_patch() {
     # the branch name of the maintenance branch and SR1 (if exists) is the
     # service release. Strip out the branch from the tag and set the stable release
     # branch.
-    STABLE_BRANCH="stable/$( cut -d '-' -f1 <<< "${RELEASE_TAG,,}")"
-
-
     subproject="${PWD##*/}"
 
     # Validate that we're patching at the same commit level as when autorelease
