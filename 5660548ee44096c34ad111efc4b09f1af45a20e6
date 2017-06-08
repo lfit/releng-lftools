@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_671488f5",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-08T23:34:50Z",
+      "side": 1,
+      "message": "Apparently we shouldn\u0027t be ignoring this file. It\u0027s created by Maven on the client side sadly which means if we\u0027re using curl we will need to update this manually.",
+      "range": {
+        "startLine": 245,
+        "startChar": 25,
+        "endLine": 245,
+        "endChar": 39
+      },
+      "revId": "5660548ee44096c34ad111efc4b09f1af45a20e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
