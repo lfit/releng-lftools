@@ -16,6 +16,24 @@
       "revId": "9101fc5a0b0da197ca32ab7e36b802ff90a4b3ae",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_677368b2",
+        "filename": "lftools/utils/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-08T14:39:40Z",
+      "side": 1,
+      "message": "Python modules need __init__.py so that python knows it\u0027s a module.",
+      "parentUuid": "9a437d4f_ce3356f5",
+      "revId": "9101fc5a0b0da197ca32ab7e36b802ff90a4b3ae",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
