@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_ce3356f5",
+        "filename": "lftools/utils/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2017-06-08T13:39:32Z",
+      "side": 1,
+      "message": "This probably isn\u0027t a good idea.  Putting the __init__.py file here in tests.  Reading some conflicting stuff.",
+      "revId": "9101fc5a0b0da197ca32ab7e36b802ff90a4b3ae",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
