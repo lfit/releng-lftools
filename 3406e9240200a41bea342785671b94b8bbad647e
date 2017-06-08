@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_07901c94",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-08T18:04:10Z",
+      "side": 1,
+      "message": "FYI a missing archives directory does not fail the build. It just prints a message that the project did not provide an archives directory and continue with the script.\n\nWe do not have set -e in this part of the script. (Although we should probably improve this script to use it).",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 46
+      },
+      "revId": "3406e9240200a41bea342785671b94b8bbad647e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
