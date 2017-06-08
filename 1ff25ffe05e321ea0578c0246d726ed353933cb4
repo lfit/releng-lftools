@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_876e4cc8",
+        "filename": "lftools/utils/github.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-08T14:39:40Z",
+      "side": 1,
+      "message": "Is utils used?\n\nanyway I would put this stuff inside of the github folder. It\u0027s confusing if we split put our libraries into so many separate folders.",
+      "revId": "1ff25ffe05e321ea0578c0246d726ed353933cb4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_c774549e",
+        "filename": "requirements.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-08T14:39:40Z",
+      "side": 1,
+      "message": "Alphabetical order please.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 8
+      },
+      "revId": "1ff25ffe05e321ea0578c0246d726ed353933cb4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_a7795095",
+        "filename": "test_requirements.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-08T14:39:40Z",
+      "side": 1,
+      "message": "This file isn\u0027t needed. we already pull in pytest via tox.ini.",
+      "revId": "1ff25ffe05e321ea0578c0246d726ed353933cb4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
