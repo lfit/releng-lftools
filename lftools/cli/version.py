@@ -66,7 +66,8 @@ def bump(ctx, release_tag):
     3. Change x.y.z-SNAPSHOT versions to x.(y+1).0-SNAPSHOT
     4. Change x.y.z-RELEASE_TAG versions to x.y.(z+1)-SNAPSHOT and
     """
-    subprocess.call(['version', 'bump', release_tag])
+    status = subprocess.call(['version', 'bump', release_tag])
+    sys.exit(status)
 
 
 @click.command()
@@ -78,7 +79,8 @@ def release(ctx, release_tag):
     Searches poms for all instances of SNAPSHOT version and changes it to
     RELEASE_TAG.
     """
-    subprocess.call(['version', 'release', release_tag])
+    status = subprocess.call(['version', 'release', release_tag])
+    sys.exit(status)
 
 
 @click.command()
@@ -97,7 +99,8 @@ def patch(ctx, release_tag, patch_dir, project):
     if not os.path.isdir(patch_dir):
         print("{} is not a valid directory.".format(patch_dir))
         sys.exit(404)
-    subprocess.call(['version', 'patch', release_tag, patch_dir, project])
+    status = subprocess.call(['version', 'patch', release_tag, patch_dir, project])
+    sys.exit(status)
 
 
 version.add_command(bump)

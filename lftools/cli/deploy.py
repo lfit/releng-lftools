@@ -13,6 +13,7 @@ __author__ = 'Thanh Ha'
 
 
 import subprocess
+import sys
 
 import click
 
@@ -43,7 +44,8 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
     with the name "logs" as this is a hardcoded path. Also this script uses
     ~/.netrc for it's authentication which must be provided.
     """
-    subprocess.call(['deploy', 'archives', nexus_url, nexus_path, workspace, pattern])
+    status = subprocess.call(['deploy', 'archives', nexus_url, nexus_path, workspace, pattern])
+    sys.exit(status)
 
 
 @click.command()
@@ -61,7 +63,8 @@ def logs(ctx, nexus_url, nexus_path, build_url):
     with the name "logs" as this is a hardcoded path. Also this script uses
     ~/.netrc for it's authentication which must be provided.
     """
-    subprocess.call(['deploy', 'logs', nexus_url, nexus_path, build_url])
+    status = subprocess.call(['deploy', 'logs', nexus_url, nexus_path, build_url])
+    sys.exit(status)
 
 
 deploy.add_command(archives)
