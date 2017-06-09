@@ -192,12 +192,24 @@ deploy_logs() {
     # Print system info before collecting logs
     touch "_sys-info.log"
     {
-        echo -e "---> uname -a:\n $(uname -a) \n"
-        echo -e "---> lscpu:\n $(lscpu) \n"
-        echo -e "---> nproc:\n $(nproc) \n"
-        echo -e "---> df -h:\n $(df -h) \n"
-        echo -e "---> free -m:\n $(free -m) \n"
-        echo -e "---> ip addr:\n $(/sbin/ip addr) \n"
+        local sys_cmds
+        sys_cmds=(
+            "uname -a"
+            "lscpu"
+            "nproc"
+            "df -h"
+            "free -m"
+            "ip addr"
+            "sar -r"
+        )
+        for cmd in "${sys_cmds[@]}"; do
+            # If command exists then print output.
+            set -- $cmd
+            hash $1 2> /dev/null
+            if [ "$?" -eq "0" ]; then
+                echo -e "---> $cmd:\n $($cmd) \n"
+            fi
+        done
     } 2>&1 | tee -a "_sys-info.log"
 
     # Magic string used to trim console logs at the appropriate level during wget
