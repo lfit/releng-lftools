@@ -24,3 +24,8 @@ nexus
 -----
 
 .. program-output:: lftools deploy nexus --help
+
+nexus-stage
+-----
+
+.. program-output:: lftools deploy nexus-stage --help
