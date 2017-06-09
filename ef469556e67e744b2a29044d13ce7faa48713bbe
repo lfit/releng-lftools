@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_e7ee38b4",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-09T22:09:26Z",
+      "side": 1,
+      "message": "I seriously don\u0027t know from this line sneaked in!",
+      "parentUuid": "9a437d4f_e7a9987c",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 39,
+        "endChar": 41
+      },
+      "revId": "ef469556e67e744b2a29044d13ce7faa48713bbe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_07adbc88",
         "filename": "shell/deploy",
         "patchSetId": 1
