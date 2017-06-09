@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_4795043f",
+        "filename": "shell/deploy",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-09T05:12:11Z",
+      "side": 1,
+      "message": "Not sure if it\u0027s this or the job but the job doesn\u0027t appear to fail when this fails to upload. Need to double check on that.",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 10
+      },
+      "revId": "5bf60127b57492cca16a7b5412804bca6eb2fad1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
