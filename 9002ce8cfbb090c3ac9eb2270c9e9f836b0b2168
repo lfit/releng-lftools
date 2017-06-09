@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_875acc81",
+        "filename": "shell/deploy",
+        "patchSetId": 7
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-09T22:52:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_e71cf8c3",
+      "range": {
+        "startLine": 233,
+        "startChar": 6,
+        "endLine": 233,
+        "endChar": 48
+      },
+      "revId": "9002ce8cfbb090c3ac9eb2270c9e9f836b0b2168",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_c779f4fd",
         "filename": "shell/deploy",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_c760d437",
+        "filename": "shell/deploy",
+        "patchSetId": 7
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-09T22:52:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_c779f4fd",
+      "range": {
+        "startLine": 244,
+        "startChar": 28,
+        "endLine": 244,
+        "endChar": 33
+      },
+      "revId": "9002ce8cfbb090c3ac9eb2270c9e9f836b0b2168",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_a77ef0e2",
         "filename": "shell/deploy",
         "patchSetId": 7
@@ -59,6 +107,30 @@
       "writtenOn": "2017-06-09T22:44:03Z",
       "side": 1,
       "message": "Maybe exit $status would be better?",
+      "range": {
+        "startLine": 265,
+        "startChar": 17,
+        "endLine": 265,
+        "endChar": 18
+      },
+      "revId": "9002ce8cfbb090c3ac9eb2270c9e9f836b0b2168",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_a765d046",
+        "filename": "shell/deploy",
+        "patchSetId": 7
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-09T22:52:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_a77ef0e2",
       "range": {
         "startLine": 265,
         "startChar": 17,
