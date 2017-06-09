@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_678808e8",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-09T22:47:43Z",
+      "side": 1,
+      "message": "This is a incorrect copy paste of the nexus deploy command. Please write one for this command.",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 7
+      },
+      "revId": "973fd8535766d0e87eff4c594c79b553b190054e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_0777fc03",
+        "filename": "shell/deploy",
+        "patchSetId": 5
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-09T22:47:43Z",
+      "side": 1,
+      "message": "Should also document the parameters.",
+      "revId": "973fd8535766d0e87eff4c594c79b553b190054e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_476d0432",
+        "filename": "shell/deploy",
+        "patchSetId": 5
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-09T22:47:43Z",
+      "side": 1,
+      "message": "Maybe we can \"exit $status\" like we do in the deploy Nexus command.",
+      "range": {
+        "startLine": 303,
+        "startChar": 13,
+        "endLine": 303,
+        "endChar": 14
+      },
+      "revId": "973fd8535766d0e87eff4c594c79b553b190054e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_276a001b",
+        "filename": "shell/deploy",
+        "patchSetId": 5
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-09T22:47:43Z",
+      "side": 1,
+      "message": "Do we need to capture the exit code?",
+      "range": {
+        "startLine": 310,
+        "startChar": 4,
+        "endLine": 310,
+        "endChar": 16
+      },
+      "revId": "973fd8535766d0e87eff4c594c79b553b190054e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
