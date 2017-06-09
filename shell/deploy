@@ -36,7 +36,7 @@ copy_archives() {
     pushd "$workspace"
 
     # First copy all archives provided by user if any
-    if [ "$(ls -A "$workspace/archives/")" ]; then
+    if [ -d "$workspace/archives" ] && [ "$(ls -A "$workspace/archives/")" ]; then
         mv "$workspace/archives/"* "$dest_dir"
     fi
 
@@ -198,6 +198,7 @@ deploy_logs() {
         echo -e "---> df -h:\n $(df -h) \n"
         echo -e "---> free -m:\n $(free -m) \n"
         echo -e "---> ip addr:\n $(/sbin/ip addr) \n"
+        echo -e "---> sar -r:\n $(sar -r) \n"
     } 2>&1 | tee -a "_sys-info.log"
 
     # Magic string used to trim console logs at the appropriate level during wget
