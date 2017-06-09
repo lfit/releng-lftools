@@ -268,6 +268,67 @@ deploy_nexus() {
     popd
 }
 
+deploy_nexus_stage() {
+    # Deploy Maven artifacts to Nexus staging repo using curl
+
+    local nexus_url="$1"
+    local staging_profile_id="$2"
+    local deploy_dir="$3"
+
+    if [ -z "$3" ]; then
+        echo "Missing required arguments."
+        echo "Usage: deploy nexus-stage <nexus_url> <staging_profile_id> <deploy_dir>"
+        exit 1
+    fi
+
+    FILE_XML="$(mktemp)"
+
+    cat > "$FILE_XML" <<EOF
+<promoteRequest>
+  <data>
+    <description>Create staging repo.</description>
+  </data>
+</promoteRequest>
+EOF
+
+    local resp
+    resp=$(curl -s --netrc -X POST -d "@$FILE_XML" \
+        -H "Content-Type:application/xml" \
+        "${nexus_url}/service/local/staging/profiles/${staging_profile_id}/start")
+
+    if echo "$resp" | grep -q nexus-error; then
+        local msg
+        msg=$(sed -n -e 's/.*<msg>\(.*\)<\/msg>.*/\1/p' <<< $resp)
+        echo "ERROR: $msg"
+    fi
+
+    local staging_repo_id
+    staging_repo_id=$(sed -n -e 's/.*<stagedRepositoryId>\(.*\)<\/stagedRepositoryId>.*/\1/p' <<< $resp)
+    echo "Staging repository $staging_repo_id created."
+
+    deploy_nexus "${nexus_url}/service/local/staging/deployByRepositoryId/${staging_repo_id}" "${deploy_dir}"
+
+    # Close the repo
+
+    cat > "$FILE_XML" <<EOF
+<promoteRequest>
+  <data>
+    <stagedRepositoryId>$staging_repo_id</stagedRepositoryId>
+    <description>Close staging repository.</description>
+  </data>
+</promoteRequest>
+EOF
+
+    curl -s --netrc -X POST \
+        -H "Content-Type:application/xml" -d "@$FILE_XML" \
+        "${nexus_url}/service/local/staging/profiles/${staging_profile_id}/finish"
+
+    echo "Completed uploading files to ${staging_repo_id}."
+
+    # cleanup
+    rm "$FILE_XML"
+}
+
 # Only run the script if it is being called directly and not sourced.
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
 then

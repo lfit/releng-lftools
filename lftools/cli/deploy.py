@@ -81,6 +81,25 @@ def nexus(ctx, nexus_repo_url, deploy_dir):
     subprocess.call(['deploy', 'nexus', nexus_repo_url, deploy_dir])
 
 
+@click.command(name='nexus-stage')
+@click.argument('nexus-url', envvar='NEXUS_URL')
+@click.argument('staging-profile-id', envvar='STAGING_PROFILE_ID')
+@click.argument('deploy-dir', envvar='DEPLOY_DIR')
+@click.pass_context
+def nexus_stage(ctx, nexus_url, staging_profile_id, deploy_dir):
+    """Deploy a Maven repository to a specified Nexus repository.
+
+    This script takes a local Maven repository and deploys it to a Nexus
+    repository.
+
+    Example Repository:
+
+        https://nexus.opendaylight.org/content/repositories/opendaylight.snapshot
+    """
+    subprocess.call(['deploy', 'nexus-stage', nexus_url, staging_profile_id, deploy_dir])
+
+
 deploy.add_command(archives)
 deploy.add_command(logs)
 deploy.add_command(nexus)
+deploy.add_command(nexus_stage)
