@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_e7a9987c",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-09T16:10:34Z",
+      "side": 1,
+      "message": "Can we undo this change since it appears to have nothing to do with this patch?\n\nAlso it would hide the log that the project didn\u0027t provide a archives directory which I think is a good debugging log in case we\u0027re troubleshooting.",
+      "range": {
+        "startLine": 39,
+        "startChar": 9,
+        "endLine": 39,
+        "endChar": 41
+      },
+      "revId": "ef469556e67e744b2a29044d13ce7faa48713bbe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_07adbc88",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-09T16:10:34Z",
+      "side": 1,
+      "message": "Does this cause build failure if the project is missing this command?\n\nJust thinking about non-odl projects which might not be installing sysstat.",
+      "range": {
+        "startLine": 201,
+        "startChar": 22,
+        "endLine": 201,
+        "endChar": 25
+      },
+      "revId": "ef469556e67e744b2a29044d13ce7faa48713bbe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
