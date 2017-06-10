@@ -69,6 +69,30 @@
       "revId": "ef469556e67e744b2a29044d13ce7faa48713bbe",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_4702a43f",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-10T06:32:15Z",
+      "side": 1,
+      "message": "All our image are based on either CentOS or Ubuntu which is packaging and enabling the sysstats in the baseline provisioning scripts. so it should be good!",
+      "parentUuid": "9a437d4f_07adbc88",
+      "range": {
+        "startLine": 201,
+        "startChar": 22,
+        "endLine": 201,
+        "endChar": 25
+      },
+      "revId": "ef469556e67e744b2a29044d13ce7faa48713bbe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
