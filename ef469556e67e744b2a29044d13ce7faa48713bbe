@@ -93,6 +93,30 @@
       "revId": "ef469556e67e744b2a29044d13ce7faa48713bbe",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_879f6c03",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-10T06:37:42Z",
+      "side": 1,
+      "message": "Our other projects use Fedora and I heard OpenSUSE is being used somewhere too. I think ODL\u0027s Ubuntu is the only project that pulls in sysstat currently.",
+      "parentUuid": "9a437d4f_4702a43f",
+      "range": {
+        "startLine": 201,
+        "startChar": 22,
+        "endLine": 201,
+        "endChar": 25
+      },
+      "revId": "ef469556e67e744b2a29044d13ce7faa48713bbe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
