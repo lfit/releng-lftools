@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_0706dc20",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-11T16:51:02Z",
+      "side": 1,
+      "message": "We don\u0027t work correctly with snapshots at the moment. So lets not imply that we do.",
+      "range": {
+        "startLine": 82,
+        "startChar": 73,
+        "endLine": 82,
+        "endChar": 81
+      },
+      "revId": "a3b787b3b6413ec8bf48f1d8e5761fc3f1a0bdd4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_2709e031",
+        "filename": "shell/deploy",
+        "patchSetId": 8
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-11T16:51:02Z",
+      "side": 1,
+      "message": "We\u0027re not generating metadata so this technically doesn\u0027t work with snapshot repos (at least correctly). So let\u0027s not imply that we do work with snapshots.",
+      "range": {
+        "startLine": 238,
+        "startChar": 85,
+        "endLine": 238,
+        "endChar": 93
+      },
+      "revId": "a3b787b3b6413ec8bf48f1d8e5761fc3f1a0bdd4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
