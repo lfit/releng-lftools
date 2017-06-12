@@ -327,6 +327,9 @@ EOF
         msg=$(sed -n -e 's/.*<msg>\(.*\)<\/msg>.*/\1/p' <<< $resp)
         echo "ERROR: $msg"
         exit "$status"
+    elif [ "$status" != "201" ]; then
+        echo "ERROR: Failed with status code $status"
+        exit "$status"
     fi
 
     local staging_repo_id
