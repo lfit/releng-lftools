@@ -317,7 +317,7 @@ EOF
 
     local resp
     local status
-    resp=$(curl -s -w "%{http_code}" --netrc -X POST -d "@$FILE_XML" \
+    resp=$(curl -s -w " %{http_code}" --netrc -X POST -d "@$FILE_XML" \
         -H "Content-Type:application/xml" \
         "${nexus_url}/service/local/staging/profiles/${staging_profile_id}/start")
     status=$(echo "$resp" | awk 'END {print $NF}')
@@ -326,6 +326,9 @@ EOF
         local msg
         msg=$(sed -n -e 's/.*<msg>\(.*\)<\/msg>.*/\1/p' <<< $resp)
         echo "ERROR: $msg"
+        exit "$status"
+    elif [ "$status" != "201" ]; then
+        echo "ERROR: Failed with status code $status"
         exit "$status"
     fi
 
