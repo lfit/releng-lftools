@@ -72,6 +72,53 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_4a2509c1",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-13T01:10:05Z",
+      "side": 1,
+      "message": "Based on your explanation about calling maven. Then I would call this command.\n\ndeploy-maven-file",
+      "parentUuid": "9a437d4f_ca31f90c",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 13
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_2a22c5b9",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-13T01:10:05Z",
+      "side": 1,
+      "message": "As I understand it we are NOT using a Nexus site repository here. We\u0027re using a Maven 2 repository correct?",
+      "range": {
+        "startLine": 57,
+        "startChar": 34,
+        "endLine": 57,
+        "endChar": 38
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_6a49ed8a",
         "filename": "shell/deploy",
         "patchSetId": 1
@@ -88,6 +135,29 @@
         "startChar": 8,
         "endLine": 68,
         "endChar": 17
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_ca18d986",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-13T01:10:05Z",
+      "side": 1,
+      "message": "Do we need to disable this rule? if so why?",
+      "range": {
+        "startLine": 231,
+        "startChar": 4,
+        "endLine": 232,
+        "endChar": 31
       },
       "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
@@ -135,6 +205,52 @@
         "startChar": 4,
         "endLine": 233,
         "endChar": 10
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_0a2f01a3",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-13T01:10:05Z",
+      "side": 1,
+      "message": "I do not thing the code here allows the use of both SETTINGS_FILE or ~/.settings.xml as described in the function doc above.",
+      "range": {
+        "startLine": 238,
+        "startChar": 8,
+        "endLine": 238,
+        "endChar": 55
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_ea2b9d92",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-13T01:10:05Z",
+      "side": 1,
+      "message": "If we don\u0027t need this then remove it.",
+      "range": {
+        "startLine": 239,
+        "startChar": 8,
+        "endLine": 239,
+        "endChar": 48
       },
       "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
