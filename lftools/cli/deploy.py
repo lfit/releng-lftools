@@ -67,6 +67,33 @@ def logs(ctx, nexus_url, nexus_path, build_url):
     sys.exit(status)
 
 
+@click.command(name='maven-file')
+@click.argument('nexus-url', envvar='NEXUS_URL')
+@click.argument('repo-id', envvar='REPO_ID')
+@click.argument('group-id', envvar='GROUP_ID')
+@click.argument('file-name', envvar='FILE_NAME')
+@click.option('-c', '--classifier', envvar='CLASSIFIER', default='',
+              help='File classifier.')
+@click.option('-gs', '--global-settings-file', envvar='GLOBAL_SETTINGS_FILE',
+              default='', help='Global settings file.')
+@click.option('-s', '--settings-file', envvar='SETTINGS_FILE', default='',
+              help='Settings file.')
+@click.option('-m', '--maven-bin', envvar='MAVEN_BIN', default='',
+              help='Path of maven binary.')
+@click.pass_context
+def maven_file(ctx, nexus_url, repo_id, group_id, file_name, classifier, global_settings_file, settings_file, maven_bin):
+    """Deploy maven-file to a Nexus maven2 repository.
+
+    To use this script the Nexus server must have a maven2 repository configured
+    with capabilities. The script requires passing "~/.m2/settings.xml" file,
+    passed either through command line options or through environment variables
+    $GLOBAL_SETTINGS_FILE and $SETTINGS_FILE from the JJB configration.
+    """
+    status = subprocess.call(['deploy', 'maven-file', nexus_url, repo_id, group_id, file_name,
+                              classifier, global_settings_file, settings_file, maven_bin])
+    sys.exit(status)
+
+
 @click.command()
 @click.argument('nexus-repo-url', envvar='NEXUS_REPO_URL')
 @click.argument('deploy-dir', envvar='DEPLOY_DIR')
@@ -101,6 +128,7 @@ def nexus_stage(ctx, nexus_url, staging_profile_id, deploy_dir):
 
 
 deploy.add_command(archives)
+deploy.add_command(maven_file)
 deploy.add_command(logs)
 deploy.add_command(nexus)
 deploy.add_command(nexus_stage)
