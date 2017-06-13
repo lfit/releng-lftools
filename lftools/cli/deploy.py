@@ -67,6 +67,62 @@ def logs(ctx, nexus_url, nexus_path, build_url):
     sys.exit(status)
 
 
+@click.command(name='maven-file')
+@click.argument('nexus-url', envvar='NEXUS_URL')
+@click.argument('repo-id', envvar='REPO_ID')
+@click.argument('group-id', envvar='GROUP_ID')
+@click.argument('file-name', envvar='FILE_NAME')
+# Maven Config
+@click.option('-b', '--maven-bin', envvar='MAVEN_BIN',
+              help='Path of maven binary.')
+@click.option('-gs', '--global-settings-file', envvar='GLOBAL_SETTINGS_FILE',
+              help='Global settings file.')
+@click.option('-s', '--settings-file', envvar='SETTINGS_FILE',
+              help='Settings file.')
+# Maven Artifact GAV
+@click.option('-a', '--artifact-id',
+              help='Artifact Id.')
+@click.option('-c', '--classifier',
+              help='File classifier.')
+@click.option('-v', '--version',
+              help='Maven artifact version.')
+@click.pass_context
+def maven_file(ctx, nexus_url, repo_id, group_id, file_name, artifact_id,
+               classifier, maven_bin, global_settings_file, settings_file, version):
+    """Deploy a file to a Nexus maven2 repository.
+
+    As this script uses mvn to deploy. The server configuration should be
+    configured in your local settings.xml. By default the script uses the
+    mvn default "~/.m2/settings.xml" for the configuration but this can be
+    overrided in the following order:
+
+        \b
+        1. Passed through CLI option "-s" ("-l" for global-settings)
+        2. Environment variable "$SETTINGS_FILE" ("$GLOBAL_SETTINGS_FILE" for global-settings)
+        3. Maven default "~/.m2/settings.xml".
+    """
+    params=['deploy', 'maven-file', nexus_url, repo_id, group_id, file_name]
+
+    # Maven Configuration
+    if mvn_bin:
+        params.extend(["-b", maven_bin])
+    if global_settings_file:
+        params.extend(["-g", global_settings_file])
+    if settings_file:
+        params.extend(["-s", settings_file])
+
+    # Maven Artifact GAV
+    if artifact_id:
+        params.extend(["-a", artifact_id])
+    if classifier:
+        params.extend(["-c", classifier])
+    if version:
+        params.extend(["-v", version])
+
+    status = subprocess.call(params)
+    sys.exit(status)
+
+
 @click.command()
 @click.argument('nexus-repo-url', envvar='NEXUS_REPO_URL')
 @click.argument('deploy-dir', envvar='DEPLOY_DIR')
@@ -101,6 +157,7 @@ def nexus_stage(ctx, nexus_url, staging_profile_id, deploy_dir):
 
 
 deploy.add_command(archives)
+deploy.add_command(maven_file)
 deploy.add_command(logs)
 deploy.add_command(nexus)
 deploy.add_command(nexus_stage)
