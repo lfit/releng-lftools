@@ -67,6 +67,50 @@ def logs(ctx, nexus_url, nexus_path, build_url):
     sys.exit(status)
 
 
+@click.command(name='maven-file')
+@click.argument('nexus-url', envvar='NEXUS_URL')
+@click.argument('repo-id', envvar='REPO_ID')
+@click.argument('group-id', envvar='GROUP_ID')
+@click.argument('file-name', envvar='FILE_NAME')
+@click.option('-a', '--artifact-id', envvar='ARTIFACT_ID', default='',
+              help='Artifact Id.')
+@click.option('-c', '--classifier', envvar='ARTIFACT_CLASSIFIER', default='',
+              help='File classifier.')
+@click.option('-m', '--maven-bin', envvar='MAVEN_BIN', default='',
+              help='Path of maven binary.')
+@click.option('-gs', '--global-settings-file', envvar='GLOBAL_SETTINGS_FILE',
+              default='', help='Global settings file.')
+@click.option('-s', '--settings-file', envvar='SETTINGS_FILE', default='',
+              help='Settings file.')
+@click.option('-v', '--version', envvar='ARTIFACT_VERSION', default='',
+              help='Maven artifact version.')
+@click.pass_context
+def maven_file(ctx, nexus_url, repo_id, group_id, file_name, artifact_id,
+               classifier, maven_bin, global_settings_file, settings_file, version):
+    """Deploy maven-file to a Nexus maven2 repository.
+
+    To use this script the Nexus server must have a maven2 repository configured
+    The script requires with global settings and settings file in one of the
+    following ways:
+
+         \b
+         1. Passed through CLI options '--gs' and '-s'
+         2. Environment variables '$GLOBAL_SETTINGS_FILE' and '$SETTINGS_FILE'
+         3. Maven defaults on the file systems "~/.m2/settings.xml".
+    """
+    status = subprocess.call(['deploy', 'maven-file',
+                              nexus_url,
+                              repo_id,
+                              group_id,
+                              file_name,
+                              "-a", artifact_id,
+                              "-c", classifier,
+                              "-b", maven_bin,
+                              "-g", global_settings_file,
+                              "-s", settings_file])
+    sys.exit(status)
+
+
 @click.command()
 @click.argument('nexus-repo-url', envvar='NEXUS_REPO_URL')
 @click.argument('deploy-dir', envvar='DEPLOY_DIR')
@@ -101,6 +145,7 @@ def nexus_stage(ctx, nexus_url, staging_profile_id, deploy_dir):
 
 
 deploy.add_command(archives)
+deploy.add_command(maven_file)
 deploy.add_command(logs)
 deploy.add_command(nexus)
 deploy.add_command(nexus_stage)
