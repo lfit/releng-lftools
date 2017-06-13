@@ -50,6 +50,21 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
 
 @click.command()
 @click.argument('nexus-url', envvar='NEXUS_URL')
+@click.argument('repo-id', envvar='REPO_ID')
+@click.argument('file-name', envvar='FILE_NAME')
+@click.pass_context
+def artifacts(ctx, nexus_url, repo_id, file_name):
+    """Deploy artifact to a Nexus site repository.
+
+    To use this script the Nexus server must have a repository configured.
+    The script uses ~/.m2/settings.xml for authentication which must be provided.
+    """
+    status = subprocess.call(['deploy', 'artifacts', nexus_url, repo_id, file_name])
+    sys.exit(status)
+
+
+@click.command()
+@click.argument('nexus-url', envvar='NEXUS_URL')
 @click.argument('nexus-path', envvar='NEXUS_PATH')
 @click.argument('build-url', envvar='BUILD_URL')
 @click.pass_context
@@ -99,8 +114,8 @@ def nexus_stage(ctx, nexus_url, staging_profile_id, deploy_dir):
     status = subprocess.call(['deploy', 'nexus-stage', nexus_url, staging_profile_id, deploy_dir])
     sys.exit(status)
 
-
 deploy.add_command(archives)
+deploy.add_command(artifacts)
 deploy.add_command(logs)
 deploy.add_command(nexus)
 deploy.add_command(nexus_stage)
