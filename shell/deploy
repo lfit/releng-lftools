@@ -65,6 +65,11 @@ deploy() {
             deploy_archives "$@"
             exit 0
             ;;
+        maven-file )
+            echo "Deploying artifacts..."
+            deploy_maven_file "$@"
+            exit 0
+            ;;
         files )
             echo "Deploying files..."
             echo "ERROR: Unimplemented."
@@ -160,6 +165,233 @@ deploy_archives() {
 
     popd
     rm -rf "$tmpdir"
+}
+
+deploy_maven_file_usage () {
+    echo "Usage: $0 <nexus_url> <repo_id> <file>"
+    echo ""
+    echo "    nexus_url:   The URL to the Nexus Server."
+    echo "    repo_id:     Server ID as defined in settings.xml."
+    echo "    file:        File to deploy."
+    echo ""
+    echo "Options:"
+    echo "    -b /path/to/mvn"
+    echo "    -l /path/to/global-settings.xml"
+    echo "    -s /path/to/settings.xml"
+    echo "    -a <artifact_id>"
+    echo "    -c <classifier>"
+    echo "    -g <group_id>"
+    echo "    -v <version>"
+}
+
+deploy_maven_file () {
+    # Deploy a file to a Nexus maven2 repository.
+    #
+    # Usage: deploy_maven_file <nexus_url> <repo_id> <file>
+    #        (Refer to help for full listing by passing -h)
+    #
+    # As this script uses mvn to deploy. The server configuration should be
+    # configured in your local settings.xml. By default the script uses the
+    # mvn default "~/.m2/settings.xml" for the configuration but this can be
+    # overrided in the following order:
+    #
+    #     1. Passed through CLI option "-s" ("-l" for global-settings)
+    #     2. Environment variable "$SETTINGS_FILE" ("$GLOBAL_SETTINGS_FILE" for global-settings)
+    #     3. Maven default "~/.m2/settings.xml".
+    #
+    # If pom-file is passed in via the "-f" option then the Maven GAV parameters
+    # are not necessary. pom-file setting overrides the Maven GAV parameters.
+    while getopts a:b:c:f:g:hl:m:s:v: o; do
+      case "$o" in
+        h)
+            deploy_maven_file_usage
+            exit 0
+            ;;
+
+        ################
+        # Maven Config #
+        ################
+        b)
+            local mvn_bin="$OPTARG"
+            ;;
+        l)
+            local global_settings="$OPTARG"
+            ;;
+        s)
+            settings="$OPTARG"
+            ;;
+
+        #########################
+        # Maven Artitfact (GAV) #
+        #########################
+        a)
+            local artifact_id="$OPTARG"
+            ;;
+        c)
+            local classifier="$OPTARG"
+            ;;
+        f)
+            local pom_file="$OPTARG"
+            echo "pom-file: $pom_file"
+            echo "ERROR: pom_file is currently unimplemented."
+            exit 1
+            ;;
+        g)
+            local group_id="$OPTARG"
+            ;;
+        v)
+            local version="$OPTARG"
+            ;;
+
+        [?])
+            deploy_maven_file_usage
+            exit 1
+            ;;
+      esac
+    done
+    shift $((OPTIND-1))
+
+    # User input
+    local nexus_url="$1"
+    local repo_id="$2"
+    local file="$3"
+
+    if [ "$#" -ne "3" ]; then
+        echo "Missing required arguments."
+        exit 1
+    fi
+
+    # Until we implement the -f <pom-file> parameter assume that group_id must
+    # be passed.
+    if [ -z "$group_id" ]; then
+        echo "ERROR: group_id must be defined. Please pass -g <group_id>."
+        exit 1
+    fi
+
+    ################
+    # Start script #
+    ################
+
+    local mvn_bin="${mvn_bin:-mvn}"
+    local mvn_goals=("org.apache.maven.plugins:maven-deploy-plugin:deploy-file")
+
+    declare -a params
+    params+=("-DrepositoryId=\"$repo_id\"")
+    params+=("-Durl=\"$nexus_url\"")
+    params+=("-Dfile=\"$file\"")
+
+    # Precedence:
+    #   1) -g option
+    #   2) $GLOBAL_SETTINGS_FILE environment variable
+    if [ ! -z "$global_settings" ]; then
+        params+=("-gs $global_settings")
+    elif [ ! -z "$GLOBAL_SETTINGS_FILE" ] && [ -z "$global_settings" ]; then
+        params+=("-gs $GLOBAL_SETTINGS_FILE")
+    fi
+
+    # Precedence:
+    #   1) -s option
+    #   2) $SETTINGS_FILE environment variable
+    if [ ! -z "$settings" ]; then
+        params+=("-s $settings")
+    elif [ ! -z "$SETTINGS_FILE" ] && [ -z "$settings" ]; then
+        params+=("-s $SETTINGS_FILE")
+    fi
+
+    local file_type
+    if [[ "$file" == *.tar.gz ]]; then
+        file_type="tar.gz"
+    else
+        file_type="${file##*.}"
+    fi
+    params+=("-Dtype=\"$file_type\"")
+
+    case "$file_type" in
+        deb )
+            if hash dpkg 2>/dev/null; then
+                echo "dpkg command is available."
+
+                # If user does not provide artifact_id and / or version then parse
+                # information from file.
+                if [ -z "$artifact_id" ]; then
+                    artifact_id=$(dpkg -I "$file" | grep 'Package:' | sed 's/^[ \t]*Package:[ \t]*//')
+
+                fi
+                if [ -z "$version" ]; then
+                    version=$(dpkg -I "$file" | grep 'Version:' | sed 's/^[ \t]*Version:[ \t]*//')
+                fi
+            else
+                echo "dpkg command is not available."
+
+                basefile=$(basename -s .deb "$file")
+
+                # If user does not provide artifact_id and / or version then parse
+                # information from file.
+                if [ -z "$artifact_id" ]; then
+                    artifact_id=$(echo "$basefile" | rev | cut -f 3- -d '-' | rev)
+                fi
+                if [ -z "$version" ]; then
+                    version=$(echo "$basefile" | rev | cut -f 1 -d '-' | rev)
+                fi
+            fi
+            ;;
+
+        rpm )
+            if hash rpm 2>/dev/null; then
+                echo "rpm command is available."
+
+                # If user does not provide artifact_id and / or version then parse
+                # information from file.
+                if [ -z "$artifact_id" ]; then
+                    artifact_id=$(rpm -qp --queryformat="%{name}" "$file")
+                fi
+                if [ -z "$version" ]; then
+                    if grep -qE '\.s(rc\.)?rpm' <<<"$file"; then
+                        rpmrelease=$(rpm -qp --queryformat="%{release}.src" "$file")
+                    else
+                        rpmrelease=$(rpm -qp --queryformat="%{release}.%{arch}" "$file")
+                    fi
+
+                    version=$(rpm -qp --queryformat="%{version}" "$file")
+                    version+="-$rpmrelease"
+                fi
+            else
+                echo "rpm command is not available."
+
+                basefile=$(basename -s .rpm "$file")
+
+                # If user does not provide artifact_id and / or version then parse
+                # information from file.
+                if [ -z "$artifact_id" ]; then
+                    artifact_id=$(echo "$basefile" | rev | cut -f 3- -d '-' | rev)
+                fi
+                if [ -z "$version" ]; then
+                    version=$(echo "$basefile" | rev | cut -f 1 -d '-' | rev)
+                fi
+            fi
+            ;;
+
+        * )
+            echo "ERROR: Unrecognized file type \"$file_type\"." 1>&2
+            exit 1
+            ;;
+    esac
+
+    params+=("-DgroupId=\"$group_id\"")
+    params+=("-DartifactId=\"$artifact_id\"")
+    params+=("-Dversion=\"$version\"")
+
+    if [ ! -z "$classifier" ]; then
+        params+=("-Dclassifier=\"$classifier\"")
+    fi
+
+    echo "Deploying $file to $nexus_url..."
+
+    # make sure the script bombs if we fail an upload
+    if ! eval "$mvn_bin" "${mvn_goals[*]}" "${params[*]}"; then
+        echo "ERROR: There was an error with the upload"
+        exit 1
+    fi
 }
 
 deploy_logs() {
