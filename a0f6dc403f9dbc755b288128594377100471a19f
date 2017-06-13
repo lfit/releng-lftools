@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_ca31f90c",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-13T00:52:28Z",
+      "side": 1,
+      "message": "Can we change this to \"file\" or something else ?",
+      "parentUuid": "9a437d4f_2a5be555",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 13
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_6a49ed8a",
         "filename": "shell/deploy",
         "patchSetId": 1
