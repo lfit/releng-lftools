@@ -96,6 +96,54 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_d58cfa81",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-13T20:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_4a2509c1",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 13
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_f58ffe73",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-13T20:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_2a5be555",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 13
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_2a22c5b9",
         "filename": "lftools/cli/deploy.py",
         "patchSetId": 1
@@ -119,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_8a12d160",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-13T20:41:51Z",
+      "side": 1,
+      "message": "yes, I belive its a maven2 repo adn that should be changed.\nhttps://nexus.opendaylight.org/#view-repositories;opendaylight-yum-centos-7-x86_64-testing~configuration",
+      "parentUuid": "9a437d4f_2a22c5b9",
+      "range": {
+        "startLine": 57,
+        "startChar": 34,
+        "endLine": 57,
+        "endChar": 38
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_6a49ed8a",
         "filename": "shell/deploy",
         "patchSetId": 1
@@ -130,6 +202,30 @@
       "writtenOn": "2017-06-13T00:48:43Z",
       "side": 1,
       "message": "Not a fan of the name here because everything that\u0027s deployed is an artifact so this makes things confusing.",
+      "range": {
+        "startLine": 68,
+        "startChar": 8,
+        "endLine": 68,
+        "endChar": 17
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_95ee7221",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-13T20:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_6a49ed8a",
       "range": {
         "startLine": 68,
         "startChar": 8,
@@ -235,6 +331,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_75f30e0b",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-13T20:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_0a2f01a3",
+      "range": {
+        "startLine": 238,
+        "startChar": 8,
+        "endLine": 238,
+        "endChar": 55
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_ea2b9d92",
         "filename": "shell/deploy",
         "patchSetId": 1
@@ -246,6 +366,30 @@
       "writtenOn": "2017-06-13T01:10:05Z",
       "side": 1,
       "message": "If we don\u0027t need this then remove it.",
+      "range": {
+        "startLine": 239,
+        "startChar": 8,
+        "endLine": 239,
+        "endChar": 48
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_55f80ae5",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-13T20:41:51Z",
+      "side": 1,
+      "message": "Done! I disabled this while testing locally",
+      "parentUuid": "9a437d4f_ea2b9d92",
       "range": {
         "startLine": 239,
         "startChar": 8,
