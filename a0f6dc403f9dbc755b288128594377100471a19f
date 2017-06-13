@@ -115,6 +115,30 @@
       "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_8a3bf1ea",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-13T00:57:23Z",
+      "side": 1,
+      "message": "yes I think it would be a additional command good to have for future.\n\nas discussed in today\u0027s morning call we need this to trigger metadata generation the yum repository hosted on nexus. We may not be able to get around that with curl atm.",
+      "parentUuid": "9a437d4f_4a5e2947",
+      "range": {
+        "startLine": 233,
+        "startChar": 4,
+        "endLine": 233,
+        "endChar": 10
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
