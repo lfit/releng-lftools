@@ -65,6 +65,11 @@ deploy() {
             deploy_archives "$@"
             exit 0
             ;;
+        maven-file )
+            echo "Deploying artifacts..."
+            deploy_maven_file "$@"
+            exit 0
+            ;;
         files )
             echo "Deploying files..."
             echo "ERROR: Unimplemented."
@@ -161,6 +166,88 @@ deploy_archives() {
     popd
     rm -rf "$tmpdir"
 }
+
+
+deploy_maven_file () {
+    # Deploy maven-file to a Nexus maven2 repository.
+    #
+    # To use this script the Nexus server must have a maven2 repository configured
+    # with capabilities. The script requires "~/.m2/settings.xml" passed through
+    # command line option or set as environment variables $GLOBAL_SETTINGS_FILE
+    # and $SETTINGS_FILE from the JJB configration.
+    #
+    # Usage: deploy_maven_file <nexus_url>
+    #                          <repo_id>
+    #                          <group_id>
+    #                          <file_name>
+    #                          <global_settings_file>
+    #                          <settings_file>
+    #
+    #   <nexus_url>: URL of Nexus server. Eg: https://nexus.opendaylight.org
+    #   <repo_id>: Repository ID for the repository
+    #   <group_id>: Group ID for the repository
+    #   <file_name>: Name of the file to upload
+    #   <global_settings_file>: Path for $GLOBAL_SETTINGS_FILE (optional)
+    #   <settings_file>: Path for $SETTINGS_FILE (optional)
+
+    if [ "$#" -le 4 ]; then
+        echo "Missing required arguments."
+        exit 1
+    fi
+
+    local nexus_url="$1"
+    local repoId="$2"
+    local group_id="$3"
+    local file_name="$4"
+    local global_settings_file="${GLOBAL_SETTINGS_FILE:-$5}"
+    local settings_file="${SETTINGS_FILE:-$6}"
+
+    local file_type="${file_name##*.}"
+
+    case "$file_type" in
+        deb )
+            echo "Deploying deb to $nexus_url"
+            basefile=$(basename -s .deb "$file_name")
+            artifactId=$(echo "$basefile" | cut -f 1 -d '_')
+            version=$(echo "$basefile" | cut -f 2- -d '_')
+            ;;
+        rpm )
+            echo "Deploying rpm to $nexus_url"
+            if grep -qE '\.s(rc\.)?rpm' <<<"$file_name"
+            then
+                rpmrelease=$(rpm -qp --queryformat="%{release}.src" "$file_name")
+            else
+                rpmrelease=$(rpm -qp --queryformat="%{release}.%{arch}" "$file_name")
+            fi
+            artifactId=$(rpm -qp --queryformat="%{name}" "$file_name")
+            version=$(rpm -qp --queryformat="%{version}" "$file_name")
+            version+="-$rpmrelease"
+            ;;
+        * )
+            echo "Invalid file type: $file_type" 1>&2
+            exit 1
+            ;;
+    esac
+
+    "$MVN" org.apache.maven.plugins:maven-deploy-plugin:deploy-file\
+        -DrepositoryId="$repoId" \
+        -Durl="$nexus_url" \
+        -Dfile="$file_name" \
+        -Dtype="$file_type" \
+        -DartifactId="$artifactId" \
+        -Dclassifier="$file_type" \
+        -DgroupId="$group_id" \
+        -Dversion="$version" \
+        -gs "$global_settings_file" \
+        -s "$settings_file"
+
+    # make sure the script bombs if we fail an upload
+    if [ "$?" != '0' ]; then
+        echo "ERROR: There was an error with the upload"
+        exit 1
+    fi
+}
+
 
 deploy_logs() {
     # Deploy logs to a Nexus site repository named logs.
