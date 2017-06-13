@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_0a582155",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-13T00:48:43Z",
+      "side": 1,
+      "message": "artifacts",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_2a5be555",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-13T00:48:43Z",
+      "side": 1,
+      "message": "Not a fan of the command name here because everything that is pushed to Nexus is an artifact. This makes the command confusing as to how it\u0027s different than the deploy nexus command.",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 13
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_6a49ed8a",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-13T00:48:43Z",
+      "side": 1,
+      "message": "Not a fan of the name here because everything that\u0027s deployed is an artifact so this makes things confusing.",
+      "range": {
+        "startLine": 68,
+        "startChar": 8,
+        "endLine": 68,
+        "endChar": 17
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_4a5e2947",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-13T00:48:43Z",
+      "side": 1,
+      "message": "Do we need to use Maven? As far as I can tell there\u0027s nothing special about what this function is doing in terms of pushing to Nexus. Looks like the only special thing where doing here is generating a pom file which I think we can do with pure bash too.\n\nThen we can probably call deploy_nexus here and pass it a prepared directory with pom files in the structure we want to upload to Nexus.\n\ncURL is less heavy weight than calling a full Java stack so I\u0027d like to do that if we can.",
+      "range": {
+        "startLine": 233,
+        "startChar": 4,
+        "endLine": 233,
+        "endChar": 10
+      },
+      "revId": "a0f6dc403f9dbc755b288128594377100471a19f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
