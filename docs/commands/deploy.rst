@@ -20,6 +20,11 @@ logs
 
 .. program-output:: lftools deploy logs --help
 
+maven-file
+----------
+
+.. program-output:: lftools deploy maven-file --help
+
 nexus
 -----
 
