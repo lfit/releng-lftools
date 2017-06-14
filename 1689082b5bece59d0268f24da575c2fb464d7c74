@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_55148af4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_5546ca24",
+      "range": {
+        "startLine": 9,
+        "startChar": 41,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_354b462d",
         "filename": "lftools/cli/deploy.py",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_950af2d0",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_354b462d",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 47
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_1548422c",
         "filename": "lftools/cli/deploy.py",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2017-06-14T03:49:24Z",
       "side": 1,
       "message": "envvar\u003d\u0027SETTINGS_FILE\u0027",
+      "range": {
+        "startLine": 75,
+        "startChar": 38,
+        "endLine": 75,
+        "endChar": 39
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_750f8ee2",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_1548422c",
       "range": {
         "startLine": 75,
         "startChar": 38,
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_35f906c9",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_f5549ecb",
+      "range": {
+        "startLine": 175,
+        "startChar": 24,
+        "endLine": 175,
+        "endChar": 78
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_d5519ad9",
         "filename": "shell/deploy",
         "patchSetId": 4
@@ -163,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_15f602d8",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_b55e16e8",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 48
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_7558aefa",
         "filename": "shell/deploy",
         "patchSetId": 4
@@ -174,6 +294,30 @@
       "writtenOn": "2017-06-14T03:49:24Z",
       "side": 1,
       "message": "I believe repoId should not be considered a groupId",
+      "range": {
+        "startLine": 198,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 28
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_f5025eb3",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "What should the groupid be set as ?",
+      "parentUuid": "9a437d4f_7558aefa",
       "range": {
         "startLine": 198,
         "startChar": 10,
@@ -232,6 +376,54 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_d5ff5aa9",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_956312b1",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 48
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_b52cd64b",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "any better alternatives you could suggest ?",
+      "parentUuid": "9a437d4f_f56b7e83",
+      "range": {
+        "startLine": 199,
+        "startChar": 38,
+        "endLine": 199,
+        "endChar": 47
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_d5687a89",
         "filename": "shell/deploy",
         "patchSetId": 4
@@ -243,6 +435,30 @@
       "writtenOn": "2017-06-14T03:49:24Z",
       "side": 1,
       "message": "alphabetical sorting?",
+      "range": {
+        "startLine": 214,
+        "startChar": 8,
+        "endLine": 214,
+        "endChar": 11
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_9531d2a4",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_d5687a89",
       "range": {
         "startLine": 214,
         "startChar": 8,
@@ -278,6 +494,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_552b6a30",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "We have give two options 1. -gs|-g 2. env var. Is it better to have only env var and allow mvn to read from the default location ?",
+      "parentUuid": "9a437d4f_3572267d",
+      "range": {
+        "startLine": 231,
+        "startChar": 8,
+        "endLine": 231,
+        "endChar": 55
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_156f2294",
         "filename": "shell/deploy",
         "patchSetId": 4
@@ -289,6 +529,24 @@
       "writtenOn": "2017-06-14T03:49:24Z",
       "side": 1,
       "message": "I would probably put 1 line per argument in the following order so that it\u0027s easy to read.\n\n # Repository details\n -Durl ...\n -DrepositoryId ...\n -gs ...\n -s ...\n # File details\n -Dfile ...\n -Dtype ...\n # GAV details\n -DgroupId ...\n -DartifactId ...\n -Dversion ...\n -Dclassifier ...",
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_75266e6a",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T07:58:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_156f2294",
       "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
