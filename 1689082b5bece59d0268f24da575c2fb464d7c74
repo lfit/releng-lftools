@@ -330,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_d5c4fa60",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T13:54:56Z",
+      "side": 1,
+      "message": "In a Java project the group id is typically:\n\nROOT.DOMAIN.PROJECT[.SUB_PROJECT[...]]\n\nThis is why it needs to be provided by the user.",
+      "parentUuid": "9a437d4f_f5025eb3",
+      "range": {
+        "startLine": 198,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 28
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_f56b7e83",
         "filename": "shell/deploy",
         "patchSetId": 4
@@ -506,6 +530,30 @@
       "side": 1,
       "message": "We have give two options 1. -gs|-g 2. env var. Is it better to have only env var and allow mvn to read from the default location ?",
       "parentUuid": "9a437d4f_3572267d",
+      "range": {
+        "startLine": 231,
+        "startChar": 8,
+        "endLine": 231,
+        "endChar": 55
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_15cba273",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T13:54:56Z",
+      "side": 1,
+      "message": "We need to support 3 scenarios in this order of precedence:\n\n1) User provides the file explicitly\n2) User provides the file via ENVVAR\n3) User does not provide the file\n\nWe also have to support the following cases:\n\n1) User provides BOTH GS and S\n2) User provides ONLY GS or S\n3) User does NOT provide any files",
+      "parentUuid": "9a437d4f_552b6a30",
       "range": {
         "startLine": 231,
         "startChar": 8,
