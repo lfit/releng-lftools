@@ -354,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "7a288981_ce3da3bd",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T23:32:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_d5c4fa60",
+      "range": {
+        "startLine": 198,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 28
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_f56b7e83",
         "filename": "shell/deploy",
         "patchSetId": 4
@@ -554,6 +578,30 @@
       "side": 1,
       "message": "We need to support 3 scenarios in this order of precedence:\n\n1) User provides the file explicitly\n2) User provides the file via ENVVAR\n3) User does not provide the file\n\nWe also have to support the following cases:\n\n1) User provides BOTH GS and S\n2) User provides ONLY GS or S\n3) User does NOT provide any files",
       "parentUuid": "9a437d4f_552b6a30",
+      "range": {
+        "startLine": 231,
+        "startChar": 8,
+        "endLine": 231,
+        "endChar": 55
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_4e79b392",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-14T23:32:00Z",
+      "side": 1,
+      "message": "\u003e We need to support 3 scenarios in this order of precedence:\n\nhttp://mywiki.wooledge.org/BashFAQ/050\n\nWe have two level of parameter passing here: 1. python click and 2. mvn cli. \n\nIf you recall we have already tried this during AR notify, which is not a recommend practice, substituting bash variable with CLI options.   \n\n+ /usr/bin/mvn org.apache.maven.plugins:maven-deploy-plugin:deploy-file -DrepositoryId\u003dopendaylight-yum-centos-7-x86_64-testing -Durl\u003dhttps://nexus.opendaylight.org/content/repositories/ -Dfile\u003dwget-1.14-10.el7.x86_64.rpm -Dtype\u003drpm -DartifactId\u003dwget -Dclassifier\u003drpm -DgroupId\u003dopendaylight-yum-centos-7-x86_64-testing -Dversion\u003d1.14-10.el7.x86_64 \u0027-gs /home/abelur/.m2/settings.xml\u0027 \u0027-s /home/abelur/.m2/settings.xml\u0027\nOpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize\u003d512m; support was removed in 8.0\nUnable to parse command line options: Unrecognized option: -gs /home/abelur/.m2/settings.xml\n\nSo I recommend we decide on [[ 1) and 2) ]] or [[ 2) and 3) ]]. What are your thoughts ?\n\nPlease feel free add to the patch if all the three options could still be implemented here.",
+      "parentUuid": "9a437d4f_15cba273",
       "range": {
         "startLine": 231,
         "startChar": 8,
