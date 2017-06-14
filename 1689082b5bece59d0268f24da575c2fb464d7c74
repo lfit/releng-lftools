@@ -1,0 +1,297 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_5546ca24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "To be clear deploy-file is a \"goal\" of the maven-deploy-plugin. This is an important distinction in Maven.",
+      "range": {
+        "startLine": 9,
+        "startChar": 41,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_354b462d",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "envvar\u003d\u0027GLOBAL_MAVEN_SETTINGS\u0027",
+      "range": {
+        "startLine": 74,
+        "startChar": 46,
+        "endLine": 74,
+        "endChar": 47
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_1548422c",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "envvar\u003d\u0027SETTINGS_FILE\u0027",
+      "range": {
+        "startLine": 75,
+        "startChar": 38,
+        "endLine": 75,
+        "endChar": 39
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_555daae8",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "Seems like the code in this file is extremely specific to rpm and debs. Can we allow the user to also push arbitrary files too?",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 17
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_f5549ecb",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "My understanding is that ~/.m2/settings.xml  is the default location mvn searches for the settings file if it is NOT passed.",
+      "range": {
+        "startLine": 175,
+        "startChar": 24,
+        "endLine": 175,
+        "endChar": 78
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_d5519ad9",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "GLOBAL_SETTINGS_FILE is optional and is generally only used in CI environments. What about local setups where this is not generally configured by the user?",
+      "range": {
+        "startLine": 177,
+        "startChar": 6,
+        "endLine": 177,
+        "endChar": 27
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_b55e16e8",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "Which of these are required and which are optional?",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 48
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_7558aefa",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "I believe repoId should not be considered a groupId",
+      "range": {
+        "startLine": 198,
+        "startChar": 10,
+        "endLine": 198,
+        "endChar": 28
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_f56b7e83",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "Classifier is not always file_type and is a poor assumption that will break us if we start allowing other file types to be uploaded via this command.\n\nFor example take a look at all the classifiers this bundle contains:\nhttps://nexus.opendaylight.org/content/repositories/opendaylight.release/org/opendaylight/aaa/aaa-authn-mdsal-api/0.5.0-Carbon/",
+      "range": {
+        "startLine": 199,
+        "startChar": 38,
+        "endLine": 199,
+        "endChar": 47
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_956312b1",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "List user input first and then script generated variables separately after a blank line so it\u0027s clear which variables require user input.",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 48
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_d5687a89",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "alphabetical sorting?",
+      "range": {
+        "startLine": 214,
+        "startChar": 8,
+        "endLine": 214,
+        "endChar": 11
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_3572267d",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "Seems like global_settings and settings are not optional as the command description implies.",
+      "range": {
+        "startLine": 231,
+        "startChar": 8,
+        "endLine": 231,
+        "endChar": 55
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_156f2294",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-14T03:49:24Z",
+      "side": 1,
+      "message": "I would probably put 1 line per argument in the following order so that it\u0027s easy to read.\n\n # Repository details\n -Durl ...\n -DrepositoryId ...\n -gs ...\n -s ...\n # File details\n -Dfile ...\n -Dtype ...\n # GAV details\n -DgroupId ...\n -DartifactId ...\n -Dversion ...\n -Dclassifier ...",
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
