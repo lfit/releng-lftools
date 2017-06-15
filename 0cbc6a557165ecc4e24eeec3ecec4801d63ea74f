@@ -22,6 +22,30 @@
       "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_0e460b24",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-15T23:04:40Z",
+      "side": 1,
+      "message": "They are all optional. I think click takes care of passing empty string as default when nothing is set.",
+      "parentUuid": "7a288981_cec0037f",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
