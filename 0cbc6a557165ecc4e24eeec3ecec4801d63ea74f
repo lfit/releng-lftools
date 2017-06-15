@@ -46,6 +46,144 @@
       "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_4e3c1394",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-15T23:06:07Z",
+      "side": 1,
+      "message": "So this code requires the user to set MAVEN_BIN or passing an 8th parameter for define maven_bin. So makes this parameter not optional as the script will fail  if neither is passed.\n\nThis comment applies to CLASSIFIER, GLOBAL_SETTINGS_FILE, and SETTINGS_FILE too.",
+      "range": {
+        "startLine": 209,
+        "startChar": 23,
+        "endLine": 209,
+        "endChar": 32
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_6e5eafeb",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-15T23:06:07Z",
+      "side": 1,
+      "message": "Is this capable of handling tar.gz files? which are extensions tar.gz?",
+      "range": {
+        "startLine": 212,
+        "startChar": 3,
+        "endLine": 212,
+        "endChar": 38
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_8e51dbda",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-15T23:06:07Z",
+      "side": 1,
+      "message": "See below",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 40
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_ae5497ca",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-15T23:06:07Z",
+      "side": 1,
+      "message": "Instead of 2 lines of code this could simply be:\n\nPARAMS+\u003d(\"-s \\\"$settings_file\\\"\")",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 32
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_ce47e31c",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-15T23:06:07Z",
+      "side": 1,
+      "message": "Classifier is optional and does not always have to be passed as mentioned in previous reviews.",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 44
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_2e41c70b",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-15T23:06:07Z",
+      "side": 1,
+      "message": "Put PARAMS+\u003d inside of the if statement above on line 219 saves some lines of code.",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 23
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
