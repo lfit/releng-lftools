@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a288981_8eb55b33",
+        "filename": "shell/deploy",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-15T22:55:45Z",
+      "side": 1,
+      "message": "I\u0027m not sure how this is getting set. This shouldn\u0027t be something the user has to set.",
+      "range": {
+        "startLine": 232,
+        "startChar": 4,
+        "endLine": 232,
+        "endChar": 10
+      },
+      "revId": "089b91be6b1438c0b8a780a7a9d086ebda2c5f22",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
