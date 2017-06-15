@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7a288981_2e58a7f9",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-15T23:07:46Z",
+      "side": 1,
+      "message": "What if someone wanted to use this shell script without Click?\n\nThe shell scripts in the shell directory do not require the python component to run and should be runnable as simply a shell script.\n\nSome of our users download only the shell script. I know of at least once instance where someone is using the version.sh bash script by itself.",
+      "parentUuid": "7a288981_0e460b24",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a288981_6e5eafeb",
         "filename": "shell/deploy",
         "patchSetId": 10
