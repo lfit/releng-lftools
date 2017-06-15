@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a288981_cec0037f",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-15T22:55:45Z",
+      "side": 1,
+      "message": "The way this is designed means you cannot configure maven_bin unless you configure the previous 3 settings too. We really should be using something like getopts here.",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
