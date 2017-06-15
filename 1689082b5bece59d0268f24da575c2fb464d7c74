@@ -614,6 +614,30 @@
     },
     {
       "key": {
+        "uuid": "7a288981_0eaa8bd4",
+        "filename": "shell/deploy",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-15T01:08:09Z",
+      "side": 1,
+      "message": "I don\u0027t have the cycles to work on this patch but all 3 options can and should be supported.",
+      "parentUuid": "7a288981_4e79b392",
+      "range": {
+        "startLine": 231,
+        "startChar": 8,
+        "endLine": 231,
+        "endChar": 55
+      },
+      "revId": "1689082b5bece59d0268f24da575c2fb464d7c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_156f2294",
         "filename": "shell/deploy",
         "patchSetId": 4
