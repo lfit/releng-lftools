@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a288981_0eb96be9",
+        "filename": "shell/deploy",
+        "patchSetId": 16
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-16T05:37:41Z",
+      "side": 1,
+      "message": "I would vote for keeping deploy generic, and removing the rpm/deb stuff outside and passing it as a wrapper script outside of lftools, who ever invokes the `deploy maven-file` cmd. the command should only do whats stated, and do the maven deploy stuff!",
+      "range": {
+        "startLine": 292,
+        "startChar": 2,
+        "endLine": 339,
+        "endChar": 14
+      },
+      "revId": "6320afbb0bea25c79dd29cd860159e52f3dacdd2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
