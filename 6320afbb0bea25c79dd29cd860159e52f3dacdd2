@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "7a288981_ceca436e",
+        "filename": "shell/deploy",
+        "patchSetId": 16
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-16T06:31:06Z",
+      "side": 1,
+      "message": "bug! $file_type only get defined below!",
+      "range": {
+        "startLine": 265,
+        "startChar": 4,
+        "endLine": 265,
+        "endChar": 37
+      },
+      "revId": "6320afbb0bea25c79dd29cd860159e52f3dacdd2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_aec7f763",
+        "filename": "shell/deploy",
+        "patchSetId": 16
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-16T06:31:06Z",
+      "side": 1,
+      "message": "$file_type gets set here! this fails the mvn upload",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 31
+      },
+      "revId": "6320afbb0bea25c79dd29cd860159e52f3dacdd2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a288981_0eb96be9",
         "filename": "shell/deploy",
         "patchSetId": 16
