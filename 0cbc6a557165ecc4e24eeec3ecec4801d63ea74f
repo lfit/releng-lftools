@@ -96,6 +96,78 @@
     },
     {
       "key": {
+        "uuid": "7a288981_2e266769",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-16T00:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a288981_4e3c1394",
+      "range": {
+        "startLine": 209,
+        "startChar": 23,
+        "endLine": 209,
+        "endChar": 32
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_4e31b3a1",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-16T00:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a288981_2e58a7f9",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_0e2bab31",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-16T00:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a288981_0e460b24",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 38
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a288981_6e5eafeb",
         "filename": "shell/deploy",
         "patchSetId": 10
@@ -107,6 +179,30 @@
       "writtenOn": "2017-06-15T23:06:07Z",
       "side": 1,
       "message": "Is this capable of handling tar.gz files? which are extensions tar.gz?",
+      "range": {
+        "startLine": 212,
+        "startChar": 3,
+        "endLine": 212,
+        "endChar": 38
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_eef85fc6",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-16T00:35:13Z",
+      "side": 1,
+      "message": "no this will return `gz`! \n$ file_name\u003d\"test.tar.gz\"\n$ echo \"${file_name##*.}\"\ngz",
+      "parentUuid": "7a288981_6e5eafeb",
       "range": {
         "startLine": 212,
         "startChar": 3,
@@ -142,6 +238,30 @@
     },
     {
       "key": {
+        "uuid": "7a288981_6e2c6f4b",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-16T00:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a288981_8e51dbda",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 40
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a288981_ae5497ca",
         "filename": "shell/deploy",
         "patchSetId": 10
@@ -153,6 +273,30 @@
       "writtenOn": "2017-06-15T23:06:07Z",
       "side": 1,
       "message": "Instead of 2 lines of code this could simply be:\n\nPARAMS+\u003d(\"-s \\\"$settings_file\\\"\")",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 32
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_cef5a3cc",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-16T00:35:13Z",
+      "side": 1,
+      "message": "good point!",
+      "parentUuid": "7a288981_ae5497ca",
       "range": {
         "startLine": 220,
         "startChar": 0,
@@ -199,6 +343,30 @@
       "writtenOn": "2017-06-15T23:06:07Z",
       "side": 1,
       "message": "Put PARAMS+\u003d inside of the if statement above on line 219 saves some lines of code.",
+      "range": {
+        "startLine": 260,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 23
+      },
+      "revId": "0cbc6a557165ecc4e24eeec3ecec4801d63ea74f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_ae0257b2",
+        "filename": "shell/deploy",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-16T00:35:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a288981_2e41c70b",
       "range": {
         "startLine": 260,
         "startChar": 0,
