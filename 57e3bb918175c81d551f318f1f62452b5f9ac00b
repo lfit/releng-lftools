@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "7a288981_b1619ad5",
+        "filename": "shell/deploy",
+        "patchSetId": 22
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-19T20:45:15Z",
+      "side": 1,
+      "message": "Thinking about this some more I think we need to make group_id optional after all. If the user passes a pom file then there\u0027s no point passing a group_id.\n\nWe can make the usage statement print that if -f is passed then group_id is not needed however if -f is not passed then group_id needs to be passed at the very least.",
+      "range": {
+        "startLine": 171,
+        "startChar": 42,
+        "endLine": 171,
+        "endChar": 52
+      },
+      "revId": "57e3bb918175c81d551f318f1f62452b5f9ac00b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a288981_6e310f0b",
         "filename": "shell/deploy",
         "patchSetId": 22
