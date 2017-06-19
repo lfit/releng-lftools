@@ -8,6 +8,7 @@ bash. It supports the following commands.
 .. toctree::
     :maxdepth: 2
 
+    deploy
     nexus
     openstack
     version
