@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a288981_f194c245",
+        "filename": "shell/deploy",
+        "patchSetId": 31
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-20T16:09:11Z",
+      "side": 1,
+      "message": "This seems to have changed from patchset 24 which used `artifact_id\u003d$(echo \"$basefile\" | cut -f 1 -d \u0027_\u0027)`",
+      "revId": "128fd8c526ccd9072184df1815f67293648d48ee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_d191c653",
+        "filename": "shell/deploy",
+        "patchSetId": 31
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-20T16:09:11Z",
+      "side": 1,
+      "message": "This seems to have changed from patchset 24 which used `artifact_id\u003d$(echo \"$basefile\" | cut -f 1 -d \u0027_\u0027)`\n\nThe current code seems to apply to deb packages not rpms.",
+      "revId": "128fd8c526ccd9072184df1815f67293648d48ee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
