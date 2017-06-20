@@ -93,6 +93,29 @@
       "revId": "796634d00d9f965e4d63b52f2e90735d788f7d67",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_b1e63a43",
+        "filename": "shell/deploy",
+        "patchSetId": 24
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-20T00:49:35Z",
+      "side": 1,
+      "message": "checking this like this is incorrect, if the OPTIONS are passed  the \"$#\" value woud be sum of optional param + required params!",
+      "range": {
+        "startLine": 260,
+        "startChar": 8,
+        "endLine": 260,
+        "endChar": 17
+      },
+      "revId": "796634d00d9f965e4d63b52f2e90735d788f7d67",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
