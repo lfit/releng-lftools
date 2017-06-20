@@ -116,6 +116,30 @@
       "revId": "796634d00d9f965e4d63b52f2e90735d788f7d67",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a288981_31ca4aa2",
+        "filename": "shell/deploy",
+        "patchSetId": 24
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-20T01:01:36Z",
+      "side": 1,
+      "message": "The code here is correct. It\u0027s the lftools wrapper that is broken.\n\n $ ./shell/deploy maven-file -g test -a asdf a b\n Deploying artifacts...\n Missing required arguments.",
+      "parentUuid": "7a288981_b1e63a43",
+      "range": {
+        "startLine": 260,
+        "startChar": 8,
+        "endLine": 260,
+        "endChar": 17
+      },
+      "revId": "796634d00d9f965e4d63b52f2e90735d788f7d67",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
