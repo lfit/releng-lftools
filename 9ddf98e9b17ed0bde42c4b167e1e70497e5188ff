@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a288981_f14a8226",
+        "filename": "shell/deploy",
+        "patchSetId": 28
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-20T01:32:38Z",
+      "side": 1,
+      "message": "I think it would be clean to tie down the above case to \"$OS\" instead of \"$file_type\". \n\nWhat is your suggestion ?",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 361,
+        "endChar": 8
+      },
+      "revId": "9ddf98e9b17ed0bde42c4b167e1e70497e5188ff",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
