@@ -174,8 +174,28 @@ def nexus_stage(ctx, nexus_url, staging_profile_id, deploy_dir):
     sys.exit(status)
 
 
+@click.command(name='nexus-zip')
+@click.argument('nexus-url', envvar='NEXUS_URL')
+@click.argument('nexus-repo', envvar='NEXUS_REPO')
+@click.argument('nexus-path', envvar='NEXUS_PATH')
+@click.argument('deploy-zip', envvar='DEPLOY_DIR')
+@click.pass_context
+def nexus_zip(ctx, nexus_url, nexus_repo, nexus_path, deploy_zip):
+    """Deploy zip file containing artifacts to Nexus using cURL.
+
+    This script simply takes a zip file preformatted in the correct
+    directory for Nexus and uploads to a specified Nexus repo using the
+    content-compressed URL.
+
+    Requires the Nexus Unpack plugin and permission assigned to the upload user.
+    """
+    status = subprocess.call(['deploy', 'nexus-zip', nexus_url, nexus_repo, nexus_path, deploy_zip])
+    sys.exit(status)
+
+
 deploy.add_command(archives)
 deploy.add_command(logs)
 deploy.add_command(maven_file)
 deploy.add_command(nexus)
 deploy.add_command(nexus_stage)
+deploy.add_command(nexus_zip)

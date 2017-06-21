@@ -34,3 +34,8 @@ nexus-stage
 -----
 
 .. program-output:: lftools deploy nexus-stage --help
+
+nexus-zip
+-----
+
+.. program-output:: lftools deploy nexus-zip --help

@@ -90,6 +90,11 @@ deploy() {
             deploy_nexus_stage "$@"
             exit 0
             ;;
+        nexus-zip )
+            echo "Deploying nexus-zip..."
+            deploy_nexus_zip "$@"
+            exit 0
+            ;;
         * )
             echo "Invalid command: $subcommand" 1>&2
             exit 1
@@ -589,6 +594,40 @@ EOF
 
     # cleanup
     rm "$FILE_XML"
+}
+
+deploy_nexus_zip() {
+    # Deploy zip file containing artifacts to Nexus using cURL
+    #
+    # This function simply takes a zip file preformatted in the correct
+    # directory for Nexus and uploads to a specified Nexus repo using the
+    # content-compressed URL.
+    #
+    # Requires the Nexus Unpack plugin and permission assigned to the upload user.
+    #
+    # Parameters:
+    #     nexus_url:    URL to Nexus server. (Ex: https://nexus.opendaylight.org)
+    #     nexus_repo:   The repository to push to. (Ex: site)
+    #     nexus_path:   The path to upload the artifacts to. Typically the
+    #                   project group_id depending on if a Maven or Site repo
+    #                   is being pushed.
+    #                   Maven Ex: org/opendaylight/odlparent
+    #                   Site Ex: org.opendaylight.odlparent
+    #     deploy_zip:   The zip to deploy. (Ex: /tmp/artifacts.zip)
+
+    local nexus_url="$1"
+    local nexus_repo="$2"
+    local nexus_path="$3"
+    local deploy_zip="$4"
+
+    if [ -z "$4" ]; then
+        echo "Missing required arguments."
+        exit 1
+    fi
+
+    echo "Pushing $deploy_zip to $nexus_repo on $nexus_url"
+    curl --netrc --upload-file "$deploy_zip" \
+        "${nexus_url}/service/local/repositories/${nexus_repo}/content-compressed/${nexus_path}"
 }
 
 # Only run the script if it is being called directly and not sourced.
