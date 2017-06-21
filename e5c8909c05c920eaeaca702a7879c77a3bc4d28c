@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a2585a7_eddce576",
+        "filename": "shell/deploy",
+        "patchSetId": 35
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-21T19:58:51Z",
+      "side": 1,
+      "message": "Technically this is not a true statement. It will also fail if too many arguments are passed because it\u0027s checking for exactly 3 positional parameters.",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 6
+      },
+      "revId": "e5c8909c05c920eaeaca702a7879c77a3bc4d28c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
