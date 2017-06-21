@@ -167,6 +167,85 @@ deploy_archives() {
     rm -rf "$tmpdir"
 }
 
+deploy_logs() {
+    # Deploy logs to a Nexus site repository named logs.
+    #
+    # This script fetches logs and system information and pushes them to Nexus
+    # for log archiving.
+    #
+    # To use this script the Nexus server must have a site repository configured
+    # with the name "logs" as this is a hardcoded path. Also this script uses
+    # ~/.netrc for it's authentication which must be provided.
+    #
+    # Usage: deploy <nexus_url> <nexus_path> <build_url>
+    #
+    #   <nexus_url>: URL of Nexus server. Eg: https://nexus.opendaylight.org
+    #   <nexus_path>: Path on nexus logs repo to place the logs. Eg:
+    #                 $SILO/$JENKINS_HOSTNAME/$JOB_NAME/$BUILD_NUMBER
+    #   <build_url>: URL of the Jenkins build. Jenkins typicallyi provides this
+    #                via the $BUILD_URL environment variable.
+
+    if [ -z "$3" ]; then
+        echo "Missing required arguments."
+        echo "Usage: deploy <nexus_url> <nexus_path> <build_url>"
+        exit 1
+    fi
+
+    local nexus_url="$1"
+    local nexus_path="$2"
+    local build_url="$3"
+
+    tmpdir=$(mktemp -d)
+    pushd "$tmpdir"
+
+    touch "_build-details.log"
+    {
+        echo "build-url: ${build_url}"
+    } 2>&1 | tee -a "_build-details.log"
+    env | grep -v PASSWORD | sort > "_build-enviroment-variables.log"
+
+    # Print system info before collecting logs
+    touch "_sys-info.log"
+    {
+        local sys_cmds
+        sys_cmds=(
+            "uname -a"
+            "lscpu"
+            "nproc"
+            "df -h"
+            "free -m"
+            "ip addr"
+            "sar -r"
+        )
+        for cmd in "${sys_cmds[@]}"; do
+            # If command exists then print output.
+            set -- $cmd
+            hash $1 2> /dev/null
+            if [ "$?" -eq "0" ]; then
+                echo -e "---> $cmd:\n $($cmd) \n"
+            fi
+        done
+    } 2>&1 | tee -a "_sys-info.log"
+
+    # Magic string used to trim console logs at the appropriate level during wget
+    MAGIC_STRING="-----END_OF_BUILD-----"
+    echo "$MAGIC_STRING"
+
+    wget --no-verbose -O "console.log" "${build_url}consoleText"
+    wget --no-verbose -O "console-timestamp.log" "${build_url}/timestamps?time=HH:mm:ss&appendLog"
+    sed -i "/^$MAGIC_STRING$/q" "console.log"
+    sed -i "/^.*$MAGIC_STRING$/q" "console-timestamp.log"
+
+    gzip -- *.log
+    zip -r console-logs.zip -- *.log.gz
+
+    curl --netrc --upload-file console-logs.zip \
+        "${nexus_url}/service/local/repositories/logs/content-compressed/${nexus_path}"
+
+    popd
+    rm -rf "$tmpdir"
+}
+
 deploy_maven_file_usage () {
     echo "Usage: $0 <nexus_url> <repo_id> <file>"
     echo ""
@@ -392,85 +471,6 @@ deploy_maven_file () {
         echo "ERROR: There was an error with the upload"
         exit 1
     fi
-}
-
-deploy_logs() {
-    # Deploy logs to a Nexus site repository named logs.
-    #
-    # This script fetches logs and system information and pushes them to Nexus
-    # for log archiving.
-    #
-    # To use this script the Nexus server must have a site repository configured
-    # with the name "logs" as this is a hardcoded path. Also this script uses
-    # ~/.netrc for it's authentication which must be provided.
-    #
-    # Usage: deploy <nexus_url> <nexus_path> <build_url>
-    #
-    #   <nexus_url>: URL of Nexus server. Eg: https://nexus.opendaylight.org
-    #   <nexus_path>: Path on nexus logs repo to place the logs. Eg:
-    #                 $SILO/$JENKINS_HOSTNAME/$JOB_NAME/$BUILD_NUMBER
-    #   <build_url>: URL of the Jenkins build. Jenkins typicallyi provides this
-    #                via the $BUILD_URL environment variable.
-
-    if [ -z "$3" ]; then
-        echo "Missing required arguments."
-        echo "Usage: deploy <nexus_url> <nexus_path> <build_url>"
-        exit 1
-    fi
-
-    local nexus_url="$1"
-    local nexus_path="$2"
-    local build_url="$3"
-
-    tmpdir=$(mktemp -d)
-    pushd "$tmpdir"
-
-    touch "_build-details.log"
-    {
-        echo "build-url: ${build_url}"
-    } 2>&1 | tee -a "_build-details.log"
-    env | grep -v PASSWORD | sort > "_build-enviroment-variables.log"
-
-    # Print system info before collecting logs
-    touch "_sys-info.log"
-    {
-        local sys_cmds
-        sys_cmds=(
-            "uname -a"
-            "lscpu"
-            "nproc"
-            "df -h"
-            "free -m"
-            "ip addr"
-            "sar -r"
-        )
-        for cmd in "${sys_cmds[@]}"; do
-            # If command exists then print output.
-            set -- $cmd
-            hash $1 2> /dev/null
-            if [ "$?" -eq "0" ]; then
-                echo -e "---> $cmd:\n $($cmd) \n"
-            fi
-        done
-    } 2>&1 | tee -a "_sys-info.log"
-
-    # Magic string used to trim console logs at the appropriate level during wget
-    MAGIC_STRING="-----END_OF_BUILD-----"
-    echo "$MAGIC_STRING"
-
-    wget --no-verbose -O "console.log" "${build_url}consoleText"
-    wget --no-verbose -O "console-timestamp.log" "${build_url}/timestamps?time=HH:mm:ss&appendLog"
-    sed -i "/^$MAGIC_STRING$/q" "console.log"
-    sed -i "/^.*$MAGIC_STRING$/q" "console-timestamp.log"
-
-    gzip -- *.log
-    zip -r console-logs.zip -- *.log.gz
-
-    curl --netrc --upload-file console-logs.zip \
-        "${nexus_url}/service/local/repositories/logs/content-compressed/${nexus_path}"
-
-    popd
-    rm -rf "$tmpdir"
 }
 
 deploy_nexus() {
