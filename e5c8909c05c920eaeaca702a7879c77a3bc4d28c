@@ -46,6 +46,30 @@
       "revId": "e5c8909c05c920eaeaca702a7879c77a3bc4d28c",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_2d0f8de3",
+        "filename": "shell/deploy",
+        "patchSetId": 35
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-22T15:05:16Z",
+      "side": 1,
+      "message": "getopts only parses opts. It won\u0027t parse positional arguements so something like this will fail.\n\n $cmd maven-file -g org.opendaylight.odlparent nexus_url repo_id file extra-arg-1 extra-arg-2\n\nbecause we\u0027re now passing extra-arg-1 and extra-arg-2 I will expect it to fail here and exit 1.\n\nWhile this is an improvement over the previous if-statement the message \"Missing required arguments.\" can be confusing as in this case the user provided more arguments than they needed to but the message printed seems to indicate that they need to provide even more arguments.\n\nHere\u0027s an example of an actual test run:\n\n $ ./shell/deploy maven-file -g org.example a b c d\n Deploying artifacts...\n Missing required arguments.\n\nIn this case we provided additional positional arguments c and d yet the command tells us that we provided insufficient arguments.\n\nMight be worth calling `deploy_maven_file_usage` before exiting as well so that it prints out the usage statement.",
+      "parentUuid": "5a2585a7_0d5df1e9",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 6
+      },
+      "revId": "e5c8909c05c920eaeaca702a7879c77a3bc4d28c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
