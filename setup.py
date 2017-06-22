@@ -3,6 +3,10 @@ from setuptools import setup
 
 from lftools import __version__
 
+desc = '''Linux Foundation Release Engineering Tools
+Website: https://lf-releng-tools.readthedocs.io/en/latest/
+'''
+
 long_desc = '''
 LF Tools is a collection of scripts and utilities that are useful to multiple
 Linux Foundation project CI and Releng related activities. We try to create
@@ -24,8 +28,7 @@ setup(
     author='Thanh Ha',
     author_email='thanh.ha@linuxfoundation.org',
     url='',
-    description=('Linux Foundation Release Engineering Tools'
-        'Website: https://lf-releng-tools.readthedocs.io/en/latest/'),
+    description=(desc),
     long_description=long_desc,
     license='EPL',
     classifiers=[
