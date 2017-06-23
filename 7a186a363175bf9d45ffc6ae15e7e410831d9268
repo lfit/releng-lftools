@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a2585a7_adf13d97",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-23T15:22:23Z",
+      "side": 1,
+      "message": "Not sure if this is the best wording but at least it tells the user if they did not pass enough arguments or passed too many.",
+      "revId": "7a186a363175bf9d45ffc6ae15e7e410831d9268",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
