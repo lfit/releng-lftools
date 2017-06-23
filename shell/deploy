@@ -341,7 +341,8 @@ deploy_maven_file () {
     local file="$3"
 
     if [ "$#" -ne "3" ]; then
-        echo "Missing required arguments."
+        echo "ERROR: $# arguments passed. This function expects 3 required arguments."
+        deploy_maven_file_usage
         exit 1
     fi
 
