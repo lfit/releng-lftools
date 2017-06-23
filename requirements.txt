@@ -2,6 +2,7 @@ click
 docker
 defusedxml # Needed due to tox complains on parseString not safe
 jsonschema
+Jinja2
 requests
 ruamel.yaml
 setuptools>=36.5.0
