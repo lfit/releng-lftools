@@ -15,7 +15,10 @@ __author__ = 'Trevor Bramwell'
 import logging
 
 import click
+from jinja2 import Environment, PackageLoader, select_autoescape
 from six.moves.urllib.error import HTTPError
+from six.moves import configparser
+import yaml
 
 from lftools.cli.jenkins.builds import builds
 from lftools.cli.jenkins.jobs import jobs
@@ -25,6 +28,10 @@ from lftools.cli.jenkins.token import token
 from lftools.jenkins import Jenkins
 
 log = logging.getLogger(__name__)
+env = Environment(
+    loader=PackageLoader('lftools.jenkins', 'templates'),
+    autoescape=select_autoescape(['html', 'xml'])
+)
 
 
 @click.group()
@@ -82,6 +89,42 @@ def groovy(ctx, groovy_file):
     result = jenkins.server.run_script(data)
     log.info(result)
 
+
+@click.command()
+@click.option(
+    '--projects', type=str, required=True,
+    help='Yaml file containing the hierarchy of files and passwords to '
+        'create')
+@click.pass_context
+def create_settings(ctx, projects):
+    """Create settings files based on Yaml configuration"""
+    try:
+        with open(projects, 'r') as f:
+            settings = yaml.safe_load(f)
+    except IOError:
+        log.error('Error reading control file "{}"'.format(projects))
+        sys.exit(1)
+
+    if not 'repositories' in settings:
+        log.error('repositories needs to be defined in {}'.format(projects))
+        sys.exit(1)
+
+    project_map = {}
+
+    def add_project(base, config):
+        for repo in config.keys():
+            project_map.update({("%s%s" % (base, repo)): config[repo]['password']})
+            if 'repositories' in config[repo]:
+                add_project(("%s%s-" % (base, repo)), config[repo]['repositories'])
+
+    add_project('', settings['repositories'])
+
+    template = env.get_template('create-settings-file.groovy')
+
+    jenkins = ctx.obj['jenkins']
+    result = jenkins.server.run_script(template.render(projects=project_map))
+    log.info(result)
+#    print(template.render(projects=project_map))
 
 @click.command()
 @click.option("-n/-y", is_flag=True, prompt="Quiet down Jenkins?", required=True)
@@ -175,6 +218,7 @@ jenkins_cli.add_command(nodes)
 jenkins_cli.add_command(builds)
 jenkins_cli.add_command(get_credentials, name='get-credentials')
 jenkins_cli.add_command(groovy)
+jenkins_cli.add_command(create_settings, name='create-settings')
 jenkins_cli.add_command(jobs)
 jenkins_cli.add_command(quiet_down, name='quiet-down')
 jenkins_cli.add_command(remove_offline_nodes, name='remove-offline-nodes')
