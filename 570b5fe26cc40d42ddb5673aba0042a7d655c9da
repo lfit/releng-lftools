@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a2585a7_6d9595e3",
+        "filename": "lftools/jenkins/add_config_groovy",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-24T03:11:21Z",
+      "side": 1,
+      "message": "I believe groovy scripts should have the .groovy extension.",
+      "revId": "570b5fe26cc40d42ddb5673aba0042a7d655c9da",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
