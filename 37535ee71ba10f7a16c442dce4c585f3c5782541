@@ -1,0 +1,504 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a2585a7_50d5d241",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "If you can shorten the description below it would make a better subject line imo as \"Add github funcs\" is pretty generic and doesn\u0027t explain to shortlog what that means.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_b0e63643",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "Need a space here.",
+      "range": {
+        "startLine": 9,
+        "startChar": 38,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_90e33a33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "Move this to the footer as:\n\n Issue: RELENG-85",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_10cf4ab2",
+        "filename": "etc/github/branch-protection.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "GitHub",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 8
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_503cb293",
+        "filename": "etc/github/branch-protection.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "What\u0027s it mean to be JJB Verified? Is everything going to be called JJB Verify?\n\nMy original thought was for the CI Jobs they are JJB verify because they are verifying JJB code but if this is going to be applied generally to any job then does this make sense here? for example a Maven build is not verifying JJB but Maven code.",
+      "range": {
+        "startLine": 10,
+        "startChar": 11,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_30ca46a2",
+        "filename": "etc/github/settings.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "credentials",
+      "range": {
+        "startLine": 3,
+        "startChar": 23,
+        "endLine": 3,
+        "endChar": 28
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_f0c39e88",
+        "filename": "etc/github/webhook.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "GitHub",
+      "range": {
+        "startLine": 3,
+        "startChar": 25,
+        "endLine": 3,
+        "endChar": 31
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_d0c0a27e",
+        "filename": "etc/github/webhook.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "WebHook",
+      "range": {
+        "startLine": 3,
+        "startChar": 32,
+        "endLine": 3,
+        "endChar": 39
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_b0bd1605",
+        "filename": "etc/github/webhook.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "Sounds like name is a confined set of options. If so this should be worded as Name must be one of [\u0027web\u0027, \u0027other\u0027, \u0027possible\u0027, \u0027values\u0027]",
+      "range": {
+        "startLine": 5,
+        "startChar": 2,
+        "endLine": 5,
+        "endChar": 48
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_90ba1a09",
+        "filename": "etc/github/webhook.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "It\u0027s good practice to put 2 spaces before the start of a comment to make it clear that this is a comment line.",
+      "range": {
+        "startLine": 10,
+        "startChar": 25,
+        "endLine": 10,
+        "endChar": 26
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_7037aeb1",
+        "filename": "etc/github/webhook.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 22,
+        "startChar": 25,
+        "endLine": 22,
+        "endChar": 26
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_3041260c",
+        "filename": "lftools/cli/github.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "GitHub",
+      "range": {
+        "startLine": 21,
+        "startChar": 31,
+        "endLine": 21,
+        "endChar": 37
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_10462a24",
+        "filename": "lftools/cli/github.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "GitHub",
+      "range": {
+        "startLine": 29,
+        "startChar": 41,
+        "endLine": 29,
+        "endChar": 47
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_f04a7e26",
+        "filename": "lftools/cli/github.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "GitHub",
+      "range": {
+        "startLine": 31,
+        "startChar": 32,
+        "endLine": 31,
+        "endChar": 38
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a2585a7_d047821c",
+        "filename": "lftools/cli/github.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "GitHub",
+      "range": {
+        "startLine": 34,
+        "startChar": 16,
+        "endLine": 34,
+        "endChar": 22
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a3291f1_6cffdb02",
+        "filename": "lftools/github/__init__.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "GitHub",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 17
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a3291f1_4c041f15",
+        "filename": "lftools/github/cmd.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "Doc strings need to go BELOW the license header.",
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a3291f1_2c09d32c",
+        "filename": "lftools/github/cmd.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "Do what stuff?\n\nI have learned nothing from this comment.",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a3291f1_0c0e1735",
+        "filename": "tests/fixtures/github/branch-protection.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "GitHub",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 8
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a3291f1_cc0fef2d",
+        "filename": "tests/fixtures/github/settings.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "credentials",
+      "range": {
+        "startLine": 3,
+        "startChar": 23,
+        "endLine": 3,
+        "endChar": 28
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a3291f1_ec12ab57",
+        "filename": "tests/fixtures/github/settings.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "GitHub",
+      "range": {
+        "startLine": 3,
+        "startChar": 2,
+        "endLine": 3,
+        "endChar": 8
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a3291f1_ac1ca36b",
+        "filename": "tests/fixtures/github/webhook.example.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-06-27T16:45:38Z",
+      "side": 1,
+      "message": "If name has specific contraints on what it can be set to then list them.",
+      "range": {
+        "startLine": 5,
+        "startChar": 2,
+        "endLine": 5,
+        "endChar": 49
+      },
+      "revId": "37535ee71ba10f7a16c442dce4c585f3c5782541",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
