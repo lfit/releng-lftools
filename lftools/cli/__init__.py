@@ -16,6 +16,7 @@ import click
 from lftools.cli.deploy import deploy
 from lftools.cli.jenkins import jenkins_cli
 from lftools.cli.nexus import nexus
+from lftools.cli.sign import sign
 from lftools.cli.version import version
 from lftools.openstack.cmd import openstack
 
@@ -29,9 +30,10 @@ def cli(ctx):
 
 
 cli.add_command(deploy)
-cli.add_command(openstack)
-cli.add_command(nexus)
 cli.add_command(jenkins_cli, name='jenkins')
+cli.add_command(nexus)
+cli.add_command(openstack)
+cli.add_command(sign)
 cli.add_command(version)
 
 
