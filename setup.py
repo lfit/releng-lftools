@@ -53,6 +53,7 @@ setup(
     ''',
     scripts=[
         'shell/deploy',
+        'shell/sign',
         'shell/version',
     ],
 )
