@@ -1,0 +1,187 @@
+#!/bin/bash
+
+# @License EPL-1.0 <http://spdx.org/licenses/EPL-1.0>
+##############################################################################
+# Copyright (c) 2017 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+
+# Signs artifacts with gpg
+
+
+sign() {
+    # Entry point for the deploy command.
+    subcommand=$1; shift
+
+    case "$subcommand" in
+        dir )
+            echo "Signing Directory..."
+            sign_dir "$@"
+            exit 0
+            ;;
+        nexus )
+            echo "Signing Nexus repo..."
+            sign_nexus "$@"
+            exit 0
+            ;;
+        * )
+            echo "Invalid command: $subcommand" 1>&2
+            exit 1
+            ;;
+    esac
+}
+
+
+sign_dir() {
+    # GPG signs all of the files in a directory
+    #
+    # Parameters:
+    #
+    #     <directory>: The directory to find and sign artifacts.
+    local dir="$1"
+
+    if [ -z "$1" ]; then
+        echo "Missing required arguments."
+        echo "Usage: $0 sign-dir <directory>"
+        exit 1
+    fi
+
+    test_gpg_key
+
+    set -e  # Fail immediately if any if signing fails
+    cd "$dir"
+    files_to_sign=($(find . -type f ! -name "*.asc" \
+                                    ! -name "*.md5" \
+                                    ! -name "*.sha1" \
+                                    ! -name "_maven.repositories" \
+                                    ! -name "_remote.repositories" \
+                                    ! -name "*.lastUpdated" \
+                                    ! -name "maven-metadata-local.xml" \
+                                    ! -name "maven-metadata.xml"))
+
+    for f in "${files_to_sign[@]}"
+    do
+        echo "Signing $f"
+        gpg --batch -abq "$f"
+    done
+    set +e
+}
+
+
+sign_nexus_usage () {
+    echo "Usage: $0 nexus <nexus_repo_url>"
+    echo ""
+    echo "    nexus_repo_url:   The URL to the Nexus repository to be signed."
+    echo "        Ex: https://nexus.opendaylight.org/content/repositories/autorelease-1888"
+    echo ""
+    echo "Options:"
+    echo "    -d /path/to/store/signatures"
+}
+
+
+sign_nexus() {
+    # Fetch and GPG sign a Nexus repo
+    #
+    # The resultant output of this command is stored in
+    # /tmp/gpg-signatures.XXXXXXXXXX unless the -d parameter is passed to
+    # override.
+    while getopts d: o; do
+      case "$o" in
+        h)
+            sign_nexus_usage
+            exit 0
+            ;;
+
+        d)
+            local sign_dir="$OPTARG"
+            mkdir -p "$sign_dir"
+            ;;
+
+        [?])
+            sign_nexus_usage
+            exit 1
+            ;;
+      esac
+    done
+    shift $((OPTIND-1))
+
+    local nexus_repo_url="$1"
+
+    if [ -z "$1" ]; then
+        echo "Missing required arguments."
+        sign_nexus_usage
+        exit 1
+    fi
+
+    # Ensure that the repo_url has a trailing slash as wget needs it to work
+    case "$nexus_repo_url" in
+        */)
+            ;;
+        *)
+            nexus_repo_url="$nexus_repo_url/"
+            ;;
+    esac
+
+    sign_dir=${sign_dir:-$(mktemp -d /tmp/gpg-signatures.XXXXXXXXXX)}
+    cd "$sign_dir" || exit 1
+
+    echo "Fetching artifacts from $nexus_repo_url to $sign_dir..."
+    wget --recursive --execute robots=off --no-parent --quiet \
+        --no-host-directories --cut-dirs=3 \
+        "$nexus_repo_url"
+
+    echo "Removing files that do not need to be cloned..."
+    remove_files=($(find . -type f -name "index.html" \
+        -o -name "*.asc" \
+        -o -name "*.md5" \
+        -o -name "*.sha1" \
+        -o -name "_maven.repositories*" \
+        -o -name "_remote.repositories*" \
+        -o -name "maven-metadata-local.xml*" \
+        -o -name "maven-metadata.xml*" \
+        -o -name "archetype-catalog.xml"))
+    for f in "${remove_files[@]}"; do
+        rm "$f"
+    done
+
+    echo "Signing artifacts..."
+    sign_dir "$sign_dir"
+
+    echo "Removing non-signature files..."
+    remove_files=($(find . -type f -not -name '*.asc'))
+    for f in "${remove_files[@]}"; do
+        rm "$f"
+    done
+
+    echo "Printing signatures generated"
+    find . -type f
+
+    echo "Signing complete. Signatures can be found in $sign_dir"
+}
+
+
+test_gpg_key() {
+  # Test that our GPG key works by signing a test file.
+
+  local test_file
+  test_file=$(mktemp)
+  echo "Test Signature" > "$test_file"
+  gpg --batch -abq "$test_file"
+  if ! gpg --verify "$test_file".asc "$test_file" > /dev/null 2>&1; then
+      echo "ERROR: Failed to validate signature."
+      rm "$test_file" "$test_file".asc  # Cleanup before we exit
+      exit 1
+  fi
+  rm "$test_file" "$test_file".asc  # Cleanup tmp files
+}
+
+
+# Only run the script if it is being called directly and not sourced.
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
+then
+    sign "$@"
+fi
