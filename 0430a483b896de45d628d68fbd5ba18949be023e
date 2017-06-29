@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a2f8d8d_0b039d74",
+        "filename": "lftools/ldap/cmd.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-06-29T18:08:29Z",
+      "side": 1,
+      "message": "Per discussions related to change Jeremy is adding for GitHub we shouldn\u0027t be using \u0027settings\u0027 but \u0027secure-config\u0027 or even \u0027admin-config\u0027",
+      "range": {
+        "startLine": 32,
+        "startChar": 13,
+        "endLine": 32,
+        "endChar": 21
+      },
+      "revId": "0430a483b896de45d628d68fbd5ba18949be023e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a2f8d8d_ebf7318b",
+        "filename": "lftools/ldap/groups.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-06-29T18:08:29Z",
+      "side": 1,
+      "message": "This should be secure_settings_file",
+      "range": {
+        "startLine": 23,
+        "startChar": 40,
+        "endLine": 23,
+        "endChar": 53
+      },
+      "revId": "0430a483b896de45d628d68fbd5ba18949be023e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a2f8d8d_cbf47589",
+        "filename": "lftools/ldap/groups.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-06-29T18:08:29Z",
+      "side": 1,
+      "message": "This should be secure_settings_file",
+      "range": {
+        "startLine": 31,
+        "startChar": 13,
+        "endLine": 31,
+        "endChar": 26
+      },
+      "revId": "0430a483b896de45d628d68fbd5ba18949be023e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
