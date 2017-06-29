@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a2f8d8d_2bd1b9cd",
+        "filename": "lftools/cli/sign.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-06-29T22:12:15Z",
+      "side": 1,
+      "message": "why are we hardcoding AAA project here ?",
+      "range": {
+        "startLine": 59,
+        "startChar": 22,
+        "endLine": 59,
+        "endChar": 70
+      },
+      "revId": "a8704414395b88025d823c92223f21648a089a52",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
