@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a2f8d8d_5fa03bf4",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-07-12T18:46:10Z",
+      "side": 1,
+      "message": "not strong enough, imho.\n\n\"With few exceptions, all patches...\"",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 7
+      },
+      "revId": "08d83f24fbebd1317e09c43ea198f48e82448396",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a2f8d8d_9f5ea311",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-07-12T18:46:10Z",
+      "side": 1,
+      "message": "plural?",
+      "range": {
+        "startLine": 28,
+        "startChar": 28,
+        "endLine": 28,
+        "endChar": 32
+      },
+      "revId": "08d83f24fbebd1317e09c43ea198f48e82448396",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a2f8d8d_7f9bf7c9",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-07-12T18:46:10Z",
+      "side": 1,
+      "message": "the",
+      "revId": "08d83f24fbebd1317e09c43ea198f48e82448396",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
