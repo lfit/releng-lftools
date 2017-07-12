@@ -2,6 +2,53 @@
 Best Practices
 ##############
 
+Code Review
+===========
+
+.. Listing Code Ceview first as it is incredibly important.
+
+With few exceptions, all patches that go into a project repo need to be code
+reviewed by someone other than the original author. Code review is a very good
+way to both learn from others as well as improve code quality and we highly
+recommend everyone participate in code review regardless of if you are an
+active committer on a project or not.
+
+Below provides a simple checklist of common things that code reviewers should
+look out for (Patch submitters are encouraged to self-review as well to ensure
+that they are not hitting any of these):
+
+**General**
+
+- Does the Git commit message sufficiently describes the change?
+  (Refer to: https://chris.beams.io/posts/git-commit/)
+- Does the commit message have an 'Issue: <someissue>' in the footer and not
+  in the subject line or body?
+- Are there any typos?
+- Have all code review comments been addressed?
+- Does the code pull in any dependencies that might have license conflicts
+  with this project's license?
+
+**Code**
+
+- Are imports alphabetical and sectioned off by stdlib, 3rdparty, and local?
+- Are functions / methods organized alphabetically?
+  (or categorized alphabetically)
+- Does the change need unit tests?
+  (Yes, it probably does!)
+- Does the change need documentation?
+  (Most likely!)
+- Does every function added have function docs?
+  (javadoc, pydoc, whatever the language equivalent is)
+- Does it pass linting?
+- Does the code cause backwards compatability breakage?
+  (If so it should be documented)
+
+Google posted an interesting blog on effective code review and how to spend both
+your own and your reviewers' time wisely.
+
+https://testing.googleblog.com/2017/06/code-health-too-many-comments-on-your.html
+
+
 Coala
 =====
 
