@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a2f8d8d_ff400737",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-07-12T15:18:09Z",
+      "side": 1,
+      "message": "- Does the commit message have an \u0027Issue: \u003csomeissue\u003e\u0027 in the footer and not in the subject line or body?",
+      "revId": "6cdabe27cfbda9b81a3722edf8f37b0bbbc0f754",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
