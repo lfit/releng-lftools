@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72e2520d_3ab80978",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-13T19:59:03Z",
+      "side": 1,
+      "message": "Needs a license header.",
+      "revId": "3de6278d28f3e24a3fc2298751886b77e93ef537",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
