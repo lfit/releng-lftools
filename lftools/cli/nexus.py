@@ -48,7 +48,10 @@ def create(ctx):
 @click.option(
     '-s', '--settings', type=str, required=True,
     help='Config file containing administrative settings.')
+@click.option(
+    '-q', '--quiet', default=False, is_flag=True,
+    help='Quiet run. Do not show any logs in the console.')
 @click.pass_context
-def repo(ctx, config, settings):
+def repo(ctx, config, settings, quiet):
     """Create a Nexus repository as defined by a repo-config.yaml file."""
-    nexuscmd.create_repos(config, settings)
+    nexuscmd.create_repos(config, settings, quiet)
