@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4890b0a9_6fe3d66b",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-13T17:07:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a2f8d8d_5fa03bf4",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 7
+      },
+      "revId": "08d83f24fbebd1317e09c43ea198f48e82448396",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a2f8d8d_9f5ea311",
         "filename": "docs/best-practices.rst",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7ca32983_a5a9fb7f",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-13T17:07:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a2f8d8d_9f5ea311",
+      "range": {
+        "startLine": 28,
+        "startChar": 28,
+        "endLine": 28,
+        "endChar": 32
+      },
+      "revId": "08d83f24fbebd1317e09c43ea198f48e82448396",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a2f8d8d_7f9bf7c9",
         "filename": "docs/best-practices.rst",
         "patchSetId": 2
@@ -59,6 +107,24 @@
       "writtenOn": "2017-07-12T18:46:10Z",
       "side": 1,
       "message": "the",
+      "revId": "08d83f24fbebd1317e09c43ea198f48e82448396",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0fb5a415_b651102a",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-13T17:07:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a2f8d8d_7f9bf7c9",
       "revId": "08d83f24fbebd1317e09c43ea198f48e82448396",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
