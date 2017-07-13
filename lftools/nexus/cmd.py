@@ -9,11 +9,18 @@
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
 """Contains functions for various Nexus tasks."""
+import logging
 import sys
 
 from lftools.nexus import Nexus
 import yaml
 
+log = logging.getLogger(__name__)
+out_hdlr = logging.StreamHandler(sys.stdout)
+out_hdlr.setFormatter(logging.Formatter('%(asctime)s [%(levelname)-5.5s] %(message)s'))
+out_hdlr.setLevel(logging.INFO)
+log.addHandler(out_hdlr)
+log.setLevel(logging.INFO)
 
 def reorder_staged_repos(settings_file):
     """Reorder staging repositories in Nexus.
@@ -52,13 +59,14 @@ def reorder_staged_repos(settings_file):
     _nexus.update_repo_group_details(repo_id, repo_update)
 
 
-def create_repos(config_file, settings_file):
+def create_repos(config_file, settings_file, quiet_flag):
     """Create repositories as defined by configuration file.
 
     :arg str config: Configuration file containing repository definitions that
         will be used to create the new Nexus repositories.
     :arg str settings: Settings file containing administrative credentials and
         information.
+    :arg flag quiet: Quiet option to silence logs.
     """
     with open(config_file, 'r') as f:
         config = yaml.safe_load(f)
@@ -90,29 +98,34 @@ def create_repos(config_file, settings_file):
         for priv in privs_set:
             try:
                 privs[priv] = _nexus.get_priv(name, priv)
+                log.info('   Creating %s privileges' % (priv))
             except LookupError as e:
                 privs[priv] = _nexus.create_priv(name, target_id, priv)
 
         # Create Role
         try:
             role_id = _nexus.get_role(name)
+            log.info('   Creating %s role' % (role_id))
         except LookupError as e:
             role_id = _nexus.create_role(name, privs)
 
         # Create user
         try:
             _nexus.get_user(name)
+            log.info('   Creating %s user' % (name))
         except LookupError as e:
             _nexus.create_user(name, email, role_id, password, extra_privs)
 
     def build_repo(repo, repoId, config, base_groupId):
-        print('Building for %s.%s' % (base_groupId, repo))
+        log.info('-> Building for %s.%s in Nexus' % (base_groupId, repo))
         groupId = '%s.%s' % (base_groupId, repo)
         target1 = '^/%s/.*' % groupId.replace('.', '[/\.]')
         target2 = '^/%s[\.].*' % groupId.replace('.', '[/\.]')
 
         if 'extra_privs' in config:
             extra_privs = config['extra_privs']
+            log.info('   Privileges for this repo:')
+            log.info('     ' + ', '.join(extra_privs))
         else:
             extra_privs = []
 
@@ -123,6 +136,8 @@ def create_repos(config_file, settings_file):
             config['password'],
             extra_privs)
 
+        log.info('-> Finished successfully for %s.%s!!\n' % (base_groupId, repo))
+
         if 'repositories' in config:
             for sub_repo in config['repositories']:
                 sub_repo_id = '%s-%s' % (repoId, sub_repo)
@@ -132,5 +147,6 @@ def create_repos(config_file, settings_file):
                     config['repositories'][sub_repo],
                     groupId)
 
+    log.warning('Nexus repo creation started. Aborting now could leave tasks undone')
     for repo in config['repositories']:
         build_repo(repo, repo, config['repositories'][repo], config['base_groupId'])
