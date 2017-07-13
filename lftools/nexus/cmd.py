@@ -90,29 +90,34 @@ def create_repos(config_file, settings_file):
         for priv in privs_set:
             try:
                 privs[priv] = _nexus.get_priv(name, priv)
+                print('   Creating %s privileges' % (priv))
             except LookupError as e:
                 privs[priv] = _nexus.create_priv(name, target_id, priv)
 
         # Create Role
         try:
             role_id = _nexus.get_role(name)
+            print('   Creating %s role' % (role_id))
         except LookupError as e:
             role_id = _nexus.create_role(name, privs)
 
         # Create user
         try:
             _nexus.get_user(name)
+            print('   Creating %s user' % (name))
         except LookupError as e:
             _nexus.create_user(name, email, role_id, password, extra_privs)
 
     def build_repo(repo, repoId, config, base_groupId):
-        print('Building for %s.%s' % (base_groupId, repo))
+        print('-> Building for %s.%s in Nexus' % (base_groupId, repo))
         groupId = '%s.%s' % (base_groupId, repo)
         target1 = '^/%s/.*' % groupId.replace('.', '[/\.]')
         target2 = '^/%s[\.].*' % groupId.replace('.', '[/\.]')
 
         if 'extra_privs' in config:
             extra_privs = config['extra_privs']
+            print('   Privileges for this repo:')
+            print '     ' + ', '.join(extra_privs)
         else:
             extra_privs = []
 
@@ -122,6 +127,8 @@ def create_repos(config_file, settings_file):
             settings['email_domain'],
             config['password'],
             extra_privs)
+
+        print('-> Finished successfully for %s.%s!!\n' % (base_groupId, repo))
 
         if 'repositories' in config:
             for sub_repo in config['repositories']:
