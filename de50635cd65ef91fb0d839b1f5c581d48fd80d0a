@@ -16,6 +16,24 @@
       "revId": "de50635cd65ef91fb0d839b1f5c581d48fd80d0a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9609f66_4060944a",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-14T02:35:43Z",
+      "side": 1,
+      "message": "backwards compatability is a good one to add.\n\nI\u0027m not sure about regressions, and functionality completeness? How does one know what to look for to ensure that? It seems to generic to me that people might just skip that suggestion.\n\nRegressions can be caught by unit tests so I think that covers it. Maybe functionality completeness is covered too by unit tests and docs?",
+      "parentUuid": "e33eb6a3_5db2b61f",
+      "revId": "de50635cd65ef91fb0d839b1f5c581d48fd80d0a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
