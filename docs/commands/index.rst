@@ -11,4 +11,5 @@ bash. It supports the following commands.
     deploy
     nexus
     openstack
+    sign
     version
