@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e33eb6a3_5db2b61f",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-07-14T01:36:32Z",
+      "side": 1,
+      "message": "backward compatibility, regressions, functionality completeness change in question.",
+      "revId": "de50635cd65ef91fb0d839b1f5c581d48fd80d0a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
