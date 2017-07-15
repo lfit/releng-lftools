@@ -21,7 +21,7 @@ cleanup
 The intent of this command is to automatically cleanup old images in the cloud.
 The OpenDaylight project has 2 clouds, a Private Cloud and a Public cloud which
 needs the `--clouds` option to automatically remove the same images from
-multiple clouds simultaniously.
+more than one cloud simultaneously.
 
 .. program-output:: lftools openstack --os-cloud docs image cleanup --help
 

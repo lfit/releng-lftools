@@ -6,18 +6,17 @@ Coala
 =====
 
 Coala is a great tool for linting all languages. We use it here in lftools for
-linting this project and can be launched simply with python-tox as long as
-Python 3 is available on the system.
+linting this project. The easiest way to run coala is with python-tox and
+requires Python 3 installed on the system.
 
 .. code-block:: bash
 
     tox -ecoala
 
 Sometimes running Coala without tox such as for running in interactive mode
-could be handy. In this case it is necessary to install Coala. The recommended
-way to setup Coala is to use a Python VirtualEnv. If possible using a script
-called virtualenvwrapper is recommended as it makes it very simple to manage
-local virtualenvs.
+could be handy. In this case install Coala. The recommended
+way to setup Coala is to use a Python VirtualEnv. We recommend using a script
+called virtualenvwrapper as it makes it simple to manage local virtualenvs.
 
 Requirements
 ------------
@@ -31,7 +30,7 @@ Install Coala
 
 .. note::
 
-    Some distros have a package called *coala* available however do not confuse
+    Some distros have a package called *coala* available but do not confuse
     this package with python-coala which is an entirely different piece of
     software.
 
@@ -50,7 +49,9 @@ follows.
 
 .. code-block:: bash
 
+    # Re-activate coala virtualenv
     workon coala
+    # Run the coala command
     coala --help
 
 Setting up Coala a Project
@@ -66,7 +67,7 @@ for any projects.
 * Python VirtualEnv
 * Python Tox
 
-Once requirements are met configure the project with a tox.ini and a .coafile
+With requirements installed configure the project with a tox.ini and a .coafile
 file. Below are examples of .coafile and tox.ini as defined by lftools. Inside
 the tox.ini file the interesting bits are under [testenv:coala].
 
@@ -87,35 +88,32 @@ Jenkins Job Builder
 Passing parameters to shell scripts
 -----------------------------------
 
-In a shell script there are 2 types of parameters that can be passed in via JJB.
+There are 2 ways to pass parameters into scripts:
 
 1) JJB variables in the format {var}
 2) Environment variables in the format ${VAR}
 
-One of the issues one may run into when using JJB variables in shell scripts is
-that curly braces ``{var}`` need to be escaped for not JJB variables such as
-``${VAR}`` which would become ``${{VAR}}`` and would not pass ShellCheck. It
-also makes scripts more difficult to debug when something has gone wrong.
+We recommend avoiding using method 1 (Pass JJB variables) into shell scripts
+and instead always use method 2 (Enviornment variables). This makes
+troubleshooting JJB errors easier and does not require escaping curly braces.
 
-Instead it is best practice to not pass in JJB variables into shell scripts and
-instead always use Enviornment variables when a parameter is needed. This method
-requires 2 steps:
+This method requires 2 steps:
 
 1) Declare a parameter section
 2) Use the parameter in shell script
 
-What is nice about this is since parameters in a job are listed at the top of
-the job page as well as when running a build we can also very clearly see what
-parameters are being passed into the job. We can review the parameters
-retro-actively by visiting the job parameters page
+The benefit of this method is that parameters will always be at the top
+of the job page and when clicking the Build with Parameters button in Jenkins
+we can see the parameters before running the job. We can review the
+parameters retro-actively by visiting the job parameters page
 ``job/lastSuccessfulBuild/parameters/``.
 
 Usage of config-file-provider
 -----------------------------
 
-When using the config-file-provider plugin in Jenkins to provide a config file
-we should create a macro such that the builder that needs the config file
-removes the config file immediately after it is done using it. This ensures
+When using the config-file-provider plugin in Jenkins to provide a config file.
+We recommend using a macro so that we can configure the builder to
+remove the config file as a last step. This ensures
 that credentials do not exist on the system for longer than it needs to.
 
 ship-logs example:
@@ -141,7 +139,7 @@ ship-logs example:
 
 In this example the script logs-deploy requires a config file to authenticate
 with Nexus to push logs up. We declare a macro here so that we can ensure that
-the credentials are removed from the system immediately after the scripts are
+we remove credentials from the system after the scripts
 complete running via the logs-clear-credentials.sh script. This script contains
 3 basic steps:
 
