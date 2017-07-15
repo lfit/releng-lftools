@@ -3,8 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Linux Foundation Release Engineering Tools
-==========================================
+LF Tools
+========
+
+Linux Foundation Release Engineering Tools.
+
+This software is a collection of scripts written in a variety of
+languages contained by a Python wrapper. It provides tools that
+are generally useful to Linux Foundation release engineering.
 
 Contents:
 
