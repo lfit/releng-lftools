@@ -1,0 +1,472 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ed49f80_fa9b038a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 25
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "You\u0027re submitting to the lftools repo. It\u0027s already clear where this patch is going. Simply just stating that the patch is to add a script to fix yamllint issues is sufficient.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ae26601_81dd10c2",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Please add a license header.",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb9c917a_2651bf71",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "script*\n\nRather than writing sentences explaining why you need it. Write it as a docstring such that it explains the purpose of the script instead. Documentation shouldn\u0027t be written with a personal narrative.",
+      "range": {
+        "startLine": 4,
+        "startChar": 7,
+        "endLine": 4,
+        "endChar": 13
+      },
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d1ae723_94faabff",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "TODO\u0027s should be clear and concise and should explain in sufficient details what DONE means. Otherwise no one will ever do the TODO.",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a29e2cdb_babcd374",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Instead of being an interactive script. I think making the script more non-interactive would be better. The script should accept a space separated list of inputs. It will work regardless of if one is passed or multiple. Something like this:\n\n ./script FILES...\n ./script some.yaml\n ./script some.yaml another.yaml\n\nIf you want to support the mode where it will search the current directory for all yaml files I suggest using something like getopts to add a flag like `./script -a` which will scan all yaml files.",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "051249c0_8dbf6a4b",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Indent the block by 4 spaces.",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c801eac1_2b966aa9",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "SC2044 is very good advice. So we should fix it rather than ignoring it.",
+      "range": {
+        "startLine": 20,
+        "startChar": 23,
+        "endLine": 20,
+        "endChar": 29
+      },
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0487d326_80ac30ba",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Should be more specific here and list *.yaml otherwise it will only be checking things that end in yaml even if it\u0027s not the same extension.\n\nAlso yaml files can also be \"*.yml\".",
+      "range": {
+        "startLine": 21,
+        "startChar": 30,
+        "endLine": 21,
+        "endChar": 34
+      },
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9efe3b54_8139d038",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "If you put the echo statement inside process_file function you won\u0027t have to call it every time you use the process_file function.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 24
+      },
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "332d1483_853442df",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Why do we exit 1?",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71315c2c_2d118515",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "I don\u0027t know what this TODO means? What needs to be fixed and why not fix it now as part of the patch?\n\n(Actually bash doesn\u0027t care if it\u0027s full path or not so it should work regardless as long as your loop doesn\u0027t care)",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0578527c_2b29e143",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "If you put the echo statement inside process_file function you won\u0027t have to call it every time you use the process_file function.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9a94157_d5c1cd9f",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "We do we exit 1 after processing files? shouldn\u0027t we exit 0 if it\u0027s success?",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74931060_7aaca973",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Indent entire block by 4 spaces.",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1333c6e6_b841ef44",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Looks like a redundant variable name here. Call it \"line\" on the read statement.\n\n while read line; do",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b2c9dc0_ed5e9934",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "length*",
+      "range": {
+        "startLine": 65,
+        "startChar": 25,
+        "endLine": 65,
+        "endChar": 31
+      },
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1df17318_a008e124",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Indent entire block by 4 spaces.",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22e1efe8_30600edf",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "The echo already states the same thing the comment does so remove the unnecessary comment.",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdb9b54a_96c705cc",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "indent entire block by 4 spaces.",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "807f8993_03df6d91",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Can you write this following docstring style?\n\nHere\u0027s an example of Google style.\n\nhttps://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 61
+      },
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7ad84a2_0a279e3b",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Spacing would make this more clear:\n\n read -r firstline \u003c \"$FILE\"",
+      "range": {
+        "startLine": 107,
+        "startChar": 8,
+        "endLine": 107,
+        "endChar": 25
+      },
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e208968_ceb7fed9",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Indent entire block by 4 spaces.",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1ff7b78_6c082ccb",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "Indent entire block by 4 spaces.",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "930a3b19_181c1198",
+        "filename": "shell/fix_yamllint.sh",
+        "patchSetId": 25
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-17T15:53:56Z",
+      "side": 1,
+      "message": "4 space indent.",
+      "revId": "25b72f54d8187dbaddaa43f1793e866ca5a5826e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
