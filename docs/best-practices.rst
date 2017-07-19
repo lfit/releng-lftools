@@ -146,3 +146,31 @@ complete running via the logs-clear-credentials.sh script. This script contains
 1. Provide credentials via config-file-provider
 2. Run the build scripts in this case lftools-install.sh and logs-deploy.sh
 3. Remove credentials provided by config-file-provider
+
+Preserving Objects in Variable References
+-----------------------------------------
+
+JJB has an option to preserve a data structure object when you want to pass
+it to a template.
+https://docs.openstack.org/infra/jenkins-job-builder/definition.html#variable-references
+
+One thing that is not explicitly covered is the format of the variable name
+that you pass the object to. When you use the `{obj:key}` notation to preserve
+the original data structure object, it will not work if the variable name has a
+dash `-` in it. The standard that we follow, and recommend, is to use an uderscore
+`_` instead of a dash.
+
+Example:
+  code-block:: yaml
+    - triggers:
+       - lf-infra-github-pr-trigger:
+           trigger-phrase: '^remerge$'
+           status-context: 'JJB Merge'
+           permit-all: false
+           github-hooks: true
+           github-org: '{github-org}'
+           github_pr_whitelist: '{obj:github_pr_whitelist}'
+           github_pr_admin_list: '{obj:github_pr_admin_list}'
+
+In the above example note the use of underscores in `github_pr_admin_list` and
+`github_pr_admin_list`.
