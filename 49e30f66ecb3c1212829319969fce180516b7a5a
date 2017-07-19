@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfe6fbef_adc4f36b",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-07-19T16:16:17Z",
+      "side": 1,
+      "message": "are some of these lines too long?",
+      "revId": "49e30f66ecb3c1212829319969fce180516b7a5a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b612bd9c_e37ba13f",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-07-19T16:16:17Z",
+      "side": 1,
+      "message": "I think this period messes up the anchor and just takes you\nto the top of the page",
+      "range": {
+        "startLine": 154,
+        "startChar": 88,
+        "endLine": 154,
+        "endChar": 89
+      },
+      "revId": "49e30f66ecb3c1212829319969fce180516b7a5a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2a33070_539708ee",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-07-19T16:16:17Z",
+      "side": 1,
+      "message": "one space.",
+      "range": {
+        "startLine": 158,
+        "startChar": 42,
+        "endLine": 158,
+        "endChar": 44
+      },
+      "revId": "49e30f66ecb3c1212829319969fce180516b7a5a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f981025_5b680dc9",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-07-19T16:16:17Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 158,
+        "startChar": 77,
+        "endLine": 158,
+        "endChar": 84
+      },
+      "revId": "49e30f66ecb3c1212829319969fce180516b7a5a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2967564_71d72b1a",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-07-19T16:16:17Z",
+      "side": 1,
+      "message": "instead of a",
+      "range": {
+        "startLine": 159,
+        "startChar": 17,
+        "endLine": 159,
+        "endChar": 42
+      },
+      "revId": "49e30f66ecb3c1212829319969fce180516b7a5a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ace39d5b_e00c9be2",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-07-19T16:16:17Z",
+      "side": 1,
+      "message": "note",
+      "range": {
+        "startLine": 173,
+        "startChar": 21,
+        "endLine": 173,
+        "endChar": 24
+      },
+      "revId": "49e30f66ecb3c1212829319969fce180516b7a5a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
