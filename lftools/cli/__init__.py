@@ -15,6 +15,7 @@ __author__ = 'Thanh Ha'
 import click
 from lftools.cli.deploy import deploy
 from lftools.cli.jenkins import jenkins_cli
+from lftools.cli.license import license
 from lftools.cli.nexus import nexus
 from lftools.cli.sign import sign
 from lftools.cli.version import version
@@ -31,6 +32,7 @@ def cli(ctx):
 
 cli.add_command(deploy)
 cli.add_command(jenkins_cli, name='jenkins')
+cli.add_command(license)
 cli.add_command(nexus)
 cli.add_command(openstack)
 cli.add_command(sign)
