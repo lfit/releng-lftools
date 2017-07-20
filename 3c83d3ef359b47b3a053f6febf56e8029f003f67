@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c30d6cd_33cdc356",
+        "filename": "license-header.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-07-20T15:59:06Z",
+      "side": 1,
+      "message": "This probably should be in a sub-directory. I also think we probably need an EPL one (this one) and an Apache 2 version.\n\nMany of our projects are EPL, but we do have some that are Apache 2 (for instance EdgeX)",
+      "revId": "3c83d3ef359b47b3a053f6febf56e8029f003f67",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
