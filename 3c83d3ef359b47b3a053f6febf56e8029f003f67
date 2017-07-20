@@ -16,6 +16,24 @@
       "revId": "3c83d3ef359b47b3a053f6febf56e8029f003f67",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31a490a9_c5059943",
+        "filename": "license-header.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-20T16:01:24Z",
+      "side": 1,
+      "message": "I\u0027m expecting the project using this software to provide the header. The one in lftools is the header for the lftools project.\n\nSo an Apache project would need to put a license-header.txt (or whatever they want to call it in their own repo).",
+      "parentUuid": "1c30d6cd_33cdc356",
+      "revId": "3c83d3ef359b47b3a053f6febf56e8029f003f67",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
