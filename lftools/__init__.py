@@ -13,4 +13,4 @@
 """lftools package."""
 
 __author__ = 'Thanh Ha'
-__version__ = '0.6.0'
+__version__ = '0.7.0-dev'
