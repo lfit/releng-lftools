@@ -78,6 +78,10 @@ def logs(ctx, nexus_url, nexus_path, build_url):
               help='Global settings file.')
 @click.option('-s', '--settings', envvar='SETTINGS_FILE',
               help='Settings file.')
+@click.option('-o', '--maven-options', envvar='MAVEN_OPTIONS',
+              help='Maven options.')
+@click.option('-p', '--maven-params', envvar='MAVEN_PARAMS',
+              help='Maven params.')
 # Maven Artifact GAV
 @click.option('-a', '--artifact-id',
               help='Maven Artifact ID.')
@@ -94,6 +98,7 @@ def maven_file(
     # Maven Config
     ctx, nexus_url, repo_id, file_name,
     maven_bin, global_settings, settings,
+    maven_options, maven_params,
     # Maven GAV
     artifact_id, group_id, classifier, version,
         pom_file):
@@ -121,6 +126,10 @@ def maven_file(
         params.extend(["-l", global_settings])
     if settings:
         params.extend(["-s", settings])
+    if maven_options:
+        params.extend(["-o", maven_options])
+    if maven_params:
+        params.extend(["-p", maven_params])
 
     # Maven Artifact GAV
     if artifact_id:

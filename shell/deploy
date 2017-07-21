@@ -265,6 +265,8 @@ deploy_maven_file_usage () {
     echo "    -a <artifact_id>"
     echo "    -c <classifier>"
     echo "    -g <group_id>"
+    echo "    -o <maven_options>"
+    echo "    -p <maven_params>"
     echo "    -v <version>"
 }
 
@@ -285,8 +287,12 @@ deploy_maven_file () {
     #
     # If pom-file is passed in via the "-f" option then the Maven GAV parameters
     # are not necessary. pom-file setting overrides the Maven GAV parameters.
-    while getopts a:b:c:f:g:hl:m:s:v: o; do
-      case "$o" in
+    #
+    # Maven options and/or parameters can be passed to through command
+    # line or through environement variable MAVEN_OPTS or MAVEN_PARAMS.
+
+    while getopts a:b:c:f:g:hl:m:o:p:s:v: opts; do
+      case "$opts" in
         h)
             deploy_maven_file_usage
             exit 0
@@ -304,6 +310,13 @@ deploy_maven_file () {
         s)
             settings="$OPTARG"
             ;;
+        o)
+            local mvn_options="$OPTARG"
+            ;;
+        p)
+            local mvn_params="$OPTARG"
+            ;;
+
 
         #########################
         # Maven Artitfact (GAV) #
@@ -465,6 +478,24 @@ deploy_maven_file () {
     params+=("-DgroupId=\"$group_id\"")
     params+=("-DartifactId=\"$artifact_id\"")
     params+=("-Dversion=\"$version\"")
+
+    # Precedence:
+    #   1) -o option
+    #   2) $MAVEN_OPTIONS environment variable
+    if [ ! -z "$mvn_options" ]; then
+        params+=("$mvn_options")
+    elif [ ! -z "$MAVEN_OPTIONS" ] && [ -z "$mvn_options" ]; then
+        params+=("$MAVEN_OPTIONS")
+    fi
+
+    # Precedence:
+    #   1) -p option
+    #   2) $MAVEN_PARAMS environment variable
+    if [ ! -z "$mvn_params" ]; then
+        params+=("$mvn_params")
+    elif [ ! -z "$MAVEN_PARAMS" ] && [ -z "$mvn_params" ]; then
+        params+=("$MAVEN_PARAMS")
+    fi
 
     if [ ! -z "$classifier" ]; then
         params+=("-Dclassifier=\"$classifier\"")
