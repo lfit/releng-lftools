@@ -470,6 +470,10 @@ deploy_maven_file () {
         params+=("-Dclassifier=\"$classifier\"")
     fi
 
+    # Disable the Maven transfer output.
+    params+=("--batch-mode")
+    params+=("-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn")
+
     echo "Deploying $file to $nexus_url..."
 
     # make sure the script bombs if we fail an upload
