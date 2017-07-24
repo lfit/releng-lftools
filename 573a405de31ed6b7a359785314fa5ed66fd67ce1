@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "60c68ce7_2d70db29",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-07-24T23:17:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "289175a4_48d085cc",
+      "revId": "573a405de31ed6b7a359785314fa5ed66fd67ce1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1d05778_5b0bf2f5",
         "filename": "shell/deploy",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "d27dea42_188f5c74",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-07-24T23:17:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1d05778_5b0bf2f5",
+      "revId": "573a405de31ed6b7a359785314fa5ed66fd67ce1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05f2b72b_cff6b9bf",
         "filename": "shell/deploy",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2017-07-24T14:47:53Z",
       "side": 1,
       "message": "I think this doesn\u0027t work it passes in a single string to be appended as an array variable. Have you tested this?",
+      "revId": "573a405de31ed6b7a359785314fa5ed66fd67ce1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3c31778_e3e802c0",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-07-24T23:17:25Z",
+      "side": 1,
+      "message": "tested works, please refer to the comment before patch set 3.",
+      "parentUuid": "05f2b72b_cff6b9bf",
       "revId": "573a405de31ed6b7a359785314fa5ed66fd67ce1",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
