@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "289175a4_48d085cc",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-24T14:47:53Z",
+      "side": 1,
+      "message": "-o does not appear to be used.",
+      "revId": "573a405de31ed6b7a359785314fa5ed66fd67ce1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1d05778_5b0bf2f5",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-24T14:47:53Z",
+      "side": 1,
+      "message": "This doc should go into the usage line to explain what the parameter is and how to use it.",
+      "revId": "573a405de31ed6b7a359785314fa5ed66fd67ce1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05f2b72b_cff6b9bf",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-24T14:47:53Z",
+      "side": 1,
+      "message": "I think this doesn\u0027t work it passes in a single string to be appended as an array variable. Have you tested this?",
+      "revId": "573a405de31ed6b7a359785314fa5ed66fd67ce1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
