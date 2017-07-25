@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "376055fa_8e520b21",
+        "filename": "lftools/cli/license.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-25T20:32:28Z",
+      "side": 1,
+      "message": "Torn here. While I\u0027d love to add another command that can find and update all the files given an extension. I also think `find . -name \"*.sh\"` is more efficient here.",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 9
+      },
+      "revId": "3c83d3ef359b47b3a053f6febf56e8029f003f67",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c30d6cd_33cdc356",
         "filename": "license-header.txt",
         "patchSetId": 1
