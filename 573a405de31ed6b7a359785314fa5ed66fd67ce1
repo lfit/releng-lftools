@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "9a768205_1a75a323",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-25T16:45:49Z",
+      "side": 1,
+      "message": "Ok I see that the usage statement already has a params documented.",
+      "parentUuid": "57163c1f_bcedea7d",
+      "revId": "573a405de31ed6b7a359785314fa5ed66fd67ce1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05f2b72b_cff6b9bf",
         "filename": "shell/deploy",
         "patchSetId": 3
