@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "57163c1f_bcedea7d",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-25T15:19:26Z",
+      "side": 1,
+      "message": "I\u0027m not sure what was changed to resolve this. There\u0027s no difference between patchset 3. and 4.",
+      "parentUuid": "d27dea42_188f5c74",
+      "revId": "573a405de31ed6b7a359785314fa5ed66fd67ce1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "05f2b72b_cff6b9bf",
         "filename": "shell/deploy",
         "patchSetId": 3
