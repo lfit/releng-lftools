@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7493afb0_9249486c",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-25T16:45:49Z",
+      "side": 1,
+      "message": "This doesn\u0027t really explain what a Maven parameter is. We should provide a bit more info here so that people understand what to point to.",
+      "revId": "6e65dc01d40820bdba683822e4a154b8f0db57ab",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "676bfa11_00eb459f",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-25T16:45:49Z",
+      "side": 1,
+      "message": "This line is unnecessary as there\u0027s a click help for this already.",
+      "revId": "6e65dc01d40820bdba683822e4a154b8f0db57ab",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
