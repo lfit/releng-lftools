@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "736977e2_82bb9e6e",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-07-25T11:30:01Z",
+      "side": 1,
+      "message": "Is there any specific reason, these values are being hard coded \n instead of passing them as options ?",
+      "range": {
+        "startLine": 474,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 106
+      },
+      "revId": "37422986292d4e9e9e99e42fcd78626dfaeae259",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
