@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b596c51_71f734b6",
+        "filename": "shell/deploy",
+        "patchSetId": 7
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-25T20:59:17Z",
+      "side": 1,
+      "message": "In another patch we should explain what each of these options actually mean/do.",
+      "revId": "ff0ae77843e44e208ca8be9fe1459a045fc20b23",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
