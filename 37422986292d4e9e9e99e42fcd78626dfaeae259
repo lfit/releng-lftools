@@ -22,6 +22,30 @@
       "revId": "37422986292d4e9e9e99e42fcd78626dfaeae259",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b51d5787_e79a244a",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-25T13:47:39Z",
+      "side": 1,
+      "message": "Yes. the deploy command is a non-interactive command so should have batch-mode enabled at all times and the transfer output is not useful in non-interactive sessions so should always be disabled anyway.",
+      "parentUuid": "736977e2_82bb9e6e",
+      "range": {
+        "startLine": 474,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 106
+      },
+      "revId": "37422986292d4e9e9e99e42fcd78626dfaeae259",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
