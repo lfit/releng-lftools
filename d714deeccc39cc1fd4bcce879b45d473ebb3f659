@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "ce3924e9_e888ad70",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2017-07-26T18:18:37Z",
+      "side": 1,
+      "message": "oops.. sorry it was a quick copy from another example :)",
+      "parentUuid": "06ca210b_1f4077ec",
+      "range": {
+        "startLine": 3,
+        "startChar": 17,
+        "endLine": 3,
+        "endChar": 21
+      },
+      "revId": "d714deeccc39cc1fd4bcce879b45d473ebb3f659",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6677857e_eba7d5b6",
         "filename": "lftools/jenkins/sync_config_files.groovy",
         "patchSetId": 4
