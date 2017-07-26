@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b66fe4d_065d8089",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-26T03:40:28Z",
+      "side": 1,
+      "message": "Should fix trailing whitespace in this file.",
+      "revId": "d714deeccc39cc1fd4bcce879b45d473ebb3f659",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06ca210b_1f4077ec",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-26T03:40:28Z",
+      "side": 1,
+      "message": "This script was written in 2014?",
+      "range": {
+        "startLine": 3,
+        "startChar": 17,
+        "endLine": 3,
+        "endChar": 21
+      },
+      "revId": "d714deeccc39cc1fd4bcce879b45d473ebb3f659",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6677857e_eba7d5b6",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-07-26T03:40:28Z",
+      "side": 1,
+      "message": "Eclipse no longer recommends creating a contributors section since you can get a list of contributors to a file by checking git log against the file.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "d714deeccc39cc1fd4bcce879b45d473ebb3f659",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
