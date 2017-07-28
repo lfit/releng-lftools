@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f4da2c9_6b98635c",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-07-28T16:52:58Z",
+      "side": 1,
+      "message": "not 100% sure, but I think the -verify is because these\nimports are not sorted.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 11
+      },
+      "revId": "92aba7f9ab916137d549d4c574e5b653b4a839be",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
