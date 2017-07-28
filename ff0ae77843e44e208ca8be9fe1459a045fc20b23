@@ -16,6 +16,24 @@
       "revId": "ff0ae77843e44e208ca8be9fe1459a045fc20b23",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "665b8b0d_b6832bb6",
+        "filename": "shell/deploy",
+        "patchSetId": 7
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-07-28T01:05:44Z",
+      "side": 1,
+      "message": "sure thing",
+      "parentUuid": "4b596c51_71f734b6",
+      "revId": "ff0ae77843e44e208ca8be9fe1459a045fc20b23",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
