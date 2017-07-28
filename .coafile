@@ -1,4 +1,12 @@
-[Git]
+[all]
+ignore = .tox/**,
+    .git/**,
+    .gitignore,
+    .gitreview,
+    .gitmodules,
+    node_modules/**
+
+[all.Git]
 bears = GitCommitBear
 ignore_length_regex = Signed-off-by,
     Also-by,
@@ -6,27 +14,28 @@ ignore_length_regex = Signed-off-by,
     http://,
     https://
 
-[Documentation]
+[all.Documentation]
 bears = WriteGoodLintBear
 files = docs/**/*.rst
 
-[Python]
+[all.Python]
 bears = BanditBear,
     PEP8Bear,
     PyCommentedCodeBear,
     PyDocStyleBear,
     PyFlakesBear,
     PyImportSortBear
-files = lftools/**/*.py
+files = **.py
+ignore += docs/conf.py
 known_first_party_imports = lftools
 known_third_party_imports = pytest, six
 pydocstyle_ignore = D203, D213, D301
 max_line_length = 120
 
-[Shell]
+[all.Shell]
 bears = ShellCheckBear,
     SpaceConsistencyBear
-files = shell/*
+files = **.sh, shell/*
 shell = bash
 indent_size = 4
 use_spaces = yeah
