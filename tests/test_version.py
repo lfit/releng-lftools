@@ -8,13 +8,11 @@
 # which accompanies this distribution, and is available at
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
+"""Unit tests for the version command."""
 
-import difflib
-from distutils import dir_util
 import filecmp
 import os
 
-import click
 import pytest
 
 from lftools import cli
@@ -30,8 +28,9 @@ FIXTURE_DIR = os.path.join(
     os.path.join(FIXTURE_DIR, 'version_bump'),
     )
 def test_version_bump(cli_runner, datafiles):
+    """Test version bump command."""
     os.chdir(str(datafiles))
-    result = cli_runner.invoke(cli.cli, ['version', 'bump', 'TestRelease'])
+    cli_runner.invoke(cli.cli, ['version', 'bump', 'TestRelease'])
 
     for _file in datafiles.listdir():
         pom = str(_file) + '/pom.xml'
@@ -43,8 +42,9 @@ def test_version_bump(cli_runner, datafiles):
     os.path.join(FIXTURE_DIR, 'version_release'),
     )
 def test_version_release(cli_runner, datafiles):
+    """Test version release command."""
     os.chdir(str(datafiles))
-    result = cli_runner.invoke(cli.cli, ['version', 'release', 'TestRelease'])
+    cli_runner.invoke(cli.cli, ['version', 'release', 'TestRelease'])
 
     for _file in datafiles.listdir():
         pom = str(_file) + '/pom.xml'
