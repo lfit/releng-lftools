@@ -1,1 +1,2 @@
+include lftools/config/logging.ini
 include requirements.txt
