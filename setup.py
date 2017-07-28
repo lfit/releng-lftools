@@ -10,8 +10,12 @@
 ##############################################################################
 """Setup.py."""
 
+import load_logger_ini
+
 from setuptools import find_packages
 from setuptools import setup
+from setuptools.command.develop import develop
+from setuptools.command.install import install
 
 from lftools import __version__
 
@@ -30,6 +34,20 @@ Ubuntu Dependencies:
     - build-essentials
     - python-dev
 '''
+
+log_ini_file = "logging.ini"
+
+class PostDevelopCommand(develop):
+    def run(self):
+        log_ini_file_path = load_logger_ini.find_log_ini(log_ini_file)
+        print("Using logger config file: %s" % log_ini_file_path)
+        develop.run(self)
+
+class PostInstallCommand(install):
+    def run(self):
+        log_ini_file_path = load_logger_ini.find_log_ini(log_ini_file)
+        print("Using logger config file: %s" % log_ini_file_path)
+        install.run(self)
 
 with open('requirements.txt') as f:
     install_reqs = f.read().splitlines()
@@ -50,6 +68,10 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.5',
     ],
+    cmdclass={
+        'develop': PostDevelopCommand,
+        'install': PostInstallCommand,
+    },
     install_requires=install_reqs,
     packages=find_packages(exclude=[
         '*.tests',
@@ -57,6 +79,8 @@ setup(
         'tests.*',
         'tests'
     ]),
+    package_data={'lftools': ['logging.ini']},
+    include_package_data=True,
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
     entry_points='''
