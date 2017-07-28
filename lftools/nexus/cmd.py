@@ -11,8 +11,9 @@
 """Contains functions for various Nexus tasks."""
 import sys
 
-from lftools.nexus import Nexus
 import yaml
+
+from lftools.nexus import Nexus
 
 
 def reorder_staged_repos(settings_file):

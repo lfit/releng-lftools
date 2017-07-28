@@ -9,6 +9,7 @@
 ##############################################################################
 """CLI entry point for nexus commands."""
 import click
+
 from lftools.nexus import cmd as nexuscmd
 
 

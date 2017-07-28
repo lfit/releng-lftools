@@ -14,6 +14,7 @@ __author__ = 'Thanh Ha'
 
 
 import click
+
 from lftools.openstack import image as os_image
 from lftools.openstack import server as os_server
 

@@ -14,11 +14,11 @@ __author__ = 'Trevor Bramwell'
 
 import click
 import jenkins as jenkins_python  # Don't confuse this with the function ...
+from six.moves.urllib.error import HTTPError
+
 from lftools.cli.jenkins.builds import builds
 from lftools.cli.jenkins.nodes import nodes
 from lftools.cli.jenkins.plugins import plugins_init
-
-from six.moves.urllib.error import HTTPError
 
 
 @click.group()
