@@ -1,4 +1,5 @@
-This project's documentation can be found on ReadTheDocs (RTD)
+# LF Tools
 
-https://lf-releng-tools.readthedocs.io
+This project's documentation is available on ReadTheDocs (RTD)
 
+<https://lf-releng-tools.readthedocs.io>

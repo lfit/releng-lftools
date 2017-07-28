@@ -18,6 +18,11 @@ ignore_length_regex = Signed-off-by,
 bears = WriteGoodLintBear
 files = docs/**/*.rst
 
+[all.MarkDown]
+bears = MarkdownBear,SpaceConsistencyBear,WriteGoodLintBear
+files = **.md, **.markdown
+use_spaces = true
+
 [all.Python]
 bears = BanditBear,
     PEP8Bear,
