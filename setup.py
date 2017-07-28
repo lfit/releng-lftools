@@ -68,4 +68,5 @@ setup(
         'shell/sign',
         'shell/version',
     ],
+    data_files=[('etc', ['etc/logging.ini'])],
 )
