@@ -265,6 +265,7 @@ deploy_maven_file_usage () {
     echo "    -p <maven_params>"
     echo "    -a <artifact_id>"
     echo "    -c <classifier>"
+    echo "    -f <pom file>"
     echo "    -g <group_id>"
     echo "    -v <version>"
 }
@@ -322,9 +323,6 @@ deploy_maven_file () {
             ;;
         f)
             local pom_file="$OPTARG"
-            echo "pom-file: $pom_file"
-            echo "ERROR: pom_file is currently unimplemented."
-            exit 1
             ;;
         g)
             local group_id="$OPTARG"
@@ -349,13 +347,6 @@ deploy_maven_file () {
     if [ "$#" -ne "3" ]; then
         echo "ERROR: $# arguments passed. This function expects 3 required arguments."
         deploy_maven_file_usage
-        exit 1
-    fi
-
-    # Until we implement the -f <pom-file> parameter assume that group_id must
-    # be passed.
-    if [ -z "$group_id" ]; then
-        echo "ERROR: group_id must be defined. Please pass -g <group_id>."
         exit 1
     fi
 
@@ -393,91 +384,116 @@ deploy_maven_file () {
         params+=("$mvn_params")
     fi
 
-    local file_type
-    if [[ "$file" == *.tar.gz ]]; then
-        file_type="tar.gz"
+    if [ ! -z "$pom_file" ]; then
+        params+=("-DpomFile=\"$pom_file\"")
     else
-        file_type="${file##*.}"
-    fi
-    params+=("-Dtype=\"$file_type\"")
+        # Ensure groupId is passed when -f <pom-file> parameter is not used
+        if [ -z "$group_id" ]; then
+            echo "ERROR: group_id must be defined. Please pass -g <group_id>."
+            exit 1
+        fi
 
-    case "$file_type" in
-        deb )
-            if hash dpkg 2>/dev/null; then
-                echo "dpkg command is available."
+        local file_type
+        if [[ "$file" == *.tar.gz ]]; then
+            file_type="tar.gz"
+        else
+            file_type="${file##*.}"
+        fi
+        params+=("-Dtype=\"$file_type\"")
+        params+=("-Dpackaging=\"$file_type\"")
 
-                # If user does not provide artifact_id and / or version then parse
-                # information from file.
-                if [ -z "$artifact_id" ]; then
-                    artifact_id=$(dpkg -I "$file" | grep ' Package: ' | sed 's/^[ \t]*Package:[ \t]*//')
+        case "$file_type" in
+            deb )
+                if hash dpkg 2>/dev/null; then
+                    echo "dpkg command is available."
 
-                fi
-                if [ -z "$version" ]; then
-                    version=$(dpkg -I "$file" | grep ' Version: ' | sed 's/^[ \t]*Version:[ \t]*//')
-                fi
-            else
-                echo "dpkg command is not available."
+                    # If user does not provide artifact_id and / or version then parse
+                    # information from file.
+                    if [ -z "$artifact_id" ]; then
+                        artifact_id=$(dpkg -I "$file" | grep ' Package: ' | sed 's/^[ \t]*Package:[ \t]*//')
 
-                basefile=$(basename -s .deb "$file")
-
-                # If user does not provide artifact_id and / or version then parse
-                # information from file.
-                if [ -z "$artifact_id" ]; then
-                    artifact_id=$(echo "$basefile" | cut -f 1 -d '_')
-                fi
-                if [ -z "$version" ]; then
-                    version=$(echo "$basefile" | cut -f 2- -d '_')
-                fi
-            fi
-            ;;
-
-        rpm )
-            if hash rpm 2>/dev/null; then
-                echo "rpm command is available."
-
-                # If user does not provide artifact_id and / or version then parse
-                # information from file.
-                if [ -z "$artifact_id" ]; then
-                    artifact_id=$(rpm -qp --queryformat="%{name}" "$file")
-                fi
-                if [ -z "$version" ]; then
-                    if grep -qE '\.s(rc\.)?rpm' <<<"$file"; then
-                        rpmrelease=$(rpm -qp --queryformat="%{release}.src" "$file")
-                    else
-                        rpmrelease=$(rpm -qp --queryformat="%{release}.%{arch}" "$file")
                     fi
+                    if [ -z "$version" ]; then
+                        version=$(dpkg -I "$file" | grep ' Version: ' | sed 's/^[ \t]*Version:[ \t]*//')
+                    fi
+                else
+                    echo "dpkg command is not available."
 
-                    version=$(rpm -qp --queryformat="%{version}" "$file")
-                    version+="-$rpmrelease"
+                    basefile=$(basename -s .deb "$file")
+
+                    # If user does not provide artifact_id and / or version then parse
+                    # information from file.
+                    if [ -z "$artifact_id" ]; then
+                        artifact_id=$(echo "$basefile" | cut -f 1 -d '_')
+                    fi
+                    if [ -z "$version" ]; then
+                        version=$(echo "$basefile" | cut -f 2- -d '_')
+                    fi
                 fi
-            else
-                echo "rpm command is not available."
+                ;;
 
-                basefile=$(basename -s .rpm "$file")
+            rpm )
+                if hash rpm 2>/dev/null; then
+                    echo "rpm command is available."
+
+                    # If user does not provide artifact_id and / or version then parse
+                    # information from file.
+                    if [ -z "$artifact_id" ]; then
+                        artifact_id=$(rpm -qp --queryformat="%{name}" "$file")
+                    fi
+                    if [ -z "$version" ]; then
+                        if grep -qE '\.s(rc\.)?rpm' <<<"$file"; then
+                            rpmrelease=$(rpm -qp --queryformat="%{release}.src" "$file")
+                        else
+                            rpmrelease=$(rpm -qp --queryformat="%{release}.%{arch}" "$file")
+                        fi
+
+                        version=$(rpm -qp --queryformat="%{version}" "$file")
+                        version+="-$rpmrelease"
+                    fi
+                else
+                    echo "rpm command is not available."
+
+                    basefile=$(basename -s .rpm "$file")
+
+                    # If user does not provide artifact_id and / or version then parse
+                    # information from file.
+                    if [ -z "$artifact_id" ]; then
+                        artifact_id=$(echo "$basefile" | rev | cut -f 3- -d '-' | rev)
+                    fi
+                    if [ -z "$version" ]; then
+                        version=$(echo "$basefile" | rev | cut -f 1 -d '-' | rev)
+                    fi
+                fi
+                ;;
+
+            jar|tar.gz|war )
+
+                basefile=$(basename -s ".$file_type" "$file")
 
                 # If user does not provide artifact_id and / or version then parse
                 # information from file.
                 if [ -z "$artifact_id" ]; then
-                    artifact_id=$(echo "$basefile" | rev | cut -f 3- -d '-' | rev)
+                    artifact_id=$(echo "$basefile" | rev | cut -f 2- -d '-' | rev)
                 fi
                 if [ -z "$version" ]; then
                     version=$(echo "$basefile" | rev | cut -f 1 -d '-' | rev)
                 fi
-            fi
-            ;;
+                ;;
 
-        * )
-            echo "ERROR: Unrecognized file type \"$file_type\"." 1>&2
-            exit 1
-            ;;
-    esac
+            * )
+                echo "ERROR: Unrecognized file type \"$file_type\"." 1>&2
+                exit 1
+                ;;
+        esac
 
-    params+=("-DgroupId=\"$group_id\"")
-    params+=("-DartifactId=\"$artifact_id\"")
-    params+=("-Dversion=\"$version\"")
+        params+=("-DgroupId=\"$group_id\"")
+        params+=("-DartifactId=\"$artifact_id\"")
+        params+=("-Dversion=\"$version\"")
 
-    if [ ! -z "$classifier" ]; then
-        params+=("-Dclassifier=\"$classifier\"")
+        if [ ! -z "$classifier" ]; then
+            params+=("-Dclassifier=\"$classifier\"")
+        fi
     fi
 
     # Disable the Maven transfer output.
