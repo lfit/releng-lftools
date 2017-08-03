@@ -128,7 +128,7 @@ deploy_archives() {
         exit 1
     fi
 
-    local nexus_url="$1"
+    local nexus_url="${1%/}"
     local nexus_path="$2"
     # Workspace of where to search for files to archive.
     local workspace="$3"
@@ -196,7 +196,7 @@ deploy_logs() {
         exit 1
     fi
 
-    local nexus_url="$1"
+    local nexus_url="${1%/}"
     local nexus_path="$2"
     local build_url="$3"
 
@@ -342,7 +342,7 @@ deploy_maven_file () {
     shift $((OPTIND-1))
 
     # User input
-    local nexus_url="$1"
+    local nexus_url="${1%/}"
     local repo_id="$2"
     local file="$3"
 
@@ -506,7 +506,7 @@ deploy_nexus() {
     # deploy-at-end configuration with upstream Maven.
     # https://issues.apache.org/jira/browse/MDEPLOY-193
 
-    local nexus_repo_url="$1"
+    local nexus_repo_url="${1%/}"
     local deploy_dir="$2"
 
     if [ -z "$2" ]; then
@@ -542,7 +542,7 @@ deploy_nexus_stage() {
     #                          staging repo.
     #     deploy_dir:   The directory to deploy. (Ex: /tmp/m2repo)
 
-    local nexus_url="$1"
+    local nexus_url="${1%/}"
     local staging_profile_id="$2"
     local deploy_dir="$3"
 
@@ -625,7 +625,7 @@ deploy_nexus_zip() {
     #                   Site Ex: org.opendaylight.odlparent
     #     deploy_zip:   The zip to deploy. (Ex: /tmp/artifacts.zip)
 
-    local nexus_url="$1"
+    local nexus_url="${1%/}"
     local nexus_repo="$2"
     local nexus_path="$3"
     local deploy_zip="$4"
@@ -648,7 +648,7 @@ upload_to_nexus() {
     #     nexus_repo_url: The URL to the Nexus repo.
     #         (Ex:  https://nexus.example.org/content/repositories/release)
     #     file:     File that is to be pushed to Nexus.
-    local nexus_repo_url="$1"
+    local nexus_repo_url="${1%/}"
     local file="$2"
 
     echo "Uploading ${file}"
