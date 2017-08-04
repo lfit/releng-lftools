@@ -22,6 +22,29 @@
       "revId": "4dca362a34f07a00f3c7a898c00283dd5c4bce20",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bd233b9_f612168a",
+        "filename": "docs/installation.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T20:07:53Z",
+      "side": 1,
+      "message": "We release to pypy. All an end user needs to do is:\n\n mkvirtualenv lftools\n pip install lftools\n\nThis will pull lftools from pypi and install all the necessary requirements. No need to clone lftools repo either.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "4dca362a34f07a00f3c7a898c00283dd5c4bce20",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
