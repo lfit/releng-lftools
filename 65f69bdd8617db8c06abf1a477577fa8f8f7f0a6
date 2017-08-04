@@ -79,6 +79,30 @@
       "revId": "65f69bdd8617db8c06abf1a477577fa8f8f7f0a6",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "698cd416_10e1318f",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2017-08-04T19:36:51Z",
+      "side": 1,
+      "message": "The white space was to create an indentation, \nso that is was easier to read\nfor example: \nprivileges:\n   uno\n   dos\n   tres\n\ninstead of:\nprivileges:\nuno\ndos\ntres\n\nI thought it might look nice, but I can ignore if it creates issues..",
+      "parentUuid": "d387aa93_76e3ceb8",
+      "range": {
+        "startLine": 100,
+        "startChar": 26,
+        "endLine": 100,
+        "endChar": 29
+      },
+      "revId": "65f69bdd8617db8c06abf1a477577fa8f8f7f0a6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
