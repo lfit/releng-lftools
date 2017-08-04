@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dc68b00c_8431346f",
+        "filename": "docs/installation.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2017-08-04T20:17:46Z",
+      "side": 1,
+      "message": "Ah yes...done",
+      "parentUuid": "da907137_65f30f1f",
+      "revId": "4dca362a34f07a00f3c7a898c00283dd5c4bce20",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9a74d38_0b6e63d6",
         "filename": "docs/installation.rst",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2017-08-04T20:07:46Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "4dca362a34f07a00f3c7a898c00283dd5c4bce20",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b04b72a2_b26ff5d5",
+        "filename": "docs/installation.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2017-08-04T20:17:46Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "a9a74d38_0b6e63d6",
       "range": {
         "startLine": 7,
         "startChar": 34,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "cd932e2d_a1eda189",
+        "filename": "docs/installation.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2017-08-04T20:17:46Z",
+      "side": 1,
+      "message": "Good idea...done",
+      "parentUuid": "18f3d491_2a220f92",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 7
+      },
+      "revId": "4dca362a34f07a00f3c7a898c00283dd5c4bce20",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bd233b9_f612168a",
         "filename": "docs/installation.rst",
         "patchSetId": 1
@@ -76,6 +142,30 @@
       "writtenOn": "2017-08-04T20:07:53Z",
       "side": 1,
       "message": "We release to pypy. All an end user needs to do is:\n\n mkvirtualenv lftools\n pip install lftools\n\nThis will pull lftools from pypi and install all the necessary requirements. No need to clone lftools repo either.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "4dca362a34f07a00f3c7a898c00283dd5c4bce20",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "205ac81f_2837a129",
+        "filename": "docs/installation.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2017-08-04T20:17:46Z",
+      "side": 1,
+      "message": "Done...I left the virtualenv part generic since some folks don\u0027t use the wrapper.",
+      "parentUuid": "8bd233b9_f612168a",
       "range": {
         "startLine": 15,
         "startChar": 0,
