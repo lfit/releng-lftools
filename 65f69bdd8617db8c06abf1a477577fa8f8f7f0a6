@@ -103,6 +103,30 @@
       "revId": "65f69bdd8617db8c06abf1a477577fa8f8f7f0a6",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c5461aa_ab880e93",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T19:39:10Z",
+      "side": 1,
+      "message": "Logging shouldn\u0027t be multiline. Basically it should print enough that a sysadmin can \"grep some string patter\" to get information. If we cannot grep data because it\u0027s spread across multiple lines then the logger has failed it\u0027s job.",
+      "parentUuid": "698cd416_10e1318f",
+      "range": {
+        "startLine": 100,
+        "startChar": 26,
+        "endLine": 100,
+        "endChar": 29
+      },
+      "revId": "65f69bdd8617db8c06abf1a477577fa8f8f7f0a6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
