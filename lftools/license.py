@@ -34,7 +34,8 @@ def get_header_text(_file):
             if not result:
                 break
             string = re.sub(r'^\s*#+', '', line).strip()
-            if bool(re.match('Copyright', string, re.I)):  # Ignore the Copyright line
+            if (bool(re.match('Copyright', string, re.I))  # Ignore the Copyright line
+                    or bool(re.match('^#!', line, re.I))):  # Ignore #! shebang lines
                 continue
             text += ' {}'.format(string)
     # Strip unnecessary spacing
