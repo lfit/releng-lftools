@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f343f0d0_176a72e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T16:51:01Z",
+      "side": 1,
+      "message": "Add generic logger configuration file to be used by lftools scripts.\n\nTry to use present-tense imperative-style in commit messages.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 29
+      },
+      "revId": "496d088fbe5316b6415c25b5ed3f1be601aff870",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "739c1f98_affd7e68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T16:51:01Z",
+      "side": 1,
+      "message": "Metadata should go in the footer.",
+      "revId": "496d088fbe5316b6415c25b5ed3f1be601aff870",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae80360f_5b6b3ab3",
+        "filename": "lftools/config/logging.ini",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T16:51:01Z",
+      "side": 1,
+      "message": "Let\u0027s put this file in etc/ as that\u0027s a more standard naming scheme I think.",
+      "revId": "496d088fbe5316b6415c25b5ed3f1be601aff870",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a8f14476_4c945788",
+        "filename": "load_logger_ini.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T16:51:01Z",
+      "side": 1,
+      "message": "No need to create a brand new file. Put this code in lftools/__init__.py and then lftools will automatically get a logger configured anytime anything loads the module.\n\nhttps://github.com/Freeseer/freeseer/blob/master/src/freeseer/__init__.py",
+      "revId": "496d088fbe5316b6415c25b5ed3f1be601aff870",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "855d676b_8ef876bd",
+        "filename": "load_logger_ini.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T16:51:01Z",
+      "side": 1,
+      "message": "Never append paths this way. It\u0027s dangerous and is not cross-platform compatible code. Use os.path.join() instead to create paths. It will handle / vs \\ on windows and unix.",
+      "range": {
+        "startLine": 5,
+        "startChar": 5,
+        "endLine": 5,
+        "endChar": 67
+      },
+      "revId": "496d088fbe5316b6415c25b5ed3f1be601aff870",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60805f8d_a3592495",
+        "filename": "load_logger_ini.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T16:51:01Z",
+      "side": 1,
+      "message": "Python is not C/C++",
+      "range": {
+        "startLine": 11,
+        "startChar": 18,
+        "endLine": 11,
+        "endChar": 19
+      },
+      "revId": "496d088fbe5316b6415c25b5ed3f1be601aff870",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8afdef4_15250758",
+        "filename": "load_logger_ini.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T16:51:01Z",
+      "side": 1,
+      "message": "We should use the logger to log the information instead of a print statement.",
+      "revId": "496d088fbe5316b6415c25b5ed3f1be601aff870",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f875f75c_31246bfd",
+        "filename": "setup.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T16:51:01Z",
+      "side": 1,
+      "message": "setup.py should not have code in it. The logger should be setup at runtime using lftools/__init__.py",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 25
+      },
+      "revId": "496d088fbe5316b6415c25b5ed3f1be601aff870",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb1e958_9bc36ad9",
+        "filename": "setup.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T16:51:01Z",
+      "side": 1,
+      "message": "No need.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 6
+      },
+      "revId": "496d088fbe5316b6415c25b5ed3f1be601aff870",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
