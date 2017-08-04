@@ -13,7 +13,7 @@
 """lftools package."""
 
 __author__ = 'Thanh Ha'
-__version__ = '0.7.0-dev'
+__version__ = '0.7.0'
 
 import logging
 import logging.config
