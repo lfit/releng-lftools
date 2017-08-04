@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbe12b18_ec27e49a",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T19:12:28Z",
+      "side": 1,
+      "message": "This line is not needed. Basically every file that wants to use the logger only needs 2 lines:\n\n import logging\n log \u003d logging.getLogger(__name__)\n\nThese 2 lines are sufficient to work out of the box.",
+      "revId": "65f69bdd8617db8c06abf1a477577fa8f8f7f0a6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94128b31_71bcf073",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T19:12:28Z",
+      "side": 1,
+      "message": "This line is not needed.",
+      "revId": "65f69bdd8617db8c06abf1a477577fa8f8f7f0a6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d387aa93_76e3ceb8",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T19:12:28Z",
+      "side": 1,
+      "message": "Unnecessary whitespace let the logger handle that if it\u0027s needed.",
+      "range": {
+        "startLine": 100,
+        "startChar": 26,
+        "endLine": 100,
+        "endChar": 29
+      },
+      "revId": "65f69bdd8617db8c06abf1a477577fa8f8f7f0a6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ba96c9f_04c2c478",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T19:12:28Z",
+      "side": 1,
+      "message": "Instead of this. use \u0027Creating {} privileges.\u0027.format(priv)\n\nSame applies with the below instances of logging.",
+      "range": {
+        "startLine": 100,
+        "startChar": 53,
+        "endLine": 100,
+        "endChar": 54
+      },
+      "revId": "65f69bdd8617db8c06abf1a477577fa8f8f7f0a6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
