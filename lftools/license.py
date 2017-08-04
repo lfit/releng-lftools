@@ -58,14 +58,14 @@ def check_license(license_file, code_file):
     return 0
 
 
-def check_license_directory(license_file, directory, extension="py"):
+def check_license_directory(license_file, directory, regex=".+\.py$"):
     """Search a directory for files and calls check_license()."""
     missing_license = False
 
     for root, dirs, files in os.walk(directory):
-        for file in files:
-            if file.endswith(".{}".format(extension)):
-                if check_license(license_file, os.path.join(root, file)):
+        for f in files:
+            if re.search(regex, f):
+                if check_license(license_file, os.path.join(root, f)):
                     missing_license = True
 
     if missing_license:

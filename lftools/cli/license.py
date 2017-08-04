@@ -46,20 +46,22 @@ def check(ctx, license, source):
 
 @click.command(name='check-dir')
 @click.argument('directory')
-@click.option('-e', '--extension', default='py',
-              help='File extension to search for.')
 @click.option('-l', '--license', default='license-header.txt',
               help='License header file to compare against.')
+@click.option('-r', '--regex', default='.+\.py$',
+              help='File regex pattern to match on when searching.')
 @click.pass_context
-def check_directory(ctx, license, directory, extension):
+def check_directory(ctx, license, directory, regex):
     """Check directory for files missing license headers.
+
+    Uses a regex pattern to find files to check for approved license headers.
 
     Does not care if about line formatting of the license as long as all of the
     text is there and in the correct order.
 
     Note: This code only supports '#' comments for license headers.
     """
-    check_license_directory(license, directory, extension)
+    check_license_directory(license, directory, regex)
 
 
 license.add_command(check)
