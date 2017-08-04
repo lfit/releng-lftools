@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e97f95fa_b35d5bb9",
+        "filename": "docs/index.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T20:19:15Z",
+      "side": 1,
+      "message": "We should probably list installation before commands.",
+      "revId": "f1b264b468911b41bca725e5c1d1bb21a72d6337",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
