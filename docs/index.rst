@@ -16,6 +16,7 @@ Contents:
     :maxdepth: 2
 
     best-practices
+    installation
     commands/index
 
 Indices and tables
