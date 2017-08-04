@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c541b9d9_65fbbc83",
+        "filename": "lftools/__init__.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T18:11:39Z",
+      "side": 1,
+      "message": "It\u0027s not pythonic to have spaces surrounding like this. Pep8 should be failing this.",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "318f2bd5b66f8d7c7c4226192221c9a36f062bd7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c76d7766_c46dd1e9",
+        "filename": "lftools/__init__.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T18:11:39Z",
+      "side": 1,
+      "message": "no slashes. let os.path.join take care of this.",
+      "range": {
+        "startLine": 24,
+        "startChar": 64,
+        "endLine": 24,
+        "endChar": 65
+      },
+      "revId": "318f2bd5b66f8d7c7c4226192221c9a36f062bd7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0cb1db63_1ca5a9a4",
+        "filename": "lftools/__init__.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T18:11:39Z",
+      "side": 1,
+      "message": "same here let os.path.join handle this",
+      "range": {
+        "startLine": 25,
+        "startChar": 47,
+        "endLine": 25,
+        "endChar": 59
+      },
+      "revId": "318f2bd5b66f8d7c7c4226192221c9a36f062bd7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f1cdb36_9be45951",
+        "filename": "lftools/__init__.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T18:11:39Z",
+      "side": 1,
+      "message": "os.path.join",
+      "range": {
+        "startLine": 31,
+        "startChar": 18,
+        "endLine": 31,
+        "endChar": 38
+      },
+      "revId": "318f2bd5b66f8d7c7c4226192221c9a36f062bd7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04936d94_d65237b0",
+        "filename": "lftools/__init__.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T18:11:39Z",
+      "side": 1,
+      "message": "While this works the recommended way to do this these days is using str.format().",
+      "range": {
+        "startLine": 40,
+        "startChar": 39,
+        "endLine": 40,
+        "endChar": 41
+      },
+      "revId": "318f2bd5b66f8d7c7c4226192221c9a36f062bd7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf5e4a9c_ff129b99",
+        "filename": "load_logger_ini.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T18:11:39Z",
+      "side": 1,
+      "message": "Delete this file.",
+      "revId": "318f2bd5b66f8d7c7c4226192221c9a36f062bd7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
