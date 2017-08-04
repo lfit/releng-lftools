@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2b4b7c5_f5f36715",
+        "filename": "etc/logging.ini",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-04T18:18:03Z",
+      "side": 1,
+      "message": "No need for a file logger. lftools is a cli tool. If we need to log to a file scripts can redirect it using shell.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "f4d19b0a09e457aeb5a0ce857dcec0ac09d69f18",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
