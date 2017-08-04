@@ -17,6 +17,7 @@ Contents:
 
     best-practices
     commands/index
+    installation
 
 Indices and tables
 ==================
