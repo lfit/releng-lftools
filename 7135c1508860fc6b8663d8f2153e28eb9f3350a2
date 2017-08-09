@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "5994bc04_3d601791",
+        "filename": "etc/github/branch-protection.example.yaml",
+        "patchSetId": 27
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-08-09T23:15:15Z",
+      "side": 1,
+      "message": "I would suggest adding some docs string explaining what this config does and some of the config options.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 40
+      },
+      "revId": "7135c1508860fc6b8663d8f2153e28eb9f3350a2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1b3b207_5a67dbed",
+        "filename": "etc/github/webhook.example.yaml",
+        "patchSetId": 27
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-08-09T23:15:15Z",
+      "side": 1,
+      "message": "I would suggest adding some docs string explaining what this config does and some of the config options.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "7135c1508860fc6b8663d8f2153e28eb9f3350a2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "12ce13a6_37cba452",
         "filename": "lftools/github/cmd.py",
         "patchSetId": 27
