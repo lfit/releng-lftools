@@ -3,7 +3,7 @@
 ##############################################################################
 # Copyright (c) 2017 The Linux Foundation and others.
 #
-# All rights reserved. This program and the accompanying materials
+# All rights reserved. Thi program and the accompanying materials
 # are made available under the terms of the Eclipse Public License v1.0
 # which accompanies this distribution, and is available at
 # http://www.eclipse.org/legal/epl-v10.html
@@ -13,9 +13,12 @@
 __author__ = 'Thanh Ha'
 
 
+import logging
 import os
 import re
 import sys
+
+log = logging.getLogger(__name__)
 
 
 def get_header_text(_file):
@@ -53,7 +56,7 @@ def check_license(license_file, code_file):
     code_header = get_header_text(code_file)
 
     if not license_header in code_header:
-        print('ERROR: {} is missing or has incorrect license header.'.format(code_file))
+        log.error('{} is missing or has incorrect license header.'.format(code_file))
         return 1
 
     return 0
@@ -72,4 +75,4 @@ def check_license_directory(license_file, directory, regex=".+\.py$"):
     if missing_license:
         sys.exit(1)
 
-    print('Scan completed did not detect any files missing license headers.')
+    log.info('Scan completed did not detect any files missing license headers.')
