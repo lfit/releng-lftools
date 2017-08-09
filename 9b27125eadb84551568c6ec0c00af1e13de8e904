@@ -22,6 +22,30 @@
       "revId": "9b27125eadb84551568c6ec0c00af1e13de8e904",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a246286a_92245fd7",
+        "filename": "lftools/openstack/server.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-09T22:13:41Z",
+      "side": 1,
+      "message": "Yep :)",
+      "parentUuid": "5b79f238_28d53a88",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 11
+      },
+      "revId": "9b27125eadb84551568c6ec0c00af1e13de8e904",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
