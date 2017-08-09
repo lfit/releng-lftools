@@ -38,7 +38,7 @@ def list(os_cloud, days=0):
 
     filtered_servers = _filter_servers(servers, days)
     for server in filtered_servers:
-        print(server.name)
+        log.info(server.name)
 
 
 def cleanup(os_cloud, days=0):
@@ -48,23 +48,23 @@ def cleanup(os_cloud, days=0):
     :arg int days: Filter servers that are older than number of days.
     """
     def _remove_servers_from_cloud(servers, cloud):
-        print('Removing {} servers from {}.'.format(len(servers), cloud.cloud_config.name))
+        log.info('Removing {} servers from {}.'.format(len(servers), cloud.cloud_config.name))
         for server in servers:
             try:
                 result = cloud.delete_server(server.name)
             except shade.exc.OpenStackCloudException as e:
                 if str(e).startswith('Multiple matches found for'):
-                    print('WARNING: {}. Skipping server...'.format(str(e)))
+                    log.warn('{}. Skipping server...'.format(str(e)))
                     continue
                 else:
-                    print('ERROR: Unexpected exception: {}'.format(str(e)))
+                    log.error('Unexpected exception: {}'.format(str(e)))
                     raise
 
             if not result:
-                print('WARNING: Failed to remove \"{}\" from {}. Possibly already deleted.'
+                log.warn('Failed to remove \"{}\" from {}. Possibly already deleted.'
                       .format(server.name, cloud.cloud_config.name))
             else:
-                print('Removed "{}" from {}.'.format(server.name, cloud.cloud_config.name))
+                log.info('Removed "{}" from {}.'.format(server.name, cloud.cloud_config.name))
 
     cloud = shade.openstack_cloud(cloud=os_cloud)
     servers = cloud.list_servers()

@@ -14,8 +14,11 @@ __author__ = 'Thanh Ha'
 
 from datetime import datetime
 from datetime import timedelta
+import logging
 
 import shade
+
+log = logging.getLogger(__name__)
 
 
 def _filter_images(images, days=0, hide_public=False):
@@ -43,7 +46,7 @@ def list(os_cloud, days=0, hide_public=False):
 
     filtered_images = _filter_images(images, days, hide_public)
     for image in filtered_images:
-        print(image.name)
+        log.info(image.name)
 
 
 def cleanup(os_cloud, days=0, hide_public=False, clouds=None):
@@ -56,23 +59,23 @@ def cleanup(os_cloud, days=0, hide_public=False, clouds=None):
         from. Otherwise os_cloud will be used.
     """
     def _remove_images_from_cloud(images, cloud):
-        print('Removing {} images from {}.'.format(len(images), cloud.cloud_config.name))
+        log.info('Removing {} images from {}.'.format(len(images), cloud.cloud_config.name))
         for image in images:
             try:
                 result = cloud.delete_image(image.name)
             except shade.exc.OpenStackCloudException as e:
                 if str(e).startswith('Multiple matches found for'):
-                    print('WARNING: {}. Skipping image...'.format(str(e)))
+                    log.warn('{}. Skipping image...'.format(str(e)))
                     continue
                 else:
-                    print('ERROR: Unexpected exception: {}'.format(str(e)))
+                    log.error('Unexpected exception: {}'.format(str(e)))
                     raise
 
             if not result:
-                print('WARNING: Failed to remove \"{}\" from {}. Possibly already deleted.'
+                log.warn('Failed to remove \"{}\" from {}. Possibly already deleted.'
                       .format(image.name, cloud.cloud_config.name))
             else:
-                print('Removed "{}" from {}.'.format(image.name, cloud.cloud_config.name))
+                log.info('Removed "{}" from {}.'.format(image.name, cloud.cloud_config.name))
 
     cloud = shade.openstack_cloud(cloud=os_cloud)
     if clouds:
