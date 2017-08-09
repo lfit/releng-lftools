@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b79f238_28d53a88",
+        "filename": "lftools/openstack/server.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2017-08-09T22:13:13Z",
+      "side": 1,
+      "message": "you don\u0027t have to instantiate this log object? like you did\nin image.py?",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 11
+      },
+      "revId": "9b27125eadb84551568c6ec0c00af1e13de8e904",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
