@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d71cd34c_eb988be2",
+        "filename": "lftools/license.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2017-08-09T22:24:00Z",
+      "side": 1,
+      "message": "Spelling here?  `Thi`",
+      "revId": "36b5c893b140a775c51b82a00f59604e65269726",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
