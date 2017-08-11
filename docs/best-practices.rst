@@ -207,7 +207,9 @@ dash `-` in it. The standard that we follow, and recommend, is to use an udersco
 `_` instead of a dash.
 
 Example:
-  code-block:: yaml
+
+.. code-block:: yaml
+
     - triggers:
        - lf-infra-github-pr-trigger:
            trigger-phrase: '^remerge$'
