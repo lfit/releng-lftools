@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # SPDX-License-Identifier: EPL-1.0
 ##############################################################################
 # Copyright (c) 2016, 2017 The Linux Foundation and others.
@@ -269,6 +270,27 @@ deploy_maven_file_usage () {
     echo "    -v <version>"
 }
 
+
+get_file_info () {
+  # Common function to parse artifact_id, version number from file.
+  local basefile=$(basename -s ".$1" "$2")
+
+  if [ -z "$artifact_id" ] && [[ "$1" =~ rpm|deb ]]; then
+      artifact_id=$(echo "$basefile" | cut -f 1 -d '_')
+  else
+      # handle other file types (tar, jar, gunzip files versions)
+      artifact_id=$(echo "$basefile" | rev | cut -f 2- -d '-' | rev)
+  fi
+
+  if [ -z "$version" ] && [[ "$1" =~ rpm|deb ]]; then
+      version=$(echo "$basefile" | cut -f 2- -d '_')
+  else
+      # handle other file types (tar, jar, gunzip files versions)
+      version=$(echo "$basefile" | rev | cut -f 1 -d '-' | rev)
+  fi
+}
+
+
 deploy_maven_file () {
     # Deploy a file to a Nexus maven2 repository.
     #
@@ -417,17 +439,7 @@ deploy_maven_file () {
                     fi
                 else
                     echo "dpkg command is not available."
-
-                    basefile=$(basename -s .deb "$file")
-
-                    # If user does not provide artifact_id and / or version then parse
-                    # information from file.
-                    if [ -z "$artifact_id" ]; then
-                        artifact_id=$(echo "$basefile" | cut -f 1 -d '_')
-                    fi
-                    if [ -z "$version" ]; then
-                        version=$(echo "$basefile" | cut -f 2- -d '_')
-                    fi
+                    get_file_info "$file_type" "$file"
                 fi
                 ;;
 
@@ -452,32 +464,12 @@ deploy_maven_file () {
                     fi
                 else
                     echo "rpm command is not available."
-
-                    basefile=$(basename -s .rpm "$file")
-
-                    # If user does not provide artifact_id and / or version then parse
-                    # information from file.
-                    if [ -z "$artifact_id" ]; then
-                        artifact_id=$(echo "$basefile" | rev | cut -f 3- -d '-' | rev)
-                    fi
-                    if [ -z "$version" ]; then
-                        version=$(echo "$basefile" | rev | cut -f 1 -d '-' | rev)
-                    fi
+                    get_file_info "$file_type" "$file"
                 fi
                 ;;
 
             jar|tar.gz|war )
-
-                basefile=$(basename -s ".$file_type" "$file")
-
-                # If user does not provide artifact_id and / or version then parse
-                # information from file.
-                if [ -z "$artifact_id" ]; then
-                    artifact_id=$(echo "$basefile" | rev | cut -f 2- -d '-' | rev)
-                fi
-                if [ -z "$version" ]; then
-                    version=$(echo "$basefile" | rev | cut -f 1 -d '-' | rev)
-                fi
+                get_file_info "$file_type" "$file"
                 ;;
 
             * )
