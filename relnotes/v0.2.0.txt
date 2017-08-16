@@ -1,0 +1,31 @@
+lftools v0.2.0 Release Notes
+============================
+
+Thanks to Andy, Anil, Jeremy, and Thanh for contributing to this release.
+
+
+Notable changes since v0.1.0
+----------------------------
+
+2e0c35e which removes version bumping from the end of the version "patch"
+command. This was necessary as in OpenDaylight we're now using a Jenkins job to
+perform the version bumping steps to make our release process quicker. The
+patch command is still useful for tagging a release using a local GPG key.
+
+eb919f2 which adds the Nexus artifact base target configuration which fixes
+artifact deployments for Nexus projects.
+
+fb32a2c which adds support to the openstack command to list and cleanup servers
+based on age.
+
+
+Full Change Log
+---------------
+
+2e0c35e Thanh Ha        DO NOT version bump after tagging
+a4e0d29 Thanh Ha        Merge "Add artifact base target to nexus configuration"
+eb919f2 Andrew Grimberg Add artifact base target to nexus configuration
+fb32a2c Anil Belur      Add openstack server list and cleanup commands
+c3bf292 Jeremy Phelps   Amend .gitignore for vscode editor
+389c260 Andrew Grimberg Merge "Add JJB best practices"
+c7d75e3 Thanh Ha        Pin babel version

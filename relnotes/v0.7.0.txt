@@ -1,0 +1,51 @@
+lftools v0.7.0 Release Notes
+============================
+
+Thanks to Anil, Jeremy, Jessica, and Thanh for contributing to this release.
+
+
+Notable changes since v0.6.0
+----------------------------
+
+f3b7292 Jessica Wagantall       Implement lftools logger
+Adds a logger to lftools to print internal statements. Is configurable via
+logging.ini.
+
+f16b45d Anil Belur      Make maven deploy-file more generic
+Adds support for tar.gz, jar, and war files to be uploaded using the
+deploy-file command.
+
+c4084d7 Anil Belur      Pass maven parameters to deploy maven-file
+Adds a '-p' parameter which can be used to pass arbitrary mvn cli options.
+
+2f7fc1a Jessica Wagantall       Add script to fix yamllint errors
+Script which can automatically try to resolve yaml lint issues.
+
+8f0d84c Thanh Ha        Add a license header scanner
+Script that can search for license headers and returns a list of files that do
+not have a license header or the license header does not match the one provided
+by the project. The code does not care about formatting of the license header
+text as long as all the text is available.
+
+
+Full Change Log
+---------------
+
+b7d80c6 Jeremy Phelps   Document installation of lftools
+54a6bc3 Jessica Wagantall       Use logger for Nexus create repo script
+f3b7292 Jessica Wagantall       Implement lftools logger
+9a2d868 Thanh Ha        Ignore shebang when evaluating license headers
+1f86e05 Thanh Ha        Use a regex pattern instead for license searching
+d92e8e1 Thanh Ha        Trim trailing slashes from URL inputs
+f16b45d Anil Belur      Make maven deploy-file more generic
+c4084d7 Anil Belur      Pass maven parameters to deploy maven-file
+2f7fc1a Jessica Wagantall       Add script to fix yamllint errors
+72492c6 Thanh Ha        Add CONTRIBUTING file
+57b7360 Thanh Ha        Enable MarkDown linting
+8f0d84c Thanh Ha        Add a license header scanner
+6109492 Thanh Ha        Improve .coafile rules using inheritance
+7d945e8 Thanh Ha        Fix first/third party import sorting
+8bae0fc Thanh Ha        Add missing license header in test_version.py
+856d800 Thanh Ha        Fix docs underline too short in deploy docs
+286378a Thanh Ha        Ignore linkchecking Google blog
+d0fe779 Thanh Ha        Bump version to 0.7.0-dev
