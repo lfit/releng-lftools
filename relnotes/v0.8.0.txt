@@ -1,0 +1,21 @@
+lftools v0.8.0 Release Notes
+============================
+
+Thanks to Anil, and Thanh for contributing to this release.
+
+
+Notable changes since v0.7.0
+----------------------------
+
+Changes related to documentation or refactoring. No new features or
+functionality added.
+
+
+Full Change Log
+---------------
+
+94f4573 Thanh Ha        Add all release notes up to date
+bff3ad6 Anil Belur      Re-factor deploy maven file to remove dup code
+1d6b441 Thanh Ha        Convert license print statements to logger
+dd711cb Anil Belur      Fix best practice doc example code indent
+4485c2d Thanh Ha        Verify lftools scripts have license headers
