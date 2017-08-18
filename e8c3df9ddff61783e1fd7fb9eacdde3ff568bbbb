@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed86754_107bca39",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2017-08-18T02:19:37Z",
+      "side": 1,
+      "message": "Confirmed,,, i dont need this anymore..",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 3
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
