@@ -1,0 +1,36 @@
+lftools v0.3.0 Release Notes
+============================
+
+Thanks to Anil, Trevor, and Thanh for contributing to this release.
+
+
+Notable changes since v0.2.0
+----------------------------
+
+5529081 Trevor Bramwell Add Jenkins to LF Tools
+Adds some useful Jenkins commands to query Jenkins via lftools.
+
+58a1793 Anil Belur      Report memory usage with sys-info
+Adds sar reporting to the lf-infra-publisher so that we have some system
+resource data at the end of each build.
+
+c84a544 Thanh Ha        Add deploy nexus command
+Adds a command to deploy RELEASE artifacts to Nexus using cURL. We currently do
+not recommend using this for SNAPSHOTs as it's missing some code to generate
+the maven-metadata.xml file that is needed by Maven projects to correctly
+download the latest snapshot.
+
+3c498dc Thanh Ha        Add deploy nexus-stage command
+Adds a command to deploy RELEASE artifacts to a nexus staging repo.
+
+
+Full Change Log
+---------------
+
+3c498dc Thanh Ha        Add deploy nexus-stage command
+c84a544 Thanh Ha        Add deploy nexus command
+58a1793 Anil Belur      Report memory usage with sys-info
+24bd98e Thanh Ha        Ensure shell scripts exit with proper status codes
+5529081 Trevor Bramwell Add Jenkins to LF Tools
+f5b6f78 Thanh Ha        Remove unused variable
+47ec7e8 Thanh Ha        Improve lftools description to include dependencies

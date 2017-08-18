@@ -1,0 +1,22 @@
+lftools v0.4.0 Release Notes
+============================
+
+Thanks to Anil and Thanh for contributing to this release.
+
+
+Notable changes since v0.3.0
+----------------------------
+
+e5c8909 Anil Belur      Add deploy maven-file command to lftools
+This change makes it possible for us to now deploy deb and rpm files to Nexus
+using lftools. With future improvements planned to allow maven-file to deploy
+any type of file.
+
+
+Full Change Log
+---------------
+
+e5c8909 Anil Belur      Add deploy maven-file command to lftools
+b6a9961 Thanh Ha        Add a README to locate the online docs
+7485330 Thanh Ha        Link deploy commands into commands index
+032dbba Thanh Ha        Improve error detection for when SSL invalid

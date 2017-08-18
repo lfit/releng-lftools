@@ -1,0 +1,27 @@
+lftools v0.6.0 Release Notes
+============================
+
+Thanks to Anil, Jeremy, and Thanh for contributing to this release.
+
+
+Notable changes since v0.5.0
+----------------------------
+
+41bf360 Thanh Ha        Copy sign scripts over to lftools
+Which add a new command `lftools sign` which can be used to sign a Nexus
+staging repo and produces a 2nd staging repo containing gpg signatures.
+
+
+Full Change Log
+---------------
+
+3742298 Thanh Ha        Disable Maven transfer output
+9238dcd Thanh Ha        Add Code Review checklist
+ef94274 Jeremy Phelps   Document the use of {obj:key} notation
+ce7770a Thanh Ha        Update SPDX License header to new format
+6e221ed Thanh Ha        Add write-good linting for docs
+285c371 Thanh Ha        Fix write-good lint errors
+e1a1cf3 Thanh Ha        Shorten title and add description
+cfaa5e0 Thanh Ha        Add Sign command documentation
+a4c019e Anil Belur      Filter creds before writing to logs.
+41bf360 Thanh Ha        Copy sign scripts over to lftools

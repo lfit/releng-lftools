@@ -1,0 +1,24 @@
+lftools v0.5.0 Release Notes
+============================
+
+Notable changes since v0.4.0
+----------------------------
+
+4da2d40 Thanh Ha        Deploy to Nexus using parallel
+Makes the cURL calls use GNU parallel if it exists to speed uploads.
+
+a72bf05 Thanh Ha        Add command to deploy nexus-zip files
+Adds a nexus-zip command to deploy artifacts using Nexus Unpack plugin to
+upload a zip file containing all of the artifacts to speed up uploads of small
+files. For example maven-sites that contain many small html files which would
+be inefficient to upload one at a time.
+
+
+Full Change Log
+---------------
+
+4da2d40 Thanh Ha        Deploy to Nexus using parallel
+7a186a3 Thanh Ha        Improve deploy error message
+a72bf05 Thanh Ha        Add command to deploy nexus-zip files
+7905343 Thanh Ha        Re-organize functions alphabetically
+2c03ef7 Thanh Ha        Use a multiline string for description
