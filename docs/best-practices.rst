@@ -131,6 +131,75 @@ the tox.ini file the interesting bits are under [testenv:coala].
 Jenkins Job Builder
 ===================
 
+JJB YAML Layout
+---------------
+
+.. note::
+
+    While some of this applies to the Global JJB project other recommendations
+    are generally useful to projects that might be defining JJB templates.
+
+The Global JJB project is a useful example project to look at so we recommend
+referring to the Maven job definitions as an example as you read the
+documentation below:
+
+https://github.com/lfit/releng-global-jjb/blob/master/jjb/lf-maven-jobs.yaml
+
+In a single YAML file representing a template category for example "Maven"
+jobs. We recommend sectioning off the template into 3 general sections in
+order:
+
+1. Job Groups (optional)
+2. Common Functions
+3. Job Template Definitions
+
+In section 1) not all configurations need this so is an optional section. Job
+groups are useful in cases where there are jobs that are generally useful
+together. For example the OpenDaylight uses a lot of Merge and Verify job
+combinations so every new project will want both job types defined in their
+project.
+
+In section 2) we want to define all common functions (anchors, aliases, macros)
+that are generally useful to all jobs in the file. This allows job template
+developers to look at the top of the file to see if there are useful functions
+already defined that they can reuse.
+
+In section 3) we can declare our job definitions. In the Global JJB project we
+create Gerrit and GitHub versions of the jobs so the format we use here
+might look strange at first but is well layed out for code reuse if we need to
+define 2 or more versions of the same job template for different systems. We
+will define this in more detail in the next section.
+
+Job Template Layout
+^^^^^^^^^^^^^^^^^^^
+
+1. Comment of Job Template Name
+2. Macro containing build definition of the job
+   a. Macro named after job
+   b. Complete documentation of the job parameters
+   c. Default parameters defined by the job
+   d. Job configuration
+3. job-template definition containing build triggers
+
+In section 1) we need to declare a in large comment text to identify the job
+section.
+
+In section 2) we declare the actual job definition. This is so that we have a
+single macro that we call in all the real job-template sections that is
+reusable and not duplicating any code. First we declare the macro as the job
+name. Then in 2.b) we provide the complete documentation of the job parameters
+this is so that we can link users of the job to this file and they can
+understand fully what options they can configure for this particular job.
+Then we define defaults for any parameters that are optional. The last section
+we define the job configuration which completes the macro.
+
+In section 3) we declare the actual job-template. Because of all the
+preparations above job template definitions should be small and simple. It
+needs to define the scm and job triggers. The Global JJB project needs to
+support both Gerrit and GitHub versions of the same job so the job definitions
+there have 2 templates for each job defined.
+
+
 Passing parameters to shell scripts
 -----------------------------------
 
