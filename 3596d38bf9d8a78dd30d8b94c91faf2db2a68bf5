@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "232a9654_9da6cb82",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2017-08-21T19:41:56Z",
+      "side": 1,
+      "message": "what about comment text to delineate certain sections? \nLike ``` \n    ######################\n    # Default parameters #\n    ######################\n\n    stream: master\n    branch: master\n    submodule-recursive: true\n\n    #####################\n    # Job Configuration #\n    #####################\n```",
+      "revId": "3596d38bf9d8a78dd30d8b94c91faf2db2a68bf5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe6873ca_032ab542",
         "filename": "docs/best-practices.rst",
         "patchSetId": 4
