@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bc03c953_4b72b265",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-23T17:12:35Z",
+      "side": 1,
+      "message": "Not sure what you mean here? the examples have this? did you want to to specify this explicitly somewhere?",
+      "parentUuid": "232a9654_9da6cb82",
+      "revId": "3596d38bf9d8a78dd30d8b94c91faf2db2a68bf5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe6873ca_032ab542",
         "filename": "docs/best-practices.rst",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2017-08-21T18:33:48Z",
       "side": 1,
       "message": "I don\u0027t understand this sentence.",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 5
+      },
+      "revId": "3596d38bf9d8a78dd30d8b94c91faf2db2a68bf5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d317b2f1_6ea2d5ff",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-23T17:12:35Z",
+      "side": 1,
+      "message": "I think this sentence is not necessary. The next sentence explains the concept.",
+      "parentUuid": "fe6873ca_032ab542",
       "range": {
         "startLine": 148,
         "startChar": 0,
