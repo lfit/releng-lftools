@@ -20,6 +20,8 @@ import logging.config
 import os
 import sys
 
+log = logging.getLogger(__name__)
+
 
 def find_log_ini(file_name='logging.ini'):
     """Find the logging.ini file.
@@ -49,7 +51,14 @@ def find_log_ini(file_name='logging.ini'):
 
 
 log_ini_file = find_log_ini()
-logging.config.fileConfig(log_ini_file)
 
-log = logging.getLogger(__name__)
-log.info("Using logger config file {}".format(log_ini_file))
+if os.path.exists(log_ini_file):
+    logging.config.fileConfig(log_ini_file)
+    log.info("Using logger config file {}".format(log_ini_file))
+else:
+    formatter = logging.Formatter('%(asctime)s (%(levelname)s) %(name)s: %(message)s')
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    logging.getLogger("").setLevel(logging.NOTSET)
+    logging.getLogger("").addHandler(console_handler)
+    log.info("Log ini file not found. Using a default logger...")
