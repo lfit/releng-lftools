@@ -45,6 +45,13 @@ copy_archives() {
         for pattern in $archive_pattern; do
             [[ -e $pattern ]] || continue  # handle the case of no files to archive
             echo "Archiving $pattern" >> "$workspace/archives.log"
+
+            filename=$(basename $pattern)
+            if [ "${#filename}" -gt 255 ]; then
+                echo "Filename too long: $pattern" | tee -a "$workspace/archives-missed.log"
+                continue
+            fi
+
             dir=$(dirname "$pattern")
             mkdir -p "$dest_dir/$dir"
             mv "$pattern" "$dest_dir/$pattern"
