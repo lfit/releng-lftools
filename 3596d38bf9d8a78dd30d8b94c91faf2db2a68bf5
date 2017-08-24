@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "510ebf7c_3fc2b1ff",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2017-08-24T17:31:41Z",
+      "side": 1,
+      "message": "At first I was thinking explicitly mentioning it but that\u0027s not needed with examples.",
+      "parentUuid": "bc03c953_4b72b265",
+      "revId": "3596d38bf9d8a78dd30d8b94c91faf2db2a68bf5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe6873ca_032ab542",
         "filename": "docs/best-practices.rst",
         "patchSetId": 4
