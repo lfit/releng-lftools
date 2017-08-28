@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bccdca72_7f79cc24",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-28T22:00:40Z",
+      "side": 1,
+      "message": "This code is fragile and seems to make us add additional if-statements every time we want to add yet another file type. Perhaps we can detect the file type and set it appropriately and use if-statements for exceptions to the norm like tar.gz.",
+      "range": {
+        "startLine": 421,
+        "startChar": 0,
+        "endLine": 424,
+        "endChar": 26
+      },
+      "revId": "9a69fdb858397a8f228c54144b2ec12de91b418e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
