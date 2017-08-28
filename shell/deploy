@@ -418,6 +418,10 @@ deploy_maven_file () {
         local file_type
         if [[ "$file" == *.tar.gz ]]; then
             file_type="tar.gz"
+        elif [[ "$file" == *.tgz ]]; then
+            file_type="tgz"
+        elif [[ "$file" == *.gz ]]; then
+            file_type="gz"
         else
             file_type="${file##*.}"
         fi
@@ -469,7 +473,7 @@ deploy_maven_file () {
                 fi
                 ;;
 
-            jar|tar.gz|war )
+            gz|jar|tar.gz|tgz|war )
                 get_file_info "$file_type" "$file"
                 ;;
 
