@@ -469,7 +469,7 @@ deploy_maven_file () {
                 fi
                 ;;
 
-            jar|tar.gz|war )
+            gz|jar|tar.gz|tgz|war )
                 get_file_info "$file_type" "$file"
                 ;;
 
