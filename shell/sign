@@ -9,7 +9,12 @@
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
 
-# Signs artifacts with gpg
+# Sign artifacts with gpg
+
+GPG_BIN="gpg"
+if hash gpg2 2>/dev/null; then
+    GPG_BIN="gpg2"
+fi
 
 
 sign() {
@@ -65,7 +70,7 @@ sign_dir() {
     for f in "${files_to_sign[@]}"
     do
         echo "Signing $f"
-        gpg --batch -abq "$f"
+        "$GPG_BIN" --batch -abq "$f"
     done
     set +e
 }
@@ -164,18 +169,18 @@ sign_nexus() {
 
 
 test_gpg_key() {
-  # Test that our GPG key works by signing a test file.
+    # Test that our GPG key works by signing a test file.
 
-  local test_file
-  test_file=$(mktemp)
-  echo "Test Signature" > "$test_file"
-  gpg --batch -abq "$test_file"
-  if ! gpg --verify "$test_file".asc "$test_file" > /dev/null 2>&1; then
-      echo "ERROR: Failed to validate signature."
-      rm "$test_file" "$test_file".asc  # Cleanup before we exit
-      exit 1
-  fi
-  rm "$test_file" "$test_file".asc  # Cleanup tmp files
+    local test_file
+    test_file=$(mktemp)
+    echo "Test Signature" > "$test_file"
+    "$GPG_BIN" --batch -abq "$test_file"
+    if ! "$GPG_BIN" --verify "$test_file".asc "$test_file" > /dev/null 2>&1; then
+        echo "ERROR: Failed to validate signature."
+        rm "$test_file" "$test_file".asc  # Cleanup before we exit
+        exit 1
+    fi
+    rm "$test_file" "$test_file".asc  # Cleanup tmp files
 }
 
 
