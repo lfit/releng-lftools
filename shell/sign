@@ -134,9 +134,12 @@ sign_nexus() {
     cd "$sign_dir" || exit 1
 
     echo "Fetching artifacts from $nexus_repo_url to $sign_dir..."
-    wget --recursive --execute robots=off --no-parent --quiet \
-        --no-host-directories --cut-dirs=3 \
-        "$nexus_repo_url"
+    if ! wget --recursive --execute robots=off --no-parent --quiet \
+              --no-host-directories --cut-dirs=3 \
+              "$nexus_repo_url"; then
+        echo "ERROR: Failed to download artifacts."
+        exit 1
+    fi
 
     echo "Removing files that do not need to be cloned..."
     remove_files=($(find . -type f -name "index.html" \
