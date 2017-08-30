@@ -22,6 +22,30 @@
       "revId": "a7b458698426ed2e1db1ffe29a69c44ab59bd1ab",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd923dae_8eafdcb0",
+        "filename": "shell/sign",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-08-30T01:48:01Z",
+      "side": 1,
+      "message": "Good idea.",
+      "parentUuid": "d4c3c4b1_feeeaaad",
+      "range": {
+        "startLine": 137,
+        "startChar": 9,
+        "endLine": 139,
+        "endChar": 32
+      },
+      "revId": "a7b458698426ed2e1db1ffe29a69c44ab59bd1ab",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
