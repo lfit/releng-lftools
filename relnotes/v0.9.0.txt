@@ -1,0 +1,22 @@
+lftools v0.9.0 Release Notes
+============================
+
+Thanks to Anil, and Thanh for contributing to this release.
+
+
+Notable changes since v0.8.0
+----------------------------
+
+6c692e8 Anil Belur      Add support for .tgz and .gz file extensions
+tgz and gz file support has been added to the deploy maven file command.
+
+
+Full Change Log
+---------------
+
+6f51ac4 Thanh Ha        Exit script with error if artifacts fail download
+deab66b Thanh Ha        Use gpg2 if available
+aebf395 Thanh Ha        DO NOT archive if filename is longer than 255
+5215558 Thanh Ha        Add a best practice for JJB templates
+6c692e8 Anil Belur      Add support for .tgz and .gz file extensions
+6d86321 Thanh Ha        Set a default logger if file methods fail
