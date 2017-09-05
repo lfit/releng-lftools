@@ -1,2 +1,3 @@
 include etc/logging.ini
+include README.md
 include requirements.txt
