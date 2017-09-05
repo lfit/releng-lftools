@@ -13,6 +13,7 @@
 """lftools package."""
 
 __author__ = 'Thanh Ha'
+__summary__ = 'Linux Foundation Release Engineering Tools'
 __version__ = '0.10.0-dev'
 
 import logging
