@@ -201,7 +201,7 @@ there have 2 templates for each job defined.
 Passing parameters to shell scripts
 -----------------------------------
 
-There are 2 ways to pass parameters into scripts:
+There are 3 ways to pass parameters into scripts:
 
 1) JJB variables in the format {var}
 2) Environment variables in the format ${VAR}
@@ -212,14 +212,24 @@ troubleshooting JJB errors easier and does not require escaping curly braces.
 
 This method requires 2 steps:
 
-1) Declare a parameter section
-2) Use the parameter in shell script
+1) Declare a parameter section or inject the variable as properties-content.
+2) Invoke the shell script with `include-raw-escape` instead of `include-raw`.
+3) Use the shell variable in shell script.
+
 
 The benefit of this method is that parameters will always be at the top
 of the job page and when clicking the Build with Parameters button in Jenkins
 we can see the parameters before running the job. We can review the
 parameters retro-actively by visiting the job parameters page
-``job/lastSuccessfulBuild/parameters/``.
+``job/lastSuccessfulBuild/parameters/``. Injecting variables as
+properties-content makes the variable local to the specific macro, while
+declaring it as parameter makes the variable global.
+
+.. note::
+
+    When a macro which invokes a shell script has no JJB parameters defined
+    `!include-raw-escape` will insert extra curly braces, therefore in such
+    cases its recommended to use `!include-raw` to retain the existing behavior.
 
 Usage of config-file-provider
 -----------------------------
@@ -289,3 +299,29 @@ Example:
 
 In the above example note the use of underscores in `github_pr_admin_list` and
 `github_pr_admin_list`.
+
+Using single quotes around variables
+------------------------------------
+
+Single quotes are required when using JJB variables '{variable}', in cases where
+variable are being passed to parameters, in other cases its recommended to drop
+the single quotes if its not required.
+
+Example:
+
+.. code-block:: yaml
+
+  builders:
+    - inject:
+        properties-content: |
+            'HOME={user-home}'
+
+
+Example:
+
+.. code-block:: yaml
+
+  builders:
+    - build-validate:
+        settings: '{settings-file}'
+        file-version: '{file-version}'
