@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf544734_bd5661ce",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-09-06T20:26:47Z",
+      "side": 1,
+      "message": "Ah just realized you actually meant to bump this to 3. (In the last patchset you bumped the one in the above section, that was why)",
+      "range": {
+        "startLine": 213,
+        "startChar": 21,
+        "endLine": 213,
+        "endChar": 22
+      },
+      "revId": "bad8c4e49ba645c2a1e56f48639a891c4e821970",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
