@@ -22,6 +22,30 @@
       "revId": "cd84762ac3d4e9fe7b03b5f8d4dc2107f4655620",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f24ad8f5_b0c5a4f3",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-09-06T14:11:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b92baf9_4d849346",
+      "range": {
+        "startLine": 204,
+        "startChar": 10,
+        "endLine": 204,
+        "endChar": 11
+      },
+      "revId": "cd84762ac3d4e9fe7b03b5f8d4dc2107f4655620",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
