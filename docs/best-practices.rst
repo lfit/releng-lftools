@@ -38,7 +38,7 @@ that they are not hitting any of these):
 - Does every function added have function docs?
   (javadoc, pydoc, whatever the language code docs is)
 - Does it pass linting?
-- Does the code cause backwards compatability breakage?
+- Does the code cause backwards compatibility breakage?
   (If so it needs documentation)
 
 Google posted an interesting blog on effective code review and how to spend both
@@ -207,7 +207,7 @@ There are 2 ways to pass parameters into scripts:
 2) Environment variables in the format ${VAR}
 
 We recommend avoiding using method 1 (Pass JJB variables) into shell scripts
-and instead always use method 2 (Enviornment variables). This makes
+and instead always use method 2 (Environment variables). This makes
 troubleshooting JJB errors easier and does not require escaping curly braces.
 
 This method requires 2 steps:
@@ -270,7 +270,7 @@ https://docs.openstack.org/infra/jenkins-job-builder/definition.html#variable-re
 One thing that is not explicitly covered is the format of the variable name
 that you pass the object to. When you use the `{obj:key}` notation to preserve
 the original data structure object, it will not work if the variable name has a
-dash `-` in it. The standard that we follow, and recommend, is to use an uderscore
+dash `-` in it. The standard that we follow, and recommend, is to use an underscore
 `_` instead of a dash.
 
 Example:
