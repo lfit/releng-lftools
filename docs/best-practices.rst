@@ -210,16 +210,26 @@ We recommend avoiding using method 1 (Pass JJB variables) into shell scripts
 and instead always use method 2 (Environment variables). This makes
 troubleshooting JJB errors easier and does not require escaping curly braces.
 
-This method requires 2 steps:
+This method requires 3 steps:
 
-1) Declare a parameter section
-2) Use the parameter in shell script
+1) Declare a parameter section or inject the variable as properties-content.
+2) Invoke the shell script with `include-raw-escape` instead of `include-raw`.
+3) Use the shell variable in shell script.
+
 
 The benefit of this method is that parameters will always be at the top
 of the job page and when clicking the Build with Parameters button in Jenkins
 we can see the parameters before running the job. We can review the
 parameters retro-actively by visiting the job parameters page
-``job/lastSuccessfulBuild/parameters/``.
+``job/lastSuccessfulBuild/parameters/``. Injecting variables as
+properties-content makes the variable local to the specific macro, while
+declaring it as parameter makes the variable global.
+
+.. note::
+
+    When a macro which invokes a shell script has no JJB parameters defined
+    `!include-raw-escape` will insert extra curly braces, in such cases its
+    recommended to use `!include-raw`.
 
 Usage of config-file-provider
 -----------------------------
@@ -238,8 +248,8 @@ ship-logs example:
         builders:
           - config-file-provider:
               files:
-                - file-id: 'jenkins-log-archives-settings'
-                  variable: 'SETTINGS_FILE'
+                - file-id: jenkins-log-archives-settings
+                  variable: SETTINGS_FILE
           - shell: !include-raw:
               - ../shell/logs-get-credentials.sh
           - shell: !include-raw:
@@ -279,8 +289,8 @@ Example:
 
     - triggers:
        - lf-infra-github-pr-trigger:
-           trigger-phrase: '^remerge$'
-           status-context: 'JJB Merge'
+           trigger-phrase: ^remerge$
+           status-context: JJB Merge
            permit-all: false
            github-hooks: true
            github-org: '{github-org}'
@@ -289,3 +299,24 @@ Example:
 
 In the above example note the use of underscores in `github_pr_admin_list` and
 `github_pr_admin_list`.
+
+Using single quotes around variables
+------------------------------------
+
+Its recommended to use single quotes around JJB variables '{variable}-field'
+during variable substitution or when using a variable in a string field, in
+other cases its recommended to drop the single quotes.
+
+Example:
+
+.. code-block:: yaml
+
+    - builder:
+        name: lf-user-logs
+        builders:
+          - inject:
+              properties-content: |
+                  'HOME={user-home}'
+          - build-file:
+              settings: '{settings-file}'
+              file-version: '{file-version}'
