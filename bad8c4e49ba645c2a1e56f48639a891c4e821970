@@ -22,6 +22,30 @@
       "revId": "bad8c4e49ba645c2a1e56f48639a891c4e821970",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2bce361_863197cc",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-09-07T01:01:45Z",
+      "side": 1,
+      "message": "ah, missed this ... late night patch ... not best practice :)",
+      "parentUuid": "cf544734_bd5661ce",
+      "range": {
+        "startLine": 213,
+        "startChar": 21,
+        "endLine": 213,
+        "endChar": 22
+      },
+      "revId": "bad8c4e49ba645c2a1e56f48639a891c4e821970",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
