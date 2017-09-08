@@ -213,7 +213,7 @@ deploy_logs() {
     {
         echo "build-url: ${build_url}"
     } 2>&1 | tee -a "_build-details.log"
-    env | grep -v -E "SSH|HUDSON|COOKIE|TOKEN|DOCKER|PASSWORD" | sort > "_build-enviroment-variables.log"
+    env | grep -v -E "COOKIE|DOCKER|HUDSON|KEY|PASSWORD|SSH|TOKEN" | sort > "_build-enviroment-variables.log"
 
     # Print system info before collecting logs
     touch "_sys-info.log"
