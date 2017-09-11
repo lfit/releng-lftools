@@ -22,6 +22,30 @@
       "revId": "0883e3590ba649b72208ee1dd6d131a298f3aaf4",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39d694b4_60d466d7",
+        "filename": "setup.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-09-11T14:46:07Z",
+      "side": 1,
+      "message": "Works for me.",
+      "parentUuid": "55034a2c_29b741d3",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 46
+      },
+      "revId": "0883e3590ba649b72208ee1dd6d131a298f3aaf4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
