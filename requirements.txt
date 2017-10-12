@@ -1,7 +1,7 @@
 click
 pyyaml
 requests!=2.13.0
-setuptools>=11.3
+setuptools>=30.0.0
 shade
 sphinx>=1.4.9
 sphinxcontrib-programoutput
