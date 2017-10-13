@@ -1,6 +1,8 @@
 .. Linux Foundation Release Engineering Tools documentation master file, created by
    sphinx-quickstart on Sat Mar  4 12:20:05 2017.
 
+.. _lfreleng-lftools:
+
 LF Tools
 ========
 
