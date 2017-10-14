@@ -2,6 +2,8 @@
 OpenStack
 *********
 
+Requires a `pip install lftools[openstack]` to activate this command.
+
 .. program-output:: lftools openstack --help
 
 Commands
