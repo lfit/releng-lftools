@@ -3,9 +3,9 @@ pyyaml
 requests!=2.13.0
 setuptools>=36.5.0
 shade
-sphinx>=1.4.9
+sphinx>=1.6.4
 sphinxcontrib-programoutput
-sphinx_bootstrap_theme>=0.4.14
+sphinx_bootstrap_theme>=0.6.0
 python-jenkins
 
 # workarounds to prevent upstream from breaking us
