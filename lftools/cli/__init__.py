@@ -20,7 +20,6 @@ from lftools.cli.license import license
 from lftools.cli.nexus import nexus
 from lftools.cli.sign import sign
 from lftools.cli.version import version
-from lftools.openstack.cmd import openstack
 
 
 @click.group()
@@ -35,9 +34,15 @@ cli.add_command(deploy)
 cli.add_command(jenkins_cli, name='jenkins')
 cli.add_command(license)
 cli.add_command(nexus)
-cli.add_command(openstack)
 cli.add_command(sign)
 cli.add_command(version)
+
+try:
+    from lftools.openstack.cmd import openstack
+    cli.add_command(openstack)
+except ModuleNotFoundError:
+    from lftools.openstack.no_cmd import openstack
+    cli.add_command(openstack)
 
 
 def main():
