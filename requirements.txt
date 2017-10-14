@@ -2,9 +2,4 @@ click
 pyyaml
 requests!=2.13.0
 setuptools>=36.5.0
-shade
 python-jenkins
-
-# workarounds to prevent upstream from breaking us
-babel<2.4.0
-pbr<2.1.0
