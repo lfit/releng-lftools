@@ -19,6 +19,9 @@ from lftools import __version__
 with open('requirements.txt') as f:
     install_reqs = f.read().splitlines()
 
+with open('requirements-openstack.txt') as f:
+    openstack_reqs = f.read().splitlines()
+
 setup(
     name='lftools',
     version=__version__,
@@ -36,6 +39,9 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     install_requires=install_reqs,
+    extras_require={
+        'openstack': openstack_reqs,
+    },
     packages=find_packages(exclude=[
         '*.tests',
         '*.tests.*',
