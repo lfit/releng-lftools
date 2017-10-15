@@ -1,0 +1,31 @@
+lftools v0.10.0 Release Notes
+=============================
+
+Thanks to Andy, Anil, Ry, and Thanh for contributing to this release.
+
+
+Notable changes since v0.9.0
+----------------------------
+
+d943695 Andrew Grimberg Re-order log ENV stripping and add new key
+Added additional env stripping for more variables that should not be logged.
+
+9a42505 Ry Jones        Update setuptools version to 36.5.0
+Some CI systems were having issues installing lftools and needed a version of
+setuptools>=30 so we bumped the setuptools version in requirements.txt
+
+
+Full Change Log
+---------------
+
+fca0d2f Thanh Ha        Rename docs requirements for better sorting
+c9a8a31 Thanh Ha        Add LF Logo
+77c2d0f Thanh Ha        Add custom navbar ala OpenDaylight docs
+c4523b1 Thanh Ha        Bump Sphinx minimal dependencies to latest
+98006e1 Thanh Ha        Remove best practices guide from lftools
+c324414 Thanh Ha        Add cross link
+9a42505 Ry Jones        Update setuptools version
+54f8abc Thanh Ha        Refactor descriptions to README.md and __summary__
+d943695 Andrew Grimberg Re-order log ENV stripping and add new key
+6d79275 Anil Belur      Update JJB best practices
+589e597 Anil Belur      Spell check fixes in best practices
