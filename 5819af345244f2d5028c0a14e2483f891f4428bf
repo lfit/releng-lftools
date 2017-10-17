@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c088700f_9e7f9e29",
+        "filename": "shell/sign",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2017-10-17T19:09:32Z",
+      "side": 1,
+      "message": "Maybe you should toss a note stating that parallel was not found so signing will happen serially.",
+      "revId": "5819af345244f2d5028c0a14e2483f891f4428bf",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
