@@ -66,6 +66,11 @@ sign_dir() {
                                     ! -name "maven-metadata-local.xml" \
                                     ! -name "maven-metadata.xml"))
 
+    if [ "${#files_to_sign[@]}" -eq 0 ]; then
+        echo "ERROR: No files to sign. Quitting..."
+        exit 1
+    fi
+
     if hash parallel 2>/dev/null; then
         echo "Signing in parallel..."
         parallel --jobs 200% --halt now,fail=1 "$GPG_BIN --batch -abq {}" ::: ${files_to_sign[*]}
