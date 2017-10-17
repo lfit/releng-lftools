@@ -57,8 +57,7 @@ sign_dir() {
     test_gpg_key
 
     set -e  # Fail immediately if any if signing fails
-    cd "$dir"
-    files_to_sign=($(find . -type f ! -name "*.asc" \
+    files_to_sign=($(find "$dir" -type f ! -name "*.asc" \
                                     ! -name "*.md5" \
                                     ! -name "*.sha1" \
                                     ! -name "_maven.repositories" \
@@ -67,11 +66,19 @@ sign_dir() {
                                     ! -name "maven-metadata-local.xml" \
                                     ! -name "maven-metadata.xml"))
 
-    for f in "${files_to_sign[@]}"
-    do
-        echo "Signing $f"
-        "$GPG_BIN" --batch -abq "$f"
-    done
+    if hash parallel 2>/dev/null; then
+        echo "Signing in parallel..."
+        parallel --jobs 200% --halt now,fail=1 "$GPG_BIN --batch -abq {}" ::: ${files_to_sign[*]}
+
+        echo "Signed the following files:"
+        printf '%s\n' "${files_to_sign[@]}"
+    else
+        echo "GNU `parallel` not found. Signing in serial mode..."
+        for f in "${files_to_sign[@]}"; do
+            echo "Signing $f"
+            "$GPG_BIN" --batch -abq "$f"
+        done
+    fi
     set +e
 }
 
