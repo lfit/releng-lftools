@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00d25ef8_c7d6285a",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2017-10-25T14:24:13Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t know that.",
+      "range": {
+        "startLine": 231,
+        "startChar": 4,
+        "endLine": 231,
+        "endChar": 56
+      },
+      "revId": "571da4bd6aaa500abfb96d18d3a173218fc789c5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e95a80b0_86fde7e2",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2017-10-25T14:24:13Z",
+      "side": 1,
+      "message": "reword, unclear, and mention -- pass an object (boolean, list or dict)",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 54
+      },
+      "revId": "571da4bd6aaa500abfb96d18d3a173218fc789c5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70882e61_59c49488",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2017-10-25T14:24:13Z",
+      "side": 1,
+      "message": "obj:disabled might be a better, simple, example eg: boolean",
+      "range": {
+        "startLine": 297,
+        "startChar": 32,
+        "endLine": 297,
+        "endChar": 59
+      },
+      "revId": "571da4bd6aaa500abfb96d18d3a173218fc789c5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d074f73f_fdd1fc23",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2017-10-25T14:24:13Z",
+      "side": 1,
+      "message": "An example of when not to quote would make this section more useful",
+      "range": {
+        "startLine": 307,
+        "startChar": 73,
+        "endLine": 308,
+        "endChar": 54
+      },
+      "revId": "571da4bd6aaa500abfb96d18d3a173218fc789c5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4aa60fd8_db3184e9",
+        "filename": "docs/best-practices.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2017-10-25T14:24:13Z",
+      "side": 1,
+      "message": "at both?",
+      "range": {
+        "startLine": 339,
+        "startChar": 0,
+        "endLine": 339,
+        "endChar": 7
+      },
+      "revId": "571da4bd6aaa500abfb96d18d3a173218fc789c5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
