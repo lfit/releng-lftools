@@ -149,8 +149,10 @@ def maven_file(
 @click.command()
 @click.argument('nexus-repo-url', envvar='NEXUS_REPO_URL')
 @click.argument('deploy-dir', envvar='DEPLOY_DIR')
+@click.option('-s', '--snapshot', is_flag=True, default=False,
+              help='Deploy a snapshot repo.')
 @click.pass_context
-def nexus(ctx, nexus_repo_url, deploy_dir):
+def nexus(ctx, nexus_repo_url, deploy_dir, snapshot):
     """Deploy a Maven repository to a specified Nexus repository.
 
     This script takes a local Maven repository and deploys it to a Nexus
@@ -160,7 +162,14 @@ def nexus(ctx, nexus_repo_url, deploy_dir):
 
         https://nexus.example.org/content/repositories/release
     """
-    status = subprocess.call(['deploy', 'nexus', nexus_repo_url, deploy_dir])
+    params = ['deploy', 'nexus']
+
+    if snapshot:
+        params.extend(["-s"])
+
+    params.extend([nexus_repo_url, deploy_dir])
+
+    status = subprocess.call(params)
     sys.exit(status)
 
 

@@ -508,6 +508,13 @@ deploy_maven_file () {
     fi
 }
 
+deploy_nexus_usage() {
+    echo "Usage: deploy nexus <nexus_repo_url> <deploy_dir>"
+    echo
+    echo "Options:"
+    echo "    -s  # Enable snapshot mode for pushing snapshot artifacts to Nexus."
+}
+
 deploy_nexus() {
     # Deploy Maven artifacts to Nexus using curl
     #
@@ -520,22 +527,49 @@ deploy_nexus() {
     # One purpose of this is so that we can get around the problematic
     # deploy-at-end configuration with upstream Maven.
     # https://issues.apache.org/jira/browse/MDEPLOY-193
+    local snapshot="false"
+
+    while getopts s o; do
+      case "$o" in
+        h)
+            deploy_nexus_usage
+            exit 0
+            ;;
+
+        s)
+            local snapshot="true"
+            ;;
+
+        [?])
+            deploy_nexus_usage
+            exit 1
+            ;;
+      esac
+    done
+    shift $((OPTIND-1))
 
     local nexus_repo_url="${1%/}"
     local deploy_dir="$2"
 
     if [ -z "$2" ]; then
         echo "Missing required arguments."
-        echo "Usage: deploy nexus <nexus_repo_url> <deploy_dir>"
+        deploy_nexus_usage
         exit 1
     fi
 
     pushd "$deploy_dir"
-    file_list=($(find . -type f \
-                ! -name "maven-metadata*" \
-                ! -name _remote.repositories \
-                ! -name resolver-status.properties \
-                | cut -c 3-))
+    if [ "$snapshot" == "true" ]; then
+        file_list=($(find . -type f \
+                    ! -name _remote.repositories \
+                    ! -name resolver-status.properties \
+                    | cut -c 3-))
+    else
+        file_list=($(find . -type f \
+                    ! -name "maven-metadata*" \
+                    ! -name _remote.repositories \
+                    ! -name resolver-status.properties \
+                    | cut -c 3-))
+    fi
 
     if hash parallel 2>/dev/null; then
         export -f upload_to_nexus
