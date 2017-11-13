@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "8f589471_3e6d89b4",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2017-11-13T23:37:58Z",
+      "side": 1,
+      "message": "Seems like a lot of work in order to rename a config... and can\u0027t this be done easily through the interface?",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 1
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b1f25e8d_e9cc7dfe",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2017-11-13T23:37:58Z",
+      "side": 1,
+      "message": "Why is a password generated here? Shouldn\u0027t it be explicitly set as an argument, or already exist in Nexus?",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 90
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09885e29_352588d7",
         "filename": "lftools/jenkins/sync_config_files.groovy",
         "patchSetId": 12
