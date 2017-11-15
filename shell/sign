@@ -73,7 +73,8 @@ sign_dir() {
 
     if hash parallel 2>/dev/null; then
         echo "Signing in parallel..."
-        parallel --jobs 200% --halt now,fail=1 "$GPG_BIN --batch -abq {}" ::: ${files_to_sign[*]}
+        parallel --no-notice --jobs 200% --halt now,fail=1 \
+            "$GPG_BIN --batch -abq {}" ::: ${files_to_sign[*]}
 
         echo "Signed the following files:"
         printf '%s\n' "${files_to_sign[@]}"
