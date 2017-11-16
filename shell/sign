@@ -147,7 +147,7 @@ sign_nexus() {
 
     echo "Fetching artifacts from $nexus_repo_url to $sign_dir..."
     if ! wget -nv --recursive --execute robots=off --no-parent \
-              --no-host-directories --cut-dirs=3 \
+              --no-host-directories --cut-dirs=3 --level=15 \
               "$nexus_repo_url"; then
         echo "ERROR: Failed to download artifacts."
         exit 1
