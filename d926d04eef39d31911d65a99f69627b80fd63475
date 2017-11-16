@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd0db4c0_304696e4",
+        "filename": "shell/sign",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2017-11-16T13:29:00Z",
+      "side": 1,
+      "message": "Which platform is the issue seen? any specific version of wget? we have been using this for ODL staging repositories for a while on U16.04 and F26.",
+      "range": {
+        "startLine": 150,
+        "startChar": 49,
+        "endLine": 150,
+        "endChar": 58
+      },
+      "revId": "d926d04eef39d31911d65a99f69627b80fd63475",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
