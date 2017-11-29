@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "70c22ce3_a8237f8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2017-11-29T15:27:04Z",
+      "side": 1,
+      "message": "Technically it\u0027s improving the script to support infinity depth. (Although I\u0027m not sure we want to allow infinity in case we run into a weird case where infinite is an infinite loop (think symlinked directories wrapping back to the top level)).\n\nWhat\u0027s a reasonable depth that we need to support? In ODL\u0027s case the default of 5 was enough but seems like ONAP might need more. How deep is the deepest directories ONAP has in it\u0027s project?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "d926d04eef39d31911d65a99f69627b80fd63475",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd0db4c0_304696e4",
         "filename": "shell/sign",
         "patchSetId": 1
