@@ -36,6 +36,9 @@ def image(ctx):
 
 @click.command()
 @click.option(
+    '--ci-managed', type=bool, default=True,
+    help='Filter only images that have the ci_managed=yes metadata set.')
+@click.option(
     '--days', type=int, default=0,
     help='Find images older than or equal to days.')
 @click.option(
@@ -46,10 +49,11 @@ def image(ctx):
     help=('Clouds (as defined in clouds.yaml) to remove images from. If not'
           'passed will assume from os-cloud parameter. (optional)'))
 @click.pass_context
-def cleanup(ctx, days, hide_public, clouds):
+def cleanup(ctx, days, hide_public, ci_managed, clouds):
     """Cleanup old images."""
     os_image.cleanup(
         ctx.obj['os_cloud'],
+        ci_managed=ci_managed,
         days=days,
         hide_public=hide_public,
         clouds=clouds)
@@ -57,16 +61,20 @@ def cleanup(ctx, days, hide_public, clouds):
 
 @click.command()
 @click.option(
+    '--ci-managed', type=bool, default=True,
+    help='Filter only images that have the ci_managed=yes metadata set.')
+@click.option(
     '--days', type=int, default=0,
     help='Find images older than or equal to days.')
 @click.option(
     '--hide-public', type=bool, default=False,
     help='Ignore public images.')
 @click.pass_context
-def list(ctx, days, hide_public):
+def list(ctx, days, hide_public, ci_managed):
     """List cloud images."""
     os_image.list(
         ctx.obj['os_cloud'],
+        ci_managed=ci_managed,
         days=days,
         hide_public=hide_public)
 
