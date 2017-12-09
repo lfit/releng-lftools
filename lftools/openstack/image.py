@@ -31,6 +31,8 @@ def _filter_images(images, days=0, hide_public=False, ci_managed=True):
             continue
         if ci_managed and image.metadata.get('ci_managed', None) != 'yes':
             continue
+        if image.protected:
+            continue
         if days and (
                 datetime.strptime(image.created_at, '%Y-%m-%dT%H:%M:%SZ')
                 >= datetime.now() - timedelta(days=days)):
