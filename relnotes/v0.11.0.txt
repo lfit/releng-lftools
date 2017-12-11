@@ -1,0 +1,39 @@
+lftools v0.11.0 Release Notes
+=============================
+
+Thanks to Anil and Thanh for contributing to this release.
+
+
+Notable changes since v0.10.0
+----------------------------
+
+bfa488e Thanh Ha        Use parallel to sign when available
+lftools signing should now be significantly faster as we are now using parallel
+to run gpg sign commands.
+
+e396384 Thanh Ha        Add a snapshot mode to the deploy-nexus command
+This change allows us to use cURL to upload snapshots to Nexus. Previously only
+release artifacts were possible as we did not allow maven-metadata.xml files to
+be pushed to Nexus. This exception is added for SNAPSHOT builds as this is
+necessary in the case of SNAPSHOTs so that Maven builds can find the SNAPSHOT
+artifacts.
+
+68f40d3 Thanh Ha        Update openstack cmd to support ci_managed filter
+Updated to support lf-infra in OpenStack scenarios. We use image metadata
+fields to determine if an image is managed by lfci. This can be turned on or
+off via "ci-managed" parameter on the CLI. Defaults to true.
+
+f2bd527 Thanh Ha        Automatically hide protected images
+This change automatically hides protected images. lftools uses this as a marker
+to ignore the image and not manage it.
+
+
+Full Change Log
+---------------
+
+f2bd527 Thanh Ha        Automatically hide protected images
+68f40d3 Thanh Ha        Update openstack cmd to support ci_managed filter
+8bca894 Anil Belur      Suppress GNU parallel notice on every run
+e396384 Thanh Ha        Add a snapshot mode to the deploy-nexus command
+78cd27d Thanh Ha        Fail gracefully when no files to sign
+bfa488e Thanh Ha        Use parallel to sign when available
