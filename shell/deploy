@@ -226,7 +226,8 @@ deploy_logs() {
             "df -h"
             "free -m"
             "ip addr"
-            "sar -r"
+            "sar -b -r -n DEV"
+            "sar -P ALL"
         )
         for cmd in "${sys_cmds[@]}"; do
             # If command exists then print output.
