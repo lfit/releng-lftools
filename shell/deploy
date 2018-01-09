@@ -685,9 +685,11 @@ deploy_nexus_zip() {
         exit 1
     fi
 
-    echo "Pushing $deploy_zip to $nexus_repo on $nexus_url"
-    curl --netrc --upload-file "$deploy_zip" \
-        "${nexus_url}/service/local/repositories/${nexus_repo}/content-compressed/${nexus_path}"
+    echo "Pushing $deploy_zip to $nexus_repo on $nexus_url to path $nexus_path"
+    resp=$(curl -s -w "\\n\\n%{http_code}" --netrc --upload-file "$deploy_zip" \
+        "${nexus_url}/service/local/repositories/${nexus_repo}/content-compressed/${nexus_path}")
+    status=$(echo "$resp" | awk 'END {print $NF}')
+    echo $status $resp
 }
 
 upload_to_nexus() {
