@@ -57,14 +57,14 @@ sign_dir() {
     test_gpg_key
 
     set -e  # Fail immediately if any if signing fails
-    files_to_sign=($(find "$dir" -type f ! -name "*.asc" \
-                                    ! -name "*.md5" \
-                                    ! -name "*.sha1" \
-                                    ! -name "_maven.repositories" \
-                                    ! -name "_remote.repositories" \
-                                    ! -name "*.lastUpdated" \
-                                    ! -name "maven-metadata-local.xml" \
-                                    ! -name "maven-metadata.xml"))
+    mapfile -t files_to_sign < <(find "$dir" -type f ! -name "*.asc" \
+        ! -name "*.md5" \
+        ! -name "*.sha1" \
+        ! -name "_maven.repositories" \
+        ! -name "_remote.repositories" \
+        ! -name "*.lastUpdated" \
+        ! -name "maven-metadata-local.xml" \
+        ! -name "maven-metadata.xml")
 
     if [ "${#files_to_sign[@]}" -eq 0 ]; then
         echo "ERROR: No files to sign. Quitting..."
@@ -106,7 +106,7 @@ sign_nexus() {
     # The resultant output of this command is stored in
     # /tmp/gpg-signatures.XXXXXXXXXX unless the -d parameter is passed to
     # override.
-    while getopts d: o; do
+    while getopts d:h o; do
       case "$o" in
         h)
             sign_nexus_usage
@@ -155,7 +155,7 @@ sign_nexus() {
     fi
 
     echo "Removing files that do not need to be cloned..."
-    remove_files=($(find . -type f -name "index.html" \
+    mapfile -t remove_files < <(find . -type f -name "index.html" \
         -o -name "*.asc" \
         -o -name "*.md5" \
         -o -name "*.sha1" \
@@ -163,7 +163,7 @@ sign_nexus() {
         -o -name "_remote.repositories*" \
         -o -name "maven-metadata-local.xml*" \
         -o -name "maven-metadata.xml*" \
-        -o -name "archetype-catalog.xml"))
+        -o -name "archetype-catalog.xml")
     for f in "${remove_files[@]}"; do
         rm "$f"
     done
@@ -172,7 +172,7 @@ sign_nexus() {
     sign_dir "$sign_dir"
 
     echo "Removing non-signature files..."
-    remove_files=($(find . -type f -not -name '*.asc'))
+    mapfile -t remove_files < <(find . -type f -not -name '*.asc')
     for f in "${remove_files[@]}"; do
         rm "$f"
     done

@@ -13,18 +13,21 @@
 # function loop_log_file takes care of the most common problems so far
 
 function start_script {
-    while getopts 'af:h' opt "$@"; do
+    while getopts af:h opt "$@"; do
         case $opt in
-        'a')
-            option=1
-            ;;
-        'f')
-            option=2
-            FILES="$OPTARG"
-            ;;
-        'h')
-            option=3
-            ;;
+            a)
+                option=1
+                ;;
+            f)
+                option=2
+                FILES="$OPTARG"
+                ;;
+            h)
+                option=3
+                ;;
+            *)
+                echo "ERROR: Unknown flag passed."
+                ;;
         esac
     done
 
