@@ -37,6 +37,18 @@ def jenkins_cli(ctx, server, user, password):
 
 
 @click.command()
+@click.argument('groovy_file')
+@click.pass_context
+def groovy(ctx, groovy_file):
+    """Run a groovy script."""
+    with open(groovy_file, 'r') as f:
+        data = f.read()
+
+    server = ctx.obj['server']
+    server.run_script(data)
+
+
+@click.command()
 @click.option("-n/-y", is_flag=True, prompt="Quiet down Jenkins?", required=True)
 @click.pass_context
 def quiet_down(ctx, n):
@@ -58,4 +70,5 @@ def quiet_down(ctx, n):
 jenkins_cli.add_command(plugins_init, name='plugins')
 jenkins_cli.add_command(nodes)
 jenkins_cli.add_command(builds)
+jenkins_cli.add_command(groovy)
 jenkins_cli.add_command(quiet_down, name='quiet-down')
