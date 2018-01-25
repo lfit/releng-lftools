@@ -23,7 +23,7 @@ import sphinx_bootstrap_theme
 from lftools import __version__
 sys.path.insert(0, os.path.abspath('..'))
 
-from docs_conf import *
+from docs_conf.conf import *
 
 version = __version__
 release = __version__
