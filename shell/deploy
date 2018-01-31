@@ -712,13 +712,14 @@ upload_to_nexus() {
     echo "Uploading ${file}"
 
     local resp
-    resp=$(curl -s -w "%{http_code}" --netrc --upload-file "$file" "$nexus_repo_url/$file")
+    resp=$(curl -s -w "\\n\\n%{http_code}" --netrc --upload-file "$file" "$nexus_repo_url/$file")
+    data=$(echo "$resp" | head -n1)
     status=$(echo "$resp" | awk 'END {print $NF}')
 
     if [ "$status" != "201" ]; then
-        echo "ERROR: Failed to upload to Nexus. Aborting..."
-        echo "$resp"
-        exit "$status"
+        echo "ERROR: Failed to upload to Nexus with status code $status. Aborting..."
+        echo "HTTP Response: $data"
+        exit 1
     fi
 }
 
