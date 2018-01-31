@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d35e2865_1fbff988",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-01-31T21:19:55Z",
+      "side": 1,
+      "message": "parallel is supposed to exit if it catches the failure due to the `--halt now,fail\u003d1` parameter above. However I think because the upload_to_nexus exits and passes the HTTP \"$status\" code rather then 1 it doesn\u0027t catch it.\n\nThe easy solution is to make it exit 1. I\u0027ll poke around and see if there\u0027s aw ay to have fail\u003d anything but 0 as another possible solution.",
+      "revId": "d87ebbc8970c323128d4c585262ad2909e1fb15d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
