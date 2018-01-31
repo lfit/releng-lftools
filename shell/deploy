@@ -574,7 +574,8 @@ deploy_nexus() {
     if hash parallel 2>/dev/null; then
         export -f upload_to_nexus
         parallel --no-notice --jobs 200% --halt now,fail=1 \
-            "upload_to_nexus $nexus_repo_url {}" ::: ${file_list[*]}
+            "upload_to_nexus $nexus_repo_url {}" ::: ${file_list[*]} \
+            || exit
     else
         for file in "${file_list[@]}"; do
             upload_to_nexus "$nexus_repo_url" "$file"
