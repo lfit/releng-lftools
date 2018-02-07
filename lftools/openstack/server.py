@@ -14,6 +14,7 @@ __author__ = 'Anil Belur'
 
 from datetime import datetime
 from datetime import timedelta
+import sys
 
 import shade
 
@@ -70,3 +71,24 @@ def cleanup(os_cloud, days=0):
     servers = cloud.list_servers()
     filtered_servers = _filter_servers(servers, days)
     _remove_servers_from_cloud(filtered_servers, cloud)
+
+
+def remove(os_cloud, server_name, minutes=0):
+    """Remove a server from cloud.
+
+    :arg str os_cloud: Cloud name as defined in OpenStack clouds.yaml.
+    :arg int minutes: Only delete server if it is older than number of minutes.
+    """
+    cloud = shade.openstack_cloud(cloud=os_cloud)
+    server = cloud.get_server(server_name)
+
+    if not server:
+        print("ERROR: Server not found.")
+        sys.exit(1)
+
+    if (datetime.strptime(server.created, '%Y-%m-%dT%H:%M:%SZ')
+            >= datetime.utcnow() - timedelta(minutes=minutes)):
+        print('WARN: Server "{}" is not older than {} minutes.'.format(
+            server.name, minutes))
+    else:
+        cloud.delete_server(server.name)
