@@ -114,5 +114,20 @@ def list(ctx, days):
         days=days)
 
 
+@click.command()
+@click.argument('server')
+@click.option(
+    '--minutes', type=int, default=0,
+    help='Delete server if older than x minutes.')
+@click.pass_context
+def remove(ctx, server, minutes):
+    """Remove servers."""
+    os_server.remove(
+        ctx.obj['os_cloud'],
+        server_name=server,
+        minutes=minutes)
+
+
 server.add_command(cleanup)
 server.add_command(list)
+server.add_command(remove)
