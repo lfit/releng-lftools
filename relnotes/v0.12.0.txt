@@ -1,0 +1,45 @@
+lftools v0.12.0 Release Notes
+=============================
+
+Thanks to Anil, Jessica, Robert and Thanh for contributing to this release.
+
+
+Notable changes since v0.11.0
+----------------------------
+
+8be6ebc Thanh Ha        Add lftools command to remove specific server
+Adds a new remove server command that accepts an optional minutes parameter.
+This allows us to ignore deleting a server if it is not at least a certain age
+to prevent cleanup scripts deleting a server before it has a chance to connect
+to Jenkins.
+
+dd02080 Robert Varga    upload_to_nexus to return a non-zero exit status
+Fixed a bug where upload_to_nexus did not properly return a failure state. This
+would cause Jenkins to incorrectly log the upload as passed.
+
+d28fe86 Thanh Ha        Add a groovy command to lftools
+Adds a new groovy command which can be used to execute admin scripts against a
+Jenkins instance. We plan to use this feature to enable management of global
+Jenkins configuration.
+
+fc50450 Jessica Wagantall       Fix wget command for Nexus sign script
+Improves the sign script command to clone 15 levels of directories in Nexus
+when signing artifacts. This is necessary as some projects have more than the
+default number of nested subdirectories.
+
+e42e0f5 Anil Belur      Print CPU, Memory, Disk and Network stats
+This prints additional information about the system at the end of a job run.
+
+
+Full Change Log
+---------------
+
+8be6ebc Thanh Ha        Add lftools command to remove specific server
+dd02080 Robert Varga    upload_to_nexus to return a non-zero exit status
+0cf41e5 Thanh Ha        Switch to using lfdocs-conf 0.1.3
+d28fe86 Thanh Ha        Add a groovy command to lftools
+2bf9eef Thanh Ha        Switch lftools to lfdocs-conf
+459dded Thanh Ha        Improve debugging output for deploy nexus-zip cmd
+b4de489 Thanh Ha        Fix ShellCheck v0.4.7 lint issues
+fc50450 Jessica Wagantall       Fix wget command for Nexus sign script
+e42e0f5 Anil Belur      Print CPU, Memory, Disk and Network stats
