@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "4b4cc6e1_3ad2a4ed",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "I am not sure.. but I can investigate...",
+      "parentUuid": "8f589471_3e6d89b4",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 1
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1f25e8d_e9cc7dfe",
         "filename": "lftools/jenkins/sync_config_files.groovy",
         "patchSetId": 12
@@ -59,6 +83,30 @@
       "writtenOn": "2017-11-13T23:37:58Z",
       "side": 1,
       "message": "Why is a password generated here? Shouldn\u0027t it be explicitly set as an argument, or already exist in Nexus?",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 90
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51cc03e0_a976bddf",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Right, This was just added initially so that I can test it, but we are supposed to provide the passwords too. Will adjust that",
+      "parentUuid": "b1f25e8d_e9cc7dfe",
       "range": {
         "startLine": 114,
         "startChar": 4,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "41128052_890ec069",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09885e29_352588d7",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 40
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "edc67f0e_5e025994",
         "filename": "lftools/jenkins/sync_config_files.groovy",
         "patchSetId": 12
@@ -105,6 +177,30 @@
       "writtenOn": "2017-11-13T23:25:15Z",
       "side": 1,
       "message": "Declared later, remove.",
+      "range": {
+        "startLine": 128,
+        "startChar": 1,
+        "endLine": 128,
+        "endChar": 53
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "436827c1_918873fe",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edc67f0e_5e025994",
       "range": {
         "startLine": 128,
         "startChar": 1,
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "c4b5fa1b_a3608d20",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d71b83a4_13e259f1",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 35
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2c0713d_f5ce4809",
         "filename": "lftools/jenkins/sync_config_files.groovy",
         "patchSetId": 12
@@ -151,6 +271,30 @@
       "writtenOn": "2017-11-13T23:25:15Z",
       "side": 1,
       "message": "Unused, remove.",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 72
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9d9bd9b_31dd0507",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2c0713d_f5ce4809",
       "range": {
         "startLine": 130,
         "startChar": 0,
@@ -186,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "300455dd_0a957543",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e5d52a6_09b09568",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 35
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66764c22_65a99878",
         "filename": "lftools/jenkins/sync_config_files.groovy",
         "patchSetId": 12
@@ -197,6 +365,30 @@
       "writtenOn": "2017-11-13T23:25:15Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 134,
+        "startChar": 4,
+        "endLine": 134,
+        "endChar": 26
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "432981f3_04679451",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66764c22_65a99878",
       "range": {
         "startLine": 134,
         "startChar": 4,
@@ -232,6 +424,30 @@
     },
     {
       "key": {
+        "uuid": "c3c517bd_07abc08c",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75467423_351e2804",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 135,
+        "endChar": 26
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f85004c3_8a2e1eff",
         "filename": "lftools/jenkins/sync_config_files.groovy",
         "patchSetId": 12
@@ -243,6 +459,30 @@
       "writtenOn": "2017-11-13T23:25:15Z",
       "side": 1,
       "message": "You shouldn\u0027t need to pre-declare this. Just a `def mapping` should work as you\u0027re only using inside the loop.",
+      "range": {
+        "startLine": 140,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 15
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad0d6ed4_89b0bf1e",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f85004c3_8a2e1eff",
       "range": {
         "startLine": 140,
         "startChar": 8,
@@ -278,6 +518,30 @@
     },
     {
       "key": {
+        "uuid": "96fc3b24_fcdc589d",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba5078c8_eac51091",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 65
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29db1158_6db9b828",
         "filename": "lftools/jenkins/sync_config_files.groovy",
         "patchSetId": 12
@@ -301,6 +565,30 @@
     },
     {
       "key": {
+        "uuid": "9fee2554_c468d4db",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29db1158_6db9b828",
+      "range": {
+        "startLine": 145,
+        "startChar": 102,
+        "endLine": 145,
+        "endChar": 112
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73d1ef7a_50e66bbd",
         "filename": "lftools/jenkins/sync_config_files.groovy",
         "patchSetId": 12
@@ -312,6 +600,30 @@
       "writtenOn": "2017-11-13T23:25:15Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 146,
+        "startChar": 4,
+        "endLine": 146,
+        "endChar": 81
+      },
+      "revId": "e8c3df9ddff61783e1fd7fb9eacdde3ff568bbbb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "199e9175_8e835818",
+        "filename": "lftools/jenkins/sync_config_files.groovy",
+        "patchSetId": 12
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-02-23T04:31:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73d1ef7a_50e66bbd",
       "range": {
         "startLine": 146,
         "startChar": 4,
