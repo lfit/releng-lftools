@@ -1,0 +1,9 @@
+#!/bin/bash
+cd "$TMP_WORKSPACE"/"$repository"
+
+#get uuid for for GitHub users into groups file
+ssh -p 29418 "$user"@"$project" gerrit ls-groups --verbose \
+| grep "GitHub\ Replication"\
+| awk '{print $3"\t"$1,$2}' > groups
+
+cat groups
