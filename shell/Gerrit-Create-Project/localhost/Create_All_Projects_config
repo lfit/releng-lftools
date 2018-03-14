@@ -1,0 +1,20 @@
+#!/bin/bash
+cd "$TMP_WORKSPACE"/All-Projects-"$repository"
+
+printf "ldap:cn=$shortname-gerrit-$repository-submitters,ou=Groups,dc=freestandards,dc=org\tldap/$shortname-gerrit-$repository-submitters\n\
+ldap:cn=$shortname-gerrit-$repository-contributors,ou=Groups,dc=freestandards,dc=org\tldap/$shortname-gerrit-$repository-contributors\n"\
+>> groups
+
+git add groups
+git commit -sv -m "Creating groups file"
+
+if git push origin HEAD:refs/meta/config &> /dev/null; then
+  echo "git push for groups file succeeded"
+else
+  echo "git push for groups file failed"
+  exit 1
+fi
+
+#Adding gerrit acces
+git config  --add -f project.config 'access.refs/for/refs/*.push' "group ldap/$shortname-gerrit-$repository-submitters"
+git config  --add -f project.config 'access.refs/for/refs/*.push' "group ldap/$shortname-gerrit-$repository-contributors"

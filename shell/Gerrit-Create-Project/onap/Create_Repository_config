@@ -1,0 +1,7 @@
+#!/bin/bash
+cd "$TMP_WORKSPACE"/"$repository"
+
+git config  --replace project.config 'access.inheritFrom' "All-Projects"
+git config  --add -f project.config 'access.refs/*.read' "group GitHub Replication"
+
+echo ""
