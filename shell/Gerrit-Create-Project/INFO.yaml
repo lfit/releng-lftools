@@ -1,0 +1,60 @@
+---
+project: ''
+project_creation_date: ''
+project_category: ''
+lifecycle_state: ''
+project_lead: &_ptl
+    name: ''
+    email: ''
+    id: ''
+    company: ''
+    timezone: ''
+primary_contact: *_ptl
+issue_tracking:
+    type: ''
+    url: ''
+    key: ''
+mailing_list:
+    type: ''
+    url: ''
+    tag: ''
+realtime_discussion:
+    type: ''
+    server: ''
+    channel: ''
+meetings:
+    - type: ''
+      agenda: ''
+      url: ''
+      server: ''
+      channel: ''
+      repeats: ''
+      time: ''
+repositories:
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+committers:
+    - <<: *_ptl
+    - name: ''
+      email: ''
+      company: ''
+      id: ''
+      timezone: ''
+    - name: ''
+      email: ''
+      company: ''
+      id: ''
+      timezone: ''
+tsc:
+    # yamllint disable rule:line-length
+    approval: ''
+    changes:
+        - type: 'removal'
+          name: ''
+          link: ''
+        - type: 'promotion'
+          name: ''
+          link: ''

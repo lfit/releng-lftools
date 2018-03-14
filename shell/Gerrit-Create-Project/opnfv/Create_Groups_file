@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#Groups File OPNFV
+cd "$TMP_WORKSPACE"/"$repository"
+
+#get uuid for Non-Interactive and GitHub users into groups file
+ssh -p 29418 "$user"@"$project" gerrit ls-groups --verbose \
+  | egrep 'GitHub|Non-Interactive'\
+  | awk '{print $3"\t"$1,$2}' > groups
+
+
+printf "global:Registered-Users\tRegistered Users\n\
+ldap:cn=$shortname-gerrit-$repository-submitters,ou=Groups,dc=freestandards,dc=org\tldap/$shortname-gerrit-$repository-submitters\n\
+ldap:cn=$shortname-gerrit-$repository-contributors,ou=Groups,dc=freestandards,dc=org\tldap/$shortname-gerrit-$repository-contributors\n"\
+>> groups
+
+cat groups
