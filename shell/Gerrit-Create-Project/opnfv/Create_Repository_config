@@ -1,0 +1,20 @@
+#!/bin/bash
+cd "$TMP_WORKSPACE"/"$repository"
+
+git config  --replace project.config 'access.inheritFrom' "All-Projects"
+git config  --add -f project.config 'access.refs/heads/*.read' "group Github Replication"
+git config  --add -f project.config "access.refs/heads/*.label-Code-Review" "-2..+2 group ldap/$shortname-gerrit-$repository-submitters"
+git config  --add -f project.config "access.refs/heads/*.label-Code-Review" "-1..+1 group Registered Users"
+git config  --add -f project.config "access.refs/heads/*.label-Verified" "-1..+1 group Non-Interactive Users"
+git config  --add -f project.config "access.refs/heads/*.label-Verified" "-1..+1 group ldap/$shortname-gerrit-$repository-submitters"
+git config  --add -f project.config 'access.refs/heads/*.submit' "group ldap/$shortname-gerrit-$repository-submitters"
+git config  --add -f project.config 'access.refs/heads/*.read' "group ldap/$shortname-gerrit-$repository-submitters"
+git config  --add -f project.config 'access.refs/tags/*.create' "group ldap/$shortname-gerrit-$repository-submitters"
+git config  --add -f project.config 'access.refs/tags/*.push' "group ldap/$shortname-gerrit-$repository-submitters"
+git config  --add -f project.config 'access.refs/tags/*.pushTag' "group ldap/$shortname-gerrit-$repository-submitters"
+git config  --add -f project.config 'access.refs/tags/*.pushSignedTag' "group ldap/$shortname-gerrit-$repository-submitters"
+git config  --add -f project.config 'access.refs/tags/*.pushAnnotatedTag' "group ldap/$shortname-gerrit-$repository-submitters"
+git config  --add -f project.config --add 'access.refs/heads/*.forgeAuthor' "group ldap/$shortname-gerrit-$repository-contributors"
+git config  --add -f project.config --add 'access.refs/heads/*.forgeAuthor' "group ldap/$shortname-gerrit-$repository-submitters"
+
+echo ""
