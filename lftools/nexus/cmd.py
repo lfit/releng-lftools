@@ -16,6 +16,7 @@ import sys
 import yaml
 
 from lftools.nexus import Nexus
+from lftools.nexus import util
 
 log = logging.getLogger(__name__)
 
@@ -115,9 +116,8 @@ def create_repos(config_file, settings_file):
 
     def build_repo(repo, repoId, config, base_groupId):
         log.info('-> Building for {}.{} in Nexus'.format(base_groupId, repo))
-        groupId = '%s.%s' % (base_groupId, repo)
-        target1 = '^/%s/.*' % groupId.replace('.', '[/\.]')
-        target2 = '^/%s[\.].*' % groupId.replace('.', '[/\.]')
+        groupId = '{}.{}'.format(base_groupId, repo)
+        target = util.create_repo_target_regex(groupId)
 
         if 'extra_privs' in config:
             extra_privs = config['extra_privs']
@@ -127,7 +127,7 @@ def create_repos(config_file, settings_file):
 
         create_nexus_perms(
             repoId,
-            [target1, target2],
+            [target],
             settings['email_domain'],
             config['password'],
             extra_privs)
