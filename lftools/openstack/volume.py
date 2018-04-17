@@ -86,7 +86,7 @@ def remove(os_cloud, volume_name, minutes=0):
         print("ERROR: volume not found.")
         sys.exit(1)
 
-    if (datetime.strptime(volume.created_at, '%Y-%m-%dT%H:%M:%SZ')
+    if (datetime.strptime(volume.created_at, '%Y-%m-%dT%H:%M:%S.%f')
             >= datetime.utcnow() - timedelta(minutes=minutes)):
         print('WARN: volume "{}" is not older than {} minutes.'.format(
             volume.name, minutes))
