@@ -17,6 +17,7 @@ import click
 
 from lftools.openstack import image as os_image
 from lftools.openstack import server as os_server
+from lftools.openstack import volume as os_volume
 
 
 @click.group()
@@ -131,3 +132,53 @@ def remove(ctx, server, minutes):
 server.add_command(cleanup)
 server.add_command(list)
 server.add_command(remove)
+
+
+@openstack.group()
+@click.pass_context
+def volume(ctx):
+    """Command for manipulating volumes."""
+    pass
+
+
+@click.command()
+@click.option(
+    '--days', type=int, default=0,
+    help='Find volumes older than or equal to days.')
+@click.pass_context
+def cleanup(ctx, days):
+    """Cleanup old volumes."""
+    os_volume.cleanup(
+        ctx.obj['os_cloud'],
+        days=days)
+
+
+@click.command()
+@click.option(
+    '--days', type=int, default=0,
+    help='Find volumes older than or equal to days.')
+@click.pass_context
+def list(ctx, days):
+    """List cloud volumes."""
+    os_volume.list(
+        ctx.obj['os_cloud'],
+        days=days)
+
+
+@click.command()
+@click.argument('volume')
+@click.option(
+    '--minutes', type=int, default=0,
+    help='Delete volumes if older than x minutes.')
+@click.pass_context
+def remove(ctx, volume, minutes):
+    """Remove volumes."""
+    os_volume.remove(
+        ctx.obj['os_cloud'],
+        volume_name=volume,
+        minutes=minutes)
+
+
+volume.add_command(cleanup)
+volume.add_command(list)
+volume.add_command(remove)
