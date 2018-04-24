@@ -63,6 +63,7 @@ def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, root_domain):
     # as a workaround we have to at least give it 1 directory deep. Since most
     # LF projects are 'org' domain default is org but can be override with the
     # -r option.
+    nexus_url = nexus_url.rstrip('/')
     nexus_repo_url = "{}/content/repositories/{}/{}".format(nexus_url, nexus_repo, root_domain)
     sign_dir = tempfile.mkdtemp(prefix='gpg-signatures.')
 
