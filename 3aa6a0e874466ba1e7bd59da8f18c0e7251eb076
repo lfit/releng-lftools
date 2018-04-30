@@ -34,6 +34,24 @@
       "revId": "3aa6a0e874466ba1e7bd59da8f18c0e7251eb076",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3664cedc_7ee56d6a",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-04-30T16:04:15Z",
+      "side": 1,
+      "message": "No, my suggestion on the change actually clamps them to org.bar.PROJECT at most Note the change that I suggested drops the [\\.].* completely that it previously had.\n\nWe don\u0027t want to all them to do org.bar.PROJECT.ADDITIONAL.ARTIFACTS but org.bar.PROJECT/ADDITIONAL/ARTIFACTS is fine (our first regex)",
+      "parentUuid": "904a2e85_7d4a500c",
+      "revId": "3aa6a0e874466ba1e7bd59da8f18c0e7251eb076",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
