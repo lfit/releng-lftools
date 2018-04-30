@@ -8,6 +8,7 @@ bash. It supports the following commands.
 .. toctree::
     :maxdepth: 2
 
+    config
     deploy
     license
     nexus
