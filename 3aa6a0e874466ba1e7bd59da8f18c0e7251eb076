@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c9c1cd1_3dc36acd",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-04-30T15:08:32Z",
+      "side": 1,
+      "message": "This disallows a project to release an artifact of their specific groupID name. So, project foo of org.bar _cannot_ release an artifact of org.bar.foo with only this target. They are forced into releasing org.bar.foo.foo\n\nSo, instead of removing the second target, perhaps it should be rewritten as\n\ntarget1 \u003d \u0027/%s\u0027 % groupId.replace(\u0027.\u0027, \u0027[/\\.]\u0027)",
+      "revId": "3aa6a0e874466ba1e7bd59da8f18c0e7251eb076",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
