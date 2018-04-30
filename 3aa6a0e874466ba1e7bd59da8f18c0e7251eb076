@@ -16,6 +16,24 @@
       "revId": "3aa6a0e874466ba1e7bd59da8f18c0e7251eb076",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "904a2e85_7d4a500c",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-04-30T16:00:12Z",
+      "side": 1,
+      "message": "hmm... I thought this was what we agreed to the past meeting. So I guess the constraint is a project wants to publish things to both.\n\n org.opendaylight.PROJECT/maven/artifacts/go/here\n\nas well as \n\n org.opendaylight.PROJECT.ADDITIONAL.ARTIFACTS/\n\nIf we want to simplify this then the regex might look like:\n\n \u0027^/%s.*\u0027 % groupId.replace(\u0027.\u0027, \u0027[/\\.]\u0027)\n\n(basically remove the end /)\n\nOr stay with having the 2 regex patterns.\n\nI think we shouldn\u0027t allow the 2nd case because it basically gives them a wildcard namespace as long as it loosely starts with the groupId.\n\nFor example the 2 projects in OpenDaylight, DLUX and DLUXAPPs. DLUX can write into the DLUX apps namespace because it starts with DLUX.",
+      "parentUuid": "3c9c1cd1_3dc36acd",
+      "revId": "3aa6a0e874466ba1e7bd59da8f18c0e7251eb076",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
