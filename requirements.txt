@@ -2,7 +2,9 @@ click
 pyyaml
 requests~=2.18.0
 setuptools>=36.5.0
+six~=1.11.0
 python-jenkins~=0.4.16  # Regression in run_script() with 1.0.0
+xdg~=3.0.0
 
 # workarounds to prevent upstream from breaking us
 netifaces==0.10.5
