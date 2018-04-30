@@ -13,6 +13,7 @@ __author__ = 'Thanh Ha'
 
 import click
 
+from lftools.cli.config import config_sys
 from lftools.cli.deploy import deploy
 from lftools.cli.jenkins import jenkins_cli
 from lftools.cli.license import license
@@ -29,6 +30,7 @@ def cli(ctx):
     pass
 
 
+cli.add_command(config_sys)
 cli.add_command(deploy)
 cli.add_command(jenkins_cli, name='jenkins')
 cli.add_command(license)
