@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b43b638_1cd40fd2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-05-31T16:12:08Z",
+      "side": 1,
+      "message": "Move this to the footer in the following format:\n\nIssue: RELENG-407",
+      "revId": "2f8fd3ee4e8fbcc6ac35a08464f4fbc6cec87e27",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83bdfc4b_31efe0b7",
+        "filename": "3rdparty/ldap-lookup.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-05-31T16:12:08Z",
+      "side": 1,
+      "message": "While I understand that our standard use case is going to be LF infra, can we please not hard code the infra into the script? I would prefer a configuration file and / or CLI switches for setting this information",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 56
+      },
+      "revId": "2f8fd3ee4e8fbcc6ac35a08464f4fbc6cec87e27",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "337354d1_58090f07",
+        "filename": "shell/Check_committers.sh",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-05-31T16:12:08Z",
+      "side": 1,
+      "message": "I don\u0027t like tools telling us to loosen system security. Can you please find a way to do this / inform how to update properly so that we can use the certs being provided by the infrastructure?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 29
+      },
+      "revId": "2f8fd3ee4e8fbcc6ac35a08464f4fbc6cec87e27",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
