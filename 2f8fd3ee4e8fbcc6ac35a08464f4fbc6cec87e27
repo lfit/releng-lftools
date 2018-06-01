@@ -62,6 +62,29 @@
       "revId": "2f8fd3ee4e8fbcc6ac35a08464f4fbc6cec87e27",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb84fa1a_c51d5b58",
+        "filename": "shell/Check_committers.sh",
+        "patchSetId": 11
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-06-01T02:35:52Z",
+      "side": 1,
+      "message": "should be using `~/.ldaprc` for users\n\nHOST ldap.fqdn \nPORT 636  \nTLS_REQCERT ALLOW\n\nNote: this setting requires pulling in CA certs from letsencrypt for this to work. \n\ndoes this work with vpn?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 29
+      },
+      "revId": "2f8fd3ee4e8fbcc6ac35a08464f4fbc6cec87e27",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
