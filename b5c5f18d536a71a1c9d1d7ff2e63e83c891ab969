@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16eef8fc_8b1e14df",
+        "filename": "relnotes/v0.13.0.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 82
+      },
+      "writtenOn": "2018-06-01T16:49:17Z",
+      "side": 1,
+      "message": "what\u0027s the plan for this? do we need to search and fix\nin our project repos before we upgrade to .13?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 38
+      },
+      "revId": "b5c5f18d536a71a1c9d1d7ff2e63e83c891ab969",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
