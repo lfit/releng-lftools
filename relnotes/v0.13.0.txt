@@ -1,0 +1,30 @@
+lftools v0.13.0 Release Notes
+=============================
+
+Thanks to Thanh for contributing to this release.
+
+
+Notable changes since v0.12.0
+----------------------------
+
+81cf2ce Thanh Ha        Make OpenStack requirements optional
+This is a breaking change for any scripts that need the openstack command.
+These projects will need to additionally call `pip install lftools[openstack]`
+to install the openstack dependencies.
+
+
+Full Change Log
+---------------
+
+f881931 Thanh Ha        Simplify Nexus 2 repo target regex
+81cf2ce Thanh Ha        Make OpenStack requirements optional
+5dafca0 Thanh Ha        Add test for latest upstream of dependencies
+891cd62 Thanh Ha        Move tests requirements to separate file
+1a58332 Thanh Ha        Remove trailing slashes in nexus_url
+767ad4c Thanh Ha        Add pytest cache to .gitignore
+beef63d Thanh Ha        Pin requests and python-jenkins
+f4eba82 Thanh Ha        Fail Sphinx build even on warnings
+c41b5fa Thanh Ha        Fix remove volume time format
+05c2bf2 Thanh Ha        Fix volume remove command polling wrong metadata
+f4a4e17 Thanh Ha        Add support for volume management
+4181a01 Thanh Ha        Pin netifaces to 0.10.5
