@@ -14,7 +14,7 @@
 
 __author__ = 'Thanh Ha'
 __summary__ = 'Linux Foundation Release Engineering Tools'
-__version__ = '0.13.0'
+__version__ = '0.13.1'
 
 import logging
 import logging.config
