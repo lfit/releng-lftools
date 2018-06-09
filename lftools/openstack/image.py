@@ -66,6 +66,10 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
     def _remove_images_from_cloud(images, cloud):
         print('Removing {} images from {}.'.format(len(images), cloud.cloud_config.name))
         for image in images:
+            if image.is_protected:
+                print('WARNING: Image {} is protected. Cannot remove...'.format(image.name))
+                continue
+
             try:
                 result = cloud.delete_image(image.name)
             except shade.exc.OpenStackCloudException as e:
