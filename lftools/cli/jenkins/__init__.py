@@ -45,7 +45,8 @@ def groovy(ctx, groovy_file):
         data = f.read()
 
     server = ctx.obj['server']
-    server.run_script(data)
+    result = server.run_script(data)
+    print(result)
 
 
 @click.command()
