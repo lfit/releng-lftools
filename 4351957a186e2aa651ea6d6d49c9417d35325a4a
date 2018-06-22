@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d795b35d_0a6d6eca",
+        "filename": "3rdparty/ldap-lookup.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-06-22T20:03:28Z",
+      "side": 1,
+      "message": "a space is output here before the uid. not sure where its coming form.  \neg: opnfv-gerrit-releng-submitters, agardner,Aric Gardner,agardner@linuxfoundation.org",
+      "range": {
+        "startLine": 96,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 73
+      },
+      "revId": "4351957a186e2aa651ea6d6d49c9417d35325a4a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
