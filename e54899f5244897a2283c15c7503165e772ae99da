@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7faaf70a_1c046c48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-06-22T17:16:11Z",
+      "side": 1,
+      "message": "Extraneous line. This line makes it part of the body and not the footer. Remove this please.",
+      "revId": "e54899f5244897a2283c15c7503165e772ae99da",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
