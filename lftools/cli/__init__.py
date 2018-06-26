@@ -13,10 +13,13 @@ __author__ = 'Thanh Ha'
 
 import click
 
+from lftools.cli.correctinfofile import correctinfofile
 from lftools.cli.deploy import deploy
 from lftools.cli.jenkins import jenkins_cli
+from lftools.cli.ldap_cli import ldap_cli
 from lftools.cli.license import license
 from lftools.cli.nexus import nexus
+from lftools.cli.parseinfofile import parseinfofile
 from lftools.cli.sign import sign
 from lftools.cli.version import version
 
@@ -29,12 +32,15 @@ def cli(ctx):
     pass
 
 
+cli.add_command(correctinfofile)
 cli.add_command(deploy)
 cli.add_command(jenkins_cli, name='jenkins')
 cli.add_command(license)
 cli.add_command(nexus)
 cli.add_command(sign)
 cli.add_command(version)
+cli.add_command(ldap_cli, name='ldap')
+cli.add_command(parseinfofile)
 
 try:
     from lftools.openstack.cmd import openstack
