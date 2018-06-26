@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2022e1c_b768df63",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2018-06-26T23:38:05Z",
+      "side": 1,
+      "message": "here",
+      "range": {
+        "startLine": 31,
+        "startChar": 43,
+        "endLine": 31,
+        "endChar": 63
+      },
+      "revId": "6cf84b9491ffa59bcc1ca94df4a780fe9891e2de",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
