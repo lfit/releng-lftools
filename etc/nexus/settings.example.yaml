@@ -3,11 +3,11 @@
 
 # Nexus 2 system to work against. This should be the full path to the base web
 # interface including any URL context.
-nexus: 'http://nexus2.example.com'
+nexus: 'https://nexus.example.org'
 
 # Administrative nexus user account credentials
 user: 'admin'
 password: 'admin123'
 
 # email domain that nexus user emails should be generated with
-email_domain: 'example.com'
+email_domain: 'example.org'
