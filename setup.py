@@ -56,8 +56,11 @@ setup(
     ''',
     scripts=[
         'shell/deploy',
+        'shell/inactivecommitters',
         'shell/sign',
         'shell/version',
+        'shell/yaml4info',
+        'shell/autocorrectinfofile',
     ],
     data_files=[('etc', ['etc/logging.ini'])],
 )
