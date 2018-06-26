@@ -16,7 +16,9 @@ import click
 from lftools.cli.config import config_sys
 from lftools.cli.dco import dco
 from lftools.cli.deploy import deploy
+from lftools.cli.infofile import infofile
 from lftools.cli.jenkins import jenkins_cli
+from lftools.cli.ldap_cli import ldap_cli
 from lftools.cli.license import license
 from lftools.cli.nexus import nexus
 from lftools.cli.sign import sign
@@ -32,6 +34,7 @@ def cli(ctx):
 
 
 cli.add_command(config_sys)
+cli.add_command(infofile)
 cli.add_command(deploy)
 cli.add_command(dco)
 cli.add_command(jenkins_cli, name='jenkins')
@@ -39,6 +42,7 @@ cli.add_command(license)
 cli.add_command(nexus)
 cli.add_command(sign)
 cli.add_command(version)
+cli.add_command(ldap_cli, name='ldap')
 
 try:
     from lftools.openstack.cmd import openstack
