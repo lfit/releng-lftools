@@ -1,0 +1,77 @@
+#!/bin/bash
+
+#set -u
+
+main () {
+
+echo "Diff LDAP of $repo against INFO.yaml of $repo"
+
+lftools ldap yaml4info --groups "$ldapgroup" > LDAP.yaml
+
+if ! [[ -d $repo ]]; then
+  git clone -q "$gerritclonebase""$repo"
+fi
+
+if [ ! -f "$repo"/INFO.yaml ]; then
+  echo "$repo no INFO.yaml file"
+  status="1"
+
+else
+
+  diff="$(diff <(lftools parseinfofile --file LDAP.yaml| sort) <(lftools parseinfofile --file "$repo"/INFO.yaml| sort))"
+  status="$?"
+
+  diff_array=()
+  onlyinINFO=()
+  onlyinLDAP=()
+
+  while IFS= read -r line; do
+        diff_array+=( "$line" )
+        if [[ $(echo "$line" | grep ">") ]];
+        then
+          onlyinINFO+=( "$(echo "$line" | awk -F"'" '{ print $2 }')" )
+        fi
+        if [[ $(echo "$line" | grep "<") ]];
+        then
+          onlyinLDAP+=( "$(echo "$line" | awk -F"'" '{ print $2 }')" )
+        fi
+  done < <(echo "${diff[@]}" )
+
+
+  if ! [ "${#onlyinINFO[@]}" -eq 0 ]; then
+    echo "These users are only in $repo/INFO.yaml and are not found in LDAP"
+    for missing in "${onlyinINFO[@]}"; do
+      lftools parseinfofile --single "$missing" --file "$repo"/INFO.yaml
+    done
+  fi
+
+  if ! [ "${#onlyinLDAP[@]}" -eq 0 ]; then
+    echo "These users are listed as commiters in LDAP and not in the INFO.yaml"
+    for missing in "${onlyinLDAP[@]}"; do
+      lftools parseinfofile --single "$missing" --file LDAP.yaml
+    done
+  fi
+
+fi
+
+echo "Exit status = $status"
+#rm -rf "$repo"
+exit "$status"
+
+}
+
+usage() {
+cat << EOF
+Must be called from lftools
+eg: lftools ldap verifyinfofile
+EOF
+exit 1
+}
+
+if [[ -z "$@" ]]; then usage
+fi
+
+gerritclonebase="$1"
+ldapgroup="$2"
+repo="$3"
+main
