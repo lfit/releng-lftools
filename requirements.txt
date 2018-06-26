@@ -1,4 +1,5 @@
 click
+ldap
 pyyaml
 requests~=2.18.0
 setuptools>=36.5.0
