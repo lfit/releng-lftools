@@ -1,6 +1,8 @@
 click
+ldap
 pyyaml
 requests~=2.18.0
+ruamel.yaml
 setuptools>=36.5.0
 python-jenkins~=0.4.16  # Regression in run_script() with 1.0.0
 
