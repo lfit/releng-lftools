@@ -1,0 +1,109 @@
+#!/bin/bash
+# SPDX-License-Identifier: EPL-1.0
+##############################################################################
+# Copyright (c) 2017 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+
+set -u
+
+main () {
+
+echo "Diff LDAP of $repo against INFO.yaml of $repo"
+
+
+DIR=$(mktemp -d -t CORRECT_INFO_FILE.XXXXXX) || exit 1
+echo "tmpdir = $DIR"
+
+
+if lftools ldap yaml4info --groups "$ldapgroup" > "$DIR"/LDAP.yaml;
+  then
+    echo "LDAP lookup sucssesfull"
+  else
+    echo "Ldap lookup failed"
+    exit 1
+fi
+
+if ! [[ -d $repo ]]; then
+  git clone -q "$gerritclonebase""$repo" "$DIR"/"$repo"
+fi
+
+if [ ! -f "$DIR"/"$repo"/INFO.yaml ]; then
+  echo "$repo has no INFO.yaml file"
+  exit 1
+
+else
+
+  diff="$(diff <(lftools parseinfofile --file "$DIR"/LDAP.yaml| sort) <(lftools parseinfofile --file "$DIR"/"$repo"/INFO.yaml| sort))"
+  status="$?"
+
+  diff_array=()
+  onlyinINFO=()
+  onlyinLDAP=()
+
+  while IFS= read -r line; do
+        diff_array+=( "$line" )
+        if [[ $(echo "$line" | grep ">") ]];
+        then
+          onlyinINFO+=( "$(echo "$line" | awk -F"'" '{ print $2 }')" )
+        fi
+        if [[ $(echo "$line" | grep "<") ]];
+        then
+          onlyinLDAP+=( "$(echo "$line" | awk -F"'" '{ print $2 }')" )
+        fi
+  done < <(echo "${diff[@]}" )
+
+
+  if ! [ "${#onlyinINFO[@]}" -eq 0 ]; then
+    echo "These users are only in $repo/INFO.yaml and are not found in LDAP"
+    for missing in "${onlyinINFO[@]}"; do
+      echo "DUMMY: sending invite to $missing"
+      lftools parseinfofile --single "$missing" --file "$DIR"/"$repo"/INFO.yaml
+    done
+  fi
+
+  if ! [ "${#onlyinLDAP[@]}" -eq 0 ]; then
+    echo "These users are listed as commiters in LDAP and not in the INFO.yaml"
+    CommitMessage="Automatically adding: "
+    for missing in "${onlyinLDAP[@]}"; do
+      CommitMessage+="$missing, " 
+      echo "lftools correctinfofile --id "$missing" --file "$repo"/INFO.yaml --ldap LDAP.yaml"
+      #I have to load the info file. its the one I want to append
+      lftools correctinfofile --id "$missing" --file "$DIR"/"$repo"/INFO.yaml --ldap "$DIR"/LDAP.yaml
+    done
+    cd "$DIR"/"$repo" || exit
+    pwd
+    echo "git add INFO.yaml"
+    git add INFO.yaml
+    echo "git commit -svm "$CommitMessage""
+    git commit -svm "$CommitMessage"
+    echo "DUMMY: git review"
+  fi
+
+fi
+
+echo "Exit status = $status"
+#rm -rf "$repo"
+exit "$status"
+
+}
+
+usage() {
+cat << EOF
+Must be called from lftools
+eg: lftools ldap autocorrectinfofile
+EOF
+exit 1
+}
+
+if [[ -z "$*" ]]; then usage
+fi
+
+gerritclonebase="$1"
+ldapgroup="$2"
+repo="$3"
+main
