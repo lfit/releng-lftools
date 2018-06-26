@@ -1,0 +1,9 @@
+ldapsearch \
+-Z \
+-h pdx-wl-lb-lfldap.web.codeaurora.org \
+-D "uid=$1,ou=Users,dc=freestandards,dc=org" \
+-b 'ou=Groups,dc=freestandards,dc=org' \
+-W
+
+
+

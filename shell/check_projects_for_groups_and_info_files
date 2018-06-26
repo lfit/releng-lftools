@@ -1,0 +1,204 @@
+#!/bin/bash
+
+
+if ! [[ -f allgerritcsm ]]; then
+  echo "To get a dump of all ldap groups please run"
+  echo "./GrouplookupUser 'yourlfid' | grep "cn:" | grep gerrit | awk -F":\ " '{ print $2 }' | egrep '(committers|submitters|maintainers)' > allgerritcsm"
+exit 1
+fi
+
+if [[ -z $1 ]]; then 
+  echo "usage $0 lfid 2>&-"
+  exit 1
+fi
+
+
+user="$1"
+#bash check_info_files  2>&-
+main(){
+echo "************$project***************"
+fullproject=$project
+
+echo "Getting reviews for $project that match file INFO.yaml"
+ssh -p 29418 $user@$gerrit gerrit query --format=JSON --current-patch-set "is:open" --files "INFO.yaml" > review.$fullproject
+
+while read repo; do
+unset status
+
+    repotrunkated=${repo%%/*}
+    repodashed=$(echo $repo | sed -e 's/\//-/g')
+
+    if [[ $project == 'opendaylight' ]]; then
+      project=odl
+    fi
+    if [[ $project == 'iotivity' ]]; then
+      groupguess="$repotrunkated-gerrit-$committers"
+    else
+      groupguess="$project-gerrit-$repotrunkated-$committers"
+    fi
+      hasgroup="$(grep $groupguess allgerritcsm)"
+    if ! [[ -z $hasgroup ]]; then
+
+      #if git ls-remote ssh://$user@$gerrit:29418/$repo HEAD &>/dev/null; then
+      if git ls-remote git@github.com:$fullproject/$repodashed.git HEAD  &>/dev/null; then
+        status="READY_FOR_INFO $project $repo has matching committer group $groupguess"
+        
+        url="https://raw.githubusercontent.com/$fullproject/$repodashed/master/INFO.yaml"
+
+         if curl --output /dev/null --silent --head --fail "$url"; then
+          status="PASS $fullproject $repo has an INFO.yaml file"
+         else
+            hasreview=$(gerrit_magic | grep "$repo")
+ 						if ! [[ -z $hasreview ]]; then 
+                status="IN-REVIEW $project has $hasreview"
+            fi
+         fi
+
+      else 
+         echo "ERROR $repo repo does not exist in github"
+      fi
+      
+
+    else
+          if [[ -z $hasgroup ]]; then 
+          status="FAIL $project $repo has no matching committer group $groupguess"
+          fi
+    fi
+    echo "$status"
+
+    if [[ $status =~ "READY_FOR_INFO" ]]; then
+      echo "    lftools ldap autocorrectinfofile"
+      lftools ldap autocorrectinfofile --gerritclonebase "$clonebase" --ldapgroup "$groupguess" --repo "$repo" --purpose READY_FOR_INFO --review none
+
+		fi
+
+    if [[ $status =~ "PASS" ]]; then
+      echo "    LINTING: curl --silent "$url" > /tmp/INFO.yaml"
+      curl --silent "$url" > /tmp/INFO.yaml
+      if yamllint /tmp/INFO.yaml; then
+        #eventually I will want to check repos that PASS against LDAP
+        #lftools ldap autocorrectinfofile --gerritclonebase "$clonebase" --ldapgroup "$groupguess" --repo "$repo" --purpose LINT --review none
+        #if $? = 0; rm ... I need a 4th, PURPOSE=CHECK
+        rm /tmp/INFO.yaml
+      else
+        echo "    YAML LINT FAILED"
+        lftools ldap autocorrectinfofile --gerritclonebase "$clonebase" --ldapgroup "$groupguess" --repo "$repo" --purpose LINT --review none
+      fi
+		fi
+
+    if [[ $status =~ "IN-REVIEW" ]]; then
+      review="$(echo "$hasreview" | awk -F"," '{ print $3 }')"
+      echo "    lftools ldap autocorrectinfofile" 
+      lftools ldap autocorrectinfofile --gerritclonebase "$clonebase" --ldapgroup "$groupguess" --repo "$repo" --purpose IN-REVIEW --review "$review"
+		fi
+
+
+done < <(ssh -n -p 29418 "$gerrit" gerrit ls-projects --format json | grep -B2  ACTIVE | grep \"id\" | awk -F'"' '{ print $4 }' | sed s,%2F,/,g)
+}
+
+
+gerrit_magic() {
+
+    while read line; do
+      g_project="$(echo "$line" | jq -r '.project')"
+      g_file="$(echo "$line" | jq -r '.currentPatchSet.files' | grep INFO.yaml)"
+      trim "$g_file"
+      g_ref="$(echo "$line" | jq -r '.currentPatchSet.ref')"
+
+      if [ -z "$g_project" ] || [ -z "$g_file" ] || [ -z "$g_ref" ]; then
+        continue
+      else
+        echo "$g_project,$trimmed$g_ref"
+      fi
+
+    done < <(cat review."$fullproject")
+ 
+
+}
+
+trim()
+{
+    trimmed="$1"
+    trimmed="$(echo "$trimmed" | xargs echo -n)"
+}
+
+
+opnfv(){
+project=opnfv
+#clonebase=https://gerrit.opnfv.org/gerrit/
+committers=submitters
+gerrit=gerrit.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+odl(){
+project=opendaylight
+#clonebase=https://git.$project.org/gerrit/
+committers=committers
+gerrit=git.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+iotivity(){
+project=iotivity
+#clonebase=https://gerrit.$project.org/gerrit/
+committers=resource-maintainers
+gerrit=gerrit.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+onap(){
+project=onap
+#clonebase=https://gerrit.$project.org/r/
+committers=committers
+gerrit=gerrit.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+acumos(){
+project=acumos
+#clonebase=https://gerrit.acumos.org/r/
+committers=committers
+gerrit=gerrit.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+fdio(){
+project=fdio
+#clonebase=https://gerrit.fd.io/r/
+committers=committers
+gerrit=gerrit.fd.io
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+hyperledger(){
+project=hyperledger
+#clonebase=https://gerrit.$project.org/r/
+committers=committers
+gerrit=gerrit.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+
+
+#choose your order here
+odl
+iotivity
+onap
+acumos
+fdio
+hyperledger
+opnfv
+
+
+#project=akraino
+#clonebase=https://gerrit.$project.org/r/
+#committers=committers
+#gerrit=gerrit.$project.org

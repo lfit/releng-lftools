@@ -1,0 +1,142 @@
+#!/bin/bash
+# SPDX-License-Identifier: EPL-1.0
+##############################################################################
+# Copyright (c) 2017 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+
+set -u
+
+#echo "Diff LDAP against INFO.yaml"
+
+parseoptions() {
+
+echo "    gerritclonebase $gerritclonebase"
+echo "    ldapgroup $ldapgroup"
+echo "    repo $repo"
+echo "    purpose $purpose"
+
+if [[ $purpose =~ "READY_FOR_INFO" ]]; then
+
+  DIR="$(mktemp -d -t READY_FOR_INFO."$repo".XXXXXX)" || exit 1
+
+  if ! [[ -d "$DIR"/"$repo" ]]; then
+    echo "    git clone -q $gerritclonebase$repo $DIR/$repo || exit 1"
+    git clone -q "$gerritclonebase""$repo" "$DIR"/"$repo" || exit 1
+  fi
+  if [ ! -f "$DIR"/"$repo"/INFO.yaml ]; then
+    cp INFO.template.yaml "$DIR"/"$repo"/INFO.yaml || exit 1
+  fi
+
+fi
+
+if [[ $purpose =~ "LINT" ]]; then
+  echo "    LINT FAILED"
+  DIR="$(mktemp -d -t LINT."$repo".XXXXXX)" || exit 1
+  if ! [[ -d "$DIR"/"$repo" ]]; then
+    echo "    git clone -q $gerritclonebase$repo $DIR/$repo || exit 1"
+    git clone -q "$gerritclonebase""$repo" "$DIR"/"$repo" || exit 1
+  fi
+
+fi
+
+#I should only clone the review if their is a discrepancy in commiters
+if [[ $purpose =~ "IN-REVIEW" ]]; then
+  DIR="$(mktemp -d -t IN-REVIEW."$repo".XXXXXX)" || exit 1
+  if ! [[ -d "$DIR"/"$repo" ]]; then
+    echo "    git clone -q $gerritclonebase$repo $DIR/$repo || exit 1"
+    SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    git clone -q "$gerritclonebase""$repo" "$DIR"/"$repo" || exit 1
+    cd "$DIR"/"$repo" || exit
+    git fetch origin "$review" && git checkout --quiet FETCH_HEAD
+    cd "$SCRIPTDIR" || exit
+    yamllint "$DIR"/"$repo"/INFO.yaml
+    if ! yamllint "$DIR"/"$repo"/INFO.yaml; then
+      echo "   ERROR LINT FAILED CANNOT AUTO CORRECT FILE IN REVIEW"
+      exit 1
+    fi
+
+  fi
+fi
+
+main
+}
+
+main() {
+
+echo "    tmpdir = $DIR"
+
+if lftools ldap yaml4info --groups "$ldapgroup" 2>&- > "$DIR"/LDAP.yaml
+  then
+    echo "    LDAP lookup sucssesfull"
+  else
+    echo "    LDAP lookup failed"
+    exit 1
+fi
+
+diff="$(diff <(lftools parseinfofile --file "$DIR"/LDAP.yaml 2>&-| sort) <(lftools parseinfofile --file "$DIR"/"$repo"/INFO.yaml 2>&- | sort))"
+status="$?"
+
+diff_array=()
+onlyinINFO=()
+onlyinLDAP=()
+
+while IFS= read -r line; do
+      diff_array+=( "$line" )
+      if [[ $(echo "$line" | grep ">") ]];
+      then
+        onlyinINFO+=( "$(echo "$line" | awk -F"'" '{ print $2 }')" )
+      fi
+      if [[ $(echo "$line" | grep "<") ]];
+      then
+        onlyinLDAP+=( "$(echo "$line" | awk -F"'" '{ print $2 }')" )
+      fi
+done < <(echo "${diff[@]}" )
+
+
+if ! [ "${#onlyinINFO[@]}" -eq 0 ]; then
+  for missing in "${onlyinINFO[@]}"; do
+    if ! [ -z "$missing" ]; then
+      echo "    DUMMY: sending invite to $missing"
+      lftools parseinfofile --single "$missing" --file "$DIR"/"$repo"/INFO.yaml 2>&-
+    fi
+  done
+fi
+
+if ! [ "${#onlyinLDAP[@]}" -eq 0 ]; then
+  echo "    These users are listed as commiters in LDAP and not in the INFO.yaml"
+  for missing in "${onlyinLDAP[@]}"; do
+    echo "    lftools correctinfofile --id $missing --file $DIR/$repo/INFO.yaml --ldap $DIR/LDAP.yaml --repo $repo  2>&-"
+    lftools correctinfofile --id "$missing" --file "$DIR"/"$repo"/INFO.yaml --ldap "$DIR"/LDAP.yaml --repo "$repo"  2>&-
+  done
+
+fi
+
+echo "    Exit status = $status"
+exit "$status"
+
+}
+
+usage() {
+cat << EOF
+Must be called from lftools
+eg: lftools ldap autocorrectinfofile
+EOF
+exit 1
+}
+
+if [[ -z "$*" ]]; then usage
+fi
+
+gerritclonebase="$1"
+ldapgroup="$2"
+repo="$3"
+purpose="$4"
+review="$5"
+#review=${review:=default}
+
+parseoptions "$@"
