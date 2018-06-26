@@ -15,8 +15,10 @@ import click
 
 from lftools.cli.deploy import deploy
 from lftools.cli.jenkins import jenkins_cli
+from lftools.cli.ldap_cli import ldap_cli
 from lftools.cli.license import license
 from lftools.cli.nexus import nexus
+from lftools.cli.parseinfofile import parseinfofile
 from lftools.cli.sign import sign
 from lftools.cli.version import version
 
@@ -35,6 +37,8 @@ cli.add_command(license)
 cli.add_command(nexus)
 cli.add_command(sign)
 cli.add_command(version)
+cli.add_command(ldap_cli, name='ldap')
+cli.add_command(parseinfofile)
 
 try:
     from lftools.openstack.cmd import openstack
