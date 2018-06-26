@@ -1,0 +1,10 @@
+#!/bin/bash
+org=onap
+while read gerrit github; do
+
+echo $gerrit
+echo $github
+
+curl -i -H 'Authorization: token YOUR_TOKEN' -d "{\"name\":\"$github\", \"description\":\"Mirror of git clone https://gerrit.onap.org/r/$gerrit\", \"private\": false, \"has_issues\": false, \"has_wiki\": false }" https://api.github.com/orgs/$org/repos
+
+done < <(cat $1 | grep "READY TO"  | awk '{print $4, $6} )

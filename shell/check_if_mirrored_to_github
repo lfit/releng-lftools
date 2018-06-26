@@ -1,0 +1,133 @@
+#!/bin/bash
+
+
+if ! [[ -f allgerritcsm ]]; then
+  echo "To get a dump of all ldap groups please run"
+  echo "./GrouplookupUser 'yourlfid' | grep "cn:" | grep gerrit | awk -F":\ " '{ print $2 }' | egrep '(committers|submitters|maintainers)' > allgerritcsm"
+exit 1
+fi
+
+if [[ -z $1 ]]; then 
+  echo "usage $0 lfid 2>&-"
+  exit 1
+fi
+
+
+user="$1"
+main(){
+echo "************$project***************"
+fullproject=$project
+
+#echo "Getting reviews for $project that match file INFO.yaml"
+ssh -p 29418 $user@$gerrit gerrit query --format=JSON --current-patch-set "is:open" --files "INFO.yaml" > review.$fullproject
+
+while read repo; do
+
+repodashed=$(echo $repo | sed -e 's/\//-/g')
+
+if [[ $project == 'opendaylight' ]]; then
+  project=odl
+fi
+
+
+  if git ls-remote git@github.com:$fullproject/$repodashed.git HEAD  &>/dev/null; then
+    echo "ALREADY MIRROED TO GITHUB $fullproject/$repodashed" 
+  else 
+     git clone --quiet $clonebase$repo /tmp/TEST$repo 
+     cd /tmp/TEST$repo 
+     git fetch && git merge &> /dev/null
+     if ! git ls-files ".gitreview" --error-unmatch &> /dev/null; then
+          echo "ERROR IS_EMPTY $fullproject/$repo"
+     else
+          echo "READY TO CREATE $repo as $repodashed in GITHUB"
+     fi
+     cd - &> /dev/null
+
+  fi
+      
+
+
+done < <(ssh -n -p 29418 "$gerrit" gerrit ls-projects --format json | grep -B2  ACTIVE | grep \"id\" | awk -F'"' '{ print $4 }' | sed s,%2F,/,g)
+}
+
+
+
+opnfv(){
+project=opnfv
+#clonebase=https://gerrit.opnfv.org/gerrit/
+committers=submitters
+gerrit=gerrit.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+odl(){
+project=opendaylight
+#clonebase=https://git.$project.org/gerrit/
+committers=committers
+gerrit=git.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+iotivity(){
+project=iotivity
+#clonebase=https://gerrit.$project.org/gerrit/
+committers=resource-maintainers
+gerrit=gerrit.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+onap(){
+project=onap
+#clonebase=https://gerrit.$project.org/r/
+committers=committers
+gerrit=gerrit.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+acumos(){
+project=acumos
+#clonebase=https://gerrit.acumos.org/r/
+committers=committers
+gerrit=gerrit.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+fdio(){
+project=fdio
+#clonebase=https://gerrit.fd.io/r/
+committers=committers
+gerrit=gerrit.fd.io
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+hyperledger(){
+project=hyperledger
+#clonebase=https://gerrit.$project.org/r/
+committers=committers
+gerrit=gerrit.$project.org
+clonebase=ssh://$user@$gerrit:29418/
+main
+}
+
+
+
+#choose your order here
+onap
+odl
+opnfv
+acumos
+iotivity
+fdio
+hyperledger
+
+
+#project=akraino
+#clonebase=https://gerrit.$project.org/r/
+#committers=committers
+#gerrit=gerrit.$project.org
