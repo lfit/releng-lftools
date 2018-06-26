@@ -58,6 +58,8 @@ setup(
         'shell/deploy',
         'shell/sign',
         'shell/version',
+        'shell/yaml4info',
+        'shell/fixinfofile',
     ],
     data_files=[('etc', ['etc/logging.ini'])],
 )
