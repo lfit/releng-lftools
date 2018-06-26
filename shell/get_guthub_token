@@ -1,0 +1,3 @@
+#for2fa you can use the https://github.com/settings/tokens
+curl -i -u your_username -d '{"scopes": ["repo", "user"], "note": "getting api key"}' \
+https://api.github.com/authorizations

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+curl -i -H 'Authorization: token YOURTOKEN' -d \
+  "{\"name\":\"$1\", \"description\":\"Mirror of https://gerrit.opnfv.org/gerrit/$1\", \"private\": false, \"has_issues\": false, \"has_wiki\": false }" \
+  https://api.github.com/orgs/opnfv/repos

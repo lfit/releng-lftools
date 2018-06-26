@@ -1,6 +1,8 @@
 click
+ldap
 pyyaml
 requests~=2.18.0
+ruamel.yaml
 setuptools>=36.5.0
 six~=1.11.0
 python-jenkins~=1.1.0
