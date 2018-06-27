@@ -1,3 +1,5 @@
+.. _lf-lftools-commands-nexus:
+
 *****
 Nexus
 *****
