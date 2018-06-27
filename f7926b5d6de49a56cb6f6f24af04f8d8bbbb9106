@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9a3f5f5a_018b736a",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-06-27T01:37:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cba56135_7c4613c5",
+      "revId": "f7926b5d6de49a56cb6f6f24af04f8d8bbbb9106",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3111d6b9_bffffeb5",
         "filename": "docs/commands/nexus.rst",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-06-27T01:33:22Z",
       "side": 1,
       "message": "add above this: .. _nexus-commands:",
+      "revId": "f7926b5d6de49a56cb6f6f24af04f8d8bbbb9106",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49cab6cd_e06687a7",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-06-27T01:37:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3111d6b9_bffffeb5",
       "revId": "f7926b5d6de49a56cb6f6f24af04f8d8bbbb9106",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "52cd5811_091337cd",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-06-27T01:37:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85d6f98a_ecac2766",
+      "revId": "f7926b5d6de49a56cb6f6f24af04f8d8bbbb9106",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44bb4ff0_82b8709d",
         "filename": "docs/commands/nexus.rst",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "bbff077f_10d216af",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-06-27T01:37:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44bb4ff0_82b8709d",
+      "revId": "f7926b5d6de49a56cb6f6f24af04f8d8bbbb9106",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7d60818_b6f2ea4e",
         "filename": "docs/commands/nexus.rst",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2018-06-27T01:33:22Z",
       "side": 1,
       "message": "add above this: .._nexus-reorder-staged-repos:",
+      "revId": "f7926b5d6de49a56cb6f6f24af04f8d8bbbb9106",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b54ac528_b055269b",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-06-27T01:37:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7d60818_b6f2ea4e",
       "revId": "f7926b5d6de49a56cb6f6f24af04f8d8bbbb9106",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
