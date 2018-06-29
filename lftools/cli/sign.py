@@ -49,10 +49,14 @@ def nexus(ctx, nexus_repo_url):
 @click.argument('nexus-repo', envvar='NEXUS_REPO')
 @click.argument('staging-profile-id', envvar='STAGING_PROFILE_ID')
 @click.option(
+    '-d', '--sign-dir', type=str,
+    default=tempfile.mkdtemp(prefix='gpg-signatures.'),
+    help='Local directory to clone repository. (default /tmp/gpg-signatures.*)')
+@click.option(
     '-r', '--root-domain', type=str, default='org',
     help='Root download path of staging repo. (default org)')
 @click.pass_context
-def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, root_domain):
+def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, root_domain):
     """Sign artifacts from a Nexus repo then upload to a staging repo.
 
     This is a porcelain command that ties the lftools sign and deploy tools
@@ -65,7 +69,6 @@ def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, root_domain):
     # -r option.
     nexus_url = nexus_url.rstrip('/')
     nexus_repo_url = "{}/content/repositories/{}/{}".format(nexus_url, nexus_repo, root_domain)
-    sign_dir = tempfile.mkdtemp(prefix='gpg-signatures.')
 
     status = subprocess.call(['sign', 'nexus', '-d', sign_dir, nexus_repo_url])
     if status:
