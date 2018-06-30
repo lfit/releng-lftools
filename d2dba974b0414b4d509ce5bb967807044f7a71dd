@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6c64de52_91c22f87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-06-30T13:54:38Z",
+      "side": 1,
+      "message": "If it requires this patch than rebase ontop of it so that they cannot be merged independently of each other.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 61
+      },
+      "revId": "d2dba974b0414b4d509ce5bb967807044f7a71dd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdc1029e_ee8d5b87",
         "filename": "shell/sign",
         "patchSetId": 1
@@ -13,6 +36,30 @@
       "writtenOn": "2018-06-30T13:47:58Z",
       "side": 1,
       "message": "I think shouldn\u0027t set infinity because symlinks can cause an infinite loop.",
+      "range": {
+        "startLine": 151,
+        "startChar": 57,
+        "endLine": 151,
+        "endChar": 60
+      },
+      "revId": "d2dba974b0414b4d509ce5bb967807044f7a71dd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af580e9f_23fb4ae7",
+        "filename": "shell/sign",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-06-30T13:54:38Z",
+      "side": 1,
+      "message": "I also think we shouldn\u0027t be sneaking in unrelated changes in a patch either and should be a separate discussion.",
+      "parentUuid": "bdc1029e_ee8d5b87",
       "range": {
         "startLine": 151,
         "startChar": 57,
