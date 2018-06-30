@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdc1029e_ee8d5b87",
+        "filename": "shell/sign",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-06-30T13:47:58Z",
+      "side": 1,
+      "message": "I think shouldn\u0027t set infinity because symlinks can cause an infinite loop.",
+      "range": {
+        "startLine": 151,
+        "startChar": 57,
+        "endLine": 151,
+        "endChar": 60
+      },
+      "revId": "d2dba974b0414b4d509ce5bb967807044f7a71dd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
