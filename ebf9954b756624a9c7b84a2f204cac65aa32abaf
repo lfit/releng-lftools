@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08e2557f_d9c944c7",
+        "filename": "shell/sign",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-02T03:47:22Z",
+      "side": 1,
+      "message": "What guarantees / protection do we have against corrupt file or files that were half downloaded the previous time say if lftools crashed in a previous run?\n\nOr what if a file with the same name already exists but is not byte equivalent?\n\nIf we upload a signature signed against a corrupt file it won\u0027t validate when pushed back up to Nexus.",
+      "range": {
+        "startLine": 152,
+        "startChar": 14,
+        "endLine": 152,
+        "endChar": 46
+      },
+      "revId": "ebf9954b756624a9c7b84a2f204cac65aa32abaf",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
