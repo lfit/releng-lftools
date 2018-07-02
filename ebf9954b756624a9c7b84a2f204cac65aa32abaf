@@ -22,6 +22,30 @@
       "revId": "ebf9954b756624a9c7b84a2f204cac65aa32abaf",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce4efc5c_a6c2189c",
+        "filename": "shell/sign",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-07-02T10:02:15Z",
+      "side": 1,
+      "message": "None, with wget there are no guards to verify the checksum of every downloaded file. I tried using the -c (continue) option which does not work.\n\nAlso you are right, if the download file is interrupted and continued again from the same path, this just skips to the file. If we need to implement this manually downloading an individual file and verifying the checksum, with retries on failures. Let me know if you know of an option to overcome this.",
+      "parentUuid": "08e2557f_d9c944c7",
+      "range": {
+        "startLine": 152,
+        "startChar": 14,
+        "endLine": 152,
+        "endChar": 46
+      },
+      "revId": "ebf9954b756624a9c7b84a2f204cac65aa32abaf",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
