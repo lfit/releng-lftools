@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d81f6848_a80a7ba8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-07-02T11:33:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14a6b141_7c2e1ae7",
+      "range": {
+        "startLine": 10,
+        "startChar": 22,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e654369d_851ad5e2",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-02T04:00:32Z",
       "side": 1,
       "message": "-d \u003cpath\u003e would make more sense when referring to a directory.",
+      "range": {
+        "startLine": 17,
+        "startChar": 26,
+        "endLine": 17,
+        "endChar": 35
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88ee1c3e_3a974c20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-07-02T11:33:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e654369d_851ad5e2",
       "range": {
         "startLine": 17,
         "startChar": 26,
@@ -94,6 +142,54 @@
     },
     {
       "key": {
+        "uuid": "675dd6f6_1c92fd2f",
+        "filename": "lftools/cli/sign.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-07-02T11:33:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3094dcda_b014fb72",
+      "range": {
+        "startLine": 52,
+        "startChar": 33,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "231ae276_e885071d",
+        "filename": "lftools/cli/sign.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-07-02T11:33:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3a970d0_c1042386",
+      "range": {
+        "startLine": 52,
+        "startChar": 13,
+        "endLine": 52,
+        "endChar": 20
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1117986b_9f42c5e2",
         "filename": "lftools/cli/sign.py",
         "patchSetId": 4
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "be8163e5_33e161a1",
+        "filename": "lftools/cli/sign.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-07-02T11:33:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1117986b_9f42c5e2",
+      "range": {
+        "startLine": 53,
+        "startChar": 48,
+        "endLine": 53,
+        "endChar": 60
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccf9eb1c_ec958403",
         "filename": "lftools/cli/sign.py",
         "patchSetId": 4
@@ -128,6 +248,30 @@
       "writtenOn": "2018-07-02T04:00:32Z",
       "side": 1,
       "message": "These 4 lines of code, entirely unnecessary if using the pattern above.\n\nNormally the above defaults would be a Python \"gotcha\" however in this case we\u0027re trying to create a caching function so exploiting this is beneficial in this case.\n\nhttp://docs.python-guide.org/en/latest/writing/gotchas/",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 26
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54650dea_7de57041",
+        "filename": "lftools/cli/sign.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-07-02T11:33:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccf9eb1c_ec958403",
       "range": {
         "startLine": 72,
         "startChar": 0,
