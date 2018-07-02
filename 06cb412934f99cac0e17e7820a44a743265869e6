@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14a6b141_7c2e1ae7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-02T04:00:32Z",
+      "side": 1,
+      "message": "Default download location is actually `/tmp/gpg-signatures.*` where * is a randomly created directory.",
+      "range": {
+        "startLine": 10,
+        "startChar": 22,
+        "endLine": 11,
+        "endChar": 9
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e654369d_851ad5e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-02T04:00:32Z",
+      "side": 1,
+      "message": "-d \u003cpath\u003e would make more sense when referring to a directory.",
+      "range": {
+        "startLine": 17,
+        "startChar": 26,
+        "endLine": 17,
+        "endChar": 35
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3094dcda_b014fb72",
+        "filename": "lftools/cli/sign.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-02T04:00:32Z",
+      "side": 1,
+      "message": "default\u003dtempfile.mkdtemp(prefix\u003d\u0027gpg-signatures.\u0027)",
+      "range": {
+        "startLine": 52,
+        "startChar": 33,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3a970d0_c1042386",
+        "filename": "lftools/cli/sign.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-02T04:00:32Z",
+      "side": 1,
+      "message": "Just call this `--sign-dir` instead with short option `-d` for directory.",
+      "range": {
+        "startLine": 52,
+        "startChar": 13,
+        "endLine": 52,
+        "endChar": 20
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1117986b_9f42c5e2",
+        "filename": "lftools/cli/sign.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-02T04:00:32Z",
+      "side": 1,
+      "message": "The commit message says \"default /tmp\" and here says default None. Sounds inconsistent.\n\nWe should keep (default /tmp/gpg-signatures.*) as that\u0027s the previous behaviour. See above suggestion to put the tmpdir code into the default declaration.",
+      "range": {
+        "startLine": 53,
+        "startChar": 48,
+        "endLine": 53,
+        "endChar": 60
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ccf9eb1c_ec958403",
+        "filename": "lftools/cli/sign.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-02T04:00:32Z",
+      "side": 1,
+      "message": "These 4 lines of code, entirely unnecessary if using the pattern above.\n\nNormally the above defaults would be a Python \"gotcha\" however in this case we\u0027re trying to create a caching function so exploiting this is beneficial in this case.\n\nhttp://docs.python-guide.org/en/latest/writing/gotchas/",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 26
+      },
+      "revId": "06cb412934f99cac0e17e7820a44a743265869e6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
