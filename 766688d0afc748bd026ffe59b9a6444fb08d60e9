@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a26ca230_23a1edb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-07-09T15:36:16Z",
+      "side": 1,
+      "message": "Please mark this as an Issue: or JIRA: I don\u0027t like seeing bare footer data like this!",
+      "revId": "766688d0afc748bd026ffe59b9a6444fb08d60e9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
