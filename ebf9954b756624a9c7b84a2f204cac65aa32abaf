@@ -46,6 +46,30 @@
       "revId": "ebf9954b756624a9c7b84a2f204cac65aa32abaf",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd9e2f26_26589d88",
+        "filename": "shell/sign",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-09T16:24:33Z",
+      "side": 1,
+      "message": "I think wget is sometimes used to mirror websites. How are those systems mirroring and ensuring file integrity of their mirrors?",
+      "parentUuid": "ce4efc5c_a6c2189c",
+      "range": {
+        "startLine": 152,
+        "startChar": 14,
+        "endLine": 152,
+        "endChar": 46
+      },
+      "revId": "ebf9954b756624a9c7b84a2f204cac65aa32abaf",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
