@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45dfdd7e_59e91a4a",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-10T00:12:30Z",
+      "side": 1,
+      "message": "indent by 4 otherwise it\u0027s not affecting the def above. Python cares very much about indents :(",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 4
+      },
+      "revId": "afad36fab2e57679d683188eea3f5cd57f94748d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0afabd39_f12e88cb",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-10T00:12:30Z",
+      "side": 1,
+      "message": "These need to be spaces not tabs.",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 141,
+        "endChar": 58
+      },
+      "revId": "afad36fab2e57679d683188eea3f5cd57f94748d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02b58d3f_f0eca8da",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-10T00:12:30Z",
+      "side": 1,
+      "message": "Remove this.",
+      "revId": "afad36fab2e57679d683188eea3f5cd57f94748d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
