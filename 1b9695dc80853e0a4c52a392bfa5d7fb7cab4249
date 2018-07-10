@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "415eb43e_14e3cdb2",
+        "filename": "lftools/cli/__init__.py",
+        "patchSetId": 28
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-10T00:12:30Z",
+      "side": 1,
+      "message": "I think the parseinfofile and correctinfofile should be merged into a single infofile command. Something like:\n\n lftools info correct|parse [args]",
+      "revId": "1b9695dc80853e0a4c52a392bfa5d7fb7cab4249",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cefa0fb_7ac656b0",
+        "filename": "requirements.txt",
+        "patchSetId": 28
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-10T00:12:30Z",
+      "side": 1,
+      "message": "What\u0027s this providing that we cannot achieve with the regular PyYAML import?",
+      "revId": "1b9695dc80853e0a4c52a392bfa5d7fb7cab4249",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
