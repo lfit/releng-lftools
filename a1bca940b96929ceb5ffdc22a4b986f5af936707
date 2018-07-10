@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9116e844_80974b4e",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-10T23:23:04Z",
+      "side": 1,
+      "message": "These days it\u0027s better to use the format:\n\n \"Target not created for \u0027{}\u0027, code \u0027{}\u0027\".format(arg1, arg2)",
+      "revId": "a1bca940b96929ceb5ffdc22a4b986f5af936707",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2ba6b15_ec68577d",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-10T23:23:04Z",
+      "side": 1,
+      "message": "same here.",
+      "revId": "a1bca940b96929ceb5ffdc22a4b986f5af936707",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4c1ca12_07b75f1b",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-10T23:23:04Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "a1bca940b96929ceb5ffdc22a4b986f5af936707",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea639486_e33a236c",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-10T23:23:04Z",
+      "side": 1,
+      "message": "same here.",
+      "revId": "a1bca940b96929ceb5ffdc22a4b986f5af936707",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
