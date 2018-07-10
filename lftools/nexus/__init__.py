@@ -70,9 +70,12 @@ class Nexus:
             }
         }
 
-        json_data = json.dumps(target, encoding='latin-1')
+        json_data = json.dumps(target).encode(encoding='latin-1')
 
         r = requests.post(url, auth=self.auth, headers=self.headers, data=json_data)
+
+        if r.status_code != requests.codes.created:
+            raise Exception("Target not created for '%s', code '%s'" % (name, r.status_code))
 
         return r.json()['data']['id']
 
@@ -115,8 +118,12 @@ class Nexus:
             }
         }
 
-        json_data = json.dumps(privileges, encoding='latin-1')
-        privileges = requests.post(url, auth=self.auth, headers=self.headers, data=json_data).json()
+        json_data = json.dumps(privileges).encode(encoding='latin-1')
+        r = requests.post(url, auth=self.auth, headers=self.headers, data=json_data)
+        privileges = r.json()
+
+        if r.status_code != requests.codes.created:
+            raise Exception("Privilege not created for '%s', code '%s'" % (name, r.status_code))
 
         return privileges['data'][0]['id']
 
@@ -148,9 +155,12 @@ class Nexus:
             }
         }
 
-        json_data = json.dumps(role, encoding='latin-1')
+        json_data = json.dumps(role).encode(encoding='latin-1')
 
         r = requests.post(url, auth=self.auth, headers=self.headers, data=json_data)
+
+        if r.status_code != requests.codes.created:
+            raise Exception("Role not created for '%s', code '%s'" % (name, r.status_code))
 
         return r.json()['data']['id']
 
@@ -190,9 +200,12 @@ class Nexus:
         for role in extra_roles:
             user['data']['roles'].append(self.get_role(role))
 
-        json_data = json.dumps(user, encoding='latin-1')
+        json_data = json.dumps(user).encode(encoding='latin-1')
 
-        requests.post(url, auth=self.auth, headers=self.headers, data=json_data)
+        user = requests.post(url, auth=self.auth, headers=self.headers, data=json_data)
+
+        if user.status_code != requests.codes.created:
+            raise Exception("User not created for '%s', code '%s'" % (name, user.status_code))
 
     def get_repo_group(self, name):
         """Get the repository ID for a repo group that has a specific name."""
@@ -220,6 +233,6 @@ class Nexus:
             'data': data
         }
 
-        json_data = json.dumps(repo, encoding='latin-1')
+        json_data = json.dumps(repo).encode(encoding='latin-1')
 
         requests.put(url, auth=self.auth, headers=self.headers, data=json_data)
