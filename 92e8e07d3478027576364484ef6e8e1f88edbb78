@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a516356_9f52da88",
+        "filename": "lftools/license.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-11T02:46:17Z",
+      "side": 1,
+      "message": "Why\u0027s this file even changed at all?",
+      "revId": "92e8e07d3478027576364484ef6e8e1f88edbb78",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
