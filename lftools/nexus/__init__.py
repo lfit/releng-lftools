@@ -56,7 +56,7 @@ class Nexus:
         for priv in targets['data']:
             if priv['name'] == name:
                 return priv['id']
-        raise LookupError("No target found named '%s'" % (name))
+        raise LookupError("No target found named '{}'".format(name))
 
     def create_target(self, name, patterns):
         """Create a target with the given patterns."""
@@ -83,14 +83,14 @@ class Nexus:
         """Get the ID for the privilege with the given name."""
         url = '/'.join([self.baseurl, 'service/local/privileges'])
 
-        search_name = '%s - (%s)' % (name, priv)
+        search_name = '{} - ({})'.format(name, priv)
         privileges = requests.get(url, auth=self.auth, headers=self.headers).json()
 
         for priv in privileges['data']:
             if priv['name'] == search_name:
                 return priv['id']
 
-        raise LookupError("No privilege found named '%s'" % name)
+        raise LookupError("No privilege found named '{}'".format(name))
 
     def create_priv(self, name, target_id, priv):
         """Create a given privilege.
@@ -136,7 +136,7 @@ class Nexus:
             if role['name'] == name:
                 return role['id']
 
-        raise LookupError("No role with name '%s'" % (name))
+        raise LookupError("No role with name '{}'".format(name))
 
     def create_role(self, name, privs):
         """Create a role with the given privileges."""
@@ -173,7 +173,7 @@ class Nexus:
             if user['userId'] == user_id:
                 return
 
-        raise LookupError("No user with id '%s'" % (user_id))
+        raise LookupError("No user with id '{}'".format(user_id))
 
     def create_user(self, name, domain, role_id, password, extra_roles=[]):
         """Create a Deployment user with a specific role_id and potentially extra roles.
@@ -185,7 +185,7 @@ class Nexus:
         user = {
             'data': {
                 'userId': name,
-                'email': '%s-deploy@%s' % (name, domain),
+                'email': '{}-deploy@{}'.format(name, domain),
                 'firstName': name,
                 'lastName': 'Deployment',
                 'roles': [
@@ -217,7 +217,7 @@ class Nexus:
             if repo['name'] == name:
                 return repo['id']
 
-        raise LookupError("No repository group named '%s'" % (name))
+        raise LookupError("No repository group named '{}'".format(name))
 
     def get_repo_group_details(self, repoId):
         """Get the current configuration of a given repo group with a specific ID."""
