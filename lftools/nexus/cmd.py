@@ -136,7 +136,7 @@ def create_repos(config_file, settings_file):
 
         if 'repositories' in config:
             for sub_repo in config['repositories']:
-                sub_repo_id = '%s-%s' % (repoId, sub_repo)
+                sub_repo_id = "{}-{}".format(repoId, sub_repo)
                 build_repo(
                     sub_repo,
                     sub_repo_id,
