@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b55e809_ff759f48",
+        "filename": "shell/sign",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-12T22:50:23Z",
+      "side": 1,
+      "message": "Add a comment above this comment to state that we are on purpose want to wordsplit the ${files_to_sign[*]} because we need it parsed out as separate parameters rather than a single quoted string.",
+      "revId": "527b9e2ed20651ffff20640bc6bd2eea8031e564",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
