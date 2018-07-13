@@ -20,6 +20,11 @@ nexus
 
 .. program-output:: lftools sign nexus --help
 
+sigul
+_____
+
+.. program-output:: lftools sign sigul --help
+
 deploy-nexus
 ------------
 

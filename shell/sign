@@ -9,7 +9,19 @@
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
 
-# Sign artifacts with gpg
+# Sign artifacts with gpg or sigul
+
+# Sigul signing requires the following:
+#
+# * sigul is installed
+# * configuration file for sigul with the full file path to the file as an
+#   environment variable of $SIGUL_CONFIG
+# * the sigul user (key) as an environment variable of $SIGUL_KEY
+# * the sigul nss password, null terminated in a file referred to by
+#   $SIGUL_PASSWORD
+#
+# If this is being run via JJB and sigul was installed via the scaffolding
+# macros then all environment variables should already be properly set
 
 GPG_BIN="gpg"
 if hash gpg2 2>/dev/null; then
@@ -24,12 +36,17 @@ sign() {
     case "$subcommand" in
         dir )
             echo "Signing Directory..."
-            sign_dir "$@"
+            sign_dir 'gpg' "$@"
             exit 0
             ;;
         nexus )
             echo "Signing Nexus repo..."
             sign_nexus "$@"
+            exit 0
+            ;;
+        sigul )
+            echo "Signing Directory with Sigul..."
+            sign_dir 'sigul' "$@"
             exit 0
             ;;
         * )
@@ -46,15 +63,18 @@ sign_dir() {
     # Parameters:
     #
     #     <directory>: The directory to find and sign artifacts.
-    local dir="$1"
+    local signer="$1"
+    local dir="$2"
 
-    if [ -z "$1" ]; then
+    if [ -z "$2" ]; then
         echo "Missing required arguments."
-        echo "Usage: $0 sign-dir <directory>"
+        echo "Usage: $0 sign-dir 'gpg|sigul' <directory>"
         exit 1
     fi
 
-    test_gpg_key
+    if [ "$signer" == "gpg" ]; then
+        test_gpg_key
+    fi
 
     set -e  # Fail immediately if any if signing fails
     mapfile -t files_to_sign < <(find "$dir" -type f ! -name "*.asc" \
@@ -73,19 +93,49 @@ sign_dir() {
 
     if hash parallel 2>/dev/null; then
         echo "Signing in parallel..."
-        # We need to wordsplit ${files_to_sign[*]} so disable quoting check
-        # shellcheck disable=SC2086
-        parallel --no-notice --jobs 200% --halt now,fail=1 \
-            "$GPG_BIN --batch -abq {}" ::: ${files_to_sign[*]}
+        case "$signer" in
+            gpg )
+                # We need to wordsplit ${files_to_sign[*]} so disable quoting check
+                # shellcheck disable=SC2086
+                parallel --no-notice --jobs 200% --halt now,fail=1 \
+                    "$GPG_BIN --batch -abq {}" ::: ${files_to_sign[*]}
+                ;;
+            sigul )
+                # We need to wordsplit ${files_to_sign[*]} so disable quoting check
+                # shellcheck disable=SC2086
+                parallel --no-notice --jobs 200% --halt now,fail=1 \
+                    "sigul --batch -c $SIGUL_CONFIG sign-data -a -o {}.asc \
+                    $SIGUL_KEY < $SIGUL_PASSWORD" ::: ${files_to_sign[*]}
+                ;;
+            * )
+                echo "Invalid signer: $signer" 1>&2
+                exit 1
+                ;;
+        esac
 
         echo "Signed the following files:"
         printf '%s\n' "${files_to_sign[@]}"
     else
         echo "GNU parallel not found. Signing in serial mode..."
-        for f in "${files_to_sign[@]}"; do
-            echo "Signing $f"
-            "$GPG_BIN" --batch -abq "$f"
-        done
+        case "$signer" in
+            gpg )
+                for f in "${files_to_sign[@]}"; do
+                    echo "Signing $f"
+                    "$GPG_BIN" --batch -abq "$f"
+                done
+                ;;
+            sigul )
+                for f in "${files_to_sign[@]}"; do
+                    echo "Signing $f"
+                    sigul --batch -c "$SIGUL_CONFIG" sign-data -a -o "$f.asc" \
+                        "$SIGUL_KEY" "$f" < "$SIGUL_PASSWORD"
+                done
+                ;;
+            * )
+                echo "Invalid signer: $signer" 1>&2
+                exit 1
+                ;;
+        esac
     fi
     set +e
 }
@@ -99,16 +149,18 @@ sign_nexus_usage () {
     echo ""
     echo "Options:"
     echo "    -d /path/to/store/signatures"
+    echo "    -w gpg|sigul"
 }
 
 
 sign_nexus() {
-    # Fetch and GPG sign a Nexus repo
+    # Fetch and sign Nexus repo using GPG or sigul
     #
     # The resultant output of this command is stored in
     # /tmp/gpg-signatures.XXXXXXXXXX unless the -d parameter is passed to
     # override.
-    while getopts d:h o; do
+    local signer='gpg'
+    while getopts dw:h o; do
       case "$o" in
         h)
             sign_nexus_usage
@@ -118,6 +170,16 @@ sign_nexus() {
         d)
             local sign_dir="$OPTARG"
             mkdir -p "$sign_dir"
+            ;;
+
+        w)
+            if [[ "$OPTARG" =~ ^(gpg|sigul)$ ]]
+            then
+                signer="$OPTARG"
+            else
+                sign_nexus_usage
+                exit 1
+            fi
             ;;
 
         [?])
@@ -171,7 +233,12 @@ sign_nexus() {
     done
 
     echo "Signing artifacts..."
-    sign_dir "$sign_dir"
+    if [ "$signer" == "gpg" ]
+    then
+        sign_dir 'gpg' "$sign_dir"
+    else
+        sign_dir 'sigul' "$sign_dir"
+    fi
 
     echo "Removing non-signature files..."
     mapfile -t remove_files < <(find . -type f -not -name '*.asc')
