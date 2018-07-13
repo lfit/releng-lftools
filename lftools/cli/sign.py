@@ -39,8 +39,17 @@ def directory(ctx, directory):
 @click.argument('nexus-repo-url')
 @click.pass_context
 def nexus(ctx, nexus_repo_url):
-    """Fetch and GPG sign a Nexus repo."""
+    """Fetch and GPG or Sigul sign a Nexus repo."""
     status = subprocess.call(['sign', 'nexus', nexus_repo_url])
+    sys.exit(status)
+
+
+@click.command(name='sigul')
+@click.argument('directory')
+@click.pass_context
+def sigul(ctx, directory):
+    """Sigul signs all of the files in a directory."""
+    status = subprocess.call(['sign', 'sigul', directory])
     sys.exit(status)
 
 
@@ -55,6 +64,9 @@ def nexus(ctx, nexus_repo_url):
 @click.option(
     '-r', '--root-domain', type=str, default='org',
     help='Root download path of staging repo. (default org)')
+@click.option(
+    '-w', '--sign-with', type=str, default='gpg',
+    help='Sign artifacts with GPG or Sigul. (default gpg)')
 @click.pass_context
 def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, root_domain):
     """Sign artifacts from a Nexus repo then upload to a staging repo.
@@ -62,6 +74,8 @@ def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, root_
     This is a porcelain command that ties the lftools sign and deploy tools
     together for easier use. It calls the sign-nexus command and then the
     deploy-nexus-stage command to create a signed staging repository in Nexus.
+
+    Signing is performed either with gpg (defaul) or via sigul.
     """
     # wget does not appear to like to fully clone the root of a staging repo
     # as a workaround we have to at least give it 1 directory deep. Since most
@@ -70,7 +84,7 @@ def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, root_
     nexus_url = nexus_url.rstrip('/')
     nexus_repo_url = "{}/content/repositories/{}/{}".format(nexus_url, nexus_repo, root_domain)
 
-    status = subprocess.call(['sign', 'nexus', '-d', sign_dir, nexus_repo_url])
+    status = subprocess.call(['sign', 'nexus', '-d', sign_dir, '-w', sign_with, nexus_repo_url])
     if status:
         sys.exit(status)
 
