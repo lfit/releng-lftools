@@ -1,0 +1,50 @@
+lftools v0.14.0 Release Notes
+=============================
+
+Thanks to Andrew, Anil, Jessica, and Thanh for contributing to this release.
+
+
+Notable changes since v0.13.0
+----------------------------
+
+
+0c96a0b Andrew Grimberg Add sigul signing capabilities to lftools
+The `sign` command now has a new capability to sign artifacts with sigul.
+
+e3fd906 Thanh Ha        Add configuration subsystem
+A new `config` subsystem has been added for managing configuration files.
+
+e51dc8a Anil Belur      Add user-specified download path for lftools sign
+The `sign` command now supports a new "-d / --sign-dir" parameter to specify
+an alternative download path.
+
+64ce8a1 Thanh Ha        Add remove-offline-nodes command
+The new command `lftools jenkins remove-offline-nodes` can remove Nodes marked
+as offline in Jenkins, a --force parameter can forcibly remove from Jenkins if
+the node is stuck.
+
+dfc9449 Thanh Ha        Add get-credentials groovy script to lftools
+The new command `lftools jenkins get-credentials` can retrieve all
+available credentials from a Jenkins.
+
+aec13d0 Thanh Ha        Print result of groovy script to console
+Groovy script output is now printed out to console.
+
+
+Full Change Log
+---------------
+
+0c96a0b Andrew Grimberg Add sigul signing capabilities to lftools
+e3fd906 Thanh Ha        Add configuration subsystem
+632a2b6 Thanh Ha        Update to python-jenkins 1.1.0
+bbed6f5 Andrew Grimberg Fix ShellCheck warnings for signing script
+7a9f2a8 Andrew Grimberg Update Nexus string substition formating
+5b54fb3 Andrew Grimberg Cleanup nexus repo command for Python 3
+e51dc8a Anil Belur      Add user-specified download path for lftools sign
+64ce8a1 Thanh Ha        Add remove-offline-nodes command
+d4148d4 Jessica Wagantall       Add Nexus tags
+bea5be5 Jessica Wagantall       Add tag to Nexus docs
+2c2b219 Jessica Wagantall       Update Nexus settings example
+dfc9449 Thanh Ha        Add get-credentials groovy script to lftools
+aec13d0 Thanh Ha        Print result of groovy script to console
+051b548 Thanh Ha        Ignore protected images that are protected
