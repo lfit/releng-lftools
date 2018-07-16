@@ -7,7 +7,7 @@
 # which accompanies this distribution, and is available at
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
-"""Script to GPG sign files."""
+"""Script to GPG or Sigul sign files."""
 
 __author__ = 'Thanh Ha'
 
@@ -22,7 +22,7 @@ import click
 @click.group()
 @click.pass_context
 def sign(ctx):
-    """GPG sign files."""
+    """GPG or Sigul sign files."""
     pass
 
 
@@ -37,10 +37,26 @@ def directory(ctx, directory):
 
 @click.command(name='nexus')
 @click.argument('nexus-repo-url')
+@click.option(
+    '-d', '--sign-dir', type=str,
+    default=tempfile.mkdtemp(prefix='gpg-signatures.'),
+    help='Local directory to clone repository. (default /tmp/gpg-signatures.*)')
+@click.option(
+    '-w', '--sign-with', type=str, default='gpg',
+    help='Sign artifacts with GPG or Sigul. (default gpg)')
 @click.pass_context
-def nexus(ctx, nexus_repo_url):
-    """Fetch and GPG sign a Nexus repo."""
-    status = subprocess.call(['sign', 'nexus', nexus_repo_url])
+def nexus(ctx, sign_dir, sign_with, nexus_repo_url):
+    """Fetch and GPG or Sigul sign a Nexus repo."""
+    status = subprocess.call(['sign', 'nexus', '-d', sign_dir, '-w', sign_with, nexus_repo_url])
+    sys.exit(status)
+
+
+@click.command(name='sigul')
+@click.argument('directory')
+@click.pass_context
+def sigul(ctx, directory):
+    """Sigul signs all of the files in a directory."""
+    status = subprocess.call(['sign', 'sigul', directory])
     sys.exit(status)
 
 
@@ -55,13 +71,18 @@ def nexus(ctx, nexus_repo_url):
 @click.option(
     '-r', '--root-domain', type=str, default='org',
     help='Root download path of staging repo. (default org)')
+@click.option(
+    '-w', '--sign-with', type=str, default='gpg',
+    help='Sign artifacts with GPG or Sigul. (default gpg)')
 @click.pass_context
-def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, root_domain):
+def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, sign_with, root_domain):
     """Sign artifacts from a Nexus repo then upload to a staging repo.
 
     This is a porcelain command that ties the lftools sign and deploy tools
     together for easier use. It calls the sign-nexus command and then the
     deploy-nexus-stage command to create a signed staging repository in Nexus.
+
+    Signing is performed either with gpg (default) or via sigul.
     """
     # wget does not appear to like to fully clone the root of a staging repo
     # as a workaround we have to at least give it 1 directory deep. Since most
@@ -70,7 +91,7 @@ def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, root_
     nexus_url = nexus_url.rstrip('/')
     nexus_repo_url = "{}/content/repositories/{}/{}".format(nexus_url, nexus_repo, root_domain)
 
-    status = subprocess.call(['sign', 'nexus', '-d', sign_dir, nexus_repo_url])
+    status = subprocess.call(['sign', 'nexus', '-d', sign_dir, '-w', sign_with, nexus_repo_url])
     if status:
         sys.exit(status)
 
@@ -81,3 +102,4 @@ def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, root_
 sign.add_command(directory)
 sign.add_command(nexus)
 sign.add_command(deploy_nexus)
+sign.add_command(sigul)
