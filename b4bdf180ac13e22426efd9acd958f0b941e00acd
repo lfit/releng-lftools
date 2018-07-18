@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fbc7408_773ebdd5",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-07-18T18:21:07Z",
+      "side": 1,
+      "message": "Shouldn\u0027t just be https://nexus.example.org?\n\nSince we are trying to access /service/local/staging/profiles..\nin line 683",
+      "range": {
+        "startLine": 662,
+        "startChar": 20,
+        "endLine": 662,
+        "endChar": 74
+      },
+      "revId": "b4bdf180ac13e22426efd9acd958f0b941e00acd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "570b09d8_f44f7945",
+        "filename": "shell/deploy",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-07-18T18:21:07Z",
+      "side": 1,
+      "message": "Same as my previous comment",
+      "range": {
+        "startLine": 705,
+        "startChar": 19,
+        "endLine": 705,
+        "endChar": 74
+      },
+      "revId": "b4bdf180ac13e22426efd9acd958f0b941e00acd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
