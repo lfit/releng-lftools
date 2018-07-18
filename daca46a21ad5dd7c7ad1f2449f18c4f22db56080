@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52d1f12e_94e6f185",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-18T22:28:19Z",
+      "side": 1,
+      "message": "asdkjfsdjklasdf",
+      "revId": "daca46a21ad5dd7c7ad1f2449f18c4f22db56080",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
