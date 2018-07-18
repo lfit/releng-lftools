@@ -188,6 +188,34 @@ def nexus_stage(ctx, nexus_url, staging_profile_id, deploy_dir):
     sys.exit(status)
 
 
+@click.command(name='nexus-stage-repo-close')
+@click.argument('nexus-url', envvar='NEXUS_URL')
+@click.argument('staging-profile-id', envvar='STAGING_PROFILE_ID')
+@click.argument('staging-repo-id')
+@click.pass_context
+def nexus_stage_repo_close(ctx, nexus_url, staging_profile_id, staging_repo_id):
+    status = subprocess.call([
+        'deploy', 'nexus-stage-repo-close',
+        nexus_url,
+        staging_profile_id,
+        staging_repo_id
+    ])
+    sys.exit(status)
+
+
+@click.command(name='nexus-stage-repo-create')
+@click.argument('nexus-url', envvar='NEXUS_URL')
+@click.argument('staging-profile-id', envvar='STAGING_PROFILE_ID')
+@click.pass_context
+def nexus_stage_repo_create(ctx, nexus_url, staging_profile_id):
+    status = subprocess.call([
+        'deploy', 'nexus-stage-repo-create',
+        nexus_url,
+        staging_profile_id
+    ])
+    sys.exit(status)
+
+
 @click.command(name='nexus-zip')
 @click.argument('nexus-url', envvar='NEXUS_URL')
 @click.argument('nexus-repo', envvar='NEXUS_REPO')
@@ -212,4 +240,6 @@ deploy.add_command(logs)
 deploy.add_command(maven_file)
 deploy.add_command(nexus)
 deploy.add_command(nexus_stage)
+deploy.add_command(nexus_stage_repo_close)
+deploy.add_command(nexus_stage_repo_create)
 deploy.add_command(nexus_zip)
