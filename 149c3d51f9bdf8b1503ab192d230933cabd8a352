@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4f6a4ef_f378a90a",
+        "filename": "shell/deploy",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-07-18T18:24:32Z",
+      "side": 1,
+      "message": "Sorry for not commenting on this on my previous review. \n\nThis would be better described as \"Project\u0027s Nexus URL site\"\nRather than making reference to a Nexus repo.",
+      "range": {
+        "startLine": 661,
+        "startChar": 22,
+        "endLine": 661,
+        "endChar": 48
+      },
+      "revId": "149c3d51f9bdf8b1503ab192d230933cabd8a352",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "837b160b_758001c2",
+        "filename": "shell/deploy",
+        "patchSetId": 2
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-07-18T18:24:32Z",
+      "side": 1,
+      "message": "Same as my previous comment",
+      "range": {
+        "startLine": 704,
+        "startChar": 20,
+        "endLine": 704,
+        "endChar": 48
+      },
+      "revId": "149c3d51f9bdf8b1503ab192d230933cabd8a352",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
