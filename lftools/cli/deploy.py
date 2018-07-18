@@ -50,6 +50,42 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
 
 @click.command()
 @click.argument('nexus-url', envvar='NEXUS_URL')
+@click.argument('nexus-repo-id')
+@click.argument('group-id')
+@click.argument('artifact-id')
+@click.argument('version')
+@click.argument('packaging')
+@click.argument('file')
+@click.pass_context
+def file(ctx,
+         nexus_url,
+         nexus_repo_id,
+         group_id,
+         artifact_id,
+         version,
+         packaging,
+         file):
+    """Upload file to Nexus as a Maven artifact using cURL.
+
+    This function will upload an artifact to Nexus while providing all of
+    the usual Maven pom.xml information so that it conforms to Maven 2 repo
+    specs.
+    """
+    status = subprocess.call([
+        'deploy', 'file',
+        nexus_url,
+        nexus_repo_id,
+        group_id,
+        artifact_id,
+        version,
+        packaging,
+        file
+    ])
+    sys.exit(status)
+
+
+@click.command()
+@click.argument('nexus-url', envvar='NEXUS_URL')
 @click.argument('nexus-path', envvar='NEXUS_PATH')
 @click.argument('build-url', envvar='BUILD_URL')
 @click.pass_context
@@ -238,6 +274,7 @@ def nexus_zip(ctx, nexus_url, nexus_repo, nexus_path, deploy_zip):
 
 
 deploy.add_command(archives)
+deploy.add_command(file)
 deploy.add_command(logs)
 deploy.add_command(maven_file)
 deploy.add_command(nexus)
