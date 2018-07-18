@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9fa0ba99_36a5339e",
+        "filename": "shell/deploy",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-18T18:26:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4f6a4ef_f378a90a",
+      "range": {
+        "startLine": 661,
+        "startChar": 22,
+        "endLine": 661,
+        "endChar": 48
+      },
+      "revId": "149c3d51f9bdf8b1503ab192d230933cabd8a352",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "837b160b_758001c2",
         "filename": "shell/deploy",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-18T18:24:32Z",
       "side": 1,
       "message": "Same as my previous comment",
+      "range": {
+        "startLine": 704,
+        "startChar": 20,
+        "endLine": 704,
+        "endChar": 48
+      },
+      "revId": "149c3d51f9bdf8b1503ab192d230933cabd8a352",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c213f730_1e3a9079",
+        "filename": "shell/deploy",
+        "patchSetId": 2
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-18T18:26:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "837b160b_758001c2",
       "range": {
         "startLine": 704,
         "startChar": 20,
