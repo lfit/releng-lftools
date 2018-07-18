@@ -76,6 +76,11 @@ deploy() {
             deploy_maven_file "$@"
             exit 0
             ;;
+        file )
+            echo "Deploying file..."
+            upload_maven_file_to_nexus "$@"
+            exit 0
+            ;;
         files )
             echo "Deploying files..."
             echo "ERROR: Unimplemented."
@@ -741,6 +746,54 @@ deploy_nexus_zip() {
     if [[ "$status" != "20"* ]]; then
         echo "Failed with: $resp"
         echo "Zip contains: $(unzip -l "$deploy_zip")"
+        exit "$status"
+    fi
+}
+
+upload_maven_file_to_nexus() {
+    # Upload file to Nexus as a Maven artifact using cURL.
+    #
+    # This function will upload an artifact to Nexus while providing all of
+    # the usual Maven pom.xml information so that it conforms to Maven 2 repo
+    # specs.
+    #
+    # Parameters:
+    #     nexus_url:  The URL to the Nexus repo.
+    #         (Ex:  https://nexus.example.org)
+    #     nexus_repo_id:  Repo ID of repo to push artifact to.
+    #     group_id:  Maven style Group ID to upload artifact as.
+    #     artifact_id:  Maven style Artifact ID to upload artifact as.
+    #     version:  Maven style Version to upload artifact as.
+    #     packaging:  Packaging type to upload as (Eg. tar.xz)
+    #     file:  File to upload.
+
+    local nexus_url="${1%/}"
+    local nexus_repo_id="$2"
+    local group_id="$3"
+    local artifact_id="$4"
+    local version="$5"
+    local packaging="$6"
+    local file="$7"
+
+    local resp
+    local status
+    resp=$(curl -s -w " %{http_code}" --netrc -X POST \
+        -F "r=$nexus_repo_id" \
+        -F "g=$group_id" \
+        -F "a=$artifact_id" \
+        -F "v=$version" \
+        -F "p=$packaging" \
+        -F "file=@$file" \
+        "${nexus_url}/service/local/artifact/maven/content")
+    status=$(echo "$resp" | awk 'END {print $NF}')
+
+    if echo "$resp" | grep -q nexus-error; then
+        local msg
+        msg=$(sed -n -e 's/.*<msg>\(.*\)<\/msg>.*/\1/p' <<< $resp)
+        echo "ERROR: $msg"
+        exit "$status"
+    elif [ "$status" != "201" ]; then
+        echo "ERROR: Failed with status code $status"
         exit "$status"
     fi
 }
