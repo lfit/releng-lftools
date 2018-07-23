@@ -2,6 +2,149 @@
   "comments": [
     {
       "key": {
+        "uuid": "a5fa3cca_21cd0a24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-23T20:50:31Z",
+      "side": 1,
+      "message": "Co-Authored-By: Eric Ball \u003ceball@linuxfoundation.org\u003e\nCo-Authored-By: Thanh Ha \u003cthanh.ha@linuxfoundation.org\u003e",
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30a2fc6e_5bbf297c",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-23T20:50:31Z",
+      "side": 1,
+      "message": "commits missing DCO.\n\nAnd then link to https://developercertificate.org/ in the body of the pydoc.",
+      "range": {
+        "startLine": 10,
+        "startChar": 40,
+        "endLine": 10,
+        "endChar": 56
+      },
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb69eda1_49387cd8",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-23T20:50:31Z",
+      "side": 1,
+      "message": "commits missing DCO.",
+      "range": {
+        "startLine": 30,
+        "startChar": 28,
+        "endLine": 30,
+        "endChar": 44
+      },
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d493c47_c1b5cd59",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-23T20:50:31Z",
+      "side": 1,
+      "message": "add: Refer to https://developercertificate.org/",
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "511152a0_647eabb2",
+        "filename": "shell/dco",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-23T20:50:31Z",
+      "side": 1,
+      "message": "Should only be 2018",
+      "range": {
+        "startLine": 4,
+        "startChar": 16,
+        "endLine": 4,
+        "endChar": 32
+      },
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4c754f26_9032688e",
+        "filename": "shell/dco",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-23T20:50:31Z",
+      "side": 1,
+      "message": "as far as I can tell the function below accepts no arguments.",
+      "range": {
+        "startLine": 23,
+        "startChar": 22,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3cb95b2_f455ae6d",
+        "filename": "shell/dco",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-23T20:50:31Z",
+      "side": 1,
+      "message": "actually why even complicate this, just have lftools call check_dco() directly below.",
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0190925_55385e15",
         "filename": "shell/dco",
         "patchSetId": 2
@@ -13,6 +156,29 @@
       "writtenOn": "2018-07-23T20:27:57Z",
       "side": 1,
       "message": "Please break this onto multiple lines. It\u0027s longer than it should be",
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d584223_1b40c407",
+        "filename": "shell/dco",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-23T20:50:31Z",
+      "side": 1,
+      "message": "\u0027missing Signed-off-by line.\u0027\n\nI think makes it a little more clear. \"not signed\" could also mean gpg so.",
+      "range": {
+        "startLine": 35,
+        "startChar": 44,
+        "endLine": 35,
+        "endChar": 56
+      },
       "revId": "487afca320851db27ada5bb04cba9536dda56343",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
