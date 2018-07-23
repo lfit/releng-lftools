@@ -1,0 +1,34 @@
+#!/bin/bash
+# SPDX-License-Identifier: EPL-1.0
+##############################################################################
+# Copyright (c) 2018 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+
+# This script determines if a git repo contains commits missing DCO.
+# It operates in your current working directory which must be a git repo.
+# Alternatively you can pass it a path to a git repo.
+
+REPO_PATH="$1"
+
+cd $REPO_PATH || exit 1
+
+status=0
+while IFS= read -a line; do
+    my_array+=( "$line" )
+    done < <( git branch -r | grep -v origin/HEAD )
+for branch in "${my_array[@]}"
+do
+    status=1
+    branch=$(echo "$branch" | xargs)
+    echo "Checking commits in branch $branch for commits missing DCO..."
+    git log $branch --no-merges --pretty="%H" --grep 'Signed-off-by' --invert-grep * | \
+        while read commit_hash; do
+            echo "ERROR: Commit $commit_hash is missing Signed-off-by line."
+        done
+done
+exit $status
