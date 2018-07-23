@@ -20,6 +20,7 @@ from lftools.cli.license import license
 from lftools.cli.nexus import nexus
 from lftools.cli.sign import sign
 from lftools.cli.version import version
+from lftools.cli.dco import dco
 
 
 @click.group()
@@ -37,6 +38,7 @@ cli.add_command(license)
 cli.add_command(nexus)
 cli.add_command(sign)
 cli.add_command(version)
+cli.add_command(dco)
 
 try:
     from lftools.openstack.cmd import openstack
