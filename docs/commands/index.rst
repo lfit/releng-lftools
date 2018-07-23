@@ -10,6 +10,7 @@ bash. It supports the following commands.
 
     config
     deploy
+    dco
     license
     nexus
     openstack
