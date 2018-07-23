@@ -56,6 +56,7 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
 @click.argument('version')
 @click.argument('packaging')
 @click.argument('file')
+@click.option('-c', '--classifier', default='')
 @click.pass_context
 def file(ctx,
          nexus_url,
@@ -64,6 +65,7 @@ def file(ctx,
          artifact_id,
          version,
          packaging,
+         classifier,
          file):
     """Upload file to Nexus as a Maven artifact using cURL.
 
@@ -79,7 +81,8 @@ def file(ctx,
         artifact_id,
         version,
         packaging,
-        file
+        file,
+        classifier
     ])
     sys.exit(status)
 

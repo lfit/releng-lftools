@@ -766,6 +766,7 @@ upload_maven_file_to_nexus() {
     #     version:  Maven style Version to upload artifact as.
     #     packaging:  Packaging type to upload as (Eg. tar.xz)
     #     file:  File to upload.
+    #     classifier: Maven classifier. (optional)
 
     local nexus_url="${1%/}"
     local nexus_repo_id="$2"
@@ -774,16 +775,24 @@ upload_maven_file_to_nexus() {
     local version="$5"
     local packaging="$6"
     local file="$7"
+    local classifier="${8:-}"
+
+    declare -a params
+    params+=("-F r=$nexus_repo_id")
+    params+=("-F g=$group_id")
+    params+=("-F a=$artifact_id")
+    params+=("-F v=$version")
+    params+=("-F p=$packaging")
+    if [ ! -z "$classifier" ]; then
+        params+=("-F c=$classifier")
+    fi
+    params+=("-F file=@$file")
 
     local resp
     local status
-    resp=$(curl -s -w " %{http_code}" --netrc -X POST \
-        -F "r=$nexus_repo_id" \
-        -F "g=$group_id" \
-        -F "a=$artifact_id" \
-        -F "v=$version" \
-        -F "p=$packaging" \
-        -F "file=@$file" \
+    # We need word splitting here to parse the params
+    # shellcheck disable=SC2086
+    resp=$(curl -s -w " %{http_code}" --netrc -X POST ${params[*]} \
         "${nexus_url}/service/local/artifact/maven/content")
     status=$(echo "$resp" | awk 'END {print $NF}')
 
