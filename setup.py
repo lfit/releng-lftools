@@ -55,6 +55,7 @@ setup(
         lftools=lftools.cli:main
     ''',
     scripts=[
+        'shell/dco',
         'shell/deploy',
         'shell/sign',
         'shell/version',
