@@ -55,9 +55,10 @@ setup(
         lftools=lftools.cli:main
     ''',
     scripts=[
+        'shell/dco',
         'shell/deploy',
         'shell/sign',
-        'shell/version',
+        'shell/version'
     ],
     data_files=[('etc', ['etc/logging.ini'])],
 )
