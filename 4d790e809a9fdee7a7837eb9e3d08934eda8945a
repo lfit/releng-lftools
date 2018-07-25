@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9535d4f6_ec20508c",
+        "filename": "docs/commands/dco.rst",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-25T18:23:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5441515d_9c5e31f1",
+      "range": {
+        "startLine": 16,
+        "startChar": 64,
+        "endLine": 16,
+        "endChar": 65
+      },
+      "revId": "4d790e809a9fdee7a7837eb9e3d08934eda8945a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "658c5048_a7943d25",
         "filename": "lftools/cli/dco.py",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "fafdd656_e1e68f87",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-25T18:23:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "658c5048_a7943d25",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 7
+      },
+      "revId": "4d790e809a9fdee7a7837eb9e3d08934eda8945a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2f94429d_acdd9f83",
         "filename": "shell/dco",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2018-07-25T17:02:46Z",
       "side": 1,
       "message": "This states that it checks out a repo determined by repository_url but there is nothing being done with a \u0027repository_url\u0027 variable.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 31
+      },
+      "revId": "4d790e809a9fdee7a7837eb9e3d08934eda8945a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6694670b_680bdda7",
+        "filename": "shell/dco",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-25T18:23:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f94429d_acdd9f83",
       "range": {
         "startLine": 12,
         "startChar": 0,
