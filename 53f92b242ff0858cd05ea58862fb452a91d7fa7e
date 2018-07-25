@@ -22,6 +22,30 @@
       "revId": "53f92b242ff0858cd05ea58862fb452a91d7fa7e",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b488dc56_84bca072",
+        "filename": "shell/dco",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-25T18:58:08Z",
+      "side": 1,
+      "message": "Ok lemme fix that up",
+      "parentUuid": "31496476_704c831c",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 8
+      },
+      "revId": "53f92b242ff0858cd05ea58862fb452a91d7fa7e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
