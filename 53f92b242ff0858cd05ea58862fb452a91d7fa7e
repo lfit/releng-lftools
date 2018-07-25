@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31496476_704c831c",
+        "filename": "shell/dco",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-07-25T18:55:48Z",
+      "side": 1,
+      "message": "We should have an exit code 1 if there are any ERRORs that get printed. We should still print all ERRORs first and not exit on the first one.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 8
+      },
+      "revId": "53f92b242ff0858cd05ea58862fb452a91d7fa7e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
