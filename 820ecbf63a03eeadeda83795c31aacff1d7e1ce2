@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea899d9_a340833f",
+        "filename": "docs/commands/dco.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-25T18:38:28Z",
+      "side": 1,
+      "message": "are missing DCOs (Signed-off-by line).",
+      "range": {
+        "startLine": 16,
+        "startChar": 43,
+        "endLine": 16,
+        "endChar": 64
+      },
+      "revId": "820ecbf63a03eeadeda83795c31aacff1d7e1ce2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30e6bf0a_95abcdba",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-25T18:38:28Z",
+      "side": 1,
+      "message": "Needs to match the name of the shell script.",
+      "range": {
+        "startLine": 36,
+        "startChar": 31,
+        "endLine": 36,
+        "endChar": 40
+      },
+      "revId": "820ecbf63a03eeadeda83795c31aacff1d7e1ce2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
