@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "108cf430_358ebf0a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-25T16:33:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5fa3cca_21cd0a24",
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30a2fc6e_5bbf297c",
         "filename": "lftools/cli/dco.py",
         "patchSetId": 2
@@ -105,6 +123,30 @@
     },
     {
       "key": {
+        "uuid": "2db9b01e_b4f37411",
+        "filename": "shell/dco",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-25T16:33:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "511152a0_647eabb2",
+      "range": {
+        "startLine": 4,
+        "startChar": 16,
+        "endLine": 4,
+        "endChar": 32
+      },
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c754f26_9032688e",
         "filename": "shell/dco",
         "patchSetId": 2
@@ -116,6 +158,30 @@
       "writtenOn": "2018-07-23T20:50:31Z",
       "side": 1,
       "message": "as far as I can tell the function below accepts no arguments.",
+      "range": {
+        "startLine": 23,
+        "startChar": 22,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "236c7caf_7d632a25",
+        "filename": "shell/dco",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-25T16:33:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c754f26_9032688e",
       "range": {
         "startLine": 23,
         "startChar": 22,
@@ -145,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "918e8856_e9172810",
+        "filename": "shell/dco",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-25T16:33:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3cb95b2_f455ae6d",
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0190925_55385e15",
         "filename": "shell/dco",
         "patchSetId": 2
@@ -162,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "a50c0ab6_f6cd40ac",
+        "filename": "shell/dco",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-25T16:33:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0190925_55385e15",
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d584223_1b40c407",
         "filename": "shell/dco",
         "patchSetId": 2
@@ -173,6 +275,30 @@
       "writtenOn": "2018-07-23T20:50:31Z",
       "side": 1,
       "message": "\u0027missing Signed-off-by line.\u0027\n\nI think makes it a little more clear. \"not signed\" could also mean gpg so.",
+      "range": {
+        "startLine": 35,
+        "startChar": 44,
+        "endLine": 35,
+        "endChar": 56
+      },
+      "revId": "487afca320851db27ada5bb04cba9536dda56343",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d38dcb3_48222933",
+        "filename": "shell/dco",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-25T16:33:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d584223_1b40c407",
       "range": {
         "startLine": 35,
         "startChar": 44,
