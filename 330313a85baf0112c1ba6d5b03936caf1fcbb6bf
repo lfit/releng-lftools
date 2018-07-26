@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "817c0c76_91b93673",
+        "filename": "shell/dco",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-26T00:57:53Z",
+      "side": 1,
+      "message": "This only checks local branches. Which for a freshly cloned  git repo is only \"master\".\n\nI think we want to check all remote branches right?\n\nAlso when I ran this on my local system I get the following error:\n\nerror: pathspec \u0027  deploy-archives\n  docs\n  gitignore\n  license\n  master\n  review/andrew_grimberg/nexus_config\n  review/andrew_grimberg/project_builder\n  review/anil_shashikumar_belur/5696\n  review/anil_shashikumar_belur/del-stale-nodes\n  review/anil_shashikumar_belur/deploy-arifacts\n  review/anil_shashikumar_belur/mvn-opts\n  review/anil_shashikumar_belur/releng-160\n  review/anil_shashikumar_belur/sysinfo-update\n  review/aric_gardner/11558\n  review/aric_gardner/6857\n* review/jeremy_phelps/add_dco_check\n  review/jeremy_phelps/doc_install\n  review/jessica_wagantall/5665\n  review/jessica_wagantall/5666\n  review/jessica_wagantall/yamllint\n  review/ry_jones/6813\n  review/thanh_ha/10273\n  review/thanh_ha/11157\n  review/thanh_ha/11776\n  review/thanh_ha/3262\n  review/thanh_ha/3612\n  review/thanh_ha/3635\n  review/thanh_ha/3961\n  review/thanh_ha/5055\n  review/thanh_ha/5343\n  review/thanh_ha/5522\n  review/thanh_ha/5612\n  review/thanh_ha/5663\n  review/thanh_ha/5733\n  review/thanh_ha/5748\n  review/thanh_ha/6050\n  review/thanh_ha/6123\n  review/thanh_ha/6879\n  review/thanh_ha/9855\n  review/thanh_ha/docs\n  review/thanh_ha/jenkins-admin-scripts\n  review/thanh_ha/license\n  review/trevor_bramwell/4866\n  trailing-slash\n  v0.13.x\n  v0.9.x\u0027 did not match any file(s) known to git.\nChecking commits in branch   deploy-archives\n  docs\n  gitignore\n  license\n  master\n  review/andrew_grimberg/nexus_config\n  review/andrew_grimberg/project_builder\n  review/anil_shashikumar_belur/5696\n  review/anil_shashikumar_belur/del-stale-nodes\n  review/anil_shashikumar_belur/deploy-arifacts\n  review/anil_shashikumar_belur/mvn-opts\n  review/anil_shashikumar_belur/releng-160\n  review/anil_shashikumar_belur/sysinfo-update\n  review/aric_gardner/11558\n  review/aric_gardner/6857\n* review/jeremy_phelps/add_dco_check\n  review/jeremy_phelps/doc_install\n  review/jessica_wagantall/5665\n  review/jessica_wagantall/5666\n  review/jessica_wagantall/yamllint\n  review/ry_jones/6813\n  review/thanh_ha/10273\n  review/thanh_ha/11157\n  review/thanh_ha/11776\n  review/thanh_ha/3262\n  review/thanh_ha/3612\n  review/thanh_ha/3635\n  review/thanh_ha/3961\n  review/thanh_ha/5055\n  review/thanh_ha/5343\n  review/thanh_ha/5522\n  review/thanh_ha/5612\n  review/thanh_ha/5663\n  review/thanh_ha/5733\n  review/thanh_ha/5748\n  review/thanh_ha/6050\n  review/thanh_ha/6123\n  review/thanh_ha/6879\n  review/thanh_ha/9855\n  review/thanh_ha/docs\n  review/thanh_ha/jenkins-admin-scripts\n  review/thanh_ha/license\n  review/trevor_bramwell/4866\n  trailing-slash\n  v0.13.x\n  v0.9.x for commits missing DCO...",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 22
+      },
+      "revId": "330313a85baf0112c1ba6d5b03936caf1fcbb6bf",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
