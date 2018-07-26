@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65f362c3_979e0f47",
+        "filename": "shell/dco",
+        "patchSetId": 14
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-26T15:20:52Z",
+      "side": 1,
+      "message": "We cannot do this as it does not make a proper array or trim the whitespace.\n\nUse the method from ShellCheck here. \n\nhttps://github.com/koalaman/shellcheck/wiki/SC2207\n\nAlso we should ignore origin/HEAD so maybe:\n\n git branch -r | grep -v origin/HEAD",
+      "revId": "41e6c92db847ab123388546e4ba4cb3435b80ea7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
