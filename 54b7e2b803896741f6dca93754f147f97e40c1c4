@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20a2eaa8_8bca2110",
+        "filename": "shell/autocorrectinfofile",
+        "patchSetId": 34
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-26T00:47:17Z",
+      "side": 1,
+      "message": "2018 right? or are this imported files?",
+      "range": {
+        "startLine": 4,
+        "startChar": 16,
+        "endLine": 4,
+        "endChar": 20
+      },
+      "revId": "54b7e2b803896741f6dca93754f147f97e40c1c4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a71c66c2_e2147e7f",
+        "filename": "shell/inactivecommitters",
+        "patchSetId": 34
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-26T00:47:17Z",
+      "side": 1,
+      "message": "2018 right? or are this imported files?",
+      "range": {
+        "startLine": 4,
+        "startChar": 16,
+        "endLine": 4,
+        "endChar": 26
+      },
+      "revId": "54b7e2b803896741f6dca93754f147f97e40c1c4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10791cdd_4b06a68c",
+        "filename": "shell/yaml4info",
+        "patchSetId": 34
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-26T00:47:17Z",
+      "side": 1,
+      "message": "2018 right? or are this imported files?",
+      "range": {
+        "startLine": 4,
+        "startChar": 16,
+        "endLine": 4,
+        "endChar": 26
+      },
+      "revId": "54b7e2b803896741f6dca93754f147f97e40c1c4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
