@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "235dbdf9_be189b60",
+        "filename": "docs/commands/dco.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-26T00:50:15Z",
+      "side": 1,
+      "message": "Our style guide says to use ####### for chapter headings. Also only 3 length is needed.",
+      "revId": "a815bef8de16eda8e296195ffae7792d4fc160f5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "824fdfa2_ff8b2410",
+        "filename": "setup.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-26T00:50:15Z",
+      "side": 1,
+      "message": "Alphabetical order.",
+      "revId": "a815bef8de16eda8e296195ffae7792d4fc160f5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d1889c6_852822e4",
+        "filename": "shell/dco",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-26T00:50:15Z",
+      "side": 1,
+      "message": "Should do some indenting here so that it\u0027s clear when we\u0027re in the loop.",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 26,
+        "endChar": 8
+      },
+      "revId": "a815bef8de16eda8e296195ffae7792d4fc160f5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d413929a_bb3506ba",
+        "filename": "shell/dco",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-26T00:50:15Z",
+      "side": 1,
+      "message": "Double quote to prevent word splitting.",
+      "revId": "a815bef8de16eda8e296195ffae7792d4fc160f5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
