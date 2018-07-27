@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33158aa2_d6b8bd4a",
+        "filename": "shell/dco",
+        "patchSetId": 23
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T18:35:37Z",
+      "side": 1,
+      "message": "Remove test echo",
+      "revId": "7ddce8c6d16de524081717736cb899a8e9583203",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "392a322c_6f0d0017",
+        "filename": "shell/dco",
+        "patchSetId": 23
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T18:35:37Z",
+      "side": 1,
+      "message": "cd \"$REPO_PATH\" || exit 1\n\nTurns out \"cd\" command itself already prints a message if it fails so we don\u0027t need to also print.",
+      "revId": "7ddce8c6d16de524081717736cb899a8e9583203",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89247138_56dd46a5",
+        "filename": "shell/dco",
+        "patchSetId": 23
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T18:35:37Z",
+      "side": 1,
+      "message": "Remove test echos",
+      "revId": "7ddce8c6d16de524081717736cb899a8e9583203",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
