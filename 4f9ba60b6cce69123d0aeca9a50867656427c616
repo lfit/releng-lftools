@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8d18706_5966081b",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T18:06:39Z",
+      "side": 1,
+      "message": "repo_path\u003d\u0027.\u0027",
+      "range": {
+        "startLine": 28,
+        "startChar": 15,
+        "endLine": 28,
+        "endChar": 24
+      },
+      "revId": "4f9ba60b6cce69123d0aeca9a50867656427c616",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0a34f6c_06c5c231",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T18:06:39Z",
+      "side": 1,
+      "message": "This needs the be the variable repo_path, not the literal string \u0027repo_path\u0027",
+      "range": {
+        "startLine": 37,
+        "startChar": 38,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "4f9ba60b6cce69123d0aeca9a50867656427c616",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e1aecc4_7962751e",
+        "filename": "setup.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T18:06:39Z",
+      "side": 1,
+      "message": "Alphabetical order please.",
+      "revId": "4f9ba60b6cce69123d0aeca9a50867656427c616",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c7af594_50df0f04",
+        "filename": "shell/dco",
+        "patchSetId": 21
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T18:06:39Z",
+      "side": 1,
+      "message": "\"ERROR: Could not cd into $REPO_PATH\"",
+      "range": {
+        "startLine": 17,
+        "startChar": 23,
+        "endLine": 17,
+        "endChar": 55
+      },
+      "revId": "4f9ba60b6cce69123d0aeca9a50867656427c616",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
