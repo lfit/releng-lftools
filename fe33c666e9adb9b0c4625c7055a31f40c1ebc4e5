@@ -1,0 +1,761 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3614b3b6_df37e051",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "If there\u0027s no envvar just don\u0027t include the definition.",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ad3f03d_7d80447b",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "This doesn\u0027t look optional. I would use click.argument in this case so that you call the command as: parse FILE --params",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e19ebf97_185fcf10",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "Should this actually be a \"bool\" then? seems like that\u0027s how it\u0027s used below.",
+      "range": {
+        "startLine": 28,
+        "startChar": 40,
+        "endLine": 28,
+        "endChar": 43
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f121e1c6_86d90f24",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "LFID",
+      "range": {
+        "startLine": 31,
+        "startChar": 42,
+        "endLine": 31,
+        "endChar": 46
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1dc6612_a59dcd66",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "Unnecessary, if lookup is [] then the for loop below won\u0027t execute anyway.",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 19
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ea692ff_f0ee23f1",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "I think the if logic up here doesn\u0027t make sense.\n\n1. Full seems to take precedence over everything. So if someone says --full --id abc123, then it will loop the lookup for all results not just for the one id.\n\nThese 2 switches should be mutually exclusive right?\n\nSo if someone passes an ID then it will only print the ID of that person, otherwise use the loop to iterate over all committers.\n\nRegardless of the above statement, if someone passes --full then print all of the info, otherwise only print the id field.\n\nTo me this sounds like we need 2 sets of if-statements.",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c76687e5_9f57a8db",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "If there is no envvar just don\u0027t declare it.",
+      "range": {
+        "startLine": 60,
+        "startChar": 22,
+        "endLine": 60,
+        "endChar": 32
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d851c845_9b97c945",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "For the above 3 settings none of them are optional so I think we should use click.arguments instead so that the command becomes:\n\n correct info_file ldap_file user_id [--repo NAME]",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e7b5bf3_9a29ffe5",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "What is the context for the repo name? is it a repo in ldap or what?",
+      "range": {
+        "startLine": 67,
+        "startChar": 20,
+        "endLine": 67,
+        "endChar": 29
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14826180_2ad67bbe",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "info_file",
+      "range": {
+        "startLine": 69,
+        "startChar": 21,
+        "endLine": 69,
+        "endChar": 25
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb638968_64d1e24a",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "ldap_file",
+      "range": {
+        "startLine": 69,
+        "startChar": 27,
+        "endLine": 69,
+        "endChar": 31
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f814f5f_07412e33",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "info_data\n\nwould be more clear.",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 8
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea17ac88_8b47b557",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "ldap_data would be more clear.",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75496f1f_69063de4",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "committer*",
+      "range": {
+        "startLine": 105,
+        "startChar": 12,
+        "endLine": 105,
+        "endChar": 20
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1fbf7ef9_6f7d3d01",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "I\u0027m not entirely sure what this if-statement is doing. seems like there is no code at all after it so there\u0027s nothing to break from. Did you mean to put this above the data line previously? or should it just be removed entirely?",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 21
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eebc9a3c_de50489c",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "unnecessary else statement the continue is implied since there\u0027s nothing after.",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 24
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "835250b2_96843286",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "Use the with open() pattern instead of f.close()",
+      "range": {
+        "startLine": 119,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 17
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "759a974e_697b813d",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "should be click.argument if this is not optional.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 38
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f427583_40a10089",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "What is groups? is it 1 group? or if I can pass more than 1 what\u0027s the format?\n\nI think it\u0027s a better user experience if hte command is like this:\n\n yaml4info group [...]\n\nwhere you can keep passing space separated list of groups to parse (assuming this supports passing more than 1?)",
+      "range": {
+        "startLine": 36,
+        "startChar": 19,
+        "endLine": 36,
+        "endChar": 25
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7e17756_3c505fc8",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "Would be more clear as gerrit-url",
+      "range": {
+        "startLine": 43,
+        "startChar": 17,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a141b51b_54a39f2f",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "if these options are not actually optional I think it would be better if the format of the command was:\n\n inactivecommitters URL GROUP",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ff0401b_3d6061e8",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "--gerrit-clone-base",
+      "range": {
+        "startLine": 55,
+        "startChar": 17,
+        "endLine": 55,
+        "endChar": 32
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04f1845d_521ecd22",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "GERRIT_CLONE_BASE",
+      "range": {
+        "startLine": 55,
+        "startChar": 43,
+        "endLine": 55,
+        "endChar": 58
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75e23bfa_fedfadbb",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "--ldap-group",
+      "range": {
+        "startLine": 57,
+        "startChar": 17,
+        "endLine": 57,
+        "endChar": 26
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63828422_502ee2b2",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "LDAP_GROUP",
+      "range": {
+        "startLine": 57,
+        "startChar": 37,
+        "endLine": 57,
+        "endChar": 46
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "379cdc4f_a3b5b0c0",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "We shouldn\u0027t use click.option() for required arguments that have no default value. Use click.argument instead.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 22
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7f61f60_ca64952d",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "--ldap-server",
+      "range": {
+        "startLine": 73,
+        "startChar": 17,
+        "endLine": 73,
+        "endChar": 27
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86170417_b4cecab3",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "--ldap-user-base",
+      "range": {
+        "startLine": 75,
+        "startChar": 17,
+        "endLine": 75,
+        "endChar": 29
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14428d39_f951cb13",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "--ldap-group-base",
+      "range": {
+        "startLine": 77,
+        "startChar": 17,
+        "endLine": 77,
+        "endChar": 30
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28d77db1_60ea9fe1",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "We should use a click.argument() that accepts a space separated list of inputs like:\n\n csv GROUP [...]",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 67
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ac78a05_16639d94",
+        "filename": "lftools/cli/parseinfofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "I think we forgot to delete this file? It\u0027s in the infofile.py now right?",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9366752_2f4257c7",
+        "filename": "setup.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "Alphabetical order please.",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a264d652_7da4b000",
+        "filename": "shell/autocorrectinfofile",
+        "patchSetId": 35
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "can we put it in /tmp/infofile/\u003cfiles\u003e instead. That way our /tmp directory does not get cluttered by a bunch of output from a single application.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 5
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9487dd9_3643f4ca",
+        "filename": "shell/autocorrectinfofile",
+        "patchSetId": 35
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "4 space indent these functions (below as well, and in the other shell files)..",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0834fd8d_e8dd5065",
+        "filename": "shell/yaml4info",
+        "patchSetId": 35
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T16:43:17Z",
+      "side": 1,
+      "message": "move this down a line.",
+      "range": {
+        "startLine": 47,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 30
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
