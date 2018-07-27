@@ -1,0 +1,36 @@
+lftools v0.15.0 Release Notes
+=============================
+
+Thanks to Anil, Jeremy, and Thanh for contributing to this release.
+
+
+Notable changes since v0.14.0
+----------------------------
+
+7ecbff3 Anil Belur      Add options to continue interrupted downloads
+The staging repo artifact signing script will now resume downloads if it was
+interrupted for whatever reason.
+
+4a92381 Thanh Ha        Add cURL command to push an artifact to Nexus
+8904697 Thanh Ha        Add optional classifier def to deploy cmd
+Adds a new command to push Maven files up to a Nexus repository, includes
+support for staging repos as well.
+
+9aa2fa4 Jeremy Phelps   Add utility to check repos for commits missing DCO
+A new `lftools dco check` command is now available which will scan a repo for
+commits that are missing DCO sign-offs.
+
+59f8abc Anil Belur      Handle snapshot artifacts in get_file_info()
+maven-file deploy script now supports SNAPSHOTs.
+
+
+Full Change Log
+---------------
+
+59f8abc Anil Belur      Handle snapshot artifacts in get_file_info()
+9aa2fa4 Jeremy Phelps   Add utility to check repos for commits missing DCO
+8904697 Thanh Ha        Add optional classifier def to deploy cmd
+4a92381 Thanh Ha        Add cURL command to push an artifact to Nexus
+66d8562 Thanh Ha        Split Nexus staged repo create & close functions
+6ee7bfa Thanh Ha        Add pre-commit hook for trailing-whitespace
+7ecbff3 Anil Belur      Add options to continue interrupted downloads
