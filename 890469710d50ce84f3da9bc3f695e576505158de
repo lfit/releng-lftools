@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c49d2e3_6a66b3ba",
+        "filename": "setup.py",
+        "patchSetId": 24
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T18:44:51Z",
+      "side": 0,
+      "message": "no need to remove this. Python is perfectly happy with the last element ending with a comma for lists and dictionaries.",
+      "range": {
+        "startLine": 60,
+        "startChar": 23,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "890469710d50ce84f3da9bc3f695e576505158de",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
