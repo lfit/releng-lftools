@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "c53a2f5b_0749bafb",
+        "filename": "shell/dco",
+        "patchSetId": 18
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-07-27T15:17:46Z",
+      "side": 1,
+      "message": "flag-less xargs strips space of the beginning and end no?",
+      "parentUuid": "910d0ba4_29b1e5b3",
+      "range": {
+        "startLine": 23,
+        "startChar": 30,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "4d1f6df89f57d6a7dd12e5bb1dfb752258e8346d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df0cd15d_e50e2fdb",
         "filename": "shell/dco",
         "patchSetId": 18
