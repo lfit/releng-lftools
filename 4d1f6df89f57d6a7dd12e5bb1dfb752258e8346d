@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8329406d_ad0f81b7",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T15:15:26Z",
+      "side": 1,
+      "message": "This should have an argument with required\u003dFalse.\n\nBy default the argument should be \u0027.\u0027 for the current working directory. But if the user passes /path/to/repo it will scan that path instead.",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 9
+      },
+      "revId": "4d1f6df89f57d6a7dd12e5bb1dfb752258e8346d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61ab0f0a_415e0c40",
+        "filename": "shell/dco",
+        "patchSetId": 18
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T15:15:26Z",
+      "side": 1,
+      "message": "Add support for the user passing the path to a repo to scan.",
+      "revId": "4d1f6df89f57d6a7dd12e5bb1dfb752258e8346d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "910d0ba4_29b1e5b3",
+        "filename": "shell/dco",
+        "patchSetId": 18
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T15:15:26Z",
+      "side": 1,
+      "message": "What\u0027s the point of this xargs?",
+      "range": {
+        "startLine": 23,
+        "startChar": 30,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "4d1f6df89f57d6a7dd12e5bb1dfb752258e8346d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df0cd15d_e50e2fdb",
+        "filename": "shell/dco",
+        "patchSetId": 18
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T15:15:26Z",
+      "side": 1,
+      "message": "I don\u0027t like that this modifies my local environment. We could make it less intrusive by adding the branch directly to the git log command.\n\ngit log \"$branch\"",
+      "revId": "4d1f6df89f57d6a7dd12e5bb1dfb752258e8346d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6000e5f2_7d777a31",
+        "filename": "shell/dco",
+        "patchSetId": 18
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T15:15:26Z",
+      "side": 1,
+      "message": "Indent here because this is a continuation of the git log command.",
+      "revId": "4d1f6df89f57d6a7dd12e5bb1dfb752258e8346d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f0c4db4_8243625f",
+        "filename": "shell/dco",
+        "patchSetId": 18
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-07-27T15:15:26Z",
+      "side": 1,
+      "message": "Indent even more here because this is inside the nested while loop.",
+      "revId": "4d1f6df89f57d6a7dd12e5bb1dfb752258e8346d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
