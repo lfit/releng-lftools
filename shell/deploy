@@ -301,14 +301,20 @@ get_file_info () {
       artifact_id=$(echo "$basefile" | cut -f 1 -d '_')
   else
       # handle other file types (tar, jar, gunzip files versions)
-      artifact_id=$(echo "$basefile" | rev | cut -f 2- -d '-' | rev)
+      # extract artifactId from string <file-name>-<version-SNAPSHOT>
+      # regex ex: input "onap-amsterdam1-regional-controller-master-1.0.0-SNAPSHOT"
+      # returns "onap-amsterdam1-regional-controller-master"
+      artifact_id=$(echo "$basefile" | sed -r 's#(.*)-([0-9.]+(-SNAPSHOT)?)$#\1#g')
   fi
 
   if [ -z "$version" ] && [[ "$1" =~ rpm|deb ]]; then
       version=$(echo "$basefile" | cut -f 2- -d '_')
   else
       # handle other file types (tar, jar, gunzip files versions)
-      version=$(echo "$basefile" | rev | cut -f 1 -d '-' | rev)
+      # extract version from string <file-name>-<version-SNAPSHOT>
+      # regex ex: input "onap-amsterdam1-regional-controller-master-1.0.0-SNAPSHOT" returns "1.0.0-SNAPSHOT" or
+      # ex: input "onap-1.0.0" returns "1.0.0"
+      version=$(echo "$basefile" | sed -r 's#(.*)-([0-9.]+(-SNAPSHOT)?)$#\2#g')
   fi
 }
 
