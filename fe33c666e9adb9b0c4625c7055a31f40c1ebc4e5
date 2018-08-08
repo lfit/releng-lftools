@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b9787f7d_762b9da4",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3614b3b6_df37e051",
+      "range": {
+        "startLine": 26,
+        "startChar": 24,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ad3f03d_7d80447b",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 35
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "58d71006_6a2c3a04",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ad3f03d_7d80447b",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e19ebf97_185fcf10",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 35
@@ -53,6 +95,30 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "Should this actually be a \"bool\" then? seems like that\u0027s how it\u0027s used below.",
+      "range": {
+        "startLine": 28,
+        "startChar": 40,
+        "endLine": 28,
+        "endChar": 43
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eb6aa2d_69b1b1a4",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e19ebf97_185fcf10",
       "range": {
         "startLine": 28,
         "startChar": 40,
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "7cc14b61_db45b695",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f121e1c6_86d90f24",
+      "range": {
+        "startLine": 31,
+        "startChar": 42,
+        "endLine": 31,
+        "endChar": 46
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1dc6612_a59dcd66",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 35
@@ -99,6 +189,30 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "Unnecessary, if lookup is [] then the for loop below won\u0027t execute anyway.",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 19
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82788edb_830b5126",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "yeah this was for some error correction i mean to add, fixed in the latest patchset",
+      "parentUuid": "f1dc6612_a59dcd66",
       "range": {
         "startLine": 41,
         "startChar": 8,
@@ -128,6 +242,24 @@
     },
     {
       "key": {
+        "uuid": "6f0aeaf9_48ac4c15",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ea692ff_f0ee23f1",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c76687e5_9f57a8db",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 35
@@ -139,6 +271,30 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "If there is no envvar just don\u0027t declare it.",
+      "range": {
+        "startLine": 60,
+        "startChar": 22,
+        "endLine": 60,
+        "endChar": 32
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6011db47_ebea2b25",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c76687e5_9f57a8db",
       "range": {
         "startLine": 60,
         "startChar": 22,
@@ -168,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "327932a4_1e50d115",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d851c845_9b97c945",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e7b5bf3_9a29ffe5",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 35
@@ -179,6 +353,30 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "What is the context for the repo name? is it a repo in ldap or what?",
+      "range": {
+        "startLine": 67,
+        "startChar": 20,
+        "endLine": 67,
+        "endChar": 29
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "256ce68f_15bcd9af",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e7b5bf3_9a29ffe5",
       "range": {
         "startLine": 67,
         "startChar": 20,
@@ -237,6 +435,30 @@
     },
     {
       "key": {
+        "uuid": "402c35d4_2ebc4058",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb638968_64d1e24a",
+      "range": {
+        "startLine": 69,
+        "startChar": 27,
+        "endLine": 69,
+        "endChar": 31
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f814f5f_07412e33",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 35
@@ -248,6 +470,30 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "info_data\n\nwould be more clear.",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 8
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b57d1510_31c67f99",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f814f5f_07412e33",
       "range": {
         "startLine": 81,
         "startChar": 4,
@@ -277,6 +523,24 @@
     },
     {
       "key": {
+        "uuid": "df4e6dc7_7146fe9c",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea17ac88_8b47b557",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75496f1f_69063de4",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 35
@@ -288,6 +552,30 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "committer*",
+      "range": {
+        "startLine": 105,
+        "startChar": 12,
+        "endLine": 105,
+        "endChar": 20
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad63550f_1e63bc28",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75496f1f_69063de4",
       "range": {
         "startLine": 105,
         "startChar": 12,
@@ -323,6 +611,30 @@
     },
     {
       "key": {
+        "uuid": "ef92fb63_a971daf2",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fbf7ef9_6f7d3d01",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 107,
+        "endChar": 21
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eebc9a3c_de50489c",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 35
@@ -334,6 +646,30 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "unnecessary else statement the continue is implied since there\u0027s nothing after.",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 109,
+        "endChar": 24
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b1e3071_04e9faee",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eebc9a3c_de50489c",
       "range": {
         "startLine": 108,
         "startChar": 12,
@@ -369,6 +705,30 @@
     },
     {
       "key": {
+        "uuid": "16f72382_982b9fe8",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "835250b2_96843286",
+      "range": {
+        "startLine": 119,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 17
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "759a974e_697b813d",
         "filename": "lftools/cli/ldap_cli.py",
         "patchSetId": 35
@@ -380,6 +740,30 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "should be click.argument if this is not optional.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 38
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54923039_6573b2bf",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "759a974e_697b813d",
       "range": {
         "startLine": 33,
         "startChar": 0,
@@ -415,6 +799,30 @@
     },
     {
       "key": {
+        "uuid": "2a3fdbcf_6954551c",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "not sure how to do this",
+      "parentUuid": "4f427583_40a10089",
+      "range": {
+        "startLine": 36,
+        "startChar": 19,
+        "endLine": 36,
+        "endChar": 25
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7e17756_3c505fc8",
         "filename": "lftools/cli/ldap_cli.py",
         "patchSetId": 35
@@ -438,6 +846,30 @@
     },
     {
       "key": {
+        "uuid": "47889793_4a0e476c",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "it doesnt seem to like -\u0027s in the option name",
+      "parentUuid": "e7e17756_3c505fc8",
+      "range": {
+        "startLine": 43,
+        "startChar": 17,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a141b51b_54a39f2f",
         "filename": "lftools/cli/ldap_cli.py",
         "patchSetId": 35
@@ -449,6 +881,24 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "if these options are not actually optional I think it would be better if the format of the command was:\n\n inactivecommitters URL GROUP",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "157d2c77_ca14412c",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a141b51b_54a39f2f",
       "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
@@ -570,6 +1020,30 @@
     },
     {
       "key": {
+        "uuid": "e26e7e1c_1c4a1d3c",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "379cdc4f_a3b5b0c0",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 22
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7f61f60_ca64952d",
         "filename": "lftools/cli/ldap_cli.py",
         "patchSetId": 35
@@ -662,6 +1136,30 @@
     },
     {
       "key": {
+        "uuid": "86d5058b_2e8324e3",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "not sure how to do this..",
+      "parentUuid": "28d77db1_60ea9fe1",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 67
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ac78a05_16639d94",
         "filename": "lftools/cli/parseinfofile.py",
         "patchSetId": 35
@@ -673,6 +1171,24 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "I think we forgot to delete this file? It\u0027s in the infofile.py now right?",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "557793c9_5db8ebdf",
+        "filename": "lftools/cli/parseinfofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ac78a05_16639d94",
       "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
