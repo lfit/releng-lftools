@@ -1235,6 +1235,30 @@
     },
     {
       "key": {
+        "uuid": "902bdb5d_b9415baa",
+        "filename": "shell/autocorrectinfofile",
+        "patchSetId": 35
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:24:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a264d652_7da4b000",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 5
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e9487dd9_3643f4ca",
         "filename": "shell/autocorrectinfofile",
         "patchSetId": 35
@@ -1246,6 +1270,24 @@
       "writtenOn": "2018-07-27T16:43:17Z",
       "side": 1,
       "message": "4 space indent these functions (below as well, and in the other shell files)..",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30d65b07_223aaec9",
+        "filename": "shell/autocorrectinfofile",
+        "patchSetId": 35
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-08T18:24:49Z",
+      "side": 1,
+      "message": "I would not normally do this, do we have a style guide I can follow?",
+      "parentUuid": "e9487dd9_3643f4ca",
       "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
