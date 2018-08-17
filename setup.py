@@ -19,46 +19,15 @@ from lftools import __version__
 with open('requirements.txt') as f:
     install_reqs = f.read().splitlines()
 
-with open('requirements-openstack.txt') as f:
-    openstack_reqs = f.read().splitlines()
-
 setup(
-    name='lftools',
-    version=__version__,
-    author='Thanh Ha',
-    author_email='releng@linuxfoundation.org',
-    url='https://lf-releng-tools.readthedocs.io',
-    description=__summary__,
-    long_description=open("README.md").read(),
-    license='EPL',
-    classifiers=[
-        'Development Status :: 1 - Planning',
-        'Operating System :: POSIX :: Linux',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.5',
-    ],
+    setup_requires=['pbr', 'pytest-runner'],
+    pbr=True,
     install_requires=install_reqs,
-    extras_require={
-        'openstack': openstack_reqs,
-    },
     packages=find_packages(exclude=[
         '*.tests',
         '*.tests.*',
         'tests.*',
         'tests'
     ]),
-    setup_requires=['pytest-runner'],
     tests_require=['pytest'],
-    entry_points='''
-        [console_scripts]
-        lftools=lftools.cli:main
-    ''',
-    scripts=[
-        'shell/dco',
-        'shell/deploy',
-        'shell/sign',
-        'shell/version'
-    ],
-    data_files=[('etc', ['etc/logging.ini'])],
 )

@@ -28,3 +28,7 @@ __pycache__/
 docs/_build/
 dist/
 MANIFEST
+
+# PBR
+AUTHORS
+ChangeLog
