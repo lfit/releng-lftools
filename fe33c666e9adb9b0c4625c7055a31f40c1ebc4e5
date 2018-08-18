@@ -1294,6 +1294,24 @@
     },
     {
       "key": {
+        "uuid": "7bb1f901_8692330e",
+        "filename": "shell/autocorrectinfofile",
+        "patchSetId": 35
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-18T13:05:55Z",
+      "side": 1,
+      "message": "No, we should make one though. However in general most of our scripts use 4 space indents.\n\nRegardless of 4 or 2 space indents though we should indent functions for readability:\n\n func1() {\n     echo hello\n     echo world\n }",
+      "parentUuid": "30d65b07_223aaec9",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0834fd8d_e8dd5065",
         "filename": "shell/yaml4info",
         "patchSetId": 35
