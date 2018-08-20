@@ -2,6 +2,7 @@
 project: lftools
 project_cfg: lfdocs
 extensions:
+  - reno.sphinxext
   - sphinx.ext.autodoc
   - sphinx.ext.doctest
   - sphinx.ext.intersphinx
