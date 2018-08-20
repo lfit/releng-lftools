@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c4ec531_3e552603",
+        "filename": "shell/autocorrectinfofile",
+        "patchSetId": 40
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-20T23:59:24Z",
+      "side": 1,
+      "message": "I think the code would be a little more efficient if we swapped this around:\n\n DIR\u003d\"/tmp/...\"\n mkdir -p \"$DIR\"",
+      "revId": "711d7b172fd724478ad5d3d2be362bdef5c8a925",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
