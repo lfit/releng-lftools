@@ -16,6 +16,24 @@
       "revId": "711d7b172fd724478ad5d3d2be362bdef5c8a925",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1347a6d0_8f9fc954",
+        "filename": "shell/autocorrectinfofile",
+        "patchSetId": 40
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T00:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c4ec531_3e552603",
+      "revId": "711d7b172fd724478ad5d3d2be362bdef5c8a925",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
