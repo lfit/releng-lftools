@@ -208,6 +208,30 @@
     },
     {
       "key": {
+        "uuid": "fc267a52_f4c9538a",
+        "filename": "releasenotes/notes/ldap-info-017df79c3c8f9585.yaml",
+        "patchSetId": 44
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T15:57:33Z",
+      "side": 1,
+      "message": "This is an RST file for our purposes. Reno generates RSTs from YAML via the Sphinx plugin.",
+      "parentUuid": "db13d54b_b0df1eec",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 24
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3ada8ef_7f20570f",
         "filename": "releasenotes/notes/ldap-info-017df79c3c8f9585.yaml",
         "patchSetId": 44
@@ -219,6 +243,30 @@
       "writtenOn": "2018-08-21T06:32:28Z",
       "side": 1,
       "message": "this is not an .rst file. Do we need the `.. code block::` here?",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 24
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8cd51ab_73e80753",
+        "filename": "releasenotes/notes/ldap-info-017df79c3c8f9585.yaml",
+        "patchSetId": 44
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T15:57:33Z",
+      "side": 1,
+      "message": "This is an RST file for our purposes. Reno generates RSTs from YAML via the Sphinx plugin.",
+      "parentUuid": "d3ada8ef_7f20570f",
       "range": {
         "startLine": 19,
         "startChar": 4,
@@ -254,6 +302,30 @@
     },
     {
       "key": {
+        "uuid": "b8d2d802_c982ed64",
+        "filename": "shell/inactivecommitters",
+        "patchSetId": 44
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T15:57:33Z",
+      "side": 1,
+      "message": "Personally I like %Y-%m-%d because it\u0027s clear what it means at a glance. %F I\u0027d have to Google and find out.",
+      "parentUuid": "cedc25c2_2a88b307",
+      "range": {
+        "startLine": 23,
+        "startChar": 16,
+        "endLine": 23,
+        "endChar": 30
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84e453ab_c5d5a9b7",
         "filename": "shell/inactivecommitters",
         "patchSetId": 44
@@ -265,6 +337,30 @@
       "writtenOn": "2018-08-21T06:32:28Z",
       "side": 1,
       "message": "optionally fix, shorter version: `date +%F`",
+      "range": {
+        "startLine": 37,
+        "startChar": 35,
+        "endLine": 37,
+        "endChar": 44
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5576ea07_a1608603",
+        "filename": "shell/inactivecommitters",
+        "patchSetId": 44
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T15:57:33Z",
+      "side": 1,
+      "message": "Personally I like %Y-%m-%d because it\u0027s clear what it means at a glance. %F I\u0027d have to Google and find out.",
+      "parentUuid": "84e453ab_c5d5a9b7",
       "range": {
         "startLine": 37,
         "startChar": 35,
