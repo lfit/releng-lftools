@@ -1044,6 +1044,30 @@
     },
     {
       "key": {
+        "uuid": "1aa9929b_6fc51c58",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T00:33:11Z",
+      "side": 1,
+      "message": "This works: \u0027--gerrit-url\u0027\n\nWhen it turns into a variable it becomes gerrit_url which is probably why you were having issues. I\u0027ve updated this in the latest patch.",
+      "parentUuid": "39a0d0cd_8687c498",
+      "range": {
+        "startLine": 43,
+        "startChar": 17,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a141b51b_54a39f2f",
         "filename": "lftools/cli/ldap_cli.py",
         "patchSetId": 35
