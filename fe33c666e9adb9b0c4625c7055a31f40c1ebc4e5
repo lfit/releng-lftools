@@ -625,6 +625,24 @@
     },
     {
       "key": {
+        "uuid": "995729c4_4e299008",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T00:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21f726ac_58e64846",
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75496f1f_69063de4",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 35
@@ -825,6 +843,30 @@
       "side": 1,
       "message": "This wasn\u0027t addressed.",
       "parentUuid": "835250b2_96843286",
+      "range": {
+        "startLine": 119,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 17
+      },
+      "revId": "fe33c666e9adb9b0c4625c7055a31f40c1ebc4e5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83c512d3_3ffa2fd5",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T00:24:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c0c0c3f_c5608205",
       "range": {
         "startLine": 119,
         "startChar": 8,
