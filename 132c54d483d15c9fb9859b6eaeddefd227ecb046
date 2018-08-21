@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "730c2288_b2566514",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T01:20:49Z",
+      "side": 1,
+      "message": "Now that I understand this a bit more I think maybe calling this function \"get_committers\" is more accurate?",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 9
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b50e94d6_346e8497",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T01:20:49Z",
+      "side": 1,
+      "message": "So the output we are providing it needs to be a properly formatted YAML?\n\nIn the case where only ID is printed it\u0027s not outputting a list item \"- id: uid\" instead it\u0027s just \"id: uid\" is this intended?",
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9faeb284_98b203bf",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T01:20:49Z",
+      "side": 1,
+      "message": "Ok I think my original comment got misunderstood. Hopefully I\u0027ll be more clear this time. I didn\u0027t mean to add yet another if-statement to check that FULL and ID are passed.\n\nIf I understand the intent of this function correctly then it has 2 modes.\n\n1. --id is passed so return a single account\n2. --id is not passed so return all committers\n\nWithin 2) there is 2 states:\n\na. --full is passed so print name, email, and id\nb. --full is not passed so return only id\n\n\nI think this code would be a lot more cleaner. There\u0027s 2 parts to this:\n\nnew function declared above list_committers:\n\n    def print_committer_info(committer, full):\n        if full:\n            print(\"    - name: {}\".format(committer[\u0027name\u0027]))\n            print(\"      email: {}\".format(committer[\u0027email\u0027]))\n\n        print(\"      id: {}\".format(committer[\u0027id\u0027]))\n\nThis function handles printing both full and none full outputs.\n\nThe 2nd part the new loop:\n\n        for item in lookup:\n            if id:\n                if item[\u0027id\u0027] \u003d\u003d id:\n                    print_committer_info(item, True)\n                    break\n                else:\n                    continue\n\n            print_committer_info(item, full)\n\nThis loop is more clean and covers both cases of if we want to search for a single ID, vs print all of the IDs.",
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e68d3398_2b8bf090",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T01:20:49Z",
+      "side": 1,
+      "message": "This only deals with committers as far as I can tell. Maybe calling the function \"sync_committers\" would make more sense?",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cfb8caa1_5eff7ea9",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T01:20:49Z",
+      "side": 1,
+      "message": "Sync\u0027s committer information from LDAP into INFO.yaml",
+      "range": {
+        "startLine": 67,
+        "startChar": 7,
+        "endLine": 67,
+        "endChar": 78
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af143369_57c9216c",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T01:20:49Z",
+      "side": 1,
+      "message": "Using \"with open\" syntax would be much better here.\n\n with open(info_file) as f:\n     info_data \u003d ryaml.load(f)\n with open(ldap_file) as f:\n     ldap_data \u003d ryaml.load(f)\n\nThis ensures that f.close() is appropriately called.",
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b31253e1_3add3802",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T01:20:49Z",
+      "side": 1,
+      "message": "I think this pydoc is not accurate. It works on more than just OPNFV right?",
+      "range": {
+        "startLine": 11,
+        "startChar": 3,
+        "endLine": 11,
+        "endChar": 37
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98fb7d81_096ad51e",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T01:20:49Z",
+      "side": 1,
+      "message": "Would be easier to read like this:\n\nPrereqs:\n\n - yum install python-devel openldap-devel\n - pip install python-ldap",
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24ee75ee_16f93d65",
+        "filename": "lftools/cli/ldap_cli.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-21T01:20:49Z",
+      "side": 1,
+      "message": "committers",
+      "range": {
+        "startLine": 37,
+        "startChar": 21,
+        "endLine": 37,
+        "endChar": 30
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
