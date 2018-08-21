@@ -17,6 +17,7 @@ import click
 
 from lftools.openstack import image as os_image
 from lftools.openstack import server as os_server
+from lftools.openstack import stack as os_stack
 from lftools.openstack import volume as os_volume
 
 
@@ -132,6 +133,38 @@ def remove(ctx, server, minutes):
 server.add_command(cleanup)
 server.add_command(list)
 server.add_command(remove)
+
+
+@openstack.group()
+@click.pass_context
+def stack(ctx):
+    """Command for manipulating stacks."""
+    pass
+
+
+@click.command()
+@click.argument('name')
+@click.argument('template_file')
+@click.argument('parameter_file')
+@click.option(
+    '--timeout', type=int, default=900,
+    help='Stack create timeout in seconds.')
+@click.option(
+    '--tries', type=int, default=2,
+    help='Number of tries before giving up.')
+@click.pass_context
+def create(ctx, name, template_file, parameter_file, timeout):
+    """Create stack."""
+    os_stack.create(
+        ctx.obj['os_cloud'],
+        name,
+        template_file,
+        parameter_file,
+        timeout,
+        tries)
+
+
+stack.add_command(create)
 
 
 @openstack.group()
