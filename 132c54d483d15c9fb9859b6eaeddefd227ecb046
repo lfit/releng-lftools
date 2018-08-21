@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ab5f5b1c_ebb21d41",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-21T18:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "730c2288_b2566514",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 9
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b50e94d6_346e8497",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 44
@@ -36,6 +60,24 @@
       "writtenOn": "2018-08-21T01:20:49Z",
       "side": 1,
       "message": "So the output we are providing it needs to be a properly formatted YAML?\n\nIn the case where only ID is printed it\u0027s not outputting a list item \"- id: uid\" instead it\u0027s just \"id: uid\" is this intended?",
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1044edb7_485533e5",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-21T18:47:02Z",
+      "side": 1,
+      "message": "It\u0027s just output to be read by a human or parsed by a script (autocorrectinfofile) I don\u0027t see it living as valid yaml in a file.",
+      "parentUuid": "b50e94d6_346e8497",
       "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "494c7897_02f7c532",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-21T18:47:02Z",
+      "side": 1,
+      "message": "print_committer_info(item, full)\n\n-Also, done",
+      "parentUuid": "9faeb284_98b203bf",
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e68d3398_2b8bf090",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 44
@@ -70,6 +130,30 @@
       "writtenOn": "2018-08-21T01:20:49Z",
       "side": 1,
       "message": "This only deals with committers as far as I can tell. Maybe calling the function \"sync_committers\" would make more sense?",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 11
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61e7e947_eee9451a",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-21T18:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e68d3398_2b8bf090",
       "range": {
         "startLine": 66,
         "startChar": 4,
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "1a56a755_87bec7a4",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-21T18:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfb8caa1_5eff7ea9",
+      "range": {
+        "startLine": 67,
+        "startChar": 7,
+        "endLine": 67,
+        "endChar": 78
+      },
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af143369_57c9216c",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 44
@@ -116,6 +224,24 @@
       "writtenOn": "2018-08-21T01:20:49Z",
       "side": 1,
       "message": "Using \"with open\" syntax would be much better here.\n\n with open(info_file) as f:\n     info_data \u003d ryaml.load(f)\n with open(ldap_file) as f:\n     ldap_data \u003d ryaml.load(f)\n\nThis ensures that f.close() is appropriately called.",
+      "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16677534_90b9b90e",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 44
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-08-21T18:47:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af143369_57c9216c",
       "revId": "132c54d483d15c9fb9859b6eaeddefd227ecb046",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
