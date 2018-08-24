@@ -13,7 +13,7 @@ Commands
 directory
 ---------
 
-.. program-output:: lftools sign directory --help
+.. program-output:: lftools sign dir --help
 
 nexus
 -----
