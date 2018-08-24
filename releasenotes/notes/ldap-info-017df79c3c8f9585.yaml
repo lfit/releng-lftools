@@ -1,0 +1,23 @@
+---
+features:
+  - |
+    $ lftools ldap
+
+    Usage: lftools ldap [OPTIONS] COMMAND [ARGS]...
+
+    .. code-block:: none
+
+       Commands:
+         autocorrectinfofile  Verify INFO.yaml against LDAP group.
+         csv                  Query an Ldap server.
+         inactivecommitters   Check committer participation.
+         yaml4info            Build yaml of commiters for your INFO.yaml.
+
+  - |
+    $ lftools infofile
+
+    .. code-block:: none
+
+       Commands:
+         get-committers   Extract Committer info from INFO.yaml or LDAP...
+         sync-committers  Sync committer information from LDAP into...
