@@ -22,5 +22,5 @@ import logging.config
 formatter = logging.Formatter('(%(levelname)s) %(name)s: %(message)s')
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(formatter)
-logging.getLogger("").setLevel(logging.NOTSET)
+logging.getLogger("").setLevel(logging.INFO)
 logging.getLogger("").addHandler(console_handler)
