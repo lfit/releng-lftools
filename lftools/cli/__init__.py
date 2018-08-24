@@ -11,6 +11,8 @@
 
 __author__ = 'Thanh Ha'
 
+import logging
+
 import click
 
 from lftools.cli.config import config_sys
@@ -22,13 +24,20 @@ from lftools.cli.nexus import nexus
 from lftools.cli.sign import sign
 from lftools.cli.version import version
 
+log = logging.getLogger(__name__)
+
 
 @click.group()
+@click.option('--debug', envvar='DEBUG', is_flag=True, default=False)
 @click.pass_context
 @click.version_option()
-def cli(ctx):
+def cli(ctx, debug):
     """CLI entry point for lftools."""
-    pass
+    if debug:
+        logging.getLogger("").setLevel(logging.DEBUG)
+
+    ctx.obj['DEBUG'] = debug
+    log.debug('DEBUG mode enabled.')
 
 
 cli.add_command(config_sys)

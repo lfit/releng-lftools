@@ -29,7 +29,7 @@ FIXTURE_DIR = os.path.join(
 def test_version_bump(cli_runner, datafiles):
     """Test version bump command."""
     os.chdir(str(datafiles))
-    cli_runner.invoke(cli.cli, ['version', 'bump', 'TestRelease'])
+    cli_runner.invoke(cli.cli, ['version', 'bump', 'TestRelease'], obj={})
 
     for _file in datafiles.listdir():
         pom = str(_file) + '/pom.xml'
@@ -44,7 +44,7 @@ def test_version_bump(cli_runner, datafiles):
 def test_version_release(cli_runner, datafiles):
     """Test version release command."""
     os.chdir(str(datafiles))
-    cli_runner.invoke(cli.cli, ['version', 'release', 'TestRelease'])
+    cli_runner.invoke(cli.cli, ['version', 'release', 'TestRelease'], obj={})
 
     for _file in datafiles.listdir():
         pom = str(_file) + '/pom.xml'
