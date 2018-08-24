@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0266553e_3fa3a0c4",
+        "filename": "lftools/cli/jenkins/__init__.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-24T04:44:36Z",
+      "side": 1,
+      "message": "Looks like this isn\u0027t even used at all in the code.",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 61
+      },
+      "revId": "370753cfcf79784ba23bb5fc46509056b05c3006",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76d6db7a_7e77b7d6",
+        "filename": "lftools/cli/jenkins/__init__.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-24T04:44:36Z",
+      "side": 1,
+      "message": "We should probably give credit to the original author of this code and provide a reference to the stack overflow this comes from since it is not original work.",
+      "revId": "370753cfcf79784ba23bb5fc46509056b05c3006",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
