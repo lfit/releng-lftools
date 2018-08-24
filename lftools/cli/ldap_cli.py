@@ -26,6 +26,16 @@ import ldap
 
 @click.group()
 @click.pass_context
+def no_cmd(ctx):
+    """(lftools[ldap]) Provides an ldap interface.
+
+    To activate this interface run `pip install lftools[ldap]`.
+    """
+    pass
+
+
+@click.group()
+@click.pass_context
 def ldap_cli(ctx):
     """LDAP TOOLS."""
     pass

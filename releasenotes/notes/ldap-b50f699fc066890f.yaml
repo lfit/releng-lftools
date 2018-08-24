@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    The v0.16.0 pulled in a new ldap module which breaks if the ldap devel
+    libraries are not available on the system trying to use it. This hotfix
+    makes the ldap module optional.
