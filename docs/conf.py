@@ -20,13 +20,14 @@
 import os
 import sys
 import sphinx_bootstrap_theme
-from lftools import __version__
 sys.path.insert(0, os.path.abspath('..'))
+
+from pbr.version import VersionInfo
 
 from docs_conf.conf import *
 
-version = __version__
-release = __version__
+version = str(VersionInfo('lftools'))
+release = str(VersionInfo('lftools'))
 
 # Linkcheck Options
 linkcheck_ignore= [

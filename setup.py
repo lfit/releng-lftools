@@ -13,8 +13,6 @@
 from setuptools import find_packages
 from setuptools import setup
 
-from lftools import __summary__
-from lftools import __version__
 
 with open('requirements.txt') as f:
     install_reqs = f.read().splitlines()
