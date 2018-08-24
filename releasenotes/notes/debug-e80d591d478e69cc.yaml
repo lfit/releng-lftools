@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Add a new ``--debug`` flag to enable extra troubleshooting information.
+    This flag can also be set via environment variable ``DEBUG=True``.
