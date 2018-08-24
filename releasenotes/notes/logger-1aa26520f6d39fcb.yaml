@@ -1,0 +1,6 @@
+---
+deprecations:
+  - |
+    Remove support for modifying the logger via logging.ini. It was a good idea
+    but in practice this is not really used and adds extra complexity to
+    lftools.
