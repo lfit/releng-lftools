@@ -161,6 +161,47 @@ for (node in Jenkins.instance.computers) {
     print(result)
 
 
+@click.command()
+@click.option(
+    '-e', '--enable', is_flag=True, default=False,
+    help='Enable jobs which match the given input pattern.')
+@click.option(
+    '-d', '--disable', is_flag=True, default=False,
+    help='Disable jobs which match the given input pattern.')
+@click.argument('regex')
+@click.pass_context
+def enable_disable_jobs(ctx, enable, disable, regex):
+    """Enable/disable Jenkins jobs."""
+    server = ctx.obj['server']
+    enable_jobs = """
+import jenkins.*
+import jenkins.model.*
+import hudson.*
+import hudson.model.*
+
+def jobTypes = [hudson.model.FreeStyleProject.class]
+
+def filter = {{job->
+    if (job.disabled == true) {{
+        println("${{job.fullName}}")
+    }}
+    job.getDisplayName().contains("{0}")
+}}
+
+def disableClosure = {{job->job.{1}()}}
+
+jobTypes.each{{ className->
+    jenkins.model.Jenkins.instance.getAllItems(className).findAll(filter).each(disableClosure)}}
+"""
+
+    if enable:
+        result = server.run_script(enable_jobs.format(regex, "enable"))
+    if disable:
+        result = server.run_script(enable_jobs.format(regex, "disable"))
+
+    print(result)
+
+
 jenkins_cli.add_command(plugins_init, name='plugins')
 jenkins_cli.add_command(nodes)
 jenkins_cli.add_command(builds)
@@ -168,3 +209,4 @@ jenkins_cli.add_command(get_credentials, name='get-credentials')
 jenkins_cli.add_command(groovy)
 jenkins_cli.add_command(quiet_down, name='quiet-down')
 jenkins_cli.add_command(remove_offline_nodes, name='remove-offline-nodes')
+jenkins_cli.add_command(enable_disable_jobs, name='jobs')
