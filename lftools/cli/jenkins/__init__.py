@@ -12,8 +12,11 @@
 __author__ = 'Trevor Bramwell'
 
 
+import os
+
 import click
 import jenkins as jenkins_python  # Don't confuse this with the function ...
+from six.moves import configparser
 from six.moves.urllib.error import HTTPError
 
 from lftools.cli.jenkins.builds import builds
@@ -22,13 +25,32 @@ from lftools.cli.jenkins.plugins import plugins_init
 
 
 @click.group()
-@click.option('-s', '--server', type=str, required=True, envvar='JENKINS_URL')
-@click.option('-u', '--user', type=str, required=True, envvar='JENKINS_USER')
-@click.option('-p', '--password', type=str, required=True,
-              envvar='JENKINS_PASSWORD')
+@click.option(
+    '-s', '--server', type=str, envvar='JENKINS_URL', default='jenkins',
+    help='The URL to a Jenkins server. Alternatively the jenkins_jobs.ini '
+    'section to parse for url/user/password configuration if available.')
+@click.option('-u', '--user', type=str, envvar='JENKINS_USER', default='admin')
+@click.option('-p', '--password', type=str, envvar='JENKINS_PASSWORD')
 @click.pass_context
 def jenkins_cli(ctx, server, user, password):
     """Query information about the Jenkins Server."""
+
+    jjb_ini = os.path.join(
+        os.path.expanduser('~'),
+        '.config',
+        'jenkins_jobs',
+        'jenkins_jobs.ini')
+
+    if '://' not in server:
+        if os.path.isfile(jjb_ini):
+            config = configparser.ConfigParser()
+            config.read(jjb_ini)
+            user = config.get(server, 'user')
+            password = config.get(server, 'password')
+            server = config.get(server, 'url')
+        else:
+            server = 'https://localhost:8080'
+
     # Initial the Jenkins object and pass it to sub-commands
     ctx.obj['server'] = jenkins_python.Jenkins(
         server,
