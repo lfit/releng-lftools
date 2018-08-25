@@ -17,6 +17,10 @@ target/
 # VSCode
 .vscode
 
+# NPM / NodeJS
+_cacache/
+anonymous-cli-metrics.json
+
 # Python
 .cache/
 .eggs/
