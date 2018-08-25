@@ -33,7 +33,11 @@ bears = BanditBear,
 files = lftools/**.py
 ignore += docs/conf.py
 known_first_party_imports = lftools
-known_third_party_imports = pytest, six
+known_third_party_imports =
+    pytest,
+    six,
+    ruamel.yaml,
+    yaml
 pydocstyle_ignore = D203, D213, D301
 max_line_length = 120
 
