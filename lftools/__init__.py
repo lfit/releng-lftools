@@ -18,7 +18,7 @@ __summary__ = 'Linux Foundation Release Engineering Tools'
 import logging
 import logging.config
 
-formatter = logging.Formatter('(%(levelname)s) %(name)s: %(message)s')
+formatter = logging.Formatter('%(message)s')
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(formatter)
 logging.getLogger("").setLevel(logging.INFO)

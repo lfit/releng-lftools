@@ -35,10 +35,9 @@ log = logging.getLogger(__name__)
 def cli(ctx, debug):
     """CLI entry point for lftools."""
     if debug:
-        logging.getLogger("").setLevel(logging.DEBUG)
-
-    ctx.obj['DEBUG'] = debug
-    log.debug('DEBUG mode enabled.')
+        ctx.obj['DEBUG'] = debug
+        enable_debug()
+        log.debug('DEBUG mode enabled.')
 
 
 cli.add_command(config_sys)
@@ -65,6 +64,17 @@ try:
 except ImportError:
     from lftools.openstack.no_cmd import openstack
     cli.add_command(openstack)
+
+
+def enable_debug():
+    logging.getLogger("").setLevel(logging.DEBUG)
+    formatter = logging.Formatter('(%(levelname)s) %(name)s: %(message)s')
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    logger = logging.getLogger("")
+    for handler in logger.handlers[:]:
+        logger.removeHandler(handler)
+    logger.addHandler(console_handler)
 
 
 def main():
