@@ -18,8 +18,23 @@ __summary__ = 'Linux Foundation Release Engineering Tools'
 import logging
 import logging.config
 
-formatter = logging.Formatter('(%(levelname)s) %(name)s: %(message)s')
+
+class LogFormatter(logging.Formatter):
+    default_fmt = logging.Formatter('%(levelname)s: %(message)s')
+    debug_fmt = logging.Formatter('%(levelname)s: %(name)s:%(lineno)d: %(message)s')
+    info_fmt = logging.Formatter('%(message)s')
+
+
+    def format(self, record):
+        if record.levelno == logging.INFO:
+            return self.info_fmt.format(record)
+        if record.levelno == logging.DEBUG:
+            return self.debug_fmt.format(record)
+        else:
+            return self.default_fmt.format(record)
+
+
 console_handler = logging.StreamHandler()
-console_handler.setFormatter(formatter)
+console_handler.setFormatter(LogFormatter())
 logging.getLogger("").setLevel(logging.INFO)
 logging.getLogger("").addHandler(console_handler)
