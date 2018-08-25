@@ -1,0 +1,6 @@
+---
+other:
+  - |
+    Enhance logger subsystem to work better as a CLI program. This is a first
+    step to migrating all lftools subsystems to use the logger instead of print
+    statements everywhere.
