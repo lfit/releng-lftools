@@ -22,6 +22,30 @@
       "revId": "54c0bdb08963841eecd01cc816d485d15f1e9de1",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3d128ff_f17bc6f5",
+        "filename": "releasenotes/notes/jenkins-25629106553ebbd5.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-08-27T13:56:20Z",
+      "side": 1,
+      "message": "We use reno for release notes in lftools now. These files are generated using the reno tool. pip install reno and then run `reno new \u003ckeyword\u003e`. Documentation for reno is available via the reno project: https://docs.openstack.org/reno/latest/user/usage.html",
+      "parentUuid": "e10a18eb_fbdb897f",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 62
+      },
+      "revId": "54c0bdb08963841eecd01cc816d485d15f1e9de1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
