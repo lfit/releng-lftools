@@ -11,10 +11,13 @@
 
 __author__ = 'Thanh Ha'
 
+import logging
 
 import click
 
 from lftools import config
+
+log = logging.getLogger(__name__)
 
 
 @click.group(name='config')
@@ -33,9 +36,9 @@ def get_setting(ctx, section, option):
     result = config.get_setting(section, option)
     if isinstance(result, list):
         for i in result:
-            print('{}: {}'.format(i, config.get_setting(section, i)))
+            log.info('{}: {}'.format(i, config.get_setting(section, i)))
     else:
-        print(result)
+        log.info(result)
 
 
 @click.command(name='set')
@@ -45,6 +48,7 @@ def get_setting(ctx, section, option):
 @click.pass_context
 def set_setting(ctx, section, option, value):
     """Set a setting in the config file."""
+    log.debug('Set config\n[{}]\n{}:{}'.format(section, option, value))
     config.set_setting(section, option, value)
 
 
