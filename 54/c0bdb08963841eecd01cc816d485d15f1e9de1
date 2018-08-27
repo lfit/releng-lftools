@@ -1,0 +1,7 @@
+Verified+1: Jenkins CI <releng+lf-jenkins@linuxfoundation.org>
+Code-Review+2: Trevor Bramwell <tbramwell@linuxfoundation.org>
+Submitted-by: Thanh Ha (zxiiro) <thanh.ha@linuxfoundation.org>
+Submitted-at: Mon, 27 Aug 2018 22:23:43 +0000
+Reviewed-on: https://gerrit.linuxfoundation.org/infra/12391
+Project: releng/lftools
+Branch: refs/heads/master
