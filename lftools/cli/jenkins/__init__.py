@@ -17,6 +17,7 @@ import jenkins as jenkins_python  # Don't confuse this with the function ...
 from six.moves.urllib.error import HTTPError
 
 from lftools.cli.jenkins.builds import builds
+from lftools.cli.jenkins.jobs import jobs
 from lftools.cli.jenkins.nodes import nodes
 from lftools.cli.jenkins.plugins import plugins_init
 
@@ -166,5 +167,6 @@ jenkins_cli.add_command(nodes)
 jenkins_cli.add_command(builds)
 jenkins_cli.add_command(get_credentials, name='get-credentials')
 jenkins_cli.add_command(groovy)
+jenkins_cli.add_command(jobs)
 jenkins_cli.add_command(quiet_down, name='quiet-down')
 jenkins_cli.add_command(remove_offline_nodes, name='remove-offline-nodes')

@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Add a **jobs** sub-command to **jenkins** command to enable or disable Jenkins
+    Jobs that match a regular expression.
