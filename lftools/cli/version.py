@@ -12,11 +12,14 @@
 __author__ = 'Thanh Ha'
 
 
+import logging
 import os
 import subprocess
 import sys
 
 import click
+
+log = logging.getLogger(__name__)
 
 
 @click.group()
@@ -97,7 +100,7 @@ def patch(ctx, release_tag, patch_dir, project):
     using RELEASE_TAG in order to version bump by x.y.(z+1)-SNAPSHOT.
     """
     if not os.path.isdir(patch_dir):
-        print("{} is not a valid directory.".format(patch_dir))
+        log.error("{} is not a valid directory.".format(patch_dir))
         sys.exit(404)
     status = subprocess.call(['version', 'patch', release_tag, patch_dir, project])
     sys.exit(status)
