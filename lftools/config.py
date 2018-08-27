@@ -12,11 +12,13 @@
 
 __author__ = 'Thanh Ha'
 
+import logging
 import sys
 
 from six.moves import configparser
 from xdg import XDG_CONFIG_HOME
 
+log = logging.getLogger(__name__)
 LFTOOLS_CONFIG_FILE = '/'.join([XDG_CONFIG_HOME, 'lftools', 'lftools.ini'])
 
 
@@ -35,17 +37,17 @@ def get_setting(section, option=None):
         try:
             return config.get(section, option)
         except configparser.NoOptionError:
-            print('ERROR: Config option does not exist.')
+            log.error('Config option does not exist.')
             sys.exit(1)
         except configparser.NoSectionError:
-            print('ERROR: Config section does not exist.')
+            log.error('Config section does not exist.')
             sys.exit(1)
 
     else:
         try:
             return config.options(section)
         except configparser.NoSectionError:
-            print('ERROR: Config section does not exist.')
+            log.error('Config section does not exist.')
             sys.exit(1)
 
 
