@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Add support to the **jenkins** command to parse ``jenkins_jobs.ini`` for
+    configuration if **server** parameter passed is not a URL.
