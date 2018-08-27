@@ -17,6 +17,10 @@ from setuptools import setup
 with open('requirements.txt') as f:
     install_reqs = f.read().splitlines()
 
+with open('requirements-test.txt') as f:
+    f.readline()  # Skip the first -rrequirements.txt line
+    test_reqs = f.read().splitlines()
+
 setup(
     setup_requires=['pbr', 'pytest-runner'],
     pbr=True,
@@ -27,5 +31,5 @@ setup(
         'tests.*',
         'tests'
     ]),
-    tests_require=['pytest'],
+    tests_require=test_reqs,
 )
