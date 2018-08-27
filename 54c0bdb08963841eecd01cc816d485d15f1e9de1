@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e10a18eb_fbdb897f",
+        "filename": "releasenotes/notes/jenkins-25629106553ebbd5.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-08-27T07:27:49Z",
+      "side": 1,
+      "message": "how does this file get generated, Do we add this manually for every change submitted?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 62
+      },
+      "revId": "54c0bdb08963841eecd01cc816d485d15f1e9de1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
