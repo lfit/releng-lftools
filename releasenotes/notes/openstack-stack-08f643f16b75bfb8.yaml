@@ -1,0 +1,20 @@
+---
+prelude: >
+    Add new stack command feature to allow creation and deletion of stacks
+    using lftools.
+
+    Usage: lftools openstack stack create|delete <params>
+features:
+  - |
+    Add stack command.
+    https://jira.linuxfoundation.org/browse/RELENG-235
+  - |
+    Add stack create sub-command.
+    https://jira.linuxfoundation.org/browse/RELENG-235
+
+    Usage: lftools openstack stack create NAME TEMPLATE_FILE PARAMETER_FILE
+  - |
+    Add stack delete sub-command.
+    https://jira.linuxfoundation.org/browse/RELENG-235
+
+    Usage: lftools openstack stack create NAME
