@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    Add an ``openstack image upload`` sub-command to handle uploading images
+    to openstack.
+
+    Usage: ``Usage: lftools openstack image upload [OPTIONS] IMAGE NAME...``
