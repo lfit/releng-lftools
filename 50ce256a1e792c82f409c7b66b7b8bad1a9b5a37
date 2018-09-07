@@ -46,6 +46,30 @@
       "revId": "50ce256a1e792c82f409c7b66b7b8bad1a9b5a37",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "249f8c7d_6f744836",
+        "filename": "releasenotes/notes/share-openstack-images-4f1e3d18fdcb488b.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-07T22:07:36Z",
+      "side": 1,
+      "message": "nope, that\u0027s not needed, the better way to do it actually is:\n\n export OS_CLOUD\u003dodl\n\nThen you never have to specify it again. This true for all \"openstack\" commands so I don\u0027t think it needs to be made explicit for every sub-command of \"openstack\".",
+      "parentUuid": "aec77220_ac5c0a25",
+      "range": {
+        "startLine": 8,
+        "startChar": 3,
+        "endLine": 8,
+        "endChar": 70
+      },
+      "revId": "50ce256a1e792c82f409c7b66b7b8bad1a9b5a37",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
