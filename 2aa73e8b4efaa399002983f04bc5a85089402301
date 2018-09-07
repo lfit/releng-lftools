@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd25a515_81aba4e5",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-07T19:40:59Z",
+      "side": 1,
+      "message": "We should probably verify the checksum of the downloaded file.",
+      "revId": "2aa73e8b4efaa399002983f04bc5a85089402301",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
