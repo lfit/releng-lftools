@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aec77220_ac5c0a25",
+        "filename": "releasenotes/notes/share-openstack-images-4f1e3d18fdcb488b.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-09-07T20:26:12Z",
+      "side": 1,
+      "message": "This command needs to specify that \"os-cloud\" option is required. \nFor example:\nlftools openstack --os-cloud \u003ccloud\u003e image share ...",
+      "range": {
+        "startLine": 8,
+        "startChar": 3,
+        "endLine": 8,
+        "endChar": 70
+      },
+      "revId": "50ce256a1e792c82f409c7b66b7b8bad1a9b5a37",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
