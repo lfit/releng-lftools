@@ -81,8 +81,18 @@ def list(ctx, days, hide_public, ci_managed):
         hide_public=hide_public)
 
 
+@click.command()
+@click.argument('image')
+@click.argument('dest', nargs=-1)
+@click.pass_context
+def share(ctx, image, dest):
+    """Share image with another tenant."""
+    os_image.share(ctx.obj['os_cloud'], image, dest)
+
+
 image.add_command(cleanup)
 image.add_command(list)
+image.add_command(share)
 
 
 @openstack.group()
