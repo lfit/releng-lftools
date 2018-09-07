@@ -22,6 +22,30 @@
       "revId": "50ce256a1e792c82f409c7b66b7b8bad1a9b5a37",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "405429e9_86ff3fc3",
+        "filename": "releasenotes/notes/share-openstack-images-4f1e3d18fdcb488b.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-09-07T20:32:22Z",
+      "side": 1,
+      "message": "I think there is a conflict of usage messages, is it?\nFor example:\n\n(lftools-dev) jessicag@jessicag:~/linuxfoundation/lftools-dev/lftools$ lftools openstack image share --help\nUsage: lftools openstack [OPTIONS] COMMAND [ARGS]...\n\nError: Missing option \"--os-cloud\".",
+      "parentUuid": "aec77220_ac5c0a25",
+      "range": {
+        "startLine": 8,
+        "startChar": 3,
+        "endLine": 8,
+        "endChar": 70
+      },
+      "revId": "50ce256a1e792c82f409c7b66b7b8bad1a9b5a37",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
