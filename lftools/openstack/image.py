@@ -14,8 +14,13 @@ __author__ = 'Thanh Ha'
 
 from datetime import datetime
 from datetime import timedelta
+import logging
+import subprocess
+import sys
 
 import shade
+
+log = logging.getLogger(__name__)
 
 
 def _filter_images(images, days=0, hide_public=False, ci_managed=True):
@@ -100,3 +105,78 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
             _remove_images_from_cloud(filtered_images, c)
     else:
         _remove_images_from_cloud(filtered_images, cloud)
+
+
+def share(os_cloud, image, clouds):
+    """Share image with another tenant."""
+    def _get_image_id(os_cloud, image):
+        cmd = ['openstack', '--os-cloud', os_cloud, 'image', 'list',
+               '--name', image, '-f', 'value', '-c', 'ID']
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        log.debug('exit code: {}'.format(p.returncode))
+        log.debug(stderr.decode('utf-8'))
+        if p.returncode:
+            sys.exit(1)
+
+        image_id = stdout.decode('utf-8').strip()
+        log.debug('image_id: {}'.format(image_id))
+        return image_id
+
+    def _mark_image_shared(os_cloud, image):
+        cmd = ['openstack', '--os-cloud', os_cloud, 'image', 'set', '--shared', image]
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        log.debug('exit code: {}'.format(p.returncode))
+        log.debug(stderr.decode('utf-8'))
+        if p.returncode:
+            sys.exit(1)
+
+    def _get_token(cloud):
+        cmd = ['openstack', '--os-cloud', cloud, 'token', 'issue',
+               '-c', 'project_id', '-f', 'value']
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        log.debug('exit code: {}'.format(p.returncode))
+        log.debug(stderr.decode('utf-8'))
+        if p.returncode:
+            sys.exit(1)
+
+        token = stdout.decode('utf-8').strip()
+        log.debug('token: {}'.format(token))
+        return token
+
+    def _share_to_cloud(os_cloud, image, token):
+        log.debug('Sharing image {} to {}'.format(image, token))
+        cmd = ['openstack', '--os-cloud', os_cloud, 'image', 'add', 'project',
+               image, token]
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        log.debug('exit code: {}'.format(p.returncode))
+        log.debug(stderr.decode('utf-8'))
+
+        if p.returncode:
+            if stderr.decode('utf-8').startswith('409 Conflict'):
+                log.info('  Image is already shared.')
+            else:
+                sys.exit(1)
+
+    def _accept_shared_image(cloud, image):
+        log.debug('Accepting image {}'.format(image))
+        cmd = ['openstack', '--os-cloud', cloud, 'image', 'set',
+               '--accept', image]
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        log.debug('exit code: {}'.format(p.returncode))
+        log.debug(stderr.decode('utf-8'))
+        if p.returncode:
+            sys.exit(1)
+
+    log.info('Marking {}\'s image "{}" as shared.'.format(os_cloud, image))
+    image_id = _get_image_id(os_cloud, image)
+    _mark_image_shared(os_cloud, image_id)
+
+    for cloud in clouds:
+        log.info('Sharing to {}.'.format(cloud))
+        _share_to_cloud(os_cloud, image_id, _get_token(cloud))
+        _accept_shared_image(cloud, image_id)
