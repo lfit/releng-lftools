@@ -15,9 +15,12 @@ __author__ = 'Thanh Ha'
 from datetime import datetime
 from datetime import timedelta
 import logging
+import re
 import subprocess
 import sys
+import tempfile
 
+from six.moves import urllib
 import shade
 
 log = logging.getLogger(__name__)
@@ -180,3 +183,23 @@ def share(os_cloud, image, clouds):
         log.info('Sharing to {}.'.format(cloud))
         _share_to_cloud(os_cloud, image_id, _get_token(cloud))
         _accept_shared_image(cloud, image_id)
+
+
+def upload(os_cloud, image, name, disk_format='qcow2'):
+    """Upload image to openstack."""
+    log.info('Uploading image {} with name "{}".'.format(image, name))
+    cloud = shade.openstack_cloud(cloud=os_cloud)
+
+    if re.match(r'^http[s]?://', image):
+        tmp = tempfile.NamedTemporaryFile(suffix='.img')
+        log.info('URL provided downloading image locally to {}.'.format(tmp.name))
+        urllib.request.urlretrieve(image, tmp.name)
+        image = tmp.name
+
+    try:
+        cloud.create_image(name, image, disk_format=disk_format, wait=True)
+    except FileNotFoundError as e:
+        log.info(str(e))
+        sys.exit(1)
+
+    log.info('Upload complete.')
