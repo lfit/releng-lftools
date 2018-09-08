@@ -19,6 +19,7 @@ import click
 import requests
 from six.moves import configparser
 
+from lftools import config as lftools_cfg
 from lftools.jenkins import JJB_INI
 from lftools.jenkins.token import get_token
 
@@ -36,6 +37,34 @@ def token(ctx):
 def change(ctx):
     """Generate a new API token."""
     log.info(get_token(ctx.obj['jenkins_url'], True))
+
+
+@click.command()
+@click.argument('name')
+@click.argument('url')
+def init(name, url):
+    """Initialize jenkins_jobs.ini config for new server section."""
+    if not os.path.isfile(JJB_INI):
+        log.error('{} not found. Please provide one before proceeding.'
+                  .format(JJB_INI))
+        sys.exit(1)
+
+    config = configparser.ConfigParser()
+    config.read(JJB_INI)
+
+    token = get_token(url, True)
+    try:
+        config.add_section(name)
+    except configparser.DuplicateSectionError as e:
+        log.error(e)
+        sys.exit(1)
+
+    config.set(name, 'url', url)
+    config.set(name, 'user', lftools_cfg.get_setting('global', 'username'))
+    config.set(name, 'password', token)
+
+    with open(JJB_INI, 'w') as configfile:
+        config.write(configfile)
 
 
 @click.command(name='print')
@@ -81,5 +110,6 @@ def reset():
 
 
 token.add_command(change)
+token.add_command(init)
 token.add_command(print_token)
 token.add_command(reset)
