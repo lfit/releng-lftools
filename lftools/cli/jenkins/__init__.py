@@ -24,6 +24,7 @@ from lftools.cli.jenkins.builds import builds
 from lftools.cli.jenkins.jobs import jobs
 from lftools.cli.jenkins.nodes import nodes
 from lftools.cli.jenkins.plugins import plugins_init
+from lftools.cli.jenkins.token import token
 from lftools.jenkins import JJB_INI
 
 log = logging.getLogger(__name__)
@@ -54,6 +55,8 @@ def jenkins_cli(ctx, server, user, password):
         server,
         username=user,
         password=password)
+
+    ctx.obj['jenkins_url'] = server
 
 
 @click.command()
@@ -189,3 +192,4 @@ jenkins_cli.add_command(groovy)
 jenkins_cli.add_command(jobs)
 jenkins_cli.add_command(quiet_down, name='quiet-down')
 jenkins_cli.add_command(remove_offline_nodes, name='remove-offline-nodes')
+jenkins_cli.add_command(token)
