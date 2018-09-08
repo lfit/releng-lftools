@@ -24,6 +24,7 @@ from lftools.cli.jenkins.builds import builds
 from lftools.cli.jenkins.jobs import jobs
 from lftools.cli.jenkins.nodes import nodes
 from lftools.cli.jenkins.plugins import plugins_init
+from lftools.jenkins import JJB_INI
 
 log = logging.getLogger(__name__)
 
@@ -38,16 +39,10 @@ log = logging.getLogger(__name__)
 @click.pass_context
 def jenkins_cli(ctx, server, user, password):
     """Query information about the Jenkins Server."""
-    jjb_ini = os.path.join(
-        os.path.expanduser('~'),
-        '.config',
-        'jenkins_jobs',
-        'jenkins_jobs.ini')
-
     if '://' not in server:
-        if os.path.isfile(jjb_ini):
+        if os.path.isfile(JJB_INI):
             config = configparser.ConfigParser()
-            config.read(jjb_ini)
+            config.read(JJB_INI)
             user = config.get(server, 'user')
             password = config.get(server, 'password')
             server = config.get(server, 'url')
