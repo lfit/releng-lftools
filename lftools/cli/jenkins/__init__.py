@@ -12,6 +12,7 @@
 __author__ = 'Trevor Bramwell'
 
 
+import logging
 import os
 
 import click
@@ -23,6 +24,8 @@ from lftools.cli.jenkins.builds import builds
 from lftools.cli.jenkins.jobs import jobs
 from lftools.cli.jenkins.nodes import nodes
 from lftools.cli.jenkins.plugins import plugins_init
+
+log = logging.getLogger(__name__)
 
 
 @click.group()
@@ -81,7 +84,7 @@ for (c in creds) {
 }
 """
     result = server.run_script(groovy_script)
-    print(result)
+    log.info(result)
 
 
 @click.command()
@@ -94,7 +97,7 @@ def groovy(ctx, groovy_file):
 
     server = ctx.obj['server']
     result = server.run_script(data)
-    print(result)
+    log.info(result)
 
 
 @click.command()
@@ -109,7 +112,7 @@ def quiet_down(ctx, n):
             ctx.obj['server'].quiet_down()
         except HTTPError as m:
             if m.code == 405:
-                print("\n[%s]\nJenkins %s does not support Quiet Down "
+                log.error("\n[%s]\nJenkins %s does not support Quiet Down "
                       "without a CSRF Token. (CVE-2017-04-26)\nPlease "
                       "file a bug with 'python-jenkins'" % (m, version))
             else:
@@ -180,7 +183,7 @@ for (node in Jenkins.instance.computers) {
         result = server.run_script(force_script)
     else:
         result = server.run_script(groovy_script)
-    print(result)
+    log.info(result)
 
 
 jenkins_cli.add_command(plugins_init, name='plugins')
