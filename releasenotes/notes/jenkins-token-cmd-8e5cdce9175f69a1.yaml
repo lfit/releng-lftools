@@ -1,0 +1,13 @@
+---
+features:
+  - |
+    Add new cmd to fetch Jenkins token from user account. An optional
+    ``--change`` parameter can be passed to have Jenkins change the API token.
+
+    Usage: lftools jenkins token [OPTIONS]
+
+      Get API token.
+
+    Options:
+      --change  Generate a new API token.
+      --help    Show this message and exit.
