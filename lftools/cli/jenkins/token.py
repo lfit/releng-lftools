@@ -12,9 +12,13 @@
 __author__ = 'Thanh Ha'
 
 import logging
+import sys
 
 import click
+import requests
+from six.moves import configparser
 
+from lftools.jenkins import JJB_INI
 from lftools.jenkins.token import get_token
 
 log = logging.getLogger(__name__)
@@ -40,5 +44,60 @@ def print_token(ctx):
     log.info(get_token(ctx.obj['jenkins_url']))
 
 
+@click.command()
+@click.argument('server', required=False)
+@click.pass_context
+def reset(ctx, server):
+    """Regenerate API tokens for all configurations in jenkins_jobs.ini."""
+    _require_jjb_ini()
+
+    def _reset_key(config, server):
+        url = config.get(server, 'url')
+
+        try:
+            token = get_token(url, True)
+            config.set(server, 'password', token)
+            return token
+        except requests.exceptions.ConnectionError as e:
+            return None
+
+    fail = 0
+    success = 0
+    config = configparser.ConfigParser()
+    config.read(JJB_INI)
+
+    if server:
+        key = _reset_key(config, server)
+        log.info(key)
+        return
+
+    for section in config.sections():
+        if not config.has_option(section, 'url'):
+            log.debug('Section does not contain a url, skipping...')
+            continue
+
+        log.info('Resetting API key for {}'.format(section))
+        if _reset_key(config, section):
+            success += 1
+        else:
+            fail += 1
+            log.error('Failed to reset API key for {}'.format(section))
+
+    with open(JJB_INI, 'w') as configfile:
+        config.write(configfile)
+
+    log.info('Update configurations complete.')
+    log.info('Success: {}'.format(success))
+    log.info('Failed: {}'.format(fail))
+
+
 token.add_command(change)
 token.add_command(print_token)
+token.add_command(reset)
+
+
+def _require_jjb_ini():
+    if not JJB_INI:
+        log.error('jenkins_jobs.ini not found in any of the search paths. '
+                  'Please provide one before proceeding.')
+        sys.exit(1)
