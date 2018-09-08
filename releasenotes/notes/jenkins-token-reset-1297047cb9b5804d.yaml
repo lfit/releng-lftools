@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    Add jenkins token reset command to automatically reset API tokens for all
+    Jenkins systems configured in jenkins_jobs.ini.
+
+    Usage: lftools jenkins token reset [OPTIONS] [SERVER]
