@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    Add jenkins token init command to initialize a new server section in
+    jenkins_jobs.ini. This command uses credentials found in lftools.ini to
+    initialize the new Jenkins server configuration.
+
+    Usage: lftools jenkins token init [OPTIONS] NAME URL
