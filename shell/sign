@@ -103,7 +103,7 @@ sign_dir() {
             sigul )
                 # We need to wordsplit ${files_to_sign[*]} so disable quoting check
                 # shellcheck disable=SC2086
-                parallel --no-notice --jobs 200% --halt now,fail=1 \
+                parallel --no-notice --jobs 200% --retries 3 \
                     "sigul --batch -c $SIGUL_CONFIG sign-data -a -o {}.asc \
                     $SIGUL_KEY {} < $SIGUL_PASSWORD" ::: ${files_to_sign[*]}
                 ;;
