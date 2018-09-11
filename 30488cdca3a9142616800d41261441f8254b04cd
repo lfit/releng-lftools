@@ -45,6 +45,30 @@
       "revId": "30488cdca3a9142616800d41261441f8254b04cd",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d3f5b7d_ffe378e7",
+        "filename": "lftools/jenkins/token.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-11T18:00:32Z",
+      "side": 1,
+      "message": "As far as I can tell it happens immediately via the t.changeApiToken() call.",
+      "parentUuid": "46cbaec5_14545df3",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 27
+      },
+      "revId": "30488cdca3a9142616800d41261441f8254b04cd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
