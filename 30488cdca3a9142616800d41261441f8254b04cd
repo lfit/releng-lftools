@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aea0f1e6_fce8b0f4",
+        "filename": "lftools/jenkins/token.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2018-09-11T17:06:03Z",
+      "side": 1,
+      "message": "This looks like a typo to me?\n\nShouldn\u0027t it be just:\n\u003e t.changeApiToken()\nOr is there some Groovy magic/casting happening here?\n\nOH I see it now.\n\nI\u0027d prefer to see this as a conditional, though now I\u0027m wondering if you tried that and trying to finagle the types was too much.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 2
+      },
+      "revId": "30488cdca3a9142616800d41261441f8254b04cd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46cbaec5_14545df3",
+        "filename": "lftools/jenkins/token.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2018-09-11T17:06:03Z",
+      "side": 1,
+      "message": "Having just done this in the UI, I noticed just creating a token did not work, I had to \u0027Save\u0027 the config as well. Does something similar need to happen here in the API?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 27
+      },
+      "revId": "30488cdca3a9142616800d41261441f8254b04cd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
