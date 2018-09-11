@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4b1f879_2cfe57a9",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-11T18:25:41Z",
+      "side": 1,
+      "message": "I think we actually want os.getcwd() here.",
+      "revId": "613c16ce20d812d2707b8bf35ca87a63abf1e943",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
