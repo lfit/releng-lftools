@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "22273836_3a30be33",
+        "filename": "lftools/cli/jenkins/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-11T17:30:23Z",
+      "side": 1,
+      "message": "Good idea, then we can do \"if JJB_INI\" when we want to use it. Let me see if I can find a nice solution to this.",
+      "parentUuid": "435c3e1c_7b07987f",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 35
+      },
+      "revId": "37b8b665d17b02dcb2571a4b6865a79432ea1767",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01b3318f_135dbb06",
         "filename": "lftools/jenkins/__init__.py",
         "patchSetId": 3
