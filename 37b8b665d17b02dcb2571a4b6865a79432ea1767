@@ -22,6 +22,29 @@
       "revId": "37b8b665d17b02dcb2571a4b6865a79432ea1767",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01b3318f_135dbb06",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2018-09-11T16:58:25Z",
+      "side": 1,
+      "message": "In the future should we support all paths for jenkins_jobs.ini?\n\n\u003e /etc/jenkins_jobs/jenkins_jobs.ini\n\u003e ~/.config/jenkins_jobs/jenkins_jobs.ini\n\u003e ./jenkins_jobs.ini",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 23
+      },
+      "revId": "37b8b665d17b02dcb2571a4b6865a79432ea1767",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
