@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "435c3e1c_7b07987f",
+        "filename": "lftools/cli/jenkins/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2018-09-11T16:56:49Z",
+      "side": 1,
+      "message": "Instead of calling \u0027os.path.isfile\u0027 each time we want to check this, we should do it once in lftools.jenkins.__init__.py and check that value.\n\nSomething like \u0027from lftools.jenkins import JJB_INI, jjb_init_exists\u0027",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 35
+      },
+      "revId": "37b8b665d17b02dcb2571a4b6865a79432ea1767",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
