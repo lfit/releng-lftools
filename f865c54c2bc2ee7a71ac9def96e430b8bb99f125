@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a3c36c1_f526064b",
+        "filename": "lftools/cli/jenkins/token.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-11T18:33:27Z",
+      "side": 1,
+      "message": "os.path.isfile unneeded since JJB_INI handles it already.",
+      "range": {
+        "startLine": 51,
+        "startChar": 11,
+        "endLine": 51,
+        "endChar": 25
+      },
+      "revId": "f865c54c2bc2ee7a71ac9def96e430b8bb99f125",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
