@@ -70,6 +70,30 @@
       "revId": "50ce256a1e792c82f409c7b66b7b8bad1a9b5a37",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94daeb4f_364bbef3",
+        "filename": "releasenotes/notes/share-openstack-images-4f1e3d18fdcb488b.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-09-12T18:30:24Z",
+      "side": 1,
+      "message": "The issue then is that if you\u0027re working against several different clouds, you have to update your ENV var before each run instead of being able to just pass in a standard --os-cloud option...\n\nI think we should properly support --os-cloud for any openstack command we are creating",
+      "parentUuid": "249f8c7d_6f744836",
+      "range": {
+        "startLine": 8,
+        "startChar": 3,
+        "endLine": 8,
+        "endChar": 70
+      },
+      "revId": "50ce256a1e792c82f409c7b66b7b8bad1a9b5a37",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
