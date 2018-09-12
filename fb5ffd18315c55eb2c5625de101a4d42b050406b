@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ab1615d_05d0cc2c",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-09-12T18:44:04Z",
+      "side": 1,
+      "message": "Anyway to allow for a --conf option in case someone wants to have an ini file that is not a standard name / location?",
+      "revId": "fb5ffd18315c55eb2c5625de101a4d42b050406b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
