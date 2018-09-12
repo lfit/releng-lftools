@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "92a210f0_fe51d357",
+        "filename": "lftools/cli/jenkins/token.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-12T19:07:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edff7b05_8bb9979b",
+      "range": {
+        "startLine": 33,
+        "startChar": 46,
+        "endLine": 33,
+        "endChar": 51
+      },
+      "revId": "f11036ba0683ef5711ff30b6b80a119951a24808",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba552bfe_ab3f5f82",
         "filename": "lftools/cli/jenkins/token.py",
         "patchSetId": 7
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "4564d11e_98aac0e5",
+        "filename": "lftools/cli/jenkins/token.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-12T19:07:26Z",
+      "side": 1,
+      "message": "What do you mean contextualize?\n\nget_token\u0027s meant to be an API so shouldn\u0027t print anything. \n\nSame with print_token itself, it\u0027s mean to only print the token so that you can pipe it into the CLI without having to parse the message.",
+      "parentUuid": "ba552bfe_ab3f5f82",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 47
+      },
+      "revId": "f11036ba0683ef5711ff30b6b80a119951a24808",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9576c2b4_77818625",
         "filename": "lftools/jenkins/token.py",
         "patchSetId": 7
@@ -59,6 +107,30 @@
       "writtenOn": "2018-09-12T19:04:23Z",
       "side": 1,
       "message": "We should not be logging passwords or usernames especially\nif these are supposed to be LFIDs. This should just be the\n Jenkins url and what the function is doing:\n  Getting new Jenkins API token from \u003curl\u003e\n  Resetting Jenkins API token on \u003curl\u003e",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 65
+      },
+      "revId": "f11036ba0683ef5711ff30b6b80a119951a24808",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af172013_e487d067",
+        "filename": "lftools/jenkins/token.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-12T19:07:26Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "9576c2b4_77818625",
       "range": {
         "startLine": 32,
         "startChar": 5,
