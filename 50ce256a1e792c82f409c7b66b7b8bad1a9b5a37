@@ -118,6 +118,30 @@
       "revId": "50ce256a1e792c82f409c7b66b7b8bad1a9b5a37",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6151f23c_46d83574",
+        "filename": "releasenotes/notes/share-openstack-images-4f1e3d18fdcb488b.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-09-12T18:34:17Z",
+      "side": 1,
+      "message": "Ah, oops, I missed that.",
+      "parentUuid": "b2d620cc_37d6fa8c",
+      "range": {
+        "startLine": 8,
+        "startChar": 3,
+        "endLine": 8,
+        "endChar": 70
+      },
+      "revId": "50ce256a1e792c82f409c7b66b7b8bad1a9b5a37",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
