@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "edff7b05_8bb9979b",
+        "filename": "lftools/cli/jenkins/token.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2018-09-12T19:04:23Z",
+      "side": 1,
+      "message": "Please use \u0027change\u003dTrue\u0027 here. Passing naked booleans in args to kwargs is confusing and not as clear.",
+      "range": {
+        "startLine": 33,
+        "startChar": 46,
+        "endLine": 33,
+        "endChar": 51
+      },
+      "revId": "f11036ba0683ef5711ff30b6b80a119951a24808",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba552bfe_ab3f5f82",
+        "filename": "lftools/cli/jenkins/token.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2018-09-12T19:04:23Z",
+      "side": 1,
+      "message": "\u0027log.info\u0027 should either be moved into the get_token function, or expanded to contextualize the token being printed.",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 47
+      },
+      "revId": "f11036ba0683ef5711ff30b6b80a119951a24808",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9576c2b4_77818625",
+        "filename": "lftools/jenkins/token.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2018-09-12T19:04:23Z",
+      "side": 1,
+      "message": "We should not be logging passwords or usernames especially\nif these are supposed to be LFIDs. This should just be the\n Jenkins url and what the function is doing:\n  Getting new Jenkins API token from \u003curl\u003e\n  Resetting Jenkins API token on \u003curl\u003e",
+      "range": {
+        "startLine": 32,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 65
+      },
+      "revId": "f11036ba0683ef5711ff30b6b80a119951a24808",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
