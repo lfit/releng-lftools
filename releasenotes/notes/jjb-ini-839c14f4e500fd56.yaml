@@ -1,0 +1,9 @@
+---
+features:
+  - |
+    We now support locating the jenkins_jobs.ini in all the same default search
+    paths as JJB supports. Specifically in this order:
+
+    #. $PWD/jenkins_jobs.ini
+    #. ~/.config/jenkins_jobs/jenkins_jobs.ini
+    #. /etc/jenkins_jobs/jenkins_jobs.ini
