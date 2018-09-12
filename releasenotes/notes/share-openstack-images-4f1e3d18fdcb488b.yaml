@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    Add an ``openstack image share`` sub-command to handle sharing images
+    between multiple tenants. Command accepts a space-separated list of tenants
+    to share the provided image with.
+
+    Usage: ``lftools openstack image share [OPTIONS] IMAGE [DEST]...``

@@ -81,8 +81,32 @@ def list(ctx, days, hide_public, ci_managed):
         hide_public=hide_public)
 
 
+@click.command()
+@click.argument('image')
+@click.argument('dest', nargs=-1)
+@click.pass_context
+def share(ctx, image, dest):
+    """Share image with another tenant."""
+    os_image.share(ctx.obj['os_cloud'], image, dest)
+
+
+@click.command()
+@click.argument('image')
+@click.argument('name', nargs=-1, required=True)
+@click.option(
+    '--disk-format', type=str, default='qcow2',
+    help='Disk format of image. (default: qcow2)')
+@click.pass_context
+def upload(ctx, image, name, disk_format):
+    """Share image with another tenant."""
+    name = ' '.join(name)
+    os_image.upload(ctx.obj['os_cloud'], image, name, disk_format)
+
+
 image.add_command(cleanup)
 image.add_command(list)
+image.add_command(share)
+image.add_command(upload)
 
 
 @openstack.group()
