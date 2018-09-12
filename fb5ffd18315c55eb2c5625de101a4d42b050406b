@@ -16,6 +16,24 @@
       "revId": "fb5ffd18315c55eb2c5625de101a4d42b050406b",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7cd5b684_aa660962",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-12T18:47:29Z",
+      "side": 1,
+      "message": "We could probably do something around that. It wouldn\u0027t be done in this file though as __init__.py runs before Click has even had a chance to run and parse the input.\n\nI think we should do this feature as a separate patch as this commit has already went beyond it\u0027s original scope by even adding support for more than ~/.config/jenkins_jobs/jenkins_jobs.ini",
+      "parentUuid": "6ab1615d_05d0cc2c",
+      "revId": "fb5ffd18315c55eb2c5625de101a4d42b050406b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
