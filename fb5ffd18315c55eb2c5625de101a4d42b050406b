@@ -34,6 +34,24 @@
       "revId": "fb5ffd18315c55eb2c5625de101a4d42b050406b",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0eef7f0f_89d783ca",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-09-12T18:48:52Z",
+      "side": 1,
+      "message": "Ok, that\u0027s fine.",
+      "parentUuid": "7cd5b684_aa660962",
+      "revId": "fb5ffd18315c55eb2c5625de101a4d42b050406b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
