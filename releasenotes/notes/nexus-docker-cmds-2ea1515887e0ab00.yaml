@@ -1,0 +1,12 @@
+---
+features:
+  - |
+    Docker list and delete commands for Nexus docker repos.
+
+    Usage: lftools nexus docker [OPTIONS] COMMAND [ARGS]...
+
+    .. code-block:: none
+
+       Commands:
+         delete  Delete all images matching the PATTERN.
+         list    List images matching the PATTERN.
