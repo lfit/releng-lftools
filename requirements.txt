@@ -1,4 +1,5 @@
 click
+future
 pyyaml
 requests~=2.18.0
 ruamel.yaml
