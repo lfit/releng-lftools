@@ -18,6 +18,8 @@ __license__ = 'Apache 2.0'
 __copyright__ = 'Copyright 2017 Andrew Grimberg'
 
 import json
+import os
+import sys
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -29,6 +31,11 @@ class Nexus:
     def __init__(self, baseurl=None, username=None, password=None):
         """Initialize Nexus instance."""
         self.baseurl = baseurl
+        self.set_full_baseurl()
+        if self.baseurl.find("local") < 0:
+            self.version = 2
+        else:
+            self.version = 3
 
         if username and password:
             self.add_credentials(username, password)
@@ -40,6 +47,21 @@ class Nexus:
             'Content-Type': 'application/json',
         }
 
+    def set_full_baseurl(self):
+        endpoints = [
+            "service/local/repo_targets",
+            "service/siesta/rest/beta/read-only",
+            "service/rest/beta/read-only",
+            "service/rest/v1/read-only"
+        ]
+        for endpoint in endpoints:
+            url = os.path.join(self.baseurl, endpoint)
+            response = requests.get(url)
+            if response.status_code != 404:
+                self.baseurl = os.path.dirname(url)
+                return
+        raise LookupError("Could not determine Nexus version")
+
     def add_credentials(self, username, password):
         """Create an authentication object to be used."""
         self.auth = HTTPBasicAuth(username, password)
@@ -50,7 +72,7 @@ class Nexus:
 
     def get_target(self, name):
         """Get the ID of a given target name."""
-        url = '/'.join([self.baseurl, 'service/local/repo_targets'])
+        url = os.path.join(self.baseurl, 'repo_targets')
         targets = requests.get(url, auth=self.auth, headers=self.headers).json()
 
         for priv in targets['data']:
@@ -60,7 +82,7 @@ class Nexus:
 
     def create_target(self, name, patterns):
         """Create a target with the given patterns."""
-        url = '/'.join([self.baseurl, 'service/local/repo_targets'])
+        url = os.path.join(self.baseurl, 'repo_targets')
 
         target = {
             'data': {
@@ -81,7 +103,7 @@ class Nexus:
 
     def get_priv(self, name, priv):
         """Get the ID for the privilege with the given name."""
-        url = '/'.join([self.baseurl, 'service/local/privileges'])
+        url = os.path.join(self.baseurl, 'privileges')
 
         search_name = "{} - ({})".format(name, priv)
         privileges = requests.get(url, auth=self.auth, headers=self.headers).json()
@@ -102,7 +124,7 @@ class Nexus:
         delete
         update
         """
-        url = '/'.join([self.baseurl, 'service/local/privileges_target'])
+        url = os.path.join(self.baseurl, 'privileges_target')
 
         privileges = {
             'data': {
@@ -129,7 +151,7 @@ class Nexus:
 
     def get_role(self, name):
         """Get the id of a role with a given name."""
-        url = '/'.join([self.baseurl, 'service/local/roles'])
+        url = os.path.join(self.baseurl, 'roles')
         roles = requests.get(url, auth=self.auth, headers=self.headers).json()
 
         for role in roles['data']:
@@ -140,7 +162,7 @@ class Nexus:
 
     def create_role(self, name, privs):
         """Create a role with the given privileges."""
-        url = '/'.join([self.baseurl, 'service/local/roles'])
+        url = os.path.join(self.baseurl, 'roles')
 
         role = {
             'data': {
@@ -166,7 +188,7 @@ class Nexus:
 
     def get_user(self, user_id):
         """Determine if a user with a given userId exists."""
-        url = '/'.join([self.baseurl, 'service/local/users'])
+        url = os.path.join(self.baseurl, 'users')
         users = requests.get(url, auth=self.auth, headers=self.headers).json()
 
         for user in users['data']:
@@ -180,7 +202,7 @@ class Nexus:
 
         User is created with the nx-deployment role attached
         """
-        url = '/'.join([self.baseurl, 'service/local/users'])
+        url = os.path.join(self.baseurl, 'users')
 
         user = {
             'data': {
@@ -209,7 +231,7 @@ class Nexus:
 
     def get_repo_group(self, name):
         """Get the repository ID for a repo group that has a specific name."""
-        url = '/'.join([self.baseurl, 'service/local/repo_groups'])
+        url = os.path.join(self.baseurl, 'repo_groups')
 
         repos = requests.get(url, auth=self.auth, headers=self.headers).json()
 
@@ -221,13 +243,13 @@ class Nexus:
 
     def get_repo_group_details(self, repoId):
         """Get the current configuration of a given repo group with a specific ID."""
-        url = '/'.join([self.baseurl, 'service/local/repo_groups', repoId])
+        url = os.path.join(self.baseurl, 'repo_groups', repoId)
 
         return requests.get(url, auth=self.auth, headers=self.headers).json()['data']
 
     def update_repo_group_details(self, repoId, data):
         """Update the given repo group with new configuration."""
-        url = '/'.join([self.baseurl, 'service/local/repo_groups', repoId])
+        url = os.path.join(self.baseurl, 'repo_groups', repoId)
 
         repo = {
             'data': data
@@ -236,3 +258,54 @@ class Nexus:
         json_data = json.dumps(repo).encode(encoding='latin-1')
 
         requests.put(url, auth=self.auth, headers=self.headers, data=json_data)
+
+    def get_all_images(self, repo):
+        url = "%s/search?repository=%s" % (self.baseurl, repo)
+        print url
+        url_attr = requests.get(url)
+        if url_attr:
+            result = url_attr.json()
+            items = result["items"]
+            cont_token = result["continuationToken"]
+        else:
+            sys.exit("{} returned {}".format(url, str(url_attr)))
+
+        # Check if there are multiple pages of data
+        while cont_token:
+            continue_url = "%s&continuationToken=%s" % (url, cont_token)
+            url_attr = requests.get(continue_url)
+            result = url_attr.json()
+            items += result["items"]
+            cont_token = result["continuationToken"]
+            print continue_url
+
+        return items
+
+    def search_images(self, repo, regex):
+        url = "{}/search?q={}&repository={}".format(self.baseurl, regex, repo)
+        url_attr = requests.get(url)
+        if url_attr:
+            result = url_attr.json()
+            items = result["items"]
+            cont_token = result["continuationToken"]
+        else:
+            sys.exit("{} returned {}".format(url, str(url_attr)))
+
+        # Check if there are multiple pages of data
+        while cont_token:
+            continue_url = "%s&continuationToken=%s" % (url, cont_token)
+            url_attr = requests.get(continue_url)
+            result = url_attr.json()
+            items += result["items"]
+            cont_token = result["continuationToken"]
+
+        return items
+
+    def delete_images(self, images_to_delete):
+        for image in images_to_delete:
+            url = os.path.join(self.baseurl, "components", image["id"])
+            print("Deleting {}:{}".format(image["name"], image["version"]))
+            # Use global session
+            url_attr = requests.delete(url, auth=self.auth)
+            if url_attr.status_code != 204:
+                sys.exit("{} returned {}".format(url, str(url_attr)))

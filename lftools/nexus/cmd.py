@@ -13,6 +13,7 @@
 import logging
 import sys
 
+import csv
 import yaml
 
 from lftools.nexus import Nexus
@@ -146,3 +147,58 @@ def create_repos(config_file, settings_file):
     log.warning('Nexus repo creation started. Aborting now could leave tasks undone!')
     for repo in config['repositories']:
         build_repo(repo, repo, config['repositories'][repo], config['base_groupId'])
+
+
+def audit(action, settings_file, repo, pattern, yes, csv_path=""):
+    """Audit the images in a repo, according to a regular expression.
+
+    Keyword arguments:
+    action -- the desired action: list or delete (string)
+    settings_file -- path to yaml file with Nexus settings (string)
+    repo -- the Nexus repository to audit (string)
+    pattern -- the pattern to search for in repo (string)
+    """
+    with open(settings_file, 'r') as f:
+        settings = yaml.safe_load(f)
+
+    for setting in ['nexus', 'user', 'password']:
+        if not setting in settings:
+            sys.exit('{} needs to be defined'.format(setting))
+
+    _nexus = Nexus(settings['nexus'], settings['user'], settings['password'])
+
+    # Remove CLI escape characters from pattern
+    pattern = pattern.replace("\\", "")
+
+    all_images = _nexus.search_images(repo, pattern)
+
+    # Ensure all of our images has a value for each of the keys we will use
+    included_keys = ["name", "version", "id"]
+    images = []
+    for image in all_images:
+        if set(included_keys).issubset(image):
+            images.append(image)
+    count = len(images)
+
+    if action == "list" and csv_path:
+        with open(csv_path, 'wb') as out_file:
+            dw = csv.DictWriter(out_file, fieldnames=included_keys,
+                                quoting=csv.QUOTE_ALL)
+            dw.writeheader()
+            for image in images:
+                print("Name: {}\nVersion: {}\nID: {}\n\n".format(
+                    image["name"], image["version"], image["id"]))
+                dw.writerow({k:v for k, v in image.items() if
+                             k in included_keys})
+        print("Found {} images matching \"{}\" in {}".format(count, pattern,
+                                                             repo))
+    else:
+        for image in images:
+            print("Name: {}\nVersion: {}\nID: {}\n\n".format(
+                image["name"], image["version"], image["id"]))
+        print("Found {} images matching \"{}\" in {}".format(count, pattern,
+                                                             repo))
+
+    if action == "delete":
+        if yes or util.gate_deletion(count):
+            _nexus.delete_images(images)
