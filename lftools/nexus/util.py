@@ -12,7 +12,9 @@
 
 __author__ = 'Thanh Ha'
 
+from builtins import input
 import logging
+import re
 
 log = logging.getLogger(__name__)
 
@@ -20,3 +22,15 @@ log = logging.getLogger(__name__)
 def create_repo_target_regex(group_id):
     """Create a repo_target for Nexus use."""
     return '^/{}/.*'.format(group_id.replace('.', '[/\.]'))
+
+
+def gate_deletion(total_to_delete):
+    """Prompt user for confirmation before deleting images."""
+    while True:
+        user_input = input("Would you like to delete all "
+                           + str(total_to_delete)
+                           + " images listed above? [y/N]: ")
+        if not user_input or re.search(r"^[nN]", user_input):
+            return False
+        if re.search(r"^[yY]", user_input):
+            return True
