@@ -30,7 +30,31 @@ repo
 
 .. _nexus-reorder-staged-repos:
 
-reorder_staged_repos
+reorder-staged-repos
 --------------------
 
 .. program-output:: lftools nexus reorder-staged-repos --help
+
+.. _nexus-docker:
+
+docker
+------
+
+.. program-output:: lftools nexus docker --help
+
+.. _nexus-list:
+
+For ``nexus docker`` commands, a settings.yaml file can be used, as with the
+older commands. However, the preferred way to authorize is using an lftools.ini
+file, and providing the server address using the ``--server`` option. The
+config file should be located at $HOME/.config/lftools/lftools.ini.
+
+list
+^^^^
+
+.. program-output:: lftools nexus docker list --help
+
+delete
+^^^^^^
+
+.. program-output:: lftools nexus docker delete --help
