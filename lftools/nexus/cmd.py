@@ -10,6 +10,7 @@
 ##############################################################################
 """Contains functions for various Nexus tasks."""
 
+import csv
 import logging
 import sys
 
@@ -146,3 +147,82 @@ def create_repos(config_file, settings_file):
     log.warning('Nexus repo creation started. Aborting now could leave tasks undone!')
     for repo in config['repositories']:
         build_repo(repo, repo, config['repositories'][repo], config['base_groupId'])
+
+
+def search(settings_file, repo, pattern):
+    """Return of list of images in the repo matching the pattern.
+
+    Keyword arguments:
+    settings_file -- path to yaml file with Nexus settings (string)
+    repo -- the Nexus repository to audit (string)
+    pattern -- the pattern to search for in repo (string)
+    """
+    with open(settings_file, 'r') as f:
+        settings = yaml.safe_load(f)
+
+    for setting in ['nexus', 'user', 'password']:
+        if not setting in settings:
+            sys.exit('{} needs to be defined'.format(setting))
+
+    _nexus = Nexus(settings['nexus'], settings['user'], settings['password'])
+
+    # Check for NoneType, remove CLI escape characters from pattern
+    if not pattern:
+        pattern = ""
+    pattern = pattern.replace("\\", "")
+
+    all_images = _nexus.search_images(repo, pattern)
+
+    # Ensure all of our images has a value for each of the keys we will use
+    included_keys = ["name", "version", "id"]
+    images = []
+    for image in all_images:
+        if set(included_keys).issubset(image):
+            images.append(image)
+    return images
+
+
+def output_images(images, csv_path):
+    """Output a list of images to stdout, or a provided file path.
+
+    Keyword arguments:
+    images -- list of images
+    csv_path -- path to write out csv file of matching images (string)
+    """
+    count = len(images)
+
+    if csv_path:
+        with open(csv_path, 'wb') as out_file:
+            dw = csv.DictWriter(out_file, fieldnames=included_keys,
+                                quoting=csv.QUOTE_ALL)
+            dw.writeheader()
+            for image in images:
+                dw.writerow({k: v for k, v in image.items() if
+                             k in included_keys})
+
+    for image in images:
+        log.info("Name: {}\nVersion: {}\nID: {}\n\n".format(
+                 image["name"], image["version"], image["id"]))
+    log.info("Found {} images matching \"{}\" in {}".format(count, pattern,
+                                                            repo))
+
+
+def delete_images(settings_file, images, yes):
+    """Delete all images in a list.
+
+    Keyword arguments:
+    settings_file -- path to yaml file with Nexus settings (string)
+    images -- list of images to delete (list)
+    yes -- do not prompt before deletion (boolean)
+    """
+    with open(settings_file, 'r') as f:
+        settings = yaml.safe_load(f)
+
+    for setting in ['nexus', 'user', 'password']:
+        if not setting in settings:
+            sys.exit('{} needs to be defined'.format(setting))
+
+    _nexus = Nexus(settings['nexus'], settings['user'], settings['password'])
+
+    for image in images:
+        _nexus.delete_image(image)
