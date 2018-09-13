@@ -10,15 +10,54 @@
 ##############################################################################
 """Contains functions for various Nexus tasks."""
 
+import csv
 import logging
 import sys
 
 import yaml
 
+from lftools import config
 from lftools.nexus import Nexus
 from lftools.nexus import util
 
 log = logging.getLogger(__name__)
+
+
+def get_credentials(settings_file, url=None):
+    """Return credentials for Nexus instantiation."""
+    if settings_file:
+        try:
+            with open(settings_file, 'r') as f:
+                settings = yaml.safe_load(f)
+        except IOError:
+            sys.exit('Error reading settings file "{}"'.format(settings_file))
+
+        if url and set(['user', 'password']).issubset(settings):
+            settings['nexus'] = url
+            return settings
+        elif set(['nexus', 'user', 'password']).issubset(settings):
+            return settings
+    elif url:
+        user = config.get_setting("global", "username")
+        password = config.get_setting("global", "password")
+        return {"nexus": url, "user": user, "password": password}
+    sys.exit('Please define a settings.yaml file, or include a url if using '
+             + 'lftools.ini')
+
+
+def get_url(settings_file):
+    """Return URL from settings file, if it exists."""
+    if settings_file:
+        try:
+            with open(settings_file, 'r') as f:
+                settings = yaml.safe_load(f)
+        except IOError:
+            sys.exit('Error reading settings file "{}"'.format(settings_file))
+
+        if "nexus" in settings:
+            return settings["nexus"]
+
+    return ""
 
 
 def reorder_staged_repos(settings_file):
@@ -146,3 +185,86 @@ def create_repos(config_file, settings_file):
     log.warning('Nexus repo creation started. Aborting now could leave tasks undone!')
     for repo in config['repositories']:
         build_repo(repo, repo, config['repositories'][repo], config['base_groupId'])
+
+
+def search(settings_file, url, repo, pattern):
+    """Return of list of images in the repo matching the pattern.
+
+    Keyword arguments:
+    settings_file -- path to yaml file with Nexus settings (string)
+    url -- Nexus URL. Overrides settings.yaml (string)
+    repo -- the Nexus repository to audit (string)
+    pattern -- the pattern to search for in repo (string)
+    """
+    if not url and settings_file:
+        url = get_url(settings_file)
+    if not url:
+        sys.exit("ERROR: No Nexus URL provided. Please provide Nexus URL in "
+                 + "settings file or with the --url parameter.")
+
+    _nexus = Nexus(url)
+
+    # Check for NoneType, remove CLI escape characters from pattern
+    if not pattern:
+        pattern = ""
+    pattern = pattern.replace("\\", "")
+
+    all_images = _nexus.search_images(repo, pattern)
+
+    # Ensure all of our images has a value for each of the keys we will use
+    included_keys = ["name", "version", "id"]
+    images = []
+    for image in all_images:
+        if set(included_keys).issubset(image):
+            # Keep only the keys we're using
+            restricted_image = {}
+            for key in included_keys:
+                restricted_image[key] = image[key]
+            images.append(restricted_image)
+    return images
+
+
+def output_images(images, csv_path):
+    """Output a list of images to stdout, or a provided file path.
+
+    Keyword arguments:
+    images -- list of images
+    csv_path -- path to write out csv file of matching images (string)
+    """
+    count = len(images)
+    if not count:
+        log.warning("{}.{} called with empty images list".format(
+            __name__, sys._getframe().f_code.co_name))
+        return
+    included_keys = images[0].keys()
+
+    if csv_path:
+        with open(csv_path, 'wb') as out_file:
+            dw = csv.DictWriter(out_file, fieldnames=included_keys,
+                                quoting=csv.QUOTE_ALL)
+            dw.writeheader()
+            for image in images:
+                dw.writerow({k: v for k, v in image.items() if
+                             k in included_keys})
+
+    for image in images:
+        log.info("Name: {}\nVersion: {}\nID: {}\n\n".format(
+                 image["name"], image["version"], image["id"]))
+    log.info("Found {} images matching the query".format(count))
+
+
+def delete_images(settings_file, url, images, yes):
+    """Delete all images in a list.
+
+    Keyword arguments:
+    settings_file -- path to yaml file with Nexus settings (string)
+    images -- list of images to delete (list)
+    yes -- do not prompt before deletion (boolean)
+    """
+    credentials = get_credentials(settings_file, url)
+
+    _nexus = Nexus(credentials['nexus'], credentials['user'],
+                   credentials['password'])
+
+    for image in images:
+        _nexus.delete_image(image)
