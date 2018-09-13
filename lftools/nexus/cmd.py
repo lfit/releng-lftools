@@ -10,15 +10,57 @@
 ##############################################################################
 """Contains functions for various Nexus tasks."""
 
+import csv
 import logging
 import sys
 
 import yaml
 
+from lftools import config
 from lftools.nexus import Nexus
 from lftools.nexus import util
 
 log = logging.getLogger(__name__)
+
+
+def get_credentials(settings_file, url=None):
+    """Return credentials for Nexus instantiation."""
+    if settings_file:
+        try:
+            with open(settings_file, 'r') as f:
+                settings = yaml.safe_load(f)
+        except IOError:
+            log.error('Error reading settings file "{}"'.format(settings_file))
+            sys.exit(1)
+
+        if url and set(['user', 'password']).issubset(settings):
+            settings['nexus'] = url
+            return settings
+        elif set(['nexus', 'user', 'password']).issubset(settings):
+            return settings
+    elif url:
+        user = config.get_setting("global", "username")
+        password = config.get_setting("global", "password")
+        return {"nexus": url, "user": user, "password": password}
+    log.error('Please define a settings.yaml file, or include a url if using '
+              + 'lftools.ini')
+    sys.exit(1)
+
+
+def get_url(settings_file):
+    """Return URL from settings file, if it exists."""
+    if settings_file:
+        try:
+            with open(settings_file, 'r') as f:
+                settings = yaml.safe_load(f)
+        except IOError:
+            log.error('Error reading settings file "{}"'.format(settings_file))
+            sys.exit(1)
+
+        if "nexus" in settings:
+            return settings["nexus"]
+
+    return ""
 
 
 def reorder_staged_repos(settings_file):
@@ -33,14 +75,16 @@ def reorder_staged_repos(settings_file):
 
     for setting in ['nexus', 'user', 'password']:
         if not setting in settings:
-            sys.exit('{} needs to be defined'.format(setting))
+            log.error('{} needs to be defined'.format(setting))
+            sys.exit(1)
 
     _nexus = Nexus(settings['nexus'], settings['user'], settings['password'])
 
     try:
         repo_id = _nexus.get_repo_group('Staging Repositories')
     except LookupError as e:
-        sys.exit("Staging repository 'Staging Repositories' cannot be found")
+        log.error("Staging repository 'Staging Repositories' cannot be found")
+        sys.exit(1)
 
     repo_details = _nexus.get_repo_group_details(repo_id)
 
@@ -73,7 +117,8 @@ def create_repos(config_file, settings_file):
 
     for setting in ['nexus', 'user', 'password', 'email_domain']:
         if not setting in settings:
-            sys.exit('{} needs to be defined'.format(setting))
+            log.error('{} needs to be defined'.format(setting))
+            sys.exit(1)
 
     _nexus = Nexus(settings['nexus'], settings['user'], settings['password'])
 
@@ -146,3 +191,83 @@ def create_repos(config_file, settings_file):
     log.warning('Nexus repo creation started. Aborting now could leave tasks undone!')
     for repo in config['repositories']:
         build_repo(repo, repo, config['repositories'][repo], config['base_groupId'])
+
+
+def search(settings_file, url, repo, pattern):
+    """Return of list of images in the repo matching the pattern.
+
+    :arg str settings_file: Path to yaml file with Nexus settings.
+    :arg str url: Nexus URL. Overrides settings.yaml.
+    :arg str repo: The Nexus repository to audit.
+    :arg str pattern: The pattern to search for in repo.
+    """
+    if not url and settings_file:
+        url = get_url(settings_file)
+    if not url:
+        log.error("ERROR: No Nexus URL provided. Please provide Nexus URL in "
+                  + "settings file or with the --server parameter.")
+        sys.exit(1)
+
+    _nexus = Nexus(url)
+
+    # Check for NoneType, remove CLI escape characters from pattern
+    if not pattern:
+        pattern = ""
+    pattern = pattern.replace("\\", "")
+
+    all_images = _nexus.search_images(repo, pattern)
+
+    # Ensure all of our images has a value for each of the keys we will use
+    included_keys = ["name", "version", "id"]
+    images = []
+    for image in all_images:
+        if set(included_keys).issubset(image):
+            # Keep only the keys we're using
+            restricted_image = {}
+            for key in included_keys:
+                restricted_image[key] = image[key]
+            images.append(restricted_image)
+    return images
+
+
+def output_images(images, csv_path=None):
+    """Output a list of images to stdout, or a provided file path.
+
+    :arg list images: Images to output.
+    :arg str csv_path: Path to write out csv file of matching images.
+    """
+    count = len(images)
+    if not count:
+        log.warning("{}.{} called with empty images list".format(
+            __name__, sys._getframe().f_code.co_name))
+        return
+    included_keys = images[0].keys()
+
+    if csv_path:
+        with open(csv_path, 'wb') as out_file:
+            dw = csv.DictWriter(out_file, fieldnames=included_keys,
+                                quoting=csv.QUOTE_ALL)
+            dw.writeheader()
+            for image in images:
+                dw.writerow({k: v for k, v in image.items() if
+                             k in included_keys})
+
+    for image in images:
+        log.info("Name: {}\nVersion: {}\nID: {}\n\n".format(
+            image["name"], image["version"], image["id"]))
+    log.info("Found {} images matching the query".format(count))
+
+
+def delete_images(settings_file, url, images):
+    """Delete all images in a list.
+
+    :arg str settings_file: Path to yaml file with Nexus settings.
+    :arg list images: List of images to delete.
+    """
+    credentials = get_credentials(settings_file, url)
+
+    _nexus = Nexus(credentials['nexus'], credentials['user'],
+                   credentials['password'])
+
+    for image in images:
+        _nexus.delete_image(image)
