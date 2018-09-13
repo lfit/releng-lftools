@@ -53,3 +53,46 @@ def create(ctx):
 def repo(ctx, config, settings):
     """Create a Nexus repository as defined by a repo-config.yaml file."""
     nexuscmd.create_repos(config, settings)
+
+
+@nexus.group()
+@click.pass_context
+def docker(ctx):
+    """Docker repos in Nexus."""
+    pass
+
+
+def docker_params(command):
+    """Common options and arguments for all docker subcommands."""
+    command = click.option(
+        '-s', '--settings', type=str, required=True,
+        help='Yaml file containing "nexus" (url), "user", and "password" '
+        + 'definitions.')(command)
+    command = click.argument('REPO', type=str)(command)
+    command = click.argument('PATTERN', type=str)(command)
+    return command
+
+
+@docker.command(name="list")
+@docker_params
+@click.option(
+    '--csv', type=str, metavar="PATH",
+    help='Write a csv file of the search results to PATH.')
+@click.pass_context
+def list_images(ctx, settings, repo, pattern, csv):
+    """List images matching the pattern."""
+    images = nexuscmd.search(settings, repo, pattern)
+    # List/print functionality TBD
+
+
+@docker.command(name="delete")
+@docker_params
+@click.option(
+    '-y', '--yes', is_flag=True, help="Answer yes to all prompts")
+@click.pass_context
+def delete_images(ctx, settings, repo, pattern, yes):
+    """Delete all images matching the pattern."""
+    images = nexuscmd.search(settings, repo, pattern)
+    if click.confirm("Would you like to delete all " + str(len(images))
+                     + " images?"):
+        nexuscmd.delete_images(settings, images, yes)
