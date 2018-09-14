@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "6e427679_a0679583",
+        "filename": "lftools/cli/jenkins/token.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-14T15:20:01Z",
+      "side": 1,
+      "message": "Need config.write() to actually save the config file.",
+      "revId": "614bbbfbb4deefb21f10540316aa709ba36ec3ee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea0eaba9_ce565303",
         "filename": "releasenotes/notes/jenkins-token-reset-1297047cb9b5804d.yaml",
         "patchSetId": 10
