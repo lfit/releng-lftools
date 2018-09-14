@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "966513f2_f6fbaa1c",
+        "filename": "lftools/cli/jenkins/token.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-09-14T15:19:01Z",
+      "side": 1,
+      "message": "Since this takes an optional single server to update, the text should indicate that it\u0027s for all servers or a single specified server",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 72
+      },
+      "revId": "614bbbfbb4deefb21f10540316aa709ba36ec3ee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea0eaba9_ce565303",
         "filename": "releasenotes/notes/jenkins-token-reset-1297047cb9b5804d.yaml",
         "patchSetId": 10
