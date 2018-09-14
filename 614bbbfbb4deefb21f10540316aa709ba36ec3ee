@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea0eaba9_ce565303",
+        "filename": "releasenotes/notes/jenkins-token-reset-1297047cb9b5804d.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-09-14T15:13:19Z",
+      "side": 1,
+      "message": "Is this option meant to allow you to regenerate for just one server?",
+      "range": {
+        "startLine": 7,
+        "startChar": 49,
+        "endLine": 7,
+        "endChar": 57
+      },
+      "revId": "614bbbfbb4deefb21f10540316aa709ba36ec3ee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
