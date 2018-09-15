@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15093f60_13c2581f",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "We have a configuration sub-system now, \n\n [global]\n username\u003dname\n password\u003dpass\n\nIs LFID. Instead of creating yet another configuration file format let\u0027s reuse those through the config subsystem.\n\nAs for URL I\u0027d take it in as CLI input via --url parameter and ENV var via NEXUS_URL\u003d\"https://example.org\".",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "903d13cf_fd899911",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "if these are required it\u0027s more natural to use arguments imo. Passing \"--param\" for required things (unless they have reasonable defaults) seems unnatural to me from a CLI design perspective.\n\nWe could probably do something like:\n\n export NEXUS_URL\u003dhttps://example.org\n lftools docker list REPO [PATTERN]...\n\nI\u0027m not really liking the NEXUS_URL but I think is a decent start. I can see us expanding the configuration file to allow multiple configured nexus systems. Then we could have a \u0027-s | --server\u0027 parameter similar to the jenkins command so folks could do something like:\n\n lftools nexus -s onap docker list REPO [PATTERN]...\n\nI could potentially see allowing multiple patterns (which is why I put [PATTERN]...)\n\nI think PATTERN is optional and by default it can list everything. I\u0027m not sure if that would make sense?",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 67
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5495d2f_9fc3cc15",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "I dislike having underscores in cli commands `lftools docker list_images` is a pain to type.\n\nCan we just call it `lftools docker list` if there\u0027s no other types of docker things we\u0027d be listing?\n\nI haven\u0027t spent much time with Nexus 3 docker support but is there other things in there related to docker that we might need to support?\n\nIf there is we could do `lftools docker image list` but I suspect that might be way too much sub-commanding for our needs.",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 15
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34967a9f_6a7a28fc",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "Similar question to above, if there\u0027s Nexus 3 docker images are the only thing we will be managing we could just call it \"delete\".",
+      "range": {
+        "startLine": 96,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 17
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0de31d4c_795cbd99",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "Are we sure Nexus 3 does not have any local endpoints?\n\nThere are perfectly valid REST endpoints in Nexus 2 that do not have local in it\u0027s name as well.",
+      "range": {
+        "startLine": 35,
+        "startChar": 30,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "063a4ec6_b14b2ce8",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "no print statements, please use the logger system. use log.info() / log.error() / log.warn() / log.debug().\n\nMy opinion though is we should make this file be API and not print anything other than debug statements. If we need to print stuff, it should be routed / printed through the CLI file. That way if we find need for the API in the future for other commands we won\u0027t need to refactor this for a non-CLI use case.",
+      "range": {
+        "startLine": 309,
+        "startChar": 12,
+        "endLine": 309,
+        "endChar": 17
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "140a57c2_8e229898",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "I think search is doing too much here and over scoped. It should not care about action (or settings_file) here. It should be given a server connection, repo, and pattern and returns a list of matching items.",
+      "range": {
+        "startLine": 152,
+        "startChar": 11,
+        "endLine": 152,
+        "endChar": 17
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "612e09e1_5683d597",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "Search should not care about delete functions.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 50
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33f1d3d9_7282701b",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "I think search should not care about csv_path. leave it up to a more dedicated function to handle output formats. Search should simply return a list of matched items.",
+      "range": {
+        "startLine": 161,
+        "startChar": 4,
+        "endLine": 161,
+        "endChar": 70
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47ce7745_0d07e198",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "As mentioned above the search command should not care about reading config and creating a Nexus server connection. It should already be passed into here by the \"nexus\" command group similarly to how we are handling the Jenkins subsystem.",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 77
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad6e47a9_f54e7dbf",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "I\u0027d prefer that list and delete be moved into more dedicated list and delete functions, that make use of search to get it\u0027s list of items rather than having search do so many tasks in it\u0027s own function.",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 40
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "129caac2_1844d1b0",
+        "filename": "lftools/nexus/util.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-15T02:46:00Z",
+      "side": 1,
+      "message": "I think we don\u0027t need this at all since we are using click.\n\nYou can use:\n\n import click\n if click.confirm(\"Question\", default\u003dFalse):\n     pass",
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
