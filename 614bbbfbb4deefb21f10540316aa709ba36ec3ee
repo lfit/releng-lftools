@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7ab92c0c_28088c00",
+        "filename": "lftools/cli/jenkins/token.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-18T15:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "966513f2_f6fbaa1c",
+      "range": {
+        "startLine": 51,
+        "startChar": 7,
+        "endLine": 51,
+        "endChar": 72
+      },
+      "revId": "614bbbfbb4deefb21f10540316aa709ba36ec3ee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e427679_a0679583",
         "filename": "lftools/cli/jenkins/token.py",
         "patchSetId": 10
@@ -36,6 +60,24 @@
       "writtenOn": "2018-09-14T15:20:01Z",
       "side": 1,
       "message": "Need config.write() to actually save the config file.",
+      "revId": "614bbbfbb4deefb21f10540316aa709ba36ec3ee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6dbaeb62_64c67c5f",
+        "filename": "lftools/cli/jenkins/token.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-18T15:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e427679_a0679583",
       "revId": "614bbbfbb4deefb21f10540316aa709ba36ec3ee",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
