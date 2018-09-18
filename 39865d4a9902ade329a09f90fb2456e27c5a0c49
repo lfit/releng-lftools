@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f0960f4c_3e4ff0c3",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-09-18T00:52:18Z",
+      "side": 1,
+      "message": "This is modeled on how other \"nexus\" subcommands already handle config. I wouldn\u0027t disagree with fixing that, but I also think that\u0027s out of scope for this ticket. How about opening a new ticket to get all these commands in line with the lftools standards (I\u0027d be happy to tackle that), but keep this in line with other \"nexus\" subcommands for now?",
+      "parentUuid": "15093f60_13c2581f",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "903d13cf_fd899911",
         "filename": "lftools/cli/nexus.py",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d50e3f79_7cd3b210",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-09-18T00:52:18Z",
+      "side": 1,
+      "message": "Pattern is required (to search for everything, a wildcard should be provided), I\u0027ve switched it and REPO to args. Right now, it can\u0027t take multiple patterns.",
+      "parentUuid": "903d13cf_fd899911",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 67
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5495d2f_9fc3cc15",
         "filename": "lftools/cli/nexus.py",
         "patchSetId": 5
@@ -59,6 +107,30 @@
       "writtenOn": "2018-09-15T02:46:00Z",
       "side": 1,
       "message": "I dislike having underscores in cli commands `lftools docker list_images` is a pain to type.\n\nCan we just call it `lftools docker list` if there\u0027s no other types of docker things we\u0027d be listing?\n\nI haven\u0027t spent much time with Nexus 3 docker support but is there other things in there related to docker that we might need to support?\n\nIf there is we could do `lftools docker image list` but I suspect that might be way too much sub-commanding for our needs.",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 15
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6df78acc_509197fd",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-09-18T00:52:18Z",
+      "side": 1,
+      "message": "\"list\" (and \"delete\" below) are fine by me, but I didn\u0027t want to have something with the same name as a Python built-in. However, I\u0027ve now added the \"name\" argument to the command decorator for both.",
+      "parentUuid": "f5495d2f_9fc3cc15",
       "range": {
         "startLine": 86,
         "startChar": 4,
@@ -117,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "4bbd3cd6_bdebab6e",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-09-18T00:52:18Z",
+      "side": 1,
+      "message": "No, all endpoints in Nexus 3 begin with rest/ (or siesta/rest/ prior to 3.8).",
+      "parentUuid": "0de31d4c_795cbd99",
+      "range": {
+        "startLine": 35,
+        "startChar": 30,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "063a4ec6_b14b2ce8",
         "filename": "lftools/nexus/__init__.py",
         "patchSetId": 5
@@ -128,6 +224,30 @@
       "writtenOn": "2018-09-15T02:46:00Z",
       "side": 1,
       "message": "no print statements, please use the logger system. use log.info() / log.error() / log.warn() / log.debug().\n\nMy opinion though is we should make this file be API and not print anything other than debug statements. If we need to print stuff, it should be routed / printed through the CLI file. That way if we find need for the API in the future for other commands we won\u0027t need to refactor this for a non-CLI use case.",
+      "range": {
+        "startLine": 309,
+        "startChar": 12,
+        "endLine": 309,
+        "endChar": 17
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27927101_448d1665",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-09-18T00:52:18Z",
+      "side": 1,
+      "message": "I have no problem replacing the print statements with log calls, but I don\u0027t know what you mean when referring to routing/printing output through the CLI file. Outputting the matching images is an absolute requirement here, so I need to know how that should be handled before redoing the \"list\" functionality as a separate method from \"search\".",
+      "parentUuid": "063a4ec6_b14b2ce8",
       "range": {
         "startLine": 309,
         "startChar": 12,
