@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "73ed7332_4070db96",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-18T02:10:41Z",
+      "side": 1,
+      "message": "Personally I think it\u0027s much harder to change API once people start using them then it is to do it before they use them becuase then we have to be careful about API backwards compatibility and so forth.\n\nI\u0027m fine if you want to tackle it as a separate change but I feel like this kind of refactoring will never get done unless we do the work upfront. For example I refactored some of the Jenkins commands in the past few weeks to make using it more inline with the JJB CLI as I was designing the token commands.",
+      "parentUuid": "f0960f4c_3e4ff0c3",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "903d13cf_fd899911",
         "filename": "lftools/cli/nexus.py",
         "patchSetId": 5
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "bea3a5e6_6c9ebdcf",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-18T02:10:41Z",
+      "side": 1,
+      "message": "I\u0027m fine with it taking one pattern. But yeah if you do click.argument() and make the default pattern \"*\" then the user won\u0027t even have to provide the *. I think that will be better user experience.",
+      "parentUuid": "d50e3f79_7cd3b210",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 67
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5495d2f_9fc3cc15",
         "filename": "lftools/cli/nexus.py",
         "patchSetId": 5
@@ -131,6 +179,30 @@
       "side": 1,
       "message": "\"list\" (and \"delete\" below) are fine by me, but I didn\u0027t want to have something with the same name as a Python built-in. However, I\u0027ve now added the \"name\" argument to the command decorator for both.",
       "parentUuid": "f5495d2f_9fc3cc15",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 15
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ed8207f_d92635f0",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-18T02:10:41Z",
+      "side": 1,
+      "message": "That\u0027s exactly what I meant. click.command(name\u003d\u0027cmd\u0027) so that we can avoid the use of underscores.",
+      "parentUuid": "6df78acc_509197fd",
       "range": {
         "startLine": 86,
         "startChar": 4,
@@ -248,6 +320,30 @@
       "side": 1,
       "message": "I have no problem replacing the print statements with log calls, but I don\u0027t know what you mean when referring to routing/printing output through the CLI file. Outputting the matching images is an absolute requirement here, so I need to know how that should be handled before redoing the \"list\" functionality as a separate method from \"search\".",
       "parentUuid": "063a4ec6_b14b2ce8",
+      "range": {
+        "startLine": 309,
+        "startChar": 12,
+        "endLine": 309,
+        "endChar": 17
+      },
+      "revId": "39865d4a9902ade329a09f90fb2456e27c5a0c49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d48ab40_b49a82bd",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-18T02:10:41Z",
+      "side": 1,
+      "message": "I\u0027m just thinking that in your very specific use case right now, you want to print something to the CLI.\n\nHowever I might want to use this delete_images function in the future in a different use-case where maybe I don\u0027t want to print the image names to the CLI. So an option for me to disable CLI printing would be useful. maybe (print_cli\u003dTrue) in the function def above would be sufficient.\n\nAnother thought is this function should return a list of successfully deleted images back to the function caller in case the user of the function wants to use that information in some other way.",
+      "parentUuid": "27927101_448d1665",
       "range": {
         "startLine": 309,
         "startChar": 12,
