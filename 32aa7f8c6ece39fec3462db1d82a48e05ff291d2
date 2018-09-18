@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6affe6fb_eb2b0588",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-18T02:13:15Z",
+      "side": 1,
+      "message": "I wonder if maybe we could have instead an option like\n\n--format, where possible values are like json|csv|value (similar to the openstack commands) you can start with just csv for now.\n\nand then another option\n\n--output, which is the path of an optional file in case the user wants it redirected to file instead of stdout.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 59
+      },
+      "revId": "32aa7f8c6ece39fec3462db1d82a48e05ff291d2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
