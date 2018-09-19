@@ -22,6 +22,30 @@
       "revId": "32aa7f8c6ece39fec3462db1d82a48e05ff291d2",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a9a26c8_5de00c91",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-09-19T00:14:56Z",
+      "side": 1,
+      "message": "Closely related to the other discussion about output, how should writing be handled if it\u0027s not to a file? Logging, print, or maybe something specific like sys.stdout.write()?",
+      "parentUuid": "6affe6fb_eb2b0588",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 59
+      },
+      "revId": "32aa7f8c6ece39fec3462db1d82a48e05ff291d2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
