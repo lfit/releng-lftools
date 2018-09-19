@@ -46,6 +46,30 @@
       "revId": "32aa7f8c6ece39fec3462db1d82a48e05ff291d2",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8cf16ed4_ce7846e6",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-19T00:22:01Z",
+      "side": 1,
+      "message": "Always use the logger. \"log.info()\" in lftools is setup to basically be the same as print().\n\nThe reason it\u0027s important to use the logger instead of print is when we turn on DEBUG mode we can trace where a print is happening more easily.",
+      "parentUuid": "5a9a26c8_5de00c91",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 59
+      },
+      "revId": "32aa7f8c6ece39fec3462db1d82a48e05ff291d2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
