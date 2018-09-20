@@ -25,7 +25,8 @@ def builds(ctx):
 @click.pass_context
 def running(ctx):
     """Show all the currently running builds."""
-    running_builds = ctx.obj['server'].get_running_builds()
+    jenkins = ctx.obj['jenkins']
+    running_builds = jenkins.server.get_running_builds()
 
     for build in running_builds:
         print("- %s on %s" % (build['name'], build['node']))
@@ -35,7 +36,8 @@ def running(ctx):
 @click.pass_context
 def queued(ctx):
     """Show all jobs waiting in the queue and their status."""
-    queue = ctx.obj['server'].get_queue_info()
+    jenkins = ctx.obj['jenkins']
+    queue = jenkins.server.get_queue_info()
 
     queue_length = len(queue)
     print("Build Queue (%s)" % queue_length)

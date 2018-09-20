@@ -15,7 +15,6 @@ __author__ = 'Trevor Bramwell'
 import logging
 
 import click
-import jenkins as jenkins_python  # Don't confuse this with the function ...
 from six.moves import configparser
 from six.moves.urllib.error import HTTPError
 
@@ -25,6 +24,7 @@ from lftools.cli.jenkins.nodes import nodes
 from lftools.cli.jenkins.plugins import plugins_init
 from lftools.cli.jenkins.token import token
 from lftools.jenkins import JJB_INI
+from lftools.jenkins import Jenkins
 
 log = logging.getLogger(__name__)
 
@@ -39,25 +39,8 @@ log = logging.getLogger(__name__)
 @click.pass_context
 def jenkins_cli(ctx, server, user, password):
     """Query information about the Jenkins Server."""
-    if '://' not in server:
-        if JJB_INI:
-            log.debug('Using config from {}'.format(JJB_INI))
-            config = configparser.ConfigParser()
-            config.read(JJB_INI)
-            user = config.get(server, 'user')
-            password = config.get(server, 'password')
-            server = config.get(server, 'url')
-        else:
-            log.debug('jenkins_jobs.ini not found in any of the default paths.')
-            server = 'https://localhost:8080'
-
     # Initial the Jenkins object and pass it to sub-commands
-    ctx.obj['server'] = jenkins_python.Jenkins(
-        server,
-        username=user,
-        password=password)
-
-    ctx.obj['jenkins_url'] = server
+    ctx.obj['jenkins'] = Jenkins(server, user, password)
 
 
 @click.command()
@@ -94,8 +77,8 @@ def groovy(ctx, groovy_file):
     with open(groovy_file, 'r') as f:
         data = f.read()
 
-    server = ctx.obj['server']
-    result = server.run_script(data)
+    jenkins = ctx.obj['jenkins']
+    result = jenkins.server.run_script(data)
     log.info(result)
 
 
@@ -104,11 +87,12 @@ def groovy(ctx, groovy_file):
 @click.pass_context
 def quiet_down(ctx, n):
     """Put Jenkins into 'Quiet Down' mode."""
-    version = ctx.obj['server'].get_version()
+    jenkins = ctx.obj['jenkins']
+    version = jenkins.server.get_version()
     # Ask permission first
     if n:
         try:
-            ctx.obj['server'].quiet_down()
+            jenkins.server.quiet_down()
         except HTTPError as m:
             if m.code == 405:
                 log.error("\n[%s]\nJenkins %s does not support Quiet Down "
@@ -125,7 +109,7 @@ def quiet_down(ctx, n):
 @click.pass_context
 def remove_offline_nodes(ctx, force):
     """Remove any offline nodes."""
-    server = ctx.obj['server']
+    jenkins = ctx.obj['jenkin']
     groovy_script = """
 import hudson.model.*
 
@@ -179,9 +163,9 @@ for (node in Jenkins.instance.computers) {
 """
 
     if force:
-        result = server.run_script(force_script)
+        result = jenkins.server.run_script(force_script)
     else:
-        result = server.run_script(groovy_script)
+        result = jenkins.server.run_script(groovy_script)
     log.info(result)
 
 

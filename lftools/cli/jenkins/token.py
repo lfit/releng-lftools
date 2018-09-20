@@ -35,7 +35,8 @@ def token(ctx):
 @click.pass_context
 def change(ctx):
     """Generate a new API token."""
-    log.info(get_token(ctx.obj['jenkins_url'], change=True))
+    jenkins = ctx.obj['jenkins']
+    log.info(get_token(jenkins.url, change=True))
 
 
 @click.command()
@@ -67,7 +68,8 @@ def init(name, url):
 @click.pass_context
 def print_token(ctx):
     """Print current API token."""
-    log.info(get_token(ctx.obj['jenkins_url']))
+    jenkins = ctx.obj['jenkins']
+    log.info(get_token(jenkins.url))
 
 
 @click.command()
