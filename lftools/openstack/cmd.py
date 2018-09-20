@@ -195,15 +195,31 @@ def create(ctx, name, template_file, parameter_file, timeout, tries):
     help='Stack delete timeout in seconds.')
 @click.pass_context
 def delete(ctx, name_or_id, timeout):
-    """Create stack."""
+    """Delete stack."""
     os_stack.delete(
         ctx.obj['os_cloud'],
         name_or_id,
         timeout)
 
 
+@click.command(name='delete-stale')
+@click.argument('jenkins_urls', nargs=-1)
+@click.pass_context
+def delete_stale(ctx, jenkins_urls):
+    """Delete stale stacks.
+
+    This command checks Jenkins and OpenStack for stacks that do not appear in
+    both places. If a stack is no longer available in Jenkins but is in
+    OpenStack then it is considered stale. Stale stacks are then deleted.
+    """
+    os_stack.delete_stale(
+        ctx.obj['os_cloud'],
+        jenkins_urls)
+
+
 stack.add_command(create)
 stack.add_command(delete)
+stack.add_command(delete_stale)
 
 
 @openstack.group()

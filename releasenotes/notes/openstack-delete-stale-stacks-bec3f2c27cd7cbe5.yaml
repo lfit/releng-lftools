@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    Add a new ``delete-stale`` option to the **stack** command.
+
+    This function compares running builds in Jenkins to active stacks in
+    OpenStack and determines if there are orphaned stacks and removes them.
