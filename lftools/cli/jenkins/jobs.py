@@ -47,9 +47,9 @@ def jobs(ctx):
 @click.pass_context
 def enable(ctx, regex):
     """Enable all Jenkins jobs matching REGEX."""
-    server = ctx.obj['server']
+    jenkins = ctx.obj['jenkins']
 
-    result = server.run_script(enable_disable_jobs.format(regex, "enable"))
+    result = jenkins.server.run_script(enable_disable_jobs.format(regex, "enable"))
     print(result)
 
 
@@ -58,9 +58,9 @@ def enable(ctx, regex):
 @click.pass_context
 def disable(ctx, regex):
     """Disable all Jenkins jobs matching REGEX."""
-    server = ctx.obj['server']
+    jenkins = ctx.obj['jenkins']
 
-    result = server.run_script(enable_disable_jobs.format(regex, "disable"))
+    result = jenkins.server.run_script(enable_disable_jobs.format(regex, "disable"))
     print(result)
 
 

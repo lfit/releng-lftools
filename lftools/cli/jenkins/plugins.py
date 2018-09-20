@@ -30,7 +30,8 @@ def print_plugin(plugin, namefield='longName'):
 @click.pass_context
 def plugins_init(ctx):
     """Inspect Jenkins plugins on the server."""
-    ctx.obj['plugins'] = ctx.obj['server'].get_plugins()
+    jenkins = ctx.obj['jenkins']
+    ctx.obj['plugins'] = jenkins.server.get_plugins()
 
 
 @click.command()
