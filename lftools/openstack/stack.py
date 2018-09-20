@@ -12,10 +12,16 @@
 
 __author__ = 'Thanh Ha'
 
+import logging
+import re
 import sys
 import time
 
 import shade
+
+from lftools.jenkins import Jenkins
+
+log = logging.getLogger(__name__)
 
 
 def create(os_cloud, name, template_file, parameter_file, timeout=900, tries=2):
@@ -101,3 +107,29 @@ def delete(os_cloud, name_or_id, timeout=900):
 
     print('Failed to delete stack.')
     return False
+
+
+def delete_stale(os_cloud, jenkins_servers):
+    cloud = shade.openstack_cloud(cloud=os_cloud)
+    stacks = cloud.search_stacks()
+    if not stacks:
+        log.debug('No stacks to delete.')
+        sys.exit(0)
+
+    builds = []
+    for server in jenkins_servers:
+        jenkins = Jenkins(server)
+        jenkins_url = jenkins.url.rstrip('/')
+        print(jenkins_url)
+        silo = jenkins_url.rsplit('/', 1)[1]
+        running_builds = jenkins.server.get_running_builds()
+        for build in running_builds:
+            print('{}-{}-{}'.format(silo, build.get('name'), build.get('number')))
+
+    for stack in stacks:
+        if (stack.stack_status == 'CREATE_COMPLETE' or
+                stack.stack_status == 'CREATE_FAILED' or
+                stack.stack_status == 'DELETE_FAILED'):
+            cloud.pprint(stack)
+        else:
+            print("=================== SKIP")
