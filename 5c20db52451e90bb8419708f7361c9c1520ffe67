@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89f651ae_bd45c06a",
+        "filename": "lftools/openstack/stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-20T03:36:15Z",
+      "side": 1,
+      "message": "We need to handle the production silo too (When there is no /sandbox).",
+      "revId": "5c20db52451e90bb8419708f7361c9c1520ffe67",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
