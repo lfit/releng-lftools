@@ -14,6 +14,9 @@ __author__ = 'Thanh Ha'
 import logging
 import os
 
+import jenkins
+from six.moves import configparser
+
 log = logging.getLogger(__name__)
 
 
@@ -41,3 +44,28 @@ def jjb_ini():
 
 
 JJB_INI = jjb_ini()
+
+
+class Jenkins():
+    """lftools Jenkins object."""
+
+    def __init__(self, server, user, password):
+        """Initialize a Jenkins object."""
+        if '://' not in server:
+            if JJB_INI:
+                log.debug('Using config from {}'.format(JJB_INI))
+                config = configparser.ConfigParser()
+                config.read(JJB_INI)
+                user = config.get(server, 'user')
+                password = config.get(server, 'password')
+                server = config.get(server, 'url')
+            else:
+                log.debug('jenkins_jobs.ini not found in any of the default paths.')
+                server = 'https://localhost:8080'
+
+        self.server = jenkins.Jenkins(
+            server,
+            username=user,
+            password=password)
+
+        self.url = server

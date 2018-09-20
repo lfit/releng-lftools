@@ -25,7 +25,8 @@ def offline_str(status):
 @click.pass_context
 def nodes(ctx):
     """Find information about builders connected to Jenkins Master."""
-    ctx.obj['nodes'] = ctx.obj['server'].get_nodes()
+    jenkins = ctx.obj['jenkins']
+    ctx.obj['nodes'] = jenkins.server.get_nodes()
 
 
 @click.command()
