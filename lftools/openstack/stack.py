@@ -12,10 +12,15 @@
 
 __author__ = 'Thanh Ha'
 
+import logging
 import sys
 import time
 
 import shade
+
+from lftools.jenkins import Jenkins
+
+log = logging.getLogger(__name__)
 
 
 def create(os_cloud, name, template_file, parameter_file, timeout=900, tries=2):
@@ -101,3 +106,55 @@ def delete(os_cloud, name_or_id, timeout=900):
 
     print('Failed to delete stack.')
     return False
+
+
+def delete_stale(os_cloud, jenkins_servers):
+    """Search Jenkins and OpenStack for orphaned stacks and remove them.
+
+    An orphaned stack is a stack that is not known in any of the Jenkins
+    servers passed into this function.
+    """
+    cloud = shade.openstack_cloud(cloud=os_cloud)
+    stacks = cloud.search_stacks()
+    if not stacks:
+        log.debug('No stacks to delete.')
+        sys.exit(0)
+
+    builds = []
+    for server in jenkins_servers:
+        jenkins = Jenkins(server)
+        jenkins_url = jenkins.url.rstrip('/')
+        silo = jenkins_url.split('/')
+
+        if len(silo) == 4:  # https://jenkins.opendaylight.org/releng
+            silo = silo[3]
+        elif len(silo) == 3:  # https://jenkins.onap.org
+            silo = 'production'
+        else:
+            log.error('Unexpected URL pattern, could not detect silo.')
+            sys.exit(1)
+
+        log.debug('Fetching running builds from {}'.format(jenkins_url))
+        running_builds = jenkins.server.get_running_builds()
+        for build in running_builds:
+            build_name = '{}-{}-{}'.format(
+                silo, build.get('name'), build.get('number'))
+            log.debug('    {}'.format(build_name))
+            builds.append(build_name)
+
+    log.debug('Active stacks')
+    for stack in stacks:
+        if (stack.stack_status == 'CREATE_COMPLETE' or
+                stack.stack_status == 'CREATE_FAILED' or
+                stack.stack_status == 'DELETE_FAILED'):
+            log.debug('    {}'.format(stack.stack_name))
+
+            if stack.stack_status == 'DELETE_FAILED':
+                cloud.pprint(stack)
+
+            if stack.stack_name not in builds:
+                log.debug('        >>>> Marked for deletion <<<<')
+                delete(os_cloud, stack.stack_name)
+
+        else:
+            continue
