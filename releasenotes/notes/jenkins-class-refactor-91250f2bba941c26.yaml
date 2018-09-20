@@ -1,0 +1,5 @@
+---
+other:
+  - |
+    Refactored the Jenkins object into a class to allow us to reuse it outside
+    of the Jenkins command group.
