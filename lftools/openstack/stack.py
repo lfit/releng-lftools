@@ -101,3 +101,12 @@ def delete(os_cloud, name_or_id, timeout=900):
 
     print('Failed to delete stack.')
     return False
+
+
+def delete_stale(os_cloud, jenkins_urls):
+    def _get_builds():
+        pass
+
+    for url in jenkins_urls:
+        builds = _get_builds(url)
+        print(builds)
