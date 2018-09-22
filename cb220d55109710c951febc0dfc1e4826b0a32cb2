@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f54f5885_4bef5a87",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-22T00:41:01Z",
+      "side": 1,
+      "message": "Username and password can be pulled from lftools.ini.\n\nURL let\u0027s have the user pass it in via NEXUS_URL / `-s|--server` command.",
+      "range": {
+        "startLine": 69,
+        "startChar": 51,
+        "endLine": 69,
+        "endChar": 71
+      },
+      "revId": "cb220d55109710c951febc0dfc1e4826b0a32cb2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39431c12_36c40a41",
+        "filename": "releasenotes/notes/nexus-docker-cmds-2ea1515887e0ab00.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-22T00:41:01Z",
+      "side": 1,
+      "message": "Would be good to add a bit of a description before jumping into the usage to let folks know what this is doing. For example \"Add commands to manage docker images in Nexus 3.\" or something...",
+      "revId": "cb220d55109710c951febc0dfc1e4826b0a32cb2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6662356_50deed14",
+        "filename": "releasenotes/notes/nexus-docker-cmds-2ea1515887e0ab00.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-22T00:41:01Z",
+      "side": 1,
+      "message": "Code block should line up with the code-block part. Eg.\n\n .. code-block:: none\n \n    Commands:\n      delete ...",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 49
+      },
+      "revId": "cb220d55109710c951febc0dfc1e4826b0a32cb2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
