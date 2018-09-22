@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1c5aa3e0_51d143a0",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-09-22T20:47:37Z",
+      "side": 1,
+      "message": "Yes, username and password can also be pulled from lftools.ini. But it needs to maintain compatibility with other Nexus subcommands, so they can also be pulled from settings.yaml.\nSimilarly, -s is used for every other Nexus command for settings. So I could change it to just --server, or -u/--server, or leave it as is.",
+      "parentUuid": "f54f5885_4bef5a87",
+      "range": {
+        "startLine": 69,
+        "startChar": 51,
+        "endLine": 69,
+        "endChar": 71
+      },
+      "revId": "cb220d55109710c951febc0dfc1e4826b0a32cb2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39431c12_36c40a41",
         "filename": "releasenotes/notes/nexus-docker-cmds-2ea1515887e0ab00.yaml",
         "patchSetId": 9
