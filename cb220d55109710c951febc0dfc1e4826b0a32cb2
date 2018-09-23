@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "540caf17_a1e531c8",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-23T23:33:17Z",
+      "side": 1,
+      "message": "Why does it need to maintain compatibility?\n\nThese are new commands that have no existing users. I don\u0027t think there is any compatibility these commands need?",
+      "parentUuid": "1c5aa3e0_51d143a0",
+      "range": {
+        "startLine": 69,
+        "startChar": 51,
+        "endLine": 69,
+        "endChar": 71
+      },
+      "revId": "cb220d55109710c951febc0dfc1e4826b0a32cb2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39431c12_36c40a41",
         "filename": "releasenotes/notes/nexus-docker-cmds-2ea1515887e0ab00.yaml",
         "patchSetId": 9
