@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "786cb6b5_ea3b7d6f",
+        "filename": "requirements.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2018-09-24T17:55:00Z",
+      "side": 1,
+      "message": "Why the need for future?",
+      "revId": "f4c584d9921fa8553d771b467fd2841c4a57fcc5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
