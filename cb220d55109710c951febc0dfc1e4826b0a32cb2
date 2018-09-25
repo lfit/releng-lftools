@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "cb0a8fc3_08450436",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-09-25T08:44:01Z",
+      "side": 1,
+      "message": "I\u0027m on the fence allowing this here. While this is a good point, I do think if we don\u0027t make a hard stop to stop using settings.yaml then the next time we need to add yet another Nexus feature we will continue to use \"well it currently works this way\" as an excuse to never implement a common configuration file.\n\nI want to use -s|--server as the parameter option to keep it the same as Jenkins side of things to mean the server section in the config file we want to use to get configuration. I guess we\u0027ll have to break API either way but seems harder to do if we\u0027re using -s to mean settings.xml right now.\n\nI wish we could just switch the -s|--settings to an ~/lftools/nexus.ini and default to lftools.ini file or something like we do with the Jenkins stuff.\n\nIs the effort to add support this configuration first a big effort?\n\nWhen I was working on Jenkins stuff I figured it was less effort to consolidate the configuration stuff first before working on the features I wanted to add so spent some time doing it. Allows us to avoid refactoring work that we know will happen after.\n\nIf you don\u0027t plan to implement this soon maybe I will spend some time on my PTO next week to just do it otherwise I think we will never migrate these configurations out.\n\nWas a Jira created for this effort?",
+      "parentUuid": "6fd7f928_ce4e3edc",
+      "range": {
+        "startLine": 69,
+        "startChar": 51,
+        "endLine": 69,
+        "endChar": 71
+      },
+      "revId": "cb220d55109710c951febc0dfc1e4826b0a32cb2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39431c12_36c40a41",
         "filename": "releasenotes/notes/nexus-docker-cmds-2ea1515887e0ab00.yaml",
         "patchSetId": 9
