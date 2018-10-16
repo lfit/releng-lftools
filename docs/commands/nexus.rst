@@ -33,4 +33,4 @@ repo
 reorder_staged_repos
 --------------------
 
-.. program-output:: lftools nexus reorder_staged_repos --help
+.. program-output:: lftools nexus reorder-staged-repos --help
