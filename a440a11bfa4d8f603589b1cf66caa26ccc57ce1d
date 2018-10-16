@@ -16,6 +16,24 @@
       "revId": "a440a11bfa4d8f603589b1cf66caa26ccc57ce1d",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a70bc2bc_7ca575b9",
+        "filename": "lftools/openstack/stack.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-16T23:44:13Z",
+      "side": 1,
+      "message": "Because we have 2 patterns to support (see the if statements in the next few lines).\n\n 1. https://jenkins.domain/SILO\n 2. https://jenkins.domain\n\nIn the 2nd case grabbing endswith() will get the domain rather than the silo.",
+      "parentUuid": "a9860c5e_a5ae208b",
+      "revId": "a440a11bfa4d8f603589b1cf66caa26ccc57ce1d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
