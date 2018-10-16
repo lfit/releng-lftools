@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9860c5e_a5ae208b",
+        "filename": "lftools/openstack/stack.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-10-16T23:42:27Z",
+      "side": 1,
+      "message": "It\u0027s hard to figure out what you are trying to do here when you first read it.  What about something like logic that uses\njenkins_url.endswith(\u0027sandbox\u0027) ?",
+      "revId": "a440a11bfa4d8f603589b1cf66caa26ccc57ce1d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
