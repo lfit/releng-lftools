@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08c3b1c7_c761de83",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-17T18:20:32Z",
+      "side": 1,
+      "message": "Looks like this was accidentally changed (we merged a patch yesterday to fix the underscores to dashes).",
+      "range": {
+        "startLine": 36,
+        "startChar": 34,
+        "endLine": 36,
+        "endChar": 54
+      },
+      "revId": "097d65000896649a5f0bc0947deaed92edcde6bc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
