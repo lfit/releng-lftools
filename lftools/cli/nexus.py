@@ -13,6 +13,7 @@ from os import environ
 import click
 
 from lftools.nexus import cmd as nexuscmd
+import lftools.onap_nexus_2_docker as on2d
 
 NEXUS_URL_ENV = 'NEXUS_URL'
 
@@ -115,3 +116,30 @@ def delete_images(ctx, settings, server, repo, pattern, yes):
     if yes or click.confirm("Would you like to delete all {} images?".format(
             str(len(images)))):
         nexuscmd.delete_images(settings, server, images)
+
+
+@docker.command(name="nexus2docker")
+@click.option(
+    '-o', '--org', type=str, default='onap', required=False,
+    help='Specify repository organisation. Default "onap".')
+@click.option(
+    '-r', '--repo', type=str, default='', required=False,
+    help='Only repos containing this string will be selected. '
+         'Default set to blank string, which is every repo')
+@click.option(
+    '-s', '--summary', is_flag=True, default=True, required=False,
+    help='Prints a summary of missing docker tags.')
+@click.option(
+    '-v', '--verbose', is_flag=True, required=False,
+    help='Prints all collected repo/tag information.')
+@click.option(
+    '-c', '--copy', is_flag=True, required=False,
+    help='Copy missing tags from Nexus repos to Docker repos.')
+@click.pass_context
+def copy_from_nexus_to_docker(ctx, org, repo, summary, verbose, copy):
+    """Find missing repos in Docker, Copy from Nexus.
+
+    Will by default list all missing repos in docker, compared to Nexus.
+    If -c (--copy) is provided, it will copy the repos from Nexus to Docker.
+    """
+    on2d.start_point(org, repo, summary, verbose, copy)
