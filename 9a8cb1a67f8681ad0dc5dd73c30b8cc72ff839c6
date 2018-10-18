@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d062314_454820c6",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 14
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-18T00:30:41Z",
+      "side": 1,
+      "message": "We like to list things in alphabetical order so that it\u0027s easy to find things once the list get\u0027s longer.",
+      "revId": "9a8cb1a67f8681ad0dc5dd73c30b8cc72ff839c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0dfcb3f_e3fb6c37",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-18T00:30:41Z",
+      "side": 1,
+      "message": "Instead of using + a better way in python for continuing string lines is to use brackets like this:\n\n help\u003d(\u0027long line...\u0027\n       \u0027continuation of long line.\u0027)\n\nThis way we don\u0027t have to add +\u0027s everywhere.",
+      "revId": "9a8cb1a67f8681ad0dc5dd73c30b8cc72ff839c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70dcd742_9895d8e3",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-18T00:30:41Z",
+      "side": 1,
+      "message": "same here.",
+      "revId": "9a8cb1a67f8681ad0dc5dd73c30b8cc72ff839c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e0c062d_db6b1bfb",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-18T00:30:41Z",
+      "side": 1,
+      "message": "what if --csv is not passed. Do we print to console?",
+      "revId": "9a8cb1a67f8681ad0dc5dd73c30b8cc72ff839c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6cef247_1cc3b94f",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-18T00:30:41Z",
+      "side": 1,
+      "message": "Refer to the + comment above.",
+      "revId": "9a8cb1a67f8681ad0dc5dd73c30b8cc72ff839c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5833385_cb92840e",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-18T00:30:41Z",
+      "side": 1,
+      "message": "This is the format we prefer to do arguments as it\u0027s formatted nicely by sphinx:\n\nhttps://github.com/lfit/releng-lftools/blob/master/lftools/openstack/image.py#L32-L34",
+      "revId": "9a8cb1a67f8681ad0dc5dd73c30b8cc72ff839c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b20980_7e5228e3",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-18T00:30:41Z",
+      "side": 1,
+      "message": "csv_path\u003dNone ?\n\n\nthis isn\u0027t required right?",
+      "range": {
+        "startLine": 227,
+        "startChar": 26,
+        "endLine": 227,
+        "endChar": 34
+      },
+      "revId": "9a8cb1a67f8681ad0dc5dd73c30b8cc72ff839c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a368d7fa_81872c2d",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-18T00:30:41Z",
+      "side": 1,
+      "message": "See formatting style here:\n\nhttps://github.com/lfit/releng-lftools/blob/master/lftools/openstack/image.py#L32-L34",
+      "revId": "9a8cb1a67f8681ad0dc5dd73c30b8cc72ff839c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "370f4847_37b8927d",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-18T00:30:41Z",
+      "side": 1,
+      "message": "See formatting style here:\n\nhttps://github.com/lfit/releng-lftools/blob/master/lftools/openstack/image.py#L32-L34",
+      "revId": "9a8cb1a67f8681ad0dc5dd73c30b8cc72ff839c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
