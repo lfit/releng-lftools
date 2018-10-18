@@ -1,0 +1,28 @@
+---
+features:
+  - |
+    This function will collect all tags from both nexus and docker, for
+    a particular org (default 'onap'), as well as a repo (default all repos).
+    With this information, it will calculate a list of valid tags that needs to
+    be copied to docker from Nexus.
+    Usage:
+      lftools nexus docker nexus2docker
+    Options:
+      -o, --org TEXT   Specify repository organisation. Default "onap".
+      -r, --repo TEXT  Only repos containing this string will be selected.
+                       Default set to blank string, which is every repo
+      -s, --summary    Prints a summary of missing docker tags.
+      -v, --verbose    Prints all collected repo/tag information.
+      -c, --copy       Copy missing tags from Nexus repos to Docker repos.
+issues:
+  - |
+    Currently, if the docker repo is missing, it is not created specifically,
+    but implicitely by docker itself when we push the docker image to an non-
+    existing docker repo. The Public flag should be set properly, but
+critical:
+  - |
+    Before you give the "lftools nexus docker nexus2docker" command please
+    ensure you have manually logged in to both Nexus as well as to Docker.
+
+    sudo docker login       ---> DOCKER Credentials
+    sudo docker login nexus3.onap.org:10002 -u <yourLFID>
