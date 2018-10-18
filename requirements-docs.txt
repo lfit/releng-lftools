@@ -1,4 +1,4 @@
 -r requirements.txt
 lfdocs-conf
-reno~=2.10.0
+reno~=2.11.2
 sphinxcontrib-programoutput
