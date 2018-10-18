@@ -49,13 +49,17 @@ JJB_INI = jjb_ini()
 class Jenkins():
     """lftools Jenkins object."""
 
-    def __init__(self, server, user=None, password=None):
+    def __init__(self, server, user=None, password=None, config_file=None):
         """Initialize a Jenkins object."""
+        self.config_file = config_file
+        if not self.config_file:
+            self.config_file = JJB_INI
+
         if '://' not in server:
-            if JJB_INI:
-                log.debug('Using config from {}'.format(JJB_INI))
+            if self.config_file:
+                log.debug('Using config from {}'.format(self.config_file))
                 config = configparser.ConfigParser()
-                config.read(JJB_INI)
+                config.read(self.config_file)
                 user = config.get(server, 'user')
                 password = config.get(server, 'password')
                 server = config.get(server, 'url')

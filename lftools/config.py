@@ -37,6 +37,7 @@ def get_setting(section, option=None):
         try:
             return config.get(section, option)
         except configparser.NoOptionError:
+            print(section, option)
             log.error('Config option does not exist.')
             sys.exit(1)
         except configparser.NoSectionError:

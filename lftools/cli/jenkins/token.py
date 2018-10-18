@@ -12,6 +12,7 @@
 __author__ = 'Thanh Ha'
 
 import logging
+import os
 import sys
 
 import click
@@ -19,7 +20,6 @@ import requests
 from six.moves import configparser
 
 from lftools import config as lftools_cfg
-from lftools.jenkins import JJB_INI
 from lftools.jenkins.token import get_token
 
 log = logging.getLogger(__name__)
@@ -42,12 +42,14 @@ def change(ctx):
 @click.command()
 @click.argument('name')
 @click.argument('url')
-def init(name, url):
+@click.pass_context
+def init(ctx, name, url):
     """Initialize jenkins_jobs.ini config for new server section."""
-    _require_jjb_ini()
+    jenkins = ctx.obj['jenkins']
+    _require_jjb_ini(jenkins.config_file)
 
     config = configparser.ConfigParser()
-    config.read(JJB_INI)
+    config.read(jenkins.config_file)
 
     token = get_token(url, True)
     try:
@@ -60,7 +62,7 @@ def init(name, url):
     config.set(name, 'user', lftools_cfg.get_setting('global', 'username'))
     config.set(name, 'password', token)
 
-    with open(JJB_INI, 'w') as configfile:
+    with open(jenkins.config_file, 'w') as configfile:
         config.write(configfile)
 
 
@@ -87,7 +89,8 @@ def reset(ctx, servers):
     If the server parameter is NOT passed then all servers listed in the
     configuration file will be reset via multi-server mode.
     """
-    _require_jjb_ini()
+    jenkins = ctx.obj['jenkins']
+    _require_jjb_ini(jenkins.config_file)
 
     def _reset_key(config, server):
         url = config.get(server, 'url')
@@ -95,7 +98,7 @@ def reset(ctx, servers):
         try:
             token = get_token(url, True)
             config.set(server, 'password', token)
-            with open(JJB_INI, 'w') as configfile:
+            with open(jenkins.config_file, 'w') as configfile:
                 config.write(configfile)
             return token
         except requests.exceptions.ConnectionError as e:
@@ -104,7 +107,7 @@ def reset(ctx, servers):
     fail = 0
     success = 0
     config = configparser.ConfigParser()
-    config.read(JJB_INI)
+    config.read(jenkins.config_file)
 
     if len(servers) == 0:
         cfg_sections = config.sections()
@@ -138,8 +141,8 @@ token.add_command(print_token)
 token.add_command(reset)
 
 
-def _require_jjb_ini():
-    if not JJB_INI:
+def _require_jjb_ini(config):
+    if not os.path.isfile(config):
         log.error('jenkins_jobs.ini not found in any of the search paths. '
                   'Please provide one before proceeding.')
         sys.exit(1)
