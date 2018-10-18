@@ -1,0 +1,147 @@
+#!/bin/bash
+
+NEXUS3_BASE=https://nexus3.onap.org:10002/v2
+NEXUS3_CATALOG=${NEXUS3_BASE}/_catalog
+
+DOCKER_BASE=https://registry.hub.docker.com/v1/repositories
+
+NEXUS3_CATALOG_LIST=/tmp/__NEXUS3_CATALOG_LIST.$$
+NEXUS3_TAG_LIST=/tmp/__NEXUS3_TAG_LIST.$$
+NEXUS3_TAG_LIST_OK=/tmp/__NEXUS3_TAG_LIST_OK.$$
+NEXUS3_TAG_LIST_NOK=/tmp/__NEXUS3_TAG_LIST_NOK.$$
+
+DOCKER_TAG_LIST=/tmp/__DOCKER_TAG_LIST.$$
+DOCKER_TAG_LIST_OK=/tmp/__DOCKER_TAG_LIST_OK.$$
+DOCKER_TAG_LIST_NOK=/tmp/__DOCKER_TAG_LIST_NOK.$$
+
+MAIN_PART=onap
+
+
+get_nexus3_catalog()
+{
+  curl -s -X GET ${NEXUS3_CATALOG} | \
+    sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' -e 's/}//g' | \
+    awk -F: '{print $2}'| \
+    tr ',' '\n' | \
+    grep  "^${MAIN_PART}/" > ${NEXUS3_CATALOG_LIST}
+}
+
+## curl -X GET https://nexus3.onap.org:10002/v2/onap/base_sdc-sanity/tags/list
+## {"name":"onap/base_sdc-sanity","tags":["1.3.0","1.3.1","1.4.0"]}
+get_nexus_tags()
+{
+  proj_name="$1"
+  curl -s -X GET ${NEXUS3_BASE}/${proj_name}/tags/list | \
+    awk -F[ '{print $2}' | \
+    sed -e 's/\"//g' | \
+    sed -e 's/]}//' | \
+    tr ',' '\n' > ${NEXUS3_TAG_LIST}
+}
+
+## curl -s https://registry.hub.docker.com/v1/repositories/onap/base_sdc-sanity/tags| sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' | tr '}' '\n'  | awk -F: '{print $3}'
+## latest
+## v1.0.0
+get_docker_tags()
+{
+  PROJ=$1
+  DOCKER_URL="${DOCKER_BASE}/${PROJ}/tags"
+  curl -s ${DOCKER_URL} | \
+    sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' | \
+    tr '}' '\n'  | \
+    awk -F: '{print $3}' > ${DOCKER_TAG_LIST}
+}
+
+## Only valid tags #, #.#, or #.#.# where # is a number.
+validate_tags()
+{
+  TAG_LIST="$1"
+  TAG_LIST_OK="$2"
+  TAG_LIST_NOK="$3"
+  patt_1="^[0-9]+$"
+  patt_2="^[0-9]+.[0-9]+$"
+  patt_3="^[0-9]+.[0-9]+.[0-9]+$"
+
+  rm -f ${TAG_LIST_OK} ${TAG_LIST_NOK}
+  touch ${TAG_LIST_OK} ${TAG_LIST_NOK}
+
+  while read T; do
+    if [[ $T =~ ${patt_1} ]] || \
+       [[ $T =~ ${patt_2} ]] || \
+       [[ $T =~ ${patt_3} ]] ; then
+      echo ${T} >> ${TAG_LIST_OK}
+    else
+      echo ${T} >> ${TAG_LIST_NOK}
+    fi
+  done < ${TAG_LIST}
+}
+
+validate_nexus_tags()
+{
+  validate_tags "${NEXUS3_TAG_LIST}" "${NEXUS3_TAG_LIST_OK}" "${NEXUS3_TAG_LIST_NOK}"
+}
+
+validate_docker_tags()
+{
+  validate_tags "${DOCKER_TAG_LIST}" "${DOCKER_TAG_LIST_OK}" "${DOCKER_TAG_LIST_NOK}"
+}
+
+clean_up()
+{
+  rm -f ${NEXUS3_CATALOG_LIST}
+  rm -f ${NEXUS3_TAG_LIST}
+  rm -f ${NEXUS3_TAG_LIST_OK}
+  rm -f ${NEXUS3_TAG_LIST_NOK}
+
+  rm -f ${DOCKER_TAG_LIST}
+  rm -f ${DOCKER_TAG_LIST_OK}
+  rm -f ${DOCKER_TAG_LIST_NOK}
+}
+
+### MAIN_PART
+
+## NEXUS3                     ---> DOCKER
+## onap/vfc/nfvo/svnfm/huawei ---> onap/vfc-nfvo-svnfm-huawei
+## onap/aaf/aaf_cm            ---> onap/aaf-aaf_cm
+
+get_nexus3_catalog
+
+printf '%-65s   %s\n' Nexus3 Docker
+
+while read PROJ; do
+  # Remove ${MAIN_PART}/    for instance onap/
+  docker_name=`echo "${PROJ}" | sed -e 's/^'${MAIN_PART}'\///'`
+  # Change "/" to "-"
+  docker_name=`echo "${docker_name}" | sed -e 's/\//-/g'`
+  # And lets add the $MAIN_PART again
+  docker_name="${MAIN_PART}/${docker_name}"
+
+  #printf "NEXUS3 : $PROJ        ---> DOCKER : ${docker_name}"
+  printf '%-65s   %s\n' $PROJ $docker_name
+
+  get_nexus_tags "${PROJ}"
+  validate_nexus_tags
+  nexus_tags_ok="`paste -s -d\   ${NEXUS3_TAG_LIST_OK}`"
+  nexus_tags_nok="`paste -s -d\   ${NEXUS3_TAG_LIST_NOK}`"
+
+  get_docker_tags "${docker_name}"
+  validate_docker_tags
+  docker_tags_ok="`paste -s -d\   ${DOCKER_TAG_LIST_OK}`"
+  docker_tags_nok="`paste -s -d\   ${DOCKER_TAG_LIST_NOK}`"
+
+  printf ' OK:%-61s    OK:%s\n' "${nexus_tags_ok}" "${docker_tags_ok}"
+  printf 'NOK:%-61s   NOK:%s\n' "${nexus_tags_nok}" "${docker_tags_nok}"
+
+  ## Check Docker Project is missing
+  if [ "x${docker_tags_ok}" == "x" ] && [ "x${docker_tags_nok}" == "x" ]; then
+    echo "===>> DOCKER MISSING THIS PROJECT"
+  else
+
+    ## Check Missing Tags in DOCKER
+    if [ "x${nexus_tags_ok}" != "x${docker_tags_ok}" ]; then
+      echo "===>> MISSING TAGS IN DOCKER"
+    fi
+  fi
+
+done < ${NEXUS3_CATALOG_LIST}
+
+clean_up
