@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f969e730_7b99e6d3",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-19T14:57:43Z",
+      "side": 1,
+      "message": "I think this is accidently in the wrong place?\n\nreference links need to be declared ontop of sections. so this sounds like it should be below above \"list\" and maybe rename it to \"nexus-docker-list\" so it\u0027s clear it\u0027s related to docker.\n\n\nWe should probably add one for delete too.",
+      "revId": "63f7f5e34d16e240ba7b1bd5aac06358e5eaae98",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cae03b7_7d22b6c4",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-19T14:57:43Z",
+      "side": 1,
+      "message": "See comment below.",
+      "range": {
+        "startLine": 275,
+        "startChar": 16,
+        "endLine": 275,
+        "endChar": 20
+      },
+      "revId": "63f7f5e34d16e240ba7b1bd5aac06358e5eaae98",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aac69d71_7c9bd8a7",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-19T14:57:43Z",
+      "side": 1,
+      "message": "sys.exit should return an int, not a string (otherwise it will always return 1 with a string). If you want to also print a message then do log.error() or log.info(), this way our logger prints and it let\u0027s us more easily trace which module the output came from.",
+      "range": {
+        "startLine": 296,
+        "startChar": 16,
+        "endLine": 296,
+        "endChar": 20
+      },
+      "revId": "63f7f5e34d16e240ba7b1bd5aac06358e5eaae98",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b45e5dcf_76014d07",
+        "filename": "lftools/nexus/__init__.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-19T14:57:43Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 314,
+        "startChar": 16,
+        "endLine": 314,
+        "endChar": 20
+      },
+      "revId": "63f7f5e34d16e240ba7b1bd5aac06358e5eaae98",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
