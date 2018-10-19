@@ -45,7 +45,7 @@ def jenkins_cli(ctx, server, user, password):
 @click.pass_context
 def get_credentials(ctx):
     """Print all available Credentials."""
-    server = ctx.obj['server']
+    jenkins = ctx.obj['jenkins']
     groovy_script = """
 import com.cloudbees.plugins.credentials.*
 
@@ -63,7 +63,7 @@ for (c in creds) {
     } catch (MissingPropertyException) {}
 }
 """
-    result = server.run_script(groovy_script)
+    result = jenkins.server.run_script(groovy_script)
     log.info(result)
 
 
