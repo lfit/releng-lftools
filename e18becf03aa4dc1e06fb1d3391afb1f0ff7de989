@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7292dfb1_953967ea",
+        "filename": "tox.ini",
+        "patchSetId": 18
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-24T00:22:50Z",
+      "side": 1,
+      "message": "I\u0027d do this as a separate commit as this is unrelated to the docker stuff.",
+      "revId": "e18becf03aa4dc1e06fb1d3391afb1f0ff7de989",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
