@@ -36,7 +36,10 @@ def token(ctx):
 def change(ctx):
     """Generate a new API token."""
     jenkins = ctx.obj['jenkins']
-    log.info(get_token(jenkins.url, change=True))
+    username = ctx.obj['username']
+    password = ctx.obj['password']
+    log.info(get_token(jenkins.url, change=True,
+                       username=username, password=password))
 
 
 @click.command()
@@ -71,7 +74,9 @@ def init(ctx, name, url):
 def print_token(ctx):
     """Print current API token."""
     jenkins = ctx.obj['jenkins']
-    log.info(get_token(jenkins.url))
+    username = ctx.obj['username']
+    password = ctx.obj['password']
+    log.info(get_token(jenkins.url, username=username, password=password))
 
 
 @click.command()

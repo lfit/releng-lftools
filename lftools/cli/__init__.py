@@ -11,10 +11,13 @@
 
 __author__ = 'Thanh Ha'
 
+import getpass
 import logging
 
 import click
+from six.moves import input
 
+from lftools import config
 from lftools.cli.config import config_sys
 from lftools.cli.dco import dco
 from lftools.cli.deploy import deploy
@@ -30,15 +33,35 @@ log = logging.getLogger(__name__)
 
 @click.group()
 @click.option('--debug', envvar='DEBUG', is_flag=True, default=False)
+@click.option('--password', envvar='LFTOOLS_PASSWORD', default=None)
+@click.option('--username', envvar='LFTOOLS_USERNAME', default=None)
+@click.option('-i', '--interactive', is_flag=True, default=False)
 @click.pass_context
 @click.version_option()
-def cli(ctx, debug):
+def cli(ctx, debug, interactive, password, username):
     """CLI entry point for lftools."""
     if debug:
         logging.getLogger("").setLevel(logging.DEBUG)
 
     ctx.obj['DEBUG'] = debug
     log.debug('DEBUG mode enabled.')
+
+    # Start > Credentials
+    if username is None:
+        if interactive:
+            username = input('Username: ')
+        else:
+            username = config.get_setting('global', 'username')
+
+    if password is None:
+        if interactive:
+            password = getpass.getpass('Password: ')
+        else:
+            password = config.get_setting('global', 'password')
+
+    ctx.obj['username'] = username
+    ctx.obj['password'] = password
+    # End > Credentials
 
 
 cli.add_command(config_sys)
