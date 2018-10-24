@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a06dbe2_d7f53cbd",
+        "filename": "tox.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-24T01:13:08Z",
+      "side": 1,
+      "message": "If you do ~\u003d it will always install the latest patch release which is better so that we get bug fixes. It means it will install the latest version between:\n\n\u003e\u003d 1.11.0 and \u003c 1.12.0",
+      "revId": "179f97ce786846a4ccb17b4418ce190dc08ceefa",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
