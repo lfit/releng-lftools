@@ -20,16 +20,13 @@ from lftools import config
 log = logging.getLogger(__name__)
 
 
-def get_token(url, change=False):
+def get_token(url, username, password, change=False):
     """Get API token.
 
     This function uses the global username / password for Jenkins from
     lftools.ini as the user asking for the token may not already know the
     api token.
     """
-    username = config.get_setting('global', 'username')
-    password = config.get_setting('global', 'password')
-
     if change:
         log.debug('Resetting Jenkins API token on {}'.format(url))
     else:
