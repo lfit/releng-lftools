@@ -36,7 +36,15 @@ def token(ctx):
 def change(ctx):
     """Generate a new API token."""
     jenkins = ctx.obj['jenkins']
-    log.info(get_token(jenkins.url, change=True))
+    username = ctx.obj['username']
+    password = ctx.obj['password']
+
+    if not username or not password:
+        log.error('Username or password not set.')
+        sys.exit(1)
+
+    log.info(get_token(jenkins.url, change=True,
+                       username=username, password=password))
 
 
 @click.command()
@@ -46,12 +54,20 @@ def change(ctx):
 def init(ctx, name, url):
     """Initialize jenkins_jobs.ini config for new server section."""
     jenkins = ctx.obj['jenkins']
+    username = ctx.obj['username']
+    password = ctx.obj['password']
+
+    if not username or not password:
+        log.error('Username or password not set.')
+        sys.exit(1)
+
     _require_jjb_ini(jenkins.config_file)
 
     config = configparser.ConfigParser()
     config.read(jenkins.config_file)
 
-    token = get_token(url, True)
+    token = get_token(url, change=True,
+                      username=username, password=password)
     try:
         config.add_section(name)
     except configparser.DuplicateSectionError as e:
@@ -71,7 +87,14 @@ def init(ctx, name, url):
 def print_token(ctx):
     """Print current API token."""
     jenkins = ctx.obj['jenkins']
-    log.info(get_token(jenkins.url))
+    username = ctx.obj['username']
+    password = ctx.obj['password']
+
+    if not username or not password:
+        log.error('Username or password not set.')
+        sys.exit(1)
+
+    log.info(get_token(jenkins.url, username=username, password=password))
 
 
 @click.command()
@@ -90,13 +113,21 @@ def reset(ctx, servers):
     configuration file will be reset via multi-server mode.
     """
     jenkins = ctx.obj['jenkins']
+    username = ctx.obj['username']
+    password = ctx.obj['password']
+
+    if not username or not password:
+        log.error('Username or password not set.')
+        sys.exit(1)
+
     _require_jjb_ini(jenkins.config_file)
 
     def _reset_key(config, server):
         url = config.get(server, 'url')
 
         try:
-            token = get_token(url, True)
+            token = get_token(url, change=True,
+                              username=username, password=password)
             config.set(server, 'password', token)
             with open(jenkins.config_file, 'w') as configfile:
                 config.write(configfile)
