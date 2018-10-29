@@ -14,6 +14,8 @@ __author__ = 'Thanh Ha'
 import logging
 
 import click
+from six.moves import configparser
+import sys
 
 from lftools import config
 
@@ -33,7 +35,15 @@ def config_sys(ctx):
 @click.pass_context
 def get_setting(ctx, section, option):
     """Print section or setting from config file."""
-    result = config.get_setting(section, option)
+    try:
+        result = config.get_setting(section, option)
+    except configparser.NoOptionError as e:
+        log.error(e)
+        sys.exit(1)
+    except configparser.NoSectionError as e:
+        log.error(e)
+        sys.exit(1)
+
     if isinstance(result, list):
         for i in result:
             log.info('{}: {}'.format(i, config.get_setting(section, i)))
