@@ -14,8 +14,8 @@ __author__ = 'Thanh Ha'
 
 import subprocess
 import sys
-
 import click
+import lftools.deploy as deploy_sys
 
 
 @click.group()
@@ -234,13 +234,9 @@ def nexus_stage(ctx, nexus_url, staging_profile_id, deploy_dir):
 @click.pass_context
 def nexus_stage_repo_close(ctx, nexus_url, staging_profile_id, staging_repo_id):
     """Close a Nexus staging repo."""
-    status = subprocess.call([
-        'deploy', 'nexus-stage-repo-close',
-        nexus_url,
-        staging_profile_id,
-        staging_repo_id
-    ])
-    sys.exit(status)
+    deploy_sys.nexus_stage_repo_close(nexus_url,
+                                      staging_profile_id,
+                                      staging_repo_id)
 
 
 @click.command(name='nexus-stage-repo-create')
@@ -249,12 +245,9 @@ def nexus_stage_repo_close(ctx, nexus_url, staging_profile_id, staging_repo_id):
 @click.pass_context
 def nexus_stage_repo_create(ctx, nexus_url, staging_profile_id):
     """Create a Nexus staging repo."""
-    status = subprocess.call([
-        'deploy', 'nexus-stage-repo-create',
-        nexus_url,
-        staging_profile_id
-    ])
-    sys.exit(status)
+    staging_repo_id = deploy_sys.nexus_stage_repo_create(nexus_url,
+                                                         staging_profile_id)
+    log.info(staging_repo_id)
 
 
 @click.command(name='nexus-zip')
