@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # SPDX-License-Identifier: EPL-1.0
 ##############################################################################
 # Copyright (c) 2017 The Linux Foundation and others.
@@ -11,11 +12,58 @@
 
 import logging
 import os
+import re
 import shutil
+import sys
 
+from defusedxml.minidom import parseString
 import glob2  # Switch to glob when Python < 3.5 support is dropped
+import requests
 
 log = logging.getLogger(__name__)
+
+
+def local_log_error_and_exit(msg1=None, msg2=None):
+    """Print error message, and exit."""
+    if msg1:
+        log.error(msg1)
+    if msg2:
+        log.error(msg2)
+    sys.exit(1)
+
+
+def local_format_url(url):
+    """Ensure url starts with http and ends with /."""
+    start_pattern = re.compile('^(http|https)://')
+    if not start_pattern.match(url):
+        url = 'http://{}'.format(url)
+    if not url.endswith('/'):
+        url = '{}/'.format(url)
+    return url
+
+
+def local_get_node_from_xml(xml_data, tag_name):
+    """Extract tag data from xml data."""
+    try:
+        dom1 = parseString(xml_data)
+        childnode = dom1.getElementsByTagName(tag_name)[0]
+    except:
+        local_log_error_and_exit("Received bad XML, can not find tag {}".format(tag_name), xml_data)
+    return childnode.firstChild.data
+
+
+def local_request_post(in_url, in_data, in_headers):
+    """Execute a request post, return the resp."""
+    resp = {}
+    try:
+        resp = requests.post(in_url, data=in_data, headers=in_headers)
+    except requests.exceptions.MissingSchema:
+        local_log_error_and_exit("Not valid URL: {}".format(in_url))
+    except requests.exceptions.ConnectionError:
+        local_log_error_and_exit("Could not connect to URL: {}".format(in_url))
+    except requests.exceptions.InvalidURL:
+        local_log_error_and_exit("Invalid URL: {}".format(in_url))
+    return resp
 
 
 def copy_archives(workspace, pattern=None):
@@ -65,3 +113,161 @@ def copy_archives(workspace, pattern=None):
             log.debug(e)
             os.makedirs(os.path.dirname(dest))
             shutil.move(src, dest)
+
+
+def nexus_stage_repo_create(nexus_url, staging_profile_id):
+    """Create a Nexus staging repo.
+
+    Parameters:
+    nexus_url:           URL to Nexus server. (Ex: https://nexus.example.org)
+    staging_profile_id:  The staging profile id as defined in Nexus for the
+                         staging repo.
+
+    Returns:             staging_repo_id
+
+    Sample:
+    lftools deploy nexus-stage-repo-create 192.168.1.26:8081/nexsus/ 93fb68073c18
+    """
+    nexus_url = '{0}service/local/staging/profiles/{1}/start'.format(
+        local_format_url(nexus_url),
+        staging_profile_id)
+
+    log.debug("Nexus URL           = {}".format(nexus_url))
+
+    xml = """
+        <promoteRequest>
+            <data>
+                <description>Create staging repository.</description>
+            </data>
+        </promoteRequest>
+    """
+
+    headers = {'Content-Type': 'application/xml'}
+    resp = local_request_post(nexus_url, xml, headers)
+
+    log.debug("resp.status_code = {}".format(resp.status_code))
+    log.debug("resp.text = {}".format(resp.text))
+
+    if re.search('nexus-error', resp.text):
+        error_msg = local_get_node_from_xml(resp.text, 'msg')
+        if re.search('.*profile with id:.*does not exist.', error_msg):
+            local_log_error_and_exit("Staging profile id {} not found.".format(staging_profile_id))
+        local_log_error_and_exit(error_msg)
+
+    if resp.status_code == 405:
+        local_log_error_and_exit("HTTP method POST is not supported by this URL", nexus_url)
+    if resp.status_code == 404:
+        local_log_error_and_exit("Did not find nexus site: {}".format(nexus_url))
+    if not resp.status_code == 201:
+        local_log_error_and_exit("Failed with status code {}".format(resp.status_code), resp.text)
+
+    staging_repo_id = local_get_node_from_xml(resp.text, 'stagedRepositoryId')
+    log.debug("staging_repo_id = {}".format(staging_repo_id))
+
+    return staging_repo_id
+
+
+def nexus_stage_repo_close(nexus_url, staging_profile_id, staging_repo_id):
+    """Close a Nexus staging repo.
+
+    Parameters:
+    nexus_url:          URL to Nexus server. (Ex: https://nexus.example.org)
+    staging_profile_id: The staging profile id as defined in Nexus for the
+                        staging repo.
+    staging_repo_id:    The ID of the repo to close.
+
+    Sample:
+    lftools deploy nexus-stage-repo-close 192.168.1.26:8081/nexsus/ 93fb68073c18 test1-1031
+    """
+    nexus_url = '{0}service/local/staging/profiles/{1}/finish'.format(
+        local_format_url(nexus_url),
+        staging_profile_id)
+
+    log.debug("Nexus URL           = {}".format(nexus_url))
+    log.debug("staging_repo_id     = {}".format(staging_repo_id))
+
+    xml = """
+        <promoteRequest>
+            <data>
+                <stagedRepositoryId>{0}</stagedRepositoryId>
+                <description>Close staging repository.</description>
+            </data>
+        </promoteRequest>
+    """.format(staging_repo_id)
+
+    headers = {'Content-Type': 'application/xml'}
+    resp = local_request_post(nexus_url, xml, headers)
+
+    log.debug("resp.status_code = {}".format(resp.status_code))
+    log.debug("resp.text = {}".format(resp.text))
+
+    if re.search('nexus-error', resp.text):
+        error_msg = local_get_node_from_xml(resp.text, 'msg')
+    else:
+        error_msg = resp.text
+
+    if resp.status_code == 404:
+        local_log_error_and_exit("Did not find nexus site: {}".format(nexus_url))
+
+    if re.search('invalid state: closed', error_msg):
+        local_log_error_and_exit("Staging repository is already closed.")
+    if re.search('Missing staging repository:', error_msg):
+        local_log_error_and_exit("Staging repository do not exist.")
+
+    if not resp.status_code == 201:
+        local_log_error_and_exit("Failed with status code {}".format(resp.status_code), resp.text)
+
+
+def deploy_nexus_zip (nexus_url, nexus_repo, nexus_path, deploy_zip):
+    """"Deploy zip file containing artifacts to Nexus using requests.
+
+    This function simply takes a zip file preformatted in the correct
+    directory for Nexus and uploads to a specified Nexus repo using the
+    content-compressed URL.
+
+    Requires the Nexus Unpack plugin and permission assigned to the upload user.
+
+    Parameters:
+    nexus_url:    URL to Nexus server. (Ex: https://nexus.opendaylight.org)
+    nexus_repo:   The repository to push to. (Ex: site)
+    nexus_path:   The path to upload the artifacts to. Typically the
+                  project group_id depending on if a Maven or Site repo
+                  is being pushed.
+                  Maven Ex: org/opendaylight/odlparent
+                  Site Ex: org.opendaylight.odlparent
+    deploy_zip:   The zip to deploy. (Ex: /tmp/artifacts.zip)
+    """
+
+    if len(nexus_url) == 0 or
+        len(nexus_repo) == 0 or
+        len(nexus_path) == 0 or
+        len(deploy_zip) == 0:
+        log.error("Not enough parameters")
+        sys.exit(1)
+
+    nexus_url = '{0}service/local/repositories/{1}/content-compressed/{2}'.format(
+        local_format_url(nexus_url),
+        nexus_repo,
+        nexus_path)
+
+    log.debug("nexus_url  = {}".format(nexus_url))
+    log.debug("deploy_zip = {}".format(deploy_zip))
+
+    fileobj = open(deploy_zip, 'rb')
+    files = {'file': fileobj}
+    try:
+        resp = requests.post(nexus_url, files=files)
+    except Exception as e:
+        log.error("Not valid nexus URL: {}".format(nexus_url))
+        log.error(e)
+        sys.exit(1)
+    finally:
+        fileobj.close()
+
+    log.debug("resp.status_code = {}".format(resp.status_code))
+
+    if not str(resp.status_code).startswith('20'):
+        log.error("Failed with: {}".format(resp.text))
+        zfile = zipfile.ZipFile(deploy_zip)
+        log.error(zfile.infolist())
+        sys.exit(1)
