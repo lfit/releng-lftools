@@ -36,20 +36,16 @@ def get_setting(section, option=None):
     if option:
         try:
             return config.get(section, option)
-        except configparser.NoOptionError:
-            print(section, option)
-            log.error('Config option does not exist.')
-            sys.exit(1)
-        except configparser.NoSectionError:
-            log.error('Config section does not exist.')
-            sys.exit(1)
+        except configparser.NoOptionError as e:
+            raise e
+        except configparser.NoSectionError as e:
+            raise e
 
     else:
         try:
             return config.options(section)
-        except configparser.NoSectionError:
-            log.error('Config section does not exist.')
-            sys.exit(1)
+        except configparser.NoSectionError as e:
+            raise e
 
 
 def set_setting(section, option, value):
