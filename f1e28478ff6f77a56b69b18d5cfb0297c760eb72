@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb651fbd_eadbab13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-10-30T22:15:32Z",
+      "side": 1,
+      "message": "this should go as part of the commit footer and not the subject/title.\n\nI\u0027d read the git cheat sheet here and setup my `~/.gitconfig` file from the below link. \nhttps://lf-releng-docs.readthedocs.io/en/latest/git.html",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 68
+      },
+      "revId": "f1e28478ff6f77a56b69b18d5cfb0297c760eb72",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
