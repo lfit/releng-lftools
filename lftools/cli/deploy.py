@@ -17,6 +17,8 @@ import sys
 
 import click
 
+import lftools.deploy as deploy_sys
+
 
 @click.group()
 @click.pass_context
@@ -73,17 +75,9 @@ def file(ctx,
     the usual Maven pom.xml information so that it conforms to Maven 2 repo
     specs.
     """
-    status = subprocess.call([
-        'deploy', 'file',
-        nexus_url,
-        nexus_repo_id,
-        group_id,
-        artifact_id,
-        version,
-        packaging,
-        file,
-        classifier
-    ])
+    status = deploy_sys.upload_maven_file_to_nexus(nexus_url, nexus_repo_id, group_id, artifact_id, version, packaging,
+                                                   file,
+                                                   classifier=None)
     sys.exit(status)
 
 
