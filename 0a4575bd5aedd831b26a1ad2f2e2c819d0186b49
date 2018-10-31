@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5dd79e1c_960164e4",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T19:03:30Z",
+      "side": 1,
+      "message": "Delete this line. If you want to enable debug mode you do it via CLI before you run LFTOOLs \"export\" is a bash command.",
+      "revId": "0a4575bd5aedd831b26a1ad2f2e2c819d0186b49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad3dd16e_2a530555",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T19:03:30Z",
+      "side": 1,
+      "message": "Don\u0027t use + to concatinate strings, instead use str.format()\n\n \u0027http://{}\u0027.format(nexus_url)",
+      "revId": "0a4575bd5aedd831b26a1ad2f2e2c819d0186b49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aa0044b_61b21266",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T19:03:30Z",
+      "side": 1,
+      "message": "same here: \u0027{}/\u0027.format(nexus_url) is preferred.",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "0a4575bd5aedd831b26a1ad2f2e2c819d0186b49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4eaeb393_09edb956",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T19:03:30Z",
+      "side": 1,
+      "message": "pep8 says to not use camel case. The Pythonic way is to use underscore casing: error_msg_node",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 24
+      },
+      "revId": "0a4575bd5aedd831b26a1ad2f2e2c819d0186b49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f98d14f_c196b76f",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T19:03:30Z",
+      "side": 1,
+      "message": "Can we be explicit with startswith(\u0027http://\u0027) or startswith(\u0027https://\u0027). If you want to use regex you can import the \"re\" module and do something like:\n\n re.match(\u0027^http[s]*://\u0027)\n\n\nbecause this is masking the case where a server might be called \"httpserver.domain.org\" and then it wouldn\u0027t fall into this statemente to add the http://.",
+      "range": {
+        "startLine": 103,
+        "startChar": 33,
+        "endLine": 103,
+        "endChar": 37
+      },
+      "revId": "0a4575bd5aedd831b26a1ad2f2e2c819d0186b49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "942a6812_52c4f233",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T19:03:30Z",
+      "side": 1,
+      "message": "I think this \"weird\" statement is unnecessary.",
+      "range": {
+        "startLine": 146,
+        "startChar": 19,
+        "endLine": 146,
+        "endChar": 24
+      },
+      "revId": "0a4575bd5aedd831b26a1ad2f2e2c819d0186b49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
