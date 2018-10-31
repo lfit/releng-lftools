@@ -82,6 +82,24 @@
     },
     {
       "key": {
+        "uuid": "a8816396_a9e80079",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-10-31T11:15:39Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "13383770_4acea952",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6fb14f53_a54956d9",
         "filename": "lftools/deploy.py",
         "patchSetId": 3
@@ -93,6 +111,24 @@
       "writtenOn": "2018-10-31T06:22:46Z",
       "side": 1,
       "message": "No need for this at all. The easy way to enable debug mode in LFTOOLS just simply:\n\n export DEBUG\u003dtrue\n lftools ...  # will now be in debug mode.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9117676d_e8637b40",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-10-31T11:15:39Z",
+      "side": 1,
+      "message": "changed to #export...",
+      "parentUuid": "6fb14f53_a54956d9",
       "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
@@ -178,6 +214,24 @@
       "writtenOn": "2018-10-31T06:22:46Z",
       "side": 1,
       "message": "When using \"excepts\" always except an exact exception. Which exception are you expecting here?",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e259155b_77b9b1af",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-10-31T11:15:39Z",
+      "side": 1,
+      "message": "Any errors...\nBut in particular empty XML",
+      "parentUuid": "3eeb7358_e9a50a48",
       "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false

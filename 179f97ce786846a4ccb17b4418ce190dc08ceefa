@@ -16,6 +16,24 @@
       "revId": "179f97ce786846a4ccb17b4418ce190dc08ceefa",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a35dd1c8_c19980bf",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-10-31T11:15:39Z",
+      "side": 0,
+      "message": "Copied them back.",
+      "parentUuid": "2cc53bb1_bf160cc3",
+      "revId": "179f97ce786846a4ccb17b4418ce190dc08ceefa",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
