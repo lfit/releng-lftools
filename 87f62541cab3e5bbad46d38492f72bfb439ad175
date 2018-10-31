@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "362f56a6_41af58a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T12:29:26Z",
+      "side": 1,
+      "message": "From the perspective of \"git shortlog\" this first line is not helpful. Shortlog won\u0027t print the fully body of the commit message. So the first line of a commit message should be short and sweet but have enough details to let the reader have a gist of what\u0027s happening. I think something like:\n\n Refactor Nexus stage repo close|create cmds\n\nwould be better. If you haven\u0027t already I\u0027d highly recommend reading https://chris.beams.io/posts/git-commit/ commit messages are very helpful when we have to backtrack and debug code.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "87f62541cab3e5bbad46d38492f72bfb439ad175",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
