@@ -4,6 +4,7 @@ ignore = .tox/**,
     .gitignore,
     .gitreview,
     .gitmodules,
+    .pytest_cache/**,
     node_modules/**
 
 [all.Git]
