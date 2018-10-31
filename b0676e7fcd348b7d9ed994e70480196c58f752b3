@@ -22,6 +22,30 @@
       "revId": "b0676e7fcd348b7d9ed994e70480196c58f752b3",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f8f45a7_6f36755f",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-10-31T12:46:51Z",
+      "side": 1,
+      "message": "Tox complained that the normal xml.mini.dom was not safe.... and recommended defusedxml",
+      "parentUuid": "29d88e3c_77f432b4",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 42
+      },
+      "revId": "b0676e7fcd348b7d9ed994e70480196c58f752b3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
