@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "29d88e3c_77f432b4",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T12:44:15Z",
+      "side": 1,
+      "message": "Can we achieve what we need with the built in xml library rather than importing a 3rd party library?\n\nI\u0027m careful to add new 3rdparty libraries unless it provides a great need because they tend to break us. Parse string sounds like a pretty basic function though....",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 42
+      },
+      "revId": "b0676e7fcd348b7d9ed994e70480196c58f752b3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
