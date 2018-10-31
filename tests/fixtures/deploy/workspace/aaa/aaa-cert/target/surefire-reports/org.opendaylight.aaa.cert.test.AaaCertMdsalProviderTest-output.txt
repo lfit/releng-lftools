@@ -1,0 +1,6 @@
+[main] INFO org.opendaylight.aaa.cert.impl.ODLKeyTool - odlTest.jks is created
+[main] INFO org.opendaylight.aaa.cert.impl.AaaCertMdsalProvider - AaaCertMdsalProvider Initialized
+[main] INFO org.opendaylight.aaa.cert.impl.AaaCertMdsalProvider - AaaCertMdsalProvider Initialized
+[main] INFO org.opendaylight.aaa.cert.impl.ODLKeyTool - odlTest.jks is created
+[main] INFO org.opendaylight.aaa.cert.impl.AaaCertMdsalProvider - AaaCertMdsalProvider Initialized
+[main] INFO org.opendaylight.aaa.cert.impl.AaaCertMdsalProvider - AaaCertMdsalProvider Initialized

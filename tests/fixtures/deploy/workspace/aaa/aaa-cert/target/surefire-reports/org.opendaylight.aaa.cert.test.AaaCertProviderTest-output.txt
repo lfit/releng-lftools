@@ -1,0 +1,2 @@
+[main] INFO org.opendaylight.aaa.cert.impl.AaaCertProvider - aaa Certificate Service Initalized
+[main] INFO org.opendaylight.aaa.cert.impl.ODLKeyTool - ctlTest.jks is created

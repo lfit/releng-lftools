@@ -1,4 +1,5 @@
 click
+glob2
 pyyaml
 requests~=2.18.0
 ruamel.yaml
