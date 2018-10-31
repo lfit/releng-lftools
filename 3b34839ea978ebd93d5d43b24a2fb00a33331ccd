@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ffa45ae_c47819ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T22:22:58Z",
+      "side": 1,
+      "message": "You mean RELENG-1371\n\nWe don\u0027t have a Jira project called JIRA :)",
+      "revId": "3b34839ea978ebd93d5d43b24a2fb00a33331ccd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
