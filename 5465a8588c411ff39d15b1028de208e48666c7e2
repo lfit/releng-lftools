@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebae05b9_55fc9f2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T12:47:56Z",
+      "side": 1,
+      "message": "If we run \"git shortlog\" this gives us no information on what this patch does. I would very highly recommend reading https://chris.beams.io/posts/git-commit/ which explains why a well formed commit message is useful and how to create a good commit message.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "5465a8588c411ff39d15b1028de208e48666c7e2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "490213e4_bf1dfd81",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T12:47:56Z",
+      "side": 1,
+      "message": "This should be the first line instead of the current first line.",
+      "revId": "5465a8588c411ff39d15b1028de208e48666c7e2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
