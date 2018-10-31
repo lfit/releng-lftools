@@ -15,6 +15,11 @@ archives
 
 .. program-output:: lftools deploy archives --help
 
+copy-archives
+-------------
+
+.. program-output:: lftools deploy copy-archives --help
+
 logs
 ----
 

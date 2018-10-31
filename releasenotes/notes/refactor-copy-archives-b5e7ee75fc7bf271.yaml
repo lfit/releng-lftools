@@ -1,0 +1,10 @@
+---
+features:
+  - |
+    The shell/deploy file's copy_archives() function has been reimplemented in
+    pure Python for better portability to Windows systems.
+deprecations:
+  - |
+    The shell/deploy script's copy_archives() function is now deprecated and
+    will be removed in a later version. We recommend migrating to the lftools
+    pure Python implementation of this function.

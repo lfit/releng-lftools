@@ -17,6 +17,8 @@ import sys
 
 import click
 
+import lftools.deploy as deploy_sys
+
 
 @click.group()
 @click.pass_context
@@ -46,6 +48,22 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
     """
     status = subprocess.call(['deploy', 'archives', nexus_url, nexus_path, workspace, pattern])
     sys.exit(status)
+
+
+@click.command(name='copy-archives')
+@click.argument('workspace', envvar='WORKSPACE')
+@click.argument('pattern', nargs=-1, default=None, required=False)
+@click.pass_context
+def copy_archives(ctx, workspace, pattern):
+    """Copy files for archiving.
+
+    Arguments:
+
+        workspace: Typically a Jenkins WORKSPACE to copy files from.
+        pattern: Space-separated list of Unix style glob patterns of files to
+            copy for archiving. (default: false)
+    """
+    deploy_sys.copy_archives(workspace, pattern)
 
 
 @click.command()
@@ -277,6 +295,7 @@ def nexus_zip(ctx, nexus_url, nexus_repo, nexus_path, deploy_zip):
 
 
 deploy.add_command(archives)
+deploy.add_command(copy_archives)
 deploy.add_command(file)
 deploy.add_command(logs)
 deploy.add_command(maven_file)
