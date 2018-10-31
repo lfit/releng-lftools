@@ -1,0 +1,311 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d587d2a_128b420f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Please provide a more descriptive commit message. What is being refactored?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3994f851_44729578",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Add \"Issue: JIRA-1234\" with the Jira number so that this work item correctly get\u0027s linked to the right Jira. This line should be right above Change-Id.\n\nThe last block of a commit message is a meta-data footer. We need to make sure all meta-data fields are attached to the footer as all lines above following a blank line is the commit message body.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3186f188_194a197c",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Just do: log.info(staging_repo_id)\n\nI want it to print out only the staging repo_id so that we can pipe this command without needing to further parse the text out.",
+      "range": {
+        "startLine": 252,
+        "startChar": 13,
+        "endLine": 252,
+        "endChar": 73
+      },
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13383770_4acea952",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Shebangs should be the 1st line of a file for them to be valid. But this is a library file that\u0027s not meant to be called directly so this line is unneeded.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fb14f53_a54956d9",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "No need for this at all. The easy way to enable debug mode in LFTOOLS just simply:\n\n export DEBUG\u003dtrue\n lftools ...  # will now be in debug mode.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d8c2efb_aca6b3a9",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Unnecessary comment. The code is pretty obvious.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce0b6403_fe242f0c",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Unnecessary comment.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da030416_b9f57191",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Unnecessary comment.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "571e761d_0d97a292",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Unnecessary comment.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3eeb7358_e9a50a48",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "When using \"excepts\" always except an exact exception. Which exception are you expecting here?",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06a14f4e_34528c7e",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "This is outdated syntax. Always use str.format() it\u0027s faster.\n\n sys.exit(\"ERROR: Failed with status code {}\".format(resp.status_code)",
+      "range": {
+        "startLine": 67,
+        "startChar": 58,
+        "endLine": 67,
+        "endChar": 59
+      },
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6add4f5b_ba31e980",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "I\u0027d prefer if we used:\n\n log.error(msg)\n sys.exit(1)\n\nusing the logger to print the message allows us to more easily debug the code than just printing the message through sys.exit.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fab1753_eab6d803",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "all \"ERROR:\" messages should be printed via \"log.error()\" and then sys.exit(1).",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "686abdac_d4ad76e0",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Unnecessary comment. We can tell from the code that this is what it does.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc7b16cf_634bcef9",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Unnecessary comment. (Plus it\u0027s wrongly says \"close\" instead of \"create\")",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c09536c_111f7c35",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Unnecessary comment.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bbe9c5e2_5b6a367c",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 1,
+      "message": "Unnecessary comment.",
+      "revId": "9ebd4bfea0e89067ce949ef0e0237d4fc0d33bc9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}

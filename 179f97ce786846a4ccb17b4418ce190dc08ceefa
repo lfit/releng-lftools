@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2cc53bb1_bf160cc3",
+        "filename": "shell/deploy",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-10-31T06:22:46Z",
+      "side": 0,
+      "message": "Deleting these should be a separate patch because another function that is not refactored in this patch depends on these functions existing.\n\nI\u0027d recommend splitting this out to a separate patch as a DRAFT and we don\u0027t merge it until all functions that use these 2 functions have been refactored.",
+      "revId": "179f97ce786846a4ccb17b4418ce190dc08ceefa",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
