@@ -14,11 +14,28 @@ import os
 import pytest
 
 from lftools import cli
+import lftools.deploy as deploy_sys
 
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
     'fixtures',
     )
+
+
+def test_format_url():
+    """Test url format."""
+    test_url=[["192.168.1.1", "http://192.168.1.1"],
+         ["192.168.1.1:8081", "http://192.168.1.1:8081"],
+         ["192.168.1.1:8081/nexus", "http://192.168.1.1:8081/nexus"],
+         ["192.168.1.1:8081/nexus/", "http://192.168.1.1:8081/nexus"],
+         ["http://192.168.1.1:8081/nexus", "http://192.168.1.1:8081/nexus"],
+         ["https://192.168.1.1:8081/nexus", "https://192.168.1.1:8081/nexus"],
+         ["https://192.168.1.1:8081/nexus/", "https://192.168.1.1:8081/nexus"],
+         ["www.goodnexussite.org:8081", "http://www.goodnexussite.org:8081"],
+         ["192.168.1.1:8081/nexus///", "http://192.168.1.1:8081/nexus"]]
+
+    for url in test_url:
+        assert deploy_sys._format_url(url[0]) == url[1]
 
 
 @pytest.mark.datafiles(
