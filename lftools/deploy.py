@@ -13,10 +13,22 @@ import logging
 import os
 import re
 import shutil
+import sys
+import zipfile
 
 import glob2  # Switch to glob when Python < 3.5 support is dropped
+import requests
 
 log = logging.getLogger(__name__)
+
+
+def _log_error_and_exit(msg1=None, msg2=None):
+    """Print error message, and exit."""
+    if msg1:
+        log.error(msg1)
+    if msg2:
+        log.error(msg2)
+    sys.exit(1)
 
 
 def _format_url(url):
@@ -78,3 +90,56 @@ def copy_archives(workspace, pattern=None):
             log.debug(e)
             os.makedirs(os.path.dirname(dest))
             shutil.move(src, dest)
+
+
+def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
+    """"Deploy zip file containing artifacts to Nexus using requests.
+
+    This function simply takes a zip file preformatted in the correct
+    directory for Nexus and uploads to a specified Nexus repo using the
+    content-compressed URL.
+
+    Requires the Nexus Unpack plugin and permission assigned to the upload user.
+
+    Parameters:
+
+        nexus_url:    URL to Nexus server. (Ex: https://nexus.opendaylight.org)
+        nexus_repo:   The repository to push to. (Ex: site)
+        nexus_path:   The path to upload the artifacts to. Typically the
+                      project group_id depending on if a Maven or Site repo
+                      is being pushed.
+                      Maven Ex: org/opendaylight/odlparent
+                      Site Ex: org.opendaylight.odlparent
+        zip_file:     The zip to deploy. (Ex: /tmp/artifacts.zip)
+    """
+    url = '{}/service/local/repositories/{}/content-compressed/{}'.format(
+        _format_url(nexus_url),
+        nexus_repo,
+        nexus_path)
+    log.debug('Uploading {} to {}'.format(zip_file, url))
+
+    try:
+        _upload_file = open(zip_file, 'rb')
+    except IOError:
+        _log_error_and_exit("ZIP file not found: {}".format(zip_file))
+    except FileNotFoundError:
+        _log_error_and_exit("ZIP file not found: {}".format(zip_file))
+    except PermissionError:
+        _log_error_and_exit("Can not read ZIP file, wrong permissions: {}".format(zip_file))
+    files = {'file': _upload_file}
+    try:
+        resp = requests.post(url, files=files)
+    except Exception as e:
+        _log_error_and_exit("Not valid nexus URL: {}".format(nexus_url), e)
+    finally:
+        _upload_file.close()
+    log.debug('{}: {}'.format(resp.status_code, resp.text))
+
+    if resp.status_code == 404:
+        _log_error_and_exit("Did not find repository with id: {}".format(nexus_repo))
+    if resp.status_code == 400:
+        _log_error_and_exit("Repository is read only: {}".format(nexus_repo))
+
+    if not str(resp.status_code).startswith('20'):
+        _log_error_and_exit("Failed to upload with: {}:{}".format(
+            resp.status_code, resp.text), zipfile.ZipFile(zip_file).infolist())
