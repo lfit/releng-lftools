@@ -3,3 +3,4 @@ pytest
 pytest-click
 pytest-datafiles
 pytest-mock
+pytest-responses
