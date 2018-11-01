@@ -9,9 +9,11 @@
 ##############################################################################
 """Library of functions for deploying artifacts to Nexus."""
 
+import gzip
 import logging
 import os
 import shutil
+import tempfile
 
 import glob2  # Switch to glob when Python < 3.5 support is dropped
 
@@ -62,3 +64,49 @@ def copy_archives(workspace, pattern=None):
             log.debug(e)
             os.makedirs(os.path.dirname(dest))
             shutil.move(src, dest)
+
+
+def deploy_archives(nexus_url, nexus_path, workspace, pattern=None):
+    """Archive files to a Nexus site repository named logs.
+
+    Provides 2 ways to archive files:
+        1) $WORKSPACE/archives directory provided by the user.
+        2) globstar pattern provided by the user.
+
+    Requirements:
+
+    To use this API a Nexus server must have a site repository configured
+    with the name "logs" as this is a hardcoded path.
+
+    Authentication is pulled in from ~/.config/lftools/lftools.ini
+
+    Parameters:
+
+        :nexus_url: URL of Nexus server. Eg: https://nexus.opendaylight.org
+        :nexus_path: Path on nexus logs repo to place the logs. Eg:
+            $SILO/$JENKINS_HOSTNAME/$JOB_NAME/$BUILD_NUMBER
+        :workspace: Directory in which to search, typically in Jenkins this is
+            $WORKSPACE
+        :pattern: Space-separated list of Globstar patterns of files to
+            archive. (optional)
+    """
+    work_dir = tempfile.mkdtemp(prefix='lftools-da-')
+    os.chdir(work_dir)
+    log.debug('workspace: {}, work_dir: {}'.format(workspace, work_dir))
+
+    copy_archives(workspace, pattern)
+
+    compress_types = [
+        '**/*.log',
+        '**/*.txt',
+    ]
+    paths = []
+    for _type in compress_types:
+        search = os.path.join(work_dir, _type)
+        paths.extend(glob2.glob(search, recursive=True))
+
+    for _file in paths:
+        with open(_file, 'rb') as src, gzip.open('{}.gz'.format(_file), 'wb') as dest:
+            shutil.copyfileobj(src, dest)
+
+    #shutil.rmtree(work_dir)

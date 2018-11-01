@@ -31,7 +31,7 @@ def deploy(ctx):
 @click.argument('nexus-url', envvar='NEXUS_URL')
 @click.argument('nexus-path', envvar='NEXUS_PATH')
 @click.argument('workspace', envvar='WORKSPACE')
-@click.option('-p', '--pattern', default='')
+@click.option('-p', '--pattern', multiple=True, default=None)
 @click.pass_context
 def archives(ctx, nexus_url, nexus_path, workspace, pattern):
     """Archive files to a Nexus site repository.
@@ -46,8 +46,7 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
     with the name "logs" as this is a hardcoded path. Also this script uses
     ~/.netrc for it's authentication which must be provided.
     """
-    status = subprocess.call(['deploy', 'archives', nexus_url, nexus_path, workspace, pattern])
-    sys.exit(status)
+    deploy_sys.deploy_archives(nexus_url, nexus_path, workspace, pattern)
 
 
 @click.command(name='copy-archives')
