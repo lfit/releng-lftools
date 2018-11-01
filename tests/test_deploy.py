@@ -88,6 +88,34 @@ def test_copy_archive_pattern(cli_runner, datafiles):
         stage_dir, 'aaa', 'aaa-cert', 'target', 'surefire-reports',
         'org.opendaylight.aaa.cert.test.AaaCertMdsalProviderTest-output.txt'))
 
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_archive(cli_runner, datafiles, responses):
+    """Test deploy_archives() command for expected upload cases."""
+    os.chdir(str(datafiles))
+    workspace_dir = os.path.join(str(datafiles), 'workspace')
+
+    # Test successful upload
+    url = 'https://nexus.example.org/service/local/repositories/logs/content-compressed'
+    responses.add(responses.POST, '{}/test/path/abc'.format(url),
+                  json=None, status=201)
+    result = cli_runner.invoke(
+        cli.cli,
+        ['--debug', 'deploy', 'archives', 'https://nexus.example.org', 'test/path/abc', workspace_dir],
+        obj={})
+    assert result.exit_code == 0
+
+    # Test failed upload
+    url = 'https://nexus-fail.example.org/service/local/repositories/logs/content-compressed'
+    responses.add(responses.POST, '{}/test/fail/path'.format(url),
+                  status=404)
+    result = cli_runner.invoke(
+        cli.cli,
+        ['--debug', 'deploy', 'archives', 'https://nexus-fail.example.org', 'test/fail/path', workspace_dir],
+        obj={})
+    assert result.exit_code == 1
+
 def mocked_log_error(msg1=None, msg2=None):
     """Mock local_log_error_and_exit function.
     This function is modified to simply raise an Exception.
