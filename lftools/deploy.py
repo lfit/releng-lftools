@@ -18,6 +18,18 @@ import glob2  # Switch to glob when Python < 3.5 support is dropped
 log = logging.getLogger(__name__)
 
 
+def _format_url(url):
+    """Ensure url starts with http and trim trailing '/'s."""
+    start_pattern = re.compile('^(http|https)://')
+    if not start_pattern.match(url):
+        url = 'http://{}'.format(url)
+
+    if url.endswith('/'):
+        url = url.rstrip('/')
+
+    return url
+
+
 def copy_archives(workspace, pattern=None):
     """Copy files matching PATTERN in a WORKSPACE to the current directory.
 

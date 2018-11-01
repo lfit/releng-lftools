@@ -21,6 +21,27 @@ FIXTURE_DIR = os.path.join(
     )
 
 
+def test_format_url():
+    """Test url format."""
+    url1="192.168.1.1"
+    url2="192.168.1.1:8081"
+    url3="192.168.1.1:8081/nexus"
+    url4="192.168.1.1:8081/nexus/"
+    url5="http://192.168.1.1:8081/nexus"
+    url6="https://192.168.1.1:8081/nexus"
+    url7="https://192.168.1.1:8081/nexus/"
+    url8="www.goodnexussite.org:8081"
+
+    assert deploy_sys2.local_format_url(url1) == 'http://{}'.format(url1)
+    assert deploy_sys2.local_format_url(url2) == 'http://{}'.format(url2)
+    assert deploy_sys2.local_format_url(url3) == 'http://{}'.format(url3)
+    assert deploy_sys2.local_format_url(url4) == 'http://{}'.format(url4)
+    assert deploy_sys2.local_format_url(url5) == '{}'.format(url5)
+    assert deploy_sys2.local_format_url(url6) == '{}'.format(url6)
+    assert deploy_sys2.local_format_url(url7) == '{}'.format(url7)
+    assert deploy_sys2.local_format_url(url8) == 'http://{}'.format(url8)
+
+
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, 'deploy'),
     )
