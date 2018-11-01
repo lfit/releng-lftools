@@ -17,6 +17,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import zipfile
 
 import glob2  # Switch to glob when Python < 3.5 support is dropped
 import requests
@@ -166,18 +167,7 @@ def deploy_archives(nexus_url, nexus_path, workspace, pattern=None):
     archives_zip = shutil.make_archive(
         '{}/archives'.format(workspace), 'zip')
     log.debug('archives zip: {}'.format(archives_zip))
-
-    # TODO: Update to use I58ea1d7703b626f791dcd74e63251c4f3261ca7d once it's available.
-    upload_files = {'upload_file': open(archives_zip, 'rb')}
-    url = '{}/service/local/repositories/logs/content-compressed/{}'.format(
-        nexus_url, nexus_path)
-    r = requests.post(url, files=upload_files)
-    log.debug('{}: {}'.format(r.status_code, r.text))
-    if r.status_code != 201:
-        raise requests.exceptions.HTTPError(
-            'Failed to upload to Nexus with status code {}.\n{}'.format(
-                r.status_code, r.content))
-
+    deploy_nexus_zip(nexus_url, 'logs', nexus_path, archives_zip)
     shutil.rmtree(work_dir)
 
 
@@ -253,18 +243,48 @@ def deploy_logs(nexus_url, nexus_path, build_url):
     console_zip = tempfile.NamedTemporaryFile(prefix='lftools-dl', delete=True)
     log.debug('console-zip: {}'.format(console_zip.name))
     shutil.make_archive(console_zip.name, 'zip', work_dir)
-    log.debug('listdir: {}'.format(os.listdir(work_dir)))
-
-    # TODO: Update to use I58ea1d7703b626f791dcd74e63251c4f3261ca7d once it's available.
-    upload_files = {'upload_file': open('{}.zip'.format(console_zip.name), 'rb')}
-    url = '{}/service/local/repositories/logs/content-compressed/{}'.format(
-        nexus_url, nexus_path)
-    r = requests.post(url, files=upload_files)
-    log.debug('{}: {}'.format(r.status_code, r.text))
-    if r.status_code != 201:
-        raise requests.exceptions.HTTPError(
-            'Failed to upload to Nexus with status code {}.\n{}'.format(
-                r.status_code, r.content))
-
+    deploy_nexus_zip(nexus_url, 'logs', nexus_path, '{}.zip'.format(console_zip.name))
     console_zip.close()
     shutil.rmtree(work_dir)
+
+
+def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
+    """"Deploy zip file containing artifacts to Nexus using requests.
+
+    This function simply takes a zip file preformatted in the correct
+    directory for Nexus and uploads to a specified Nexus repo using the
+    content-compressed URL.
+
+    Requires the Nexus Unpack plugin and permission assigned to the upload user.
+
+    Parameters:
+
+        nexus_url:    URL to Nexus server. (Ex: https://nexus.opendaylight.org)
+        nexus_repo:   The repository to push to. (Ex: site)
+        nexus_path:   The path to upload the artifacts to. Typically the
+                      project group_id depending on if a Maven or Site repo
+                      is being pushed.
+                      Maven Ex: org/opendaylight/odlparent
+                      Site Ex: org.opendaylight.odlparent
+        zip_file:     The zip to deploy. (Ex: /tmp/artifacts.zip)
+    """
+    url = '{}/service/local/repositories/{}/content-compressed/{}'.format(
+        _format_url(nexus_url),
+        nexus_repo,
+        nexus_path)
+    log.debug('Uploading {} to {}'.format(zip_file, url))
+
+    upload_file = open(zip_file, 'rb')
+
+    files = {'file': upload_file}
+    resp = requests.post(url, files=files)
+    log.debug('{}: {}'.format(resp.status_code, resp.text))
+
+    if resp.status_code == 400:
+        raise requests.HTTPError("Repository is read only: {}".format(nexus_repo))
+    elif resp.status_code == 404:
+        raise requests.HTTPError("Did not find repository with ID: {}".format(nexus_repo))
+
+    if not str(resp.status_code).startswith('20'):
+        raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
+            resp.status_code, resp.text, zipfile.ZipFile(zip_file).infolist()))
