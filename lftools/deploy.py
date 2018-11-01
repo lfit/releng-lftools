@@ -78,3 +78,48 @@ def copy_archives(workspace, pattern=None):
             log.debug(e)
             os.makedirs(os.path.dirname(dest))
             shutil.move(src, dest)
+
+
+def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
+    """"Deploy zip file containing artifacts to Nexus using requests.
+
+    This function simply takes a zip file preformatted in the correct
+    directory for Nexus and uploads to a specified Nexus repo using the
+    content-compressed URL.
+
+    Requires the Nexus Unpack plugin and permission assigned to the upload user.
+
+    Parameters:
+
+        nexus_url:    URL to Nexus server. (Ex: https://nexus.opendaylight.org)
+        nexus_repo:   The repository to push to. (Ex: site)
+        nexus_path:   The path to upload the artifacts to. Typically the
+                      project group_id depending on if a Maven or Site repo
+                      is being pushed.
+                      Maven Ex: org/opendaylight/odlparent
+                      Site Ex: org.opendaylight.odlparent
+        zip_file:     The zip to deploy. (Ex: /tmp/artifacts.zip)
+    """
+    url = '{}/service/local/repositories/{}/content-compressed/{}'.format(
+        _format_url(nexus_url),
+        nexus_repo,
+        nexus_path)
+    log.debug('Uploading {} to {}'.format(deploy_zip, url))
+
+    _upload_file = open(zip_file, 'rb')
+    files = {'file': _upload_file}
+    try:
+        resp = requests.post(url, files=files)
+    except Exception as e:
+        log.error("Not valid nexus URL: {}".format(nexus_url))
+        log.error(e)
+        sys.exit(1)
+    finally:
+        _upload_file.close()
+    log.debug('{}: {}'.format(r.status_code, r.text))
+
+    if not str(resp.status_code).startswith('20'):
+        log.error("Failed to upload with: {}:{}".format(
+            resp.status_code, resp.text))
+        log.error(zipfile.ZipFile(deploy_zip).infolist())
+        sys.exit(1)
