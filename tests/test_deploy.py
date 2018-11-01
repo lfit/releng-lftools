@@ -78,3 +78,18 @@ def test_copy_archive_pattern(cli_runner, datafiles):
     assert os.path.exists(os.path.join(
         stage_dir, 'aaa', 'aaa-cert', 'target', 'surefire-reports',
         'org.opendaylight.aaa.cert.test.AaaCertMdsalProviderTest-output.txt'))
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_archive(cli_runner, datafiles):
+    """Test deploy_archives() command for expected upload cases."""
+    os.chdir(str(datafiles))
+    workspace_dir = os.path.join(str(datafiles), 'workspace')
+    result = cli_runner.invoke(
+        cli.cli,
+        ['--debug', 'deploy', 'archives', 'https://nexus.opendaylight.org', 'test/path/abc', workspace_dir],
+        obj={})
+    print("hello ", result.output)
+    assert result.exit_code == 0
+    assert False
