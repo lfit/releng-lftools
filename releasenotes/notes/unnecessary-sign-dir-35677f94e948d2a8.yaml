@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Running the lftools CLI was unexpectedly creating unnecessary
+    gpg-signatures directories in the /tmp directory and not cleaning
+    them up.

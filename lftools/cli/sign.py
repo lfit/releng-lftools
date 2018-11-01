@@ -39,7 +39,7 @@ def directory(ctx, directory):
 @click.argument('nexus-repo-url')
 @click.option(
     '-d', '--sign-dir', type=str,
-    default=tempfile.mkdtemp(prefix='gpg-signatures.'),
+    default=None,
     help='Local directory to clone repository. (default /tmp/gpg-signatures.*)')
 @click.option(
     '-w', '--sign-with', type=str, default='gpg',
@@ -47,6 +47,8 @@ def directory(ctx, directory):
 @click.pass_context
 def nexus(ctx, sign_dir, sign_with, nexus_repo_url):
     """Fetch and GPG or Sigul sign a Nexus repo."""
+    if not sign_dir:
+        sign_dir = tempfile.mkdtemp(prefix='gpg-signatures.')
     status = subprocess.call(['sign', 'nexus', '-d', sign_dir, '-w', sign_with, nexus_repo_url])
     sys.exit(status)
 
@@ -66,7 +68,7 @@ def sigul(ctx, directory):
 @click.argument('staging-profile-id', envvar='STAGING_PROFILE_ID')
 @click.option(
     '-d', '--sign-dir', type=str,
-    default=tempfile.mkdtemp(prefix='gpg-signatures.'),
+    default=None,
     help='Local directory to clone repository. (default /tmp/gpg-signatures.*)')
 @click.option(
     '-r', '--root-domain', type=str, default='org',
@@ -90,6 +92,9 @@ def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, sign_
     # -r option.
     nexus_url = nexus_url.rstrip('/')
     nexus_repo_url = "{}/content/repositories/{}/{}".format(nexus_url, nexus_repo, root_domain)
+
+    if not sign_dir:
+        sign_dir = tempfile.mkdtemp(prefix='gpg-signatures.')
 
     status = subprocess.call(['sign', 'nexus', '-d', sign_dir, '-w', sign_with, nexus_repo_url])
     if status:
