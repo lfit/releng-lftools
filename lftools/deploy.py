@@ -42,6 +42,9 @@ def copy_archives(workspace, pattern=None):
         except shutil.Error as e:
             log.warn(e)
 
+    if pattern is None:
+        return
+
     paths = []
     for p in pattern:
         search = os.path.join(workspace, p)
