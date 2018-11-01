@@ -2,3 +2,4 @@
 pytest
 pytest-click
 pytest-datafiles
+pytest-responses
