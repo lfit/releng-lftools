@@ -12,6 +12,7 @@
 __author__ = 'Thanh Ha'
 
 
+import logging
 import subprocess
 import sys
 
@@ -19,11 +20,20 @@ import click
 
 import lftools.deploy as deploy_sys
 
+log = logging.getLogger(__name__)
+
 
 @click.group()
 @click.pass_context
 def deploy(ctx):
-    """Deploy files to a Nexus sites repository."""
+    """Deploy files to a Nexus sites repository.
+
+    Deploy commands use ~/.netrc for authentication. This file should be
+    pre-configured with an entry for the Nexus server. Eg.
+
+        \b
+        machine nexus.opendaylight.org login logs_user password logs_password
+    """
     pass
 
 
@@ -31,7 +41,7 @@ def deploy(ctx):
 @click.argument('nexus-url', envvar='NEXUS_URL')
 @click.argument('nexus-path', envvar='NEXUS_PATH')
 @click.argument('workspace', envvar='WORKSPACE')
-@click.option('-p', '--pattern', default='')
+@click.option('-p', '--pattern', multiple=True)
 @click.pass_context
 def archives(ctx, nexus_url, nexus_path, workspace, pattern):
     """Archive files to a Nexus site repository.
@@ -42,12 +52,13 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
         1) globstar pattern provided by the user.
         2) $WORKSPACE/archives directory provided by the user.
 
-    To use this script the Nexus server must have a site repository configured
-    with the name "logs" as this is a hardcoded path. Also this script uses
-    ~/.netrc for it's authentication which must be provided.
+    To use this command the Nexus server must have a site repository configured
+    with the name "logs" as this is a hardcoded log path.
     """
-    status = subprocess.call(['deploy', 'archives', nexus_url, nexus_path, workspace, pattern])
-    sys.exit(status)
+    if not pattern:
+        pattern = None
+    deploy_sys.deploy_archives(nexus_url, nexus_path, workspace, pattern)
+    log.info('Archives upload complete.')
 
 
 @click.command(name='copy-archives')

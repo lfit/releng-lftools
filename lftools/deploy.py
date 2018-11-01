@@ -9,12 +9,16 @@
 ##############################################################################
 """Library of functions for deploying artifacts to Nexus."""
 
+import gzip
 import logging
 import os
 import re
 import shutil
+import sys
+import tempfile
 
 import glob2  # Switch to glob when Python < 3.5 support is dropped
+import requests
 
 log = logging.getLogger(__name__)
 
@@ -36,6 +40,11 @@ def copy_archives(workspace, pattern=None):
 
     The best way to use this function is to cd into the directory you wish to
     store the files first before calling the function.
+
+    This function provides 2 ways to archive files:
+
+        1) copy $WORKSPACE/archives directory
+        2) copy globstar pattern
 
     :params:
 
@@ -78,3 +87,64 @@ def copy_archives(workspace, pattern=None):
             log.debug(e)
             os.makedirs(os.path.dirname(dest))
             shutil.move(src, dest)
+
+
+def deploy_archives(nexus_url, nexus_path, workspace, pattern=None):
+    """Archive files to a Nexus site repository named logs.
+
+    Provides 2 ways to archive files:
+        1) $WORKSPACE/archives directory provided by the user.
+        2) globstar pattern provided by the user.
+
+    Requirements:
+
+    To use this API a Nexus server must have a site repository configured
+    with the name "logs" as this is a hardcoded path.
+
+    Parameters:
+
+        :nexus_url: URL of Nexus server. Eg: https://nexus.opendaylight.org
+        :nexus_path: Path on nexus logs repo to place the logs. Eg:
+            $SILO/$JENKINS_HOSTNAME/$JOB_NAME/$BUILD_NUMBER
+        :workspace: Directory in which to search, typically in Jenkins this is
+            $WORKSPACE
+        :pattern: Space-separated list of Globstar patterns of files to
+            archive. (optional)
+    """
+    nexus_url = _format_url(nexus_url)
+    work_dir = tempfile.mkdtemp(prefix='lftools-da.')
+    os.chdir(work_dir)
+    log.debug('workspace: {}, work_dir: {}'.format(workspace, work_dir))
+
+    copy_archives(workspace, pattern)
+
+    compress_types = [
+        '**/*.log',
+        '**/*.txt',
+    ]
+    paths = []
+    for _type in compress_types:
+        search = os.path.join(work_dir, _type)
+        paths.extend(glob2.glob(search, recursive=True))
+
+    for _file in paths:
+        with open(_file, 'rb') as src, gzip.open('{}.gz'.format(_file), 'wb') as dest:
+            shutil.copyfileobj(src, dest)
+            os.remove(_file)
+
+    archives_zip = shutil.make_archive(
+        '{}/archives'.format(workspace), 'zip')
+    log.debug('archives zip: {}'.format(archives_zip))
+
+    # TODO: Update to use I58ea1d7703b626f791dcd74e63251c4f3261ca7d once it's available.
+    upload_files = {'upload_file': open(archives_zip,'rb')}
+    url = '{}/service/local/repositories/logs/content-compressed/{}'.format(
+        nexus_url, nexus_path)
+    r = requests.post(url, files=upload_files)
+    log.debug('{}: {}'.format(r.status_code, r.text))
+    if r.status_code != 201:
+        log.error('Failed to upload to Nexus with status code {}.\n{}'.format(
+            r.status_code, r.content))
+        sys.exit(1)
+
+    shutil.rmtree(work_dir)
