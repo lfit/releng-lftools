@@ -1,0 +1,9 @@
+---
+features:
+  - |
+    Refactored deploy_nexus_zip() function from shell/deploy to pure Python to
+    be more portable with Windows systems.
+deprecations:
+  - |
+    shell/deploy script's deploy_nexus_zip() function is now deprecated and will
+    be removed in a future release.

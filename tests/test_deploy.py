@@ -138,6 +138,62 @@ def test_deploy_logs(cli_runner, datafiles, responses):
         obj={})
     assert result.exit_code == 0
 
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_nexus_zip(cli_runner, datafiles, responses):
+    os.chdir(str(datafiles))
+    nexus_url = 'https://nexus.example.org'
+    nexus_repo = 'test-repo'
+    nexus_path = 'test/path'
+
+    # Test success
+    success_upload_url = '{}/service/local/repositories/{}/content-compressed/{}'.format(
+        nexus_url,
+        nexus_repo,
+        nexus_path,
+    )
+    responses.add(responses.POST, success_upload_url,
+                  status=201)
+    result = cli_runner.invoke(
+        cli.cli,
+        ['--debug', 'deploy', 'nexus-zip', 'https://nexus.example.org', 'test-repo', 'test/path', 'zip-test-files/test.zip'],
+        obj={})
+    assert result.exit_code == 0
+
+    # Test repository 404
+    upload_404 = """<html>
+  <head>
+    <title>404 - Not Found</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+
+    <link rel="icon" type="image/png" href="https://nexus.opendaylight.org/favicon.png">
+    <!--[if IE]>
+    <link rel="SHORTCUT ICON" href="https://nexus.opendaylight.org/favicon.ico"/>
+    <![endif]-->
+
+    <link rel="stylesheet" href="https://nexus.opendaylight.org/static/css/Sonatype-content.css?2.14.7-01" type="text/css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <h1>404 - Not Found</h1>
+    <p>Repository with ID=&quot;logs2&quot; not found</p>
+  </body>
+</html>
+"""
+    upload_404_url = '{}/service/local/repositories/{}/content-compressed/{}'.format(
+        nexus_url,
+        'logs2',
+        nexus_path,
+    )
+    responses.add(responses.POST, upload_404_url,
+                  body=upload_404, status=404)
+    result = cli_runner.invoke(
+        cli.cli,
+        ['--debug', 'deploy', 'nexus-zip', 'https://nexus.example.org', 'logs2', 'test/path', 'zip-test-files/test.zip'],
+        obj={})
+    assert result.exit_code == 1
+
 def mocked_log_error(msg1=None, msg2=None):
     """Mock local_log_error_and_exit function.
     This function is modified to simply raise an Exception.

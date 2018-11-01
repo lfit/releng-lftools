@@ -312,8 +312,16 @@ def nexus_zip(ctx, nexus_url, nexus_repo, nexus_path, deploy_zip):
 
     Requires the Nexus Unpack plugin and permission assigned to the upload user.
     """
-    status = subprocess.call(['deploy', 'nexus-zip', nexus_url, nexus_repo, nexus_path, deploy_zip])
-    sys.exit(status)
+    try:
+        deploy_sys.deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, deploy_zip)
+    except IOError as e:
+        log.error(str(e))
+        sys.exit(1)
+    except HTTPError as e:
+        log.error(str(e))
+        sys.exit(1)
+
+    log.info('Zip file upload complete.')
 
 
 deploy.add_command(archives)
