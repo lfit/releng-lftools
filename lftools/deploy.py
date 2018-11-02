@@ -13,8 +13,10 @@ import logging
 import os
 import re
 import shutil
+import sys
 
 import glob2  # Switch to glob when Python < 3.5 support is dropped
+import requests
 
 log = logging.getLogger(__name__)
 
@@ -29,6 +31,29 @@ def _format_url(url):
         url = url.rstrip('/')
 
     return url
+
+
+def _log_error_and_exit(msg1=None, msg2=None):
+    """Print error message, and exit."""
+    if msg1:
+        log.error(msg1)
+    if msg2:
+        log.error(msg2)
+    sys.exit(1)
+
+
+def _request_post(in_url, in_data, in_headers):
+    """Execute a request post, return the resp."""
+    resp = {}
+    try:
+        resp = requests.post(in_url, data=in_data, headers=in_headers)
+    except requests.exceptions.MissingSchema:
+        _log_error_and_exit("Not valid URL: {}".format(in_url))
+    except requests.exceptions.ConnectionError:
+        _log_error_and_exit("Could not connect to URL: {}".format(in_url))
+    except requests.exceptions.InvalidURL:
+        _log_error_and_exit("Invalid URL: {}".format(in_url))
+    return resp
 
 
 def copy_archives(workspace, pattern=None):
