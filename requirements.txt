@@ -1,5 +1,6 @@
 click
 glob2  # Needed for Python < 3.5 recursive glob support
+defusedxml # Needed due to tox complains on parseString not safe
 pyyaml
 requests~=2.18.0
 ruamel.yaml

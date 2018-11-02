@@ -18,10 +18,18 @@ import requests
 from lftools import cli
 import lftools.deploy as deploy_sys
 
+
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
     'fixtures',
     )
+
+
+def test_log_and_exit():
+    """Test exit."""
+    with pytest.raises(SystemExit) as excinfo:
+        deploy_sys._log_error_and_exit("testmsg")
+    assert excinfo.type == SystemExit
 
 
 def test_format_url():
@@ -65,6 +73,7 @@ def test_copy_archive_dir(cli_runner, datafiles):
 
     assert os.path.exists(os.path.join(stage_dir, 'test.log'))
 
+
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, 'deploy'),
     )
@@ -87,6 +96,7 @@ def test_copy_archive_pattern(cli_runner, datafiles):
     assert os.path.exists(os.path.join(
         stage_dir, 'aaa', 'aaa-cert', 'target', 'surefire-reports',
         'org.opendaylight.aaa.cert.test.AaaCertMdsalProviderTest-output.txt'))
+
 
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, 'deploy'),
@@ -137,6 +147,7 @@ def test_deploy_logs(cli_runner, datafiles, responses):
         ['--debug', 'deploy', 'logs', 'https://nexus.example.org', 'test/log/upload', build_url],
         obj={})
     assert result.exit_code == 0
+
 
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, 'deploy'),
@@ -194,58 +205,219 @@ def test_deploy_nexus_zip(cli_runner, datafiles, responses):
         obj={})
     assert result.exit_code == 1
 
-def mocked_log_error(msg1=None, msg2=None):
-    """Mock local_log_error_and_exit function.
+
+def test_get_node_from_xml():
+    """Test extracting from xml."""
+    document = """\
+        <slideshow>
+        <title>Demo slideshow</title>
+        <slide><title>Slide title</title>
+        <point>This is a demo</point>
+        <point>Of a program for processing slides</point>
+        </slide>
+
+        <slide><title>Another demo slide</title><stagedRepositoryId>432</stagedRepositoryId><point>It is important</point>
+        <point>To have more than</point>
+        <point>one slide</point>
+        </slide>
+        </slideshow>
+        """
+    assert deploy_sys._get_node_from_xml(document, 'stagedRepositoryId') == '432'
+    with pytest.raises(SystemExit) as excinfo:
+        deploy_sys._get_node_from_xml(document, 'NotFoundTag')
+    assert excinfo.type == SystemExit
+
+
+def mocked_log_error(*msg_list):
+    """Mock _log_error_and_exit function.
     This function is modified to simply raise an Exception.
     The original will print msg1 & msg2, then call sys.exit(1)."""
+    msg1=msg_list[0]
+    print ("msg1={}".format(msg1))
     if 'Could not connect to URL:' in msg1:
         raise ValueError('connection_error')
     if 'Invalid URL:' in msg1:
         raise ValueError('invalid_url')
     if 'Not valid URL:' in msg1:
         raise ValueError('missing_schema')
+    if "profile with id 'INVALID' does not exist" in msg1:
+        raise ValueError('profile.id.not.exist')
+    if "OTHER create error" in msg1:
+        raise ValueError('other.create.error')
+    if "HTTP method POST is not supported by this URL" in msg1:
+        raise ValueError('post.not.supported')
+    if "Did not find nexus site" in msg1:
+        raise ValueError('site.not.found')
+    if "Failed with status code " in msg1:
+        raise ValueError('other.error.occured')
+    if "Staging repository do not exist." in msg1:
+        raise ValueError('missing.staging.repository')
+    if "Staging repository is already closed." in msg1:
+        raise ValueError('staging.already.closed')
     raise ValueError('fail')
 
 
-def mocked_requests_post(*args, **kwargs):
-    """Mock requests.post function."""
-    class MockResponse:
-        def __init__(self, json_data, status_code):
-            self.json_data = json_data
-            self.status_code = status_code
-            self.text = json_data
-
-        def json(self):
-            return self.json_data
-
-    if 'connection.error.test' in args[0]:
-        raise requests.exceptions.ConnectionError
-    if 'invalid.url.test' in args[0]:
-        raise requests.exceptions.InvalidURL
-    if 'missing.schema.test' in args[0]:
-        raise requests.exceptions.MissingSchema
-    return MockResponse(None, 404)
-
-
-def test_local_request_post(mocker):
-    """Test local_request_post."""
-    mocker.patch('requests.post', side_effect=mocked_requests_post)
+def test__request_post(responses, mocker):
+    """Test _request_post."""
     mocker.patch('lftools.deploy._log_error_and_exit', side_effect=mocked_log_error)
+    xml_doc="""
+        <promoteRequest><data>
+            <stagedRepositoryId>test1-1027</stagedRepositoryId>
+            <description>Close staging repository.</description>
+        </data></promoteRequest>
+        """
+    headers = {'Content-Type': 'application/xml'}
 
-    xml_doc='''
-        <promoteRequest>
-            <data>
-                <stagedRepositoryId>test1-1027</stagedRepositoryId>
-                <description>Close staging repository.</description>
-            </data>
-        </promoteRequest>
-        '''
+    test_url='http://connection.error.test'
+    exception = requests.exceptions.ConnectionError(test_url)
+    responses.add(responses.POST, test_url, body=exception)
     with pytest.raises(ValueError) as excinfo:
-        deploy_sys._request_post('connection.error.test', xml_doc, "{'Content-Type': 'application/xml'}")
+        deploy_sys._request_post(test_url, xml_doc, headers)
     assert 'connection_error' in str(excinfo.value)
+
+    test_url='http://invalid.url.test:8081'
+    exception = requests.exceptions.InvalidURL(test_url)
+    responses.add(responses.POST, test_url, body=exception)
     with pytest.raises(ValueError) as excinfo:
-        deploy_sys._request_post('invalid.url.test:8081nexus', xml_doc, "{'Content-Type': 'application/xml'}")
+        deploy_sys._request_post(test_url, xml_doc, headers)
     assert 'invalid_url' in str(excinfo.value)
+
+    test_url='http://missing.schema.test:8081'
+    exception = requests.exceptions.MissingSchema(test_url)
+    responses.add(responses.POST, test_url, body=exception)
     with pytest.raises(ValueError) as excinfo:
-        deploy_sys._request_post('http:/missing.schema.test:8081nexus', xml_doc, "{'Content-Type': 'application/xml'}")
+        deploy_sys._request_post(test_url, xml_doc, headers)
     assert 'missing_schema' in str(excinfo.value)
+
+
+def test_nexus_stage_repo_close(responses, mocker):
+    """Test nexus_stage_repo_close."""
+    mocker.patch('lftools.deploy._log_error_and_exit', side_effect=mocked_log_error)
+    url='service/local/staging/profiles'
+
+    responses.add(responses.POST, 'http://valid.create.post/{}/{}/finish'.format(url, '93fb68073c18' ),
+                  body=None, status=201)
+    deploy_sys.nexus_stage_repo_close('valid.create.post', '93fb68073c18', 'test1-1027')
+
+    xml_site_not_found = """
+        <html><head><title>404 - Site Not Found</title></head>
+            <body><h1>404 - Site not found</h1></body>
+        </html>
+        """
+    responses.add(responses.POST, 'http://site.not.found/{}/{}/finish'.format(url, 'INVALID'),
+                  body=xml_site_not_found, status=404)
+    with pytest.raises(ValueError) as excinfo:
+         deploy_sys.nexus_stage_repo_close('site.not.found', 'INVALID', 'test1-1027')
+    assert 'site.not.found' in str(excinfo.value)
+
+    xml_missing_staging_repository = """
+        <nexus-error><errors><error>
+            <id>*</id>
+            <msg>Unhandled: Missing staging repository: test1-1</msg>
+        </error></errors></nexus-error>
+        """
+    responses.add(responses.POST, 'http://missing.staging.repository/{}/{}/finish'.format(url, 'INVALID'),
+                  body=xml_missing_staging_repository, status=500)
+    with pytest.raises(ValueError) as excinfo:
+         deploy_sys.nexus_stage_repo_close('missing.staging.repository', 'INVALID', 'test1-1027')
+    assert 'missing.staging.repository' in str(excinfo.value)
+
+    xml_staging_already_closed = """
+        <nexus-error><errors><error>
+            <id>*</id>
+            <msg>Unhandled: Repository: test1-1000 has invalid state: closed</msg>
+        </error></errors></nexus-error>
+        """
+    responses.add(responses.POST, 'http://staging.already.closed/{}/{}/finish'.format(url, 'INVALID'),
+                  body=xml_staging_already_closed, status=500)
+    with pytest.raises(ValueError) as excinfo:
+        deploy_sys.nexus_stage_repo_close('staging.already.closed', 'INVALID',  'test1-1027')
+    assert 'staging.already.closed' in str(excinfo.value)
+
+    xml_other_error_occured = """
+        <html><head><title>303 - See Other</title></head>
+            <body><h1>303 - See Other</h1></body>
+        </html>
+        """
+    responses.add(responses.POST, 'http://other.error.occured/{}/{}/finish'.format(url, 'INVALID'),
+                  body=xml_other_error_occured, status=303)
+    with pytest.raises(ValueError) as excinfo:
+        deploy_sys.nexus_stage_repo_close('other.error.occured', 'INVALID', 'test1-1027')
+    assert 'other.error.occured' in str(excinfo.value)
+
+
+def test_nexus_stage_repo_create(responses, mocker):
+    """Test nexus_stage_repo_create."""
+    mocker.patch('lftools.deploy._log_error_and_exit', side_effect=mocked_log_error)
+    url = 'service/local/staging/profiles'
+
+    xml_created = "<stagedRepositoryId>test1-1030</stagedRepositoryId>"
+    responses.add(responses.POST, 'http://valid.create.post/{}/{}/start'.format(url, '93fb68073c18' ),
+                  body=xml_created, status=201)
+    res = deploy_sys.nexus_stage_repo_create('valid.create.post', '93fb68073c18')
+    assert res == 'test1-1030'
+
+    xml_profile_id_dont_exist = """
+        <nexus-error><errors><error>
+            <id>*</id>
+            <msg>Cannot create Staging Repository, profile with id &apos;INVALID&apos; does not exist.</msg>
+        </error></errors></nexus-error>
+        """
+    responses.add(responses.POST, 'http://profile.id_not.exist/{}/{}/start'.format(url, 'INVALID' ),
+                  body=xml_profile_id_dont_exist, status=404)
+    with pytest.raises(ValueError) as excinfo:
+        res = deploy_sys.nexus_stage_repo_create('profile.id_not.exist', 'INVALID')
+    assert 'profile.id.not.exist' in str(excinfo.value)
+
+    xml_other_create_error = "<nexus-error><errors><error><id>*</id><msg>OTHER create error.</msg></error></errors></nexus-error>"
+    responses.add(responses.POST, 'http://other.create.error/{}/{}/start'.format(url, 'INVALID' ),
+                  body=xml_other_create_error, status=404)
+    with pytest.raises(ValueError) as excinfo:
+        res = deploy_sys.nexus_stage_repo_create('other.create.error', 'INVALID')
+    assert 'other.create.error' in str(excinfo.value)
+
+    xml_other_error_occured = """
+        <html>
+            <head><title>303 - See Other</title></head>
+            <body><h1>303 - See Other</h1></body>
+        </html>
+        """
+    responses.add(responses.POST, 'http://other.error.occured/{}/{}/start'.format(url, 'INVALID' ),
+                  body=xml_other_error_occured, status=303)
+    with pytest.raises(ValueError) as excinfo:
+        res = deploy_sys.nexus_stage_repo_create('other.error.occured', 'INVALID')
+    assert 'other.error.occured' in str(excinfo.value)
+
+    xml_post_not_supported = """
+        <html>
+            <head>
+                <title>405 - HTTP method POST is not supported by this URL</title>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+                <link rel="icon" type="image/png" href="http://192.168.1.26:8081/nexus/favicon.png">
+                <!--[if IE]>
+                <link rel="SHORTCUT ICON" href="http://192.168.1.26:8081/nexus/favicon.ico"/>
+                <![endif]-->
+                <link rel="stylesheet" href="http://192.168.1.26:8081/nexus/static/css/Sonatype-content.css?2.14.10-01" type="text/css" media="screen" title="no title" charset="utf-8">
+            </head>
+            <body>
+                <h1>405 - HTTP method POST is not supported by this URL</h1>
+                <p>HTTP method POST is not supported by this URL</p>
+            </body>
+        </html>
+        """
+    responses.add(responses.POST, 'http://post.not.supported/{}/{}/start'.format(url, 'INVALID' ),
+                  body=xml_post_not_supported, status=405)
+    with pytest.raises(ValueError) as excinfo:
+         res = deploy_sys.nexus_stage_repo_create('post.not.supported', 'INVALID')
+    assert 'post.not.supported' in str(excinfo.value)
+
+    xml_site_not_found = """
+        <html><head><title>404 - Site Not Found</title></head>
+            <body><h1>404 - Site not found</h1></body>
+        </html>
+        """
+    responses.add(responses.POST, 'http://site.not.found/{}/{}/start'.format(url, 'INVALID' ),
+                  body=xml_site_not_found, status=404)
+    with pytest.raises(ValueError) as excinfo:
+        res = deploy_sys.nexus_stage_repo_create('site.not.found', 'INVALID')
+    assert 'site.not.found' in str(excinfo.value)
