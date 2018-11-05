@@ -13,7 +13,6 @@
 __author__ = 'Thanh Ha'
 
 import logging
-import sys
 
 from six.moves import configparser
 from xdg import XDG_CONFIG_HOME
@@ -36,20 +35,15 @@ def get_setting(section, option=None):
     if option:
         try:
             return config.get(section, option)
-        except configparser.NoOptionError:
-            print(section, option)
-            log.error('Config option does not exist.')
-            sys.exit(1)
-        except configparser.NoSectionError:
-            log.error('Config section does not exist.')
-            sys.exit(1)
+        except (configparser.NoOptionError,
+                configparser.NoSectionError) as e:
+            raise e
 
     else:
         try:
             return config.options(section)
-        except configparser.NoSectionError:
-            log.error('Config section does not exist.')
-            sys.exit(1)
+        except configparser.NoSectionError as e:
+            raise e
 
 
 def set_setting(section, option, value):
