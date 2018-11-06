@@ -35,10 +35,12 @@ files = lftools/**.py
 ignore += docs/conf.py
 known_first_party_imports = lftools
 known_third_party_imports =
+    jenkins,
     pytest,
     six,
     shade,
     ruamel.yaml,
+    xdg,
     yaml
 pydocstyle_ignore = D203, D213, D301
 max_line_length = 120
