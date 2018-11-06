@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3382c66_8de027eb",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-06T06:18:18Z",
+      "side": 1,
+      "message": "All 3 tests are essentially the same. Instead of checking SystemExit, do it once and then assert that checks if the 3 messages are printed would be more interesting.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 37
+      },
+      "revId": "7a78f65c094bf67fdd235d7886dc83b6e4906066",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
