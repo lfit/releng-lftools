@@ -1,0 +1,8 @@
+Verified+1: Jenkins CI <releng+lf-jenkins@linuxfoundation.org>
+Code-Review+2: Thanh Ha (zxiiro) <thanh.ha@linuxfoundation.org>
+Code-Review+1: Aric Gardner <agardner@linuxfoundation.org>
+Submitted-by: Eric Ball <eball@linuxfoundation.org>
+Submitted-at: Tue, 06 Nov 2018 21:05:44 +0000
+Reviewed-on: https://gerrit.linuxfoundation.org/infra/12581
+Project: releng/lftools
+Branch: refs/heads/master
