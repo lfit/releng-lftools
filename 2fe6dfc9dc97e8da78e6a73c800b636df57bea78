@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bfa267c9_8ef46710",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-06T04:30:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d26fd8d_74efe722",
+      "range": {
+        "startLine": 36,
+        "startChar": 24,
+        "endLine": 36,
+        "endChar": 44
+      },
+      "revId": "2fe6dfc9dc97e8da78e6a73c800b636df57bea78",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e3c3298_dda37fde",
         "filename": "lftools/deploy.py",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2018-11-05T04:57:13Z",
       "side": 1,
       "message": "in_ prefix seems unnecessary?\n\n url, data, headers",
+      "range": {
+        "startLine": 45,
+        "startChar": 18,
+        "endLine": 45,
+        "endChar": 45
+      },
+      "revId": "2fe6dfc9dc97e8da78e6a73c800b636df57bea78",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "648d3c29_3b6f2d8d",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-06T04:30:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e3c3298_dda37fde",
       "range": {
         "startLine": 45,
         "startChar": 18,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "898c0b87_b8270650",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-06T04:30:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf731c65_1faf38c7",
+      "revId": "2fe6dfc9dc97e8da78e6a73c800b636df57bea78",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8dbe3b39_94682655",
         "filename": "tests/test_deploy.py",
         "patchSetId": 5
@@ -76,6 +142,24 @@
       "writtenOn": "2018-11-05T04:57:13Z",
       "side": 1,
       "message": "Requests is already imported below so move \"import requests\" up to here and call these 3 imports via \"requests.exceptions.ConnectionError.\n\nAlternatively if you want to do from imports. PEP8 recommends against importing many on a single line and instead to do:\n\n from requests.exceptions import ConnectionError\n from requests.exceptions import MissingSchema\n from requests.exceptions import InvalidURL",
+      "revId": "2fe6dfc9dc97e8da78e6a73c800b636df57bea78",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2010f40_a2baab9c",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-06T04:30:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dbe3b39_94682655",
       "revId": "2fe6dfc9dc97e8da78e6a73c800b636df57bea78",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
