@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25e17368_ef8325e4",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-07T05:04:18Z",
+      "side": 1,
+      "message": "Remove this commented out code. it\u0027s not needed.",
+      "revId": "6cc73412a9e516ecdc7a858e26b060720d8abe1d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d93182c5_b51960f5",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-07T05:04:18Z",
+      "side": 1,
+      "message": "Remove the commented out code. Or if they are todo, do todos like this:\n\n # TODO: message about todo",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "6cc73412a9e516ecdc7a858e26b060720d8abe1d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
