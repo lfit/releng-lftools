@@ -14,14 +14,37 @@ import logging
 import os
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 
 import glob2  # Switch to glob when Python < 3.5 support is dropped
 import requests
+from six.moves import urllib
 
 log = logging.getLogger(__name__)
 
+
+def _compress_text(dir):
+    """Compress all text files in directory."""
+    save_dir = os.getcwd()
+    os.chdir(dir)
+
+    compress_types = [
+        '**/*.log',
+        '**/*.txt',
+    ]
+    paths = []
+    for _type in compress_types:
+        search = os.path.join(dir, _type)
+        paths.extend(glob2.glob(search, recursive=True))
+
+    for _file in paths:
+        with open(_file, 'rb') as src, gzip.open('{}.gz'.format(_file), 'wb') as dest:
+            shutil.copyfileobj(src, dest)
+            os.remove(_file)
+
+    os.chdir(save_dir)
 
 def _format_url(url):
     """Ensure url starts with http and trim trailing '/'s."""
@@ -138,20 +161,7 @@ def deploy_archives(nexus_url, nexus_path, workspace, pattern=None):
     log.debug('workspace: {}, work_dir: {}'.format(workspace, work_dir))
 
     copy_archives(workspace, pattern)
-
-    compress_types = [
-        '**/*.log',
-        '**/*.txt',
-    ]
-    paths = []
-    for _type in compress_types:
-        search = os.path.join(work_dir, _type)
-        paths.extend(glob2.glob(search, recursive=True))
-
-    for _file in paths:
-        with open(_file, 'rb') as src, gzip.open('{}.gz'.format(_file), 'wb') as dest:
-            shutil.copyfileobj(src, dest)
-            os.remove(_file)
+    _compress_text(work_dir)
 
     archives_zip = shutil.make_archive(
         '{}/archives'.format(workspace), 'zip')
@@ -168,4 +178,93 @@ def deploy_archives(nexus_url, nexus_path, workspace, pattern=None):
             r.status_code, r.content))
         sys.exit(1)
 
+    shutil.rmtree(work_dir)
+
+
+def deploy_logs(nexus_url, nexus_path, build_url):
+    """Deploy logs to a Nexus site repository named logs.
+
+    Fetches logs and system information and pushes them to Nexus
+    for log archiving.
+    Requirements:
+
+    To use this API a Nexus server must have a site repository configured
+    with the name "logs" as this is a hardcoded path.
+
+    Parameters:
+
+        :nexus_url: URL of Nexus server. Eg: https://nexus.opendaylight.org
+        :nexus_path: Path on nexus logs repo to place the logs. Eg:
+            $SILO/$JENKINS_HOSTNAME/$JOB_NAME/$BUILD_NUMBER
+        :build_url: URL of the Jenkins build. Jenkins typically provides this
+                    via the $BUILD_URL environment variable.
+    """
+    nexus_url = _format_url(nexus_url)
+    work_dir = tempfile.mkdtemp(prefix='lftools-dl.')
+    os.chdir(work_dir)
+    log.debug('work_dir: {}'.format(work_dir))
+
+    build_details = open('_build-details.log', 'w+')
+    build_details.write('build-url: {}'.format(build_url))
+
+    with open('_sys-info.log', 'w+') as sysinfo_log:
+        sys_cmds = []
+
+        log.debug('Platform: {}'.format(sys.platform))
+        if sys.platform == "linux" or sys.platform == "linux2":
+            sys_cmds=[
+                ['uname', '-a'],
+                ['lscpu'],
+                ['nproc'],
+                ['df', '-h'],
+                ['free', '-m'],
+                ['ip', 'addr'],
+                ['sar', '-b', '-r', '-n', 'DEV'],
+                ['sar', '-P', 'ALL'],
+            ]
+
+        for c in sys_cmds:
+            try:
+                output = subprocess.check_output(c).decode('utf-8')
+            except OSError:  # TODO: Switch to FileNotFoundError when Python < 3.5 support is dropped.
+                log.debug('Command not found: {}'.format(c))
+                continue
+
+            output = '---> {}:\n{}\n'.format(' '.join(c), output)
+            sysinfo_log.write(output)
+            log.info(output)
+
+    build_details.close()
+
+    # Magic string used to trim console logs at the appropriate level during wget
+    MAGIC_STRING = "-----END_OF_BUILD-----"
+    log.info(MAGIC_STRING)
+
+    resp = requests.get('{}/consoleText'.format(_format_url(build_url)))
+    with open('console.log', 'w+') as f:
+        f.write(resp.text.split(MAGIC_STRING)[0])
+
+    resp = requests.get('{}/timestamps?time=HH:mm:ss&appendLog'.format(_format_url(build_url)))
+    with open('console-timestamp.log', 'w+') as f:
+        f.write(resp.text.split(MAGIC_STRING)[0])
+
+    _compress_text(work_dir)
+
+    console_zip = tempfile.NamedTemporaryFile(prefix='lftools-dl', delete=True)
+    log.debug('console-zip: {}'.format(console_zip.name))
+    shutil.make_archive(console_zip.name, 'zip', work_dir)
+    log.debug('listdir: {}'.format(os.listdir(work_dir)))
+
+    # TODO: Update to use I58ea1d7703b626f791dcd74e63251c4f3261ca7d once it's available.
+    upload_files = {'upload_file': open('{}.zip'.format(console_zip.name), 'rb')}
+    url = '{}/service/local/repositories/logs/content-compressed/{}'.format(
+        nexus_url, nexus_path)
+    r = requests.post(url, files=upload_files)
+    log.debug('{}: {}'.format(r.status_code, r.text))
+    if r.status_code != 201:
+        log.error('Failed to upload to Nexus with status code {}.\n{}'.format(
+            r.status_code, r.content))
+        sys.exit(1)
+
+    console_zip.close()
     shutil.rmtree(work_dir)

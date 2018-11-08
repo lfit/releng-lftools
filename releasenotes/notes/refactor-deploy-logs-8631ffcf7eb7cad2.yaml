@@ -1,0 +1,9 @@
+---
+features:
+  - |
+    Refactored deploy_logs() function from shell/deploy to pure Python to
+    be more portable with Windows systems.
+deprecations:
+  - |
+    shell/deploy script's deploy_logs() function is now deprecated and will
+    be removed in a future release.
