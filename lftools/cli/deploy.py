@@ -135,11 +135,15 @@ def logs(ctx, nexus_url, nexus_path, build_url):
     for log archiving.
 
     To use this script the Nexus server must have a site repository configured
-    with the name "logs" as this is a hardcoded path. Also this script uses
-    ~/.netrc for it's authentication which must be provided.
+    with the name "logs" as this is a hardcoded path.
     """
-    status = subprocess.call(['deploy', 'logs', nexus_url, nexus_path, build_url])
-    sys.exit(status)
+    try:
+        deploy_sys.deploy_logs(nexus_url, nexus_path, build_url)
+    except HTTPError as e:
+        log.error(str(e))
+        sys.exit(1)
+
+    log.info('Logs upload complete.')
 
 
 @click.command(name='maven-file')

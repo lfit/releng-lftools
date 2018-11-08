@@ -116,6 +116,28 @@ def test_deploy_archive(cli_runner, datafiles, responses):
         obj={})
     assert result.exit_code == 1
 
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_logs(cli_runner, datafiles, responses):
+    """Test deploy_logs() command for expected upload cases."""
+    os.chdir(str(datafiles))
+    workspace_dir = os.path.join(str(datafiles), 'workspace')
+
+    # Test successful upload
+    build_url = 'https://jenkins.example.org/job/builder-check-poms/204'
+    nexus_url = 'https://nexus.example.org/service/local/repositories/logs/content-compressed'
+    responses.add(responses.GET, '{}/consoleText'.format(build_url),
+                  status=201)
+    responses.add(responses.GET, '{}/timestamps?time=HH:mm:ss&appendLog'.format(build_url),
+                  body='This is a console timestamped log.', status=201)
+    responses.add(responses.POST, '{}/test/log/upload'.format(nexus_url), status=201)
+    result = cli_runner.invoke(
+        cli.cli,
+        ['--debug', 'deploy', 'logs', 'https://nexus.example.org', 'test/log/upload', build_url],
+        obj={})
+    assert result.exit_code == 0
+
 def mocked_log_error(msg1=None, msg2=None):
     """Mock local_log_error_and_exit function.
     This function is modified to simply raise an Exception.
