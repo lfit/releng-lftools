@@ -33,6 +33,24 @@
       "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e62aa889_726f7071",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-11-09T18:52:31Z",
+      "side": 1,
+      "message": "Possible relevant to change this to catch an IO Exception since there are file ops going on?",
+      "parentUuid": "bc1f889b_7e0a969a",
+      "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
