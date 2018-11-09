@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9a81d38_5ffa452c",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-11-09T18:26:11Z",
+      "side": 1,
+      "message": "http://docs.python-requests.org/en/latest/user/quickstart/#errors-and-exceptions",
+      "revId": "fdcfe7f071d6e64806445dda087222609c6ff063",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
