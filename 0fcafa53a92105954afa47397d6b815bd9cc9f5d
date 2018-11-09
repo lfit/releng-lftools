@@ -16,6 +16,23 @@
       "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc1f889b_7e0a969a",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-11-09T18:51:05Z",
+      "side": 1,
+      "message": "The potential http error is caught inside the function now correct?",
+      "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
