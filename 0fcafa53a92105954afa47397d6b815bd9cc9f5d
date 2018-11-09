@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8880d24_d9b8c03e",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-11-09T18:48:37Z",
+      "side": 1,
+      "message": "Looks like pattern defaults to None in the func def.",
+      "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
