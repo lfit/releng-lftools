@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa0e25a0_924902fa",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-11-09T18:14:15Z",
+      "side": 1,
+      "message": "Return appropriate success response from deploy_logs function in order to trigger this.  Looks like it logs that regardless of what happens.",
+      "revId": "4e63e86859b19175fbdbde42f57c77b46b2122ae",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
