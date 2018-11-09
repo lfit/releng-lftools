@@ -16,6 +16,24 @@
       "revId": "4e63e86859b19175fbdbde42f57c77b46b2122ae",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f222da4d_c2a58892",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-09T18:16:03Z",
+      "side": 1,
+      "message": "We use sys.exit(1) in the deploy_logs() function so it will never reach this code here if something fails.",
+      "parentUuid": "fa0e25a0_924902fa",
+      "revId": "4e63e86859b19175fbdbde42f57c77b46b2122ae",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
