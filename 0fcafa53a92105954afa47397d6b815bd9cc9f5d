@@ -105,6 +105,69 @@
       "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27384bd4_8dc90d72",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-12T01:24:17Z",
+      "side": 1,
+      "message": "What if wrong permission? Overkill?",
+      "range": {
+        "startLine": 110,
+        "startChar": 12,
+        "endLine": 110,
+        "endChar": 18
+      },
+      "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed69838d_b4b9abb6",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-12T01:24:17Z",
+      "side": 1,
+      "message": "Any exceptions possible? Wrong permission?",
+      "range": {
+        "startLine": 154,
+        "startChar": 15,
+        "endLine": 154,
+        "endChar": 21
+      },
+      "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "011d61ae_aa9e936e",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-12T01:24:17Z",
+      "side": 1,
+      "message": "Test case for missing directory for destination?",
+      "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
