@@ -131,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "703c9432_79826285",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-12T01:38:58Z",
+      "side": 1,
+      "message": "shutil should already handle that and throw a stack trace. We don\u0027t really need to handle it again unless we want to additionally do something with the IOError that shutil will raise.",
+      "parentUuid": "27384bd4_8dc90d72",
+      "range": {
+        "startLine": 110,
+        "startChar": 12,
+        "endLine": 110,
+        "endChar": 18
+      },
+      "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed69838d_b4b9abb6",
         "filename": "lftools/deploy.py",
         "patchSetId": 10
@@ -154,6 +178,30 @@
     },
     {
       "key": {
+        "uuid": "bc1ed4f4_a7bfa034",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-12T01:38:58Z",
+      "side": 1,
+      "message": "These are files that \"we\" created. Within the space of this program we shouldn\u0027t be expecting permissions errors IMO. Unless another piece of software hijacked our process. Plus os.remove should throw an IOError already. We shouldn\u0027t need to try/except this unless we want to do something more with the IOError.",
+      "parentUuid": "ed69838d_b4b9abb6",
+      "range": {
+        "startLine": 154,
+        "startChar": 15,
+        "endLine": 154,
+        "endChar": 21
+      },
+      "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "011d61ae_aa9e936e",
         "filename": "tests/test_deploy.py",
         "patchSetId": 10
@@ -165,6 +213,24 @@
       "writtenOn": "2018-11-12T01:24:17Z",
       "side": 1,
       "message": "Test case for missing directory for destination?",
+      "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "722482b0_5da96c25",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-12T01:38:58Z",
+      "side": 1,
+      "message": "Destination directory is created by us via the `work_dir \u003d tempfile` call in the function. tempfile should already handle this case as it\u0027s supposed to be guaranteed to return a usable directory.",
+      "parentUuid": "011d61ae_aa9e936e",
       "revId": "0fcafa53a92105954afa47397d6b815bd9cc9f5d",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
