@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "17672d0a_42bf13ee",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-12T01:44:15Z",
+      "side": 1,
+      "message": "No because work_dir \u003d tempfile.mkdtemp() is guaranteed to return us a usable directory in the most secure way possible.",
+      "parentUuid": "cb929819_4e80e9b9",
+      "range": {
+        "startLine": 207,
+        "startChar": 26,
+        "endLine": 207,
+        "endChar": 32
+      },
+      "revId": "dfab0ddcb3378c9fcaa21d2757babab4999ebf3e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da86cb2d_d527ba09",
         "filename": "lftools/deploy.py",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2018-11-12T01:29:34Z",
       "side": 1,
       "message": "could this fail?",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 40
+      },
+      "revId": "dfab0ddcb3378c9fcaa21d2757babab4999ebf3e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "567e9da6_de9d4c25",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-12T01:44:15Z",
+      "side": 1,
+      "message": "No because work_dir \u003d tempfile.mkdtemp() is guaranteed to return us a usable directory in the most secure way possible.",
+      "parentUuid": "da86cb2d_d527ba09",
       "range": {
         "startLine": 244,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c71b6097_ebf23f84",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-12T01:44:15Z",
+      "side": 1,
+      "message": "No because work_dir \u003d tempfile.mkdtemp() is guaranteed to return us a usable directory in the most secure way possible.",
+      "parentUuid": "4d00da77_ad47a127",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 50
+      },
+      "revId": "dfab0ddcb3378c9fcaa21d2757babab4999ebf3e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02945267_fec83a2a",
         "filename": "tests/test_deploy.py",
         "patchSetId": 7
@@ -82,6 +154,24 @@
       "writtenOn": "2018-11-12T01:29:34Z",
       "side": 1,
       "message": "Do we need one or more failed uploads?",
+      "revId": "dfab0ddcb3378c9fcaa21d2757babab4999ebf3e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c146cb6_994ba2c0",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-12T01:44:15Z",
+      "side": 1,
+      "message": "I\u0027m depending on this to be covered by I58ea1d7703b626f791dcd74e63251c4f3261ca7d which hasn\u0027t been merged yet.\n\nThe upload function from that should cover upload failure cases. and the log and archive upload functions should be rewritten to use it.\n\nThe upload functionality in these 2 patches are temporary awaiting the other patch\u0027s completion.",
+      "parentUuid": "02945267_fec83a2a",
       "revId": "dfab0ddcb3378c9fcaa21d2757babab4999ebf3e",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
