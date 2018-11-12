@@ -1,0 +1,7 @@
+Code-Review+2: Thanh Ha (zxiiro) <thanh.ha@linuxfoundation.org>
+Verified+1: Jenkins CI <releng+lf-jenkins@linuxfoundation.org>
+Submitted-by: Bengt Thuree <bthuree@linuxfoundation.org>
+Submitted-at: Mon, 12 Nov 2018 10:42:12 +0000
+Reviewed-on: https://gerrit.linuxfoundation.org/infra/13236
+Project: releng/lftools
+Branch: refs/heads/master
