@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c90685a7_dc88950b",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-12T06:10:06Z",
+      "side": 1,
+      "message": "remove this please.\n\nYou should not have to set this in code. We have a mechanism via lftools to enable debug mode already which is simply on the CLI to run `export DEBUG\u003dtrue` before running an lftools command.",
+      "revId": "ed236fc97c75ab307faa64825d53442bfe6f8230",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
