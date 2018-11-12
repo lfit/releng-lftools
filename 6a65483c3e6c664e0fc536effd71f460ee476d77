@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cf93992_7bb1833f",
+        "filename": "releasenotes/notes/refactor-deploy-stage-create-close-7b3fcc911023a318.yaml",
+        "patchSetId": 25
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-12T09:07:15Z",
+      "side": 1,
+      "message": "This file needs to be modified to describe the relevant release notes.",
+      "revId": "6a65483c3e6c664e0fc536effd71f460ee476d77",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
