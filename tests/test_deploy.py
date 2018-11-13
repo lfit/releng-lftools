@@ -542,3 +542,75 @@ def test__upload_maven_file_to_nexus(responses, mocker):
     with pytest.raises(requests.HTTPError) as excinfo:
         resp = deploy_sys.upload_maven_file_to_nexus(test_url, nexus_repo_id, group_id, artifact_id, version, packaging, zip_file)
     assert 'Something went wrong' in str(excinfo.value)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_nexus1(datafiles, responses):
+    """Test deploy_nexus with no snapshot.
+
+    This test will send a directory of files to deploy_nexus, which should
+    call requests.post once for every valid (=4) file.
+    There are three files that should not be uploaded.
+    """
+    os.chdir(str(datafiles))
+    nexus_url = 'http://successfull.nexus.deploy/nexus/content/repositories/releases'
+    deploy_dir = 'deploy_nexus'
+
+    # Test success - No Snapshot
+    test_files = ['file1', 'file2', 'file3', 'test_dir/file4']
+    for file in test_files:
+        success_upload_url = '{}/{}'.format(nexus_url, file)
+        responses.add(responses.POST, success_upload_url,
+                      status=201)
+    deploy_sys.deploy_nexus(nexus_url, deploy_dir)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_nexus2(datafiles, responses):
+    """Test deploy_nexus with snapshot.
+
+    This test will send a directory of files to deploy_nexus, which should
+    call requests.post once for every valid (=3) file.
+    There are two files that should not be uploaded.
+    """
+    os.chdir(str(datafiles))
+    nexus_url = 'http://successfull.nexus.deploy/nexus/content/repositories/releases'
+    deploy_dir = 'deploy_nexus'
+
+    # Test success - Snapshot
+    snapshot = True
+    test_files = ['file1', 'file2', 'file3', 'file-maven-metadata-7', 'test_dir/file4']
+    for file in test_files:
+        success_upload_url = '{}/{}'.format(nexus_url, file)
+        responses.add(responses.POST, success_upload_url,
+                      status=201)
+    deploy_sys.deploy_nexus(nexus_url, deploy_dir, snapshot)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_nexus3(datafiles, responses):
+    """Test deploy_nexus with no snapshot.
+
+    This test will send a directory of files to deploy_nexus, which should
+    call requests.post once for every valid (=3) file.
+    There are six files that should not be uploaded, and three that should.
+    """
+    os.chdir(str(datafiles))
+    nexus_url = 'http://successfull.nexus.deploy/nexus/content/repositories/releases'
+    deploy_dir = 'deploy_nexus2'
+
+    # Test success - No Snapshot
+    test_files = ['4.0.3-SNAPSHOT/odlparent-lite-4.0.3-20181120.113136-1.pom',
+                  '4.0.3-SNAPSHOT/odlparent-lite-4.0.3-20181120.113136-1.pom.sha1',
+                  '4.0.3-SNAPSHOT/odlparent-lite-4.0.3-20181120.113136-1.pom.md5']
+    for file in test_files:
+        success_upload_url = '{}/{}'.format(nexus_url, file)
+        responses.add(responses.POST, success_upload_url,
+                      status=201)
+    deploy_sys.deploy_nexus(nexus_url, deploy_dir)
