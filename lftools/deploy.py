@@ -318,7 +318,7 @@ def nexus_stage_repo_create(nexus_url, staging_profile_id):
     Returns:             staging_repo_id
 
     Sample:
-    lftools deploy nexus-stage-repo-create 192.168.1.26:8081/nexsus/ 93fb68073c18
+    lftools deploy nexus-stage-repo-create 192.168.1.26:8081/nexus/ 93fb68073c18
     """
     nexus_url = '{0}/service/local/staging/profiles/{1}/start'.format(
         _format_url(nexus_url),
@@ -408,3 +408,63 @@ def nexus_stage_repo_close(nexus_url, staging_profile_id, staging_repo_id):
 
     if not resp.status_code == 201:
         _log_error_and_exit("Failed with status code {}".format(resp.status_code), resp.text)
+
+
+def upload_to_nexus(nexus_repo_url, upload_file):
+    log.info('Uploading file : {}'.format(file))
+    log.info('Uploading url  : {}'.format(nexus_repo_url))
+
+    _upload_file = open(upload_file, 'rb')
+
+    files = {'file': _upload_file}
+    resp = requests.post(url, files=files)
+    log.debug('{}: {}'.format(resp.status_code, resp.text))
+
+    if resp.status_code == 400:
+        raise requests.HTTPError("Repository is read only: {}".format(nexus_repo))
+    elif resp.status_code == 404:
+        raise requests.HTTPError("Did not find repository with ID: {}".format(nexus_repo))
+
+    if not str(resp.status_code).startswith('20'):
+        raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
+            resp.status_code, resp.text, upload_file))
+    if not resp.status_code == 201:
+        raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
+            resp.status_code, resp.text, upload_file))
+
+
+
+def deploy_nexus(nexus_repo_url, deploy_dir):
+    """Deploy Maven artifacts to Nexus.
+
+    Parameters:
+    nexus_repo_url:     URL to Nexus server. (Ex: https://nexus.example.org)
+    deploy_dir:         The directory to deploy. (Ex: /tmp/m2repo)
+
+    # One purpose of this is so that we can get around the problematic
+    # deploy-at-end configuration with upstream Maven.
+    # https://issues.apache.org/jira/browse/MDEPLOY-193
+
+    Sample:
+
+    """
+    # TODO: How to set snapshot?
+    snapshot=False
+    previous_dir=os.getcwd()
+    os.chdir(deploy_dir)
+    log.debug('Current dir is deploy_dir: {}'.format(deploy_dir))
+    file_list=[]
+    files=glob2.glob('./**/*')
+    for file in files:
+        if os.path.isfile(file):
+            if not file.endswith("_remote.repositories") and not file.endswith("resolver-status.properties"):
+                if snapshot:
+                    file_list.add(os.path.join(deploy_dir_root, file))
+                else:
+                    if not "maven-metadata" in file:
+                        file_list.add(os.path.join(root, file))
+    # TODO: How to do parallel upload?
+    for file in file_list:
+        log.debug('Uploading to nexus : {}'.format(file))
+        upload_to_nexus(nexus_repo_url, file)
+    os.chdir(previous_dir)
