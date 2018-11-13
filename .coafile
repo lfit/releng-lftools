@@ -35,6 +35,7 @@ files = lftools/**.py
 ignore += docs/conf.py
 known_first_party_imports = lftools
 known_third_party_imports =
+    defusedxml,
     jenkins,
     pytest,
     six,
