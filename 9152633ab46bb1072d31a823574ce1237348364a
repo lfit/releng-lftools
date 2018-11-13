@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8742a2d_2f9c58fe",
+        "filename": "deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-13T16:49:36Z",
+      "side": 1,
+      "message": "This file shouldn\u0027t be created as a new file... I think you meant to modify lftools/deploy.py and not create a new \"deploy.py\" at the root of the repo.",
+      "revId": "9152633ab46bb1072d31a823574ce1237348364a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
