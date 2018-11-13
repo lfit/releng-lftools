@@ -464,3 +464,16 @@ def test_nexus_stage_repo_create(responses, mocker):
     with pytest.raises(ValueError) as excinfo:
         res = deploy_sys.nexus_stage_repo_create('site.not.found', 'INVALID')
     assert 'site.not.found' in str(excinfo.value)
+
+
+def test__request_post_file(responses, mocker):
+    """Test _request_post_file."""
+
+    zip_file='zip-test-files/test.zip'
+    resp = {}
+
+    test_url='http://not.201.code:8081'
+    responses.add(responses.POST, test_url, body=None, status=204)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys.upload_to_nexus(test_url, zip_file)
+    assert 'Failed to upload to Nexus with status code' in str(excinfo.value)
