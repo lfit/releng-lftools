@@ -241,15 +241,13 @@ def nexus(ctx, nexus_repo_url, deploy_dir, snapshot):
 
         https://nexus.example.org/content/repositories/release
     """
-    params = ['deploy', 'nexus']
-
-    if snapshot:
-        params.extend(["-s"])
-
-    params.extend([nexus_repo_url, deploy_dir])
-
-    status = subprocess.call(params)
-    sys.exit(status)
+    log.debug("nexus_repo_url={}, deploy_dir={}, snapshot={}".format(nexus_repo_url, deploy_dir, snapshot))
+    try:
+        deploy_sys.deploy_nexus(nexus_repo_url, deploy_dir, snapshot)
+    except IOError as e:
+        deploy_sys._log_error_and_exit(str(e))
+    except HTTPError as e:
+        deploy_sys._log_error_and_exit(str(e))
 
 
 @click.command(name='nexus-stage')
