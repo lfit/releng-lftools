@@ -13,6 +13,8 @@
 import errno
 import gzip
 import logging
+import multiprocessing
+from multiprocessing.dummy import Pool as ThreadPool
 import os
 import re
 import shutil
@@ -352,7 +354,7 @@ def nexus_stage_repo_create(nexus_url, staging_profile_id):
     Returns:             staging_repo_id
 
     Sample:
-    lftools deploy nexus-stage-repo-create 192.168.1.26:8081/nexsus/ 93fb68073c18
+    lftools deploy nexus-stage-repo-create 192.168.1.26:8081/nexus/ 93fb68073c18
     """
     nexus_url = '{0}/service/local/staging/profiles/{1}/start'.format(
         _format_url(nexus_url),
@@ -488,3 +490,48 @@ def upload_maven_file_to_nexus(nexus_url, nexus_repo_id,
     if re.search('nexus-error', resp.text):
         error_msg = _get_node_from_xml(resp.text, 'msg')
         raise requests.HTTPError("Nexus Error: {}".format(error_msg))
+
+
+def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
+    """Deploy Maven artifacts to Nexus.
+
+    Parameters:
+        nexus_repo_url: URL to Nexus server. (Ex: https://nexus.example.org)
+        deploy_dir:     The directory to deploy. (Ex: /tmp/m2repo)
+
+    One purpose of this is so that we can get around the problematic
+    deploy-at-end configuration with upstream Maven.
+    https://issues.apache.org/jira/browse/MDEPLOY-193
+    Sample:
+        lftools deploy nexus \
+            http://192.168.1.26:8081/nexus/content/repositories/releases \
+            tests/fixtures/deploy/zip-test-files
+    """
+    def _deploy_nexus_upload(file):
+        """Fix file path, and call _request_post_file."""
+        nexus_url_with_file = '{}/{}'.format(_format_url(nexus_repo_url), file)
+        log.debug('Uploading {} to nexus : {}'.format(file, nexus_url_with_file))
+        _request_post_file(nexus_url_with_file, file)
+
+    file_list = []
+
+    previous_dir = os.getcwd()
+    os.chdir(deploy_dir)
+    log.debug('Current dir is deploy_dir: {}'.format(deploy_dir))
+    log.info('Uploading url  : {}'.format(nexus_repo_url))
+    files = glob2.glob('**/*')
+    for file in files:
+        if os.path.isfile(file):
+            if not file.endswith("_remote.repositories") and not file.endswith("resolver-status.properties"):
+                if snapshot:
+                    file_list.append(file)
+                else:
+                    if not "maven-metadata" in file:
+                        file_list.append(file)
+    # Perform parallel upload
+    pool = ThreadPool(multiprocessing.cpu_count())
+    pool.map(_deploy_nexus_upload, file_list)
+    pool.close()
+    pool.join()
+
+    os.chdir(previous_dir)
