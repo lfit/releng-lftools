@@ -464,3 +464,51 @@ def test_nexus_stage_repo_create(responses, mocker):
     with pytest.raises(ValueError) as excinfo:
         res = deploy_sys.nexus_stage_repo_create('site.not.found', 'INVALID')
     assert 'site.not.found' in str(excinfo.value)
+
+
+def test__upload_to_nexus(responses, mocker):
+    """Test upload_to_nexus."""
+
+    zip_file='zip-test-files/test.zip'
+    resp = {}
+
+    test_url='http://not.201.code:8081'
+    responses.add(responses.POST, test_url, body=None, status=204)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys.upload_to_nexus(test_url, zip_file)
+    assert 'Failed to upload to Nexus with status code' in str(excinfo.value)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_nexus1(datafiles, responses):
+    os.chdir(str(datafiles))
+    nexus_url = 'http://successfull.nexus.deploy/nexus/content/repositories/releases'
+    deploy_dir = 'deploy_nexus'
+
+    # Test success - No Snapshot
+    test_files = ['file1', 'file2', 'file3', 'test_dir/file4']
+    for file in test_files:
+        success_upload_url = '{}/{}'.format(nexus_url, file)
+        responses.add(responses.POST, success_upload_url,
+                      status=201)
+    deploy_sys.deploy_nexus(nexus_url, deploy_dir)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_nexus2(datafiles, responses):
+    os.chdir(str(datafiles))
+    nexus_url = 'http://successfull.nexus.deploy/nexus/content/repositories/releases'
+    deploy_dir = 'deploy_nexus'
+
+    # Test success - Snapshot
+    snapshot = True
+    test_files = ['file1', 'file2', 'file3', 'file-maven-metadata-7', 'test_dir/file4']
+    for file in test_files:
+        success_upload_url = '{}/{}'.format(nexus_url, file)
+        responses.add(responses.POST, success_upload_url,
+                      status=201)
+    deploy_sys.deploy_nexus(nexus_url, deploy_dir, snapshot)
