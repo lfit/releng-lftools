@@ -13,6 +13,8 @@
 import errno
 import gzip
 import logging
+import multiprocessing
+from multiprocessing.dummy import Pool as ThreadPool
 import os
 import re
 import shutil
@@ -354,7 +356,7 @@ def nexus_stage_repo_create(nexus_url, staging_profile_id):
     Returns:             staging_repo_id
 
     Sample:
-    lftools deploy nexus-stage-repo-create 192.168.1.26:8081/nexsus/ 93fb68073c18
+    lftools deploy nexus-stage-repo-create 192.168.1.26:8081/nexus/ 93fb68073c18
     """
     nexus_url = '{0}/service/local/staging/profiles/{1}/start'.format(
         _format_url(nexus_url),
@@ -444,3 +446,63 @@ def nexus_stage_repo_close(nexus_url, staging_profile_id, staging_repo_id):
 
     if not resp.status_code == 201:
         _log_error_and_exit("Failed with status code {}".format(resp.status_code), resp.text)
+
+
+def upload_to_nexus(nexus_repo_url, upload_file):
+    """Upload file to Nexus.
+
+    If responce is not 201, Raise an HTTPError Exception
+    """
+    log.info('Uploading file : {}'.format(upload_file))
+    resp = _request_post_file(nexus_repo_url, upload_file)
+    log.debug('{}: {}'.format(resp.status_code, resp.text))
+
+    if not resp.status_code == 201:
+        raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
+            resp.status_code, resp.text, upload_file))
+
+
+def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
+    """Deploy Maven artifacts to Nexus.
+
+    Parameters:
+    nexus_repo_url:     URL to Nexus server. (Ex: https://nexus.example.org)
+    deploy_dir:         The directory to deploy. (Ex: /tmp/m2repo)
+
+    # One purpose of this is so that we can get around the problematic
+    # deploy-at-end configuration with upstream Maven.Sorry,
+    # https://issues.apache.org/jira/browse/MDEPLOY-193
+
+    Sample:
+        lftools deploy nexus \
+            http://192.168.1.26:8081/nexus/content/repositories/releases \
+            tests/fixtures/deploy/zip-test-files
+    """
+    def _deploy_nexus_upload(file):
+        """Fix file path, and call upload_to_nexus."""
+        nexus_url_with_file = '{}/{}'.format(nexus_repo_url, file)
+        log.debug('Uploading {} to nexus : {}'.format(file, nexus_url_with_file))
+        upload_to_nexus(nexus_url_with_file, file)
+
+    file_list = []
+    pool = ThreadPool(multiprocessing.cpu_count())
+
+    previous_dir = os.getcwd()
+    os.chdir(deploy_dir)
+    log.debug('Current dir is deploy_dir: {}'.format(deploy_dir))
+    log.info('Uploading url  : {}'.format(nexus_repo_url))
+    files = glob2.glob('**/*')
+    for file in files:
+        if os.path.isfile(file):
+            if not file.endswith("_remote.repositories") and not file.endswith("resolver-status.properties"):
+                if snapshot:
+                    file_list.append(file)
+                else:
+                    if not "maven-metadata" in file:
+                        file_list.append(file)
+    # Perform parallel upload
+    pool.map(_deploy_nexus_upload, file_list)
+    pool.close()
+    pool.join()
+
+    os.chdir(previous_dir)
