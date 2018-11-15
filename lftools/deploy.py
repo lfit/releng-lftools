@@ -10,6 +10,7 @@
 ##############################################################################
 """Library of functions for deploying artifacts to Nexus."""
 
+import errno
 import gzip
 import logging
 import os
@@ -82,6 +83,41 @@ def _request_post(url, data, headers):
     except requests.exceptions.InvalidURL:
         log.debug("in _request_post. InvalidURL")
         _log_error_and_exit("Invalid URL: {}".format(url))
+    return resp
+
+
+def _request_post_file(url, file_to_upload):
+    """Execute a request post, return the resp."""
+    resp = {}
+    try:
+        upload_file = open(file_to_upload, 'rb')
+    except FileNotFoundError:
+        raise FileNotFoundError(
+          errno.ENOENT, os.strerror(errno.ENOENT), file_to_upload)
+
+    files = {'file': upload_file}
+    try:
+        resp = requests.post(url, files=files)
+    except requests.exceptions.MissingSchema:
+        raise requests.HTTPError("Not valid URL: {}".format(url))
+    except requests.exceptions.ConnectionError:
+        raise requests.HTTPError("Could not connect to URL: {}".format(url))
+    except requests.exceptions.InvalidURL:
+        raise requests.HTTPError("Invalid URL: {}".format(url))
+
+    if resp.status_code == 400:
+        raise requests.HTTPError("Repository is read only")
+    elif resp.status_code == 404:
+        raise requests.HTTPError("Did not find repository.")
+
+    if not str(resp.status_code).startswith('20'):
+        if zipfile.is_zipfile(file_to_upload):
+            raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
+                resp.status_code, resp.text, zipfile.ZipFile(file_to_upload).infolist()))
+        else:
+            raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}\{}".format(
+                resp.status_code, resp.text, file_to_upload))
+
     return resp
 
 
@@ -284,6 +320,13 @@ def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
                       Maven Ex: org/opendaylight/odlparent
                       Site Ex: org.opendaylight.odlparent
         zip_file:     The zip to deploy. (Ex: /tmp/artifacts.zip)
+
+    Sample:
+    lftools deploy nexus-zip \
+        192.168.1.26:8081/nexus \
+        snapshots \
+        tst_path \
+        tests/fixtures/deploy/zip-test-files/test.zip
     """
     url = '{}/service/local/repositories/{}/content-compressed/{}'.format(
         _format_url(nexus_url),
