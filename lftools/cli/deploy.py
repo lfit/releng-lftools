@@ -13,13 +13,13 @@ __author__ = 'Thanh Ha'
 
 
 import logging
-import subprocess
 import sys
 
 import click
 from requests.exceptions import HTTPError
 
 import lftools.deploy as deploy_sys
+from lftools.nexus import cmd as nexuscmd
 
 log = logging.getLogger(__name__)
 
@@ -148,15 +148,6 @@ def logs(ctx, nexus_url, nexus_path, build_url):
 @click.argument('nexus-url', envvar='NEXUS_URL')
 @click.argument('repo-id', envvar='REPO_ID')
 @click.argument('file-name', envvar='FILE_NAME')
-# Maven Config
-@click.option('-b', '--maven-bin', envvar='MAVEN_BIN',
-              help='Path of maven binary.')
-@click.option('-gs', '--global-settings', envvar='GLOBAL_SETTINGS_FILE',
-              help='Global settings file.')
-@click.option('-s', '--settings', envvar='SETTINGS_FILE',
-              help='Settings file.')
-@click.option('-p', '--maven-params',
-              help='Pass Maven commandline options to the mvn command.')
 # Maven Artifact GAV
 @click.option('-a', '--artifact-id',
               help='Maven Artifact ID.')
@@ -166,61 +157,30 @@ def logs(ctx, nexus_url, nexus_path, build_url):
               help='Pom file to extract GAV information from.')
 @click.option('-g', '--group-id',
               help='Maven Group ID')
+@click.option('-p', '--packaging',
+              help='File packaging type.')
 @click.option('-v', '--version',
               help='Maven artifact version.')
 @click.pass_context
 def maven_file(
-    # Maven Config
     ctx, nexus_url, repo_id, file_name,
-    maven_bin, global_settings, settings,
-    maven_params,
     # Maven GAV
-    artifact_id, group_id, classifier, version,
+    artifact_id, group_id, classifier, packaging, version,
         pom_file):
     """Deploy a file to a Nexus maven2 repository.
 
-    As this script uses mvn to deploy. The server configuration should be
-    configured in your local settings.xml. By default the script uses the
-    mvn default "~/.m2/settings.xml" for the configuration but this can be
-    overrided in the following order:
-
-        \b
-        1. Passed through CLI option "-s" ("-gs" for global-settings)
-        2. Environment variable "$SETTINGS_FILE" ("$GLOBAL_SETTINGS_FILE" for global-settings)
-        3. Maven default "~/.m2/settings.xml".
+    Uses the local .netrc file for authorization.
 
     If pom-file is passed in via the "-f" option then the Maven GAV parameters
     are not necessary. pom-file setting overrides the Maven GAV parameters.
     """
-    params = ['deploy', 'maven-file']
-
-    # Maven Configuration
-    if maven_bin:
-        params.extend(["-b", maven_bin])
-    if global_settings:
-        params.extend(["-l", global_settings])
-    if settings:
-        params.extend(["-s", settings])
-    if maven_params:
-        params.extend(["-p", maven_params])
-
-    # Maven Artifact GAV
-    if artifact_id:
-        params.extend(["-a", artifact_id])
-    if classifier:
-        params.extend(["-c", classifier])
-    if group_id:
-        params.extend(["-g", group_id])
-    if pom_file:
-        params.extend(["-f", pom_file])
-    if version:
-        params.extend(["-v", version])
-
-    # Set required variables last as getopts get's processed first.
-    params.extend([nexus_url, repo_id, file_name])
-
-    status = subprocess.call(params)
-    sys.exit(status)
+    try:
+        nexuscmd.deploy_maven_file(nexus_url, repo_id, file_name, pom_file,
+                                   group_id, artifact_id, packaging, version,
+                                   classifier)
+    except HTTPError as e:
+        log.error(str(e))
+        sys.exit(1)
 
 
 @click.command()

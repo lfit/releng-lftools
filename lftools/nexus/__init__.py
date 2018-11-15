@@ -36,9 +36,9 @@ class Nexus:
         self.baseurl = baseurl
         self.set_full_baseurl()
         if self.baseurl.find("local") < 0:
-            self.version = 2
-        else:
             self.version = 3
+        else:
+            self.version = 2
 
         if username and password:
             self.add_credentials(username, password)

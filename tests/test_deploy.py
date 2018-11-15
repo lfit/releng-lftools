@@ -634,3 +634,41 @@ def test_nexus_deploy_stage(datafiles, responses):
 
     #Execute test, should not return anything for successful run.
     deploy_sys.deploy_nexus_stage (url, staging_profile_id, deploy_dir)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_maven_file(cli_runner, datafiles, responses):
+    """Test deploy_maven_file() command for expected upload cases."""
+    os.chdir(str(datafiles))
+    test_file = os.path.join(str(datafiles), 'm2repo', '4.0.3-SNAPSHOT',
+        'odlparent-lite-4.0.3-20181120.113136-1.pom')
+
+    # Prepare response for Nexus initialization
+    responses.add(responses.GET,
+                  "https://nexus.example.org/service/local/repo_targets",
+                  json=None, status=200)
+    # Test successful upload
+    url = 'https://nexus.example.org/service/local/artifact/maven/content'
+    responses.add(responses.POST, "{}".format(url),
+                  json=None, status=201)
+    result = cli_runner.invoke(
+        cli.cli,
+        ["--debug", "deploy", "maven-file", "https://nexus.example.org",
+         "releases", test_file],
+        obj={})
+    assert result.exit_code == 0
+
+    # Test failed upload
+    responses.add(responses.GET,
+                  "https://nexus-fail.example.org/service/local/repo_targets",
+                  json=None, status=200)
+    url = 'https://nexus-fail.example.org/service/local/artifact/maven/content'
+    responses.add(responses.POST, "{}".format(url), status=404)
+    result = cli_runner.invoke(
+        cli.cli,
+        ["--debug", "deploy", "maven-file", "https://nexus-fail.example.org",
+         "releases", test_file],
+        obj={})
+    assert result.exit_code == 1
