@@ -544,6 +544,37 @@ def test__upload_maven_file_to_nexus(responses, mocker):
     assert 'Something went wrong' in str(excinfo.value)
 
 
+def test_deploy_maven_file(responses, mocker):
+    """Test deploy_maven_file."""
+
+    zip_file='zip-test-files/test.tar.xz'
+
+    nexus_repo_id='testing'
+    group_id='com5.test'
+    artifact_id='ArtId2'
+    version='1.2.7'
+    packaging='tar.xz'
+    classified=None
+
+    resp = {}
+
+    test_url='http://all.ok.upload'
+    responses.add(responses.POST, '{}/{}'.format(test_url, common_urlpart), body=None, status=201)
+    resp = deploy_sys.upload_maven_file_to_nexus(test_url, nexus_repo_id, group_id, artifact_id, version, packaging, zip_file)
+
+    xml_other_error = """
+        <nexus-error><errors><error>
+            <id>*</id>
+            <msg>Something went wrong.</msg>
+        </error></errors></nexus-error>
+        """
+    test_url='http://something.went.wrong:8081'
+    responses.add(responses.POST, '{}/{}'.format(test_url, common_urlpart), body=xml_other_error, status=405)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys.upload_maven_file_to_nexus(test_url, nexus_repo_id, group_id, artifact_id, version, packaging, zip_file)
+    assert 'Something went wrong' in str(excinfo.value)
+
+
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, 'deploy'),
     )
@@ -634,3 +665,38 @@ def test_nexus_deploy_stage(datafiles, responses):
 
     #Execute test, should not return anything for successful run.
     deploy_sys.deploy_nexus_stage (url, staging_profile_id, deploy_dir)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_maven_file(cli_runner, datafiles, responses):
+    """Test deploy_maven_file() command for expected upload cases."""
+    os.chdir(str(datafiles))
+    test_file = os.path.join(str(datafiles),
+                             'features-test/2.0.5/features-test-2.0.5.jar')
+
+    # Prepare response for Nexus initialization
+    responses.add(responses.GET,
+                  "https://nexus.example.org/service/local/repo_targets",
+                  json=None, status=200)
+    # Test successful upload
+    url = 'https://nexus.example.org/service/local/artifact/maven/content'
+    responses.add(responses.POST, "{}".format(url),
+                  json=None, status=201)
+    result = cli_runner.invoke(
+        cli.cli,
+        ["--debug", "deploy", "maven-file", "https://nexus.example.org",
+         "releases", test_file],
+        obj={})
+    assert result.exit_code == 0
+
+    # Test failed upload
+    url = 'https://nexusfail.example.org/service/local/artifact/maven/content'
+    responses.add(responses.POST, "{}".format(url), status=404)
+    result = cli_runner.invoke(
+        cli.cli,
+        ["--debug", "deploy", "maven-file", "https://nexusfail.example.org",
+        "releases", test_file],
+        obj={})
+    assert result.exit_code == 1

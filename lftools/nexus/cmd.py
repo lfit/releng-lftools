@@ -14,6 +14,7 @@ import csv
 import logging
 import sys
 
+import requests
 import yaml
 
 from lftools import config
@@ -39,8 +40,8 @@ def get_credentials(settings_file, url=None):
         elif set(['nexus', 'user', 'password']).issubset(settings):
             return settings
     elif url:
-        user = config.get_setting("global", "username")
-        password = config.get_setting("global", "password")
+        user = config.get_setting("nexus", "username")
+        password = config.get_setting("nexus", "password")
         return {"nexus": url, "user": user, "password": password}
     log.error('Please define a settings.yaml file, or include a url if using '
               + 'lftools.ini')
@@ -271,3 +272,79 @@ def delete_images(settings_file, url, images):
 
     for image in images:
         _nexus.delete_image(image)
+
+
+def deploy_maven_file(nexus_url, nexus_repo_id, file_name, pom_file="",
+                      group_id="", artifact_id="", packaging="", version="",
+                      classifier=""):
+    """Deploy a file to a Nexus maven2 repository.
+
+    :arg str nexus_url: URL of target Nexus server.
+    :arg str nexus_repo_id: Name of target Nexus repo.
+    :arg str file_name: Path to file that will be uploaded to Nexus.
+    :arg str pom_file: Optional path to POM file containing package info.
+    :arg str group_id: The artifact's groupId. Necessary if no pom is provided.
+    :arg str artifact_id: The artifact's artifactId. Necessary if no pom is
+        provided.
+    :arg str packaging: The artifact's packaging scheme. If not provided, this
+        will be guessed based on the file's extension.
+    :arg str version: The artifact's version. Necessary if no pom is provided.
+    :arg str classifier: Optional Nexus classifier for the artifact.
+    """
+    _nexus = Nexus(nexus_url)
+
+    if pom_file:
+        files = [
+            ('file', (pom_file, open(pom_file, 'rb'))),
+            ('file', (file_name, open(file_name, 'rb')))
+        ]
+
+        data = {
+            'r': (None, nexus_repo_id),
+            'hasPom': (None, 'true')
+        }
+
+        request_url = "{}/artifact/maven/content".format(_nexus.baseurl)
+        response = requests.post(request_url, data=data, files=files)
+
+    else:
+        if not packaging and file_name.endswith(".tar.gz"):
+            packaging = "tar.gz"
+        elif not packaging:
+            # Find packaging based on file extension
+            ext_index = file_name.rfind(".")
+            if ext_index == -1:
+                log.error("ERROR: Could not determine packaging type. Please "
+                          "provide an appropriate \"packaging\" parameter.")
+                sys.exit(1)
+            packaging = file_name[ext_index+1:]
+
+        data = {
+            'r': (None, nexus_repo_id),
+            'p': (None, packaging),
+            'hasPom': (None, 'false')
+        }
+
+        files = {
+            'file': (file_name, open(file_name, 'rb'))
+        }
+
+        if group_id:
+            data['g'] = (None, group_id)
+        if artifact_id:
+            data['a'] = (None, artifact_id)
+        if version:
+            data['v'] = (None, version)
+        if classifier:
+            data['c'] = (None, classifier)
+
+        request_url = "{}/artifact/maven/content".format(_nexus.baseurl)
+        log.debug("Request URL: {}".format(request_url))
+        response = requests.post(request_url, data=data, files=files)
+
+    if response.status_code != 201:
+        raise requests.HTTPError("Upload failed with the following "
+            "error:\n{}: {}".format(response.status_code, response.text))
+    else:
+        log.debug("Successfully uploaded {} to {}".format(file_name,
+            request_url))
