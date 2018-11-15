@@ -19,7 +19,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import zipfile
 
 from defusedxml.minidom import parseString
 import glob2  # Switch to glob when Python < 3.5 support is dropped
@@ -334,20 +333,8 @@ def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
         nexus_path)
     log.debug('Uploading {} to {}'.format(zip_file, url))
 
-    upload_file = open(zip_file, 'rb')
-
-    files = {'file': upload_file}
-    resp = requests.post(url, files=files)
+    resp = _request_post_file(url, zip_file)
     log.debug('{}: {}'.format(resp.status_code, resp.text))
-
-    if resp.status_code == 400:
-        raise requests.HTTPError("Repository is read only: {}".format(nexus_repo))
-    elif resp.status_code == 404:
-        raise requests.HTTPError("Did not find repository with ID: {}".format(nexus_repo))
-
-    if not str(resp.status_code).startswith('20'):
-        raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
-            resp.status_code, resp.text, zipfile.ZipFile(zip_file).infolist()))
 
 
 def nexus_stage_repo_create(nexus_url, staging_profile_id):
