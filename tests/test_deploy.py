@@ -288,6 +288,50 @@ def test__request_post(responses, mocker):
         deploy_sys._request_post(test_url, xml_doc, headers)
     assert 'missing_schema' in str(excinfo.value)
 
+def test__request_post_file(responses, mocker):
+    """Test _request_post_file."""
+
+    zip_file='zip-test-files/test.zip'
+    resp = {}
+    test_url='http://connection.error.test'
+    exception = requests.exceptions.ConnectionError(test_url)
+    responses.add(responses.POST, test_url, body=exception)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file)
+    assert 'Could not connect to URL' in str(excinfo.value)
+
+    test_url='http://invalid.url.test:8081'
+    exception = requests.exceptions.InvalidURL(test_url)
+    responses.add(responses.POST, test_url, body=exception)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file)
+    assert 'Invalid URL' in str(excinfo.value)
+
+    test_url='http://missing.schema.test:8081'
+    exception = requests.exceptions.MissingSchema(test_url)
+    responses.add(responses.POST, test_url, body=exception)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file)
+    assert 'Not valid URL' in str(excinfo.value)
+
+    test_url='http://repository.read.only:8081'
+    responses.add(responses.POST, test_url, body=None, status=400)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file)
+    assert 'Repository is read only' in str(excinfo.value)
+
+    test_url='http://repository.not.found:8081'
+    responses.add(responses.POST, test_url, body=None, status=404)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file)
+    assert 'Did not find repository' in str(excinfo.value)
+
+    test_url='http://other.upload.error:8081'
+    responses.add(responses.POST, test_url, body=None, status=500)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file)
+    assert 'Failed to upload to Nexus with status code' in str(excinfo.value)
+
 
 def test_nexus_stage_repo_close(responses, mocker):
     """Test nexus_stage_repo_close."""
