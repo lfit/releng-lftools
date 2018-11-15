@@ -1,0 +1,26 @@
+---
+features:
+  - |
+    Refactored deploy_maven_file() function from shell/deploy to pure Python to
+    be more portable with Windows systems.
+upgrade:
+  - |
+    The ``deploy maven-file`` command no longer calls maven (relying instead on
+    a direct REST call to Nexus). Due to this change, the following options
+    have been removed:
+
+    * ``-b|--maven-bin``
+    * ``-gs|--global-settings``
+    * ``-s|--settings``
+    * ``-p|--maven-params``
+
+    Additionally, the NEXUS_URL argument should now contain only the base URL
+    for the Nexus server being used, rather than the full path to the remote
+    repository.
+
+    Any calls to this command should be updated to reflect the above changes.
+    Nexus credentials should be located in the local .netrc file.
+deprecations:
+  - |
+    ``shell/deploy`` script's deploy_maven_file() function is now deprecated
+    and will be removed in a future release.
