@@ -333,6 +333,52 @@ def test__request_post_file(responses, mocker):
     assert 'Failed to upload to Nexus with status code' in str(excinfo.value)
 
 
+def test__request_post_file_data(responses, mocker):
+    """Test _request_post_file."""
+
+    param={'r':(None, 'testing')}
+    zip_file='zip-test-files/test.zip'
+    resp = {}
+    test_url='http://connection.error.test'
+    exception = requests.exceptions.ConnectionError(test_url)
+    responses.add(responses.POST, test_url, body=exception)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file, param)
+    assert 'Could not connect to URL' in str(excinfo.value)
+
+    test_url='http://invalid.url.test:8081'
+    exception = requests.exceptions.InvalidURL(test_url)
+    responses.add(responses.POST, test_url, body=exception)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file, param)
+    assert 'Invalid URL' in str(excinfo.value)
+
+    test_url='http://missing.schema.test:8081'
+    exception = requests.exceptions.MissingSchema(test_url)
+    responses.add(responses.POST, test_url, body=exception)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file, param)
+    assert 'Not valid URL' in str(excinfo.value)
+
+    test_url='http://repository.read.only:8081'
+    responses.add(responses.POST, test_url, body=None, status=400)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file, param)
+    assert 'Repository is read only' in str(excinfo.value)
+
+    test_url='http://repository.not.found:8081'
+    responses.add(responses.POST, test_url, body=None, status=404)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file, param)
+    assert 'Did not find repository' in str(excinfo.value)
+
+    test_url='http://other.upload.error:8081'
+    responses.add(responses.POST, test_url, body=None, status=500)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys._request_post_file(test_url, zip_file, param)
+    assert 'Failed to upload to Nexus with status code' in str(excinfo.value)
+
+
 def test_nexus_stage_repo_close(responses, mocker):
     """Test nexus_stage_repo_close."""
     mocker.patch('lftools.deploy._log_error_and_exit', side_effect=mocked_log_error)
@@ -464,3 +510,35 @@ def test_nexus_stage_repo_create(responses, mocker):
     with pytest.raises(ValueError) as excinfo:
         res = deploy_sys.nexus_stage_repo_create('site.not.found', 'INVALID')
     assert 'site.not.found' in str(excinfo.value)
+
+
+def test__upload_maven_file_to_nexus(responses, mocker):
+    """Test upload_to_nexus."""
+
+    zip_file='zip-test-files/test.tar.xz'
+    common_urlpart='service/local/artifact/maven/content'
+
+    nexus_repo_id='testing'
+    group_id='com5.test'
+    artifact_id='ArtId2'
+    version='1.2.7'
+    packaging='tar.xz'
+    classified=None
+
+    resp = {}
+
+    test_url='http://all.ok.upload:8081'
+    responses.add(responses.POST, '{}/{}'.format(test_url, common_urlpart), body=None, status=201)
+    resp = deploy_sys.upload_maven_file_to_nexus(test_url, nexus_repo_id, group_id, artifact_id, version, packaging, zip_file)
+
+    xml_other_error = """
+        <nexus-error><errors><error>
+            <id>*</id>
+            <msg>Something went wrong.</msg>
+        </error></errors></nexus-error>
+        """
+    test_url='http://something.went.wrong:8081'
+    responses.add(responses.POST, '{}/{}'.format(test_url, common_urlpart), body=xml_other_error, status=405)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys.upload_maven_file_to_nexus(test_url, nexus_repo_id, group_id, artifact_id, version, packaging, zip_file)
+    assert 'Something went wrong' in str(excinfo.value)
