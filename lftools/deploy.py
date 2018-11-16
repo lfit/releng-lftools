@@ -86,7 +86,7 @@ def _request_post(url, data, headers):
     return resp
 
 
-def _request_post_file(url, file_to_upload):
+def _request_post_file(url, file_to_upload, parameters=None):
     """Execute a request post, return the resp."""
     resp = {}
     try:
@@ -97,7 +97,10 @@ def _request_post_file(url, file_to_upload):
 
     files = {'file': upload_file}
     try:
-        resp = requests.post(url, files=files)
+        if parameters:
+            resp = requests.post(url, data=parameters, files=files)
+        else:
+            resp = requests.post(url, files=files)
     except requests.exceptions.MissingSchema:
         raise requests.HTTPError("Not valid URL: {}".format(url))
     except requests.exceptions.ConnectionError:
@@ -444,3 +447,48 @@ def nexus_stage_repo_close(nexus_url, staging_profile_id, staging_repo_id):
 
     if not resp.status_code == 201:
         _log_error_and_exit("Failed with status code {}".format(resp.status_code), resp.text)
+
+
+def upload_maven_file_to_nexus(nexus_url, nexus_repo_id, group_id, artifact_id,
+                               version, packaging, file, classified=None):
+    """Upload file to Nexus as a Maven artifact.
+
+    This function will upload an artifact to Nexus while providing all of
+    the usual Maven pom.xml information so that it conforms to Maven 2 repo
+    specs.
+
+    Parameters:
+         nexus_url:     The URL to the Nexus repo.
+                        (Ex:  https://nexus.example.org)
+         nexus_repo_id: Repo ID of repo to push artifact to.
+         group_id:      Maven style Group ID to upload artifact as.
+         artifact_id:   Maven style Artifact ID to upload artifact as.
+         version:       Maven style Version to upload artifact as.
+         packaging:     Packaging type to upload as (Eg. tar.xz)
+         file:          File to upload.
+         classifier:    Maven classifier. (optional)
+
+    Sample:
+        lftools deploy nexus \
+            http://192.168.1.26:8081/nexus/content/repositories/releases \
+            tests/fixtures/deploy/zip-test-files
+    """
+    url = '{}/service/local/artifact/maven/content'.format(_format_url(nexus_url))
+
+    log.info('Uploading url  : {}'.format(url))
+    params = {}
+    params.update({'r': (None, '{}'.format(nexus_repo_id))})
+    params.update({'g': (None, '{}'.format(group_id))})
+    params.update({'a': (None, '{}'.format(artifact_id))})
+    params.update({'v': (None, '{}'.format(version))})
+    params.update({'p': (None, '{}'.format(packaging))})
+    if classified:
+        params.update({'c': (None, '{}'.format(classified))})
+
+    log.debug('Params  : {}'.format(params))
+
+    resp = _request_post_file(url, file, params)
+
+    if re.search('nexus-error', resp.text):
+        error_msg = _get_node_from_xml(resp.text, 'msg')
+        raise requests.HTTPError("Something went wrong : {}".format(error_msg))
