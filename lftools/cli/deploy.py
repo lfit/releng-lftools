@@ -109,18 +109,16 @@ def file(ctx,
     the usual Maven pom.xml information so that it conforms to Maven 2 repo
     specs.
     """
-    status = subprocess.call([
-        'deploy', 'file',
-        nexus_url,
-        nexus_repo_id,
-        group_id,
-        artifact_id,
-        version,
-        packaging,
-        file,
-        classifier
-    ])
-    sys.exit(status)
+    try:
+        deploy_sys.upload_maven_file_to_nexus(
+            nexus_url, nexus_repo_id,
+            group_id, artifact_id, version,
+            packaging, file, classifier)
+    except HTTPError as e:
+        log.error(str(e))
+        sys.exit(1)
+
+    log.info('Upload maven file to nexus completed.')
 
 
 @click.command()
