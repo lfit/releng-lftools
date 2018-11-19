@@ -22,6 +22,30 @@
       "revId": "a918923e9bd320f20d1f3f3e3a6c9cabfeb4178e",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29476176_ec209d13",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-19T06:50:28Z",
+      "side": 1,
+      "message": "Yes of course :(",
+      "parentUuid": "d22b978d_d912e7ce",
+      "range": {
+        "startLine": 114,
+        "startChar": 11,
+        "endLine": 114,
+        "endChar": 26
+      },
+      "revId": "a918923e9bd320f20d1f3f3e3a6c9cabfeb4178e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
