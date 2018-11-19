@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d22b978d_d912e7ce",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-19T06:42:04Z",
+      "side": 1,
+      "message": "Should we be using zipfile.is_zipfile(filename) to check rather than running the full constructor?\n\nhttps://docs.python.org/3/library/zipfile.html",
+      "range": {
+        "startLine": 114,
+        "startChar": 11,
+        "endLine": 114,
+        "endChar": 26
+      },
+      "revId": "a918923e9bd320f20d1f3f3e3a6c9cabfeb4178e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
