@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "303883fe_cd148747",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-19T02:39:12Z",
+      "side": 1,
+      "message": "Would be good to add a new line between when the except block ends and the new if-statement block begins so that we can see that they are separate things.",
+      "revId": "8724bdd41581b84baf53d17ed0ffdc10e08ae923",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "516b46c2_64d234f3",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-19T02:39:12Z",
+      "side": 1,
+      "message": "either elif here, OR add a new line so that we can more easily tell when the previous if-statement block ends and the new if-statement block begins.",
+      "range": {
+        "startLine": 111,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 6
+      },
+      "revId": "8724bdd41581b84baf53d17ed0ffdc10e08ae923",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f940e5a_d4664df0",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-19T02:39:12Z",
+      "side": 1,
+      "message": "Can we check if a file is a zip file that it prints out the zipfile contents?\n\nThis is what the old code was doing and it\u0027s sometimes useful in debugging to see the zip contents as it might have things in it that break Nexus.",
+      "range": {
+        "startLine": 113,
+        "startChar": 41,
+        "endLine": 113,
+        "endChar": 55
+      },
+      "revId": "8724bdd41581b84baf53d17ed0ffdc10e08ae923",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
