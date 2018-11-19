@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "744f7a62_7b6f7707",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-19T06:29:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "303883fe_cd148747",
+      "revId": "8724bdd41581b84baf53d17ed0ffdc10e08ae923",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "516b46c2_64d234f3",
         "filename": "lftools/deploy.py",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2018-11-19T02:39:12Z",
       "side": 1,
       "message": "either elif here, OR add a new line so that we can more easily tell when the previous if-statement block ends and the new if-statement block begins.",
+      "range": {
+        "startLine": 111,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 6
+      },
+      "revId": "8724bdd41581b84baf53d17ed0ffdc10e08ae923",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae7e160c_d54255d3",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-19T06:29:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "516b46c2_64d234f3",
       "range": {
         "startLine": 111,
         "startChar": 4,
