@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f6593b4_af7d8ccc",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-20T07:15:30Z",
+      "side": 1,
+      "message": "I\u0027d move this down to where the rest of the pool stuff is called so it\u0027s altogether. Considering nothing else calls pool until the end of the function anyway.",
+      "revId": "256feaaeb2e51eac8cba3c63ba81ae37844f91c4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
