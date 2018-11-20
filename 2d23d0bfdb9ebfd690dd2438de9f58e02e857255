@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "dd0334a0_6a64c56b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-20T02:11:08Z",
+      "side": 1,
+      "message": "make sure the issue is the part of the commit message footer. No space should be there and should be above the change-id.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "2d23d0bfdb9ebfd690dd2438de9f58e02e857255",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0fe11dad_7835cae5",
         "filename": "lftools/cli/deploy.py",
         "patchSetId": 4
