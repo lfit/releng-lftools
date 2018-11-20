@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fe11dad_7835cae5",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-20T02:10:09Z",
+      "side": 1,
+      "message": "Is there any reason this is being re-ordered?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 21
+      },
+      "revId": "2d23d0bfdb9ebfd690dd2438de9f58e02e857255",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
