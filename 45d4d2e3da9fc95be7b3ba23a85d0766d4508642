@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52072976_339affb3",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-20T09:27:05Z",
+      "side": 1,
+      "message": "What\u0027s this sorry?",
+      "range": {
+        "startLine": 503,
+        "startChar": 54,
+        "endLine": 503,
+        "endChar": 60
+      },
+      "revId": "45d4d2e3da9fc95be7b3ba23a85d0766d4508642",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3870c148_b32948d0",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-20T09:27:05Z",
+      "side": 1,
+      "message": "Remove the leading # as it was copied from a bash script comment.",
+      "revId": "45d4d2e3da9fc95be7b3ba23a85d0766d4508642",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
