@@ -45,6 +45,29 @@
       "revId": "2d23d0bfdb9ebfd690dd2438de9f58e02e857255",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20b8a206_06f7e1aa",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-20T02:52:20Z",
+      "side": 1,
+      "message": "As this is testing uploading Maven files. I\u0027d like the test to actually test a real Maven artifact with a valid GAV.\n\nI can update the test with some real world Maven files.",
+      "range": {
+        "startLine": 518,
+        "startChar": 4,
+        "endLine": 518,
+        "endChar": 41
+      },
+      "revId": "2d23d0bfdb9ebfd690dd2438de9f58e02e857255",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
