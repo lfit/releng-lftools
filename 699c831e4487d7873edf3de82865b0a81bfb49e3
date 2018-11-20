@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfadf677_102298aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-20T05:31:20Z",
+      "side": 1,
+      "message": "\"Issue: RELENG-1373\" needs to be attached to the footer block.",
+      "revId": "699c831e4487d7873edf3de82865b0a81bfb49e3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
