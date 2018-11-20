@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff2be713_84f5e4b1",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-20T01:48:30Z",
+      "side": 1,
+      "message": "missing Params and defaults in the function docstring.",
+      "range": {
+        "startLine": 447,
+        "startChar": 0,
+        "endLine": 450,
+        "endChar": 7
+      },
+      "revId": "3d2cd123997a86ce0a95ff74b635b020337c4b6c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
