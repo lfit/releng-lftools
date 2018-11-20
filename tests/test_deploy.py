@@ -513,7 +513,7 @@ def test_nexus_stage_repo_create(responses, mocker):
 
 
 def test__upload_maven_file_to_nexus(responses, mocker):
-    """Test upload_to_nexus."""
+    """Test upload_maven_file_to_nexus."""
 
     zip_file='zip-test-files/test.tar.xz'
     common_urlpart='service/local/artifact/maven/content'
@@ -542,3 +542,16 @@ def test__upload_maven_file_to_nexus(responses, mocker):
     with pytest.raises(requests.HTTPError) as excinfo:
         resp = deploy_sys.upload_maven_file_to_nexus(test_url, nexus_repo_id, group_id, artifact_id, version, packaging, zip_file)
     assert 'Something went wrong' in str(excinfo.value)
+
+
+def test__upload_to_nexus(responses, mocker):
+    """Test upload_to_nexus."""
+
+    zip_file='zip-test-files/test.zip'
+    resp = {}
+
+    test_url='http://not.201.code:8081'
+    responses.add(responses.POST, test_url, body=None, status=204)
+    with pytest.raises(requests.HTTPError) as excinfo:
+        resp = deploy_sys.upload_to_nexus(test_url, zip_file)
+    assert 'Failed to upload to Nexus with status code' in str(excinfo.value)

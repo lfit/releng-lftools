@@ -488,3 +488,22 @@ def upload_maven_file_to_nexus(nexus_url, nexus_repo_id,
     if re.search('nexus-error', resp.text):
         error_msg = _get_node_from_xml(resp.text, 'msg')
         raise requests.HTTPError("Nexus Error: {}".format(error_msg))
+
+
+def upload_to_nexus(nexus_repo_url, upload_file):
+    """Upload file to Nexus.
+
+    Parameters:
+         nexus_repo_url: The URL to the Nexus repository target.
+                           (Ex:  https://nexus.example.org)
+         upload_file:    Repo ID of repo to push artifact to.
+
+    If responce is not 201, Raise an HTTPError Exception
+    """
+    log.info('Uploading file : {}'.format(upload_file))
+    resp = _request_post_file(nexus_repo_url, upload_file)
+    log.debug('{}: {}'.format(resp.status_code, resp.text))
+
+    if not resp.status_code == 201:
+        raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
+            resp.status_code, resp.text, upload_file))
