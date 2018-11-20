@@ -1,0 +1,13 @@
+---
+features:
+  - |
+    Refactored upload_maven_file_to_nexus function
+    from shell/deploy to pure Python to be more portable with Windows systems.
+    Also added a number of unit tests to cover all executable branches of the
+    code.
+
+deprecations:
+  - |
+    shell/deploy script's upload_maven_file_to_nexus
+    function is now deprecated and will be removed in a future release.
+
