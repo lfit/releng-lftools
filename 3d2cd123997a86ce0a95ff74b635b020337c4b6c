@@ -22,6 +22,29 @@
       "revId": "3d2cd123997a86ce0a95ff74b635b020337c4b6c",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51e6e830_e86ac9cb",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-20T03:44:25Z",
+      "side": 1,
+      "message": "How many threads does it open by default?",
+      "range": {
+        "startLine": 499,
+        "startChar": 4,
+        "endLine": 499,
+        "endChar": 12
+      },
+      "revId": "3d2cd123997a86ce0a95ff74b635b020337c4b6c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
