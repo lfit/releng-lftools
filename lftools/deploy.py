@@ -444,6 +444,7 @@ def nexus_stage_repo_close(nexus_url, staging_profile_id, staging_repo_id):
         _log_error_and_exit("Failed with status code {}".format(resp.status_code), resp.text)
 
 
+<<<<<<< HEAD
 def upload_maven_file_to_nexus(nexus_url, nexus_repo_id,
                                group_id, artifact_id, version,
                                packaging, file, classifier=None):
@@ -488,3 +489,17 @@ def upload_maven_file_to_nexus(nexus_url, nexus_repo_id,
     if re.search('nexus-error', resp.text):
         error_msg = _get_node_from_xml(resp.text, 'msg')
         raise requests.HTTPError("Nexus Error: {}".format(error_msg))
+=======
+def upload_to_nexus(nexus_repo_url, upload_file):
+    """Upload file to Nexus.
+
+    If responce is not 201, Raise an HTTPError Exception
+    """
+    log.info('Uploading file : {}'.format(upload_file))
+    resp = _request_post_file(nexus_repo_url, upload_file)
+    log.debug('{}: {}'.format(resp.status_code, resp.text))
+
+    if not resp.status_code == 201:
+        raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
+            resp.status_code, resp.text, upload_file))
+>>>>>>> Refactor of Upload_to_Nexus
