@@ -535,3 +535,36 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
     pool.join()
 
     os.chdir(previous_dir)
+
+
+def deploy_nexus_stage(nexus_url, staging_profile_id, deploy_dir):
+    """Deploy Maven artifacts to Nexus staging repo.
+
+    Parameters:
+    nexus_url:          URL to Nexus server. (Ex: https://nexus.example.org)
+    staging_profile_id: The staging profile id as defined in Nexus for the
+                        staging repo.
+    deploy_dir:         The directory to deploy. (Ex: /tmp/m2repo)
+
+    Sample:
+        lftools deploy nexus-stage http://192.168.1.26:8081/nexus 4e6f95cd2344 /tmp/slask
+            Deploying Maven artifacts to staging repo...
+            Staging repository aaf-1005 created.
+            /tmp/slask ~/LF/work/lftools-dev/lftools/shell
+            Uploading fstab
+            Uploading passwd
+            ~/LF/work/lftools-dev/lftools/shell
+            Completed uploading files to aaf-1005.
+    """
+    staging_repo_id = nexus_stage_repo_create(nexus_url, staging_profile_id)
+    log.info("Staging repository {} created.".format(staging_repo_id))
+
+    deploy_nexus_url = '{0}/service/local/staging/deployByRepositoryId/{1}'.format(
+        _format_url(nexus_url),
+        staging_repo_id)
+
+    log.debug("Nexus URL = {}".format(_format_url(deploy_nexus_url)))
+    deploy_nexus(deploy_nexus_url, deploy_dir)
+
+    nexus_stage_repo_close(nexus_url, staging_profile_id, staging_repo_id)
+    log.info("Completed uploading files to {}".format(staging_repo_id))

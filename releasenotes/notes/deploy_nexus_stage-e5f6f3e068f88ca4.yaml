@@ -1,0 +1,14 @@
+---
+features:
+  - |
+    Refactored deploy_nexus_stage function
+    from shell/deploy to pure Python to be more portable with Windows systems.
+    Also added a number of unit tests to cover all executable branches of the
+    code.
+
+deprecations:
+  - |
+    shell/deploy script's deploy_nexus_stage
+    function is now deprecated and will be removed in a future release.
+
+
