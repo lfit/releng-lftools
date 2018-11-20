@@ -599,3 +599,38 @@ def test_deploy_nexus_nosnapshot(datafiles, responses):
         responses.add(responses.POST, success_upload_url,
                       status=201)
     deploy_sys.deploy_nexus(nexus_url, deploy_dir)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_nexus_deploy_stage(datafiles, responses):
+    """Test nexus_deploy_stage."""
+    url='http://valid.deploy.stage'
+    url_repo = 'service/local/staging/profiles'
+    staging_profile_id='93fb68073c18'
+    repo_id='test1-1030'
+
+    #Setup for nexus_stage_repo_create
+    xml_created = "<stagedRepositoryId>{}</stagedRepositoryId>".format(repo_id)
+    responses.add(responses.POST, '{}/{}/{}/start'.format(url, url_repo, staging_profile_id),
+                  body=xml_created, status=201)
+
+    #Setup for deploy_nexus with no snapshot
+    os.chdir(str(datafiles))
+    nexus_deploy_url = '{}/service/local/staging/deployByRepositoryId/{}'.format(url, repo_id)
+    deploy_dir = 'deploy_nexus2'
+    test_files = ['4.0.3-SNAPSHOT/odlparent-lite-4.0.3-20181120.113136-1.pom',
+                  '4.0.3-SNAPSHOT/odlparent-lite-4.0.3-20181120.113136-1.pom.sha1',
+                  '4.0.3-SNAPSHOT/odlparent-lite-4.0.3-20181120.113136-1.pom.md5']
+    for file in test_files:
+        success_upload_url = '{}/{}'.format(nexus_deploy_url, file)
+        responses.add(responses.POST, success_upload_url,
+                      status=201)
+
+    #Setup for nexus_stage_repo_close
+    responses.add(responses.POST, '{}/{}/{}/finish'.format(url, url_repo, staging_profile_id),
+                  body=None, status=201)
+
+    #Execute test, should not return anything for successful run.
+    deploy_sys.deploy_nexus_stage (url, staging_profile_id, deploy_dir)

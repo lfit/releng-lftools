@@ -259,8 +259,9 @@ def nexus_stage(ctx, nexus_url, staging_profile_id, deploy_dir):
     This script takes a local Maven repository and deploys it to a Nexus
     staging repository as defined by the staging-profile-id.
     """
-    status = subprocess.call(['deploy', 'nexus-stage', nexus_url, staging_profile_id, deploy_dir])
-    sys.exit(status)
+    deploy_sys.deploy_nexus_stage(nexus_url,
+                                  staging_profile_id,
+                                  deploy_dir)
 
 
 @click.command(name='nexus-stage-repo-close')
