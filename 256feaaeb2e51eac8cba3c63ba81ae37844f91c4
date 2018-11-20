@@ -16,6 +16,24 @@
       "revId": "256feaaeb2e51eac8cba3c63ba81ae37844f91c4",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b68f51f5_3b00655e",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-20T07:36:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f6593b4_af7d8ccc",
+      "revId": "256feaaeb2e51eac8cba3c63ba81ae37844f91c4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
