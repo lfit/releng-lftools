@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a14a7e6d_947eb70b",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-21T02:53:38Z",
+      "side": 1,
+      "message": "This test doesn\u0027t assert anything. How do we know it passed or failed?",
+      "revId": "98afb6fc509864b533890f32366e797848666f93",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
