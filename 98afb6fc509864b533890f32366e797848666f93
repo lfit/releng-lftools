@@ -16,6 +16,24 @@
       "revId": "98afb6fc509864b533890f32366e797848666f93",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b3047ea_66ccf53c",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-21T04:33:02Z",
+      "side": 1,
+      "message": "If any exception is raised, test will fail.\nThe test case is adding ALL expected requests.post calls with expected URL. \nIf any of these specified calls are not executed, an error will be raised.\nAnd if you miss specify one, then the function will try to connect to the URL, and will fail, hence raise an HTTP Exception.",
+      "parentUuid": "a14a7e6d_947eb70b",
+      "revId": "98afb6fc509864b533890f32366e797848666f93",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
