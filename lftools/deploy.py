@@ -215,6 +215,7 @@ def deploy_archives(nexus_url, nexus_path, workspace, pattern=None):
             archive. (optional)
     """
     nexus_url = _format_url(nexus_url)
+    previous_dir = os.getcwd()
     work_dir = tempfile.mkdtemp(prefix='lftools-da.')
     os.chdir(work_dir)
     log.debug('workspace: {}, work_dir: {}'.format(workspace, work_dir))
@@ -226,6 +227,8 @@ def deploy_archives(nexus_url, nexus_path, workspace, pattern=None):
         '{}/archives'.format(workspace), 'zip')
     log.debug('archives zip: {}'.format(archives_zip))
     deploy_nexus_zip(nexus_url, 'logs', nexus_path, archives_zip)
+
+    os.chdir(previous_dir)
     shutil.rmtree(work_dir)
 
 
@@ -248,6 +251,7 @@ def deploy_logs(nexus_url, nexus_path, build_url):
                     via the $BUILD_URL environment variable.
     """
     nexus_url = _format_url(nexus_url)
+    previous_dir = os.getcwd()
     work_dir = tempfile.mkdtemp(prefix='lftools-dl.')
     os.chdir(work_dir)
     log.debug('work_dir: {}'.format(work_dir))
@@ -303,6 +307,8 @@ def deploy_logs(nexus_url, nexus_path, build_url):
     shutil.make_archive(console_zip.name, 'zip', work_dir)
     deploy_nexus_zip(nexus_url, 'logs', nexus_path, '{}.zip'.format(console_zip.name))
     console_zip.close()
+
+    os.chdir(previous_dir)
     shutil.rmtree(work_dir)
 
 
