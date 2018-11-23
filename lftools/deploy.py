@@ -172,6 +172,9 @@ def copy_archives(workspace, pattern=None):
 
     paths = []
     for p in pattern:
+        if p == '':  # Skip empty patterns as they are invalid
+            continue
+
         search = os.path.join(workspace, p)
         paths.extend(glob2.glob(search, recursive=True))
     log.debug('Files found: {}'.format(paths))
