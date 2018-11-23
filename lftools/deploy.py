@@ -519,7 +519,7 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
     def _deploy_nexus_upload(file):
         """Fix file path, and call _request_post_file."""
         nexus_url_with_file = '{}/{}'.format(_format_url(nexus_repo_url), file)
-        log.debug('Uploading {} to nexus : {}'.format(file, nexus_url_with_file))
+        log.info('Uploading {} to nexus: {}'.format(file, nexus_url_with_file))
         _request_post_file(nexus_url_with_file, file)
 
     file_list = []
@@ -572,7 +572,7 @@ def deploy_nexus_stage(nexus_url, staging_profile_id, deploy_dir):
         _format_url(nexus_url),
         staging_repo_id)
 
-    log.debug("Nexus URL = {}".format(_format_url(deploy_nexus_url)))
+    log.debug("Nexus URL: {}".format(_format_url(deploy_nexus_url)))
     deploy_nexus(deploy_nexus_url, deploy_dir)
 
     nexus_stage_repo_close(nexus_url, staging_profile_id, staging_repo_id)
