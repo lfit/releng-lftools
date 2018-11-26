@@ -39,6 +39,30 @@
       "revId": "809f1d1c3d83039514a4ef19020f041ddbb777a9",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0873c94_55dd8121",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-11-26T12:37:22Z",
+      "side": 1,
+      "message": "This method is not backwards compatible. By design, this no longer relies on mvn, so all mvn-specific options have been removed. I could keep the old -p/--maven-params option, but ignore its contents, if that\u0027s really necessary. But that seems like pretty bad design. \n\nPerhaps I could make this new command different; maybe move the new, Windows-compatible code to be a Nexus subcommand (it is Nexus specific, after all, and I\u0027m already piggybacking on the Nexus module), and just mark this one as deprecated.",
+      "parentUuid": "42bd0945_57bdabba",
+      "range": {
+        "startLine": 163,
+        "startChar": 21,
+        "endLine": 163,
+        "endChar": 32
+      },
+      "revId": "809f1d1c3d83039514a4ef19020f041ddbb777a9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
