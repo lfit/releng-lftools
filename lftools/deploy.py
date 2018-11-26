@@ -10,6 +10,7 @@
 ##############################################################################
 """Library of functions for deploying artifacts to Nexus."""
 
+from datetime import timedelta
 import errno
 import gzip
 import logging
@@ -21,6 +22,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import zipfile
 
 from defusedxml.minidom import parseString
@@ -539,10 +541,13 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
                         file_list.append(file)
 
     # Perform parallel upload
+    upload_start = time.time()
     pool = ThreadPool(multiprocessing.cpu_count())
     pool.map(_deploy_nexus_upload, file_list)
     pool.close()
     pool.join()
+    upload_time = time.time() - upload_start
+    log.info("Uploaded in {} seconds.".format(timedelta(seconds=round(upload_time))))
 
     os.chdir(previous_dir)
 
