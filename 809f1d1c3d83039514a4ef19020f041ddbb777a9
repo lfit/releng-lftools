@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "0f5b7a38_2e3522e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-26T02:30:15Z",
+      "side": 1,
+      "message": "Please add the metadata \"Issue: RELENG-1378\" above the Change-Id line so that this Gerrit automatically links to Jira.",
+      "revId": "809f1d1c3d83039514a4ef19020f041ddbb777a9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42bd0945_57bdabba",
         "filename": "lftools/cli/deploy.py",
         "patchSetId": 1
