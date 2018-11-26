@@ -13,6 +13,7 @@ It supports the following commands:
     config
     deploy
     dco
+    gerrit
     license
     nexus
     openstack

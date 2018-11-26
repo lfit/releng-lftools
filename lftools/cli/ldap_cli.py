@@ -99,7 +99,7 @@ def csv(ctx, ldap_server, ldap_group_base, ldap_user_base, groups):
                 print(e.message['desc'])
             else:
                 print(e)
-            sys.exit(0)
+            sys.exit(1)
 
     def eprint(*args, **kwargs):
         """Print to stderr."""
