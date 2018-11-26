@@ -1,0 +1,19 @@
+---
+features:
+  - |
+    Gerrit project create and github enable replication commands.
+
+    Usage: lftools gerrit [OPTIONS] COMMAND [ARGS]...
+
+    .. code-block:: none
+
+       Commands:
+         create  Create and configure permissions for a new gerrit repo.
+
+    .. code-block:: none
+
+       Options:
+         --enable  Enable replication to Github.
+                   This skips creating the repo.
+         --parent  Specify parent other than "All-Projects"
+         --help    Show this message and exit.
