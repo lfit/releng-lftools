@@ -504,7 +504,13 @@ def upload_maven_file_to_nexus(nexus_url, nexus_repo_id,
 
 
 def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
-    """Deploy Maven artifacts to Nexus.
+    """Deploy a local directory to a Nexus repository.
+
+    This function intentially strips out the following files:
+
+        - _remote.repositories
+        - resolver-status.properties
+        - maven-metadata.xml*  (if not a snapshot repo)
 
     Parameters:
         nexus_repo_url: URL to Nexus server. (Ex: https://nexus.example.org)
@@ -537,7 +543,7 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
                 if snapshot:
                     file_list.append(file)
                 else:
-                    if not "maven-metadata" in file:
+                    if not file.startswith("maven-metadata.xml"):
                         file_list.append(file)
 
     # Perform parallel upload
