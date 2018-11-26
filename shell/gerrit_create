@@ -1,0 +1,49 @@
+#!/bin/bash
+# SPDX-License-Identifier: EPL-1.0
+##############################################################################
+# Copyright (c) 2018 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+
+main(){
+
+if [[ $(ssh -p 29418 "$user"@"$project" gerrit version) ]];
+then
+  echo "can connect to gerrit"
+  echo "$repo"
+else
+  echo "cannot connect to gerrit"
+  exit 1
+fi
+
+}
+
+usage() {
+cat << EOF
+Usage:
+
+$0 user project repo
+
+EOF
+}
+
+if [[ $# -eq 0 ]] ; then
+  usage
+  exit 1
+fi
+
+while getopts "h" OPTION
+do
+  case $OPTION in
+          h ) usage; exit;;
+          \? ) echo "Unknown option: -$OPTARG" >&2; exit 1;;
+  esac
+done
+user=$1
+project=$2
+repo=$3
+main "$@"
