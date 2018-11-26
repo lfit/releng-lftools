@@ -1,0 +1,7 @@
+Verified+1: Jenkins CI <releng+lf-jenkins@linuxfoundation.org>
+Code-Review+2: Bengt Thuree <bthuree@linuxfoundation.org>
+Submitted-by: Bengt Thuree <bthuree@linuxfoundation.org>
+Submitted-at: Mon, 26 Nov 2018 04:15:17 +0000
+Reviewed-on: https://gerrit.linuxfoundation.org/infra/13654
+Project: releng/lftools
+Branch: refs/heads/master
