@@ -504,7 +504,13 @@ def upload_maven_file_to_nexus(nexus_url, nexus_repo_id,
 
 
 def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
-    """Deploy Maven artifacts to Nexus.
+    """Deploy a local directory to a Nexus repository.
+
+    This function intentially strips out the following files:
+
+        - _remote.repositories
+        - resolver-status.properties
+        - maven-metadata.xml*  (if not a snapshot repo)
 
     Parameters:
         nexus_repo_url: URL to Nexus server. (Ex: https://nexus.example.org)
@@ -533,12 +539,18 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
     files = glob2.glob('**/*')
     for file in files:
         if os.path.isfile(file):
-            if not file.endswith("_remote.repositories") and not file.endswith("resolver-status.properties"):
-                if snapshot:
-                    file_list.append(file)
-                else:
-                    if not "maven-metadata" in file:
-                        file_list.append(file)
+            base_name = os.path.basename(file)
+
+            # Skip blacklisted files
+            if (base_name == "_remote.repositories" or
+                    base_name == "resolver-status.properties"):
+                continue
+
+            if not snapshot:
+                if base_name.startswith("maven-metadata.xml"):
+                    continue
+
+            file_list.append(file)
 
     # Perform parallel upload
     upload_start = time.time()
