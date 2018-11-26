@@ -1,0 +1,246 @@
+#!/bin/bash -l
+# SPDX-License-Identifier: EPL-1.0
+##############################################################################
+# Copyright (c) 2018 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+set -euo pipefail
+TMP_WORKSPACE="${OPTARG:-/tmp/}"
+parent="${OPTARG:-All-Projects}"
+ENABLE_REPLICATION=false
+
+sanity_checks () {
+  echo gerrit url="$project"
+  echo new repo name="$repository"
+  echo parent="$parent"
+
+  if [[ $(ssh -p 29418 "$user"@"$project" gerrit version) ]];
+  then
+    echo "connected to Gerrit"
+  else
+    echo "cannot connect to Gerrit"
+    exit 1
+  fi
+
+  # shellcheck disable=SC2029
+  if  ! $ENABLE_REPLICATION; then
+    ssh -p 29418 "$user"@"$project" gerrit set-project "$repository"  &> /dev/null && \
+    echo "$repository Already exists, cannot create exiting" && exit 1
+  fi
+
+  #Exit if ldap group does not exist
+  #To run from your workstation you must be on the vpn
+  echo "Checking that ldapgroup=$ldapgroup exists"
+  check_ldap="$(lftools ldap csv "$ldapgroup")"
+  if [[ -z "$check_ldap" ]]; then
+    echo "ldap group is empty or does not exist."
+    exit 1
+  fi
+
+  repodashed="$(echo "$repository" | sed -e 's/\//-/g')"
+  gerrit_name="$(echo "$project" | awk -F"." '{print $2}')"
+
+
+  if  $ENABLE_REPLICATION; then
+    if git ls-remote git@github.com:"$gerrit_name"/"$repodashed".git HEAD  &> /dev/null; then
+      echo "PASS $gerrit_name $repository exists in Github"
+    else
+      echo "FAIL $gerrit_name $repository does not exist in Github"
+      exit 1
+    fi
+  fi
+
+}
+
+movetoworkspace () {
+  if ! [[ -d "$TMP_WORKSPACE" ]]; then
+    echo "$TMP_WORKSPACE"
+    mkdir -p "$TMP_WORKSPACE"
+  else
+    echo "$TMP_WORKSPACE already exists"
+  fi
+  cd "$TMP_WORKSPACE"
+}
+
+create_repo () {
+  echo "Creating repository $repository"
+  # shellcheck disable=SC2029
+  if [[ $parent == "All-Projects" ]]; then
+    ssh -p 29418 "$user"@"$project" "gerrit create-project $repository --empty-commit --parent $parent --owner ldap/$ldapgroup"
+  else
+    ssh -p 29418 "$user"@"$project" "gerrit create-project $repository --empty-commit --parent $parent"
+  fi
+
+}
+
+clone_repo() {
+  movetoworkspace
+  if ! [[ -d "$repository" ]];
+  then
+    git clone ssh://"$user"@"$project":29418/"$repository" "$repository" &> /dev/null
+    cd "$repository"
+  fi
+
+}
+
+create_groups_file () {
+  cd "$TMP_WORKSPACE"/"$repository"
+  git fetch origin refs/meta/config &> /dev/null && git checkout FETCH_HEAD &> /dev/null
+
+  #get uuid for for GitHub users into groups file
+  ssh -p 29418 "$user"@"$project" gerrit ls-groups --verbose \
+    | grep "GitHub\ Replication"\
+    | awk '{print $3"\t"$1,$2}' > groups.tmp
+
+  if [[ $parent == "All-Projects" ]]; then
+  printf "global:Registered-Users\tRegistered Users\n\
+ldap:cn=%s,ou=Groups,dc=freestandards,dc=org\tldap/%s\n" "$ldapgroup" "$ldapgroup"\
+>> groups.tmp
+  else
+    printf "global:Registered-Users\tRegistered Users\n" >> groups.tmp
+  fi
+
+  echo "groups file:"
+  echo ""
+  cat groups.tmp
+  touch groups
+
+  if diff groups groups.tmp; then
+    echo groups file already configured not pushing
+    rm groups.tmp
+  else
+    mv groups.tmp groups
+    git add groups
+    git commit -sv -m "Creating groups file" &> /dev/null
+
+    if git push origin HEAD:refs/meta/config &> /dev/null; then
+      echo "git push for groups file succeeded"
+    else
+      echo "git push for groups file failed"
+      exit 1
+    fi
+  fi
+
+}
+
+
+add_gitreview () {
+  cd "$TMP_WORKSPACE"/"$repository"
+  if ! git reset --hard origin/master &> /dev/null; then
+    echo "git reset failed"
+    exit 1
+  fi
+
+  has_gitreview="$(git ls-files .gitreview)"
+  if [[ -z $has_gitreview ]]; then
+
+    printf "[gerrit]\n\
+host=%s\n\
+port=29418\n\
+project=%s.git\n\
+defaultbranch=master\n" "$project" "$repository" > .gitreview
+
+    git add .gitreview
+    git commit -sv -m "Forcing .gitreview into repo"
+
+    if git push ssh://"$user"@"$project":29418/"$repository" HEAD:refs/heads/master &> /dev/null; then
+      echo "git push of .gitreview succeeded"
+    else
+      echo "git push of .gitreview failed"
+      exit 1
+    fi
+  else
+    echo "Repo Already has a .gitreview"
+  fi
+
+}
+
+enable_github_replication () {
+
+  cd "$TMP_WORKSPACE"/"$repository"
+
+  git fetch origin refs/meta/config &> /dev/null && git checkout FETCH_HEAD &> /dev/null
+
+  git config  --replace -f project.config 'access.refs/*.read' "group GitHub Replication"
+
+  echo "project.config:"
+  echo ""
+  cat project.config
+
+  git add project.config
+  git commit -sv -m "Pushing $repository project.config to refs/meta/config"
+
+  if git push origin HEAD:refs/meta/config &> /dev/null; then
+    echo "git push for $repository refs meta config succeeded"
+  else
+    echo "git push for $repository refs meta config failed"
+    exit 1
+  fi
+
+  echo "Starting replication"
+  ssh -p 29418 "$user"@"$project" "replication start --wait $repository"
+
+}
+
+usage() {
+cat << EOF
+"$0": Creates a repository and sets up the permissions.
+
+  usage: $0 [OPTIONS]
+   -h  Show this message
+   -s  server fqdn eg: gerrit.localhost
+   -o  owner eg: ldap group
+   -r  repository name
+   -u  ssh user name
+   -p  parent Default: All-Projects
+   -w  workspace to do clones etc. (must not be in a git repo)
+       Default is /tmp/
+   -e  enable replication to github (must = True)
+
+  example: $(basename "$0")  -s gerrit.localhost -o project-gerrit-group-committers -r reponame -u lfid
+
+EOF
+
+exit 1
+
+}
+
+# shellcheck disable=SC2199
+[[ -z "$@" ]] && usage
+
+while getopts "s:o:r:u:p:w:eh" OPTION
+do
+        case $OPTION in
+                s ) project="$OPTARG" ;;
+                o ) ldapgroup="$OPTARG" ;;
+                r ) repository="$OPTARG" ;;
+                u ) user="$OPTARG" ;;
+                p ) parent="$OPTARG" ;;
+                w ) TMP_WORKSPACE="$OPTARG" ;;
+                e ) ENABLE_REPLICATION=true ;;
+                h ) usage; exit;;
+                \? ) echo "Unknown option: -$OPTARG" >&2; exit 1;;
+        esac
+done
+
+
+if $ENABLE_REPLICATION; then
+  sanity_checks
+  clone_repo
+  enable_github_replication
+else
+  sanity_checks
+  create_repo
+  clone_repo
+  create_groups_file
+  add_gitreview
+fi
+
+echo "Repo Created and Configured"
+echo gerrit="$project"
+echo ldapgroup="$ldapgroup"
+echo repository="$repository"
