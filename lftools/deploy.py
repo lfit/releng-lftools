@@ -519,15 +519,15 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
     def _deploy_nexus_upload(file):
         """Fix file path, and call _request_post_file."""
         nexus_url_with_file = '{}/{}'.format(_format_url(nexus_repo_url), file)
-        log.info('Uploading {} to nexus: {}'.format(file, nexus_url_with_file))
+        log.info('Uploading {}'.format(file))
         _request_post_file(nexus_url_with_file, file)
+        log.debug('Uploaded {}'.format(file))
 
     file_list = []
 
     previous_dir = os.getcwd()
     os.chdir(deploy_dir)
-    log.debug('Current dir is deploy_dir: {}'.format(deploy_dir))
-    log.info('Uploading url  : {}'.format(nexus_repo_url))
+    log.info('Deploying directory {} to {}'.format(deploy_dir, nexus_repo_url))
     files = glob2.glob('**/*')
     for file in files:
         if os.path.isfile(file):
@@ -537,6 +537,7 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
                 else:
                     if not "maven-metadata" in file:
                         file_list.append(file)
+
     # Perform parallel upload
     pool = ThreadPool(multiprocessing.cpu_count())
     pool.map(_deploy_nexus_upload, file_list)
@@ -572,8 +573,8 @@ def deploy_nexus_stage(nexus_url, staging_profile_id, deploy_dir):
         _format_url(nexus_url),
         staging_repo_id)
 
-    log.debug("Nexus URL: {}".format(_format_url(deploy_nexus_url)))
+    log.debug("Nexus Staging URL: {}".format(_format_url(deploy_nexus_url)))
     deploy_nexus(deploy_nexus_url, deploy_dir)
 
     nexus_stage_repo_close(nexus_url, staging_profile_id, staging_repo_id)
-    log.info("Completed uploading files to {}".format(staging_repo_id))
+    log.info("Completed uploading files to {}.".format(staging_repo_id))
