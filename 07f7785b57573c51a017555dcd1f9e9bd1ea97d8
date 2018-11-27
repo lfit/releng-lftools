@@ -1,0 +1,441 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "407dd33b_1d393dea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Nexus3",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa4a39ab_21c1c11f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Docker Hub",
+      "range": {
+        "startLine": 7,
+        "startChar": 38,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c9b33bf_c46c0ddf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Let\u0027s not have conversation type messages. \n\nJust a brief explanation on what this script does and how to use it is enough",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 28
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64cbc725_f0d54abc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Not sure what to think about the \"nexus2docker\" part of the command. It makes it confusing and looking like we are referring to Nexus2 rather than Nexus3. \nI would suggest something like \"releasedockerhub\" maybe?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 50
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23c49c91_16c0a6b3",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "same as my comment in the commit text",
+      "range": {
+        "startLine": 121,
+        "startChar": 22,
+        "endLine": 121,
+        "endChar": 34
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a005d3e1_7b83543b",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "organization",
+      "range": {
+        "startLine": 124,
+        "startChar": 29,
+        "endLine": 124,
+        "endChar": 41
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "942036c0_21a885cd",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Nexus3",
+      "range": {
+        "startLine": 137,
+        "startChar": 33,
+        "endLine": 137,
+        "endChar": 38
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3cc941aa_afefad3f",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Docker Hub",
+      "range": {
+        "startLine": 137,
+        "startChar": 48,
+        "endLine": 137,
+        "endChar": 54
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89e92dc5_d4ab6417",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Docker Hub",
+      "range": {
+        "startLine": 140,
+        "startChar": 29,
+        "endLine": 140,
+        "endChar": 35
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2a838b8_c41a2c01",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Nexus3",
+      "range": {
+        "startLine": 140,
+        "startChar": 47,
+        "endLine": 140,
+        "endChar": 52
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "792f8558_038f212a",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Docker Hub",
+      "range": {
+        "startLine": 142,
+        "startChar": 46,
+        "endLine": 142,
+        "endChar": 52
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fccd596_7a0fe833",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Nexus3",
+      "range": {
+        "startLine": 142,
+        "startChar": 66,
+        "endLine": 142,
+        "endChar": 71
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b52d68a_9bf5cf71",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Docker Hub",
+      "range": {
+        "startLine": 143,
+        "startChar": 69,
+        "endLine": 143,
+        "endChar": 75
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d6d486e_7ee1cc16",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Nexus3",
+      "range": {
+        "startLine": 143,
+        "startChar": 60,
+        "endLine": 143,
+        "endChar": 65
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "803cea98_14ca6b02",
+        "filename": "lftools/onap_nexus_2_docker.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "I wonder if we can make this such that it can be used for any other project\n\nfor example \"nexus3.\u003cproject\u003e.org\"",
+      "range": {
+        "startLine": 53,
+        "startChar": 14,
+        "endLine": 53,
+        "endChar": 45
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "948cc672_cd77f699",
+        "filename": "lftools/onap_nexus_2_docker.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Docker Hub",
+      "range": {
+        "startLine": 57,
+        "startChar": 27,
+        "endLine": 57,
+        "endChar": 33
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3025f961_1040079c",
+        "filename": "lftools/onap_nexus_2_docker.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "Same, we probably should make this a variable to also being able to use it with any project",
+      "range": {
+        "startLine": 398,
+        "startChar": 33,
+        "endLine": 398,
+        "endChar": 37
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8157b958_226484fe",
+        "filename": "releasenotes/notes/onap-nexus-2-docker-5562e259be24b2c4.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "I don\u0027t think we should make it default to a particular project. We should make sure the user specifies a project name to avoid running this accidentally for onap",
+      "range": {
+        "startLine": 5,
+        "startChar": 31,
+        "endLine": 5,
+        "endChar": 35
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9e6b99_c2b2d69b",
+        "filename": "releasenotes/notes/onap-nexus-2-docker-5562e259be24b2c4.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-11-27T23:13:10Z",
+      "side": 1,
+      "message": "implicitly",
+      "range": {
+        "startLine": 20,
+        "startChar": 8,
+        "endLine": 20,
+        "endChar": 19
+      },
+      "revId": "07f7785b57573c51a017555dcd1f9e9bd1ea97d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
