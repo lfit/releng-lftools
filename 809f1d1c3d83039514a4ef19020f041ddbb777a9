@@ -63,6 +63,30 @@
       "revId": "809f1d1c3d83039514a4ef19020f041ddbb777a9",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d10da0d_a23eba2b",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-27T02:04:31Z",
+      "side": 1,
+      "message": "If go with this approach and deprecate the existing command then we have to move the shell script bits which handles reading the file versioning into the downstream projects that consume lftools deploy. \n\nI\u0027d get some inputs from Jermey,Thanh,Aric.",
+      "parentUuid": "e0873c94_55dd8121",
+      "range": {
+        "startLine": 163,
+        "startChar": 21,
+        "endLine": 163,
+        "endChar": 32
+      },
+      "revId": "809f1d1c3d83039514a4ef19020f041ddbb777a9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
