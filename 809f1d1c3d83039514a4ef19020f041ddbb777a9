@@ -87,6 +87,30 @@
       "revId": "809f1d1c3d83039514a4ef19020f041ddbb777a9",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2c5f98b_81d5cb51",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-11-27T02:30:43Z",
+      "side": 1,
+      "message": "@Anil as far as I\u0027m aware odl-packaging / you are the only consumer of this API. Are you okay with this change?\n\nIf you\u0027re fine with the decision then we can go with it. If we\u0027re changing API though we should document the migration path for the end users as it will break them. This can be done in the release notes using the \"upgrade\" section.",
+      "parentUuid": "2d10da0d_a23eba2b",
+      "range": {
+        "startLine": 163,
+        "startChar": 21,
+        "endLine": 163,
+        "endChar": 32
+      },
+      "revId": "809f1d1c3d83039514a4ef19020f041ddbb777a9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
