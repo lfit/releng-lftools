@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "689970dc_77508a05",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-28T04:56:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3f214d5_2a955523",
+      "range": {
+        "startLine": 4,
+        "startChar": 16,
+        "endLine": 4,
+        "endChar": 20
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "775338ef_6f0f295d",
         "filename": "lftools/nexus/release_docker_hub.py",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2018-11-28T02:52:09Z",
       "side": 1,
       "message": "rm space prefix",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 1
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93ba4025_5159ff9c",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-28T04:56:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "775338ef_6f0f295d",
       "range": {
         "startLine": 13,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0dab32a5_bc97f6e3",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-28T04:56:52Z",
+      "side": 1,
+      "message": "I agree, but probably good to have some here as well. For better understanding.\nWhich documents?",
+      "parentUuid": "b1e5adda_24ba9f50",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 40
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3d5c840_af46d662",
         "filename": "lftools/nexus/release_docker_hub.py",
         "patchSetId": 7
@@ -82,6 +154,30 @@
       "writtenOn": "2018-11-28T02:52:09Z",
       "side": 1,
       "message": "Make both consistant",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 29
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37ce206c_deaf02b9",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-28T04:56:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d5c840_af46d662",
       "range": {
         "startLine": 174,
         "startChar": 8,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "f2116fc1_2efcb45c",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-28T04:56:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3346df9_47a4fe7a",
+      "range": {
+        "startLine": 388,
+        "startChar": 70,
+        "endLine": 388,
+        "endChar": 75
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "398086b0_89e6e85c",
         "filename": "lftools/nexus/release_docker_hub.py",
         "patchSetId": 7
@@ -128,6 +248,30 @@
       "writtenOn": "2018-11-28T02:52:09Z",
       "side": 1,
       "message": "Please add these into releng docs.",
+      "range": {
+        "startLine": 440,
+        "startChar": 0,
+        "endLine": 450,
+        "endChar": 0
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f5c2815_174ecd17",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-28T04:56:52Z",
+      "side": 1,
+      "message": "Where?",
+      "parentUuid": "398086b0_89e6e85c",
       "range": {
         "startLine": 440,
         "startChar": 0,
@@ -209,6 +353,30 @@
     },
     {
       "key": {
+        "uuid": "cf1527be_74ce73f2",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-28T04:56:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13c1404c_9ce09536",
+      "range": {
+        "startLine": 512,
+        "startChar": 33,
+        "endLine": 512,
+        "endChar": 38
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "112fcfec_0310ffbb",
         "filename": "lftools/nexus/release_docker_hub.py",
         "patchSetId": 7
@@ -220,6 +388,30 @@
       "writtenOn": "2018-11-28T02:52:09Z",
       "side": 1,
       "message": "multi-threading? Looks like you creating a threadpool here.",
+      "range": {
+        "startLine": 542,
+        "startChar": 4,
+        "endLine": 542,
+        "endChar": 39
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f39fa074_e98d5fb9",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-28T04:56:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "112fcfec_0310ffbb",
       "range": {
         "startLine": 542,
         "startChar": 4,
@@ -255,6 +447,30 @@
     },
     {
       "key": {
+        "uuid": "c5e6a12a_be622929",
+        "filename": "releasenotes/notes/release_docker_hub-5562e259be24b2c4.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-28T04:56:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f5fd61a_bdecb101",
+      "range": {
+        "startLine": 4,
+        "startChar": 9,
+        "endLine": 4,
+        "endChar": 17
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1a50898_36b94e8b",
         "filename": "tests/test_release_docker_hub.py",
         "patchSetId": 7
@@ -266,6 +482,30 @@
       "writtenOn": "2018-11-28T02:52:09Z",
       "side": 1,
       "message": "del blank lines",
+      "range": {
+        "startLine": 530,
+        "startChar": 0,
+        "endLine": 531,
+        "endChar": 0
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fe0d9ca_d32380f6",
+        "filename": "tests/test_release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2018-11-28T04:56:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1a50898_36b94e8b",
       "range": {
         "startLine": 530,
         "startChar": 0,
