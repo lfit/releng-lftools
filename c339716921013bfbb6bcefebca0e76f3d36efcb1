@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3f214d5_2a955523",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "2018",
+      "range": {
+        "startLine": 4,
+        "startChar": 16,
+        "endLine": 4,
+        "endChar": 20
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "775338ef_6f0f295d",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "rm space prefix",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 1
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b1e5adda_24ba9f50",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "This should go into somewhere in releng docs.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 40
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3d5c840_af46d662",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "Make both consistant",
+      "range": {
+        "startLine": 174,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 29
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3346df9_47a4fe7a",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "Nexus 2/3? Good to be specific.",
+      "range": {
+        "startLine": 388,
+        "startChar": 70,
+        "endLine": 388,
+        "endChar": 75
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "398086b0_89e6e85c",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "Please add these into releng docs.",
+      "range": {
+        "startLine": 440,
+        "startChar": 0,
+        "endLine": 450,
+        "endChar": 0
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "045aad4d_5a706f9f",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "Nexus3 Catalog",
+      "range": {
+        "startLine": 509,
+        "startChar": 78,
+        "endLine": 509,
+        "endChar": 90
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5dd25d82_c8d37940",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "multi-threaded",
+      "range": {
+        "startLine": 509,
+        "startChar": 27,
+        "endLine": 509,
+        "endChar": 39
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13c1404c_9ce09536",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "Nexus3?",
+      "range": {
+        "startLine": 512,
+        "startChar": 33,
+        "endLine": 512,
+        "endChar": 38
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "112fcfec_0310ffbb",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "multi-threading? Looks like you creating a threadpool here.",
+      "range": {
+        "startLine": 542,
+        "startChar": 4,
+        "endLine": 542,
+        "endChar": 39
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f5fd61a_bdecb101",
+        "filename": "releasenotes/notes/release_docker_hub-5562e259be24b2c4.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "command / sub-command",
+      "range": {
+        "startLine": 4,
+        "startChar": 9,
+        "endLine": 4,
+        "endChar": 17
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1a50898_36b94e8b",
+        "filename": "tests/test_release_docker_hub.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2018-11-28T02:52:09Z",
+      "side": 1,
+      "message": "del blank lines",
+      "range": {
+        "startLine": 530,
+        "startChar": 0,
+        "endLine": 531,
+        "endChar": 0
+      },
+      "revId": "c339716921013bfbb6bcefebca0e76f3d36efcb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
