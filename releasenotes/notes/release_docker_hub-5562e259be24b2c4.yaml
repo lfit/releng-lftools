@@ -1,0 +1,35 @@
+---
+features:
+  - |
+    This command will collect all tags from both Nexus3 and Docker Hub, for
+    a particular org (for instance 'onap'), as well as a repo (default all repos).
+    With this information, it will calculate a list of valid tags that needs to
+    be copied to Docker Hub from Nexus3.
+
+    Usage:
+      lftools nexus docker releasedockerhub
+
+    Options:
+      -o, --org TEXT   Specify repository organization.  [required]
+      -r, --repo TEXT  Only repos containing this string will be selected.
+                       Default set to blank string, which is every repo.
+      -s, --summary    Prints a summary of missing docker tags.
+      -v, --verbose    Prints all collected repo/tag information.
+      -c, --copy       Copy missing tags from Nexus3 repos to Docker Hub repos.
+      -p, --progbar    Display a progress bar for the time consuming jobs.
+issues:
+  - |
+    Currently, if the Docker Hub repo is missing, it is not created specifically,
+    but implicitly by docker itself when we push the docker image to an non-
+    existing Docker Hub repo.
+
+    The command handles any org (onap or hyperledger for instance), "BUT" it
+    requires that the versioning pattern is #.#.# (1.2.3) for the project.
+    In regexp terms : ^\d+.\d+.\d+$
+critical:
+  - |
+    Before you give the "lftools nexus docker releasedockerhub" command please
+    ensure you have manually logged in to both Nexus as well as to Docker.
+
+    sudo docker login       ---> DOCKER Credentials
+    sudo docker login nexus3.onap.org:10002 -u <yourLFID>
