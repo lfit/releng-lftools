@@ -13,6 +13,7 @@ from os import environ
 import click
 
 from lftools.nexus import cmd as nexuscmd
+import lftools.nexus.release_docker_hub as rdh
 
 NEXUS_URL_ENV = 'NEXUS_URL'
 
@@ -115,3 +116,33 @@ def delete_images(ctx, settings, server, repo, pattern, yes):
     if yes or click.confirm("Would you like to delete all {} images?".format(
             str(len(images)))):
         nexuscmd.delete_images(settings, server, images)
+
+
+@docker.command(name="releasedockerhub")
+@click.option(
+    '-o', '--org', type=str, required=True,
+    help='Specify repository organization.')
+@click.option(
+    '-r', '--repo', type=str, default='', required=False,
+    help='Only repos containing this string will be selected. '
+         'Default set to blank string, which is every repo.')
+@click.option(
+    '-s', '--summary', is_flag=True, required=False,
+    help='Prints a summary of missing docker tags.')
+@click.option(
+    '-v', '--verbose', is_flag=True, required=False,
+    help='Prints all collected repo/tag information.')
+@click.option(
+    '-c', '--copy', is_flag=True, required=False,
+    help='Copy missing tags from Nexus3 repos to Docker Hub repos.')
+@click.option(
+    '-p', '--progbar', is_flag=True, required=False, default=False,
+    help='Display a progress bar for the time consuming jobs.')
+@click.pass_context
+def copy_from_nexus3_to_dockerhub(ctx, org, repo, summary, verbose, copy, progbar):
+    """Find missing repos in Docker Hub, Copy from Nexus3.
+
+    Will by default list all missing repos in Docker Hub, compared to Nexus3.
+    If -c (--copy) is provided, it will copy the repos from Nexus3 to Docker Hub.
+    """
+    rdh.start_point(org, repo, summary, verbose, copy, progbar)
