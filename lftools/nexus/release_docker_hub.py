@@ -41,6 +41,8 @@ lftools nexus docker releasedockerhub
 from __future__ import print_function
 
 import logging
+import multiprocessing
+from multiprocessing.dummy import Pool as ThreadPool
 import re
 import socket
 
@@ -515,6 +517,76 @@ def get_nexus3_catalog(org_name='', find_pattern=''):
     return True
 
 
+def fetch_all_tags(progbar=False):
+    """Fetch all tags function.
+
+    This function will use multi-threading to fetch all tags for all projects in
+    Nexus3 Catalog.
+    """
+    NbrProjects = len(NexusCatalog)
+    log.info("Fetching tags from Nexus3 and Docker Hub for {} projects".format(NbrProjects))
+    if progbar:
+        pbar = tqdm.tqdm(total=NbrProjects, bar_format='{l_bar}{bar}|{n_fmt}/{total_fmt} [{elapsed}]')
+
+    def _fetch_all_tags(proj):
+        """Helper function for multi-threading.
+
+        This function, will create an instance of ProjectClass (which triggers
+        the project class fetching all Nexus3/Docker Hub tags)
+        Then adding this instance to the project list.
+
+            Parameters:
+                proj : Tuple with 'org' and 'repo'
+                    ('onap', 'aaf/aaf_service')
+        """
+        new_proj = ProjectClass(proj)
+        projects.append(new_proj)
+        if progbar:
+            pbar.update(1)
+
+    pool = ThreadPool(multiprocessing.cpu_count())
+    pool.map(_fetch_all_tags, NexusCatalog)
+    pool.close()
+    pool.join()
+
+    if progbar:
+        pbar.close()
+    projects.sort()
+
+
+def copy_from_nexus_to_docker(progbar=False):
+    """Copy all missing tags.
+
+    This function will use multi-threading to copy all missing tags in the project list.
+    """
+    _tot_tags = 0
+    for proj in projects:
+        _tot_tags = _tot_tags + len(proj.tags_2_copy.valid)
+    log.info("About to start copying from Nexus3 to Docker Hub for {} missing tags".format(_tot_tags))
+    if progbar:
+        pbar = tqdm.tqdm(total=_tot_tags, bar_format='{l_bar}{bar}|{n_fmt}/{total_fmt} [{elapsed}]')
+
+    def _docker_pull_tag_push(proj):
+        """Helper function for multi-threading.
+
+        This function, will call the ProjectClass proj's docker_pull_tag_push.
+
+            Parameters:
+                proj : Tuple with 'org' and 'repo'
+                    ('onap', 'aaf/aaf_service')
+        """
+        proj.docker_pull_tag_push(progbar)
+        if progbar:
+            pbar.update(len(proj.tags_2_copy.valid))
+
+    pool = ThreadPool(multiprocessing.cpu_count())
+    pool.map(_docker_pull_tag_push, projects)
+    pool.close()
+    pool.join()
+    if progbar:
+        pbar.close()
+
+
 def print_nexus_docker_proj_names():
     """Print Nexus3 - Docker Hub repositories."""
     fmt_str = '{:<'+str(project_max_len_chars)+'} : '
@@ -650,3 +722,28 @@ def print_nbr_tags_to_copy():
     for proj in projects:
         _tot_tags = _tot_tags + len(proj.tags_2_copy.valid)
     log.info("Summary: {} tags that should be copied from Nexus3 to Docker Hub.".format(_tot_tags))
+
+
+def start_point(org_name, find_pattern='', summary=False,
+                verbose=False, copy=False, progbar=False):
+    """Main function."""
+    initialize(org_name)
+    if not get_nexus3_catalog(org_name, find_pattern):
+        log.info("Could not get any catalog from Nexus3 with org = {}".format(org_name))
+        return
+
+    fetch_all_tags(progbar)
+    if verbose:
+        print_nexus_docker_proj_names()
+        print_nexus_valid_tags()
+        print_nexus_invalid_tags()
+        print_docker_valid_tags()
+        print_docker_invalid_tags()
+        print_stats()
+    if summary or verbose:
+        print_missing_docker_proj()
+        print_nexus_tags_to_copy()
+    if copy:
+        copy_from_nexus_to_docker(progbar)
+    else:
+        print_nbr_tags_to_copy()
