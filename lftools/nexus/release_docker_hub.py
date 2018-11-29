@@ -44,7 +44,9 @@ import logging
 import re
 import socket
 
+import docker
 import requests
+import tqdm
 import urllib3
 
 log = logging.getLogger(__name__)
@@ -273,3 +275,161 @@ class DockerTagClass (TagClass):
                             org_name, repo_name, tmp_tuple[2]))
         else:
             self.repository_exist = False
+
+
+class ProjectClass:
+    """Main Project class.
+
+    Main Function of this class, is to pull, and push the missing images from
+    Nexus3 to Docker Hub.
+
+    Parameters:
+        nexus_proj : Tuple with 'org' and 'repo'
+            ('onap', 'aaf/aaf_service')
+
+    Upon class Initialize the following happens.
+      * Set Nexus and Docker repository names.
+      * Initialize the Nexus and Docker tag variables.
+      * Find which tags are needed to be copied.
+
+    Main external function is docker_pull_tag_push
+    """
+
+    def __init__(self, nexus_proj):
+        """Initialize this class."""
+        self.org_name = nexus_proj[0]
+        self.nexus_repo_name = nexus_proj[1]
+        self._set_docker_repo_name(self.nexus_repo_name)
+        self.nexus_tags = NexusTagClass(self.org_name, self.nexus_repo_name)
+        self.docker_tags = DockerTagClass(self.org_name, self.docker_repo_name)
+        self.tags_2_copy = TagClass(self.org_name, self.nexus_repo_name)
+        self._populate_tags_to_copy()
+        self.docker_client = docker.from_env()
+
+    def __lt__(self, other):
+        """Implement sort order base on Nexus3 repo name."""
+        return self.nexus_repo_name < other.nexus_repo_name
+
+    def calc_nexus_project_name(self):
+        """Get Nexus3 project name."""
+        return self.org_name + "/" + self.nexus_repo_name
+
+    def calc_docker_project_name(self):
+        """Get Docker Hub project name."""
+        return self.org_name + "/" + self.docker_repo_name
+
+    def _set_docker_repo_name(self, nexus_repo_name):
+        """Set Docker Hub repo name.
+
+        Docker repository will be based on the Nexus3 repo name.
+        But replacing all '/' with '-'
+        """
+        self.docker_repo_name = self.nexus_repo_name.replace('/', '-')
+        log.debug("ProjName = {} ---> Docker name = {}".format(
+            self.nexus_repo_name, self.docker_repo_name))
+
+    def _populate_tags_to_copy(self):
+        """Populate tags_to_copy list.
+
+        Check that all valid Nexus3 tags are among the Docker Hub valid tags.
+        If not, add them to the tags_2_copy list.
+        """
+        log.debug('Populate {} has valid Nexus3 {} and valid Docker Hub {}'.format(
+            self.docker_repo_name,
+            len(self.nexus_tags.valid), len(self.docker_tags.valid)))
+
+        if len(self.nexus_tags.valid) > 0:
+            for nexustag in self.nexus_tags.valid:
+                if not nexustag in self.docker_tags.valid:
+                    log.debug('Need to copy tag {} from {}'.format(nexustag, self.nexus_repo_name))
+                    self.tags_2_copy.add_tag(nexustag)
+
+    def _pull_tag_push_msg(self, info_text, count, retry_text='', progbar=False):
+        """Print a formated message using log.info."""
+        due_to_txt = ''
+        if len(retry_text) > 0:
+            due_to_txt = 'due to {}'.format(retry_text)
+        _attempt_str = 'Attempt '
+        b4_txt_template = _attempt_str + '{:2d}'
+        b4_txt = ''.ljust(len(_attempt_str)+2)
+        if count > 1:
+            b4_txt = b4_txt_template.format(count)
+        if progbar:
+            tqdm.tqdm.write("{}: {} {}".format(b4_txt, info_text, due_to_txt))
+        else:
+            log.info("{}: {} {}".format(b4_txt, info_text, due_to_txt))
+
+    def _docker_pull(self, nexus_image_str, count, tag, retry_text='', progbar=False):
+        """Pull an image from Nexus."""
+        self._pull_tag_push_msg('Pulling  Nexus3 image {} with tag {}'.format(
+            self.calc_nexus_project_name(), tag), count, retry_text)
+        image = self.docker_client.images.pull(nexus_image_str)
+        return image
+
+    def _docker_tag(self, count, image, tag, retry_text='', progbar=False):
+        """Tag the image with proper docker name and version."""
+        self._pull_tag_push_msg('Creating docker image {} with tag {}'.format(
+            self.calc_docker_project_name(), tag), count, retry_text)
+        image.tag(self.calc_docker_project_name(), tag=tag)
+
+    def _docker_push(self, count, image, tag, retry_text, progbar=False):
+        """Push the docker image to Docker Hub."""
+        self._pull_tag_push_msg('Pushing  docker image {} with tag {}'.format(
+            self.calc_docker_project_name(), tag), count, retry_text)
+        self.docker_client.images.push(self.calc_docker_project_name(), tag=tag)
+
+    def _docker_cleanup(self, count, image, tag, retry_text='', progbar=False):
+        """Remove the local copy of the image."""
+        image_id = _format_image_id(image.short_id)
+        self._pull_tag_push_msg('Cleanup  docker image {} with tag {} and id {}'.format(
+            self.calc_docker_project_name(), tag, image_id), count, retry_text)
+        self.docker_client.images.remove(image.id, force=True)
+
+    def docker_pull_tag_push(self, progbar=False):
+        """Copy all missing Docker Hub images from Nexus3.
+
+        This is the main function which will copy a specific tag from Nexu3
+        to Docker Hub repository.
+
+        It has 4 stages, pull, tag, push and cleanup.
+        Each of these stages, will be retried 10 times upon failures.
+        """
+        if len(self.tags_2_copy.valid) == 0:
+            return
+
+        for tag in self.tags_2_copy.valid:
+            org_path = _remove_http_from_url(NEXUS3_BASE)
+            nexus_image_str = '{}/{}/{}:{}'.format(org_path, self.org_name, self.nexus_repo_name, tag)
+            log.debug("Nexus Image Str = {}".format(nexus_image_str))
+            for stage in ['pull', 'tag', 'push', 'cleanup']:
+                cnt_break_loop = 1
+                retry_text = ''
+                while (True):
+                    try:
+                        log.debug('stage = {}. cnt_break_loop {}, reason {}'.format(stage, cnt_break_loop, retry_text))
+                        if stage == 'pull':
+                            image = self._docker_pull(nexus_image_str, cnt_break_loop, tag, retry_text, progbar)
+                            break
+
+                        if stage == 'tag':
+                            self._docker_tag(cnt_break_loop, image, tag, retry_text, progbar)
+                            break
+
+                        if stage == 'push':
+                            self._docker_push(cnt_break_loop, image, tag, retry_text, progbar)
+                            break
+
+                        if stage == 'cleanup':
+                            self._docker_cleanup(cnt_break_loop, image, tag, retry_text, progbar)
+                            break
+                    except socket.timeout:
+                        retry_text = 'Socket Timeout'
+                    except requests.exceptions.ConnectionError:
+                        retry_text = 'Connection Error'
+                    except urllib3.exceptions.ReadTimeoutError:
+                        retry_text = 'Read Timeout Error'
+                    except docker.errors.APIError:
+                        retry_text = 'API Error'
+                    cnt_break_loop = cnt_break_loop + 1
+                    if (cnt_break_loop > 90):
+                        raise requests.HTTPError(retry_text)
