@@ -1,4 +1,5 @@
 click
+docker
 glob2  # Needed for Python < 3.5 recursive glob support
 deb-pkg-tools~=5.2
 defusedxml # Needed due to tox complains on parseString not safe
@@ -9,6 +10,7 @@ ruamel.yaml
 setuptools>=36.5.0
 six~=1.11.0
 python-jenkins~=1.1.0
+tqdm
 xdg~=1.0.7;python_version<'3'
 xdg~=3.0.0;python_version>='3'
 
