@@ -410,3 +410,197 @@ class TestFetchNexus3Catalog:
         responses.add(responses.GET, self.url, body=self.answer, status=200)
         rdh.get_nexus3_catalog ('onap', 'aaf')
         assert len(rdh.NexusCatalog) == 18
+
+
+class TestFetchAllTagsAndUpdate:
+    _test_image_long_id = 'sha256:3450464d68c9443dedc8bfe3272a23e6441c37f707c42d32fee0ebdbcd319d2c'
+    _test_image_short_id = 'sha256:3450464d68'
+    _expected_nexus_image_str = ['nexus3.onap.org:10002/onap/base/sdc-sanity:1.4.0',
+                                'nexus3.onap.org:10002/onap/gizmo2:1.3.1',
+                                'nexus3.onap.org:10002/onap/gizmo2:1.3.2'
+                                ]
+    class mock_image:
+        id = ''
+        short_id = ''
+        def __init__(self, id, short_id):
+            self.id = id
+            self.short_id = short_id
+
+    class count_mock_hits:
+        pull = 0
+        tag = 0
+        push = 0
+        cleanup = 0
+
+    counter = count_mock_hits
+
+    class nbr_exceptions:
+        pull = 0
+        tag = 0
+        push = 0
+        cleanup = 0
+
+    nbr_exc = nbr_exceptions
+
+    def mocked_docker_pull(self, nexus_image_str, count, tag, retry_text='', progbar=False):
+        """Mocking Pull an image from Nexus."""
+        if not nexus_image_str in self._expected_nexus_image_str:
+            print ("IMAGESTR {}".format(nexus_image_str))
+            raise ValueError('Wrong nexus project in pull')
+        image = self.mock_image (self._test_image_long_id, self._test_image_short_id)
+        self.counter.pull = self.counter.pull + 1
+        if self.counter.pull > self.nbr_exc.pull:
+            return image
+        else:
+            raise requests.exceptions.ConnectionError('Connection Error')
+
+    def mocked_docker_tag(self, count, image, tag, retry_text='', progbar=False):
+        """Mocking Tag the image with proper docker name and version."""
+        if not image.id == self._test_image_long_id:
+            raise ValueError('Wrong image id in remove')
+        if not tag in ["1.4.0","1.3.1","1.3.2"]:
+            raise ValueError('Wrong tag in docker_tag')
+        self.counter.tag = self.counter.tag + 1
+        if self.counter.tag <= self.nbr_exc.tag:
+            raise requests.exceptions.ConnectionError('Connection Error')
+
+    def mocked_docker_push(self, count, image, tag, retry_text, progbar=False):
+        """Mocking Tag the image with proper docker name and version."""
+        if not image.id == self._test_image_long_id:
+            raise ValueError('Wrong image id in remove')
+        if not tag in ["1.4.0","1.3.1","1.3.2"]:
+            raise ValueError('Wrong tag in push')
+        self.counter.push = self.counter.push + 1
+        if self.counter.push <= self.nbr_exc.push:
+            raise requests.exceptions.ConnectionError('Connection Error')
+
+    def mocked_docker_cleanup(self, count, image, tag, retry_text='', progbar=False):
+        """Mocking Tag the image with proper docker name and version."""
+        if not image.id == self._test_image_long_id:
+            raise ValueError('Wrong image id in remove')
+        self.counter.cleanup = self.counter.cleanup + 1
+        if self.counter.cleanup <= self.nbr_exc.cleanup:
+            raise requests.exceptions.ConnectionError('Connection Error')
+
+    def initiate_test_fetch(self, responses, mocker, repo=''):
+        mocker.patch('lftools.nexus.release_docker_hub.ProjectClass._docker_pull', side_effect=self.mocked_docker_pull)
+        mocker.patch('lftools.nexus.release_docker_hub.ProjectClass._docker_tag', side_effect=self.mocked_docker_tag)
+        mocker.patch('lftools.nexus.release_docker_hub.ProjectClass._docker_push', side_effect=self.mocked_docker_push)
+        mocker.patch('lftools.nexus.release_docker_hub.ProjectClass._docker_cleanup', side_effect=self.mocked_docker_cleanup)
+        url = 'https://nexus3.onap.org:10002/v2/_catalog'
+        answer = '{"repositories":["onap/base/sdc-sanity","onap/gizmo","onap/gizmo2"]}'
+
+        nexus_url1 = 'https://nexus3.onap.org:10002/v2/onap/base/sdc-sanity/tags/list'
+        nexus_answer1 = '{"name":"onap/base_sdc-sanity","tags":["1.3.0","1.3.1","1.4.0","v1.0.0"]}'
+        docker_url1 = 'https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags'
+        docker_answer1 = """[{"layer": "", "name": "1.3.0"},
+            {"layer": "", "name": "1.3.1"},
+            {"layer": "", "name": "v1.0.0"}]
+        """
+        nexus_url2 = 'https://nexus3.onap.org:10002/v2/onap/gizmo/tags/list'
+        nexus_answer2 = '{"name":"onap/gizmo","tags":["1.3.0"]}'
+        docker_url2 = 'https://registry.hub.docker.com/v1/repositories/onap/gizmo/tags'
+        docker_answer2 = """[{"layer": "", "name": "1.3.0"}]
+        """
+        nexus_url3 = 'https://nexus3.onap.org:10002/v2/onap/gizmo2/tags/list'
+        nexus_answer3 = '{"name":"onap/gizmo2","tags":["1.3.0", "1.3.1", "1.3.2"]}'
+        docker_url3 = 'https://registry.hub.docker.com/v1/repositories/onap/gizmo2/tags'
+        docker_answer3 = """[{"layer": "", "name": "1.3.0"}]
+        """
+        responses.add(responses.GET, url, body=answer, status=200)
+
+        rdh.NexusCatalog = []
+        rdh.projects = []
+
+        responses.add(responses.GET, nexus_url1, body=nexus_answer1, status=200)
+        responses.add(responses.GET, docker_url1, body=docker_answer1, status=200)
+        if len(repo) == 0:
+            responses.add(responses.GET, nexus_url2, body=nexus_answer2, status=200)
+            responses.add(responses.GET, docker_url2, body=docker_answer2, status=200)
+            responses.add(responses.GET, nexus_url3, body=nexus_answer3, status=200)
+            responses.add(responses.GET, docker_url3, body=docker_answer3, status=200)
+
+        self.counter.pull = self.counter.tag = self.counter.push = self.counter.cleanup = 0
+
+    def initiate_bogus_org_test_fetch(self, responses, org):
+        url = 'https://nexus3.{}.org:10002/v2/_catalog'.format(org)
+        exception = requests.HTTPError("Issues with URL: {} - <class 'requests.exceptions.ConnectionError'>".format(url))
+        responses.add(responses.GET, url, body=exception)
+        rdh.NexusCatalog = []
+        rdh.projects = []
+        self.counter.pull = self.counter.tag = self.counter.push = self.counter.cleanup = 0
+
+    def test_fetch_all_tags(self, responses, mocker):
+        self.initiate_test_fetch(responses, mocker)
+        rdh.initialize ('onap')
+        rdh.get_nexus3_catalog ('onap')
+        rdh.fetch_all_tags()
+        assert len(rdh.NexusCatalog) == 3
+        assert len(rdh.projects) == 3
+        assert len(rdh.projects[0].tags_2_copy.valid) == 1
+        assert len(rdh.projects[1].tags_2_copy.valid) == 0
+        assert len(rdh.projects[2].tags_2_copy.valid) == 2
+
+        assert rdh.projects[0].tags_2_copy.valid[0] == '1.4.0'
+        assert rdh.projects[2].tags_2_copy.valid[0] == '1.3.1'
+        assert rdh.projects[2].tags_2_copy.valid[1] == '1.3.2'
+
+    def test_fetch_from_bogus_orgs(self, responses, mocker):
+        self.initiate_bogus_org_test_fetch(responses, 'bogus_org321')
+        rdh.initialize ('bogus_org321')
+        rdh.get_nexus3_catalog ('bogus_org321')
+        assert len(rdh.NexusCatalog) == 0
+        assert len(rdh.projects) == 0
+
+    def test_copy(self, responses, mocker):
+        self.initiate_test_fetch(responses, mocker)
+        rdh.initialize ('onap')
+        rdh.get_nexus3_catalog ('onap')
+        rdh.fetch_all_tags()
+        rdh.copy_from_nexus_to_docker()
+        assert self.counter.pull == 3
+        assert self.counter.tag == 3
+        assert self.counter.push == 3
+        assert self.counter.cleanup == 3
+
+    def test_start_no_copy(self, responses, mocker):
+        self.initiate_test_fetch(responses, mocker)
+        rdh.start_point ('onap', '', False)
+        assert self.counter.pull == 0
+        assert self.counter.tag == 0
+        assert self.counter.push == 0
+        assert self.counter.cleanup == 0
+
+    def test_start_copy(self, responses, mocker):
+        self.initiate_test_fetch(responses, mocker)
+        rdh.start_point ('onap', '', False, False, True)
+        assert len(rdh.NexusCatalog) == 3
+        assert len(rdh.projects) == 3
+        assert len(rdh.projects[0].tags_2_copy.valid) == 1
+        assert len(rdh.projects[1].tags_2_copy.valid) == 0
+        assert len(rdh.projects[2].tags_2_copy.valid) == 2
+        assert rdh.projects[0].tags_2_copy.valid[0] == '1.4.0'
+        assert rdh.projects[2].tags_2_copy.valid[0] == '1.3.1'
+        assert rdh.projects[2].tags_2_copy.valid[1] == '1.3.2'
+        assert self.counter.pull == 3
+        assert self.counter.tag == 3
+        assert self.counter.push == 3
+        assert self.counter.cleanup == 3
+
+    def test_start_copy_repo(self, responses, mocker):
+        self.initiate_test_fetch(responses, mocker, 'sanity')
+        rdh.start_point ('onap', 'sanity', False, False, True)
+        assert len(rdh.NexusCatalog) == 1
+        assert len(rdh.projects) == 1
+        assert len(rdh.projects[0].tags_2_copy.valid) == 1
+        assert rdh.projects[0].tags_2_copy.valid[0] == '1.4.0'
+        assert self.counter.pull == 1
+        assert self.counter.tag == 1
+        assert self.counter.push == 1
+        assert self.counter.cleanup == 1
+
+    def test_start_bogus_orgs(self, responses):
+        self.initiate_bogus_org_test_fetch(responses, 'bogus_org321')
+        rdh.start_point ('bogus_org321')
+        assert len(rdh.NexusCatalog) == 0
+        assert len(rdh.projects) == 0
