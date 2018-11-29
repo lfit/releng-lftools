@@ -106,7 +106,7 @@ main() {
     git clone -q "$gerritclonebase""$repo" "$DIR"/"$repo" || exit 1
   fi
 
-  diff="$(diff <(lftools infofile get_committers "$DIR"/LDAP.yaml 2>&-| sort) <(lftools infofile get_committers "$DIR"/"$repo"/INFO.yaml 2>&- | sort))"
+  diff="$(diff <(lftools infofile get-committers "$DIR"/LDAP.yaml 2>&-| sort) <(lftools infofile get-committers "$DIR"/"$repo"/INFO.yaml 2>&- | sort))"
   status="$?"
 
   diff_array=()
@@ -117,11 +117,11 @@ main() {
     diff_array+=( "$line" )
     if [[ $(echo "$line" | grep ">") ]];
     then
-      onlyinINFO+=( "$(echo "$line" | awk -F"'" '{ print $2 }')" )
+      onlyinINFO+=( "$(echo "$line" | awk -F"id: " '{ print $2 }')" )
     fi
     if [[ $(echo "$line" | grep "<") ]];
     then
-      onlyinLDAP+=( "$(echo "$line" | awk -F"'" '{ print $2 }')" )
+      onlyinLDAP+=( "$(echo "$line" | awk -F"id: " '{ print $2 }')" )
     fi
   done < <(echo "${diff[@]}" )
 
@@ -130,7 +130,7 @@ main() {
     for missing in "${onlyinINFO[@]}"; do
       if ! [ -z "$missing" ]; then
         echo "    DUMMY: sending invite to $missing"
-        lftools infofile get_committers --id "$missing" "$DIR"/"$repo"/INFO.yaml 2>&-
+        lftools infofile get-committers --id "$missing" "$DIR"/"$repo"/INFO.yaml 2>&-
       fi
     done
   fi
