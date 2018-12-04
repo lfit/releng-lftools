@@ -102,8 +102,8 @@ main() {
   fi
 
   if ! [[ -d "$DIR"/"$repo" ]]; then
-    echo "    git clone -q $gerritclonebase$repo $DIR/$repo || exit 1"
-    git clone -q "$gerritclonebase""$repo" "$DIR"/"$repo" || exit 1
+    echo "    git clone -q $gerritclonebase/$repo $DIR/$repo || exit 1"
+    git clone -q "$gerritclonebase"/"$repo" "$DIR"/"$repo" || exit 1
   fi
 
   diff="$(diff <(lftools infofile get-committers "$DIR"/LDAP.yaml 2>&-| sort) <(lftools infofile get-committers "$DIR"/"$repo"/INFO.yaml 2>&- | sort))"
@@ -138,8 +138,8 @@ main() {
   if ! [ "${#onlyinLDAP[@]}" -eq 0 ]; then
     echo "    These users are listed as commiters in LDAP and not in the INFO.yaml"
     for missing in "${onlyinLDAP[@]}"; do
-      echo "    lftools infofile correct $DIR/$repo/INFO.yaml $DIR/LDAP.yaml $missing --repo $repo 2>&-"
-      lftools infofile correct "$DIR"/"$repo"/INFO.yaml "$DIR"/LDAP.yaml "$missing" --repo "$repo" 2>&-
+      echo "    lftools infofile sync-committers $DIR/$repo/INFO.yaml $DIR/LDAP.yaml $missing --repo $repo 2>&-"
+      lftools infofile sync-committers "$DIR"/"$repo"/INFO.yaml "$DIR"/LDAP.yaml "$missing" --repo "$repo" 2>&-
     done
 
   fi
