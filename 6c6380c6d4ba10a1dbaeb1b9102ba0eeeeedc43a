@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f08cb0c_b9baa57a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-12-04T22:57:10Z",
+      "side": 1,
+      "message": "Add the Jira to the footer like:\n\nIssue: RELENG-#####",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 57
+      },
+      "revId": "6c6380c6d4ba10a1dbaeb1b9102ba0eeeeedc43a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eed5eb78_39381d60",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-12-04T22:57:10Z",
+      "side": 1,
+      "message": "Lets double check, but I am pretty sure all projects use 10002 port for docker.releases.",
+      "range": {
+        "startLine": 107,
+        "startChar": 41,
+        "endLine": 107,
+        "endChar": 46
+      },
+      "revId": "6c6380c6d4ba10a1dbaeb1b9102ba0eeeeedc43a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a116614_991f3f55",
+        "filename": "releasenotes/notes/release_docker_hub-5562e259be24b2c4.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-12-04T22:57:10Z",
+      "side": 1,
+      "message": "This versioning format is definitely a must in ONAP. \n\nWe would need to see if other projects have a different tag format for their releases. \n\nIn such case, we might need to map the correct version regex to the org that the user selects.",
+      "range": {
+        "startLine": 27,
+        "startChar": 44,
+        "endLine": 27,
+        "endChar": 74
+      },
+      "revId": "6c6380c6d4ba10a1dbaeb1b9102ba0eeeeedc43a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88b95286_2e45cff6",
+        "filename": "releasenotes/notes/release_docker_hub-5562e259be24b2c4.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2018-12-04T22:57:10Z",
+      "side": 1,
+      "message": "Lets make this more generic \"nexus3.project.org:\u003cdocker.release-port\u003e\n\nBut I think all projects use 10002",
+      "range": {
+        "startLine": 35,
+        "startChar": 22,
+        "endLine": 35,
+        "endChar": 43
+      },
+      "revId": "6c6380c6d4ba10a1dbaeb1b9102ba0eeeeedc43a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
