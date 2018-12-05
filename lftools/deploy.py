@@ -90,6 +90,12 @@ def _request_post(url, data, headers):
     return resp
 
 
+def _get_filenames_in_zipfile(_zipfile):
+    """Return a list with file names."""
+    files = zipfile.ZipFile(_zipfile).infolist()
+    return [f.filename for f in files]
+
+
 def _request_post_file(url, file_to_upload, parameters=None):
     """Execute a request post, return the resp."""
     resp = {}
@@ -118,11 +124,7 @@ def _request_post_file(url, file_to_upload, parameters=None):
         raise requests.HTTPError("Did not find repository.")
 
     if not str(resp.status_code).startswith('20'):
-        if zipfile.is_zipfile(file_to_upload):
-            raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
-                resp.status_code, resp.text, zipfile.ZipFile(file_to_upload).infolist()))
-        else:
-            raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
+        raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
                 resp.status_code, resp.text, file_to_upload))
 
     return resp
@@ -350,7 +352,14 @@ def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
         nexus_path)
     log.debug('Uploading {} to {}'.format(zip_file, url))
 
-    resp = _request_post_file(url, zip_file)
+    try:
+        resp = _request_post_file(url, zip_file)
+    except requests.HTTPError as e:
+        files = _get_filenames_in_zipfile(zip_file)
+        log.info("Uploading {} failed. It contained the following files".format(zip_file))
+        for f in files:
+            log.info("   {}".format(f))
+        raise requests.HTTPError(e.value)
     log.debug('{}: {}'.format(resp.status_code, resp.text))
 
 
