@@ -76,7 +76,7 @@ def autocorrectinfofile(ctx, gerrit_clone_base, ldap_group, repo, purpose, revie
 
 
 @click.command()
-@click.option('--ldap-server', default='ldaps://pdx-wl-lb-lfldap.web.codeaurora.org',
+@click.option('--ldap-server', default='ldaps://aws-us-west-2-lfit-openldap-2.linux-foundation.org',
               envvar='LDAP_SERVER', type=str, required=True)
 @click.option('--ldap-user-base', default='ou=Users,dc=freestandards,dc=org',
               envvar='LDAP_USER_BASE_DN', type=str, required=True)
