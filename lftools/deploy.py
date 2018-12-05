@@ -90,6 +90,15 @@ def _request_post(url, data, headers):
     return resp
 
 
+def _find_filenames_in_zipfile(_zipfile):
+    """Return a string with file names."""
+    zip_content = zipfile.ZipFile(_zipfile).infolist()
+    _res = "Zipfile contained following files\n"
+    for z in zip_content:
+        _res = '{}\n{}'.format(_res, z.orig_filename)
+    return _res
+
+
 def _request_post_file(url, file_to_upload, parameters=None):
     """Execute a request post, return the resp."""
     resp = {}
@@ -120,7 +129,7 @@ def _request_post_file(url, file_to_upload, parameters=None):
     if not str(resp.status_code).startswith('20'):
         if zipfile.is_zipfile(file_to_upload):
             raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
-                resp.status_code, resp.text, zipfile.ZipFile(file_to_upload).infolist()))
+                resp.status_code, resp.text, _find_filenames_in_zipfile(file_to_upload)))
         else:
             raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
                 resp.status_code, resp.text, file_to_upload))
