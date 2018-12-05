@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "836ed755_b1cdc593",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-12-05T07:13:45Z",
+      "side": 1,
+      "message": "No need to underscore here. It\u0027s clear that the variable is local scope due to the function.",
+      "range": {
+        "startLine": 93,
+        "startChar": 31,
+        "endLine": 93,
+        "endChar": 39
+      },
+      "revId": "ecbc0b21015608245d12b5b1f939149dca8e183c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1769ea50_ded7ad44",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-12-05T07:13:45Z",
+      "side": 1,
+      "message": "I suspect this isn\u0027t a very efficient way to concatenate a string. We\u0027re basically doing a full read on _res every time.\n\nI think it would be not only easier but more reusable to create a list object of filenames then return the list and then allow the caller to parse the output outside of the function when they want to use it.",
+      "revId": "ecbc0b21015608245d12b5b1f939149dca8e183c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a8c52cf_b233357a",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-12-05T07:13:45Z",
+      "side": 1,
+      "message": "What\u0027s orig_filename, why not just \"filename\"?\n\nI don\u0027t see it in the ZipFile printout:\n\n \u003cZipInfo filename\u003d\u0027packer/provision/devstack.sh\u0027 compress_type\u003ddeflate filemode\u003d\u0027-rw-r--r--\u0027 file_size\u003d780 compress_size\u003d415\u003e",
+      "range": {
+        "startLine": 98,
+        "startChar": 39,
+        "endLine": 98,
+        "endChar": 52
+      },
+      "revId": "ecbc0b21015608245d12b5b1f939149dca8e183c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "322ff309_249c2ffb",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-12-05T07:13:45Z",
+      "side": 1,
+      "message": "If you want to be clever:\n\n from __future__ import print_function\n filenames \u003d _find_filenames_in_zipfile(file_to_upload)\n print(*filenames, sep\u003d\u0027\\n\u0027)",
+      "revId": "ecbc0b21015608245d12b5b1f939149dca8e183c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
