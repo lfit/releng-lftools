@@ -60,3 +60,10 @@ list
 ^^^^
 
 .. program-output:: lftools nexus docker list --help
+
+.. _nexus-release:
+
+release
+-------
+
+.. program-output:: lftools nexus release --help
