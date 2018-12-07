@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f492525d_23327563",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-12-07T01:49:23Z",
+      "side": 1,
+      "message": "Should be two line breaks here rather than one.",
+      "revId": "c557879812d5ed24997acbaeb9ff3f582b127372",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
