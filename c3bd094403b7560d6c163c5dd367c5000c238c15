@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eece4249_0bbc153a",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-12-07T20:48:30Z",
+      "side": 1,
+      "message": "this should be set in all projects, only when enabling do we need to modify this.",
+      "range": {
+        "startLine": 109,
+        "startChar": 61,
+        "endLine": 109,
+        "endChar": 92
+      },
+      "revId": "c3bd094403b7560d6c163c5dd367c5000c238c15",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3501a617_76464fb6",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-12-07T20:48:30Z",
+      "side": 1,
+      "message": "I can do this on the fly. (group must exist)",
+      "range": {
+        "startLine": 110,
+        "startChar": 40,
+        "endLine": 110,
+        "endChar": 85
+      },
+      "revId": "c3bd094403b7560d6c163c5dd367c5000c238c15",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
