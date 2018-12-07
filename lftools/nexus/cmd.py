@@ -355,3 +355,33 @@ def deploy_maven_file(nexus_url, nexus_repo_id, file_name, pom_file="",
     else:
         log.debug("Successfully uploaded {} to {}".format(file_name,
                                                           request_url))
+
+def release_staging_repos(repos, nexus_url=""):
+    credentials = get_credentials(None, nexus_url)
+    _nexus = Nexus(credentials['nexus'], credentials['user'],
+                   credentials['password'])
+
+    for repo in repos:
+        data = {"data": {"stagedRepositoryIds": [repo]}}
+        log.debug("Sending data: {}".format(data))
+        request_url = "{}/staging/bulk/promote".format(_nexus.baseurl)
+        log.debug("Request URL: {}".format(request_url))
+        response = requests.post(request_url, json=data)
+
+        if response.status_code != 201:
+            raise requests.HTTPError("Release failed with the following error:"
+                                     "\n{}: {}".format(response.status_code,
+                                                       response.text))
+        else:
+            log.debug("Successfully released {}".format(str(repo)))
+
+        request_url = "{}/staging/bulk/drop".format(_nexus.baseurl)
+        log.debug("Request URL: {}".format(request_url))
+        response = requests.post(request_url, json=data)
+
+        if response.status_code != 201:
+            raise requests.HTTPError("Drop failed with the following error:"
+                                     "\n{}: {}".format(response.status_code,
+                                                       response.text))
+        else:
+            log.debug("Successfully dropped {}".format(str(repo)))
