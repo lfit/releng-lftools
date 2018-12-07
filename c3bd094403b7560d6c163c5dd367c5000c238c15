@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "7652ea62_297b24ba",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2018-12-07T20:52:13Z",
+      "side": 1,
+      "message": "ssh git.opendaylight.org \"gerrit create-project BLAH --empty-commit -d \u0027Project Description\u0027 --owner \u0027ldap/gerrit-FOO-BLAH-committers\u0027\"\n\nssh gerrit.linuxfoundation.org gerrit create-project --help",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 104
+      },
+      "revId": "c3bd094403b7560d6c163c5dd367c5000c238c15",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eece4249_0bbc153a",
         "filename": "shell/gerrit_create",
         "patchSetId": 4
