@@ -1,0 +1,14 @@
+---
+features:
+  - |
+    Add Nexus command to release one or more staging repositories. Via the
+    Nexus 2 REST API, this command performs both a "release" and a "drop"
+    action on the repo(s), in order to best reproduce the action of manually
+    using the "Release" option in the Nexus UI.
+
+    Usage: lftools nexus release [OPTIONS] [REPOS]...
+
+    Options:
+      -s, --server TEXT  Nexus server URL. Can also be set as NEXUS_URL in the
+                         environment. This will override any URL set in
+                         settings.yaml.

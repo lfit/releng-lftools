@@ -94,8 +94,8 @@ def list_images(ctx, settings, server, repo, pattern, csv):
     Use '*' for wildcard, or begin with '!' to search for images NOT matching
     the string.
     """
-    if not server and 'NEXUS_URL_ENV' in environ:
-        server = environ['NEXUS_URL_ENV']
+    if not server and NEXUS_URL_ENV in environ:
+        server = environ[NEXUS_URL_ENV]
     images = nexuscmd.search(settings, server, repo, pattern)
     if images:
         nexuscmd.output_images(images, csv)
@@ -116,3 +116,18 @@ def delete_images(ctx, settings, server, repo, pattern, yes):
     if yes or click.confirm("Would you like to delete all {} images?".format(
             str(len(images)))):
         nexuscmd.delete_images(settings, server, images)
+
+
+@nexus.command()
+@click.pass_context
+@click.argument('REPOS', type=str, nargs=-1)
+@click.option(
+    '-s', '--server', type=str,
+    help=('Nexus server URL. Can also be set as {} in the environment. '
+          'This will override any URL set in settings.yaml.').format(
+              NEXUS_URL_ENV))
+def release(ctx, repos, server):
+    """Release one or more staging repositories."""
+    if not server and NEXUS_URL_ENV in environ:
+        server = environ[NEXUS_URL_ENV]
+    nexuscmd.release_staging_repos(repos, server)

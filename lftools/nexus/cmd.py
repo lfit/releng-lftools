@@ -14,6 +14,8 @@ import csv
 import logging
 import sys
 
+import requests
+from six.moves import configparser
 import yaml
 
 from lftools import config
@@ -39,8 +41,12 @@ def get_credentials(settings_file, url=None):
         elif set(['nexus', 'user', 'password']).issubset(settings):
             return settings
     elif url:
-        user = config.get_setting("global", "username")
-        password = config.get_setting("global", "password")
+        try:
+            user = config.get_setting("nexus", "username")
+            password = config.get_setting("nexus", "password")
+        except (configparser.NoOptionError,
+                configparser.NoSectionError):
+            return {"nexus": url, "user": "", "password": ""}
         return {"nexus": url, "user": user, "password": password}
     log.error('Please define a settings.yaml file, or include a url if using '
               + 'lftools.ini')
@@ -273,3 +279,39 @@ def delete_images(settings_file, url, images):
 
     for image in images:
         _nexus.delete_image(image)
+
+
+def release_staging_repos(repos, nexus_url=""):
+    """Release one or more staging repos.
+
+    :arg tuple repos: A tuple containing one or more repo name strings.
+    :arg str nexus_url: Optional URL of target Nexus server.
+    """
+    credentials = get_credentials(None, nexus_url)
+    _nexus = Nexus(credentials['nexus'], credentials['user'],
+                   credentials['password'])
+
+    for repo in repos:
+        data = {"data": {"stagedRepositoryIds": [repo]}}
+        log.debug("Sending data: {}".format(data))
+        request_url = "{}/staging/bulk/promote".format(_nexus.baseurl)
+        log.debug("Request URL: {}".format(request_url))
+        response = requests.post(request_url, json=data)
+
+        if response.status_code != 201:
+            raise requests.HTTPError("Release failed with the following error:"
+                                     "\n{}: {}".format(response.status_code,
+                                                       response.text))
+        else:
+            log.debug("Successfully released {}".format(str(repo)))
+
+        request_url = "{}/staging/bulk/drop".format(_nexus.baseurl)
+        log.debug("Request URL: {}".format(request_url))
+        response = requests.post(request_url, json=data)
+
+        if response.status_code != 201:
+            raise requests.HTTPError("Drop failed with the following error:"
+                                     "\n{}: {}".format(response.status_code,
+                                                       response.text))
+        else:
+            log.debug("Successfully dropped {}".format(str(repo)))
