@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ab15052_95f4f945",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-12-12T05:24:36Z",
+      "side": 1,
+      "message": "We call this \"files\" but the way this code is structured I think it\u0027s only ever possible to use this function with 1 file.",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 9
+      },
+      "revId": "045f1dab487d5943b270b9c2611bf9d76e16ad56",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
