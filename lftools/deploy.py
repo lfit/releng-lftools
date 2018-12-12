@@ -14,6 +14,7 @@ from datetime import timedelta
 import errno
 import gzip
 import logging
+from mimetypes import MimeTypes
 import multiprocessing
 from multiprocessing.dummy import Pool as ThreadPool
 import os
@@ -96,21 +97,29 @@ def _get_filenames_in_zipfile(_zipfile):
     return [f.filename for f in files]
 
 
+def _get_mime_type(check_file):
+    """Return the mime type for a file."""
+    mime = MimeTypes()
+    return mime.guess_type(check_file)[0]
+
+
 def _request_post_file(url, file_to_upload, parameters=None):
     """Execute a request post, return the resp."""
     resp = {}
+    _filebasename = os.path.basename(file_to_upload)
+    _mime_type = _get_mime_type(file_to_upload)
     try:
         upload_file = open(file_to_upload, 'rb')
     except FileNotFoundError:
         raise FileNotFoundError(
           errno.ENOENT, os.strerror(errno.ENOENT), file_to_upload)
 
-    files = {'file': upload_file}
+    one_file = {'file': (_filebasename, upload_file, _mime_type)}
     try:
         if parameters:
-            resp = requests.post(url, data=parameters, files=files)
+            resp = requests.post(url, data=parameters, files=one_file)
         else:
-            resp = requests.post(url, files=files)
+            resp = requests.post(url, data=upload_file.read())
     except requests.exceptions.MissingSchema:
         raise requests.HTTPError("Not valid URL: {}".format(url))
     except requests.exceptions.ConnectionError:
