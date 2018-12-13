@@ -49,6 +49,23 @@
     },
     {
       "key": {
+        "uuid": "6df4a0b7_3d249ad8",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 68
+      },
+      "writtenOn": "2018-12-13T16:14:14Z",
+      "side": 1,
+      "message": "Bengt, perhaps you can update parameters to include `files` variable and then not use the files function parameter?",
+      "revId": "045f1dab487d5943b270b9c2611bf9d76e16ad56",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69a7b1b9_a1ab2d87",
         "filename": "lftools/deploy.py",
         "patchSetId": 1
