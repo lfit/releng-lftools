@@ -97,7 +97,8 @@ def list_images(ctx, settings, server, repo, pattern, csv):
     if not server and 'NEXUS_URL_ENV' in environ:
         server = environ['NEXUS_URL_ENV']
     images = nexuscmd.search(settings, server, repo, pattern)
-    nexuscmd.output_images(images, csv)
+    if images:
+        nexuscmd.output_images(images, csv)
 
 
 @docker.command(name="delete")
