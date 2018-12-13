@@ -232,15 +232,17 @@ def search(settings_file, url, repo, pattern):
 
 def output_images(images, csv_path=None):
     """Output a list of images to stdout, or a provided file path.
+    This method expects a list of dicts with, at a minimum, "name", "version",
+    and "id" fields defined in each.
 
     :arg list images: Images to output.
     :arg str csv_path: Path to write out csv file of matching images.
     """
-    count = len(images)
-    if not count:
+    if not images:
         log.warning("{}.{} called with empty images list".format(
             __name__, sys._getframe().f_code.co_name))
         return
+    count = len(images)
     included_keys = images[0].keys()
 
     if csv_path:
