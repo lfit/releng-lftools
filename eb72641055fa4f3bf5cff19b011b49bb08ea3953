@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b48c1c70_6797d13f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-12-14T03:30:06Z",
+      "side": 1,
+      "message": "This seems pretty excessive for a commit message. Documentation should probably be provided elsewhere, with just a summary in the commit message.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 12
+      },
+      "revId": "eb72641055fa4f3bf5cff19b011b49bb08ea3953",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc3d4989_568246e2",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-12-14T03:30:06Z",
+      "side": 1,
+      "message": "Please add proper indentation inside all the functions.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 1
+      },
+      "revId": "eb72641055fa4f3bf5cff19b011b49bb08ea3953",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa41ad67_572123ee",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-12-14T03:30:06Z",
+      "side": 1,
+      "message": "Why are we echoing this here?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 105
+      },
+      "revId": "eb72641055fa4f3bf5cff19b011b49bb08ea3953",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94609275_26ef5c18",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-12-14T03:30:06Z",
+      "side": 1,
+      "message": "This will evaluate to true if $TMP_WORKSPACE is a file (since it\u0027s not a directory), which would cause \"mkdir -p $TMP_WORKSPACE\" to fail.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 36
+      },
+      "revId": "eb72641055fa4f3bf5cff19b011b49bb08ea3953",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b516f9f_6a4224c1",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2018-12-14T03:30:06Z",
+      "side": 1,
+      "message": "Same as above, this could cause errors is $repository matches a file.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 28
+      },
+      "revId": "eb72641055fa4f3bf5cff19b011b49bb08ea3953",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
