@@ -104,6 +104,30 @@
       "revId": "045f1dab487d5943b270b9c2611bf9d76e16ad56",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10987e87_5d73b5f3",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2018-12-30T22:32:08Z",
+      "side": 1,
+      "message": "From my own testing I think the change proposed in my previous comment is all that\u0027s needed for this patch.\n\nI did testing with the maven file upload and it seems that the \"files\u003dfiles\" code works just fine when uploading a Maven file.\n\nCan someone else test and double check to confirm using a few different file types using maven file upload?\n\nI\u0027d recommend uploading gz, zip, jar, png, jpg files for testing.",
+      "parentUuid": "69a7b1b9_a1ab2d87",
+      "range": {
+        "startLine": 122,
+        "startChar": 38,
+        "endLine": 122,
+        "endChar": 49
+      },
+      "revId": "045f1dab487d5943b270b9c2611bf9d76e16ad56",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
