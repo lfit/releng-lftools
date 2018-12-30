@@ -522,7 +522,8 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
         - maven-metadata.xml*  (if not a snapshot repo)
 
     Parameters:
-        nexus_repo_url: URL to Nexus server. (Ex: https://nexus.example.org)
+        nexus_repo_url: URL to Nexus repository to upload to.
+                        (Ex: https://nexus.example.org/content/repositories/releases)
         deploy_dir:     The directory to deploy. (Ex: /tmp/m2repo)
 
     One purpose of this is so that we can get around the problematic
