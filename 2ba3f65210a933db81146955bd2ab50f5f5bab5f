@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e306f160_42775a4a",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-01-02T15:01:20Z",
+      "side": 1,
+      "message": "Why is NEXUS_URL_ENV now becoming a dynamic key when before it was a static hardcoded key?\n\nSeems to make more sense as a static key so that the user knows what environment variable to set?",
+      "revId": "2ba3f65210a933db81146955bd2ab50f5f5bab5f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
