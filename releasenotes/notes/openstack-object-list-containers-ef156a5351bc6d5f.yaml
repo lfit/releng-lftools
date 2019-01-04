@@ -1,0 +1,10 @@
+---
+features:
+  - |
+    Add command to list openstack containers.
+
+    Usage:
+
+    .. code-block:: bash
+
+       lftools openstack --os-cloud example object list-containers

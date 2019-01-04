@@ -32,6 +32,18 @@ list
 
 .. program-output:: lftools openstack --os-cloud docs image list --help
 
+object
+------
+
+Command for managing objects.
+
+.. program-output:: lftools openstack --os-cloud docs object --help
+
+list-containers
+^^^^^^^^^^^^^^^
+
+.. program-output:: lftools openstack --os-cloud docs object list-containers --help
+
 stack
 -----
 
