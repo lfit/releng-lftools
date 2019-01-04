@@ -16,6 +16,7 @@ __author__ = 'Thanh Ha'
 import click
 
 from lftools.openstack import image as os_image
+from lftools.openstack import object as os_object
 from lftools.openstack import server as os_server
 from lftools.openstack import stack as os_stack
 from lftools.openstack import volume as os_volume
@@ -107,6 +108,23 @@ image.add_command(cleanup)
 image.add_command(list)
 image.add_command(share)
 image.add_command(upload)
+
+
+@openstack.group()
+@click.pass_context
+def object(ctx):
+    """Command for manipulating objects."""
+    pass
+
+
+@click.command()
+@click.pass_context
+def list_containers(ctx):
+    """List available containers."""
+    os_object.list_containers(ctx.obj['os_cloud'])
+
+
+object.add_command(list_containers)
 
 
 @openstack.group()
