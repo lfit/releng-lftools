@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "208e4c05_60f21e6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-07T20:41:53Z",
+      "side": 1,
+      "message": "I\u0027m going to leave this here, to help reviewers, I will add the documentation once the code is ready.",
+      "parentUuid": "b48c1c70_6797d13f",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 12
+      },
+      "revId": "eb72641055fa4f3bf5cff19b011b49bb08ea3953",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc3d4989_568246e2",
         "filename": "shell/gerrit_create",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2018-12-14T03:30:06Z",
       "side": 1,
       "message": "Please add proper indentation inside all the functions.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 1
+      },
+      "revId": "eb72641055fa4f3bf5cff19b011b49bb08ea3953",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d81204ec_84dd2e9c",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 8
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-07T20:41:53Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "fc3d4989_568246e2",
       "range": {
         "startLine": 15,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7a92c4a2_107003a5",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-07T20:41:53Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "fa41ad67_572123ee",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 105
+      },
+      "revId": "eb72641055fa4f3bf5cff19b011b49bb08ea3953",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94609275_26ef5c18",
         "filename": "shell/gerrit_create",
         "patchSetId": 8
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "1dcf3b3f_3990fc07",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-07T20:41:53Z",
+      "side": 1,
+      "message": "the default is /tmp/ so this wont be a file.\nIf you do set this to something invalid errexit will quit the script before anything important happens, this seems fine to me.",
+      "parentUuid": "94609275_26ef5c18",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 36
+      },
+      "revId": "eb72641055fa4f3bf5cff19b011b49bb08ea3953",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b516f9f_6a4224c1",
         "filename": "shell/gerrit_create",
         "patchSetId": 8
@@ -105,6 +201,30 @@
       "writtenOn": "2018-12-14T03:30:06Z",
       "side": 1,
       "message": "Same as above, this could cause errors is $repository matches a file.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 28
+      },
+      "revId": "eb72641055fa4f3bf5cff19b011b49bb08ea3953",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89ecb5af_55c41a7d",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-07T20:41:53Z",
+      "side": 1,
+      "message": "if $repo is a file errexit will catch this on the clone below and exit the script before anything important happens",
+      "parentUuid": "9b516f9f_6a4224c1",
       "range": {
         "startLine": 84,
         "startChar": 0,
