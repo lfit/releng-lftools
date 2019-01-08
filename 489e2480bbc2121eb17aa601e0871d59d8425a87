@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7eb2e90c_72898d98",
+        "filename": "requirements-test.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-01-08T20:23:13Z",
+      "side": 1,
+      "message": "Please leave a comment here about why it\u0027s being pinned so that we remember in the future.\n\n pytest~\u003d4.0.1  # Reason for pinning",
+      "revId": "489e2480bbc2121eb17aa601e0871d59d8425a87",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
