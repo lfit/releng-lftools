@@ -16,6 +16,24 @@
       "revId": "2ba3f65210a933db81146955bd2ab50f5f5bab5f",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6ad9728_2fc760eb",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-01-08T16:16:50Z",
+      "side": 1,
+      "message": "It was always meant to be set as a static string (notice that line 17 was not introduced in this patch). This was a code error from an earlier patch that I\u0027m fixing.\n\nIt is not meant to be dynamic; it is a static string. It is simply being set once at the top, and referenced as a static var, as is best practice.",
+      "parentUuid": "e306f160_42775a4a",
+      "revId": "2ba3f65210a933db81146955bd2ab50f5f5bab5f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
