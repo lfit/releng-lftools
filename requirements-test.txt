@@ -1,5 +1,5 @@
 -r requirements.txt
-pytest
+pytest~=4.0.1
 pytest-click
 pytest-datafiles
 pytest-mock
