@@ -110,7 +110,7 @@ def _request_post_file(url, file_to_upload, parameters=None):
         if parameters:
             resp = requests.post(url, data=parameters, files=files)
         else:
-            resp = requests.post(url, files=files)
+            resp = requests.post(url, data=upload_file.read())
     except requests.exceptions.MissingSchema:
         raise requests.HTTPError("Not valid URL: {}".format(url))
     except requests.exceptions.ConnectionError:
