@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf6923ee_69e7e9fb",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-01-18T08:31:15Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to handle mime-types at all right? because in the case of uploading with data\u003dparameters it works regardless.\n\nand the else case where data\u003dupload_file.read() works.",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 65
+      },
+      "revId": "454c4799c9b97522be9a9671d9b716c0b48af9f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
