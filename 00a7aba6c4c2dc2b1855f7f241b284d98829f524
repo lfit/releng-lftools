@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1602c67f_f9483638",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-01-20T19:33:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86d191e7_b603cb35",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 5
+      },
+      "revId": "00a7aba6c4c2dc2b1855f7f241b284d98829f524",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80db0874_c5f2eaab",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-20T09:25:58Z",
       "side": 1,
       "message": "PS don\u0027t add code to the commit message, summarize/write what the fix/api does to resolve the issue.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "00a7aba6c4c2dc2b1855f7f241b284d98829f524",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f9893a1_7261bbc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-01-20T19:33:26Z",
+      "side": 1,
+      "message": "ok, not sure what to write, since it was only changing the parameters in one call.\nSo, let the head line be, and removed rest.\nDon\u0027t think we need to have a release notice for this. There should be one for the feature though.",
+      "parentUuid": "80db0874_c5f2eaab",
       "range": {
         "startLine": 9,
         "startChar": 0,
