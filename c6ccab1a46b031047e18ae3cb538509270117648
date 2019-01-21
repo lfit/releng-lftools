@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a4e9bcf_745e20d2",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 13
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-21T19:51:33Z",
+      "side": 1,
+      "message": "This is correct but the more common way is just \u0027set -e\u0027... I had to look this up. Also another useful setting is -u (set -ue)",
+      "revId": "c6ccab1a46b031047e18ae3cb538509270117648",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c7df56b_2a686496",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-21T19:51:33Z",
+      "side": 1,
+      "message": "This is not needed if \u0027-u\u0027 is set.",
+      "revId": "c6ccab1a46b031047e18ae3cb538509270117648",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb2815de_be62043a",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-21T19:51:33Z",
+      "side": 1,
+      "message": "Lots of ways to go sideways here. You should \u0027set -o pipefail\u0027. Problems when $repository or \u0027project\u0027 not set, even you using \u0027set -u\u0027. You should \u0027set -o pipefail\u0027.",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 48,
+        "endChar": 59
+      },
+      "revId": "c6ccab1a46b031047e18ae3cb538509270117648",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ddeeb08_f21b6d72",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-21T19:51:33Z",
+      "side": 1,
+      "message": "Should leave \u0027-e\u0027 set",
+      "revId": "c6ccab1a46b031047e18ae3cb538509270117648",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ddb5e13_93085acb",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 13
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-21T19:51:33Z",
+      "side": 1,
+      "message": "Common practice is to indent continuation lines. Like \u0027ssh\u0027 on line 99 above.",
+      "range": {
+        "startLine": 103,
+        "startChar": 2,
+        "endLine": 105,
+        "endChar": 15
+      },
+      "revId": "c6ccab1a46b031047e18ae3cb538509270117648",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
