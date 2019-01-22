@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66587de8_dc6d53d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-01-22T01:56:12Z",
+      "side": 1,
+      "message": "Perhaps a bullet point for these steps?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 21
+      },
+      "revId": "c7cd60084331adbfa621c54fa86fedad7eda341c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1932e6f_8e5ae33f",
+        "filename": "releasenotes/notes/gerrit-create-e3bea58593d0a1dd.yaml",
+        "patchSetId": 14
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-01-22T01:56:12Z",
+      "side": 1,
+      "message": "Typo : replication",
+      "range": {
+        "startLine": 4,
+        "startChar": 44,
+        "endLine": 4,
+        "endChar": 55
+      },
+      "revId": "c7cd60084331adbfa621c54fa86fedad7eda341c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "294c2746_b467b316",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 14
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-01-22T01:56:12Z",
+      "side": 1,
+      "message": "No risk that /tmp gets full?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "c7cd60084331adbfa621c54fa86fedad7eda341c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cef08709_28359c1a",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 14
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-01-22T01:56:12Z",
+      "side": 1,
+      "message": "How do you ensure that $repository is the one you expect? Might be another (or older version) file/dir called that under /tmp or?",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 30
+      },
+      "revId": "c7cd60084331adbfa621c54fa86fedad7eda341c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b7e7151_f32577c1",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 14
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-01-22T01:56:12Z",
+      "side": 1,
+      "message": "I presume you are ok with extra output on the screen?\necho, cat, and diff....",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 33
+      },
+      "revId": "c7cd60084331adbfa621c54fa86fedad7eda341c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
