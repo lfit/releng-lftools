@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "721cc290_e2a7caa5",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 14
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-22T19:03:12Z",
+      "side": 1,
+      "message": "Since the builders are dynamic, there will only be one repo being cloned at most. So I don\u0027t imagine so. If you call the shell script by hand you can change the workspace, so I could add that as a click option, I just didnt see the use.",
+      "parentUuid": "294c2746_b467b316",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "c7cd60084331adbfa621c54fa86fedad7eda341c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cef08709_28359c1a",
         "filename": "shell/gerrit_create",
         "patchSetId": 14
@@ -94,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "3a59df03_58850934",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 14
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-22T19:03:12Z",
+      "side": 1,
+      "message": "Since the builders are dynamic, tmp will be clean each time.",
+      "parentUuid": "cef08709_28359c1a",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 30
+      },
+      "revId": "c7cd60084331adbfa621c54fa86fedad7eda341c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b7e7151_f32577c1",
         "filename": "shell/gerrit_create",
         "patchSetId": 14
@@ -105,6 +153,30 @@
       "writtenOn": "2019-01-22T01:56:12Z",
       "side": 1,
       "message": "I presume you are ok with extra output on the screen?\necho, cat, and diff....",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 33
+      },
+      "revId": "c7cd60084331adbfa621c54fa86fedad7eda341c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf6044d8_204d11a4",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 14
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-22T19:03:12Z",
+      "side": 1,
+      "message": "yeah, I mean personally, I want to see the output in case something unexpected is in the groups file (if the project is not following our convention)",
+      "parentUuid": "7b7e7151_f32577c1",
       "range": {
         "startLine": 108,
         "startChar": 0,
