@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "105349bd_81f2cfb0",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 15
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-22T21:15:16Z",
+      "side": 1,
+      "message": "Make it a \u0027boolean\u0027: ENABLE_REPLICATION\u003dfalse",
+      "revId": "1d9e88277c634374abb2e4c83bc5378bbf23e0a8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a00b2a7a_6d09b7a5",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-22T21:15:16Z",
+      "side": 1,
+      "message": "If \"ENABLE_REPLICATION\u0027 were a boolean:\nif ! $ENABLE_REPLICATION; then",
+      "revId": "1d9e88277c634374abb2e4c83bc5378bbf23e0a8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3325902b_61b5dc03",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 15
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-22T21:15:16Z",
+      "side": 1,
+      "message": "if $ENABLE_REPLICATION; then",
+      "revId": "1d9e88277c634374abb2e4c83bc5378bbf23e0a8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "844a47dc_1fb19b3f",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 15
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-22T21:15:16Z",
+      "side": 1,
+      "message": "I think you want to remove the \u0027|| exit\u0027",
+      "revId": "1d9e88277c634374abb2e4c83bc5378bbf23e0a8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8dd1946_5dbb9182",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 15
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-22T21:15:16Z",
+      "side": 1,
+      "message": "I don\u0027t think you want/need the \u0027|| exit\u0027 (because -e is set).",
+      "revId": "1d9e88277c634374abb2e4c83bc5378bbf23e0a8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da282f97_4ee16868",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 15
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-22T21:15:16Z",
+      "side": 1,
+      "message": "Need to add a little logic here to validate/convert OPTARG to boolean.",
+      "revId": "1d9e88277c634374abb2e4c83bc5378bbf23e0a8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f03af899_3b7a65f9",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 15
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-22T21:15:16Z",
+      "side": 1,
+      "message": "if $ENABLE_REPLICATION; then",
+      "revId": "1d9e88277c634374abb2e4c83bc5378bbf23e0a8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
