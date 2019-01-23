@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcb2704b_a6ebcecc",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 16
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-23T18:07:36Z",
+      "side": 1,
+      "message": "This \"false\" is a string, false/true is a boolean value",
+      "revId": "4ac72c3a73979f9b77e7a89778cdb844996a9eb3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afdd996d_aa6272ab",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 16
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-23T18:07:36Z",
+      "side": 1,
+      "message": "if ! $ENABLE_REPLICATION; then",
+      "revId": "4ac72c3a73979f9b77e7a89778cdb844996a9eb3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae94091c_5fa0ed38",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 16
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-23T18:07:36Z",
+      "side": 1,
+      "message": "if $ENABLE_REPLICATION; then",
+      "revId": "4ac72c3a73979f9b77e7a89778cdb844996a9eb3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc1e5fac_6967a1f0",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 16
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-23T18:07:36Z",
+      "side": 1,
+      "message": "That is stupid, we need to talk to Thanh about that. If that is the case you need to \u0027|| exit 1\u0027, but you CANT exit 0 and allow the build to continue",
+      "revId": "4ac72c3a73979f9b77e7a89778cdb844996a9eb3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee907c99_9dbfc3cb",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 16
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-23T18:07:36Z",
+      "side": 1,
+      "message": "same",
+      "revId": "4ac72c3a73979f9b77e7a89778cdb844996a9eb3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ba7c6c5_be6da586",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 16
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-23T18:07:36Z",
+      "side": 1,
+      "message": "Looks good!\n\nI did think of a another way to do this... make -e a flag with no argument. Default value for ENABLE_REPLICATION would be false, but if -e (no arg) is specified then you set ENABLE_REPLICATION to true. Then you don\u0027t have to validate the argument.",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 4
+      },
+      "revId": "4ac72c3a73979f9b77e7a89778cdb844996a9eb3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25a595a0_259d67fa",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 16
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-23T18:07:36Z",
+      "side": 1,
+      "message": "if $ENABLE_REPLICATION; then",
+      "revId": "4ac72c3a73979f9b77e7a89778cdb844996a9eb3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
