@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb3c692b_7f4e70f7",
+        "filename": "docs/commands/gerrit.rst",
+        "patchSetId": 20
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-25T16:31:44Z",
+      "side": 1,
+      "message": "Note sure what happens here, does lftools know what to do with \u0027-help\u0027 ? The script does not (it only knows \u0027-h\u0027) and I am betting if you pass it a --help it is not going to give a useful response.",
+      "revId": "3125ca3d22a805a4202885e9db2be4360efb2d38",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb82ce28_807dd9a5",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 20
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-25T16:31:44Z",
+      "side": 1,
+      "message": "The problem with the \u0026\u003e is that if \u0027git\u0027 were to fail the script will exit, which is OK but the stderr will end up in /dev/null, which make it hard to debug. Just set stdout \u0027\u003e\u0027 to /dev/null, that keep log clean when it is OK but if there are errors that will end up in log.\nYou did same thing on \u0027push origin\u0027 below which OK because you generated an error.\nYou to get real fancy you can send output of \u0027echo\u0027 to stderr you can: echo \"ERROR\" \u003e\u00262\" will send the output to stderr. Maybe the caller of this script redirect their stdout to /dev/null, they would still see your error messages.",
+      "revId": "3125ca3d22a805a4202885e9db2be4360efb2d38",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a469af2_1323a519",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 20
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-01-25T16:31:44Z",
+      "side": 1,
+      "message": "What if user types:\n    gerrit_create --help\n    gerrit_create dddd\n    gettit_create  (the usage sez all arguments are OPTIONS)",
+      "revId": "3125ca3d22a805a4202885e9db2be4360efb2d38",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
