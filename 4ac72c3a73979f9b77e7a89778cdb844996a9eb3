@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "c10e533f_6711f82c",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 16
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-01-25T18:01:34Z",
+      "side": 1,
+      "message": "2019 maybe?",
+      "range": {
+        "startLine": 4,
+        "startChar": 16,
+        "endLine": 4,
+        "endChar": 26
+      },
+      "revId": "4ac72c3a73979f9b77e7a89778cdb844996a9eb3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dcb2704b_a6ebcecc",
         "filename": "shell/gerrit_create",
         "patchSetId": 16
