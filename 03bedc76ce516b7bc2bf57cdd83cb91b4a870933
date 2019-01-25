@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93ccbfcb_290b0567",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 21
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-01-25T18:01:34Z",
+      "side": 1,
+      "message": "2018",
+      "range": {
+        "startLine": 4,
+        "startChar": 16,
+        "endLine": 4,
+        "endChar": 26
+      },
+      "revId": "03bedc76ce516b7bc2bf57cdd83cb91b4a870933",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
