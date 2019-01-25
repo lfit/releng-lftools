@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ccf5d3a_4a330973",
+        "filename": "docs/commands/gerrit.rst",
+        "patchSetId": 20
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-25T17:41:41Z",
+      "side": 1,
+      "message": "this returns the click helper function, not the bash one. \nThe script can be run by hand or via click.",
+      "parentUuid": "eb3c692b_7f4e70f7",
+      "revId": "3125ca3d22a805a4202885e9db2be4360efb2d38",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb82ce28_807dd9a5",
         "filename": "shell/gerrit_create",
         "patchSetId": 20
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "88efec84_8e69d355",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 20
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-25T17:41:41Z",
+      "side": 1,
+      "message": "Git outputs to stderr even when its successful.",
+      "parentUuid": "bb82ce28_807dd9a5",
+      "revId": "3125ca3d22a805a4202885e9db2be4360efb2d38",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a469af2_1323a519",
         "filename": "shell/gerrit_create",
         "patchSetId": 20
@@ -47,6 +83,24 @@
       "writtenOn": "2019-01-25T16:31:44Z",
       "side": 1,
       "message": "What if user types:\n    gerrit_create --help\n    gerrit_create dddd\n    gettit_create  (the usage sez all arguments are OPTIONS)",
+      "revId": "3125ca3d22a805a4202885e9db2be4360efb2d38",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92688612_c3f8c90c",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 20
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-25T17:41:41Z",
+      "side": 1,
+      "message": "they will get an error,  line 188: OPTARG: unbound variable\n or  illegal option -- -\nsince this is generally going to be called via lftools I see no need to fix.",
+      "parentUuid": "6a469af2_1323a519",
       "revId": "3125ca3d22a805a4202885e9db2be4360efb2d38",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
