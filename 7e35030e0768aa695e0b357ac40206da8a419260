@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d9584b8b_13cb3aa3",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 19
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-25T01:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0d44ffe_14d2cdb9",
+      "revId": "7e35030e0768aa695e0b357ac40206da8a419260",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f7b60dd9_63e34f4e",
         "filename": "shell/gerrit_create",
         "patchSetId": 19
@@ -30,6 +48,30 @@
       "writtenOn": "2019-01-24T23:02:54Z",
       "side": 1,
       "message": "this is not really needed. With the \u0027-e\u0027 set the shell will exit with \"undefined variable\" error message",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 4
+      },
+      "revId": "7e35030e0768aa695e0b357ac40206da8a419260",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a435042_a87423dc",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 19
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-25T01:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7b60dd9_63e34f4e",
       "range": {
         "startLine": 19,
         "startChar": 0,
@@ -82,6 +124,48 @@
     },
     {
       "key": {
+        "uuid": "c174a133_7a536470",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 19
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-25T01:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "050a57b0_1a3370d6",
+      "revId": "7e35030e0768aa695e0b357ac40206da8a419260",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcf7de6f_89f58b4c",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 19
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-25T01:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34b10e2c_f8b17f17",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 87
+      },
+      "revId": "7e35030e0768aa695e0b357ac40206da8a419260",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cffbae6_cf92f688",
         "filename": "shell/gerrit_create",
         "patchSetId": 19
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "118dcc0d_39478177",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 19
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-25T01:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cffbae6_cf92f688",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 2
+      },
+      "revId": "7e35030e0768aa695e0b357ac40206da8a419260",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d81b76f8_d29fee7d",
         "filename": "shell/gerrit_create",
         "patchSetId": 19
@@ -116,6 +224,24 @@
       "writtenOn": "2019-01-24T23:02:54Z",
       "side": 1,
       "message": "ENABLE_REPLICATION\u003dtrue",
+      "revId": "7e35030e0768aa695e0b357ac40206da8a419260",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ebc59db0_f562857d",
+        "filename": "shell/gerrit_create",
+        "patchSetId": 19
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-01-25T01:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d81b76f8_d29fee7d",
       "revId": "7e35030e0768aa695e0b357ac40206da8a419260",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
