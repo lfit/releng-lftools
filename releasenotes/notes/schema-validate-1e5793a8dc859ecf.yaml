@@ -1,0 +1,16 @@
+---
+features:
+  - |
+    Verify YAML Schema.
+
+    Usage: Usage: lftools schema verify [OPTIONS] YAMLFILE SCHEMAFILE
+
+    .. code-block:: none
+
+       Commands:
+         verify a yaml file based on a schema file.
+
+    .. code-block:: none
+
+       Options:
+         --help    Show this message and exit.
