@@ -38,6 +38,7 @@ known_third_party_imports =
     defusedxml,
     glob2,
     jenkins,
+    jsonschema,
     pytest,
     six,
     shade,
