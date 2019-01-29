@@ -17,6 +17,7 @@ It supports the following commands:
     license
     nexus
     openstack
+    schema
     sign
     version
 
