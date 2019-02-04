@@ -22,6 +22,30 @@
       "revId": "329ea6ddc557b9e8ce2b15cbea870deb8e9c2f3a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22c89d4f_18d9d63f",
+        "filename": "lftools/schema.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-02-04T19:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da594436_e410203f",
+      "range": {
+        "startLine": 46,
+        "startChar": 27,
+        "endLine": 46,
+        "endChar": 77
+      },
+      "revId": "329ea6ddc557b9e8ce2b15cbea870deb8e9c2f3a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
