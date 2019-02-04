@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ea91c106_aa954677",
+        "filename": "lftools/cli/schema.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-02-04T19:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8391b298_949cc319",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 78
+      },
+      "revId": "58df739960a4db08ea70340ae7588e1ae79c3f3a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "508c7e2e_107721e9",
         "filename": "lftools/cli/schema.py",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2019-02-04T05:12:09Z",
       "side": 1,
       "message": "The rest of the code only have bare minimum in this file, that is, grabbing parameters, calling a function, and presenting result.\n\nPerhaps it would fit the rest better, if you added a lftools/schema.py ?\nI know, there will be very few rows in it...",
+      "revId": "58df739960a4db08ea70340ae7588e1ae79c3f3a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "576d7b48_cfcb1c82",
+        "filename": "lftools/cli/schema.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-02-04T19:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "508c7e2e_107721e9",
       "revId": "58df739960a4db08ea70340ae7588e1ae79c3f3a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
