@@ -444,3 +444,72 @@ class ProjectClass:
                     cnt_break_loop = cnt_break_loop + 1
                     if (cnt_break_loop > 90):
                         raise requests.HTTPError(retry_text)
+
+
+def get_nexus3_catalog(org_name='', find_pattern=''):
+    """Main function to collect all Nexus3 repositories.
+
+    This function will collect the Nexus catalog for all projects starting with
+    'org_name' as well as containing a pattern if specified.
+
+    If you do it manually, you give the following command.
+        curl -s https://nexus3.onap.org:10002/v2/_catalog
+
+    which gives you the following output.
+        {"repositories":["dcae_dmaapbc","onap/aaf/aaf-base-openssl_1.1.0",
+        "onap/aaf/aaf-base-xenial","onap/aaf/aaf_agent","onap/aaf/aaf_cass",
+        "onap/aaf/aaf_cm","onap/aaf/aaf_config","onap/aaf/aaf_core"]}
+
+    Nexus3 catalog starts with <org_name>/<repo name>
+
+    Parameters:
+        org_name     : Organizational name, for instance 'onap'
+        find_pattern : A pattern, that if specified, needs to be part of the
+                       repository name.
+                        for instance,
+                         ''     : this pattern finds all repositories.
+                         'eleo' : this pattern finds all repositories with 'eleo'
+                                 in its name. --> chameleon
+
+    """
+    global NexusCatalog
+    global project_max_len_chars
+
+    project_max_len_chars = 0
+    containing_str = ''
+    if len(find_pattern) > 0:
+        containing_str = ', and containing "{}"'.format(find_pattern)
+    info_str = "Collecting information from Nexus with projects with org = {}".format(org_name)
+    log.info("{}{}.".format(info_str, containing_str))
+
+    try:
+        r = _request_get(NEXUS3_CATALOG)
+    except requests.HTTPError as excinfo:
+        log.info("Fetching Nexus3 catalog. {}".format(excinfo))
+        return False
+
+    log.debug("r.status_code = {}, ok={}".format(r.status_code, r.status_code == requests.codes.ok))
+    if r.status_code == requests.codes.ok:
+        raw_catalog = r.text
+        raw_catalog = raw_catalog.replace('"', '')
+        raw_catalog = raw_catalog.replace(' ', '')
+        raw_catalog = raw_catalog.replace('}', '')
+        raw_catalog = raw_catalog.replace('[', '')
+        raw_catalog = raw_catalog.replace(']', '')
+        raw_catalog = raw_catalog.split(':')
+        TmpCatalog = raw_catalog[1].split(',')
+        for word in TmpCatalog:
+            # Remove all projects that do not start with org_name
+            if word.startswith(org_name):
+                # If  a specific search string has been specified, searc = h for it
+                # Empty string will match all words
+                if word.find(find_pattern) >= 0:
+                    # Remove onap/ from word, so we only get repository left
+                    project = (org_name, word[len(org_name)+1:])
+                    NexusCatalog.append(project)
+                    log.debug("Added project {} to my list".format(project[1]))
+                    if len(project[1]) > project_max_len_chars:
+                        project_max_len_chars = len(project[1])
+        log.debug("# TmpCatalog {}, NexusCatalog {}, DIFF = {}".format(
+            len(TmpCatalog), len(NexusCatalog), len(TmpCatalog)-len(NexusCatalog)))
+    return True
