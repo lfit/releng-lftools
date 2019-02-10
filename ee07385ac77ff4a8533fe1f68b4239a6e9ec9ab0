@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c463f44_2723fe46",
+        "filename": "tests/fixtures/schema/ipv6-broken.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-02-10T16:46:52Z",
+      "side": 1,
+      "message": "2019 now",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "ee07385ac77ff4a8533fe1f68b4239a6e9ec9ab0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50fc1571_6963df1b",
+        "filename": "tests/fixtures/schema/schema.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-02-10T16:46:52Z",
+      "side": 1,
+      "message": "2019 now",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 20
+      },
+      "revId": "ee07385ac77ff4a8533fe1f68b4239a6e9ec9ab0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
