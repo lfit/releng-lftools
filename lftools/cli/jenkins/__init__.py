@@ -110,7 +110,7 @@ def quiet_down(ctx, n):
 @click.pass_context
 def remove_offline_nodes(ctx, force):
     """Remove any offline nodes."""
-    jenkins = ctx.obj['jenkin']
+    jenkins = ctx.obj['jenkins']
     groovy_script = """
 import hudson.model.*
 
