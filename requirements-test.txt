@@ -1,6 +1,10 @@
 -r requirements.txt
-pytest~=4.0.1  # pytest>=4.1.0 breaks pytest-responses 0.3.0
+pytest~=4.3.0
 pytest-click
 pytest-datafiles
 pytest-mock
 pytest-responses
+
+# Pin transitive dependencies
+more-itertools~=5.0.0  # 6.0.0 requires Python 3.4
+
