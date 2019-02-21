@@ -1,0 +1,74 @@
+#!/bin/bash -l
+# SPDX-License-Identifier: EPL-1.0
+##############################################################################
+# Copyright (c) 2018 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+
+git_dir="$1"
+gerrit_fqdn="$2"
+clonebase=https://$gerrit_fqdn/gerrit/
+gerrit_project="$3"
+
+cd "$git_dir" || exit
+pwd
+
+determine_ldap_group(){
+  get_group(){
+    ldap_group="$(curl -s "$clonebase"access/?project=$gerrit_project \
+      | tail -n +2 \
+      | jq  '.[].local[].permissions.owner.rules' \
+      | grep ldap \
+      | awk -F"=" '{print $2}' \
+      | awk -F"," '{print $1}')"
+  }
+
+  walkgroup(){
+    repo="$(curl -s "$clonebase"access/?project=$gerrit_project | tail -n +2 | jq -r '.[].inherits_from.id')"
+    get_group "$gerrit_project"
+  }
+
+  get_group "$gerrit_project"
+
+  #if ldap_group is null, check for a parent, there may be two levels of parent
+  #This looks stupid but it works.
+  if [ -z "$ldap_group" ]; then
+    walkgroup "$gerrit_project"
+    if [ -z "$ldap_group" ]; then
+      walkgroup "$gerrit_project"
+    fi
+  fi
+  if [ -z "$ldap_group" ]; then
+    echo "could not determine ldap group"
+    exit 1
+  fi
+}
+determine_ldap_group
+
+echo "LDAP GROUP IS $ldap_group for repo $repo"
+echo "Change as we see it"
+git --no-pager show INFO.yaml
+
+#define directions for diff
+added="'%>'"
+removed="'%<'"
+for direction in "$added" "$removed"; do
+unset diff
+
+  diff=$(diff --changed-group-format="$direction" --unchanged-group-format='' <(git show HEAD~1:INFO.yaml) <(git show HEAD:INFO.yaml))
+  if ! [ -z "$diff" ]; then
+    while IFS=$'\n' read -r id; do
+      user="$(echo "$id" | niet '.id')"
+      rm ldap_file.json
+      lftools lfidapi search-members "$ldap_group" > ldap_file.json
+      cat ldap_file.json
+      lftools lfidapi add-remove-committers INFO.yaml ldap_file.json "$user" "$ldap_group"
+
+    done < <(diff --changed-group-format="$direction" --unchanged-group-format='' <(git show HEAD~1:INFO.yaml) <(git show HEAD:INFO.yaml) |grep "id:")
+  fi
+
+done
