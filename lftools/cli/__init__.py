@@ -25,6 +25,7 @@ from lftools.cli.deploy import deploy
 from lftools.cli.gerrit import gerrit_cli
 from lftools.cli.infofile import infofile
 from lftools.cli.jenkins import jenkins_cli
+from lftools.cli.lfidapi import lfidapi
 from lftools.cli.license import license
 from lftools.cli.nexus import nexus
 from lftools.cli.schema import schema
@@ -84,6 +85,7 @@ cli.add_command(jenkins_cli, name='jenkins')
 cli.add_command(license)
 cli.add_command(nexus)
 cli.add_command(schema)
+cli.add_command(lfidapi)
 cli.add_command(sign)
 cli.add_command(version)
 
