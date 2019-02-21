@@ -3,7 +3,9 @@ docker
 glob2  # Needed for Python < 3.5 recursive glob support
 deb-pkg-tools~=5.2
 defusedxml # Needed due to tox complains on parseString not safe
+httplib2
 jsonschema~=2.6.0
+oauth2client
 pyyaml
 requests~=2.18.0
 rpmfile~=0.1.4
@@ -12,6 +14,7 @@ setuptools>=36.5.0
 six~=1.11.0
 python-jenkins~=1.1.0
 tqdm
+validate_email
 xdg~=1.0.7;python_version<'3'
 xdg~=3.0.0;python_version>='3'
 
