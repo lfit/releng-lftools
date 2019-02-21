@@ -1,9 +1,12 @@
 click
 docker
+email_validator
 glob2  # Needed for Python < 3.5 recursive glob support
 deb-pkg-tools~=5.2
 defusedxml # Needed due to tox complains on parseString not safe
+httplib2
 jsonschema~=2.6.0
+oauth2client
 pyyaml
 requests~=2.18.0
 rpmfile~=0.1.4
