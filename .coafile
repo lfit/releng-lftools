@@ -37,8 +37,10 @@ known_first_party_imports = lftools
 known_third_party_imports =
     defusedxml,
     glob2,
+    httplib2,
     jenkins,
     jsonschema,
+    oauth2client,
     pytest,
     six,
     shade,
