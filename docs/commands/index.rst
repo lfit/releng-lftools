@@ -14,6 +14,7 @@ It supports the following commands:
     deploy
     dco
     gerrit
+    lfidapi
     license
     nexus
     openstack
