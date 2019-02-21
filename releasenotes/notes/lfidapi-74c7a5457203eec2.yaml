@@ -1,0 +1,20 @@
+---
+features:
+  - |
+    LFID Api Tools.
+
+    Usage: lftools lfidapi [OPTIONS] COMMAND [ARGS]...
+
+
+    .. code-block:: none
+
+       Commands:
+         create-group    Create group.
+         invite          Email invitation to join group.
+         search-members  List members of a group.
+         user            Add and remove users from groups.
+
+    .. code-block:: none
+
+       Options:
+         --help    Show this message and exit
