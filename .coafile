@@ -36,13 +36,16 @@ ignore += docs/conf.py
 known_first_party_imports = lftools
 known_third_party_imports =
     defusedxml,
+    email_validator,
     glob2,
+    httplib2,
     jenkins,
     jsonschema,
+    oauth2client,
     pytest,
+    ruamel.yaml,
     six,
     shade,
-    ruamel.yaml,
     xdg,
     yaml
 pydocstyle_ignore = D203, D213, D301
