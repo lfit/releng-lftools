@@ -91,7 +91,15 @@ sign_dir() {
         exit 1
     fi
 
+    local mode="serial"
     if hash parallel 2>/dev/null; then
+        # Unless you specifically asked for serial mode
+        if [ "$3" != "serial" ]; then
+            local mode="parallel"
+        fi
+    fi
+
+    if [ "$mode" == "parallel" ]; then
         echo "Signing in parallel..."
         case "$signer" in
             gpg )
@@ -116,7 +124,7 @@ sign_dir() {
         echo "Signed the following files:"
         printf '%s\n' "${files_to_sign[@]}"
     else
-        echo "GNU parallel not found. Signing in serial mode..."
+        echo "Signing in serial mode..."
         case "$signer" in
             gpg )
                 for f in "${files_to_sign[@]}"; do

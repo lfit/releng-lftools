@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    Allow passing ``serial`` as third argument to **sign_dir**
+
+    Parallel-signing using sigul is resulting in NSPR reset errors,
+    so allow passing "serial" to the sign_dir function as a third argument
+    to request serial signing of directory contents.
