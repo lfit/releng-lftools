@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2111a8f2_1e7759ea",
+        "filename": "lftools/cli/lfidapi.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-02-23T00:01:26Z",
+      "side": 1,
+      "message": "is that accurate? seems this script does more than that...",
+      "revId": "c4750e882552a8765bef18710989005f11888f1a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b0f4235_844a78a2",
+        "filename": "lftools/cli/lfidapi.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-02-23T00:01:26Z",
+      "side": 1,
+      "message": "does this need error handling, like checking if access token is empty or null, or will the oauth2 library throw an error if the refresh fails?",
+      "revId": "c4750e882552a8765bef18710989005f11888f1a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "241a84e1_d49f6223",
+        "filename": "lftools/cli/lfidapi.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-02-23T00:01:26Z",
+      "side": 1,
+      "message": "not super essential, but you may want to consider either using something like urlparse.urljoin, or if you want to just do basic string concatenation, abort with an error in oauth_helper if the configured URL doesn\u0027t end in a trailing slash.",
+      "revId": "c4750e882552a8765bef18710989005f11888f1a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0144df7d_9fb22182",
+        "filename": "lftools/cli/lfidapi.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-02-23T00:01:26Z",
+      "side": 1,
+      "message": "can you validate it\u0027s a proper email before you send to the API?",
+      "revId": "c4750e882552a8765bef18710989005f11888f1a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d774da57_91ef66b9",
+        "filename": "lftools/oauth2_helper.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-02-23T00:01:26Z",
+      "side": 1,
+      "message": "is there a reason you mixed cases here, rather than using all caps or all camel case?  just wondering :-)",
+      "revId": "c4750e882552a8765bef18710989005f11888f1a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ccf6448e_052dde1e",
+        "filename": "lftools/oauth2_helper.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 16
+      },
+      "writtenOn": "2019-02-23T00:01:26Z",
+      "side": 1,
+      "message": "I think \"exporting the token as JSON, then import JSON text to array\" could just be shortcutted by using credentials.access_token, which should be set after your call to refresh?",
+      "revId": "c4750e882552a8765bef18710989005f11888f1a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
