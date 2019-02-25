@@ -155,6 +155,24 @@
       "revId": "c4750e882552a8765bef18710989005f11888f1a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "059446ed_f2dddeca",
+        "filename": "lftools/oauth2_helper.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-02-25T19:15:57Z",
+      "side": 1,
+      "message": "good catch, this is my first time using client.OAuth2Credentials and I missed the obvious method there.",
+      "parentUuid": "ccf6448e_052dde1e",
+      "revId": "c4750e882552a8765bef18710989005f11888f1a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
