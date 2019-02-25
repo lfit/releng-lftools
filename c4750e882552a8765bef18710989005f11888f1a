@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "db511548_ca2c077c",
+        "filename": "lftools/cli/lfidapi.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-02-25T19:01:19Z",
+      "side": 1,
+      "message": "Yeah, it will error with something readable like\noauth2client.client.HttpAccessTokenRefreshError: invalid_client: The client credentials are invalid",
+      "parentUuid": "5b0f4235_844a78a2",
+      "revId": "c4750e882552a8765bef18710989005f11888f1a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "241a84e1_d49f6223",
         "filename": "lftools/cli/lfidapi.py",
         "patchSetId": 9
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "d6df134e_35414f13",
+        "filename": "lftools/cli/lfidapi.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-02-25T19:01:19Z",
+      "side": 1,
+      "message": "Using urlparse. \nEven without a check on the url it raises a human readable error: \n\nrequests.exceptions.ConnectionError: HTTPSConnectionPool(host\u003d\u0027id](\u0027\u003curllib3.connection.VerifiedHTTPSConnection object at 0x7f668d86e790\u003e: Failed to establish a new connection: [Errno -2] Name or service not known\u0027,))",
+      "parentUuid": "241a84e1_d49f6223",
+      "revId": "c4750e882552a8765bef18710989005f11888f1a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0144df7d_9fb22182",
         "filename": "lftools/cli/lfidapi.py",
         "patchSetId": 9
@@ -64,6 +100,24 @@
       "writtenOn": "2019-02-23T00:01:26Z",
       "side": 1,
       "message": "can you validate it\u0027s a proper email before you send to the API?",
+      "revId": "c4750e882552a8765bef18710989005f11888f1a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54dfffb7_9da4457e",
+        "filename": "lftools/cli/lfidapi.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-02-25T19:01:19Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "0144df7d_9fb22182",
       "revId": "c4750e882552a8765bef18710989005f11888f1a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
