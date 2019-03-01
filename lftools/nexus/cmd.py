@@ -121,9 +121,14 @@ def create_repos(config_file, settings_file):
     with open(settings_file, 'r') as f:
         settings = yaml.safe_load(f)
 
-    for setting in ['nexus', 'user', 'password', 'email_domain']:
+    for setting in ['email_domain', 'base_groupId', 'repositories']:
+        if not setting in config:
+            log.error('{} needs to be defined in {}'.format(setting, config_file))
+            sys.exit(1)
+
+    for setting in ['nexus', 'user', 'password']:
         if not setting in settings:
-            log.error('{} needs to be defined'.format(setting))
+            log.error('{} needs to be defined in {}'.format(setting, settings_file))
             sys.exit(1)
 
     _nexus = Nexus(settings['nexus'], settings['user'], settings['password'])
@@ -165,21 +170,26 @@ def create_repos(config_file, settings_file):
         except LookupError as e:
             _nexus.create_user(name, email, role_id, password, extra_privs)
 
-    def build_repo(repo, repoId, config, base_groupId):
+    def build_repo(repo, repoId, config, base_groupId, global_privs, email_domain):
         log.info('-> Building for {}.{} in Nexus'.format(base_groupId, repo))
         groupId = '{}.{}'.format(base_groupId, repo)
         target = util.create_repo_target_regex(groupId)
 
-        if 'extra_privs' in config:
+        if not global_privs and not 'extra_privs' in config:
+            extra_privs = []
+        elif global_privs:
+            extra_privs = global_privs
+            if 'extra_privs' in config:
+                extra_privs += config['extra_privs']
+            log.info('Privileges for this repo:' + ', '.join(extra_privs))
+        elif 'extra_privs' in config:
             extra_privs = config['extra_privs']
             log.info('Privileges for this repo:' + ', '.join(extra_privs))
-        else:
-            extra_privs = []
 
         create_nexus_perms(
             repoId,
             [target],
-            settings['email_domain'],
+            email_domain,
             config['password'],
             extra_privs)
 
@@ -192,11 +202,19 @@ def create_repos(config_file, settings_file):
                     sub_repo,
                     sub_repo_id,
                     config['repositories'][sub_repo],
-                    groupId)
+                    groupId,
+                    extra_privs,
+                    email_domain)
 
     log.warning('Nexus repo creation started. Aborting now could leave tasks undone!')
+    if 'global_privs' in config:
+        global_privs = config['global_privs']
+    else:
+        global_privs = []
+
     for repo in config['repositories']:
-        build_repo(repo, repo, config['repositories'][repo], config['base_groupId'])
+        build_repo(repo, repo, config['repositories'][repo],
+                   config['base_groupId'], global_privs, config['email_domain'])
 
 
 def search(settings_file, url, repo, pattern):

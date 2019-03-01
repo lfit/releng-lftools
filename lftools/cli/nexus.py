@@ -49,7 +49,7 @@ def create(ctx):
 @create.command()
 @click.option(
     '-c', '--config', type=str, required=True,
-    help='Repo config file for how to the Nexus repository should be created.')
+    help='Repo config file for how the Nexus repository should be created.')
 @click.option(
     '-s', '--settings', type=str, required=True,
     help='Config file containing administrative settings.')
