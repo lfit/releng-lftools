@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12ee5afc_ad1cd9d3",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-03-02T00:47:15Z",
+      "side": 1,
+      "message": "minor nit, PS change this to ... `LF Create Nexus2 repos with lftools \u003c...\u003e`",
+      "range": {
+        "startLine": 32,
+        "startChar": 9,
+        "endLine": 32,
+        "endChar": 14
+      },
+      "revId": "75533caa8511f4dbc42d6da882b123e810d5b936",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
