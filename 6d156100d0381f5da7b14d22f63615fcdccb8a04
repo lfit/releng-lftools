@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d9f6010_354e9867",
+        "filename": "shell/sign",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-03-06T17:29:29Z",
+      "side": 1,
+      "message": "In almost all circumstances, a bash script should be run with -eu -o pipefail. Making that change now would clearly be outside the scope of this change.",
+      "revId": "6d156100d0381f5da7b14d22f63615fcdccb8a04",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
