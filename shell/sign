@@ -62,7 +62,9 @@ sign_dir() {
     #
     # Parameters:
     #
+    #     <signer>: gpg|sigul
     #     <directory>: The directory to find and sign artifacts.
+    #     <mode>: serial|parallel
     local signer="$1"
     local dir="$2"
 
@@ -168,7 +170,7 @@ sign_nexus() {
     # /tmp/gpg-signatures.XXXXXXXXXX unless the -d parameter is passed to
     # override.
     local signer='gpg'
-    while getopts d:w:h o; do
+    while getopts d:m:w:h o; do
       case "$o" in
         h)
             sign_nexus_usage
@@ -178,6 +180,10 @@ sign_nexus() {
         d)
             local sign_dir="$OPTARG"
             mkdir -p "$sign_dir"
+            ;;
+
+        m)
+            local sign_mode="$OPTARG"
             ;;
 
         w)
@@ -244,9 +250,9 @@ sign_nexus() {
     echo "Signing artifacts..."
     if [ "$signer" == "gpg" ]
     then
-        sign_dir 'gpg' "$sign_dir"
+        sign_dir 'gpg' "$sign_dir" "$sign_mode"
     else
-        sign_dir 'sigul' "$sign_dir"
+        sign_dir 'sigul' "$sign_dir" "$sign_mode"
     fi
 
     echo "Removing non-signature files..."
