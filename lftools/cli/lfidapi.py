@@ -10,9 +10,6 @@
 ##############################################################################
 """Use the LFIDAPI to add, remove and list members as well as create groups."""
 
-import subprocess
-import sys
-
 import click
 
 from lftools.lfidapi import helper_add_remove_committers
@@ -67,28 +64,13 @@ def create_group(ctx, group):
 
 @click.command()
 @click.argument('info_file')
-@click.argument('ldap_file')
 @click.argument('group')
-@click.argument('user')
+@click.option('--noop', is_flag=True, required=False,
+              help='show what would be changed')
 @click.pass_context
-def add_remove_committers(ctx, info_file, ldap_file, group, user):
-    """Used in automation."""
-    helper_add_remove_committers(info_file, ldap_file, group, user)
-
-
-@click.command()
-@click.argument('git_dir')
-@click.argument('gerrit_fqdn')
-@click.argument('gerrit_project')
-@click.pass_context
-def lfidapi_add_remove_users(ctx, git_dir, gerrit_fqdn, gerrit_project):
-    """Create a diff of the changes to the INFO.yaml.
-
-    Call the api to add and remove users as appropriate.
-    """
-    status = subprocess.call(['lfidapi_add_remove_users', git_dir, gerrit_fqdn, gerrit_project])
-
-    sys.exit(status)
+def add_remove_committers(ctx, info_file, group, noop):
+    """Match an LDAP groups membership to an INFO.yaml file."""
+    helper_add_remove_committers(info_file, group, noop)
 
 
 lfidapi.add_command(search_members)
@@ -96,4 +78,3 @@ lfidapi.add_command(user)
 lfidapi.add_command(invite)
 lfidapi.add_command(create_group)
 lfidapi.add_command(add_remove_committers)
-lfidapi.add_command(lfidapi_add_remove_users)

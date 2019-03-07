@@ -40,6 +40,7 @@ def helper_search_members(group):
     result = (response.json())
     members = result["members"]
     print(json.dumps(members, indent=4, sort_keys=True))
+    return members
 
 
 def helper_user(user, group, delete):
@@ -87,7 +88,7 @@ def helper_create_group(group):
     print(json.dumps(result, indent=4, sort_keys=True))
 
 
-def helper_add_remove_committers(info_file, ldap_file, user, group):
+def helper_add_remove_committers(info_file, group, noop):
     """Helper only to be used in automation."""
     with open(info_file) as file:
         try:
@@ -95,9 +96,7 @@ def helper_add_remove_committers(info_file, ldap_file, user, group):
         except yaml.YAMLError as exc:
             print(exc)
 
-    with open(ldap_file, 'r') as file:
-        ldap_data = json.load(file)
-
+    ldap_data = helper_search_members(group)
     committer_info = info_data['committers']
 
     info_committers = []
@@ -110,16 +109,21 @@ def helper_add_remove_committers(info_file, ldap_file, user, group):
         committer = ldap_data[count]['username']
         ldap_committers.append(committer)
 
-    removed_by_patch = [item for item in ldap_committers if item not in info_committers]
+    all_users = ldap_committers + info_committers
+    all_users.remove("lfservices_releng")
+    all_users = sorted(set(all_users))
 
-    if (user in removed_by_patch):
-        print(" {} found in group {} ".format(user, group))
-        print(" removing user {} from group {}".format(user, group))
-        helper_user(user, group, "--delete")
+    for user in all_users:
+        removed_by_patch = [item for item in ldap_committers if item not in info_committers]
+        if (user in removed_by_patch):
+            print(" {} found in group {} ".format(user, group))
+            if noop is False:
+                print(" removing user {} from group {}".format(user, group))
+                helper_user(user, group, "--delete")
 
-    added_by_patch = [item for item in info_committers if item not in ldap_committers]
-
-    if (user in added_by_patch):
-        print(" {} not found in group {} ".format(user, group))
-        print(" adding user {} to group {}".format(user, group))
-        helper_user(user, group, "")
+        added_by_patch = [item for item in info_committers if item not in ldap_committers]
+        if (user in added_by_patch):
+            print(" {} not found in group {} ".format(user, group))
+            if noop is False:
+                print(" adding user {} to group {}".format(user, group))
+                helper_user(user, group, "")
