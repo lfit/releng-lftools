@@ -27,3 +27,8 @@ user
 ----
 
 .. program-output:: lftools lfidapi user --help
+
+match-ldap-to-info
+------------------
+
+.. program-output:: lftools lfidapi match-ldap-to-info --help
