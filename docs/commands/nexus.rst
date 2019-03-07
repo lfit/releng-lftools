@@ -28,6 +28,9 @@ repo
 
 .. program-output:: lftools nexus create repo --help
 
+For details and examples, please see
+:ref:`Create Nexus2 repos with lftools <create-repos-lftools>`
+
 .. _nexus-reorder-staged-repos:
 
 reorder-staged-repos
