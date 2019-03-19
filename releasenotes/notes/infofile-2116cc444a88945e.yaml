@@ -1,0 +1,17 @@
+---
+features:
+  - |
+    check-votes
+
+    Usage: lftools infofile check-votes [OPTIONS] INFO_FILE GERRIT_URL
+
+    .. code-block:: none
+
+       Commands:
+         Check for Majority of votes on a gerrit patchset that changes
+         an INFO.yaml file.
+
+    .. code-block:: none
+
+       Options:
+         --help    Show this message and exit.
