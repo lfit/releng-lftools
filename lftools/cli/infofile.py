@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # SPDX-License-Identifier: EPL-1.0
 ##############################################################################
-# Copyright (c) 2018 The Linux Foundation and others.
+# Copyright (c) 2019 The Linux Foundation and others.
 #
 # All rights reserved. This program and the accompanying materials
 # are made available under the terms of the Eclipse Public License v1.0
@@ -10,9 +10,15 @@
 ##############################################################################
 """Script to insert missing values from ldap into a projects INFO.yaml."""
 
+import sys
+
+import logging
 import click
+from pygerrit2 import GerritRestAPI
 import ruamel.yaml
 import yaml
+
+log = logging.getLogger(__name__)
 
 
 @click.group()
@@ -122,5 +128,67 @@ def sync_committers(ctx, id, info_file, ldap_file, repo):
     readfile(info_data, ldap_data, id)
 
 
+@click.command(name='check-votes')
+@click.argument('info_file')
+@click.argument('gerrit_url')
+@click.argument('change_number')
+@click.pass_context
+def check_votes(ctx, info_file, gerrit_url, change_number):
+    """Check votes on an INFO.yaml change.
+
+    Check for Majority of votes on a gerrit patchset
+    which changes an INFO.yaml file.
+    """
+    # Extract lfids from INFO.yaml
+    with open(info_file) as file:
+        try:
+            info_data = yaml.safe_load(file)
+        except yaml.YAMLError as exc:
+            log.error(exc)
+
+    committer_info = info_data['committers']
+
+    info_committers = []
+    for count, item in enumerate(committer_info):
+        committer = committer_info[count]['id']
+        info_committers.append(committer)
+
+    rest = GerritRestAPI(url=gerrit_url)
+    changes = rest.get("changes/{}/reviewers".format(change_number))
+
+    info_change = []
+    for change in changes:
+        line = (change['username'], change['approvals']['Code-Review'])
+
+        if "+1" or "+2" in line:
+            info_change.append(change['username'])
+
+    have_not_voted = [item for item in info_committers if item not in info_change]
+    have_not_voted_length = (len(have_not_voted))
+
+    have_voted = [item for item in info_committers if item in info_change]
+    have_voted_length = (len(have_voted))
+
+    log.info("Number of Committers:")
+    log.info(len(info_committers))
+    committer_lenght = (len(info_committers))
+
+    log.info("Committers that have voted:")
+    log.info(have_voted)
+    log.info(have_voted_length)
+    log.info("Committers that have not voted:")
+    log.info(have_not_voted)
+    log.info(have_not_voted_length)
+
+    majority = (committer_lenght / have_voted_length)
+    if (majority == 1):
+        log.info("majority vote reached")
+        sys.exit(0)
+    else:
+        log.info("majority not yet reached")
+        sys.exit(1)
+
+
 infofile.add_command(get_committers)
 infofile.add_command(sync_committers)
+infofile.add_command(check_votes)
