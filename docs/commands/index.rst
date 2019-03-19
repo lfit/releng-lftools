@@ -14,6 +14,7 @@ It supports the following commands:
     deploy
     dco
     gerrit
+    infofile
     lfidapi
     license
     nexus
