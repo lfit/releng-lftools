@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1e8110c_f6627a1d",
+        "filename": "requirements.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-03-19T19:15:28Z",
+      "side": 1,
+      "message": "I had to change the version of request. Ideally this wont break anything ...",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 16
+      },
+      "revId": "ef293ca3fa94b876daff0ae0a69029cf3b96c371",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
