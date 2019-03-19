@@ -4,7 +4,8 @@ glob2  # Needed for Python < 3.5 recursive glob support
 deb-pkg-tools~=5.2
 defusedxml # Needed due to tox complains on parseString not safe
 jsonschema~=2.6.0
-requests~=2.18.0
+#requests~=2.18.0
+requests>=2.20.0
 rpmfile~=0.1.4
 ruamel.yaml
 setuptools>=36.5.0
@@ -17,6 +18,7 @@ httplib2
 email_validator
 oauth2client
 pyyaml
+pygerrit2
 
 # workarounds to prevent upstream from breaking us
 netifaces==0.10.5
