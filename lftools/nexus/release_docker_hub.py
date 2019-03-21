@@ -513,3 +513,140 @@ def get_nexus3_catalog(org_name='', find_pattern=''):
         log.debug("# TmpCatalog {}, NexusCatalog {}, DIFF = {}".format(
             len(TmpCatalog), len(NexusCatalog), len(TmpCatalog)-len(NexusCatalog)))
     return True
+
+
+def print_nexus_docker_proj_names():
+    """Print Nexus3 - Docker Hub repositories."""
+    fmt_str = '{:<'+str(project_max_len_chars)+'} : '
+    log.info("")
+    log_str = fmt_str.format(NEXUS3_PROJ_NAME_HEADER)
+    log_str = "{}{}".format(log_str, DOCKER_PROJ_NAME_HEADER)
+    log.info(log_str)
+    log.info('-'*project_max_len_chars*2)
+    docker_i = 0
+    for proj in projects:
+        log_str = fmt_str.format(proj.nexus_repo_name)
+        log_str = "{}{}".format(log_str, proj.docker_repo_name)
+        log.info(log_str)
+        docker_i = docker_i + 1
+    log.info("")
+
+
+def print_tags_header(header_str, col_1_str):
+    """Print simple header."""
+    fmt_str = '{:<'+str(project_max_len_chars)+'} : '
+    log.info(header_str)
+    log_str = fmt_str.format(col_1_str)
+    log_str = "{}{}".format(log_str, 'Tags')
+    log.info(log_str)
+    log.info('-'*project_max_len_chars*2)
+
+
+def print_tags_data(proj_name, tags):
+    """Print tag data."""
+    fmt_str = '{:<'+str(project_max_len_chars)+'} : '
+    if len(tags) > 0:
+        log_str = fmt_str.format(proj_name)
+        tag_i = 0
+        for tag in tags:
+            if tag_i > 0:
+                log_str = "{}, ".format(log_str)
+            log_str = "{}{}".format(log_str, tag)
+            tag_i = tag_i + 1
+        log.info(log_str)
+
+
+def print_nexus_valid_tags():
+    """Print Nexus valid tags."""
+    print_tags_header("Nexus Valid Tags", NEXUS3_PROJ_NAME_HEADER)
+    for proj in projects:
+        print_tags_data(proj.nexus_repo_name, proj.nexus_tags.valid)
+    log.info("")
+
+
+def print_nexus_invalid_tags():
+    """Print Nexus invalid tags."""
+    print_tags_header("Nexus InValid Tags", NEXUS3_PROJ_NAME_HEADER)
+    for proj in projects:
+        print_tags_data(proj.nexus_repo_name, proj.nexus_tags.invalid)
+    log.info("")
+
+
+def print_docker_valid_tags():
+    """Print Docker valid tags."""
+    print_tags_header("Docker Valid Tags", DOCKER_PROJ_NAME_HEADER)
+    for proj in projects:
+        print_tags_data(proj.docker_repo_name, proj.docker_tags.valid)
+    log.info("")
+
+
+def print_docker_invalid_tags():
+    """Print Docker invalid tags."""
+    print_tags_header("Docker InValid Tags", DOCKER_PROJ_NAME_HEADER)
+    for proj in projects:
+        print_tags_data(proj.docker_repo_name, proj.docker_tags.invalid)
+    log.info("")
+
+
+def print_stats():
+    """Print simple repo/tag statistics."""
+    print_tags_header("Tag statistics (V=Valid, I=InValid)", NEXUS3_PROJ_NAME_HEADER)
+    fmt_str = '{:<'+str(project_max_len_chars)+'} : '
+    for proj in projects:
+        log.info("{}Nexus V:{} I:{} -- Docker V:{} I:{}".format(
+            fmt_str.format(proj.nexus_repo_name),
+            len(proj.nexus_tags.valid),
+            len(proj.nexus_tags.invalid),
+            len(proj.docker_tags.valid),
+            len(proj.docker_tags.invalid)))
+    log.info("")
+
+
+def print_missing_docker_proj():
+    """Print missing docker repos."""
+    log.info("Missing corresponding Docker Project")
+    fmt_str = '{:<'+str(project_max_len_chars)+'} : '
+    log_str = fmt_str.format(NEXUS3_PROJ_NAME_HEADER)
+    log_str = "{}{}".format(log_str, DOCKER_PROJ_NAME_HEADER)
+    log.info(log_str)
+    log.info('-'*project_max_len_chars*2)
+    all_docker_repos_found = True
+    for proj in projects:
+        if not proj.docker_tags.repository_exist:
+            log_str = fmt_str.format(proj.nexus_repo_name)
+            log_str = "{}{}".format(log_str, proj.docker_repo_name)
+            log.info(log_str)
+            all_docker_repos_found = False
+    if all_docker_repos_found:
+        log.info("All Docker Hub repos found.")
+    log.info("")
+
+
+def print_nexus_tags_to_copy():
+    """Print tags that needs to be copied."""
+    log.info("Nexus project tags to copy to docker")
+    fmt_str = '{:<'+str(project_max_len_chars)+'} : '
+    log_str = fmt_str.format(NEXUS3_PROJ_NAME_HEADER)
+    log_str = "{}{}".format(log_str, "Tags to copy")
+    log.info(log_str)
+    log.info('-'*project_max_len_chars*2)
+    for proj in projects:
+        if len(proj.tags_2_copy.valid) > 0:
+            log_str = ""
+            tag_i = 0
+            log_str = fmt_str.format(proj.nexus_repo_name)
+            for tag in proj.tags_2_copy.valid:
+                if tag_i > 0:
+                    log_str = "{}, ".format(log_str)
+                log_str = "{}{}".format(log_str, tag)
+                tag_i = tag_i + 1
+            log.info(log_str)
+    log.info("")
+
+
+def print_nbr_tags_to_copy():
+    """Print how many tags that needs to be copied."""
+    _tot_tags = 0
+    for proj in projects:
+        _tot_tags = _tot_tags + len(proj.tags_2_copy.valid)
+    log.info("Summary: {} tags that should be copied from Nexus3 to Docker Hub.".format(_tot_tags))
