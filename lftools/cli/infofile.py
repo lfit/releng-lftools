@@ -185,6 +185,9 @@ def check_votes(ctx, info_file, gerrit_url, change_number, tsc):
 
         if (have_voted_length != 0):
             majority = (committer_lenght / have_voted_length)
+        else:
+            log.info("No one has voted:")
+            sys.exit(1)
 
             if (majority == 1):
                 log.info("Majority committer vote reached")
