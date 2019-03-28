@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46b76d96_9a8923e3",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-03-28T18:30:53Z",
+      "side": 1,
+      "message": "This code will never run according to the current proposal. Is this intentional?",
+      "range": {
+        "startLine": 192,
+        "startChar": 12,
+        "endLine": 204,
+        "endChar": 27
+      },
+      "revId": "67dc348ce046161b9c72fd9a0cf24171c1887ea5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
