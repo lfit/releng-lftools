@@ -22,6 +22,30 @@
       "revId": "fc68bb1fa90b2b14222cf1e2812f17abd9caf723",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3eb4247_0149c887",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-03-28T18:28:57Z",
+      "side": 1,
+      "message": "Better subject line:\n\nCorrect script exit condition",
+      "parentUuid": "4e8086fb_5f290189",
+      "range": {
+        "startLine": 7,
+        "startChar": 12,
+        "endLine": 7,
+        "endChar": 13
+      },
+      "revId": "fc68bb1fa90b2b14222cf1e2812f17abd9caf723",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
