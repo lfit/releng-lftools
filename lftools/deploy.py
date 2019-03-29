@@ -359,7 +359,7 @@ def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
         log.info("Uploading {} failed. It contained the following files".format(zip_file))
         for f in files:
             log.info("   {}".format(f))
-        raise requests.HTTPError(e.value)
+        raise requests.HTTPError(e)
     log.debug('{}: {}'.format(resp.status_code, resp.text))
 
 

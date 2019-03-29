@@ -1,0 +1,40 @@
+---
+fixes:
+  - |
+    Fix the unhelpful stack trace when a deploy nexus-zip fails to upload.
+
+    .. code-block:: bash
+
+        Traceback (most recent call last):
+          File "/home/jenkins/.local/bin/lftools", line 10, in <module>
+            sys.exit(main())
+          File "/home/jenkins/.local/lib/python2.7/site-packages/lftools/cli/__init__.py", line 110, in main
+            cli(obj={})
+          File "/usr/lib/python2.7/site-packages/click/core.py", line 721, in __call__
+            return self.main(*args, **kwargs)
+          File "/usr/lib/python2.7/site-packages/click/core.py", line 696, in main
+            rv = self.invoke(ctx)
+          File "/usr/lib/python2.7/site-packages/click/core.py", line 1065, in invoke
+            return _process_result(sub_ctx.command.invoke(sub_ctx))
+          File "/usr/lib/python2.7/site-packages/click/core.py", line 1065, in invoke
+            return _process_result(sub_ctx.command.invoke(sub_ctx))
+          File "/usr/lib/python2.7/site-packages/click/core.py", line 894, in invoke
+            return ctx.invoke(self.callback, **ctx.params)
+          File "/usr/lib/python2.7/site-packages/click/core.py", line 534, in invoke
+            return callback(*args, **kwargs)
+          File "/usr/lib/python2.7/site-packages/click/decorators.py", line 17, in new_func
+            return f(get_current_context(), *args, **kwargs)
+          File "/home/jenkins/.local/lib/python2.7/site-packages/lftools/cli/deploy.py", line 63, in archives
+            deploy_sys.deploy_archives(nexus_url, nexus_path, workspace, pattern)
+          File "/home/jenkins/.local/lib/python2.7/site-packages/lftools/deploy.py", line 236, in deploy_archives
+            deploy_nexus_zip(nexus_url, 'logs', nexus_path, archives_zip)
+          File "/home/jenkins/.local/lib/python2.7/site-packages/lftools/deploy.py", line 362, in deploy_nexus_zip
+            raise requests.HTTPError(e.value)
+        AttributeError: 'HTTPError' object has no attribute 'value'
+
+
+    Now instead it returns a much more helpful error message::
+
+        ERROR: Failed to upload to Nexus with status code: 401.
+
+        test.zip
