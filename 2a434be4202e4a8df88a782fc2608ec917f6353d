@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3aaa54d_90706701",
+        "filename": "lftools/openstack/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2019-04-01T20:49:43Z",
+      "side": 1,
+      "message": "lets use  \"OpenStack\" like line 29",
+      "range": {
+        "startLine": 102,
+        "startChar": 23,
+        "endLine": 102,
+        "endChar": 32
+      },
+      "revId": "2a434be4202e4a8df88a782fc2608ec917f6353d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
