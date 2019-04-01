@@ -99,7 +99,7 @@ def share(ctx, image, dest):
     help='Disk format of image. (default: qcow2)')
 @click.pass_context
 def upload(ctx, image, name, disk_format):
-    """Share image with another tenant."""
+    """Upload image to openstack."""
     name = ' '.join(name)
     os_image.upload(ctx.obj['os_cloud'], image, name, disk_format)
 
