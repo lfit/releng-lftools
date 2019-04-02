@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2f37d909_41eef59c",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-04-02T16:36:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00bb8aa6_22a0266f",
+      "range": {
+        "startLine": 178,
+        "startChar": 40,
+        "endLine": 178,
+        "endChar": 44
+      },
+      "revId": "741b238e3af1df80f260e559364b3a49709d420a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de16107d_fe97eb29",
         "filename": "releasenotes/notes/lftools-deploy-HandleMissingArchiveDir-415ac62d2a45303f.yaml",
         "patchSetId": 7
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "98c8c93d_a287af9d",
+        "filename": "releasenotes/notes/lftools-deploy-HandleMissingArchiveDir-415ac62d2a45303f.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-04-02T16:36:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c184d76_2f4cb63a",
+      "range": {
+        "startLine": 9,
+        "startChar": 43,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "741b238e3af1df80f260e559364b3a49709d420a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64d901c8_f6879510",
+        "filename": "releasenotes/notes/lftools-deploy-HandleMissingArchiveDir-415ac62d2a45303f.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-04-02T16:36:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de16107d_fe97eb29",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 34
+      },
+      "revId": "741b238e3af1df80f260e559364b3a49709d420a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e85fd31_4280ff81",
         "filename": "releasenotes/notes/lftools-deploy-HandleMissingArchiveDir-415ac62d2a45303f.yaml",
         "patchSetId": 7
@@ -82,6 +154,30 @@
       "writtenOn": "2019-04-02T16:30:37Z",
       "side": 1,
       "message": "archives",
+      "range": {
+        "startLine": 11,
+        "startChar": 35,
+        "endLine": 11,
+        "endChar": 44
+      },
+      "revId": "741b238e3af1df80f260e559364b3a49709d420a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0708d767_f458019f",
+        "filename": "releasenotes/notes/lftools-deploy-HandleMissingArchiveDir-415ac62d2a45303f.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-04-02T16:36:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e85fd31_4280ff81",
       "range": {
         "startLine": 11,
         "startChar": 35,
