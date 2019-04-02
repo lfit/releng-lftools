@@ -1,0 +1,17 @@
+fixes:
+  - |
+    Fixes an OSError exception that is not handled, in the lftools command:
+
+    lftools deploy archives
+
+    The code resides in the copy_archives function in deploy.py file.
+
+    This exception is caused by a missing archives directory, which a for loop
+    expects to be there.
+    The fix is simply to verify if archives file/directory exists, and if it does
+    then perform the for loop.
+
+    12:07:36   File "/home/jenkins/.local/lib/python2.7/site-packages/lftools/deploy.py", line 166, in copy_archives
+    12:07:36     for file_or_dir in os.listdir(archives_dir):
+    12:07:36 OSError: [Errno 2] No such file or directory: '/w/workspace/music-mdbc-master-verify-java/archives'
+
