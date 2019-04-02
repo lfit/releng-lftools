@@ -163,13 +163,19 @@ def copy_archives(workspace, pattern=None):
 
     log.debug('Copying files from {} with pattern \'{}\' to {}.'.format(
         workspace, pattern, dest_dir))
-    for file_or_dir in os.listdir(archives_dir):
-        f = os.path.join(archives_dir, file_or_dir)
-        try:
-            log.debug('Moving {}'.format(f))
-            shutil.move(f, dest_dir)
-        except shutil.Error as e:
-            log.warn(e)
+    log.debug('archives_dir = {}'.format(archives_dir))
+
+    if os.path.exists(archives_dir):
+        log.debug('Archives file/dir {} DO exist.'.format(archives_dir))
+        for file_or_dir in os.listdir(archives_dir):
+            f = os.path.join(archives_dir, file_or_dir)
+            try:
+                log.debug('Moving {}'.format(f))
+                shutil.move(f, dest_dir)
+            except shutil.Error as e:
+                log.warn(e)
+    else:
+        log.debug('Archives file/dir {} dont exist.'.format(archives_dir))
 
     if pattern is None:
         return
