@@ -38,6 +38,25 @@ def directory(ctx, directory, mode):
     sys.exit(status)
 
 
+@click.command(name='git-tag')
+@click.argument('tag')
+@click.pass_context
+def directory(ctx, tag):
+    """GPG signs all of the files in a directory."""
+    status = subprocess.call(['sign', 'git-tag', tag])
+    sys.exit(status)
+
+
+@click.command(name='container')
+@click.argument('manifest')
+@click.argument('tag')
+@click.pass_context
+def directory(ctx, manifest, tag):
+    """GPG signs all of the files in a directory."""
+    status = subprocess.call(['sign', 'container', manifest, tag])
+    sys.exit(status)
+
+
 @click.command(name='nexus')
 @click.argument('nexus-repo-url')
 @click.option(
