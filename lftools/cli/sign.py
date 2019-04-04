@@ -38,6 +38,25 @@ def directory(ctx, directory, mode):
     sys.exit(status)
 
 
+@click.command(name='git-tag')
+@click.argument('tag')
+@click.pass_context
+def git_tag(ctx, tag):
+    """Sigul sign a git tag."""
+    status = subprocess.call(['sign', 'git-tag', tag])
+    sys.exit(status)
+
+
+@click.command(name='container')
+@click.argument('manifest')
+@click.argument('tag')
+@click.pass_context
+def container(ctx, manifest, tag):
+    """Sigul sign a Docker container."""
+    status = subprocess.call(['sign', 'container', manifest, tag])
+    sys.exit(status)
+
+
 @click.command(name='nexus')
 @click.argument('nexus-repo-url')
 @click.option(
