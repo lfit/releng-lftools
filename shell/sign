@@ -49,11 +49,51 @@ sign() {
             sign_dir 'sigul' "$@"
             exit 0
             ;;
+        git-tag )
+            echo "Signing Git tag with Sigul..."
+            sign_git_tag "$@"
+            exit 0
+            ;;
+        container )
+            echo "Signing container with Sigul..."
+            sign_container "$@"
+            exit 0
+            ;;
         * )
             echo "Invalid command: $subcommand" 1>&2
             exit 1
             ;;
     esac
+}
+
+
+sign_git_tag() {
+    # Signs the specified git tag.
+    #
+    # Parameters:
+    #
+    #     <tag>: The name of the git tag to be signed.
+    local tag="$1"
+
+    echo "Signing $tag"
+    sigul --batch -c "$SIGUL_CONFIG" sign-git-tag \
+        "$SIGUL_KEY" "$tag" < "$SIGUL_PASSWORD"
+}
+
+
+sign_container() {
+    # Signs the specified Docker container.
+    #
+    # Parameters:
+    #
+    #     <manifest>: Manifest of the container to be signed.
+    #     <tag>: The container's tag.
+    local manifest="$1"
+    local tag="$2"
+
+    echo "Signing $manifest:$tag"
+    sigul --batch -c "$SIGUL_CONFIG" sign-container -o "$manifest-$tag.asc" \
+        "$SIGUL_KEY" "$manifest" "$tag" < "$SIGUL_PASSWORD"
 }
 
 
