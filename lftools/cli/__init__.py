@@ -23,6 +23,7 @@ from lftools.cli.config import config_sys
 from lftools.cli.dco import dco
 from lftools.cli.deploy import deploy
 from lftools.cli.gerrit import gerrit_cli
+from lftools.cli.github_cli import github_cli
 from lftools.cli.infofile import infofile
 from lftools.cli.jenkins import jenkins_cli
 from lftools.cli.lfidapi import lfidapi
@@ -80,6 +81,8 @@ cli.add_command(config_sys)
 cli.add_command(deploy)
 cli.add_command(dco)
 cli.add_command(gerrit_cli, name='gerrit')
+cli.add_command(github_cli, name='github')
+#cli.add_command(github_cli, name='github_cli')
 cli.add_command(infofile)
 cli.add_command(jenkins_cli, name='jenkins')
 cli.add_command(license)
