@@ -16,6 +16,7 @@ email_validator
 oauth2client
 pyyaml
 pygerrit2
+pygithub
 
 # workarounds to prevent upstream from breaking us
 netifaces==0.10.5
