@@ -1,0 +1,19 @@
+---
+features:
+  - |
+    Github list and create repositories.
+
+    Usage: Usage: lftools github [OPTIONS] COMMAND [ARGS]...
+
+
+    .. code-block:: none
+
+       Commands:
+           audit   List Users for an Org that do not have 2fa enabled.
+           create  Create a Github repo for within an Organizations.
+           list    List and Organizations GitHub repos.
+
+    .. code-block:: none
+
+       Options:
+         --help    Show this message and exit.
