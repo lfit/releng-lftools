@@ -9,7 +9,7 @@
 ##############################################################################
 """CLI interface for config subsystem."""
 
-__author__ = 'Thanh Ha'
+__author__ = 'Pono'
 
 import logging
 import sys
