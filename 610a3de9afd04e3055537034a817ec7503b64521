@@ -46,6 +46,30 @@
       "revId": "610a3de9afd04e3055537034a817ec7503b64521",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa84c5c4_db14a6a5",
+        "filename": ".coafile",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-04-16T20:48:03Z",
+      "side": 1,
+      "message": "Couldn\u0027t tell if you were lazy or smart.... guess it was the later.",
+      "parentUuid": "0bf522c2_a44b64a2",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 12
+      },
+      "revId": "610a3de9afd04e3055537034a817ec7503b64521",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
