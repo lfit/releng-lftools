@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33904d9a_685fb91d",
+        "filename": ".coafile",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-04-18T20:58:45Z",
+      "side": 1,
+      "message": "Please sort both of these into the rest of the imports.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 12
+      },
+      "revId": "a7ddea81c3bdd40659c5fa06ad9b3e13b103d788",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9731a4e8_49049b83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-04-18T20:58:45Z",
+      "side": 1,
+      "message": "Delete this blank line. Issue should be in the footer, not body.",
+      "revId": "a7ddea81c3bdd40659c5fa06ad9b3e13b103d788",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc2efa92_b68c5d43",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-04-18T20:58:45Z",
+      "side": 1,
+      "message": "an",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 34,
+        "endChar": 15
+      },
+      "revId": "a7ddea81c3bdd40659c5fa06ad9b3e13b103d788",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f78afeb1_8dea5428",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-04-18T20:58:45Z",
+      "side": 1,
+      "message": "Organization\u0027s - it\u0027s possessive in the current phrasing",
+      "range": {
+        "startLine": 34,
+        "startChar": 16,
+        "endLine": 34,
+        "endChar": 29
+      },
+      "revId": "a7ddea81c3bdd40659c5fa06ad9b3e13b103d788",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8adbee7e_b7f8a9ff",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-04-18T20:58:45Z",
+      "side": 1,
+      "message": "Is it possible to also give an audit listing of all the groups with who the members are?",
+      "revId": "a7ddea81c3bdd40659c5fa06ad9b3e13b103d788",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89ffe910_52ad6624",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-04-18T20:58:45Z",
+      "side": 1,
+      "message": "Organization should not be plural here",
+      "range": {
+        "startLine": 84,
+        "startChar": 42,
+        "endLine": 84,
+        "endChar": 55
+      },
+      "revId": "a7ddea81c3bdd40659c5fa06ad9b3e13b103d788",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "244a74ba_5f9306fe",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-04-18T20:58:45Z",
+      "side": 1,
+      "message": "unneeded word \u0027for\u0027",
+      "range": {
+        "startLine": 84,
+        "startChar": 28,
+        "endLine": 84,
+        "endChar": 31
+      },
+      "revId": "a7ddea81c3bdd40659c5fa06ad9b3e13b103d788",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
