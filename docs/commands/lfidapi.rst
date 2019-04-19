@@ -7,10 +7,10 @@ Schema
 Commands
 ========
 
-create-group
+create_group
 ------------
 
-.. program-output:: lftools lfidapi create-group --help
+.. program-output:: lftools lfidapi create_group --help
 
 invite
 -------
