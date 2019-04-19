@@ -32,3 +32,15 @@ match-ldap-to-info
 ------------------
 
 .. program-output:: lftools lfidapi match-ldap-to-info --help
+
+
+API requires an [lfid] section in ~/.config/lftools/lftools.ini:
+
+.. code-block:: bash
+
+   [lfid]
+   clientid = lf-releng-jenkins
+   client_secret = REDACTED
+   refresh_token = REDACTED
+   token_uri = https://identity.linuxfoundation.org/oauth2/token
+   url = https://identity.linuxfoundation.org/rest/auth0/og/
