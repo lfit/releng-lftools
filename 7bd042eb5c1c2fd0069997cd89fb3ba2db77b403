@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "208b3b82_27edd18b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-04-19T22:06:39Z",
+      "side": 1,
+      "message": "Delete this blank line. Issue links should be in the footer, not the body of the commit message",
+      "revId": "7bd042eb5c1c2fd0069997cd89fb3ba2db77b403",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
