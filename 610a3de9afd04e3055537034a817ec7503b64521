@@ -70,6 +70,30 @@
       "revId": "610a3de9afd04e3055537034a817ec7503b64521",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "634f5dea_22295c48",
+        "filename": ".coafile",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-04-19T22:06:39Z",
+      "side": 1,
+      "message": "Well that sort of sucks :(",
+      "parentUuid": "0bf522c2_a44b64a2",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 12
+      },
+      "revId": "610a3de9afd04e3055537034a817ec7503b64521",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
