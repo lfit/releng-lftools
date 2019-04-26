@@ -15,6 +15,7 @@ It supports the following commands:
     dco
     gerrit
     infofile
+    jira
     lfidapi
     license
     nexus

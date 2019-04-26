@@ -1,0 +1,20 @@
+---
+features:
+  - |
+    Jira project creation, role and api tools.
+
+    Usage: lftools jira [OPTIONS] COMMAND [ARGS]...
+
+    .. code-block:: none
+
+       Commands:
+           create-project  Create a JIRA project.
+           get             Get api end points.
+           set-owner       Set an ldap group as owner on a jira project.
+
+
+    .. code-block:: none
+
+       Options:
+           --help  Show this message and exit.
+
