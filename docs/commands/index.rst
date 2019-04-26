@@ -16,6 +16,7 @@ It supports the following commands:
     gerrit
     github
     infofile
+    jira
     lfidapi
     license
     nexus
