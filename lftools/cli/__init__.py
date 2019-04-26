@@ -26,6 +26,7 @@ from lftools.cli.gerrit import gerrit_cli
 from lftools.cli.github_cli import github_cli
 from lftools.cli.infofile import infofile
 from lftools.cli.jenkins import jenkins_cli
+from lftools.cli.jira import jira
 from lftools.cli.lfidapi import lfidapi
 from lftools.cli.license import license
 from lftools.cli.nexus import nexus
@@ -84,6 +85,7 @@ cli.add_command(gerrit_cli, name='gerrit')
 cli.add_command(github_cli, name='github')
 cli.add_command(infofile)
 cli.add_command(jenkins_cli, name='jenkins')
+cli.add_command(jira)
 cli.add_command(license)
 cli.add_command(nexus)
 cli.add_command(schema)
