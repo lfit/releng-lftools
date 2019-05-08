@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "b3554d9e_93b6b568",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-05-08T13:57:53Z",
+      "side": 1,
+      "message": "Ok, so that\u0027s the reason for the .split() being added in the function, but since you\u0027re now handling the whitespace insertion (since this doesn\u0027t actually add it as an array?) then again, I ask, why remove the multiple\u003dTrue since you\u0027re now handling it?",
+      "parentUuid": "4ca5e8c3_3551eafc",
+      "revId": "1bcdfc70434950570a0ad5602d5bd39919c43785",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8fe1156_b38dd6cc",
         "filename": "releasenotes/notes/fix-deploy-archives-826d9360f271ca59.yaml",
         "patchSetId": 1
