@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4ca5e8c3_3551eafc",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-05-08T13:40:52Z",
+      "side": 1,
+      "message": "Andy - Thanks for the input! \n\nThis is _not_ truly treated as multiple values the way we are handling in the code in copy_archives() fun and instead treated a tuple with a single value. For example when \u0027multiple\u003dTrue\u0027, this sets var pattern as follows.\n\npattern\u003d(\u0027**/*.prop **/*.log **/target/surefire-reports/*-output.txt **/target/failsafe-reports/failsafe-summary.xml **/hs_err_*.log **/target/feature/feature.xml\u0027,)\n\nwhich is incorrect later when you are processing regex in deploy_archives().",
+      "parentUuid": "5effe37d_9726672a",
+      "revId": "1bcdfc70434950570a0ad5602d5bd39919c43785",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8fe1156_b38dd6cc",
         "filename": "releasenotes/notes/fix-deploy-archives-826d9360f271ca59.yaml",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2019-05-08T13:00:49Z",
       "side": 1,
       "message": "Dangling whitespace",
+      "range": {
+        "startLine": 3,
+        "startChar": 5,
+        "endLine": 3,
+        "endChar": 7
+      },
+      "revId": "1bcdfc70434950570a0ad5602d5bd39919c43785",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "233315da_779a8da3",
+        "filename": "releasenotes/notes/fix-deploy-archives-826d9360f271ca59.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-05-08T13:40:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f8fe1156_b38dd6cc",
       "range": {
         "startLine": 3,
         "startChar": 5,
