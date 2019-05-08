@@ -42,7 +42,7 @@ def deploy(ctx):
 @click.argument('nexus-url', envvar='NEXUS_URL')
 @click.argument('nexus-path', envvar='NEXUS_PATH')
 @click.argument('workspace', envvar='WORKSPACE')
-@click.option('-p', '--pattern', multiple=True)
+@click.option('-p', '--pattern')
 @click.pass_context
 def archives(ctx, nexus_url, nexus_path, workspace, pattern):
     """Archive files to a Nexus site repository.

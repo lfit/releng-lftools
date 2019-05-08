@@ -181,7 +181,7 @@ def copy_archives(workspace, pattern=None):
         return
 
     paths = []
-    for p in pattern:
+    for p in pattern.split():
         if p == '':  # Skip empty patterns as they are invalid
             continue
 
@@ -194,7 +194,7 @@ def copy_archives(workspace, pattern=None):
             log.warn('Filename {} is over 255 characters. Skipping...'.format(
                 os.path.basename(src)))
 
-        dest = os.path.join(dest_dir, src[len(workspace)+1:])
+        dest = os.path.join(dest_dir, src[len(workspace):])
         log.debug('{} -> {}'.format(src, dest))
 
         try:
