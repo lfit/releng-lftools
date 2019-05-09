@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    Fix processing the extended regex with multiple glob patterns correctly
+    in deploy_archives(). Each glob entry needs to be appended to the
+    `$WORKSPACE/$pattern` to obtain the match file list to be copied into
+    '$WORKSPACE/archives'.

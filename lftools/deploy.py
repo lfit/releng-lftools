@@ -162,7 +162,7 @@ def copy_archives(workspace, pattern=None):
     dest_dir = os.getcwd()
 
     log.debug('Copying files from {} with pattern \'{}\' to {}.'.format(
-        workspace, pattern, dest_dir))
+        workspace, pattern, archives_dir))
     log.debug('archives_dir = {}'.format(archives_dir))
 
     if os.path.exists(archives_dir):
@@ -185,8 +185,9 @@ def copy_archives(workspace, pattern=None):
         if p == '':  # Skip empty patterns as they are invalid
             continue
 
-        search = os.path.join(workspace, p)
-        paths.extend(glob2.glob(search, recursive=True))
+        for i in p.split():
+            search = os.path.join(workspace, i)
+            paths.extend(glob2.glob(search, recursive=True))
     log.debug('Files found: {}'.format(paths))
 
     for src in paths:
@@ -194,7 +195,7 @@ def copy_archives(workspace, pattern=None):
             log.warn('Filename {} is over 255 characters. Skipping...'.format(
                 os.path.basename(src)))
 
-        dest = os.path.join(dest_dir, src[len(workspace)+1:])
+        dest = os.path.join(archives_dir, src[len(workspace)+1:])
         log.debug('{} -> {}'.format(src, dest))
 
         try:
