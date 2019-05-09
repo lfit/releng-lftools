@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "878f101e_da7431bd",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-05-09T04:10:39Z",
+      "side": 1,
+      "message": "okay, so the way is to handle both use cases?\n\n$lftools deploy archives -p \"${ARCHIVE_ARTIFACTS:-}\" \"$nexus_url\" \"$nexus_path\" \"$WORKSPACE\"\n\n1. -p \u0027pattern1 pattern2 patterN\u0027\n2. -p pattern1 -p pattern2 -p patterN",
+      "parentUuid": "4b101d31_ba6fecde",
+      "revId": "1bcdfc70434950570a0ad5602d5bd39919c43785",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8fe1156_b38dd6cc",
         "filename": "releasenotes/notes/fix-deploy-archives-826d9360f271ca59.yaml",
         "patchSetId": 1
