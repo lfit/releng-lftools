@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "3a462a03_16fd959b",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-05-09T03:12:23Z",
+      "side": 1,
+      "message": "From the upstream code we are defining the $ARCHIVE_ARTIFATS as a space separated string value, which is passed as env variable to the scripts logs-deploy.sh [1.].     \n\nARCHIVE_ARTIFACTS\u003d\u0027**/*.prop **/*.log **/target/surefire-reports/*-output.txt **/target/failsafe-reports/failsafe-summary.xml **/hs_err_*.log **/target/feature/feature.xml\u0027 \n\n[1.] https://github.com/lfit/releng-global-jjb/blob/master/shell/logs-deploy.sh\n\nWe set `multiple\u003dTrue` in deploy_archives() creates this as a single tuple, but in the code [2.] we are _not_ handling tuples, because we further need to break them down proper search path before passing it to paths.extend().\n\n[2.] https://github.com/lfit/releng-lftools/blob/master/lftools/deploy.py#L188\n\nFor ex these two lines:\n\n        search \u003d os.path.join(workspace, p)\n        paths.extend(glob2.glob(search, recursive\u003dTrue))\n\nget replaced as follows:\n\n        search \u003d os.path.join($WORKSPACE, \u0027**/*.prop **/*.log **/target/surefire-reports/*-output.txt **/target/failsafe-reports/failsafe-summary.xml **/hs_err_*.log **/target/feature/feature.xml\u0027)\n        paths.extend(glob2.glob(search, recursive\u003dTrue))\n\nInstead, this should iteratively be handled as follow, in example below:\n\n        paths.extend(glob2.glob(\u0027$WORKSPACE/**/*.prop\u0027, recursive\u003dTrue))\n        paths.extend(glob2.glob(\u0027$WORKSPACE/**/*.log\u0027, recursive\u003dTrue))\n        paths.extend(glob2.glob(\u0027$WORKSPACE/**/target/surefire-reports/*-output.txt\u0027, recursive\u003dTrue))\n        paths.extend(glob2.glob(\u0027$WORKSPACE/**/hs_err_*.log\u0027, recursive\u003dTrue))\n        paths.extend(glob2.glob(\u0027$WORKSPACE/**/target/feature/feature.xml\u0027, recursive\u003dTrue))\n\nThe other way is just to extract whatever is passed into the `-p \u003clist pattern\u003e\n` and reformat this into a properly tuple? this would still be required to be handled internally.",
+      "parentUuid": "b3554d9e_93b6b568",
+      "revId": "1bcdfc70434950570a0ad5602d5bd39919c43785",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8fe1156_b38dd6cc",
         "filename": "releasenotes/notes/fix-deploy-archives-826d9360f271ca59.yaml",
         "patchSetId": 1
