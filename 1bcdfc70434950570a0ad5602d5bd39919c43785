@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "4b101d31_ba6fecde",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-05-09T03:18:00Z",
+      "side": 1,
+      "message": "We do not need to remove multiple\u003dTrue here. It just allows us to specify the pattern option multiple times which can be useful.\n\nThis is separate from the issue which you\u0027ve identified where global-jjb log ship is passing multiple patterns into a single pattern as a space separated list. That is handled in the other file with split() already.",
+      "parentUuid": "3a462a03_16fd959b",
+      "revId": "1bcdfc70434950570a0ad5602d5bd39919c43785",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f8fe1156_b38dd6cc",
         "filename": "releasenotes/notes/fix-deploy-archives-826d9360f271ca59.yaml",
         "patchSetId": 1
