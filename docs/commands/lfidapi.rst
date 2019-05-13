@@ -1,6 +1,6 @@
-******
-Schema
-******
+*******
+Lfidapi
+*******
 
 .. program-output:: lftools lfidapi --help
 

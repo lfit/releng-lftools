@@ -1,6 +1,6 @@
-******
-Schema
-******
+********
+Infofile
+********
 
 .. program-output:: lftools infofile --help
 

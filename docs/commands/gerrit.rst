@@ -1,5 +1,5 @@
 ******
-Deploy
+Gerrit
 ******
 
 .. program-output:: lftools gerrit --help
