@@ -12,6 +12,8 @@
 __author__ = 'Trevor Bramwell'
 
 import click
+import requests
+from pkg_resources import parse_version
 
 
 def checkmark(truthy):
@@ -21,8 +23,8 @@ def checkmark(truthy):
     return u'\u2717'
 
 
-def print_plugin(plugin, namefield='longName'):
-    """Print the plugin longName and version."""
+def print_plugin(plugin, namefield='shortName'):
+    """Print the plugin shortName and version."""
     print("%s:%s" % (plugin[namefield], plugin['version']))
 
 
@@ -124,6 +126,52 @@ def active(ctx):
             print_plugin(plugin)
 
 
+@click.command()
+@click.pass_context
+def sec(ctx):
+    """List plugins that have a known vulnerability"""
+
+    r = requests.get('http://updates.jenkins-ci.org/update-center.actual.json')
+    warn = r.json()['warnings']
+
+    #securityplugins
+    secdict = {}
+    for w in warn:
+        name = (w['name'])
+        for version in w['versions']:
+            lastversion = version.get('lastVersion')
+        nv = {name: lastversion}
+        secdict.update(nv)
+
+
+    #ourplugins
+    activedict = {}
+    plugins = ctx.obj['plugins']
+    for key in plugins.keys():
+        _, plugin_name = key
+        plugin = plugins[plugin_name]
+        if plugin['active']:
+            name = plugin['shortName']
+            version = plugin['version']
+            nv = {name: version}
+            activedict.update(nv)
+
+    shared = []
+    for key in set(secdict.keys()) & set(activedict.keys()):
+        shared.append(key)
+
+        ourversion = (activedict[key])
+        theirversion = (secdict[key])
+        t1 = tuple([ourversion])
+        t2 = tuple([theirversion])
+        
+        if (t1) < (t2):
+            print("SECURITY PLUGINS")
+            print(key, secdict[key])
+            print("OURPLUGINS")
+            print(key, activedict[key])
+
+
 plugins_init.add_command(list_plugins, name='list')
 plugins_init.add_command(pinned)
 plugins_init.add_command(dynamic)
@@ -131,3 +179,4 @@ plugins_init.add_command(needs_update, name='needs-update')
 plugins_init.add_command(active)
 plugins_init.add_command(enabled)
 plugins_init.add_command(disabled)
+plugins_init.add_command(sec)
