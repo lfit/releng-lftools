@@ -20,6 +20,7 @@ Contents:
     release-notes
     installation
     commands/index
+    jenkins/index
 
 Indices and tables
 ==================
