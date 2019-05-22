@@ -42,7 +42,7 @@ def directory(ctx, directory, mode):
 @click.argument('tag')
 @click.pass_context
 def git_tag(ctx, tag):
-    """Sigul sign a git tag."""
+    """Sigul sign an annotated git tag."""
     status = subprocess.call(['sign', 'git-tag', tag])
     sys.exit(status)
 
