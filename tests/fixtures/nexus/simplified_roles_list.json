@@ -1,0 +1,30 @@
+{
+    "data": [
+        {
+            "resourceURI": "http://nexus.localhost/service/local/roles/analytics",
+            "id": "analytics",
+            "name": "Analytics",
+            "description": "Gives access to Analytics",
+            "sessionTimeout": 0,
+            "privileges": [
+                "analytics-all"
+            ],
+            "userManaged": false
+        },
+        {
+            "resourceURI": "http://nexus.localhost/service/local/roles/nx-deployment",
+            "id": "nx-deployment",
+            "name": "Nexus Deployment Role",
+            "description": "Deployment role for Nexus",
+            "sessionTimeout": 0,
+            "roles": [
+                "ui-basic",
+                "anonymous"
+            ],
+            "privileges": [
+                "83"
+            ],
+            "userManaged": false
+        }
+    ]
+}

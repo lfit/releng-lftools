@@ -9,10 +9,46 @@
 ##############################################################################
 """Test nexus command."""
 
+import os
 import re
 
+import pytest
 
+from lftools.nexus import cmd
 from lftools.nexus import util
+
+
+FIXTURE_DIR = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)), 'fixtures')
+
+
+@pytest.fixture
+def nexus2_obj_create(responses):
+    """Create the proper responses for the init of a nexus object"""
+    baseurl_endpoint = re.compile(".*nexus.*/service/local/repo_targets")
+    responses.add(responses.GET, baseurl_endpoint, status=200)
+
+
+@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, 'nexus'))
+def test_create_roles(datafiles, responses, nexus2_obj_create):
+    """Test create_roles() method with good config."""
+    os.chdir(str(datafiles))
+    baseurl = "http://nexus.localhost/service/local/"
+    roles_url = baseurl + "roles"
+    privs_url = baseurl + "privileges"
+    role1_return = """{"data": {"id": "lf-deployment"}}"""
+    role2_return = """{"data": {"id": "LF Deployment By Name"}}"""
+
+    for _ in range(4):  # Add response for each expected "get_role" call
+        with open("simplified_roles_list.json", "r") as roles_return:
+            responses.add(responses.GET, roles_url, roles_return.read())
+    for _ in range(2):  # Add response for each expected "get_priv" call
+        with open("simplified_privs_list.json", "r") as privs_return:
+            responses.add(responses.GET, privs_url, privs_return.read())
+    responses.add(responses.POST, roles_url, role1_return, status=201)
+    responses.add(responses.POST, roles_url, role2_return, status=201)
+
+    cmd.create_roles("role_config-good.yaml", "settings.yaml")
 
 
 def test_create_repo_target_regex():
