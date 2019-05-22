@@ -106,14 +106,18 @@ class Nexus:
         return r.json()['data']['id']
 
     def get_priv(self, name, priv):
+        """Get the ID for the privilege with the given name and privlege type."""
+        search_name = "{} - ({})".format(name, priv)
+        get_priv_by_name(search_name)
+
+    def get_priv_by_name(self, name):
         """Get the ID for the privilege with the given name."""
         url = os.path.join(self.baseurl, 'privileges')
 
-        search_name = "{} - ({})".format(name, priv)
         privileges = requests.get(url, auth=self.auth, headers=self.headers).json()
 
         for priv in privileges['data']:
-            if priv['name'] == search_name:
+            if priv['name'] == name:
                 return priv['id']
 
         raise LookupError("No privilege found named '{}'".format(name))
@@ -162,31 +166,43 @@ class Nexus:
             if role['name'] == name:
                 return role['id']
 
+        # If name is not found in names, check ids
+        for role in roles['data']:
+            if role['id'] == name:
+                return role['id']
+
         raise LookupError("No role with name '{}'".format(name))
 
-    def create_role(self, name, privs):
+    def create_role(self, name, privs, id="", description="", roles=[]):
         """Create a role with the given privileges."""
         url = os.path.join(self.baseurl, 'roles')
 
         role = {
             'data': {
-                'id': name,
+                'id': id if id else name,
                 'name': name,
-                'description': name,
+                'description': description if description else name,
                 'privileges': privs,
-                'roles': [
-                    'repository-any-read',
-                ],
+                'roles': ['repository-any-read'] + roles,
                 'sessionTimeout': 60,
             }
         }
 
         json_data = json.dumps(role).encode(encoding='latin-1')
+        log.debug("Sending role {} to Nexus".format(json_data))
 
         r = requests.post(url, auth=self.auth, headers=self.headers, data=json_data)
 
         if r.status_code != requests.codes.created:
-            raise Exception("Role not created for '{}', code '{}'".format(name, r.status_code))
+            if r.status_code == 400 and "errors" in r.json().keys():
+                error_msgs = ""
+                for error in r.json()["errors"]:
+                    error_msgs += error["msg"] + "\n"
+                raise Exception("Role not created for '{}', code '{}', failed "
+                "with the following errors: {}".format(name,
+                    r.status_code, error_msgs))
+            else:
+                raise Exception("Role not created for '{}', code '{}'".format(id, r.status_code))
 
         return r.json()['data']['id']
 
