@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Add "create role" subcommand for nexus, which enables users to create
+    Nexus roles outside of project creation.
