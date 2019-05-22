@@ -31,6 +31,33 @@ repo
 For details and examples, please see
 :ref:`Create Nexus2 repos with lftools <create-repos-lftools>`
 
+.. _nexus-role:
+
+role
+^^^^
+
+.. program-output:: lftools nexus create role --help
+
+.. code-block:: yaml
+
+   # Example role-config.yaml. The top-level keys will be the role's id.
+   ---
+   lf-deployment:
+     name: LF Deployment Role
+     roles:
+       - nx-deployment
+       - analytics
+   LF Deployment By Name:
+     name: LF Dep Role
+     privileges:
+       - myrepo - (create)
+       - myrepo - (delete)
+     roles:
+       - Nexus Deployment Role
+       - Analytics
+     description: "A role where I defined its contained roles by name"
+
+
 .. _nexus-reorder-staged-repos:
 
 reorder-staged-repos
