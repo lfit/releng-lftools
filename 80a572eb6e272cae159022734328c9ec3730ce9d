@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a96d9bd5_f4548b48",
+        "filename": "lftools/cli/jenkins/plugins.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-05-23T02:46:30Z",
+      "side": 1,
+      "message": "I don\u0027t like the way it\u0027s printed it makes it hard to parse using code. Maybe something like this is better:\n\n print(\"{0}:{1}\\t{0}:{2}\\t{3}\".format(key, secdict[key], activedict[key], url))\n\nThis will print out \"vulnerable-version \u003ctab\u003e our-version \u003ctab\u003e url\"",
+      "range": {
+        "startLine": 173,
+        "startChar": 20,
+        "endLine": 174,
+        "endChar": 79
+      },
+      "revId": "80a572eb6e272cae159022734328c9ec3730ce9d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
