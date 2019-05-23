@@ -36,14 +36,14 @@ def get_token(url, username, password, change=False):
         password=password)
 
     get_token = """
+import hudson.model.*
+import jenkins.model.*
 import jenkins.security.*
+import jenkins.security.apitoken.*
 User u = User.get("{}")
 ApiTokenProperty t = u.getProperty(ApiTokenProperty.class)
-if ({}) {{
-    t.changeApiToken()
-}}
-def token = t.getApiToken()
-println "$token"
+def token = t.tokenStore.generateNewToken("token-created-by-lftools")
+println token.plainValue
 """.format(username, str(change).lower())
 
     token = server.run_script(get_token)
