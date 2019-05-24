@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2021b9fa_c2b1d44c",
+        "filename": "lftools/cli/jenkins/plugins.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-05-24T02:59:51Z",
+      "side": 1,
+      "message": "rm these words.",
+      "range": {
+        "startLine": 171,
+        "startChar": 14,
+        "endLine": 171,
+        "endChar": 44
+      },
+      "revId": "69208827da481ffdd8dc36edd425d325a2c76c77",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
