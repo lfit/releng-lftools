@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b35b95f_7fa29073",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-05-24T17:23:12Z",
+      "side": 1,
+      "message": "Don\u0027t need this fluff",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 16
+      },
+      "revId": "90ff40ed85b8ce0cdadb3d10bd3a5b1d4a145639",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fc5874e_f0e79e5e",
+        "filename": "docs/commands/lfidapi.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-05-24T17:23:12Z",
+      "side": 1,
+      "message": "REDACTED_SEE_SHARED_PASSWORD_STORAGE",
+      "range": {
+        "startLine": 43,
+        "startChar": 19,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "90ff40ed85b8ce0cdadb3d10bd3a5b1d4a145639",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
