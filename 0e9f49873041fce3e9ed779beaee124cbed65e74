@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bca5f639_29b67ed1",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-05-24T19:31:38Z",
+      "side": 1,
+      "message": "We should have a modifyrepo command as well, that allows us to toggle issues, projects, and wikis as well as add / remove teams. I don\u0027t see us really needing it, but we should have it for completeness sake, especially for the projects that are currently replicating from Gerrit but then transition to GitHub and want to do away with Jira / Confluence!",
+      "revId": "0e9f49873041fce3e9ed779beaee124cbed65e74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f752f282_d9192592",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-05-24T19:31:38Z",
+      "side": 1,
+      "message": "Should allow for more custom configuration.\n\n--no-issues --no-projects --no-wiki and sparse should just be a shorthand to all three of those flags\n\nNo need for a --full, just default to that",
+      "revId": "0e9f49873041fce3e9ed779beaee124cbed65e74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1abbbc0d_79e7391c",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-05-24T19:31:38Z",
+      "side": 1,
+      "message": "Should only need one org.create_repo command, the has_issues, has_projects and has_wiki should all just be passed in flags with a section before this to set those to false if --sparse is passed in",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 30
+      },
+      "revId": "0e9f49873041fce3e9ed779beaee124cbed65e74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
