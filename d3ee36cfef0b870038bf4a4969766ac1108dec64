@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0389ec0_7c870d11",
+        "filename": "lftools/jenkins/token.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-05-24T17:31:30Z",
+      "side": 1,
+      "message": "Make default, but allow cli parameter",
+      "range": {
+        "startLine": 45,
+        "startChar": 43,
+        "endLine": 45,
+        "endChar": 67
+      },
+      "revId": "d3ee36cfef0b870038bf4a4969766ac1108dec64",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
