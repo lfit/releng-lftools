@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "579333ca_af629fb5",
+        "filename": "lftools/cli/jenkins/plugins.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-05-24T19:15:25Z",
+      "side": 1,
+      "message": "with",
+      "range": {
+        "startLine": 131,
+        "startChar": 20,
+        "endLine": 131,
+        "endChar": 23
+      },
+      "revId": "e7c8f5398eac29a5a2f36df22f236642e3a8ebea",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2597891c_8bb2c3ac",
+        "filename": "lftools/cli/jenkins/plugins.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-05-24T19:15:25Z",
+      "side": 1,
+      "message": "installed",
+      "range": {
+        "startLine": 135,
+        "startChar": 25,
+        "endLine": 135,
+        "endChar": 28
+      },
+      "revId": "e7c8f5398eac29a5a2f36df22f236642e3a8ebea",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
