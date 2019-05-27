@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "334de57d_84a4eb02",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-05-27T20:42:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bca5f639_29b67ed1",
+      "revId": "0e9f49873041fce3e9ed779beaee124cbed65e74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f752f282_d9192592",
         "filename": "lftools/cli/github_cli.py",
         "patchSetId": 25
@@ -30,6 +48,24 @@
       "writtenOn": "2019-05-24T19:31:38Z",
       "side": 1,
       "message": "Should allow for more custom configuration.\n\n--no-issues --no-projects --no-wiki and sparse should just be a shorthand to all three of those flags\n\nNo need for a --full, just default to that",
+      "revId": "0e9f49873041fce3e9ed779beaee124cbed65e74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fcb685b_295ed03f",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-05-27T20:42:22Z",
+      "side": 1,
+      "message": "Done: Since is_flag sets vars as true, and to make the code look less bad default is false, and you pass the flags to set what you want to true --has-wiki --has-issues etc.",
+      "parentUuid": "f752f282_d9192592",
       "revId": "0e9f49873041fce3e9ed779beaee124cbed65e74",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
