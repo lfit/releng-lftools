@@ -12,7 +12,6 @@
 
 from datetime import timedelta
 import errno
-import gzip
 import logging
 import multiprocessing
 from multiprocessing.dummy import Pool as ThreadPool
@@ -23,6 +22,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import lzma
 import zipfile
 
 from defusedxml.minidom import parseString
@@ -38,8 +38,10 @@ def _compress_text(dir):
     os.chdir(dir)
 
     compress_types = [
+        '**/*.html',
         '**/*.log',
         '**/*.txt',
+        '**/*.xml',
     ]
     paths = []
     for _type in compress_types:
@@ -47,7 +49,7 @@ def _compress_text(dir):
         paths.extend(glob2.glob(search, recursive=True))
 
     for _file in paths:
-        with open(_file, 'rb') as src, gzip.open('{}.gz'.format(_file), 'wb') as dest:
+        with open(_file, 'rb') as src, lzma.open('{}.xz'.format(_file), 'wb') as dest:
             shutil.copyfileobj(src, dest)
             os.remove(_file)
 
