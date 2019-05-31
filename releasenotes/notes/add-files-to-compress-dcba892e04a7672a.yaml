@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Add file extensions *.html and *.xml ensure they are compressed. *.xml
+    pushed to the log server can be large, the fix ensures that Nexus
+    has a smaller foot print when compressed.
