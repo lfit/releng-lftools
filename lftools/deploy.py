@@ -12,8 +12,8 @@
 
 from datetime import timedelta
 import errno
-import gzip
 import logging
+import lzma
 import multiprocessing
 from multiprocessing.dummy import Pool as ThreadPool
 import os
@@ -49,7 +49,7 @@ def _compress_text(dir):
         paths.extend(glob2.glob(search, recursive=True))
 
     for _file in paths:
-        with open(_file, 'rb') as src, gzip.open('{}.gz'.format(_file), 'wb') as dest:
+        with open(_file, 'rb') as src, lzma.open('{}.xz'.format(_file), 'wb') as dest:
             shutil.copyfileobj(src, dest)
             os.remove(_file)
 

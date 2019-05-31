@@ -1,0 +1,6 @@
+---
+upgrade:
+  - |
+    Use lzma (.xz) which is faster and a better compression algorithm as
+    compared to using gzip (.gz). This ensures that Nexus logs uploaded have a
+    smaller foot print.
