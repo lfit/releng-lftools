@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1eb8befe_60d6d238",
+        "filename": "lftools/jenkins/templates/add-server-id.groovy",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-06-01T23:51:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eb282de_ebcabf0b",
+      "range": {
+        "startLine": 19,
+        "startChar": 36,
+        "endLine": 19,
+        "endChar": 47
+      },
+      "revId": "dccb2c5b5f7fae5ca727a5e7c2f960faede62247",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3537a59e_6fdb6d95",
         "filename": "lftools/jenkins/templates/create-settings-file.groovy",
         "patchSetId": 18
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "203ba0eb_433df41a",
+        "filename": "lftools/jenkins/templates/create-settings-file.groovy",
+        "patchSetId": 18
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-06-01T23:51:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3537a59e_6fdb6d95",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 86
+      },
+      "revId": "dccb2c5b5f7fae5ca727a5e7c2f960faede62247",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "414187e9_a88509a2",
         "filename": "lftools/jenkins/templates/create-settings-file.groovy",
         "patchSetId": 18
@@ -59,6 +107,30 @@
       "writtenOn": "2019-05-03T21:56:39Z",
       "side": 1,
       "message": "This will be eventually pulling from the repo config file too, let\u0027s not forget the Nexus3 serverIDs too",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 58
+      },
+      "revId": "dccb2c5b5f7fae5ca727a5e7c2f960faede62247",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d52c4b69_8c64cf23",
+        "filename": "lftools/jenkins/templates/create-settings-file.groovy",
+        "patchSetId": 18
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-06-01T23:51:10Z",
+      "side": 1,
+      "message": "The command now defaults to these 4 serverIds but can be expressly overridden. If overridden then all serverIds need to be defined. As presently written all defined projects will be updated to the servers, so if some had manual serverIds added they will lose them and have them replaced with what is defined here.",
+      "parentUuid": "414187e9_a88509a2",
       "range": {
         "startLine": 40,
         "startChar": 0,
