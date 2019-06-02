@@ -18,7 +18,7 @@ import jenkins
 log = logging.getLogger(__name__)
 
 
-def get_token(url, username, password, change=False):
+def get_token(name, url, username, password, change=False):
     """Get API token.
 
     This function uses the global username / password for Jenkins from
@@ -36,15 +36,15 @@ def get_token(url, username, password, change=False):
         password=password)
 
     get_token = """
+import hudson.model.*
+import jenkins.model.*
 import jenkins.security.*
+import jenkins.security.apitoken.*
 User u = User.get("{}")
 ApiTokenProperty t = u.getProperty(ApiTokenProperty.class)
-if ({}) {{
-    t.changeApiToken()
-}}
-def token = t.getApiToken()
-println "$token"
-""".format(username, str(change).lower())
+def token = t.tokenStore.generateNewToken("{}")
+println token.plainValue
+""".format(username, name)
 
     token = server.run_script(get_token)
     return token
