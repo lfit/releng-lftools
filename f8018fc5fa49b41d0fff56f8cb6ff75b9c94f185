@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79b1097f_53dd501d",
+        "filename": "lftools/jenkins/templates/add-server-id.groovy",
+        "patchSetId": 21
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-06-02T14:21:55Z",
+      "side": 1,
+      "message": "2019?",
+      "range": {
+        "startLine": 3,
+        "startChar": 17,
+        "endLine": 3,
+        "endChar": 21
+      },
+      "revId": "f8018fc5fa49b41d0fff56f8cb6ff75b9c94f185",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
