@@ -3,6 +3,7 @@ docker
 glob2  # Needed for Python < 3.5 recursive glob support
 defusedxml # Needed due to tox complains on parseString not safe
 jsonschema~=2.6.0
+numpy
 requests>=2.20.0
 ruamel.yaml
 setuptools>=36.5.0
