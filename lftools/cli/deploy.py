@@ -64,6 +64,8 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
     except HTTPError as e:
         log.error(str(e))
         sys.exit(1)
+    except OSError as e:
+        deploy_sys._log_error_and_exit(str(e))
 
     log.info('Archives upload complete.')
 
