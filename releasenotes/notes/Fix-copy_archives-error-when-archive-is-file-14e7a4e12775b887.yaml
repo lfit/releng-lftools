@@ -1,0 +1,12 @@
+---
+fixes:
+  - |
+    There is a possibility that there exists a file called Archives, and if so, there will be an OSError crash
+        02:15:01   File "/home/jenkins/.local/lib/python2.7/site-packages/lftools/deploy.py", line 236, in deploy_archives
+        02:15:01     copy_archives(workspace, pattern)
+        02:15:01   File "/home/jenkins/.local/lib/python2.7/site-packages/lftools/deploy.py", line 170, in copy_archives
+        02:15:01     for file_or_dir in os.listdir(archives_dir):
+        02:15:01 OSError: [Errno 20] Not a directory: '/w/workspace/autorelease-update-validate-jobs-fluorine/archives'
+
+    This fix raises an Exception, and exists lftools with (1), if there is any issues with the Archive directory
+      (missing, a file instead of directory, or something else)

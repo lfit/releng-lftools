@@ -168,16 +168,22 @@ def copy_archives(workspace, pattern=None):
     log.debug('archives_dir = {}'.format(archives_dir))
 
     if os.path.exists(archives_dir):
-        log.debug('Archives file/dir {} does exist.'.format(archives_dir))
-        for file_or_dir in os.listdir(archives_dir):
-            f = os.path.join(archives_dir, file_or_dir)
-            try:
-                log.debug('Moving {}'.format(f))
-                shutil.move(f, dest_dir)
-            except shutil.Error as e:
-                log.warn(e)
+        if os.path.isfile(archives_dir):
+            log.error('Archives {} is a file, not a directory.'.format(archives_dir))
+            raise OSError(errno.ENOENT, 'Not a directory', archives_dir)
+        else:
+            log.debug('Archives dir {} does exist.'.format(archives_dir))
+            for file_or_dir in os.listdir(archives_dir):
+                f = os.path.join(archives_dir, file_or_dir)
+                try:
+                    log.debug('Moving {}'.format(f))
+                    shutil.move(f, dest_dir)
+                except shutil.Error as e:
+                    log.error(e)
+                    raise OSError(errno.EPERM, 'Could not move to', archives_dir)
     else:
-        log.debug('Archives file/dir {} does not exist.'.format(archives_dir))
+        log.error('Archives dir {} does not exist.'.format(archives_dir))
+        raise OSError(errno.ENOENT, 'Missing directory', archives_dir)
 
     if pattern is None:
         return
