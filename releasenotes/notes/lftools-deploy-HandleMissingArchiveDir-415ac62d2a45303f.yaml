@@ -1,3 +1,4 @@
+---
 fixes:
   - |
     Fixes an OSError exception that is not handled, in the lftools command:
@@ -14,4 +15,3 @@ fixes:
     12:07:36   File "/home/jenkins/.local/lib/python2.7/site-packages/lftools/deploy.py", line 166, in copy_archives
     12:07:36     for file_or_dir in os.listdir(archives_dir):
     12:07:36 OSError: [Errno 2] No such file or directory: '/w/workspace/music-mdbc-master-verify-java/archives'
-
