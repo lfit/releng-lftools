@@ -131,19 +131,26 @@ def test_deploy_archive(cli_runner, datafiles, responses):
     os.path.join(FIXTURE_DIR, 'deploy'),
     )
 def test_deploy_archive2(cli_runner, datafiles, responses):
-    """Test deploy_archives() command for expected upload cases."""
+    """Test deploy_archives() command when archives dir is missing."""
     os.chdir(str(datafiles))
     workspace_dir = os.path.join(str(datafiles), 'workspace-noarchives')
 
-    # Test successful upload
-    url = 'https://nexus.example.org/service/local/repositories/logs/content-compressed'
-    responses.add(responses.POST, '{}/test/path/abc'.format(url),
-                  json=None, status=201)
-    result = cli_runner.invoke(
-        cli.cli,
-        ['--debug', 'deploy', 'archives', 'https://nexus.example.org', 'test/path/abc', workspace_dir],
-        obj={})
-    assert result.exit_code == 0
+    with pytest.raises(OSError) as excinfo:
+         deploy_sys.copy_archives(workspace_dir)
+    assert workspace_dir in str(excinfo.value)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_archive3(cli_runner, datafiles, responses):
+    """Test deploy_archives() command when archives dir is a file instead of a dir."""
+    os.chdir(str(datafiles))
+    workspace_dir = os.path.join(str(datafiles), 'workspace-archivesfile')
+
+    with pytest.raises(OSError) as excinfo:
+         deploy_sys.copy_archives(workspace_dir)
+    assert workspace_dir in str(excinfo.value)
 
 
 @pytest.mark.datafiles(
