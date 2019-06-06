@@ -29,6 +29,14 @@ def check_response_code(response):
                                  "error:\n{}: {}".format(response.status_code,
                                                          response.text))
 
+def helper_check_group_exists(group):
+    """List members of a group."""
+    access_token, url = oauth_helper()
+    url = PARSE(url, group)
+    headers = {'Authorization': 'Bearer ' + access_token}
+    response = requests.get(url, headers=headers)
+    status_code = response.status_code
+    return status_code
 
 def helper_search_members(group):
     """List members of a group."""
@@ -77,15 +85,19 @@ def helper_invite(email, group):
 
 def helper_create_group(group):
     """Create group."""
-    access_token, url = oauth_helper()
-    url = '{}/'.format(url)
-    headers = {'Authorization': 'Bearer ' + access_token}
-    data = {"title": group, "type": "group"}
-    print(data)
-    response = requests.post(url, json=data, headers=headers)
-    check_response_code(response)
-    result = (response.json())
-    print(json.dumps(result, indent=4, sort_keys=True))
+    check_response_code = helper_check_group_exists(group)
+    if check_response_code == 200:
+        print("Group {} already exists exiting...".format(group))
+    else:
+        access_token, url = oauth_helper()
+        url = '{}/'.format(url)
+        headers = {'Authorization': 'Bearer ' + access_token}
+        data = {"title": group, "type": "group"}
+        print(data)
+        response = requests.post(url, json=data, headers=headers)
+        check_response_code(response)
+        result = (response.json())
+        print(json.dumps(result, indent=4, sort_keys=True))
 
 
 def helper_match_ldap_to_info(info_file, group, noop):
