@@ -38,8 +38,10 @@ def _compress_text(dir):
     os.chdir(dir)
 
     compress_types = [
+        '**/*.html',
         '**/*.log',
         '**/*.txt',
+        '**/*.xml',
     ]
     paths = []
     for _type in compress_types:
