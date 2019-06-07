@@ -156,6 +156,19 @@ def test_deploy_archive3(cli_runner, datafiles, responses):
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, 'deploy'),
     )
+def test_deploy_archive4(cli_runner, datafiles, responses):
+    """Test deploy_archives() command when using duplicated patterns."""
+    os.chdir(str(datafiles))
+    workspace_dir = os.path.join(str(datafiles), 'workspace-patternfile')
+    pattern=["**/*.log", "**/hs_err_*.log", "**/target/**/feature.xml", "**/target/failsafe-reports/failsafe-summary.xml", "**/target/surefire-reports/*-output.txt", "**/target/surefire-reports/*-output.txt", "**/target/failsafe-reports/failsafe-summary.xml"]
+
+    result = deploy_sys.copy_archives(workspace_dir, pattern)
+    assert result is None
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
 def test_deploy_logs(cli_runner, datafiles, responses):
     """Test deploy_logs() command for expected upload cases."""
     os.chdir(str(datafiles))
