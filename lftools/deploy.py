@@ -306,12 +306,20 @@ def deploy_logs(nexus_url, nexus_path, build_url):
     log.info(MAGIC_STRING)
 
     resp = requests.get('{}/consoleText'.format(_format_url(build_url)))
-    with open('console.log', 'w+') as f:
-        f.write(str(resp.text.split(MAGIC_STRING)[0].encode('utf-8')))
+    if sys.version_info < (3, 0):
+        with open('console.log', 'w+') as f:
+            f.write(str(resp.text.split(MAGIC_STRING)[0].encode('utf-8')))
+    else:
+        with open('console.log', 'w+') as f:
+            f.write(str(resp.text.split(MAGIC_STRING)[0]))
 
     resp = requests.get('{}/timestamps?time=HH:mm:ss&appendLog'.format(_format_url(build_url)))
-    with open('console-timestamp.log', 'w+') as f:
-        f.write(str(resp.text.split(MAGIC_STRING)[0].encode('utf-8')))
+    if sys.version_info < (3, 0):
+        with open('console-timestamp.log', 'w+') as f:
+            f.write(str(resp.text.split(MAGIC_STRING)[0].encode('utf-8')))
+    else:
+        with open('console-timestamp.log', 'w+') as f:
+            f.write(str(resp.text.split(MAGIC_STRING)[0]))
 
     _compress_text(work_dir)
 

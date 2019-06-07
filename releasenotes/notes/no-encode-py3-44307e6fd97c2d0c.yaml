@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    deploy_logs will no longer encode the log string when running on Python 3.
+    The default string encoding is already utf-8, and the output of
+    str.encode() is a 'bytes' object rather than 'str', resulting in improperly
+    formatted output when using Python 3.
