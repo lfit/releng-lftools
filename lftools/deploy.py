@@ -188,8 +188,16 @@ def copy_archives(workspace, pattern=None):
     if pattern is None:
         return
 
+    # Remove duplicates from pattern
+    no_dups_pattern = list(dict.fromkeys(pattern))
+    duplicated_patterns =[]
+    for i in range(len(no_dups_pattern)):
+        if (pattern.count(no_dups_pattern[i]) > 1 ):
+            duplicated_patterns.append(no_dups_pattern[i])
+    log.debug ('Duplicated patterns : {}'.format(duplicated_patterns))
+
     paths = []
-    for p in pattern:
+    for p in no_dups_pattern:
         if p == '':  # Skip empty patterns as they are invalid
             continue
 
@@ -197,7 +205,16 @@ def copy_archives(workspace, pattern=None):
         paths.extend(glob2.glob(search, recursive=True))
     log.debug('Files found: {}'.format(paths))
 
-    for src in paths:
+    # Remove duplicated files found
+    no_dups_paths = list(dict.fromkeys(paths))
+    duplicated_paths =[]
+    for i in range(len(no_dups_paths)):
+        if (paths.count(no_dups_paths[i]) > 1 ):
+            duplicated_paths.append(no_dups_paths[i])
+    log.debug ('Duplicated files : {}'.format(duplicated_paths))
+
+
+    for src in no_dups_paths:
         if len(os.path.basename(src)) > 255:
             log.warn('Filename {} is over 255 characters. Skipping...'.format(
                 os.path.basename(src)))
