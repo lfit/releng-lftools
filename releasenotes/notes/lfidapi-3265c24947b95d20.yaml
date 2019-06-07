@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    lfidapi create group checks if group exists before posting
