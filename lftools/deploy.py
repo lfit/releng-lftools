@@ -28,6 +28,7 @@ import zipfile
 from defusedxml.minidom import parseString
 import glob2  # Switch to glob when Python < 3.5 support is dropped
 import requests
+import six
 
 log = logging.getLogger(__name__)
 
@@ -307,11 +308,11 @@ def deploy_logs(nexus_url, nexus_path, build_url):
 
     resp = requests.get('{}/consoleText'.format(_format_url(build_url)))
     with open('console.log', 'w+') as f:
-        f.write(str(resp.text.split(MAGIC_STRING)[0].encode('utf-8')))
+        f.write(str(six.text_type(resp.text.split(MAGIC_STRING)[0])))
 
     resp = requests.get('{}/timestamps?time=HH:mm:ss&appendLog'.format(_format_url(build_url)))
     with open('console-timestamp.log', 'w+') as f:
-        f.write(str(resp.text.split(MAGIC_STRING)[0].encode('utf-8')))
+        f.write(str(six.text_type(resp.text.split(MAGIC_STRING)[0])))
 
     _compress_text(work_dir)
 
