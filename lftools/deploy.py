@@ -188,6 +188,11 @@ def copy_archives(workspace, pattern=None):
     if pattern is None:
         return
 
+    # Remove duplicates from pattern
+    log.debug('pattern before : {}'.format(pattern))
+    pattern = list(dict.fromkeys(pattern))
+    log.debug('pattern after  : {}'.format(pattern))
+
     paths = []
     for p in pattern:
         if p == '':  # Skip empty patterns as they are invalid
@@ -196,6 +201,11 @@ def copy_archives(workspace, pattern=None):
         search = os.path.join(workspace, p)
         paths.extend(glob2.glob(search, recursive=True))
     log.debug('Files found: {}'.format(paths))
+
+    # Remove duplicated files found
+    log.debug('paths before : {} {}'.format(len(paths), paths))
+    paths = list(dict.fromkeys(paths))
+    log.debug('paths after  : {} {}'.format(len(paths), paths))
 
     for src in paths:
         if len(os.path.basename(src)) > 255:
