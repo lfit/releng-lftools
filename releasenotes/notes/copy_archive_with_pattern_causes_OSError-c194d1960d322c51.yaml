@@ -1,0 +1,17 @@
+---
+fixes:
+  - |
+    Fix OSError in lftools deploy archives due to pattern
+
+    If the pattern is not properly done, the resulting file list might
+    contain duplicated files.
+
+    This fix will remove the duplicated patterns, as well as the
+    duplicated matched files.
+
+    This fix should fix the following crash
+    08:24:05   File "/home/jenkins/.local/lib/python2.7/site-packages/lftools/deploy.py", line 204, in copy_archives
+    08:24:05     os.makedirs(os.path.dirname(dest))
+    08:24:05   File "/usr/lib64/python2.7/os.py", line 157, in makedirs
+    08:24:05     mkdir(name, mode)
+    08:24:05 OSError: [Errno 17] File exists: '/tmp/lftools-da.m80YHz/features/benchmark/odl-benchmark-api/target/surefire-reports'

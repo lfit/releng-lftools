@@ -156,6 +156,82 @@ def test_deploy_archive3(datafiles):
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, 'deploy'),
     )
+def test_deploy_archive4(cli_runner, datafiles, responses):
+    """Test deploy_archives() command when using duplicated patterns."""
+    os.chdir(str(datafiles))
+    workspace_dir = os.path.join(str(datafiles), 'workspace-patternfile')
+    pattern=["**/*.log", "**/hs_err_*.log", "**/target/**/feature.xml", "**/target/failsafe-reports/failsafe-summary.xml", "**/target/surefire-reports/*-output.txt", "**/target/surefire-reports/*-output.txt", "**/target/failsafe-reports/failsafe-summary.xml"]
+    result = deploy_sys.copy_archives(workspace_dir, pattern)
+    assert result is None
+
+
+def test_remove_duplicates_from_list_and_sort():
+    test_lst = [[["file1"],
+                 ["file1"]],
+
+                [["file1", "file2"],
+                 ["file1", "file2"]],
+
+                [["file2", "file3", "file5", "file1", "file4"],
+                 ["file1", "file2", "file3", "file4", "file5"]],
+
+                [["file2", "file3", "file2", "file3", "file4"],
+                 ["file2", "file3", "file4"]],
+
+
+                [["**/*.log",
+                "**/hs_err_*.log",
+                "**/target/**/feature.xml",
+                "**/target/failsafe-reports/failsafe-summary.xml",
+                "**/target/surefire-reports/*-output.txt",
+                "**/target/surefire-reports/*-output.txt",
+                "**/target/failsafe-reports/failsafe-summary.xml"],
+
+                ["**/*.log",
+                "**/hs_err_*.log",
+                "**/target/**/feature.xml",
+                "**/target/failsafe-reports/failsafe-summary.xml",
+                "**/target/surefire-reports/*-output.txt"]],
+
+                [['/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/abc.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir1/hs_err_13.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir1/hs_err_12.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir1/abc.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir2/hs_err_13.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir2/hs_err_12.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir2/abc.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir1/hs_err_13.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir1/hs_err_12.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir2/hs_err_13.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir2/hs_err_12.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/target/dir1/feature.xml',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/target/dir2/feature.xml',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/target/surefire-reports/abc1-output.txt',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/target/surefire-reports/abc2-output.txt',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/target/surefire-reports/abc1-output.txt',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/target/surefire-reports/abc2-output.txt'],
+
+                 ['/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/abc.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir1/abc.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir1/hs_err_12.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir1/hs_err_13.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir2/abc.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir2/hs_err_12.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/dir2/hs_err_13.log',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/target/dir1/feature.xml',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/target/dir2/feature.xml',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/target/surefire-reports/abc1-output.txt',
+                  '/tmp/pytest-of-bengt/pytest-5/test_deploy_archive40/workspace-patternfile/target/surefire-reports/abc2-output.txt']]
+
+              ]
+
+    for tst in test_lst:
+        assert deploy_sys._remove_duplicates_from_list_and_sort(tst[0]) == tst[1]
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
 def test_deploy_logs(cli_runner, datafiles, responses):
     """Test deploy_logs() command for expected upload cases."""
     os.chdir(str(datafiles))
