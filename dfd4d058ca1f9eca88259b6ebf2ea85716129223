@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b56209eb_a072cd3e",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-08T10:00:53Z",
+      "side": 0,
+      "message": "we should not have had the log.debug() as the only line here. The issue with multiple-patterns is non-reproducible when --debug option gets used.",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 78
+      },
+      "revId": "dfd4d058ca1f9eca88259b6ebf2ea85716129223",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
