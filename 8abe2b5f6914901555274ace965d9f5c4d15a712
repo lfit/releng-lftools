@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c166cf3_74a2c0c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-08T09:51:25Z",
+      "side": 1,
+      "message": "this does not crash (no core file is generated), its throws out a valid err message. I\u0027d change it to .... \n\n\"Fix lftools deploy archives to handle dup patterns/files\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "8abe2b5f6914901555274ace965d9f5c4d15a712",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd6c6160_1f99d81f",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-08T09:51:25Z",
+      "side": 1,
+      "message": "There is no need to have a before and after output of the pattern, just print out the dups, if they are present with log.debug().",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 52
+      },
+      "revId": "8abe2b5f6914901555274ace965d9f5c4d15a712",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f3f5256_73aab193",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-08T09:51:25Z",
+      "side": 1,
+      "message": "There is no need to have a before and after output of the files, just print out the dups, if they are present with log.debug().",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 63
+      },
+      "revId": "8abe2b5f6914901555274ace965d9f5c4d15a712",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
