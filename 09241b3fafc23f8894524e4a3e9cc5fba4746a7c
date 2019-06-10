@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "93d42c6f_720fc9cd",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-10T12:04:27Z",
+      "side": 1,
+      "message": "\u0027-s\u0027 option takes Jenkins \u0027URL\u0027 or string that refers to the \u0027section\u0027 in the ini file. Since [jenkins] is the default value with nothing is passed, its not correct to assume that every jenkins.ini file has a [jenkins] section and reading the \u0027user\u0027 and \u0027password\u0027 without checking if that section even exists is incorrect.\n\nIt\u0027s better to first check if that section exists before reading the value.   \n\nif you run \"lftools jenkins plugins --help\", this returns an the error, same is seen when running `tox -e`.\n\n[app] emitting event: \u0027build-finished\u0027(SphinxWarning(\"Unexpected return code 1 from command \u0027lftools jenkins plugins --help\u0027\"),)\n\nTraceback (most recent call last):\n  File \"/home/abelur/git/lftools-new/.tox/docs/lib/python3.7/site-packages/sphinx/cmd/build.py\", line 304, in build_main\n    app.build(args.force_all, filenames)\n  File \"/home/abelur/git/lftools-new/.tox/docs/lib/python3.7/site-packages/sphinx/application.py\", line 341, in build\n    self.builder.build_update()\n  File \"/home/abelur/git/lftools-new/.tox/docs/lib/python3.7/site-packages/sphinx/builders/__init__.py\", line 347, in build_update\n    len(to_build))\n  File \"/home/abelur/git/lftools-new/.tox/docs/lib/python3.7/site-packages/sphinx/builders/__init__.py\", line 360, in build\n    updated_docnames \u003d set(self.read())\n  File \"/usr/lib64/python3.7/contextlib.py\", line 119, in __exit__\n    next(self.gen)\n  File \"/home/abelur/git/lftools-new/.tox/docs/lib/python3.7/site-packages/sphinx/util/logging.py\", line 261, in pending_warnings\n    memhandler.flushTo(logger)\n  File \"/home/abelur/git/lftools-new/.tox/docs/lib/python3.7/site-packages/sphinx/util/logging.py\", line 224, in flushTo\n    logger.handle(record)\n  File \"/usr/lib64/python3.7/logging/__init__.py\", line 1529, in handle\n    self.callHandlers(record)\n  File \"/usr/lib64/python3.7/logging/__init__.py\", line 1591, in callHandlers\n    hdlr.handle(record)\n  File \"/usr/lib64/python3.7/logging/__init__.py\", line 901, in handle\n    rv \u003d self.filter(record)\n  File \"/usr/lib64/python3.7/logging/__init__.py\", line 762, in filter\n    result \u003d f.filter(record)\n  File \"/home/abelur/git/lftools-new/.tox/docs/lib/python3.7/site-packages/sphinx/util/logging.py\", line 412, in filter\n    raise SphinxWarning(message)\nsphinx.errors.SphinxWarning: Unexpected return code 1 from command \u0027lftools jenkins plugins --help\u0027",
+      "parentUuid": "585e52d5_bab59344",
+      "range": {
+        "startLine": 64,
+        "startChar": 16,
+        "endLine": 64,
+        "endChar": 51
+      },
+      "revId": "09241b3fafc23f8894524e4a3e9cc5fba4746a7c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5582c9ea_d9e87381",
         "filename": "lftools/jenkins/__init__.py",
         "patchSetId": 1
