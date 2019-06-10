@@ -22,6 +22,30 @@
       "revId": "58e14bf74326eef5b9c512d47def3d2b8997af98",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06d4e97a_5693d42e",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 27
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-06-10T19:57:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "357389bf_64d75ddd",
+      "range": {
+        "startLine": 182,
+        "startChar": 20,
+        "endLine": 182,
+        "endChar": 21
+      },
+      "revId": "58e14bf74326eef5b9c512d47def3d2b8997af98",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
