@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "585e52d5_bab59344",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-06-10T11:11:43Z",
+      "side": 1,
+      "message": "\"server\" is already passed in via the init function. This is expected to be either a full URL like \"https://jenkins.opendaylight.org\" OR an alias like \"odl\".\n\nThe \"parser.sections()\" is redundant because the user is already passing in the specific section.",
+      "range": {
+        "startLine": 64,
+        "startChar": 16,
+        "endLine": 64,
+        "endChar": 51
+      },
+      "revId": "09241b3fafc23f8894524e4a3e9cc5fba4746a7c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5582c9ea_d9e87381",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-06-10T11:11:43Z",
+      "side": 1,
+      "message": "we\u0027ve already parsed sections() via the if-statement above this is doubly redundant code.",
+      "range": {
+        "startLine": 66,
+        "startChar": 20,
+        "endLine": 66,
+        "endChar": 53
+      },
+      "revId": "09241b3fafc23f8894524e4a3e9cc5fba4746a7c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "354e32fa_cad1f089",
+        "filename": "releasenotes/notes/fix-jenkins-config-parser-d9eb6e7068a7906a.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-06-10T11:11:43Z",
+      "side": 1,
+      "message": "There\u0027s 2 different statements happening here. Which specific problem is being solved?\n\nAre we solving for missing defaults section? The default jenkins section is [jenkins] not [Jenkins].\n\nThe Jenkins.__init__() function is configured to pass in a specific [section] already there is no looping and it does not care if there\u0027s more than 1 section because it\u0027s expecting the caller of the function to pass in a valid section.",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 6,
+        "endChar": 57
+      },
+      "revId": "09241b3fafc23f8894524e4a3e9cc5fba4746a7c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
