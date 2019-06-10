@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12875140_711a6a7f",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-06-10T19:33:32Z",
+      "side": 1,
+      "message": "Still missing the fix on this one, you did catch one I didn\u0027t see though \u0027R\u0027",
+      "range": {
+        "startLine": 182,
+        "startChar": 20,
+        "endLine": 182,
+        "endChar": 21
+      },
+      "revId": "88dc4af1395dd8da87636799ade30bbee7c2dbdc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
