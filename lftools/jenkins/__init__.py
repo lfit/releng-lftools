@@ -58,11 +58,18 @@ class Jenkins():
         if '://' not in server:
             if self.config_file:
                 log.debug('Using config from {}'.format(self.config_file))
-                config = configparser.ConfigParser()
-                config.read(self.config_file)
-                user = config.get(server, 'user')
-                password = config.get(server, 'password')
-                server = config.get(server, 'url')
+                parser = configparser.SafeConfigParser()
+                parser.read(self.config_file)
+
+                if server not in parser.sections():
+                    log.debug('[{}] section found in {}'.format(server, self.config_file))
+                    for section in parser.sections():
+                        log.debug('section found: [{}]'.format(section))
+                    log.debug('set section with -s|--server')
+                else:
+                    user = parser.get(server, 'user')
+                    password = parser.get(server, 'password')
+                    server = parser.get(server, 'url')
             else:
                 log.debug('jenkins_jobs.ini not found in any of the default paths.')
                 server = 'https://localhost:8080'

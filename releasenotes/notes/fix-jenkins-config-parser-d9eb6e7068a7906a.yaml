@@ -1,0 +1,10 @@
+---
+fixes:
+  - |
+    Handle config parser conditionally, when the defaults "[Jenkins]" section
+    is not found. Tox returns the error when the ``jenkins.ini`` file has more
+    than one server section available in the config file.
+
+    .. code-block: none
+
+       sphinx.errors.SphinxWarning: Unexpected return code 1 from command 'lftools jenkins plugins --help'
