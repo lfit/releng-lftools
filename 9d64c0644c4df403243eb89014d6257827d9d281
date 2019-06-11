@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ff12b6a_7d9345b7",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-06-11T12:12:47Z",
+      "side": 1,
+      "message": "We should throw an exception after logging the error so that the code exits with non-zero exit status and does not continue running. I think the code will look cleaner if you switched it around like this:\n\n                if not config.has_section(server):\n                    log.error(\u0027[{}] section not found in {}\u0027\n                              .format(server, self.config_file))\n                    raise SectionNotFoundException\n\n                user \u003d config.get(server, \u0027user\u0027)\n                password \u003d config.get(server, \u0027password\u0027)\n                server \u003d config.get(server, \u0027url\u0027)\n\nI don\u0027t know the exact wording off the top of my head for the SectionNotFoundException. Look it up from the configparser code in Python to get the right one.",
+      "revId": "9d64c0644c4df403243eb89014d6257827d9d281",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
