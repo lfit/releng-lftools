@@ -22,6 +22,30 @@
       "revId": "dfd4d058ca1f9eca88259b6ebf2ea85716129223",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2ff5b42_76309676",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-06-11T11:58:56Z",
+      "side": 0,
+      "message": "This part here was needed for ONAP, since they had issues with\n* No ARCHIVES directory \n* ARCHIVES was a file instead of directory.\nChanged it a bit in the latest patch though, to raise an OSError exception to ensure that the issue is looked at.",
+      "parentUuid": "b56209eb_a072cd3e",
+      "range": {
+        "startLine": 180,
+        "startChar": 1,
+        "endLine": 180,
+        "endChar": 78
+      },
+      "revId": "dfd4d058ca1f9eca88259b6ebf2ea85716129223",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
