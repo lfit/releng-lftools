@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "6f4f12cb_3dcd4c77",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-06-11T11:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd6c6160_1f99d81f",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 52
+      },
+      "revId": "8abe2b5f6914901555274ace965d9f5c4d15a712",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2f3f5256_73aab193",
         "filename": "lftools/deploy.py",
         "patchSetId": 4
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "8d2442d4_d5621b34",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-06-11T11:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f3f5256_73aab193",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 63
+      },
+      "revId": "8abe2b5f6914901555274ace965d9f5c4d15a712",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67428108_e6fecd0c",
         "filename": "tests/test_deploy.py",
         "patchSetId": 4
@@ -82,6 +130,30 @@
       "writtenOn": "2019-06-08T09:54:38Z",
       "side": 1,
       "message": "please add test for checking dup files are handled, if not patterns are provided?",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 4
+      },
+      "revId": "8abe2b5f6914901555274ace965d9f5c4d15a712",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77fe1c0b_71afe581",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-06-11T11:51:19Z",
+      "side": 1,
+      "message": "Not sure what you mean?\nFirst it will copy from Archives directory to current directory.\n  Checking if Archives do not exist, or if Archives is a file (not a directory)\nAfter that it will do the Patterns. So if no Pattern, will just exit.",
+      "parentUuid": "67428108_e6fecd0c",
       "range": {
         "startLine": 159,
         "startChar": 0,
