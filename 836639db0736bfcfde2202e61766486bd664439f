@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7c95615_bb5e7efb",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-06-11T01:46:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure why the variable name \"config\" was changed to \"parser\" but it causes unnecessary line changes below. IMO config is a more accurate variable name for the object being used here.",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 22
+      },
+      "revId": "836639db0736bfcfde2202e61766486bd664439f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
