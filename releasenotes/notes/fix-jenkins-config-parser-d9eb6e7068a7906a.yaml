@@ -1,0 +1,40 @@
+---
+fixes:
+  - |
+    Handle config parser correctly which defaults to "[jenkins]" section
+    when no server is pased. This fixes the issue with checking if the key
+    exists in the configuration read before reading the key-value.
+
+    The issue is reproduceable by running `lftools jenkins plugins --help` or
+    `tox -e docs`, with the ``jenkins.ini`` file having no "[jenkins]" section.
+
+    .. code-block: none
+
+       Traceback (most recent call last):
+          File "/home/jenkins/.local/lftools/env/bin/lftools", line 10, in <module>
+            sys.exit(main())
+          File "/home/jenkins/.local/lftools/lftools/cli/__init__.py", line 104, in main
+            cli(obj={})
+          File "/home/jenkins/.local/lftools/env/lib/python3.7/site-packages/click/core.py", line 764, in __call__
+            return self.main(*args, **kwargs)
+          File "/home/jenkins/.local/lftools/env/lib/python3.7/site-packages/click/core.py", line 717, in main
+            rv = self.invoke(ctx)
+          File "/home/jenkins/.local/lftools/env/lib/python3.7/site-packages/click/core.py", line 1137, in invoke
+            return _process_result(sub_ctx.command.invoke(sub_ctx))
+          File "/home/jenkins/.local/lftools/env/lib/python3.7/site-packages/click/core.py", line 1134, in invoke
+            Command.invoke(self, ctx)
+          File "/home/jenkins/.local/lftools/env/lib/python3.7/site-packages/click/core.py", line 956, in invoke
+            return ctx.invoke(self.callback, **ctx.params)
+          File "/home/jenkins/.local/lftools/env/lib/python3.7/site-packages/click/core.py", line 555, in invoke
+            return callback(*args, **kwargs)
+          File "/home/jenkins/.local/lftools/env/lib/python3.7/site-packages/click/decorators.py", line 17, in new_func
+            return f(get_current_context(), *args, **kwargs)
+          File "/home/jenkins/.local/lftools/lftools/cli/jenkins/__init__.py", line 44, in jenkins_cli
+            ctx.obj['jenkins'] = Jenkins(server, user, password, config_file=conf)
+          File "/home/jenkins/.local/lftools/lftools/jenkins/__init__.py", line 63, in __init__
+            user = config.get(server, 'user')
+          File "/usr/lib64/python3.7/configparser.py", line 780, in get
+            d = self._unify_values(section, vars)
+          File "/usr/lib64/python3.7/configparser.py", line 1146, in _unify_values
+            raise NoSectionError(section) from None
+       configparser.NoSectionError: No section: 'jenkins'
