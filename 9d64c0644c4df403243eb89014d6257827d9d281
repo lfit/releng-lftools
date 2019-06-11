@@ -16,6 +16,24 @@
       "revId": "9d64c0644c4df403243eb89014d6257827d9d281",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efb54f31_2ee94d5a",
+        "filename": "lftools/jenkins/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-11T13:34:15Z",
+      "side": 1,
+      "message": "Here is the correct version of the code you\u0027re suggesting:\n\n                try:\n                    if not config.has_section(server):\n                        log.error(\u0027[{}] section not found in {}\u0027\n                                  .format(server, self.config_file))\n                except:\n                    raise NoSectionError(server)\n...\n\nIMO, we should not be doing this for the following reasons:\n\n1. throwing an exception because the default is not found, will again fail `tox -e docs` and also traceback when the `--help` is used, this rules out the purpose fixing the issue.\n2. If a default is not found you should print an info/warning asking the user to specify -s \u0027section|server\u0027 and move on. If you really want to throw an exception, then why set the default as \u0027jenkins\u0027?",
+      "parentUuid": "6ff12b6a_7d9345b7",
+      "revId": "9d64c0644c4df403243eb89014d6257827d9d281",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
