@@ -1,5 +1,0 @@
----
-fixes:
-  - |
-    Use six.text_type() rather than str.encode('utf-8') in deploy_logs, so that
-    strings are no longer rewritten as bytes objects in Python 3.
