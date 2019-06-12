@@ -2,11 +2,11 @@
 fixes:
   - |
     Handle config parser correctly which defaults to "[jenkins]" section
-    when no server is pased. This fixes the issue with checking if the key
+    when no server is passed. This fixes the issue with checking if the key
     exists in the configuration read before reading the key-value.
 
-    The issue is reproduceable by running `lftools jenkins plugins --help` or
-    `tox -e docs`, with the ``jenkins.ini`` file having no "[jenkins]" section.
+    The issue is reproducible by running `lftools jenkins plugins --help` or
+    `tox -e docs`, with ``jenkins.ini`` missing the "[jenkins]" section.
 
     .. code-block: none
 
