@@ -34,6 +34,52 @@
       "revId": "9d64c0644c4df403243eb89014d6257827d9d281",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "618e3707_acab979d",
+        "filename": "releasenotes/notes/fix-jenkins-config-parser-d9eb6e7068a7906a.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2019-06-12T00:13:33Z",
+      "side": 1,
+      "message": "passed",
+      "range": {
+        "startLine": 5,
+        "startChar": 22,
+        "endLine": 5,
+        "endChar": 27
+      },
+      "revId": "9d64c0644c4df403243eb89014d6257827d9d281",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57a28472_adac52df",
+        "filename": "releasenotes/notes/fix-jenkins-config-parser-d9eb6e7068a7906a.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2019-06-12T00:13:33Z",
+      "side": 1,
+      "message": "reproducible",
+      "range": {
+        "startLine": 8,
+        "startChar": 17,
+        "endLine": 8,
+        "endChar": 30
+      },
+      "revId": "9d64c0644c4df403243eb89014d6257827d9d281",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
