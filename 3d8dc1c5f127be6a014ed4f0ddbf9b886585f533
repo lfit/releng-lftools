@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d40547e7_39feac9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-12T14:12:02Z",
+      "side": 1,
+      "message": "typo: exception",
+      "range": {
+        "startLine": 15,
+        "startChar": 32,
+        "endLine": 15,
+        "endChar": 42
+      },
+      "revId": "3d8dc1c5f127be6a014ed4f0ddbf9b886585f533",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47d9b57f_acce88ed",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-12T14:12:02Z",
+      "side": 1,
+      "message": "please change this to `_remove_dups()` or equivalent.",
+      "range": {
+        "startLine": 148,
+        "startChar": 3,
+        "endLine": 148,
+        "endChar": 41
+      },
+      "revId": "3d8dc1c5f127be6a014ed4f0ddbf9b886585f533",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e482fd53_7527d60b",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-12T14:12:02Z",
+      "side": 1,
+      "message": "rm",
+      "range": {
+        "startLine": 206,
+        "startChar": 40,
+        "endLine": 206,
+        "endChar": 59
+      },
+      "revId": "3d8dc1c5f127be6a014ed4f0ddbf9b886585f533",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2442f886_23fe5612",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-12T14:12:02Z",
+      "side": 1,
+      "message": "rm \u0027_from...\u0027",
+      "range": {
+        "startLine": 217,
+        "startChar": 38,
+        "endLine": 217,
+        "endChar": 57
+      },
+      "revId": "3d8dc1c5f127be6a014ed4f0ddbf9b886585f533",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
