@@ -310,11 +310,11 @@ def deploy_logs(nexus_url, nexus_path, build_url):
 
     resp = requests.get('{}/consoleText'.format(_format_url(build_url)))
     with open('console.log', 'w+') as f:
-        f.write(str(six.text_type(resp.text.split(MAGIC_STRING)[0])))
+        f.write(six.text_type(resp.text.split(MAGIC_STRING)[0]))
 
     resp = requests.get('{}/timestamps?time=HH:mm:ss&appendLog'.format(_format_url(build_url)))
     with open('console-timestamp.log', 'w+') as f:
-        f.write(str(six.text_type(resp.text.split(MAGIC_STRING)[0])))
+        f.write(six.text_type(resp.text.split(MAGIC_STRING)[0]))
 
     _compress_text(work_dir)
 
