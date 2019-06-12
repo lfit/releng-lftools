@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "054449ab_649eabef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-12T22:40:54Z",
+      "side": 1,
+      "message": "I\u0027d add the change id of the orginal change here, so that we have the histroy why this change was introduced",
+      "revId": "85f7c5f440c67d80d1d728ca9aac10d58a4d87e4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
