@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    Unicode compatibility in deploy_logs for Python 2 and 3 was improved in
+    several ways. The former method to pull and write log files did not work
+    properly in Python 3, and was not very robust for Python 2. Both reading
+    and writing logs is now handled in a unicode-safe, 2/3 compatible way.
