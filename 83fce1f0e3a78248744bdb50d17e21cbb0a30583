@@ -22,6 +22,30 @@
       "revId": "83fce1f0e3a78248744bdb50d17e21cbb0a30583",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1356d390_2655cb8e",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-06-13T07:09:24Z",
+      "side": 1,
+      "message": "Where do I set this ?\nThis is just the default tmp directory created  :(",
+      "parentUuid": "1e36df2f_b800936b",
+      "range": {
+        "startLine": 196,
+        "startChar": 20,
+        "endLine": 196,
+        "endChar": 39
+      },
+      "revId": "83fce1f0e3a78248744bdb50d17e21cbb0a30583",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
