@@ -144,6 +144,20 @@ def _get_node_from_xml(xml_data, tag_name):
     return childnode.firstChild.data
 
 
+def _remove_duplicates_from_list_and_sort(lst):
+    # Remove duplicates from list, and sort it
+    no_dups_lst = list(dict.fromkeys(lst))
+    no_dups_lst.sort()
+
+    duplicated_list = []
+    for i in range(len(no_dups_lst)):
+        if (lst.count(no_dups_lst[i]) > 1):
+            duplicated_list.append(no_dups_lst[i])
+    log.debug("duplicates  : {}".format(duplicated_list))
+
+    return no_dups_lst
+
+
 def copy_archives(workspace, pattern=None):
     """Copy files matching PATTERN in a WORKSPACE to the current directory.
 
@@ -188,8 +202,10 @@ def copy_archives(workspace, pattern=None):
     if pattern is None:
         return
 
+    no_dups_pattern = _remove_duplicates_from_list_and_sort(pattern)
+
     paths = []
-    for p in pattern:
+    for p in no_dups_pattern:
         if p == '':  # Skip empty patterns as they are invalid
             continue
 
@@ -197,7 +213,9 @@ def copy_archives(workspace, pattern=None):
         paths.extend(glob2.glob(search, recursive=True))
     log.debug('Files found: {}'.format(paths))
 
-    for src in paths:
+    no_dups_paths = _remove_duplicates_from_list_and_sort(paths)
+
+    for src in no_dups_paths:
         if len(os.path.basename(src)) > 255:
             log.warn('Filename {} is over 255 characters. Skipping...'.format(
                 os.path.basename(src)))
