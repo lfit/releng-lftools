@@ -1,0 +1,303 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61378a66_40b137c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "This should specify that the key is \"base64\" as well. I had to check the code to discover that.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 34
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a80e8cac_229b4305",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "Why not just \"url\"? Even if keeping it as jiraurl, create_project should probably then be changed to also use jiraurl, to standardize all three commands.",
+      "range": {
+        "startLine": 30,
+        "startChar": 17,
+        "endLine": 30,
+        "endChar": 24
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b57be2e_968f895d",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "This could be much more descriptive of the expected return.",
+      "range": {
+        "startLine": 34,
+        "startChar": 7,
+        "endLine": 34,
+        "endChar": 34
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41594ba5_ddecd7e6",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "All example urls should be \"jira.example.org\" to align with other examples in lftools.",
+      "range": {
+        "startLine": 37,
+        "startChar": 10,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bbd22d2e_ae4c0933",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "I think a more neutral intro would be better, e.g. \"Example endpoints:\"",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b0683f5_24f5a6a5",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "All instances of this var should be underscored (or just all lower) rather than camel case, as that\u0027s the standard used throughout the lftools code.",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 15
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "899235cb_feb31e85",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "I believe log.info is preferred to directly printing.",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 9
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30cac496_5bce7c1c",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "All example urls should be \"jira.example.org\" to align with other examples in lftools.",
+      "range": {
+        "startLine": 76,
+        "startChar": 9,
+        "endLine": 76,
+        "endChar": 29
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f2343ba_fee65ad4",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "*capitalized",
+      "range": {
+        "startLine": 82,
+        "startChar": 45,
+        "endLine": 82,
+        "endChar": 56
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0ef7655f_4e2ffdf4",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "*Project\u0027s\n*probably",
+      "range": {
+        "startLine": 83,
+        "startChar": 16,
+        "endLine": 83,
+        "endChar": 37
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67798267_a1ef1f42",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this all be more generic?",
+      "range": {
+        "startLine": 90,
+        "startChar": 38,
+        "endLine": 90,
+        "endChar": 163
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b208cd6_179e4ce7",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "Should this be changed before merging?",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 54
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61536de5_be9b6449",
+        "filename": "lftools/cli/jira.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-06-14T21:29:27Z",
+      "side": 1,
+      "message": "All example urls should be \"jira.example.org\" to align with other examples in lftools.",
+      "range": {
+        "startLine": 134,
+        "startChar": 13,
+        "endLine": 134,
+        "endChar": 27
+      },
+      "revId": "0d7f80b8eebd43fb8237fb263828432a0aacb24c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
