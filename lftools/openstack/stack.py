@@ -74,7 +74,7 @@ def create(os_cloud, name, template_file, parameter_file, timeout=900, tries=2):
     print('------------------------------------')
 
 
-def delete(os_cloud, name_or_id, timeout=900):
+def delete(os_cloud, name_or_id, force, timeout=900):
     """Delete a stack.
 
     Return True if delete was successful.
@@ -104,8 +104,9 @@ def delete(os_cloud, name_or_id, timeout=900):
             print('Retrying delete...')
             cloud.delete_stack(name_or_id)
 
-    print('Failed to delete stack.')
-    return False
+    print('Failed to delete stack {}'.format(name_or_id))
+    if not force:
+        return False
 
 
 def delete_stale(os_cloud, jenkins_servers):

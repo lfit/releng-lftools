@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    Add a ``--force`` option to delete stacks command. This will help with
+    re-factoring the code in global-jjb scripts using in builder-openstack-cron
+    job to remove orphaned stacks/node and continue with the next stack
+    to delete.

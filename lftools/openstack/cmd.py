@@ -209,15 +209,19 @@ def create(ctx, name, template_file, parameter_file, timeout, tries):
 @click.command()
 @click.argument('name_or_id')
 @click.option(
+    '--force', type=bool, is_flag=True, default=False,
+    help='Ignore timeout and continue with next stack.')
+@click.option(
     '--timeout', type=int, default=900,
     help='Stack delete timeout in seconds.')
 @click.pass_context
-def delete(ctx, name_or_id, timeout):
+def delete(ctx, name_or_id, force, timeout):
     """Delete stack."""
     os_stack.delete(
         ctx.obj['os_cloud'],
         name_or_id,
-        timeout)
+        force=force,
+        timeout=timeout)
 
 
 @click.command(name='delete-stale')
