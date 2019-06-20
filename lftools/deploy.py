@@ -134,6 +134,40 @@ def _request_post_file(url, file_to_upload, parameters=None):
     return resp
 
 
+def _request_put_file(url, file_to_upload, parameters=None):
+    """Execute a request put, return the resp."""
+    resp = {}
+    try:
+        upload_file = open(file_to_upload, 'rb')
+    except FileNotFoundError:
+        raise FileNotFoundError(
+          errno.ENOENT, os.strerror(errno.ENOENT), file_to_upload)
+
+    files = {'file': upload_file}
+    try:
+        if parameters:
+            resp = requests.put(url, data=parameters, files=files)
+        else:
+            resp = requests.put(url, data=upload_file.read())
+    except requests.exceptions.MissingSchema:
+        raise requests.HTTPError("Not valid URL: {}".format(url))
+    except requests.exceptions.ConnectionError:
+        raise requests.HTTPError("Could not connect to URL: {}".format(url))
+    except requests.exceptions.InvalidURL:
+        raise requests.HTTPError("Invalid URL: {}".format(url))
+
+    if resp.status_code == 400:
+        raise requests.HTTPError("Repository is read only")
+    elif resp.status_code == 404:
+        raise requests.HTTPError("Did not find repository.")
+
+    if not str(resp.status_code).startswith('20'):
+        raise requests.HTTPError("Failed to upload to Nexus with status code: {}.\n{}\n{}".format(
+                resp.status_code, resp.text, file_to_upload))
+
+    return resp
+
+
 def _get_node_from_xml(xml_data, tag_name):
     """Extract tag data from xml data."""
     log.debug('xml={}'.format(xml_data))
@@ -569,10 +603,10 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
             tests/fixtures/deploy/zip-test-files
     """
     def _deploy_nexus_upload(file):
-        """Fix file path, and call _request_post_file."""
+        """Fix file path, and call _request_put_file."""
         nexus_url_with_file = '{}/{}'.format(_format_url(nexus_repo_url), file)
         log.info('Uploading {}'.format(file))
-        _request_post_file(nexus_url_with_file, file)
+        _request_put_file(nexus_url_with_file, file)
         log.debug('Uploaded {}'.format(file))
 
     file_list = []
