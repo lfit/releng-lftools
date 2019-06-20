@@ -654,7 +654,7 @@ def test_deploy_nexus_snapshot(datafiles, responses):
     """Test deploy_nexus with snapshot.
 
     This test will send a directory of files to deploy_nexus, which should
-    call requests.post once for every valid (=3) file.
+    call requests.put once for every valid (=3) file.
     There are two files that should not be uploaded.
     """
     os.chdir(str(datafiles))
@@ -674,7 +674,7 @@ def test_deploy_nexus_snapshot(datafiles, responses):
                   'maven-metadata.xml.sha1']
     for file in test_files:
         success_upload_url = '{}/{}'.format(nexus_url, file)
-        responses.add(responses.POST, success_upload_url,
+        responses.add(responses.PUT, success_upload_url,
                       status=201)
     deploy_sys.deploy_nexus(nexus_url, deploy_dir, snapshot)
 
@@ -686,7 +686,7 @@ def test_deploy_nexus_nosnapshot(datafiles, responses):
     """Test deploy_nexus with no snapshot.
 
     This test will send a directory of files to deploy_nexus, which should
-    call requests.post once for every valid (=3) file.
+    call requests.put once for every valid (=3) file.
     There are six files that should not be uploaded, and three that should.
     """
     os.chdir(str(datafiles))
@@ -699,7 +699,7 @@ def test_deploy_nexus_nosnapshot(datafiles, responses):
                   '4.0.3-SNAPSHOT/odlparent-lite-4.0.3-20181120.113136-1.pom.md5']
     for file in test_files:
         success_upload_url = '{}/{}'.format(nexus_url, file)
-        responses.add(responses.POST, success_upload_url,
+        responses.add(responses.PUT, success_upload_url,
                       status=201)
     deploy_sys.deploy_nexus(nexus_url, deploy_dir)
 
@@ -707,8 +707,8 @@ def test_deploy_nexus_nosnapshot(datafiles, responses):
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, 'deploy'),
     )
-def test_nexus_deploy_stage(datafiles, responses):
-    """Test nexus_deploy_stage."""
+def test_deploy_nexus_stage(datafiles, responses):
+    """Test deploy_nexus_stage."""
     url='http://valid.deploy.stage'
     url_repo = 'service/local/staging/profiles'
     staging_profile_id='93fb68073c18'
@@ -728,7 +728,7 @@ def test_nexus_deploy_stage(datafiles, responses):
                   '4.0.3-SNAPSHOT/odlparent-lite-4.0.3-20181120.113136-1.pom.md5']
     for file in test_files:
         success_upload_url = '{}/{}'.format(nexus_deploy_url, file)
-        responses.add(responses.POST, success_upload_url,
+        responses.add(responses.PUT, success_upload_url,
                       status=201)
 
     #Setup for nexus_stage_repo_close

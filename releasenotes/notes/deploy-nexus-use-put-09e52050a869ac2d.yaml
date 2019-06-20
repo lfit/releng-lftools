@@ -1,0 +1,5 @@
+---
+fixes:
+  - |
+    Use requests.put rather than requests.post for deploy_nexus in order to fix
+    Nexus 3 compatibility. This does not affect Nexus 2 compatibility.
