@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a48d9ef2_c261cfc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-06-20T23:35:50Z",
+      "side": 1,
+      "message": "minor nit, we can already see this func added in the code, this need to be more meaningful and should suggest introducing and using the \"put\" method which replaces of the \"post\" for Nexus2/3 compatibility.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "f7762f02a785a4a44eede572c2f15f474be44a4f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
