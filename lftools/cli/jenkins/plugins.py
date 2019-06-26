@@ -14,7 +14,6 @@ __author__ = 'Trevor Bramwell'
 import click
 import requests
 
-
 def checkmark(truthy):
     """Return a UTF-8 Checkmark or Cross depending on the truthiness of the argument."""
     if truthy:
@@ -22,8 +21,8 @@ def checkmark(truthy):
     return u'\u2717'
 
 
-def print_plugin(plugin, namefield='shortName'):
-    """Print the plugin shortName and version."""
+def print_plugin(plugin, namefield='longName'):
+    """Print the plugin longName and version."""
     print("%s:%s" % (plugin[namefield], plugin['version']))
 
 
@@ -124,7 +123,6 @@ def active(ctx):
         if plugin['active']:
             print_plugin(plugin)
 
-
 @click.command()
 @click.pass_context
 def sec(ctx):
@@ -176,7 +174,6 @@ def sec(ctx):
                     lastversion = version.get('lastVersion')
                 if name == key and secdict[key] == lastversion:
                     print("{0}:{1}\t{0}:{2}\t{3}".format(key, secdict[key], activedict[key], url))
-
 
 plugins_init.add_command(list_plugins, name='list')
 plugins_init.add_command(pinned)
