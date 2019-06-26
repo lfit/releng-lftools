@@ -1,0 +1,7 @@
+---
+critical:
+  - |
+    A problem was found with the Jenkins OpenStack cloud configuration job
+    routines that were relying on the long name form of installed plugins. As
+    the long name form is more human friendly we are reverting to that
+    configuration.
