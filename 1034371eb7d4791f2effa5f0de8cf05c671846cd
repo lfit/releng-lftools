@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11aaa540_c9f66625",
+        "filename": "releasenotes/notes/revert-plugin-list-change-0686578ef029edcc.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2019-06-26T22:01:04Z",
+      "side": 1,
+      "message": "This text is highlighted, will it look funny in the wiki?",
+      "range": {
+        "startLine": 6,
+        "startChar": 48,
+        "endLine": 6,
+        "endChar": 69
+      },
+      "revId": "1034371eb7d4791f2effa5f0de8cf05c671846cd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
