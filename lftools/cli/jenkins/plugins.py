@@ -22,8 +22,8 @@ def checkmark(truthy):
     return u'\u2717'
 
 
-def print_plugin(plugin, namefield='shortName'):
-    """Print the plugin shortName and version."""
+def print_plugin(plugin, namefield='longName'):
+    """Print the plugin longName and version."""
     print("%s:%s" % (plugin[namefield], plugin['version']))
 
 
