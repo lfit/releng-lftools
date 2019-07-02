@@ -1,0 +1,5 @@
+---
+issues:
+  - |
+    Pytest 5 has come out and requires Python >= 3.5 which we're not presently
+    testing on. Pytest is now pinned to 4.6.4 until we update.

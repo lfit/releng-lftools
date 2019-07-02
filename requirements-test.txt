@@ -1,5 +1,6 @@
 -r requirements.txt
-pytest~=4.3.0
+# pytest 5 requires Python >= 3.5
+pytest~=4.6.4
 pytest-click
 pytest-datafiles
 pytest-mock
