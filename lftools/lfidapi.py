@@ -87,9 +87,9 @@ def helper_invite(email, group):
 
 def helper_create_group(group):
     """Create group."""
-    check_response_code = helper_check_group_exists(group)
-    if check_response_code == 200:
-        print("Group {} already exists exiting...".format(group))
+    response_code = helper_check_group_exists(group)
+    if response_code == 200:
+        log.error("Group {} already exists exiting...".format(group))
     else:
         access_token, url = oauth_helper()
         url = '{}/'.format(url)
