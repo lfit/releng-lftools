@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    There was a subtle bug where a function call was being overwritten by a
+    local variable of the same name and then a call to the function was
+    being attempted.
