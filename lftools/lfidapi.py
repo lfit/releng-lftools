@@ -11,6 +11,7 @@
 """Use the LFIDAPI to add, remove and list members as well as create groups."""
 
 import json
+import logging
 
 from email_validator import validate_email
 import requests
@@ -18,6 +19,8 @@ from six.moves import urllib
 import yaml
 
 from lftools.oauth2_helper import oauth_helper
+
+log = logging.getLogger(__name__)
 
 PARSE = urllib.parse.urljoin
 
@@ -49,7 +52,7 @@ def helper_search_members(group):
     check_response_code(response)
     result = (response.json())
     members = result["members"]
-    print(json.dumps(members, indent=4, sort_keys=True))
+    log.debug(json.dumps(members, indent=4, sort_keys=True))
     return members
 
 
@@ -65,7 +68,7 @@ def helper_user(user, group, delete):
         response = requests.put(url, json=data, headers=headers)
     check_response_code(response)
     result = (response.json())
-    print(json.dumps(result, indent=4, sort_keys=True))
+    log.debug(json.dumps(result, indent=4, sort_keys=True))
 
 
 def helper_invite(email, group):
@@ -75,31 +78,31 @@ def helper_invite(email, group):
     url = PARSE(url, prejoin)
     headers = {'Authorization': 'Bearer ' + access_token}
     data = {"mail": email}
-    print('Validating email', email)
+    log.info('Validating email %s' % email)
     if validate_email(email):
         response = requests.post(url, json=data, headers=headers)
         check_response_code(response)
         result = (response.json())
-        print(json.dumps(result, indent=4, sort_keys=True))
+        log.debug(json.dumps(result, indent=4, sort_keys=True))
     else:
-        print("Email is not valid")
+        log.error("Email is not valid")
 
 
 def helper_create_group(group):
     """Create group."""
     response_code = helper_check_group_exists(group)
     if response_code == 200:
-        print("Group {} already exists exiting...".format(group))
+        log.error("Group %s already exists exiting..." % group)
     else:
         access_token, url = oauth_helper()
         url = '{}/'.format(url)
         headers = {'Authorization': 'Bearer ' + access_token}
         data = {"title": group, "type": "group"}
-        print(data)
+        log.debug(data)
         response = requests.post(url, json=data, headers=headers)
         check_response_code(response)
         result = (response.json())
-        print(json.dumps(result, indent=4, sort_keys=True))
+        log.debug(json.dumps(result, indent=4, sort_keys=True))
 
 
 def helper_match_ldap_to_info(info_file, group, noop):
@@ -130,14 +133,14 @@ def helper_match_ldap_to_info(info_file, group, noop):
     for user in all_users:
         removed_by_patch = [item for item in ldap_committers if item not in info_committers]
         if (user in removed_by_patch):
-            print(" {} found in group {} ".format(user, group))
+            log.info("%s found in group %s " % (user, group))
             if noop is False:
-                print(" removing user {} from group {}".format(user, group))
+                log.info(" removing user %s from group %s" % (user, group))
                 helper_user(user, group, "--delete")
 
         added_by_patch = [item for item in info_committers if item not in ldap_committers]
         if (user in added_by_patch):
-            print(" {} not found in group {} ".format(user, group))
+            log.info("%s not found in group %s" % (user, group))
             if noop is False:
-                print(" adding user {} to group {}".format(user, group))
+                log.info(" adding user %s to group %s" % (user, group))
                 helper_user(user, group, "")
