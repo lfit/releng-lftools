@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Change out lfidapi module print statements to use the logger facility. This
+    allows us to split appart information, debugging, and error log statements
+    so that they can be easily enabled and captured on the correct streams.
