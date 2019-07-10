@@ -33,9 +33,9 @@ sanity_checks () {
   fi
 
   #Exit if ldap group does not exist
-  #To run from your workstation you must be on the vpn
+  #lftools must be configured and lfservices_releng member must be added to group.
   echo "Checking that ldapgroup=$ldapgroup exists"
-  check_ldap="$(lftools ldap csv "$ldapgroup")"
+  check_ldap="$(lftools lfidapi search-members "$ldapgroup")"
   if [[ -z "$check_ldap" ]]; then
     echo "ldap group is empty or does not exist."
     exit 1
