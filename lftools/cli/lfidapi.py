@@ -10,6 +10,8 @@
 ##############################################################################
 """Use the LFIDAPI to add, remove and list members as well as create groups."""
 
+import logging
+
 import click
 
 from lftools.lfidapi import helper_create_group
@@ -17,6 +19,8 @@ from lftools.lfidapi import helper_invite
 from lftools.lfidapi import helper_match_ldap_to_info
 from lftools.lfidapi import helper_search_members
 from lftools.lfidapi import helper_user
+
+log = logging.getLogger(__name__)
 
 
 @click.group()
@@ -31,7 +35,9 @@ def lfidapi(ctx):
 @click.pass_context
 def search_members(ctx, group):
     """List members of a group."""
-    helper_search_members(group)
+    members = helper_search_members(group)
+    for member in members:
+        log.info('%s <%s>' % (member['username'], member['mail']))
 
 
 @click.command()
