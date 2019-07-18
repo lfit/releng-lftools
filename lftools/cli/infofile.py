@@ -18,6 +18,8 @@ from pygerrit2 import GerritRestAPI
 import ruamel.yaml
 import yaml
 
+from lftools.githubvotes import prvotes
+
 log = logging.getLogger(__name__)
 
 
@@ -150,32 +152,28 @@ def check_votes(ctx, info_file, gerrit_url, change_number, tsc):
                 log.error(exc)
 
         committer_info = info_data['committers']
-
         info_committers = []
+
         for count, item in enumerate(committer_info):
             committer = committer_info[count]['id']
             info_committers.append(committer)
 
         rest = GerritRestAPI(url=gerrit_url)
         changes = rest.get("changes/{}/reviewers".format(change_number))
-
         info_change = []
+
         for change in changes:
             line = (change['username'], change['approvals']['Code-Review'])
-
             if '+1' in line[1] or '+2' in line[1]:
                 info_change.append(change['username'])
 
         have_not_voted = [item for item in info_committers if item not in info_change]
         have_not_voted_length = (len(have_not_voted))
-
         have_voted = [item for item in info_committers if item in info_change]
         have_voted_length = (len(have_voted))
-
         log.info("Number of Committers:")
         log.info(len(info_committers))
         committer_lenght = (len(info_committers))
-
         log.info("Committers that have voted:")
         log.info(have_voted)
         log.info(have_voted_length)
@@ -189,8 +187,7 @@ def check_votes(ctx, info_file, gerrit_url, change_number, tsc):
 
         if (have_voted_length != 0):
             majority = (committer_lenght / have_voted_length)
-
-            if (majority == 1):
+            if (majority >= 1):
                 log.info("Majority committer vote reached")
                 if (tsc):
                     log.info("Need majority of tsc")
@@ -203,11 +200,81 @@ def check_votes(ctx, info_file, gerrit_url, change_number, tsc):
             else:
                 log.info("majority not yet reached")
                 sys.exit(1)
-
     majority_of_committers = 0
     main(ctx, info_file, gerrit_url, change_number, tsc, majority_of_committers)
+
+
+@click.command(name='check-votes-github')
+@click.argument('info_file')
+@click.argument('organization')
+@click.argument('repo')
+@click.argument('pr_number', type=int)
+@click.option('--tsc', type=str, required=False,
+              help='path to TSC INFO file')
+@click.pass_context
+def check_votes_github(ctx, info_file, organization, repo, pr_number, tsc):
+    """Check votes on an INFO.yaml change.
+
+    Check for Majority of votes on a github patchset
+    which changes an INFO.yaml file.
+    """
+    def main(ctx, info_file, organization, repo, pr_number, tsc, majority_of_committers):
+        """Function so we can iterate into TSC members after commiter vote has happend."""
+        with open(info_file) as file:
+            try:
+                info_data = yaml.safe_load(file)
+            except yaml.YAMLError as exc:
+                log.error(exc)
+        committer_info = info_data['committers']
+        info_committers = []
+        for count, item in enumerate(committer_info):
+            committer = committer_info[count]['github_id']
+            info_committers.append(committer)
+
+        githubvotes = prvotes(organization, repo, pr_number)
+
+        info_change = []
+        for vote in githubvotes:
+            info_change.append(vote)
+
+        have_not_voted = [item for item in info_committers if item not in info_change]
+        have_not_voted_length = (len(have_not_voted))
+        have_voted = [item for item in info_committers if item in info_change]
+        have_voted_length = (len(have_voted))
+        log.info("Number of Committers:")
+        log.info(len(info_committers))
+        committer_lenght = (len(info_committers))
+        log.info("Committers that have voted:")
+        log.info(have_voted)
+        log.info(have_voted_length)
+        log.info("Committers that have not voted:")
+        log.info(have_not_voted)
+        log.info(have_not_voted_length)
+
+        if (have_voted_length == 0):
+            log.info("No one has voted:")
+            sys.exit(1)
+
+        if (have_voted_length != 0):
+            majority = (committer_lenght / have_voted_length)
+            if (majority >= 1):
+                log.info("Majority committer vote reached")
+                if (tsc):
+                    log.info("Need majority of tsc")
+                    info_file = tsc
+                    majority_of_committers += 1
+                    if majority_of_committers == 2:
+                        log.info("TSC majority reached auto merging commit")
+                    else:
+                        main(ctx, info_file, organization, repo, pr_number, tsc, majority_of_committers)
+            else:
+                log.info("majority not yet reached")
+                sys.exit(1)
+    majority_of_committers = 0
+    main(ctx, info_file, organization, repo, pr_number, tsc, majority_of_committers)
 
 
 infofile.add_command(get_committers)
 infofile.add_command(sync_committers)
 infofile.add_command(check_votes)
+infofile.add_command(check_votes_github)
