@@ -1,0 +1,12 @@
+---
+features:
+  - |
+    --team now lists members of a specific team
+
+fixes:
+  - |
+    Fixes invite to team
+
+adds:
+  - |
+    prvotes counts votes on a github pull request
