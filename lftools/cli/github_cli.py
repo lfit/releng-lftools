@@ -18,6 +18,7 @@ from github import Github
 from github import GithubException
 
 from lftools import config
+from lftools.githubvotes import prvotes
 
 
 @click.group()
@@ -25,6 +26,17 @@ from lftools import config
 def github_cli(ctx):
     """GITHUB TOOLS."""
     pass
+
+
+@click.command(name='votes')
+@click.argument('organization')
+@click.argument('repo')
+@click.argument('pr', type=int)
+@click.pass_context
+def votes(ctx, organization, repo, pr):
+    """Helper for votes."""
+    approval_list = prvotes(organization, repo, pr)
+    print("Approvals:", approval_list)
 
 
 @click.command(name='list')
@@ -298,15 +310,16 @@ def user(ctx, organization, user, team, delete, admin):
     except GithubException as ghe:
         print(ghe)
 
+    # set team to proper object
     my_teams = [team]
-    teams = [team for team in teams() if team.name in my_teams]
+    this_team = [team for team in teams() if team.name in my_teams]
+    for t in this_team:
+        team_id = (t.id)
+    team = org.get_team(team_id)
 
     if delete:
         if is_member:
-            for t in teams:
-                team_id = (t.id)
             try:
-                team = org.get_team(team_id)
                 team.remove_membership(user_object)
             except GithubException as ghe:
                 print(ghe)
@@ -338,6 +351,7 @@ def user(ctx, organization, user, team, delete, admin):
                 print(ghe)
 
 
+github_cli.add_command(votes)
 github_cli.add_command(list)
 github_cli.add_command(createteam)
 github_cli.add_command(createrepo)
