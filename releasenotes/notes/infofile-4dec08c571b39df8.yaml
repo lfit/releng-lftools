@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    check_votes now takes click.option('--github_repo')
+    Used in automation to determine is 50% of committers
+    have voted on an INFO.yaml change
