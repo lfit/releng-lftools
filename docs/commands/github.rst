@@ -23,12 +23,33 @@ list
 
 .. program-output:: lftools github list --help
 
+
+update-repo
+-----------
+
+.. program-output:: lftools github update-repo --help
+
+
+submit-pr
+---------
+
+.. program-output:: lftools github submit-pr --help
+
+
 user
 ----
 
 .. program-output:: lftools github user --help
 
-API requires an [github] section in ~/.config/lftools/lftools.ini:
+
+votes
+-----
+
+.. program-output:: lftools github votes --help
+
+
+
+API requires a [github] section in ~/.config/lftools/lftools.ini:
 
 .. code-block:: bash
 

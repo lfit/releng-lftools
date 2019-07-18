@@ -1,0 +1,7 @@
+---
+adds:
+    - |
+           --githuborg
+           lfidapi info match-ldap-to-info now works for github groups.
+           expects group to be called $reponame-committers
+           id field for github users is github_id
