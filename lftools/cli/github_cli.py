@@ -27,6 +27,32 @@ def github_cli(ctx):
     pass
 
 
+@click.command(name='votes')
+@click.argument('organization')
+@click.argument('repo')
+@click.argument('pr', type=int)
+@click.pass_context
+def votes(ctx, organization, repo, pr):
+    """Helper for votes."""
+    token = config.get_setting("github", "token")
+    g = Github(token)
+    orgName = organization
+    try:
+        org = g.get_organization(orgName)
+    except GithubException as ghe:
+        print(ghe)
+
+    repo = org.get_repo(repo)
+
+    pr1 = repo.get_pull(pr).mergeable
+    print("MERGABLE:", pr1)
+
+    list1 = repo.get_pull(pr).get_reviews()
+    for list in list1:
+        if list.state == ("APPROVED"):
+            print(list.user.login)
+
+
 @click.command(name='list')
 @click.argument('organization')
 @click.option('--audit', is_flag=True, required=False,
@@ -338,6 +364,7 @@ def user(ctx, organization, user, team, delete, admin):
                 print(ghe)
 
 
+github_cli.add_command(votes)
 github_cli.add_command(list)
 github_cli.add_command(createteam)
 github_cli.add_command(createrepo)
