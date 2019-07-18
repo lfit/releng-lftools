@@ -18,6 +18,8 @@ import requests
 from six.moves import urllib
 import yaml
 
+from lftools.githubhelper import helper_list
+from lftools.githubhelper import helper_user_github
 from lftools.oauth2_helper import oauth_helper
 
 log = logging.getLogger(__name__)
@@ -110,42 +112,72 @@ def helper_create_group(group):
         log.debug(json.dumps(result, indent=4, sort_keys=True))
 
 
-def helper_match_ldap_to_info(info_file, group, noop):
-    """Helper only to be used in automation."""
+def helper_match_ldap_to_info(info_file, group, githuborg, noop):
+    """Helper matches ldap or github group to users in an info file.
+
+    Used in automation.
+    """
     with open(info_file) as file:
         try:
             info_data = yaml.safe_load(file)
         except yaml.YAMLError as exc:
             print(exc)
+    id = 'id'
+    if githuborg:
+        id = 'github_id'
+        ldap_data = helper_list(ctx=False, organization=githuborg, repos=False, audit=False,
+                                full=False, teams=False, repofeatures=False, team=group)
+    else:
+        ldap_data = helper_search_members(group)
 
-    ldap_data = helper_search_members(group)
     committer_info = info_data['committers']
 
     info_committers = []
     for count, item in enumerate(committer_info):
-        committer = committer_info[count]['id']
+        committer = committer_info[count][id]
         info_committers.append(committer)
 
     ldap_committers = []
-    for count, item in enumerate(ldap_data):
-        committer = ldap_data[count]['username']
-        ldap_committers.append(committer)
+    if githuborg:
+        for x in ldap_data:
+            committer = x
+            ldap_committers.append(committer)
+
+    else:
+        for count, item in enumerate(ldap_data):
+            committer = ldap_data[count]['username']
+            ldap_committers.append(committer)
 
     all_users = ldap_committers + info_committers
-    all_users.remove("lfservices_releng")
+
+    if not githuborg:
+        all_users.remove("lfservices_releng")
+
+    log.info("All users in org group")
     all_users = sorted(set(all_users))
+    for x in all_users:
+        log.info(x)
 
     for user in all_users:
         removed_by_patch = [item for item in ldap_committers if item not in info_committers]
         if (user in removed_by_patch):
             log.info("%s found in group %s " % (user, group))
             if noop is False:
-                log.info(" removing user %s from group %s" % (user, group))
-                helper_user(user, group, "--delete")
+                log.info("Removing user %s from group %s" % (user, group))
+                if githuborg:
+                    helper_user_github(ctx=False, organization=githuborg, user=user,
+                                       team=group, delete=True, admin=False)
+                else:
+                    helper_user(user, group, "--delete")
 
         added_by_patch = [item for item in info_committers if item not in ldap_committers]
         if (user in added_by_patch):
             log.info("%s not found in group %s" % (user, group))
             if noop is False:
-                log.info(" adding user %s to group %s" % (user, group))
-                helper_user(user, group, "")
+                log.info("Adding user %s to group %s" % (user, group))
+                if githuborg:
+                    helper_user_github(ctx=False, organization=githuborg, user=user,
+                                       team=group, delete=False, admin=False)
+
+                else:
+                    helper_user(user, group, "")
