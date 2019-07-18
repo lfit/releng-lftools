@@ -18,6 +18,9 @@ from github import Github
 from github import GithubException
 
 from lftools import config
+from lftools.githubhelper import prvotes
+from lftools.githubhelper import helper_list
+#from lftools.githubhelper import list
 
 
 @click.group()
@@ -25,6 +28,17 @@ from lftools import config
 def github_cli(ctx):
     """GITHUB TOOLS."""
     pass
+
+
+@click.command(name='votes')
+@click.argument('organization')
+@click.argument('repo')
+@click.argument('pr', type=int)
+@click.pass_context
+def votes(ctx, organization, repo, pr):
+    """Helper for votes."""
+    approval_list = prvotes(organization, repo, pr)
+    print("Approvals:", approval_list)
 
 
 @click.command(name='list')
@@ -37,91 +51,14 @@ def github_cli(ctx):
               help='All members and their respective teams')
 @click.option('--teams', is_flag=True, required=False,
               help='List avaliable teams')
+@click.option('--team', type=str, required=False,
+              help='List members of a team')
 @click.option('--repofeatures', is_flag=True, required=False,
               help='List enabled features for repos in an org')
 @click.pass_context
-def list(ctx, organization, repos, audit, full, teams, repofeatures):
-    """List an Organization's GitHub repos."""
-    token = config.get_setting("github", "token")
-    g = Github(token)
-    orgName = organization
-
-    try:
-        org = g.get_organization(orgName)
-    except GithubException as ghe:
-        print(ghe)
-
-    if repos:
-        print("All repos for organization: ", orgName)
-        repos = org.get_repos()
-        for repo in repos:
-            print(repo.name)
-
-    if audit:
-        print("{} members without 2fa:".format(orgName))
-        try:
-            members = org.get_members(filter_="2fa_disabled")
-        except GithubException as ghe:
-            print(ghe)
-        for member in members:
-            print(member.login)
-        print("{} outside collaborators without 2fa:".format(orgName))
-        try:
-            collaborators = org.get_outside_collaborators(filter_="2fa_disabled")
-        except GithubException as ghe:
-            print(ghe)
-        for collaborator in collaborators:
-            print(collaborator.login)
-
-    if repofeatures:
-        repos = org.get_repos()
-        for repo in repos:
-            print("{} wiki:{} issues:{}".format(repo.name, repo.has_wiki, repo.has_issues))
-            issues = repo.get_issues
-            for issue in issues():
-                print("{}".format(issue))
-
-    if full:
-        print("---")
-        print("#  All owners for {}:".format(orgName))
-        print("{}-owners:".format(orgName))
-
-        try:
-            members = org.get_members(role="admin")
-        except GithubException as ghe:
-            print(ghe)
-        for member in members:
-            print("  - '{}'".format(member.login))
-        print("#  All members for {}".format(orgName))
-        print("{}-members:".format(orgName))
-
-        try:
-            members = org.get_members()
-        except GithubException as ghe:
-            print(ghe)
-        for member in members:
-            print("  - '{}'".format(member.login))
-        print("#  All members and all teams for {}".format(orgName))
-
-        try:
-            teams = org.get_teams
-        except GithubException as ghe:
-            print(ghe)
-        for team in teams():
-            print("{}:".format(team.name))
-            for user in team.get_members():
-                print("  - '{}'".format(user.login))
-            print("")
-        teams = None
-
-    if teams:
-        try:
-            teams = org.get_teams
-        except GithubException as ghe:
-            print(ghe)
-        for team in teams():
-            print("{}".format(team.name))
-
+def list(ctx, organization, repos, audit, full, teams, team, repofeatures):
+    """Helper for Listing github org repos"""
+    helper_list(organization, repos, audit, full, teams, team, repofeatures)
 
 @click.command(name='create-repo')
 @click.argument('organization')
@@ -298,15 +235,16 @@ def user(ctx, organization, user, team, delete, admin):
     except GithubException as ghe:
         print(ghe)
 
+    # set team to proper object
     my_teams = [team]
-    teams = [team for team in teams() if team.name in my_teams]
+    this_team = [team for team in teams() if team.name in my_teams]
+    for t in this_team:
+        team_id = (t.id)
+    team = org.get_team(team_id)
 
     if delete:
         if is_member:
-            for t in teams:
-                team_id = (t.id)
             try:
-                team = org.get_team(team_id)
                 team.remove_membership(user_object)
             except GithubException as ghe:
                 print(ghe)
@@ -338,6 +276,7 @@ def user(ctx, organization, user, team, delete, admin):
                 print(ghe)
 
 
+github_cli.add_command(votes)
 github_cli.add_command(list)
 github_cli.add_command(createteam)
 github_cli.add_command(createrepo)
