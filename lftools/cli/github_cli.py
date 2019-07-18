@@ -18,6 +18,7 @@ from github import Github
 from github import GithubException
 
 from lftools import config
+from lftools.githubhelper import prvotes
 
 
 @click.group()
@@ -25,6 +26,43 @@ from lftools import config
 def github_cli(ctx):
     """GITHUB TOOLS."""
     pass
+
+
+@click.command(name='submit-pr')
+@click.argument('organization')
+@click.argument('repo')
+@click.argument('pr', type=int)
+@click.pass_context
+def submit_pr(ctx, organization, repo, pr):
+    """Submit a pr if mergeable."""
+    token = config.get_setting("github", "token")
+    g = Github(token)
+    orgName = organization
+    try:
+        org = g.get_organization(orgName)
+    except GithubException as ghe:
+        print(ghe)
+
+    repo = org.get_repo(repo)
+    pr_mergable = repo.get_pull(pr).mergeable
+
+    if pr_mergable:
+        print(pr_mergable)
+        repo.get_pull(pr).merge(commit_message="Vote Completed, merging INFO file")
+    else:
+        print("PR NOT MERGABLE {}".format(pr_mergable))
+        sys.exit(1)
+
+
+@click.command(name='votes')
+@click.argument('organization')
+@click.argument('repo')
+@click.argument('pr', type=int)
+@click.pass_context
+def votes(ctx, organization, repo, pr):
+    """Helper for votes."""
+    approval_list = prvotes(organization, repo, pr)
+    print("Approvals:", approval_list)
 
 
 @click.command(name='list')
@@ -37,11 +75,13 @@ def github_cli(ctx):
               help='All members and their respective teams')
 @click.option('--teams', is_flag=True, required=False,
               help='List avaliable teams')
+@click.option('--team', type=str, required=False,
+              help='List members of a team')
 @click.option('--repofeatures', is_flag=True, required=False,
               help='List enabled features for repos in an org')
 @click.pass_context
-def list(ctx, organization, repos, audit, full, teams, repofeatures):
-    """List an Organization's GitHub repos."""
+def list(ctx, organization, repos, audit, full, teams, team, repofeatures):
+    """List options for github org repos."""
     token = config.get_setting("github", "token")
     g = Github(token)
     orgName = organization
@@ -122,6 +162,17 @@ def list(ctx, organization, repos, audit, full, teams, repofeatures):
         for team in teams():
             print("{}".format(team.name))
 
+    if team:
+        try:
+            teams = org.get_teams
+        except GithubException as ghe:
+            print(ghe)
+        for t in teams():
+            if t.name == team:
+                print("{}".format(t.name))
+                for user in t.get_members():
+                    print("  - '{}'".format(user.login))
+
 
 @click.command(name='create-repo')
 @click.argument('organization')
@@ -171,7 +222,7 @@ def createrepo(ctx, organization, repository, description, has_issues, has_proje
         print(ghe)
 
 
-@click.command(name='modify-repo')
+@click.command(name='update-repo')
 @click.argument('organization')
 @click.argument('repository')
 @click.option('--has_issues', is_flag=True, required=False,
@@ -181,8 +232,8 @@ def createrepo(ctx, organization, repository, description, has_issues, has_proje
 @click.option('--has_wiki', is_flag=True, required=False,
               help='Repo should have wiki')
 @click.pass_context
-def modifyrepo(ctx, organization, repository, has_issues, has_projects, has_wiki):
-    """Modify a Github repo within an Organization.
+def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki):
+    """Update a Github repo within an Organization.
 
     By default has_issues has_wiki and has_projects is set to false.
     See --help to use this command to enable these options.
@@ -298,20 +349,26 @@ def user(ctx, organization, user, team, delete, admin):
     except GithubException as ghe:
         print(ghe)
 
+    # set team to proper object
     my_teams = [team]
-    teams = [team for team in teams() if team.name in my_teams]
+    this_team = [team for team in teams() if team.name in my_teams]
+    for t in this_team:
+        team_id = (t.id)
+    team = org.get_team(team_id)
+    teams = []
+    teams.append(team)
 
     if delete:
         if is_member:
-            for t in teams:
-                team_id = (t.id)
             try:
-                team = org.get_team(team_id)
                 team.remove_membership(user_object)
             except GithubException as ghe:
                 print(ghe)
+            print("Removing user {} from {}".format(user_object, team))
         else:
             print("{} is not a member of org cannot delete".format(user))
+            # TODO add revoke invite
+            print("Code does not handle revoking invitations.")
 
     if user and not delete:
         if admin and is_member:
@@ -324,6 +381,7 @@ def user(ctx, organization, user, team, delete, admin):
                 org.invite_user(user=user_object, role="admin", teams=teams)
             except GithubException as ghe:
                 print(ghe)
+            print("Sending Admin invite to {} for {}".format(user_object, team))
 
         if not admin and is_member:
             try:
@@ -336,10 +394,13 @@ def user(ctx, organization, user, team, delete, admin):
                 org.invite_user(user=user_object, teams=teams)
             except GithubException as ghe:
                 print(ghe)
+            print("Sending invite to {} for {}".format(user_object, team))
 
 
+github_cli.add_command(submit_pr)
+github_cli.add_command(votes)
 github_cli.add_command(list)
 github_cli.add_command(createteam)
 github_cli.add_command(createrepo)
-github_cli.add_command(modifyrepo)
+github_cli.add_command(updaterepo)
 github_cli.add_command(user)
