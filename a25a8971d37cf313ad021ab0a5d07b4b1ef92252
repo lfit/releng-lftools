@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc10f846_16c81058",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-07-29T19:56:00Z",
+      "side": 1,
+      "message": "set defaults to None or False for all optional flags.\nand also move all this to the helper.\n(or used named variables)",
+      "range": {
+        "startLine": 83,
+        "startChar": 9,
+        "endLine": 83,
+        "endChar": 73
+      },
+      "revId": "a25a8971d37cf313ad021ab0a5d07b4b1ef92252",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d70e9377_6f6c68f7",
+        "filename": "lftools/lfidapi.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-07-29T19:56:00Z",
+      "side": 1,
+      "message": "whoops.",
+      "range": {
+        "startLine": 129,
+        "startChar": 51,
+        "endLine": 129,
+        "endChar": 69
+      },
+      "revId": "a25a8971d37cf313ad021ab0a5d07b4b1ef92252",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
