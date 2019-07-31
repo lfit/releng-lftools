@@ -151,6 +151,7 @@ defaultbranch=master\n" "$project" "$repository" > .gitreview
       echo "git push of .gitreview succeeded"
     else
       echo "git push of .gitreview failed"
+      echo "Admins do not have push on refs/heads"
       exit 1
     fi
   else
@@ -172,7 +173,7 @@ enable_github_replication () {
   cat project.config
 
   git add project.config
-  git commit -sv -m "Pushing $repository project.config to refs/meta/config"
+  git commit -sv -m "Pushing $repository project.config"
 
   if git push origin HEAD:refs/meta/config &> /dev/null; then
     echo "git push for $repository refs meta config succeeded"
@@ -182,6 +183,8 @@ enable_github_replication () {
   fi
 
   echo "Starting replication"
+  echo "If this hangs, you need to give the replication group in"
+  echo "github write access to the repository"
   ssh -p 29418 "$user"@"$project" "replication start --wait $repository"
 
 }
