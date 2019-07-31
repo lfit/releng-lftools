@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77df3816_2bcbcc6c",
+        "filename": "lftools/github_helper.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-07-31T22:11:24Z",
+      "side": 1,
+      "message": "import logger and set the logger (plenty of examples in the code base)\n\nChange all the print statements to the appropriate logger (info, debug, error)",
+      "revId": "e5581cf596534139e13506e4107e1d95223ba9bd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
