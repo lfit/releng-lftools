@@ -16,6 +16,24 @@
       "revId": "e5581cf596534139e13506e4107e1d95223ba9bd",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94588521_9d1c4093",
+        "filename": "lftools/github_helper.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-08-01T17:25:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77df3816_2bcbcc6c",
+      "revId": "e5581cf596534139e13506e4107e1d95223ba9bd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
