@@ -46,6 +46,8 @@ def get_credentials(settings_file, url=None):
             password = config.get_setting("nexus", "password")
         except (configparser.NoOptionError,
                 configparser.NoSectionError):
+            log.info("Failed to get nexus credentials; using empty username "
+                     "and password.")
             return {"nexus": url, "user": "", "password": ""}
         return {"nexus": url, "user": user, "password": password}
     log.error('Please define a settings.yaml file, or include a url if using '
@@ -314,7 +316,7 @@ def release_staging_repos(repos, nexus_url=""):
         log.debug("Sending data: {}".format(data))
         request_url = "{}/staging/bulk/promote".format(_nexus.baseurl)
         log.debug("Request URL: {}".format(request_url))
-        response = requests.post(request_url, json=data)
+        response = requests.post(request_url, json=data, auth=_nexus.auth)
 
         if response.status_code != 201:
             raise requests.HTTPError("Release failed with the following error:"
@@ -325,7 +327,7 @@ def release_staging_repos(repos, nexus_url=""):
 
         request_url = "{}/staging/bulk/drop".format(_nexus.baseurl)
         log.debug("Request URL: {}".format(request_url))
-        response = requests.post(request_url, json=data)
+        response = requests.post(request_url, json=data, auth=_nexus.auth)
 
         if response.status_code != 201:
             raise requests.HTTPError("Drop failed with the following error:"
