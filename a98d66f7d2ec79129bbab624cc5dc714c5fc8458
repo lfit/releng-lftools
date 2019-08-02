@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "106925b1_75897175",
+        "filename": "releasenotes/notes/lfidapi-d597e5ef08fda9f7.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2019-08-02T21:25:42Z",
+      "side": 1,
+      "message": "Is this an intended indentation?",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "a98d66f7d2ec79129bbab624cc5dc714c5fc8458",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
