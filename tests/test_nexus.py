@@ -64,8 +64,6 @@ def test_release_staging_repos(responses):
     # The responses provide implicit assertions.
     responses.add(responses.POST, "{}/service/local/staging/bulk/promote".format(good_url),
                   json=None, status=201)
-    responses.add(responses.POST, "{}/service/local/staging/bulk/drop".format(good_url),
-                  json=None, status=201)
 
     # Test successful single release.
     cmd.release_staging_repos(("release-1",), good_url)
@@ -93,8 +91,5 @@ def test_release_staging_repos(responses):
     responses.add(responses.POST,
                   "{}/service/local/staging/bulk/promote".format(bad_url2),
                   status=201)
-    responses.add(responses.POST,
-                  "{}/service/local/staging/bulk/drop".format(bad_url2),
-                  status=403)
     with pytest.raises(requests.HTTPError):
         cmd.release_staging_repos(("release-1",), bad_url2)
