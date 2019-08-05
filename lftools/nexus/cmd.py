@@ -324,14 +324,3 @@ def release_staging_repos(repos, nexus_url=""):
                                                        response.text))
         else:
             log.debug("Successfully released {}".format(str(repo)))
-
-        request_url = "{}/staging/bulk/drop".format(_nexus.baseurl)
-        log.debug("Request URL: {}".format(request_url))
-        response = requests.post(request_url, json=data, auth=_nexus.auth)
-
-        if response.status_code != 201:
-            raise requests.HTTPError("Drop failed with the following error:"
-                                     "\n{}: {}".format(response.status_code,
-                                                       response.text))
-        else:
-            log.debug("Successfully dropped {}".format(str(repo)))

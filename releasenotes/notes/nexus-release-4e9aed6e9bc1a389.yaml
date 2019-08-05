@@ -1,0 +1,11 @@
+---
+fixes:
+   |
+   Remove drop of staging repos on release
+   The api returns that the relese is completed.
+   in the background java threads are still running.
+   Then we call drop and nexus has threads promoting and dropping
+   at the same time.
+   In this way we lose data.
+   Something else needs to drop, the api does not correctly
+   handle this.
