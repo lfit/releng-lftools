@@ -42,8 +42,9 @@ def get_credentials(settings_file, url=None):
             return settings
     elif url:
         try:
-            user = config.get_setting("nexus", "username")
-            password = config.get_setting("nexus", "password")
+            auth_url = url.replace("https://", "")
+            user = config.get_setting(auth_url, "username")
+            password = config.get_setting(auth_url, "password")
         except (configparser.NoOptionError,
                 configparser.NoSectionError):
             log.info("Failed to get nexus credentials; using empty username "
