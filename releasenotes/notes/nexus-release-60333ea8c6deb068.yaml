@@ -1,0 +1,29 @@
+---
+features:
+  - |
+    Support multiple nexus sections in lftools.ini
+
+    In the format:
+
+    .. code-block:: none
+
+       [nexus.example.org]
+       username=
+       password=
+
+       [nexus.example1.org]
+       username=
+       password=
+
+    [nexus] section is taken from -s "server" passed to release job.
+    https part of passed url is stripped before match.
+upgrade:
+  - |
+    current [nexus] section of lftools.ini must be changed to
+    [nexus.example.com]
+
+    where nexus.example.com matches the "server" string passed to
+    lftools nexus release -s https://nexus.example.com
+    The https part of passed url is stripped before match.
+    example provided would require auth section in lftools.ini of
+    [nexus.example.org]
