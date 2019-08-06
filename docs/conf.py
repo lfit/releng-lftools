@@ -32,4 +32,5 @@ release = str(VersionInfo('lftools'))
 # Linkcheck Options
 linkcheck_ignore= [
     r'https://testing\.googleblog\.com/.*',
+    r'https://nexus\.example\.com',
 ]
