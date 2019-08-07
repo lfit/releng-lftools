@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3e8e805_89537dbd",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-08-07T03:51:50Z",
+      "side": 1,
+      "message": "Where did the indentations go?",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 1
+      },
+      "revId": "b8a618637fac7dbdb0dc2607aaee10d65fbff8e8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
