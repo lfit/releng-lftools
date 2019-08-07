@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fef7cf82_ccd96446",
+        "filename": "docs/commands/nexus.rst",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-08-07T03:22:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ae32f1b_5dacbcb7",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 81
+      },
+      "revId": "5b0f0ec39961549d5290782f41f6fd70a19defcf",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d66297fe_453bc6e9",
         "filename": "releasenotes/notes/nexus-release-60333ea8c6deb068.yaml",
         "patchSetId": 5
