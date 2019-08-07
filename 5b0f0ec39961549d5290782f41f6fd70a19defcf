@@ -45,6 +45,30 @@
       "revId": "5b0f0ec39961549d5290782f41f6fd70a19defcf",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3635577a_264e4d73",
+        "filename": "releasenotes/notes/nexus-release-60333ea8c6deb068.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-08-07T03:21:11Z",
+      "side": 1,
+      "message": "you cant  do that in releasenotes.yaml",
+      "parentUuid": "d66297fe_453bc6e9",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 13
+      },
+      "revId": "5b0f0ec39961549d5290782f41f6fd70a19defcf",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
