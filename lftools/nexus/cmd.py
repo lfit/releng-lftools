@@ -12,8 +12,10 @@
 
 import csv
 import logging
+import re
 import sys
 
+import bs4
 import requests
 from six.moves import configparser
 import yaml
@@ -302,7 +304,7 @@ def delete_images(settings_file, url, images):
         _nexus.delete_image(image)
 
 
-def release_staging_repos(repos, nexus_url=""):
+def release_staging_repos(repos, verify, nexus_url=""):
     """Release one or more staging repos.
 
     :arg tuple repos: A tuple containing one or more repo name strings.
@@ -313,15 +315,46 @@ def release_staging_repos(repos, nexus_url=""):
                    credentials['password'])
 
     for repo in repos:
-        data = {"data": {"stagedRepositoryIds": [repo]}}
-        log.debug("Sending data: {}".format(data))
-        request_url = "{}/staging/bulk/promote".format(_nexus.baseurl)
-        log.debug("Request URL: {}".format(request_url))
-        response = requests.post(request_url, json=data, auth=_nexus.auth)
+        # Verfiy repo before releasing
+        verify_request_url = "{}/staging/repository/{}/activity".format(_nexus.baseurl, repo)
+        log.info("Request URL: {}".format(verify_request_url))
+        response = requests.get(verify_request_url, auth=_nexus.auth)
+        soup = bs4.BeautifulSoup(response.text, 'xml')
+        values = soup.find_all("value")
+        result = []
 
-        if response.status_code != 201:
-            raise requests.HTTPError("Release failed with the following error:"
+        for message in values:
+            if re.search('StagingRulesFailedException', message.text):
+                result.append(message)
+            if re.search('Invalid', message.text):
+                result.append(message)
+
+        if len(result) != 0:
+            log.info(result)
+            sys.exit(1)
+
+        if response.status_code != 200:
+
+            raise requests.HTTPError("Verification of repo failed with the following error:"
                                      "\n{}: {}".format(response.status_code,
                                                        response.text))
+            sys.exit(1)
+
         else:
-            log.debug("Successfully released {}".format(str(repo)))
+            log.info("Successfully verfied {}".format(str(repo)))
+
+    if not verify:
+        print("running release")
+        for repo in repos:
+            data = {"data": {"stagedRepositoryIds": [repo]}}
+            log.debug("Sending data: {}".format(data))
+            request_url = "{}/staging/bulk/promote".format(_nexus.baseurl)
+            log.debug("Request URL: {}".format(request_url))
+            response = requests.post(request_url, json=data, auth=_nexus.auth)
+
+            if response.status_code != 201:
+                raise requests.HTTPError("Release failed with the following error:"
+                                         "\n{}: {}".format(response.status_code,
+                                                           response.text))
+            else:
+                log.debug("Successfully released {}".format(str(repo)))

@@ -122,16 +122,17 @@ def delete_images(ctx, settings, server, repo, pattern, yes):
 @nexus.command()
 @click.pass_context
 @click.argument('REPOS', type=str, nargs=-1)
+@click.option('-v', '--verify', is_flag=True, required=False)
 @click.option(
     '-s', '--server', type=str,
     help=('Nexus server URL. Can also be set as {} in the environment. '
           'This will override any URL set in settings.yaml.').format(
               NEXUS_URL_ENV))
-def release(ctx, repos, server):
+def release(ctx, repos, verify, server):
     """Release one or more staging repositories."""
     if not server and NEXUS_URL_ENV in environ:
         server = environ[NEXUS_URL_ENV]
-    nexuscmd.release_staging_repos(repos, server)
+    nexuscmd.release_staging_repos(repos, verify, server)
 
 
 @docker.command(name="releasedockerhub")
