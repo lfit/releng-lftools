@@ -12,8 +12,10 @@
 
 import csv
 import logging
+import re
 import sys
 
+import bs4
 import requests
 from six.moves import configparser
 import yaml
@@ -302,26 +304,85 @@ def delete_images(settings_file, url, images):
         _nexus.delete_image(image)
 
 
-def release_staging_repos(repos, nexus_url=""):
+def release_staging_repos(repos, verify, nexus_url=""):
     """Release one or more staging repos.
 
     :arg tuple repos: A tuple containing one or more repo name strings.
     :arg str nexus_url: Optional URL of target Nexus server.
+    :arg flag --verify-only: Only verify repo and exit.
     """
     credentials = get_credentials(None, nexus_url)
     _nexus = Nexus(credentials['nexus'], credentials['user'],
                    credentials['password'])
 
     for repo in repos:
-        data = {"data": {"stagedRepositoryIds": [repo]}}
-        log.debug("Sending data: {}".format(data))
-        request_url = "{}/staging/bulk/promote".format(_nexus.baseurl)
-        log.debug("Request URL: {}".format(request_url))
-        response = requests.post(request_url, json=data, auth=_nexus.auth)
+        # Verfiy repo before releasing
+        verify_request_url = "{}/staging/repository/{}/activity".format(_nexus.baseurl, repo)
+        log.info("Request URL: {}".format(verify_request_url))
+        response = requests.get(verify_request_url, auth=_nexus.auth)
 
-        if response.status_code != 201:
-            raise requests.HTTPError("Release failed with the following error:"
-                                     "\n{}: {}".format(response.status_code,
-                                                       response.text))
+        if response.status_code != 200:
+            raise requests.HTTPError("Verification of repo failed with the following error:"
+                                     "\n{}: {}".format(response.status_code, response.text))
+            sys.exit(1)
+
+        soup = bs4.BeautifulSoup(response.text, 'xml')
+        values = soup.find_all("value")
+        names = soup.find_all("name")
+        failures = []
+        successes = []
+        isrepoclosed = []
+
+        # Check for failures
+        for message in values:
+            if re.search('StagingRulesFailedException', message.text):
+                failures.append(message)
+            if re.search('Invalid', message.text):
+                failures.append(message)
+
+        # Check if already released
+        for name in names:
+            if re.search('repositoryReleased', name.text):
+                successes.append(name)
+
+        # Ensure Repository is in Closed state
+        for name in names:
+            if re.search('repositoryClosed', name.text):
+                isrepoclosed.append(name)
+
+        if len(failures) != 0:
+            log.info(failures)
+            log.info("One or more rules failed")
+            sys.exit(1)
         else:
-            log.debug("Successfully released {}".format(str(repo)))
+            log.info("PASS: No rules have failed")
+
+        if len(successes) != 0:
+            log.info(successes)
+            log.info("Nothing to do: Repository already released")
+            sys.exit(0)
+
+        if len(isrepoclosed) != 1:
+            log.info(isrepoclosed)
+            log.info("Repository is not in closed state")
+            sys.exit(1)
+        else:
+            log.info("PASS: Repository is in closed state")
+
+        log.info("Successfully verfied {}".format(str(repo)))
+
+    if not verify:
+        print("running release")
+        for repo in repos:
+            data = {"data": {"stagedRepositoryIds": [repo]}}
+            log.debug("Sending data: {}".format(data))
+            request_url = "{}/staging/bulk/promote".format(_nexus.baseurl)
+            log.debug("Request URL: {}".format(request_url))
+            response = requests.post(request_url, json=data, auth=_nexus.auth)
+
+            if response.status_code != 201:
+                raise requests.HTTPError("Release failed with the following error:"
+                                         "\n{}: {}".format(response.status_code,
+                                                           response.text))
+            else:
+                log.debug("Successfully released {}".format(str(repo)))

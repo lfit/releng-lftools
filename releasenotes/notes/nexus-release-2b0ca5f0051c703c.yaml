@@ -1,0 +1,10 @@
+---
+features:
+  - |
+    nexus release now checks "{}/staging/repository/{}/activity"
+    Ensures that Repository is in closed state
+    Checks if Repository is already released (exit 0)
+    Check for failures, if found (exit 1)
+    Added
+    click.option('-v', '--verify-only', is_flag=True, required=False)
+    if -v is passed, only checks for errors, skips release
