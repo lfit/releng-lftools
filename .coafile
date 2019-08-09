@@ -49,7 +49,8 @@ known_third_party_imports =
     xdg,
     yaml,
     pygerrit2,
-    pygithub
+    pygithub,
+    bs4
 
 pydocstyle_ignore = D203, D213, D301
 max_line_length = 120
