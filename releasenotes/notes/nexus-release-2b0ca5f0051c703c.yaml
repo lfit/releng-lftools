@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    nexus release now checks "{}/staging/repository/{}/activity"
+    Exits 1 if Invalid or StagingRulesFailedException errors are found
