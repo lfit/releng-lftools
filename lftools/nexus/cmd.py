@@ -12,12 +12,14 @@
 
 import csv
 import logging
+import re
 import sys
 
 import requests
 from six.moves import configparser
 import yaml
 
+import bs4
 from lftools import config
 from lftools.nexus import Nexus
 from lftools.nexus import util
@@ -312,6 +314,36 @@ def release_staging_repos(repos, nexus_url=""):
     _nexus = Nexus(credentials['nexus'], credentials['user'],
                    credentials['password'])
 
+    for repo in repos:
+        # Verfiy repo before releasing
+        request_url = "{}/staging/repository/{}/activity".format(_nexus.baseurl, repo)
+        log.info("Request URL: {}".format(request_url))
+        response = requests.get(request_url, auth=_nexus.auth)
+        soup = bs4.BeautifulSoup(response.text, 'xml')
+        values = soup.find_all("value")
+        result = []
+
+        for message in values:
+            if re.search('StagingRulesFailedException', message.text):
+                result.append(message)
+            if re.search('Invalid', message.text):
+                result.append(message)
+
+        if len(result) != 0:
+            log.info(result)
+            sys.exit(1)
+
+        if response.status_code != 200:
+
+            raise requests.HTTPError("Verification of repo failed with the following error:"
+                                     "\n{}: {}".format(response.status_code,
+                                                       response.text))
+            sys.exit(1)
+
+        else:
+            log.info("Successfully verfied {}".format(str(repo)))
+
+    # release
     for repo in repos:
         data = {"data": {"stagedRepositoryIds": [repo]}}
         log.debug("Sending data: {}".format(data))
