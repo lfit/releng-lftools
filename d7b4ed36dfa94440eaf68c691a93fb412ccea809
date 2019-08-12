@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44032402_47ffe5b4",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-08-12T20:56:40Z",
+      "side": 1,
+      "message": "Should this be named --verify-only or --no-release ?\nThis arg should be detailed in \"\"\" below",
+      "revId": "d7b4ed36dfa94440eaf68c691a93fb412ccea809",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
