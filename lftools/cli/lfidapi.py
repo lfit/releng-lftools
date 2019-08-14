@@ -71,12 +71,14 @@ def create_group(ctx, group):
 @click.command()
 @click.argument('info_file')
 @click.argument('group')
+@click.option('--githuborg', type=str, required=False,
+              help='github org name')
 @click.option('--noop', is_flag=True, required=False,
               help='show what would be changed')
 @click.pass_context
-def match_ldap_to_info(ctx, info_file, group, noop):
-    """Match an LDAP groups membership to an INFO.yaml file."""
-    helper_match_ldap_to_info(info_file, group, noop)
+def match_ldap_to_info(ctx, info_file, group, githuborg, noop):
+    """Match an LDAP or GITHUB group membership to an INFO.yaml file."""
+    helper_match_ldap_to_info(info_file, group, githuborg, noop)
 
 
 lfidapi.add_command(search_members)

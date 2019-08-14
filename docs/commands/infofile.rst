@@ -21,3 +21,12 @@ sync-committers
 ---------------
 
  .. program-output:: lftools infofile sync-committers --help
+
+
+API for check votes requires a [github] section in ~/.config/lftools/lftools.ini:
+
+.. code-block:: bash
+
+   [github]
+   token = REDACTED
+
