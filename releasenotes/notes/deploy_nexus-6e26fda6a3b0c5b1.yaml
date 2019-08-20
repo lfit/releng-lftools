@@ -1,0 +1,10 @@
+---
+fixes:
+  - |
+    Refactored deploy_nexus to use concurrent.futures rather than multiprocessing.
+    This allows for non-blocking I/O, and also allows for easy state tracking.
+    It should also fix any random failures that are hard to troubleshoot.
+features:
+  - |
+    Added a get_filesize method to calculate filesize is an appropriate format.
+    This may be useful in logs if an upload fails.
