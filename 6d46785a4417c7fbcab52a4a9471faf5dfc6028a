@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2373d833_785ecded",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-08-21T00:24:27Z",
+      "side": 1,
+      "message": "Possible to add UnitTest for this new method?",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 593,
+        "endChar": 1
+      },
+      "revId": "6d46785a4417c7fbcab52a4a9471faf5dfc6028a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
