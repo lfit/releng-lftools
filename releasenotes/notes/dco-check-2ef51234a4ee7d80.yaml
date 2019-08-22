@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    Expanded DCO shell script with 'check' and 'match' commands. The check
+    mode checks a git repo for missing DCO signatures. The match mode confirms
+    whether or not the DCO signature(s) match the git commit author's email
+    address.
