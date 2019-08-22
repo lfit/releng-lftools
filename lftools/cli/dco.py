@@ -9,35 +9,47 @@
 ##############################################################################
 """Script to check a git repository for commits missing DCO."""
 
-import subprocess
-import sys
+import os
 
 import click
+from git import Repo
 
 
 @click.group()
 @click.pass_context
 def dco(ctx):
-    """Check repository for commits missing DCO."""
     pass
 
 
 @click.command()
-@click.argument('repo-path', required=False)
+@click.argument('repo-path', required=True)
+@click.option('--strict', type=bool, required=False)
 @click.pass_context
-def check(ctx, repo_path):
-    """Check repository for commits missing DCO.
+def check(ctx, strict, repo_path):
+    # Check repository for commits missing DCO."""
+    if 'http' in repo_path:
+        repo_dir = repo_path.rsplit('/', 1)[-1]
+        if os.path.exists(repo_dir) is False:
+            repo = Repo.clone_from(url=repo_path, to_path=repo_dir)
+        else:
+            print("Cannot clone remote repository, directory {} already"
+                  " exists. Delete it and try again.".format(repo_dir))
+            exit(1)
+    else:
+        repo = Repo(repo_path)
 
-    This check will exclude merge commits and empty commits.
-    It operates in your current working directory which has to
-    be a git repository.  Alternatively, you can opt to pass in the
-    path to a git repo.
-    Refer to https://developercertificate.org/
-    """
-    if not repo_path:
-        repo_path = "."
-    status = subprocess.call(['dco', repo_path])
-    sys.exit(status)
+    commits = list(repo.iter_commits())
+
+    for c in commits:
+        if strict:
+            if 'Signed-off-by' in c.message:
+                if c.author.email in c.message:
+                    pass
+                else:
+                    print('Commit {} has DCO mismatch'.format(c))
+
+        if 'Signed-off-by' not in c.message:
+            print('Missing DCO in commit {}'.format(c))
 
 
 dco.add_command(check)
