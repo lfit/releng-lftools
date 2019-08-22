@@ -36,8 +36,27 @@ def check(ctx, repo_path):
     """
     if not repo_path:
         repo_path = "."
-    status = subprocess.call(['dco', repo_path])
+    status = subprocess.call(['dco', 'check', repo_path])
+    sys.exit(status)
+
+
+@click.command()
+@click.argument('repo-path', required=False)
+@click.pass_context
+def match(ctx, repo_path):
+    """Check repository for commits whose DCO does not match the commit author's email.
+
+    This check will exclude merge commits and empty commits.
+    It operates in your current working directory which has to
+    be a git repository.  Alternatively, you can opt to pass in the
+    path to a git repo.
+    Refer to https://developercertificate.org/
+    """
+    if not repo_path:
+        repo_path = "."
+    status = subprocess.call(['dco', 'match', repo_path])
     sys.exit(status)
 
 
 dco.add_command(check)
+dco.add_command(match)
