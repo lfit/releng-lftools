@@ -1,0 +1,11 @@
+---
+features:
+  - |
+    DCO check is now purely in Python, and the 'dco' shell script is removed.
+    A '--strict' option is added that, when used, checks not only for the 
+    existence of a DCO signature in a commit message, but that the email in the
+    signature matches the email of the commit author.
+deprecations:
+  - |
+    The DCO shell script has been removed. This is a transparent change as the
+    dco check method invokation has not changed.
