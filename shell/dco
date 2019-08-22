@@ -13,22 +13,59 @@
 # It operates in your current working directory which must be a git repo.
 # Alternatively you can pass it a path to a git repo.
 
-REPO_PATH="$1"
+function dcocheck {
+  REPO_PATH="$1"
+  cd "$REPO_PATH" || exit 1
 
-cd $REPO_PATH || exit 1
+  status=0
+  while IFS= read -r -a line; do
+      # shellcheck disable=SC2128
+      my_array+=( "$line" )
+      done < <( git branch -r | grep -v origin/HEAD )
+  for branch in "${my_array[@]}"
+  do
+      status=1
+      branch=$(echo "$branch" | xargs)
+      echo "Checking commits in branch $branch for commits missing DCO..."
+      git log "$branch" --no-merges --pretty="%H %ae" --grep 'Signed-off-by' --invert-grep -- | \
+          while read -r results; do
+            commit_hash="$(echo "$results" | cut -d' ' -f1)"
+            echo "$commit_hash is missing Signed-off-by line."
+          done
+  done
+  exit $status
+}
 
-status=0
-while IFS= read -a line; do
-    my_array+=( "$line" )
-    done < <( git branch -r | grep -v origin/HEAD )
-for branch in "${my_array[@]}"
-do
-    status=1
-    branch=$(echo "$branch" | xargs)
-    echo "Checking commits in branch $branch for commits missing DCO..."
-    git log $branch --no-merges --pretty="%H" --grep 'Signed-off-by' --invert-grep * | \
-        while read commit_hash; do
-            echo "ERROR: Commit $commit_hash is missing Signed-off-by line."
-        done
-done
-exit $status
+function dcomatch {
+  REPO_PATH="$1"
+  cd "$REPO_PATH" || exit 1
+
+  status=0
+  while IFS= read -r -a line; do
+      # shellcheck disable=SC2128
+      my_array+=( "$line" )
+      done < <( git branch -r | grep -v origin/HEAD )
+  for branch in "${my_array[@]}"
+  do
+      status=1
+      branch=$(echo "$branch" | xargs)
+      git log "$branch" --no-merges --pretty="%H %ae" --grep 'Signed-off-by' -- | \
+          while read -r results; do
+            commit_hash="$(echo "$results" | cut -d' ' -f1)"
+            author_email="$(echo "$results" | cut -d' ' -f2)"
+            sob="$(git show --quiet "$commit_hash" | grep -oP '(?=Signed\-off\-by: )[\s\S]*[\<](.*)[\>]')"
+            if [[ "$sob" != *"$author_email"* ]] ; then
+              echo "$commit_hash author is $author_email and DCO is $sob"
+              if [ "$sob" = "" ] ; then
+                echo "NOTE: If DCO is empty, then the commit is likely signed with a name but no email address"
+              fi
+            fi
+          done
+  done
+  exit $status
+}
+
+case "$1" in
+  match) dcomatch "$2" ;;
+  check) dcocheck "$2" ;;
+esac
