@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8e487ae_f0fe0ec5",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-08-23T13:59:51Z",
+      "side": 1,
+      "message": "don\u0027t use single-lined log.debug() statements in a condition, even if the condition is met without the debug flags being passed that _never_ get executed.",
+      "range": {
+        "startLine": 270,
+        "startChar": 12,
+        "endLine": 270,
+        "endChar": 65
+      },
+      "revId": "6af764f8f0a74c9af8e92344a545db78f08dd0a3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
