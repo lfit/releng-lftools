@@ -262,8 +262,9 @@ def copy_archives(workspace, pattern=None):
         try:
             shutil.move(src, dest)
         except IOError as e:  # Switch to FileNotFoundError when Python 2 support is dropped.
-            log.debug("Missing path, will create it {}".format(os.path.dirname(dest)))
-            os.makedirs(os.path.dirname(dest))
+            if not os.path.exists(dest):
+                log.debug("Missing path, will create it {}".format(os.path.dirname(dest)))
+                os.makedirs(os.path.dirname(dest))
             shutil.move(src, dest)
 
 
