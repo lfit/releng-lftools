@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ef5b161_2c155cac",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-08-23T13:28:44Z",
+      "side": 1,
+      "message": "allignment required here",
+      "range": {
+        "startLine": 245,
+        "startChar": 16,
+        "endLine": 245,
+        "endChar": 46
+      },
+      "revId": "83ca5fee7df765f018a37bd1da3764c8f1a1bc22",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
