@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "200494c2_fce53e79",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-08-23T12:18:05Z",
+      "side": 1,
+      "message": "If src is a directory, then it will probably move all files/dir under that directory, which will cause issues when we try to copy those directly.",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 263,
+        "endChar": 1
+      },
+      "revId": "f9a0117ab8b644ca1fd33195ac2720413228d750",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "266bb067_95bf6229",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-08-23T12:18:05Z",
+      "side": 1,
+      "message": "change this to check if is is a File, and move it to before the try:",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 5
+      },
+      "revId": "f9a0117ab8b644ca1fd33195ac2720413228d750",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
