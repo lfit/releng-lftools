@@ -259,12 +259,15 @@ def copy_archives(workspace, pattern=None):
         dest = os.path.join(dest_dir, src[len(workspace)+1:])
         log.debug('{} -> {}'.format(src, dest))
 
-        try:
-            shutil.move(src, dest)
-        except IOError as e:  # Switch to FileNotFoundError when Python 2 support is dropped.
-            log.debug("Missing path, will create it {}".format(os.path.dirname(dest)))
-            os.makedirs(os.path.dirname(dest))
-            shutil.move(src, dest)
+        if os.path.isfile(src):
+            try:
+                shutil.move(src, dest)
+            except IOError as e:  # Switch to FileNotFoundError when Python 2 support is dropped.
+                log.debug("Missing path, will create it {}".format(os.path.dirname(dest)))
+                os.makedirs(os.path.dirname(dest))
+                shutil.move(src, dest)
+        else:
+            log.debug('Not copying directories: {}.'.format(src))
 
 
 def deploy_archives(nexus_url, nexus_path, workspace, pattern=None):
