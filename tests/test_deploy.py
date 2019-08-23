@@ -160,7 +160,7 @@ def test_deploy_archive4(cli_runner, datafiles, responses):
     """Test deploy_archives() command when using duplicated patterns."""
     os.chdir(str(datafiles))
     workspace_dir = os.path.join(str(datafiles), 'workspace-patternfile')
-    pattern=["**/*.log", "**/hs_err_*.log", "**/target/**/feature.xml", "**/target/failsafe-reports/failsafe-summary.xml", "**/target/surefire-reports/*-output.txt", "**/target/surefire-reports/*-output.txt", "**/target/failsafe-reports/failsafe-summary.xml"]
+    pattern=["**/*.log", "**/hs_err_*.log", "**/target/**/feature.xml", "**/target/failsafe-reports/failsafe-summary.xml", "**/target/surefire-reports/*-output.txt", "**/target/surefire-reports/*-output.txt", "**/target/failsafe-reports/failsafe-summary.xml", "**/*"]
     result = deploy_sys.copy_archives(workspace_dir, pattern)
     assert result is None
 
@@ -221,7 +221,47 @@ def test_remove_duplicates_and_sort():
                   '/workspace-patternfile/target/dir1/feature.xml',
                   '/workspace-patternfile/target/dir2/feature.xml',
                   '/workspace-patternfile/target/surefire-reports/abc1-output.txt',
-                  '/workspace-patternfile/target/surefire-reports/abc2-output.txt']]
+                  '/workspace-patternfile/target/surefire-reports/abc2-output.txt']],
+
+                [['work/results/repo/repodata',
+                  'work/results/repo/repodata/aef510f1572d6c8dd2d245640911934f51dca895d037dc137c3fe343b26ffe2a-other.sqlite.bz2',
+                  'work/results/repo/repodata/8370c06da1e72e3186f5bd1bd7d04fb772883959de7973d9b6964322415f2f4f-other.xml.gz',
+                  'work/results/repo/repodata/11299388173a685dda16ffa5e8e5993e8e32d513b1f93e11ae4bf38ac3623ff7-filelists.sqlite.bz2',
+                  'work/results/repo/repodata/47b4a63805b1d3101f24281ed4237284c48ebc1d423092c742479438353e9a79-filelists.xml.gz',
+                  'work/results/repo/repodata/224b2e07d395b282569c3ed5341f4fdc7ba2df3d9236117358d98e9f88667fdb-primary.sqlite.bz2',
+                  'work/results/repo/repodata/ae2ac51511d3d99570bbe380deffd2e88043b93dafea81ece1ebae7b6dbb9f35-primary.xml.gz',
+                  'work/results/repo/repodata/repomd.xml',
+                  'work/results/src_repo',
+                  'work/results/src_repo/product-manifest-95-1.el7.centos.ta.src.rpm',
+                  'work/results/src_repo/repodata',
+                  'work/results/src_repo/repodata/103971d7e000d6d79bfdce8a6ee2acb9d9f9ea70db181d6399ebe7fc1df60cbb-other.sqlite.bz2',
+                  'work/results/src_repo/repodata/2fadeaa73aa6313afb359828628bc661c4fc686d82a0e2acba6d93bdd3bd32b8-other.xml.gz',
+                  'work/results/src_repo/repodata/28c69dfda86e6dd2d612e21efad415feff1ef44718a475b58d4e2e345fc22f82-filelists.sqlite.bz2',
+                  'work/results/src_repo/repodata/a19a91350de47d15d147c12aebe1aa4682e4733edc14719de09eaee8793c1080-filelists.xml.gz',
+                  'work/results/src_repo/repodata/6cc8efe401cb22a8e07934d93ef6214fef91175130b2a8c1286161a7bf504a5a-primary.sqlite.bz2',
+                  'work/results/src_repo/repodata/43cc7ddec49d87af8e8b78c6ec2c3c8c9bf57d8a0723e3950266cd0440147af4-primary.xml.gz',
+                  'work/results/src_repo/repodata/repomd.xml'],
+
+                 ['work/results/repo/repodata',
+                  'work/results/repo/repodata/11299388173a685dda16ffa5e8e5993e8e32d513b1f93e11ae4bf38ac3623ff7-filelists.sqlite.bz2',
+                  'work/results/repo/repodata/224b2e07d395b282569c3ed5341f4fdc7ba2df3d9236117358d98e9f88667fdb-primary.sqlite.bz2',
+                  'work/results/repo/repodata/47b4a63805b1d3101f24281ed4237284c48ebc1d423092c742479438353e9a79-filelists.xml.gz',
+                  'work/results/repo/repodata/8370c06da1e72e3186f5bd1bd7d04fb772883959de7973d9b6964322415f2f4f-other.xml.gz',
+                  'work/results/repo/repodata/ae2ac51511d3d99570bbe380deffd2e88043b93dafea81ece1ebae7b6dbb9f35-primary.xml.gz',
+                  'work/results/repo/repodata/aef510f1572d6c8dd2d245640911934f51dca895d037dc137c3fe343b26ffe2a-other.sqlite.bz2',
+                  'work/results/repo/repodata/repomd.xml',
+                  'work/results/src_repo',
+                  'work/results/src_repo/product-manifest-95-1.el7.centos.ta.src.rpm',
+                  'work/results/src_repo/repodata',
+                  'work/results/src_repo/repodata/103971d7e000d6d79bfdce8a6ee2acb9d9f9ea70db181d6399ebe7fc1df60cbb-other.sqlite.bz2',
+                  'work/results/src_repo/repodata/28c69dfda86e6dd2d612e21efad415feff1ef44718a475b58d4e2e345fc22f82-filelists.sqlite.bz2',
+                  'work/results/src_repo/repodata/2fadeaa73aa6313afb359828628bc661c4fc686d82a0e2acba6d93bdd3bd32b8-other.xml.gz',
+                  'work/results/src_repo/repodata/43cc7ddec49d87af8e8b78c6ec2c3c8c9bf57d8a0723e3950266cd0440147af4-primary.xml.gz',
+                  'work/results/src_repo/repodata/6cc8efe401cb22a8e07934d93ef6214fef91175130b2a8c1286161a7bf504a5a-primary.sqlite.bz2',
+                  'work/results/src_repo/repodata/a19a91350de47d15d147c12aebe1aa4682e4733edc14719de09eaee8793c1080-filelists.xml.gz',
+                  'work/results/src_repo/repodata/repomd.xml']]
+
+
 
               ]
 

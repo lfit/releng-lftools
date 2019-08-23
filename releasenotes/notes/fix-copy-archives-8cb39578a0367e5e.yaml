@@ -1,0 +1,5 @@
+---
+fixes:
+  - |
+    Fix copy archives when a directory is foundm which results in the error:
+    ERROR: [Errno 17] File exists: '<dir>'
