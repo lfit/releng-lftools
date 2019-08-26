@@ -22,6 +22,30 @@
       "revId": "6d46785a4417c7fbcab52a4a9471faf5dfc6028a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab3632c1_a46ae747",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-08-26T18:17:59Z",
+      "side": 1,
+      "message": "Unit tests for deploy nexus need to be rewritten (current ones don\u0027t do anything). This will be included in that rewrite, but that\u0027s a separate patch.",
+      "parentUuid": "2373d833_785ecded",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 593,
+        "endChar": 1
+      },
+      "revId": "6d46785a4417c7fbcab52a4a9471faf5dfc6028a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
