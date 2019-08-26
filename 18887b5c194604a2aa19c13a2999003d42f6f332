@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "143b391c_3a16aa88",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-08-26T05:07:59Z",
+      "side": 1,
+      "message": "can we add the patterns being passed for the job in question?",
+      "range": {
+        "startLine": 163,
+        "startChar": 260,
+        "endLine": 163,
+        "endChar": 266
+      },
+      "revId": "18887b5c194604a2aa19c13a2999003d42f6f332",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
