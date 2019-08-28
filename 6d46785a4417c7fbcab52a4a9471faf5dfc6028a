@@ -46,6 +46,30 @@
       "revId": "6d46785a4417c7fbcab52a4a9471faf5dfc6028a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b88072c1_375b1b36",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-08-28T07:26:57Z",
+      "side": 1,
+      "message": "ok, just curious, what would want to see changed, to ensure the unit tests do something :)\nI thought, that the existing test cases tested every function, and every branch in the code. but yes, they test the functions directly, and not the proper way in, nor the resulting archive :(",
+      "parentUuid": "ab3632c1_a46ae747",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 593,
+        "endChar": 1
+      },
+      "revId": "6d46785a4417c7fbcab52a4a9471faf5dfc6028a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
