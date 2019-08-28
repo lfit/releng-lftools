@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "faa87a2f_cd4ebf89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-08-28T00:54:39Z",
+      "side": 1,
+      "message": "Move this down one line.\n\nChange from ISSUE: to Issue:",
+      "revId": "300470de67fe2c054f0a684facb79ac72d1f8a78",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d46fd726_a39929ee",
+        "filename": "shell/dco",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-08-28T00:54:39Z",
+      "side": 1,
+      "message": "Please write this out to stderr since it _is_ an error, the easiest way would be as follows:\n\n\u003e\u00262 echo ....",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 33,
+        "endChar": 16
+      },
+      "revId": "300470de67fe2c054f0a684facb79ac72d1f8a78",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5832bfa_0040536b",
+        "filename": "shell/dco",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2019-08-28T00:54:39Z",
+      "side": 1,
+      "message": "commits can have multiple Signed-off-by lines, you need to properly handle the case where the author of the commit does not exist in any of the SOB lines, this is an error and should be logged out to stderr\n\nHave you tested this use case?",
+      "range": {
+        "startLine": 56,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 111
+      },
+      "revId": "300470de67fe2c054f0a684facb79ac72d1f8a78",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
