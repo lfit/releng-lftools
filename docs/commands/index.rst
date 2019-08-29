@@ -20,6 +20,7 @@ It supports the following commands:
     license
     nexus
     openstack
+    rtd
     schema
     sign
     version
