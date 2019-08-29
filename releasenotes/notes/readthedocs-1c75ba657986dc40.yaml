@@ -1,0 +1,24 @@
+---
+features:
+  - |
+    Read the Docs CRUD operations.
+
+    Usage: Usage: lftools rtd [OPTIONS] COMMAND [ARGS]
+
+
+    .. code-block:: none
+
+       Commands:
+           project-list             Get a list of Read the Docs projects.
+           project-details          Retrieve project details.
+           project-version-list     Retrieve project version list.
+           project-version-details  Retrieve project version details.
+           project-create           Create a new project.
+           project-build-list       Retrieve a list of a project's builds.
+           project-build-details    Retrieve specific project build details.
+           project-build-trigger    Trigger a new build.
+
+    .. code-block:: none
+
+       Options:
+         --help             Show this message and exit.
