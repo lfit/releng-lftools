@@ -11,10 +11,16 @@
 
 from __future__ import print_function
 
+import requests
 import subprocess
 import sys
+import json
 
 import click
+#from pygerrit2 import GerritRestAPI, HTTPBasicAuthFromNetrc
+from pygerrit2 import GerritRestAPI, HTTPBasicAuth
+from requests.utils import get_netrc_auth
+from lftools import config
 
 
 @click.group()
@@ -23,6 +29,163 @@ def gerrit_cli(ctx):
     """GERRIT TOOLS."""
     pass
 
+#@click.command(name='listprojects')
+#@click.argument('gerrit_url')
+#@click.option('--ids', is_flag=True,
+#              help='only show ids')
+#@click.pass_context
+
+def listprojects(gerrit_url, ids):
+    user = config.get_setting("gerrit", "username")
+    pass1 = config.get_setting("gerrit", "password")
+    auth = HTTPBasicAuth(user, pass1)
+    url = ("https://{}/r".format(gerrit_url))
+    rest = GerritRestAPI(url=url, auth=auth)
+    headers = {'Content-Type': 'application/json; charset=UTF-8'}
+    access_str = '/projects/'
+    result = rest.get(access_str, headers=headers)
+
+    all_projects = []
+    if ids:
+        for name, values in result.items():
+            idlink = (values['id'])
+            name_dashed = name.replace("/", "-")
+            #print(name, name_dashed, idlink)
+            #print(name, idlink)
+            all_projects.append(idlink)
+    else:
+        pretty = json.dumps(result, indent=4, sort_keys=True)
+        print(pretty)
+
+    return(all_projects)
+
+@click.command(name='checkaccessrights')
+@click.option('--projectid', type=str, required=False,
+              help='Check only one project')
+@click.argument('gerrit_url')
+@click.option('--githubid', type=str, required=False,
+              help='daebbf523be390041a1a9c0e340a6d833aae5043')
+@click.pass_context
+def checkaccessrights(ctx, projectid, gerrit_url, githubid):
+    user = config.get_setting("gerrit", "username")
+    pass1 = config.get_setting("gerrit", "password")
+    auth = HTTPBasicAuth(user, pass1)
+    url = ("https://{}/r".format(gerrit_url))
+    rest = GerritRestAPI(url=url, auth=auth)
+    headers = {'Content-Type': 'application/json; charset=UTF-8'}
+    #result = rest.get(access_str, headers=headers)
+    #pretty = json.dumps(result, indent=4, sort_keys=True)
+
+    all_projects = []
+    if projectid:
+        all_projects.append(projectid)
+    else: 
+        all_projects = listprojects(gerrit_url=gerrit_url, ids=True)
+
+    for project in all_projects:
+        access_str = 'projects/{}/access'.format(project)
+        result = rest.get(access_str, headers=headers)
+
+        project = project.replace("%2F", "/")
+        print("Project:", project)
+        if 'inherits_from' in result:
+            inherits = (result['inherits_from']['id'])
+            print("Inherits from:", inherits)
+        else:
+            print("no key")
+
+        try:
+            owner = (result['local']['refs/*']['permissions']['owner']['rules'])
+        except KeyError:
+            owner = "None"
+
+
+        if owner == "None":
+            print("Owner:", owner)
+        else:
+            for name in owner.keys():
+                print("Owner:", name)
+
+        try:
+            github = (result['local']['refs/*']['permissions']['read']['rules'])
+        except KeyError:
+            owner = "None"
+
+        if owner == "None":
+            print("Github:", owner)
+        else:
+            for name in github.keys():
+                print("Github:", name)
+
+
+@click.command(name='accessrights')
+@click.argument('projectname')
+@click.argument('gerrit_url')
+@click.argument('gerrit_project')
+@click.argument('repo')
+@click.option('--githubid', type=str, required=False,
+              help='daebbf523be390041a1a9c0e340a6d833aae5043')
+@click.option('--deletefirst', is_flag=True,
+              help='delete all permissions before adding new ones')
+@click.option('--setparent', is_flag=True,
+              help='set parent to All-Projects')
+@click.option('--setowner', is_flag=True,
+              help='set owner to gerrit_projet')
+@click.pass_context
+
+def accessrights(ctx, projectname, gerrit_url, gerrit_project, repo, githubid, deletefirst, setparent, setowner):
+    user = config.get_setting("gerrit", "username")
+    pass1 = config.get_setting("gerrit", "password")
+    auth = HTTPBasicAuth(user, pass1)
+    url = ("https://{}/r".format(gerrit_url))
+    rest = GerritRestAPI(url=url, auth=auth)
+    project = 'dcaegen2%2Fcollectors%2Fhv-ves'
+    # This code is untested. the methods work, but the options are not configured to work right now.
+    # There be dragons. 
+    sys.ecit(1)
+    headers = {'Content-Type': 'application/json; charset=UTF-8'}
+    if githubid:
+        payload = json.dumps({
+            "add": {
+                "refs/*": {
+                    "permissions": {
+                        "read": {
+                            "rules": {
+                                "{}".format(githubid) : {
+                                    "action": "{}".format("ALLOW")
+        }}}}}}
+        })
+
+    if setparent:
+        payload = json.dumps({
+            "parent": "All-Projects"
+        })
+
+    if deletefirst:
+        payload = json.dumps({
+            "remove": {
+                "refs/*": {
+            }}
+        })
+    if setowner:
+        payload = json.dumps({
+            "add": {
+            "refs/*": {
+            "permissions": {
+            "owner": {
+            "rules": {
+                "ldap:cn=onap-gerrit-{}-committers,ou=Groups,dc=freestandards,dc=org".format(projectname): {
+            "action": "ALLOW",
+            "force": "false"
+            }}}}}}
+        })
+
+
+
+    access_str = 'projects/{}/access'.format(project)
+    result = rest.post(access_str, headers=headers, data=payload)
+    pretty = json.dumps(result, indent=4, sort_keys=True)
+    print(pretty)
 
 @click.command(name='create')
 @click.argument('gerrit_url')
@@ -60,3 +223,6 @@ def create(
 
 
 gerrit_cli.add_command(create)
+#gerrit_cli.add_command(listprojects)
+gerrit_cli.add_command(accessrights)
+gerrit_cli.add_command(checkaccessrights)
