@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4db310cd_5e4e475d",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-09-03T03:44:30Z",
+      "side": 1,
+      "message": "I had that and it passed everything, first time using continue or pass in python, this works tho.",
+      "parentUuid": "a19370c2_5e0b3378",
+      "range": {
+        "startLine": 86,
+        "startChar": 12,
+        "endLine": 86,
+        "endChar": 16
+      },
+      "revId": "196315af2d3e4f657cdb49c77aceb9022b680f84",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "00fc018a_69466367",
         "filename": "lftools/cli/gerrit.py",
         "patchSetId": 6
