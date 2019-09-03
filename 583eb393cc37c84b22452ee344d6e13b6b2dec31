@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "748749a5_10c54a8f",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-09-03T15:29:34Z",
+      "side": 1,
+      "message": "yeah true but... annoying to implement..",
+      "parentUuid": "8f713c45_785feba9",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 5
+      },
+      "revId": "583eb393cc37c84b22452ee344d6e13b6b2dec31",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0a59570f_aeea7561",
         "filename": "lftools/cli/gerrit.py",
         "patchSetId": 5
@@ -59,6 +83,30 @@
       "writtenOn": "2019-09-02T07:18:04Z",
       "side": 1,
       "message": "What format will this be entered by the user?\nfor instance \"dcaegen2/collectors/hv-ves\" should be entered as \"dcaegen2%2Fcollectors%2Fhv-ves\"",
+      "range": {
+        "startLine": 69,
+        "startChar": 28,
+        "endLine": 69,
+        "endChar": 37
+      },
+      "revId": "583eb393cc37c84b22452ee344d6e13b6b2dec31",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebe514be_337ae802",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-09-03T15:29:34Z",
+      "side": 1,
+      "message": "yes thats right",
+      "parentUuid": "0a59570f_aeea7561",
       "range": {
         "startLine": 69,
         "startChar": 28,
@@ -91,6 +139,30 @@
       "revId": "583eb393cc37c84b22452ee344d6e13b6b2dec31",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6455dcf_334c7b8d",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-09-03T15:29:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3408cee0_3838ecd5",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 1
+      },
+      "revId": "583eb393cc37c84b22452ee344d6e13b6b2dec31",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
