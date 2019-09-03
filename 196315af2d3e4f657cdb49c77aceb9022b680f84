@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "199e43b2_157cb876",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-09-03T15:29:34Z",
+      "side": 1,
+      "message": "yeah okay so I looked at this more closely, and it does nothing, I\u0027ve removed it.",
+      "parentUuid": "fbe81db0_e466a157",
+      "range": {
+        "startLine": 86,
+        "startChar": 12,
+        "endLine": 86,
+        "endChar": 16
+      },
+      "revId": "196315af2d3e4f657cdb49c77aceb9022b680f84",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "00fc018a_69466367",
         "filename": "lftools/cli/gerrit.py",
         "patchSetId": 6
