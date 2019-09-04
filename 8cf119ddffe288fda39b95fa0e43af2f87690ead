@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a092cf7_e4392a2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-09-04T11:26:59Z",
+      "side": 1,
+      "message": "Please help me understand why are we even add this into lftools? are we expecting this to be addressed issue for each an every LF* project/repo in the future? IMO lftools is designed to be generic, so that some scripting can be used around it the tool to solve specific issues in the jobs.",
+      "revId": "8cf119ddffe288fda39b95fa0e43af2f87690ead",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
