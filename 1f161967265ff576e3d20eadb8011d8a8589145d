@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9b1858f_a2bb2012",
+        "filename": "docs/commands/rtd.rst",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2019-09-05T13:11:28Z",
+      "side": 1,
+      "message": "Would you please add more documentation?  Project people like me cannot login to a Jenkins minion and run \"lftools rtd --help\" to get information.  This doc is the only thing.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 1
+      },
+      "revId": "1f161967265ff576e3d20eadb8011d8a8589145d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7062a51b_b4c6002f",
+        "filename": "releasenotes/notes/readthedocs-1c75ba657986dc40.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2019-09-05T13:11:28Z",
+      "side": 1,
+      "message": "Do you really want tabs here?",
+      "range": {
+        "startLine": 12,
+        "startChar": 23,
+        "endLine": 12,
+        "endChar": 26
+      },
+      "revId": "1f161967265ff576e3d20eadb8011d8a8589145d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
