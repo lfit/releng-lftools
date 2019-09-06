@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e0ad74f_4a47da36",
+        "filename": "shell/dco",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-09-06T06:03:06Z",
+      "side": 1,
+      "message": "I agree with Andy and Tim we should be fixing these shellcheck issues instead of disabling them, this is not too hard or would come back as another bug if kept disabled.\n\nhttps://github.com/koalaman/shellcheck/wiki/SC2128",
+      "range": {
+        "startLine": 2,
+        "startChar": 21,
+        "endLine": 2,
+        "endChar": 27
+      },
+      "revId": "9750fa1f94bc4f06ef82ce10f26aa09f8e587cf0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
