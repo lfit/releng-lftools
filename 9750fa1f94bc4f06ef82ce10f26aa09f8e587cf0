@@ -22,6 +22,148 @@
       "revId": "9750fa1f94bc4f06ef82ce10f26aa09f8e587cf0",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c06d814_f2a8e071",
+        "filename": "shell/dco",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-09-06T18:37:44Z",
+      "side": 1,
+      "message": "set -eu -o noglob -l pipefail",
+      "revId": "9750fa1f94bc4f06ef82ce10f26aa09f8e587cf0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4310d34_89fc36a4",
+        "filename": "shell/dco",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-09-06T18:37:44Z",
+      "side": 1,
+      "message": "All shell variables should be lower-case. Plus this variable should be \u0027local\u0027 as it is only used within this function. Note there is another \u0027REPO_PATH\u0027 in \u0027dcomatch()\u0027",
+      "revId": "9750fa1f94bc4f06ef82ce10f26aa09f8e587cf0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85906956_0f4ba1d9",
+        "filename": "shell/dco",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-09-06T18:37:44Z",
+      "side": 1,
+      "message": "remove \u0027|| exit 1\" it is not needed when -e is set.",
+      "revId": "9750fa1f94bc4f06ef82ce10f26aa09f8e587cf0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2eb97e8_6e3a3f52",
+        "filename": "shell/dco",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-09-06T18:37:44Z",
+      "side": 1,
+      "message": "don\u0027t understand this. why not just:\n     branch_list\u003d$(git branch -r | grep -v origin/HEAD | awk \u0027{print $1}\u0027)\n\nthen: for branch in $branch_list ; do",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "revId": "9750fa1f94bc4f06ef82ce10f26aa09f8e587cf0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71fce1ef_3972d821",
+        "filename": "shell/dco",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-09-06T18:37:44Z",
+      "side": 1,
+      "message": "I would think the \u0027status\u003d1\u0027 needs to be inside \u0027while read -r results; do\u0027 loop ?",
+      "revId": "9750fa1f94bc4f06ef82ce10f26aa09f8e587cf0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "133bef0a_98d0305a",
+        "filename": "shell/dco",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-09-06T18:37:44Z",
+      "side": 1,
+      "message": "this removes \u0027\\n\u0027 but that should not be needed (\u0027for\u0027 removes \u0027/n\u0027 because it is a field separator IFS)",
+      "revId": "9750fa1f94bc4f06ef82ce10f26aa09f8e587cf0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fff6b2bc_3645d9ec",
+        "filename": "shell/dco",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-09-06T18:37:44Z",
+      "side": 1,
+      "message": "commit_hash\u003d$(echo $results | awk \u0027{print $1}\u0027)\nAwk assumes field separator is one or more spaces|tabs",
+      "revId": "9750fa1f94bc4f06ef82ce10f26aa09f8e587cf0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51993ac8_9dfc61aa",
+        "filename": "shell/dco",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-09-06T18:37:44Z",
+      "side": 1,
+      "message": "make indents consistent. I see indents of 2, 4 \u0026 6. You can use 2 or 4 but not both. Personally I prefer 4 but others will disagree.",
+      "revId": "9750fa1f94bc4f06ef82ce10f26aa09f8e587cf0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
