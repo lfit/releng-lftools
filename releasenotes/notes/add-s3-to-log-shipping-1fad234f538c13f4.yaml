@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    Support log shipping logs to AWS S3 buckets.
+
+    A conditional statement is provided so that when a
+    s3 bucket name is provided, it checks to see if that
+    bucket exists, and if it exists, uploads the logs.
