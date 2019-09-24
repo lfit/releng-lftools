@@ -10,27 +10,33 @@
 ##############################################################################
 """Library of functions for deploying artifacts to Nexus."""
 
+import concurrent.futures
 from datetime import timedelta
 from defusedxml.minidom import parseString
-from multiprocessing import cpu_count
-import concurrent.futures
 import errno
-import glob2  # Switch to glob when Python < 3.5 support is dropped
 import gzip
 import io
+import json
 import logging
 import math
+import mimetypes
+import multiprocessing
+from multiprocessing import cpu_count
+from multiprocessing.dummy import Pool as ThreadPool
 import os
 import re
-import requests
 import shutil
-import six
 import subprocess
 import sys
 import tempfile
 import time
 import zipfile
 
+import boto3
+from defusedxml.minidom import parseString
+import glob2  # Switch to glob when Python < 3.5 support is dropped
+import requests
+import six
 
 log = logging.getLogger(__name__)
 
@@ -442,6 +448,167 @@ def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
         raise requests.HTTPError(e)
     log.debug('{}: {}'.format(resp.status_code, resp.text))
 
+def deploy_s3(s3_bucket, s3_path, workspace, build_url, pattern=None):
+    s3_bucket = s3_bucket.lower()
+    work_dir = tempfile.mkdtemp(prefix='lftools-s3.')
+    os.chdir(work_dir)
+    log.debug('work_dir: {}'.format(work_dir))
+
+    copy_archives(workspace, pattern)
+
+    build_details = open('_build-details.log', 'w+')
+    build_details.write('build-url: {}'.format(build_url))
+
+    with open('_sys-info.log', 'w+') as sysinfo_log:
+        sys_cmds = []
+
+        log.debug('Platform: {}'.format(sys.platform))
+        if sys.platform == "linux" or sys.platform == "linux2":
+            sys_cmds = [
+                ['uname', '-a'],
+                ['lscpu'],
+                ['nproc'],
+                ['df', '-h'],
+                ['free', '-m'],
+                ['ip', 'addr'],
+                ['sar', '-b', '-r', '-n', 'DEV'],
+                ['sar', '-P', 'ALL'],
+            ]
+
+        for c in sys_cmds:
+            try:
+                output = subprocess.check_output(c).decode('utf-8')
+            except OSError:  # TODO: Switch to FileNotFoundError when Python < 3.5 support is dropped.
+                log.debug('Command not found: {}'.format(c))
+                continue
+
+            output = '---> {}:\n{}\n'.format(' '.join(c), output)
+            sysinfo_log.write(output)
+            log.info(output)
+
+    build_details.close()
+
+    # Magic string used to trim console logs at the appropriate level during wget
+    MAGIC_STRING = "-----END_OF_BUILD-----"
+    log.info(MAGIC_STRING)
+
+    resp = requests.get('{}/consoleText'.format(_format_url(build_url)))
+    with io.open('console.log', 'w+', encoding='utf-8') as f:
+        f.write(six.text_type(resp.content.decode('utf-8').split(MAGIC_STRING)[0]))
+
+    resp = requests.get('{}/timestamps?time=HH:mm:ss&appendLog'.format(_format_url(build_url)))
+    with io.open('console-timestamp.log', 'w+', encoding='utf-8') as f:
+        f.write(six.text_type(resp.content.decode('utf-8').split(MAGIC_STRING)[0]))
+
+    _compress_text(work_dir)
+    subprocess.call('tree -hFH . > index.html', shell=True)
+
+    check_s3_bucket_status(s3_bucket)
+
+    def _deploy_s3_upload(file):
+        session = boto3.Session(profile_name='zowe')
+        s3 = session.resource('s3')
+        if file == 'index.html':
+            s3.Bucket(s3_bucket).upload_file(file, '{}{}'.format(s3_path, file), ExtraArgs={
+                      'ACL': 'public-read', 'ContentType': mimetypes.guess_type(file)[0]})
+        elif mimetypes.guess_type(file)[0] == None and mimetypes.guess_type(file)[1] == None:
+            s3.Bucket(s3_bucket).upload_file(file, '{}{}'.format(s3_path, file), ExtraArgs={
+                      'ACL': 'public-read', 'ContentType': 'text/plain'})
+        elif mimetypes.guess_type(file)[0] == None:
+            s3.Bucket(s3_bucket).upload_file(file, '{}{}'.format(s3_path, file), ExtraArgs={
+                      'ACL': 'public-read', 'ContentType': 'text/plain', 'ContentEncoding': mimetypes.guess_type(file)[1]})
+        else:
+            s3.Bucket(s3_bucket).upload_file(file, '{}{}'.format(s3_path, file), ExtraArgs={
+                      'ACL': 'public-read', 'ContentType': mimetypes.guess_type(file)[0], 'ContentEncoding': mimetypes.guess_type(file)[1]})
+        log.debug('Uploaded {}'.format(file))
+
+    file_list = []
+
+    previous_dir = os.getcwd()
+    log.info('Uploading files from {} to {}/{}'.format(work_dir, s3_bucket, s3_path))
+    files = glob2.glob('**/*', recursive=True)
+    for file in files:
+        if os.path.isfile(file):
+            file_list.append(file)
+
+
+    # Perform parallel upload
+    upload_start = time.time()
+    pool = ThreadPool(multiprocessing.cpu_count())
+    pool.map(_deploy_s3_upload, file_list)
+    pool.close()
+    pool.join()
+    upload_time = time.time() - upload_start
+    log.info("Uploaded in {} seconds.".format(timedelta(seconds=round(upload_time))))
+
+    log.info("http://{}.s3-website-us-west-2.amazonaws.com/{}index.html".format(s3_bucket, s3_path))
+
+    os.chdir(previous_dir)
+    shutil.rmtree(work_dir)
+
+
+def check_s3_bucket_status(s3_bucket):
+    """Check to see if s3 bucket is created.
+
+    This function checks to see if s3 bucket exists, if not,
+    creates bucket, bucket policy and static website configs.
+    Lastly, it applies the bucket policy and static site configs
+    to the bucket.
+    """
+    log.debug('Verifying {} exists'.format(s3_bucket))
+    from botocore.exceptions import ClientError
+    session = boto3.Session(profile_name='zowe')
+    s3 = session.client('s3')
+
+    try:
+        s3.head_bucket(Bucket=s3_bucket)
+        print('bucket exists!')
+    except ClientError as e:
+        log.debug(e)
+        s3.create_bucket(Bucket=s3_bucket,
+                         ACL='public-read',
+                         CreateBucketConfiguration={'LocationConstraint': 'us-west-2'})
+    try:
+        waiter = s3.get_waiter('bucket_exists')
+        waiter.wait(Bucket=s3_bucket)
+        website_configuration = {
+            'ErrorDocument': {'Key': 'error.html'},
+            'IndexDocument': {'Suffix': 'index.html'}, }
+
+        bucket_policy = {
+            'Version': '2012-10-17',
+            'Statement': [{
+                'Sid': 'PublicReadGetObject',
+                'Effect': 'Allow',
+                'Principal': '*',
+                'Action': ['s3:GetObject'],
+                'Resource': 'arn:aws:s3:::{s3_bucket}/*'
+            }]
+        }
+
+        lifecycle_config = {
+            'Rules': [
+                {
+                    'Expiration': {
+                        'Days': 181
+                    },
+                    'ID': '6 Months SLA',
+                    'Filter': {
+                        'Prefix': ''
+                    },
+                    'Status': 'Enabled'
+                }
+            ]
+        }
+
+        bucket_policy = json.dumps(bucket_policy)
+        s3.put_bucket_website(Bucket=s3_bucket, WebsiteConfiguration=website_configuration)
+        s3.put_bucket_lifecycle_configuration(Bucket=s3_bucket, LifecycleConfiguration=lifecycle_config)
+        s3.put_bucket_policy(Bucket=s3_bucket, Policy=bucket_policy)
+
+    except ClientError as e:
+        log.debug(e)
+
 
 def nexus_stage_repo_create(nexus_url, staging_profile_id):
     """Create a Nexus staging repo.
@@ -592,9 +759,6 @@ def upload_maven_file_to_nexus(nexus_url, nexus_repo_id,
         raise requests.HTTPError("Nexus Error: {}".format(error_msg))
 
 
-
-
-
 def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
     """Deploy a local directory of files to a Nexus repository.
 
@@ -698,7 +862,7 @@ def deploy_nexus_stage(nexus_url, staging_profile_id, deploy_dir):
                         staging repo.
     deploy_dir:         The directory to deploy. (Ex: /tmp/m2repo)
 
-   # Sample:
+    # Sample:
         lftools deploy nexus-stage http://192.168.1.26:8081/nexus 4e6f95cd2344 /tmp/slask
             Deploying Maven artifacts to staging repo...
             Staging repository aaf-1005 created.

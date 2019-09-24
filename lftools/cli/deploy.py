@@ -49,7 +49,6 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
 
     Provides 2 ways to archive files:
 
-        \b
         1) globstar pattern provided by the user.
         2) $WORKSPACE/archives directory provided by the user.
 
@@ -131,11 +130,10 @@ def file(ctx,
 def logs(ctx, nexus_url, nexus_path, build_url):
     """Deploy logs to a Nexus site repository.
 
-    This script fetches logs and system information and pushes them to Nexus
-    for log archiving.
+    This script fetches logs and system information and pushes them to Nexus.
 
     To use this script the Nexus server must have a site repository configured
-    with the name "logs" as this is a hardcoded path.
+    with the name "logs" as this is a hardcoded path..
     """
     try:
         deploy_sys.deploy_logs(nexus_url, nexus_path, build_url)
@@ -316,6 +314,32 @@ def nexus_zip(ctx, nexus_url, nexus_repo, nexus_path, deploy_zip):
     log.info('Zip file upload complete.')
 
 
+@click.command()
+@click.argument('s3-bucket', envvar='S3_BUCKET')
+@click.argument('s3-path', envvar='S3_PATH')
+@click.argument('workspace', envvar='WORKSPACE')
+@click.argument('build_url', envvar='BUILD_URL')
+@click.option('-p', '--pattern', multiple=True)
+@click.pass_context
+def s3(ctx, s3_bucket, s3_path, workspace, build_url, pattern):
+    """Deploy logs to s3 Bucket.
+
+    This script fetches logs and system information and pushes them s3 for log
+    archiving.
+
+    To use this script, bucket name, s3 path, workspace, and build url must
+    be passed to it.
+    """
+    try:
+        deploy_sys.deploy_s3(s3_bucket, s3_path, workspace, build_url, pattern)
+    except HTTPError as e:
+        log.error(str(e))
+        sys.exit(1)
+
+    log.info('Logs upload complete.')
+
+
+
 deploy.add_command(archives)
 deploy.add_command(copy_archives)
 deploy.add_command(file)
@@ -326,3 +350,5 @@ deploy.add_command(nexus_stage)
 deploy.add_command(nexus_stage_repo_close)
 deploy.add_command(nexus_stage_repo_create)
 deploy.add_command(nexus_zip)
+deploy.add_command(s3)
+
