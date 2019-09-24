@@ -4,3 +4,5 @@ pytest-click
 pytest-datafiles
 pytest-mock
 pytest-responses
+boto3
+moto
