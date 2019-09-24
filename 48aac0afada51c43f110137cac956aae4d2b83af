@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf3be04a_fb685c15",
+        "filename": "lftools/api/endpoints/readthedocs.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-09-24T18:35:00Z",
+      "side": 1,
+      "message": "The old code worked (patchset9) (and still does) \nThis fails for me.\nhttps://gist.github.com/Aricg/0370512fc4418c247ee4367cf8c5a0a1",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 51
+      },
+      "revId": "48aac0afada51c43f110137cac956aae4d2b83af",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
