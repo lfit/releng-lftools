@@ -146,6 +146,26 @@ def logs(ctx, nexus_url, nexus_path, build_url):
     log.info('Logs upload complete.')
 
 
+@click.command(name='s3')
+@click.argument('s3_bucket', envvar='S3_BUCKET')
+@click.argument('s3_path')
+@click.argument('build-url', envvar='BUILD_URL')
+@click.argument('workspace', envvar='WORKSPACE')
+@click.option('-p', '--pattern', multiple=True)
+@click.pass_context
+def s3(ctx, s3_bucket, s3_path, build_url, workspace, pattern):
+    """Deploy logs and archives to a S3 bucket."""
+    if not pattern:
+        pattern = None
+    try:
+        deploy_sys.deploy_s3(s3_bucket, s3_path, build_url, workspace, pattern)
+    except HTTPError as e:
+        log.error(str(e))
+        sys.exit(1)
+
+    log.info('Logs upload to S3 complete.')
+
+
 @click.command(name='maven-file')
 @click.argument('nexus-url', envvar='NEXUS_URL')
 @click.argument('repo-id', envvar='REPO_ID')
@@ -326,3 +346,4 @@ deploy.add_command(nexus_stage)
 deploy.add_command(nexus_stage_repo_close)
 deploy.add_command(nexus_stage_repo_create)
 deploy.add_command(nexus_zip)
+deploy.add_command(s3)
