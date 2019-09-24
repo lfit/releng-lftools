@@ -124,21 +124,24 @@ def file(ctx,
 
 
 @click.command()
-@click.argument('nexus-url', envvar='NEXUS_URL')
-@click.argument('nexus-path', envvar='NEXUS_PATH')
+@click.argument('logs-url', envvar='LOGS_URL')
+@click.argument('logs-path', envvar='LOGS_PATH')
 @click.argument('build-url', envvar='BUILD_URL')
 @click.pass_context
-def logs(ctx, nexus_url, nexus_path, build_url):
-    """Deploy logs to a Nexus site repository.
+def logs(ctx, logs_url, logs_path, build_url):
+    """Deploy logs to a Nexus site repository or s3 Bucket.
 
     This script fetches logs and system information and pushes them to Nexus
-    for log archiving.
+    or s3 for log archiving.
 
     To use this script the Nexus server must have a site repository configured
-    with the name "logs" as this is a hardcoded path.
+    with the name "logs" as this is a hardcoded path or s3 bucket must be created.
     """
     try:
-        deploy_sys.deploy_logs(nexus_url, nexus_path, build_url)
+        if 'nexus' in logs_url:
+            deploy_sys.deploy_logs(logs_url, logs_path, build_url)
+        else:
+            deploy_sys.deploy_logs_s3(logs_url, logs_path, build_url)
     except HTTPError as e:
         log.error(str(e))
         sys.exit(1)
