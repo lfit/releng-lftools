@@ -124,27 +124,102 @@ def file(ctx,
 
 
 @click.command()
-@click.argument('nexus-url', envvar='NEXUS_URL')
-@click.argument('nexus-path', envvar='NEXUS_PATH')
+@click.argument('logs-url', envvar='LOGS_URL')
+@click.argument('logs-path', envvar='LOGS_PATH')
 @click.argument('build-url', envvar='BUILD_URL')
 @click.pass_context
-def logs(ctx, nexus_url, nexus_path, build_url):
-    """Deploy logs to a Nexus site repository.
+def logs(ctx, logs_url, logs_path, build_url):
+    """Deploy logs to a Nexus site repository or s3 Bucket.
 
     This script fetches logs and system information and pushes them to Nexus
-    for log archiving.
+    and/or s3 for log archiving.
 
     To use this script the Nexus server must have a site repository configured
-    with the name "logs" as this is a hardcoded path.
+    with the name "logs" as this is a hardcoded path and/or s3 bucket must be created.
     """
     try:
-        deploy_sys.deploy_logs(nexus_url, nexus_path, build_url)
+        if 'http' not in logs_url:
+            deploy_sys.deploy_logs_s3(logs_url, logs_path, build_url)
+        else:
+            deploy_sys.deploy_logs(logs_url, logs_path, build_url)
     except HTTPError as e:
         log.error(str(e))
         sys.exit(1)
 
     log.info('Logs upload complete.')
 
+@click.command(name='archives-s3')
+@click.argument('s3_bucket', envvar='S3_BUCKET')
+@click.argument('s3_path', envvar='S3_PATH')
+@click.argument('workspace', envvar='WORKSPACE')
+@click.option('-p', '--pattern', multiple=True)
+@click.pass_context
+def archives_s3(ctx, s3_bucket, s3_path, workspace, pattern):
+    """Archive files to a s3 bucket.
+
+    Provides 2 ways to archive files:
+
+        1) globstar pattern provided by the user.
+        2) $WORKSPACE/archives directory provided by the user.
+
+    Requirements:
+
+    To use this API a must have a s3 bucket configured.
+
+    """
+    if not pattern:
+        pattern = None
+
+    try:
+        deploy_sys.deploy_archives_s3(s3_bucket, s3_path, workspace, pattern)
+    except HTTPError as e:
+        log.error(str(e))
+        sys.exit(1)
+    except OSError as e:
+        deploy_sys._log_error_and_exit(str(e))
+
+    log.info('Archives upload complete.')
+
+@click.command(name='logs-s3')
+@click.argument('s3_bucket', envvar='S3_BUCKET')
+@click.argument('build-url', envvar='BUILD_URL', default=False)
+@click.pass_context
+def logs_s3(ctx, s3_bucket, build_url):
+    """Deploy logs to a S3 bucket.
+
+    This script fetches logs and system information and pushes them to s3
+    for log archiving.
+    """
+    try:
+        deploy_sys.deploy_logs_s3(s3_bucket, build_url)
+    except HTTPError as e:
+        log.error(str(e))
+        sys.exit(1)
+
+    log.info('Logs upload complete.')
+
+@click.command(name='s3-zip')
+@click.argument('s3_bucket', envvar='S3_BUCKET')
+@click.argument('deploy_zip', envvar='DEPLOY_ZIP')
+@click.pass_context
+def s3_zip(ctx, s3_bucket, deploy_zip):
+    """Deploy zip file to s3 using awscli/s3cmd.
+
+    This script simply takes a zip file and uploads to a specified s3 bucket using the
+    awscli/s3cmd.
+
+    Requires the awscli/s3cmd via pip and correct aws key_id/secret_key to the upload.
+    """
+    try:
+        deploy_sys.deploy_s3_zip(s3_bucket, deploy_zip)
+    except IOError as e:
+        log.error(str(e))
+        sys.exit(1)
+    except HTTPError as e:
+        log.error(str(e))
+        sys.exit(1)
+
+    log.info('Zip file upload complete.')
 
 @click.command(name='maven-file')
 @click.argument('nexus-url', envvar='NEXUS_URL')
