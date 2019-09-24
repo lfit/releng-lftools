@@ -18,7 +18,6 @@ import requests
 from lftools import cli
 import lftools.deploy as deploy_sys
 
-
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
     'fixtures',
