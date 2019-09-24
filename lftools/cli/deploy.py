@@ -39,17 +39,17 @@ def deploy(ctx):
 
 
 @click.command()
-@click.argument('nexus-url', envvar='NEXUS_URL')
-@click.argument('nexus-path', envvar='NEXUS_PATH')
+@click.argument('logs-url', envvar='LOGS_URL')
+@click.argument('logs-path', envvar='LOGS_PATH')
 @click.argument('workspace', envvar='WORKSPACE')
 @click.option('-p', '--pattern', multiple=True)
+@click.option('-tmpdir', '--tmpdir', multiple=False)
 @click.pass_context
-def archives(ctx, nexus_url, nexus_path, workspace, pattern):
+def archives(ctx, logs_url, logs_path, workspace, tmpdir, pattern):
     """Archive files to a Nexus site repository.
 
     Provides 2 ways to archive files:
 
-        \b
         1) globstar pattern provided by the user.
         2) $WORKSPACE/archives directory provided by the user.
 
@@ -60,7 +60,10 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
         pattern = None
 
     try:
-        deploy_sys.deploy_archives(nexus_url, nexus_path, workspace, pattern)
+        if 'nexus' in logs_url:
+            deploy_sys.deploy_archives(logs_url, logs_path, workspace, pattern)
+        else:
+            deploy_sys.deploy_archives_s3(workspace, tmpdir, pattern)
     except HTTPError as e:
         log.error(str(e))
         sys.exit(1)
@@ -124,21 +127,24 @@ def file(ctx,
 
 
 @click.command()
-@click.argument('nexus-url', envvar='NEXUS_URL')
-@click.argument('nexus-path', envvar='NEXUS_PATH')
+@click.argument('logs-url', envvar='LOGS_URL')
+@click.argument('logs-path', envvar='LOGS_PATH')
 @click.argument('build-url', envvar='BUILD_URL')
+@click.option('-tmpdir', '--tmpdir', multiple=False)
 @click.pass_context
-def logs(ctx, nexus_url, nexus_path, build_url):
+def logs(ctx, logs_url, logs_path, build_url, tmpdir):
     """Deploy logs to a Nexus site repository.
 
-    This script fetches logs and system information and pushes them to Nexus
-    for log archiving.
+    This script fetches logs and system information and pushes them to Nexus.
 
     To use this script the Nexus server must have a site repository configured
-    with the name "logs" as this is a hardcoded path.
+    with the name "logs" as this is a hardcoded path..
     """
     try:
-        deploy_sys.deploy_logs(nexus_url, nexus_path, build_url)
+        if 'nexus' in logs_url:
+            deploy_sys.deploy_logs(logs_url, logs_path, build_url)
+        else:
+            deploy_sys.deploy_logs_s3(logs_url, logs_path, build_url, tmpdir)
     except HTTPError as e:
         log.error(str(e))
         sys.exit(1)
