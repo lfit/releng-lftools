@@ -22,6 +22,30 @@
       "revId": "c9d64e5dc9d41ce9ad0616f92310069a8203e77d",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de853f3b_9619fb0d",
+        "filename": "tests/test_rtd.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-09-24T21:34:55Z",
+      "side": 1,
+      "message": "It could be. The reason I didn\u0027t go that route is each endpoint is different (minus the root URL) so I thought it was trivial to leave the full URL intact. Plus, I find it more readable.\n\ne.g \nurl \u003d \u0027https://readthedocs.org/api/v3/projects/TestProject1/versions/?active\u003dTrue\u0027\n\nvs. \n\nurl \u003d CONSTANT + \"projects/TestProject1/versions/?active\u003dTrue\"\n\n\nI googled around for style suggestions since I\u0027m a big fan of readability and always open to cleaner ways to do things, but didn\u0027t find much. Do you know if there\u0027s anything out there? Could always put the whole thing in a dict too, I suppose.",
+      "parentUuid": "ca471433_f6c494fe",
+      "range": {
+        "startLine": 19,
+        "startChar": 34,
+        "endLine": 19,
+        "endChar": 65
+      },
+      "revId": "c9d64e5dc9d41ce9ad0616f92310069a8203e77d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
