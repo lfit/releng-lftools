@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca471433_f6c494fe",
+        "filename": "tests/test_rtd.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2019-09-24T20:43:50Z",
+      "side": 1,
+      "message": "could this be a constant somewhere, instead of hardcoding it repeatedly?",
+      "range": {
+        "startLine": 19,
+        "startChar": 34,
+        "endLine": 19,
+        "endChar": 65
+      },
+      "revId": "c9d64e5dc9d41ce9ad0616f92310069a8203e77d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
