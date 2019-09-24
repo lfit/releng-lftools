@@ -433,6 +433,114 @@ def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
         raise requests.HTTPError(e)
     log.debug('{}: {}'.format(resp.status_code, resp.text))
 
+def deploy_logs_s3(s3_bucket, build_url):
+    """Deploy logs to a s3 bucket.
+
+    Fetches logs and system information and pushes them to s3
+    for log archiving.
+    Requirements:
+
+    Parameters:
+
+        :s3_bucket: Name of the s3 bucket. Eg: lf-logs-test
+        :build_url: URL of the Jenkins build. Jenkins typically provides this
+                    via the $BUILD_URL environment variable.
+    """
+    s3_bucket = s3_bucket
+    previous_dir = os.getcwd()
+    work_dir = tempfile.mkdtemp(prefix='lftools-dl.')
+    os.chdir(work_dir)
+    log.debug('work_dir: {}'.format(work_dir))
+
+    build_details = open('_build-details.log', 'w+')
+    build_details.write('build-url: {}'.format(build_url))
+
+    with open('_sys-info.log', 'w+') as sysinfo_log:
+        sys_cmds = []
+
+        log.debug('Platform: {}'.format(sys.platform))
+        if sys.platform == "linux" or sys.platform == "linux2":
+            sys_cmds = [
+                ['uname', '-a'],
+                ['lscpu'],
+                ['nproc'],
+                ['df', '-h'],
+                ['free', '-m'],
+                ['ip', 'addr'],
+                ['sar', '-b', '-r', '-n', 'DEV'],
+                ['sar', '-P', 'ALL'],
+            ]
+
+        for c in sys_cmds:
+            try:
+                output = subprocess.check_output(c).decode('utf-8')
+            except OSError:  # TODO: Switch to FileNotFoundError when Python < 3.5 support is dropped.
+                log.debug('Command not found: {}'.format(c))
+                continue
+
+            output = '---> {}:\n{}\n'.format(' '.join(c), output)
+            sysinfo_log.write(output)
+            log.info(output)
+
+    build_details.close()
+
+    # Magic string used to trim console logs at the appropriate level during wget
+    MAGIC_STRING = "-----END_OF_BUILD-----"
+    log.info(MAGIC_STRING)
+
+    resp = requests.get('{}/consoleText'.format(_format_url(build_url)))
+    with io.open('console.log', 'w+', encoding='utf-8') as f:
+        f.write(six.text_type(resp.content.decode('utf-8').split(MAGIC_STRING)[0]))
+
+    resp = requests.get('{}/timestamps?time=HH:mm:ss&appendLog'.format(_format_url(build_url)))
+    with io.open('console-timestamp.log', 'w+', encoding='utf-8') as f:
+        f.write(six.text_type(resp.content.decode('utf-8').split(MAGIC_STRING)[0]))
+
+    _compress_text(work_dir)
+
+    console_zip = tempfile.NamedTemporaryFile(prefix='lftools-dl', delete=True)
+    log.debug('console-zip: {}'.format(console_zip.name))
+    shutil.make_archive(console_zip.name, 'zip', work_dir)
+    deploy_s3_zip(s3_bucket, '{}.zip'.format(console_zip.name))
+    console_zip.close()
+
+    os.chdir(previous_dir)
+    shutil.rmtree(work_dir)
+
+
+def deploy_s3_zip(s3_bucket, zip_file):
+    """"Deploy zip file to s3 using awscli/s3cmd.
+
+    This function simply takes a zip file and uploads to a specified s3 bucket using the
+    awscli/s3cmd.
+
+    Requires the awscli/s3cmd via pip and correct aws key_id/secret_key to the upload.
+
+    Parameters:
+
+        s3_bucket: Name of the s3 bucket. Eg: lf-logs-test
+        zip_file:  The zip to deploy. (Ex: /tmp/artifacts.zip)
+
+    Sample:
+    """
+
+    log.debug('Uploading {} to {}'.format(zip_file, s3_bucket))
+
+    try:
+        print('Sending '+zip_file+' to s3://' +s3_bucket)
+        subprocess.run('aws s3 cp '+zip_file+ " s3://"+s3_bucket+ " --profile zowe", shell=True)
+        #subprocess.run('s3cmd put ' +zip_file+ " s3://" +s3_bucket)
+    except:
+        print('Upload failed')
+
+    """except requests.HTTPError as e:
+        files = _get_filenames_in_zipfile(zip_file)
+        log.info("Uploading {} failed. It contained the following files".format(zip_file))
+        for f in files:
+            log.info("   {}".format(f))
+        raise requests.HTTPError(e)
+    log.debug('{}: {}'.format(resp.status_code, resp.text))"""
+
 
 def nexus_stage_repo_create(nexus_url, staging_profile_id):
     """Create a Nexus staging repo.
