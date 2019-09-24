@@ -11,7 +11,6 @@
 
 __author__ = 'Thanh Ha'
 
-
 import logging
 import subprocess
 import sys
@@ -49,12 +48,12 @@ def archives(ctx, nexus_url, nexus_path, workspace, pattern):
 
     Provides 2 ways to archive files:
 
-        \b
         1) globstar pattern provided by the user.
         2) $WORKSPACE/archives directory provided by the user.
 
     To use this command the Nexus server must have a site repository configured
     with the name "logs" as this is a hardcoded log path.
+
     """
     if not pattern:
         pattern = None
@@ -136,6 +135,7 @@ def logs(ctx, nexus_url, nexus_path, build_url):
 
     To use this script the Nexus server must have a site repository configured
     with the name "logs" as this is a hardcoded path.
+
     """
     try:
         deploy_sys.deploy_logs(nexus_url, nexus_path, build_url)
@@ -143,7 +143,27 @@ def logs(ctx, nexus_url, nexus_path, build_url):
         log.error(str(e))
         sys.exit(1)
 
-    log.info('Logs upload complete.')
+    log.info('Logs upload to Nexus complete.')
+
+
+@click.command(name='s3')
+@click.argument('s3_bucket', envvar='S3_BUCKET')
+@click.argument('s3_path')
+@click.argument('build-url', envvar='BUILD_URL')
+@click.argument('workspace', envvar='WORKSPACE')
+@click.option('-p', '--pattern', multiple=True)
+@click.pass_context
+def s3(ctx, s3_bucket, s3_path, build_url, workspace, pattern):
+    """Deploy logs and archives to a S3 bucket."""
+    if not pattern:
+        pattern = None
+    try:
+        deploy_sys.deploy_s3(s3_bucket, s3_path, build_url, workspace, pattern)
+    except HTTPError as e:
+        log.error(str(e))
+        sys.exit(1)
+
+    log.info('Logs upload to S3 complete.')
 
 
 @click.command(name='maven-file')
@@ -326,3 +346,4 @@ deploy.add_command(nexus_stage)
 deploy.add_command(nexus_stage_repo_close)
 deploy.add_command(nexus_stage_repo_create)
 deploy.add_command(nexus_zip)
+deploy.add_command(s3)
