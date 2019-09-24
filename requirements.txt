@@ -1,3 +1,4 @@
+boto3
 click
 docker
 glob2  # Needed for Python < 3.5 recursive glob support

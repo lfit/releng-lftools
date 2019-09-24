@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    Allow shipping logs to AWS s3 bucket.
+
+    A conditional statement is provided so that if a nexus url is given
+    logs will ship to nexus and if a s3 bucket name is given, logs will be
+    shipped to s3.
