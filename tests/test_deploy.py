@@ -18,6 +18,9 @@ import requests
 from lftools import cli
 import lftools.deploy as deploy_sys
 
+import boto3
+from moto import mock_s3
+
 
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
