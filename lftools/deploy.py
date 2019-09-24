@@ -11,20 +11,27 @@
 """Library of functions for deploying artifacts to Nexus."""
 
 import concurrent.futures
+from datetime import timedelta
 import errno
 import gzip
 import io
+import json
 import logging
 import math
+import mimetypes
+import multiprocessing
 from multiprocessing import cpu_count
+from multiprocessing.dummy import Pool as ThreadPool
 import os
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import zipfile
 
+import boto3
 from defusedxml.minidom import parseString
 import glob2  # Switch to glob when Python < 3.5 support is dropped
 import requests
@@ -439,6 +446,140 @@ def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
             log.info("   {}".format(f))
         raise requests.HTTPError(e)
     log.debug('{}: {}'.format(resp.status_code, resp.text))
+
+
+def deploy_archives_s3(workspace, tmpdir, pattern=None):
+    """Archive files to a temporary directory to be shipped with logs.
+
+    Provides 2 ways to archive files:
+        1) $WORKSPACE/archives directory provided by the user.
+        2) globstar pattern provided by the user.
+
+    Parameters:
+
+        :workspace: Directory in which to search, typically in Jenkins this is
+            $WORKSPACE
+        :tmpdir: Temporary directory to move files from $WORKSPACE/archives to
+            or globstar pattern. Eg: $tmpdir
+        :pattern: Space-separated list of Globstar patterns of files to
+            archive. (optional)
+    """
+    work_dir = tmpdir
+    subprocess.run(['mkdir', work_dir])
+    os.chdir(work_dir)
+    log.debug('work_dir: {}'.format(work_dir))
+    copy_archives(workspace, pattern)
+
+
+def deploy_logs_s3(s3_bucket, s3_path, build_url, tmpdir):
+    """Deploy logs and archives to S3 bucket.
+
+    Fetches logs and system information and pushes them and archives to S3
+    for log archiving.
+
+    Requires the s3 bucket to exist.
+
+    Parameters:
+
+        :s3_bucket: Name of S3 bucket. Eg: lf-project-date
+        :s3_path: Path on S3 bucket place the logs and archives. Eg:
+            $SILO/$JENKINS_HOSTNAME/$JOB_NAME/$BUILD_NUMBER
+        :build_url: URL of the Jenkins build. Jenkins typically provides this
+                    via the $BUILD_URL environment variable.
+    """
+    s3_bucket = s3_bucket.lower()
+    previous_dir = os.getcwd()
+    work_dir = tmpdir
+    os.chdir(work_dir)
+    log.debug('work_dir: {}'.format(work_dir))
+
+    build_details = open('_build-details.log', 'w+')
+    build_details.write('build-url: {}'.format(build_url))
+
+    with open('_sys-info.log', 'w+') as sysinfo_log:
+        sys_cmds = []
+
+        log.debug('Platform: {}'.format(sys.platform))
+        if sys.platform == "linux" or sys.platform == "linux2":
+            sys_cmds = [
+                ['uname', '-a'],
+                ['lscpu'],
+                ['nproc'],
+                ['df', '-h'],
+                ['free', '-m'],
+                ['ip', 'addr'],
+                ['sar', '-b', '-r', '-n', 'DEV'],
+                ['sar', '-P', 'ALL'],
+            ]
+
+        for c in sys_cmds:
+            try:
+                output = subprocess.check_output(c).decode('utf-8')
+            except FileNotFoundError:
+                log.debug('Command not found: {}'.format(c))
+                continue
+
+            output = '---> {}:\n{}\n'.format(' '.join(c), output)
+            sysinfo_log.write(output)
+            log.info(output)
+
+    build_details.close()
+
+    # Magic string used to trim console logs at the appropriate level during wget
+    MAGIC_STRING = "-----END_OF_BUILD-----"
+    log.info(MAGIC_STRING)
+
+    resp = requests.get('{}/consoleText'.format(_format_url(build_url)))
+    with io.open('console.log', 'w+', encoding='utf-8') as f:
+        f.write(six.text_type(resp.content.decode('utf-8').split(MAGIC_STRING)[0]))
+
+    resp = requests.get('{}/timestamps?time=HH:mm:ss&appendLog'.format(_format_url(build_url)))
+    with io.open('console-timestamp.log', 'w+', encoding='utf-8') as f:
+        f.write(six.text_type(resp.content.decode('utf-8').split(MAGIC_STRING)[0]))
+
+    _compress_text(work_dir)
+
+    with open("index.html", "w") as file:
+        subprocess.run(['tree', '-hFH', "."], stdout=file)
+
+    def _deploy_s3_upload(file):
+        session = boto3.Session(profile_name='zowe')
+        s3 = session.resource('s3')
+        if file == 'index.html':
+            s3.Bucket(s3_bucket).upload_file(file, '{}{}'.format(s3_path, file), ExtraArgs={
+                      'ACL': 'public-read', 'ContentType': mimetypes.guess_type(file)[0]})
+        elif mimetypes.guess_type(file)[0] == None and mimetypes.guess_type(file)[1] == None:
+            s3.Bucket(s3_bucket).upload_file(file, '{}{}'.format(s3_path, file), ExtraArgs={
+                      'ACL': 'public-read', 'ContentType': 'text/plain'})
+        elif mimetypes.guess_type(file)[0] == None:
+            s3.Bucket(s3_bucket).upload_file(file, '{}{}'.format(s3_path, file), ExtraArgs={
+                      'ACL': 'public-read', 'ContentType': 'text/plain', 'ContentEncoding': mimetypes.guess_type(file)[1]})
+        else:
+            s3.Bucket(s3_bucket).upload_file(file, '{}{}'.format(s3_path, file), ExtraArgs={
+                      'ACL': 'public-read', 'ContentType': mimetypes.guess_type(file)[0], 'ContentEncoding': mimetypes.guess_type(file)[1]})
+        log.debug('Uploaded {}'.format(file))
+
+    file_list = []
+
+    log.info('Uploading files from {} to {}/{}'.format(work_dir, s3_bucket, s3_path))
+    files = glob2.glob('**/*', recursive=True)
+    for file in files:
+        if os.path.isfile(file):
+            file_list.append(file)
+
+    # Perform parallel upload
+    upload_start = time.time()
+    pool = ThreadPool(multiprocessing.cpu_count())
+    pool.map(_deploy_s3_upload, file_list)
+    pool.close()
+    pool.join()
+    upload_time = time.time() - upload_start
+    log.info("Uploaded in {} seconds.".format(timedelta(seconds=round(upload_time))))
+
+    log.info("http://{}.s3-website-us-west-2.amazonaws.com/{}index.html".format(s3_bucket, s3_path))
+
+    os.chdir(previous_dir)
+    shutil.rmtree(work_dir)
 
 
 def nexus_stage_repo_create(nexus_url, staging_profile_id):

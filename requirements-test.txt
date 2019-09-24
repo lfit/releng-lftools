@@ -1,4 +1,6 @@
 -r requirements.txt
+boto3
+moto
 pytest
 pytest-click
 pytest-datafiles
