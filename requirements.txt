@@ -1,4 +1,5 @@
 bs4
+boto3
 click
 defusedxml # Needed due to tox complains on parseString not safe
 docker
