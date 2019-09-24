@@ -18,6 +18,9 @@ import requests
 from lftools import cli
 import lftools.deploy as deploy_sys
 
+import boto3
+from moto import mock_s3
+
 
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
@@ -777,3 +780,20 @@ def test_deploy_nexus_stage(datafiles, responses):
 
     #Execute test, should not return anything for successful run.
     deploy_sys.deploy_nexus_stage (url, staging_profile_id, deploy_dir)
+'''
+@mock_s3
+@pytest.mark.houatest
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, 'deploy'),
+    )
+def test_deploy_s3_zip(cli_runner, datafiles):
+    os.chdir(str(datafiles))
+    s3_bucket = 'my-bucket'
+    conn = boto3.client('s3', region_name='us-west-2')
+    conn.create_bucket(Bucket=s3_bucket)
+    result = cli_runner.invoke(
+        cli.cli,
+        ['--debug', 'deploy', 's3-zip', s3_bucket, 'zip-test-files/test.zip'],
+        obj={})
+    assert result.exit_code == 2
+'''
