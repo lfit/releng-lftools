@@ -19,7 +19,9 @@ import glob2  # Switch to glob when Python < 3.5 support is dropped
 import gzip
 import io
 import logging
-import math
+import mimetypes
+import multiprocessing
+from multiprocessing.dummy import Pool as ThreadPool
 import os
 import re
 import requests
@@ -31,6 +33,13 @@ import tempfile
 import time
 import zipfile
 
+from defusedxml.minidom import parseString
+import glob2  # Switch to glob when Python < 3.5 support is dropped
+import requests
+import six
+import boto3
+import awscli
+import json
 
 log = logging.getLogger(__name__)
 
@@ -237,6 +246,8 @@ def copy_archives(workspace, pattern=None):
                 try:
                     log.debug('Moving {}'.format(f))
                     shutil.move(f, dest_dir)
+                    ls = os.listdir(dest_dir)
+                    #print(ls)
                 except shutil.Error as e:
                     log.error(e)
                     raise OSError(errno.EPERM, 'Could not move to', archives_dir)
@@ -257,6 +268,7 @@ def copy_archives(workspace, pattern=None):
         search = os.path.join(workspace, p)
         paths.extend(glob2.glob(search, recursive=True))
     log.debug('Files found: {}'.format(paths))
+    print('Files found: {}'.format(paths))
 
     no_dups_paths = _remove_duplicates_and_sort(paths)
 
@@ -442,6 +454,184 @@ def deploy_nexus_zip(nexus_url, nexus_repo, nexus_path, zip_file):
         raise requests.HTTPError(e)
     log.debug('{}: {}'.format(resp.status_code, resp.text))
 
+def deploy_logs_s3(s3_bucket, s3_path, build_url):
+    """Deploy logs to a s3 bucket.
+
+    Fetches logs and system information and pushes them to s3
+    for log archiving.
+    Requirements:
+
+    Parameters:
+
+        :s3_bucket: Name of the s3 bucket. Eg: lf-logs-test
+        :build_url: URL of the Jenkins build. Jenkins typically provides this
+                    via the $BUILD_URL environment variable.
+    """
+    s3_bucket = s3_bucket
+    previous_dir = os.getcwd()
+    work_dir = tempfile.mkdtemp(prefix='lftools-dl.')
+    os.chdir(work_dir)
+    log.debug('work_dir: {}'.format(work_dir))
+
+    build_details = open('_build-details.log', 'w+')
+    build_details.write('build-url: {}'.format(build_url))
+
+    with open('_sys-info.log', 'w+') as sysinfo_log:
+        sys_cmds = []
+
+        log.debug('Platform: {}'.format(sys.platform))
+        if sys.platform == "linux" or sys.platform == "linux2":
+            sys_cmds = [
+                ['uname', '-a'],
+                ['lscpu'],
+                ['nproc'],
+                ['df', '-h'],
+                ['free', '-m'],
+                ['ip', 'addr'],
+                ['sar', '-b', '-r', '-n', 'DEV'],
+                ['sar', '-P', 'ALL'],
+            ]
+
+        for c in sys_cmds:
+            try:
+                output = subprocess.check_output(c).decode('utf-8')
+            except OSError:  # TODO: Switch to FileNotFoundError when Python < 3.5 support is dropped.
+                log.debug('Command not found: {}'.format(c))
+                continue
+
+            output = '---> {}:\n{}\n'.format(' '.join(c), output)
+            sysinfo_log.write(output)
+            log.info(output)
+
+    build_details.close()
+
+    # Magic string used to trim console logs at the appropriate level during wget
+    MAGIC_STRING = "-----END_OF_BUILD-----"
+    log.info(MAGIC_STRING)
+
+    resp = requests.get('{}/consoleText'.format(_format_url(build_url)))
+    with io.open('console.log', 'w+', encoding='utf-8') as f:
+        f.write(six.text_type(resp.content.decode('utf-8').split(MAGIC_STRING)[0]))
+
+    resp = requests.get('{}/timestamps?time=HH:mm:ss&appendLog'.format(_format_url(build_url)))
+    with io.open('console-timestamp.log', 'w+', encoding='utf-8') as f:
+        f.write(six.text_type(resp.content.decode('utf-8').split(MAGIC_STRING)[0]))
+    _compress_text(work_dir)
+    subprocess.call('tree -H . > index.html', shell=True)
+    # subprocess.call('tree -H $WORKSPACE > index.html', shell=True)
+
+    check_s3_bucket_status(s3_bucket)
+
+    def _deploy_s3_upload(file):
+        session = boto3.Session(profile_name='zowe')
+        s3 = session.resource('s3')
+        if 'gz' in file:
+            s3.Bucket(s3_bucket).upload_file(file, '{}{}'.format(s3_path, file), ExtraArgs={'ACL': 'public-read','ContentType': mimetypes.guess_type(file)[0], 'ContentEncoding':'gzip'})
+        else:
+            s3.Bucket(s3_bucket).upload_file(file, '{}{}'.format(s3_path, file), ExtraArgs={'ACL': 'public-read','ContentType': mimetypes.guess_type(file)[0]})
+        log.debug('Uploaded {}'.format(file))
+
+    file_list = []
+
+    previous_dir = os.getcwd()
+    log.info('Uploading files from {} to {}/{}'.format(work_dir, s3_bucket, s3_path ))
+    files = glob2.glob('**/*')
+    for file in files:
+        if os.path.isfile(file):
+            base_name = os.path.basename(file)
+            file_list.append(file)
+
+    # Perform parallel upload
+    upload_start = time.time()
+    pool = ThreadPool(multiprocessing.cpu_count())
+    pool.map(_deploy_s3_upload, file_list)
+    pool.close()
+    pool.join()
+    upload_time = time.time() - upload_start
+    log.info("Uploaded in {} seconds.".format(timedelta(seconds=round(upload_time))))
+
+    log.info("http://{}.s3-website-us-west-2.amazonaws.com/{}index.html".format(s3_bucket, s3_path))
+
+    os.chdir(previous_dir)
+    shutil.rmtree(work_dir)
+
+
+def check_s3_bucket_status(s3_bucket):
+    """Check to see if s3 bucket is created.
+
+    This function checks to see if s3 bucket exists, if not,
+    creates bucket, bucket policy and static website configs.
+    Lastly, it applies the bucket policy and static site configs
+    to the bucket.
+    """
+    log.debug('Verifying {} exists'.format(s3_bucket))
+    from botocore.exceptions import ClientError
+    session = boto3.Session(profile_name='zowe')
+    s3 = session.client('s3')
+
+    try:
+        s3.head_bucket(Bucket=s3_bucket)
+    except ClientError as e:
+        log.debug(e)
+        s3.create_bucket(Bucket=s3_bucket,
+                         ACL='public-read',
+                         CreateBucketConfiguration={'LocationConstraint': 'us-west-2'})
+    try:
+        waiter = s3.get_waiter('bucket_exists')
+        waiter.wait(Bucket=s3_bucket)
+        website_configuration = {
+            'ErrorDocument': {'Key': 'error.html'},
+            'IndexDocument': {'Suffix': 'index.html'}, }
+
+        bucket_policy = {
+            'Version': '2012-10-17',
+            'Statement': [{
+                'Sid': 'PublicReadGetObject',
+                'Effect': 'Allow',
+                'Principal': '*',
+                'Action': ['s3:GetObject'],
+                'Resource': 'arn:aws:s3:::{s3_bucket}/*'
+            }]
+        }
+        bucket_policy = json.dumps(bucket_policy)
+        print('Adding policy and website config')
+        s3.put_bucket_website(Bucket=s3_bucket, WebsiteConfiguration=website_configuration)
+        s3.put_bucket_policy(Bucket=s3_bucket, Policy=bucket_policy)
+    except ClientError as e:
+        log.debug(e)
+
+
+def deploy_s3_zip(s3_bucket, zip_file, s3_path):
+    """"Deploy zip file to s3 using awscli/s3cmd/boto3.
+
+    This function simply takes a zip file and uploads to a specified s3 bucket using the
+    awscli/s3cmd.
+
+    Requires the awscli/s3cmdi/boto3 via pip and correct aws key_id/secret_key to the upload.
+
+    Parameters:
+
+        s3_bucket: Name of the s3 bucket. Eg: lf-logs-test
+        zip_file:  The zip to deploy. (Ex: /tmp/artifacts.zip)
+
+    Sample:
+    """
+
+    log.debug('Uploading {} to {}'.format(zip_file, s3_bucket))
+    path = os.path.split(zip_file)
+    object_name = s3_path + path[1]
+    print(object_name)
+
+    try:
+        from botocore.exceptions import ClientError
+        session = boto3.Session(profile_name='zowe')
+        s3 = session.client('s3')
+        s3.upload_file(zip_file, s3_bucket, object_name)
+    except ClientError as e:
+        log.info("Uploading {} failed".format(zip_file))
+        log.error(e)
+        return False
+    return True
 
 def nexus_stage_repo_create(nexus_url, staging_profile_id):
     """Create a Nexus staging repo.
