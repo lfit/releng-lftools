@@ -17,14 +17,12 @@ function dcocheck {
   REPO_PATH="$1"
   cd "$REPO_PATH" || exit 1
 
-  status=0
   while IFS= read -r -a line; do
       # shellcheck disable=SC2128
       my_array+=( "$line" )
       done < <( git branch -r | grep -v origin/HEAD )
   for branch in "${my_array[@]}"
   do
-      status=1
       branch=$(echo "$branch" | xargs)
       echo "Checking commits in branch $branch for commits missing DCO..."
       git log "$branch" --no-merges --pretty="%H %ae" --grep 'Signed-off-by' --invert-grep -- | \
@@ -33,21 +31,18 @@ function dcocheck {
             >&2 echo "$commit_hash is missing Signed-off-by line."
           done
   done
-  exit $status
 }
 
 function dcomatch {
   REPO_PATH="$1"
   cd "$REPO_PATH" || exit 1
 
-  status=0
   while IFS= read -r -a line; do
       # shellcheck disable=SC2128
       my_array+=( "$line" )
       done < <( git branch -r | grep -v origin/HEAD )
   for branch in "${my_array[@]}"
   do
-      status=1
       branch=$(echo "$branch" | xargs)
       git log "$branch" --no-merges --pretty="%H %ae" --grep 'Signed-off-by' -- | \
           while read -r results; do
@@ -62,7 +57,6 @@ function dcomatch {
             fi
           done
   done
-  exit $status
 }
 
 case "$1" in
