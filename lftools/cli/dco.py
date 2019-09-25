@@ -13,6 +13,7 @@ import subprocess
 import sys
 
 import click
+from lftools.shell import dco as dco_checker
 
 
 @click.group()
@@ -36,7 +37,8 @@ def check(ctx, repo_path):
     """
     if not repo_path:
         repo_path = "."
-    status = subprocess.call(['dco', 'check', repo_path])
+    # status = subprocess.call(['dco', 'check', repo_path])
+    status = dco_checker.check(repo_path)
     sys.exit(status)
 
 
@@ -54,7 +56,7 @@ def match(ctx, repo_path):
     """
     if not repo_path:
         repo_path = "."
-    status = subprocess.call(['dco', 'match', repo_path])
+    status = dco_checker.match(repo_path)
     sys.exit(status)
 
 
