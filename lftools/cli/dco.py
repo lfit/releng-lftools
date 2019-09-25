@@ -9,10 +9,10 @@
 ##############################################################################
 """Script to check a git repository for commits missing DCO."""
 
-import subprocess
 import sys
 
 import click
+from lftools.shell import dco as dco_checker
 
 
 @click.group()
@@ -36,7 +36,7 @@ def check(ctx, repo_path):
     """
     if not repo_path:
         repo_path = "."
-    status = subprocess.call(['dco', 'check', repo_path])
+    status = dco_checker.check(repo_path)
     sys.exit(status)
 
 
@@ -44,7 +44,7 @@ def check(ctx, repo_path):
 @click.argument('repo-path', required=False)
 @click.pass_context
 def match(ctx, repo_path):
-    """Check repository for commits whose DCO does not match the commit author's email.
+    """Check for commits whose DCO does not match the commit author's email.
 
     This check will exclude merge commits and empty commits.
     It operates in your current working directory which has to
@@ -54,7 +54,7 @@ def match(ctx, repo_path):
     """
     if not repo_path:
         repo_path = "."
-    status = subprocess.call(['dco', 'match', repo_path])
+    status = dco_checker.match(repo_path)
     sys.exit(status)
 
 
