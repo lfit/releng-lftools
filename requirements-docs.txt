@@ -1,6 +1,4 @@
 -r requirements.txt
 lfdocs-conf
-reno~=2.11.2
+reno
 sphinxcontrib-programoutput
-# pytest 5 requires Python >= 3.5
-pytest~=4.6.4

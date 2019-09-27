@@ -1,11 +1,6 @@
 -r requirements.txt
-# pytest 5 requires Python >= 3.5
-pytest~=4.6.4
+pytest
 pytest-click
 pytest-datafiles
 pytest-mock
 pytest-responses
-
-# Pin transitive dependencies
-more-itertools~=5.0.0  # 6.0.0 requires Python 3.4
-
