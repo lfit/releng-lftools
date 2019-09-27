@@ -13,12 +13,14 @@
 __author__ = 'Thanh Ha'
 
 import logging
+import os.path
 
 from six.moves import configparser
 from xdg import XDG_CONFIG_HOME
 
 log = logging.getLogger(__name__)
-LFTOOLS_CONFIG_FILE = '/'.join([XDG_CONFIG_HOME, 'lftools', 'lftools.ini'])
+
+LFTOOLS_CONFIG_FILE = os.path.join(XDG_CONFIG_HOME, 'lftools', 'lftools.ini')
 
 
 def get_config():
