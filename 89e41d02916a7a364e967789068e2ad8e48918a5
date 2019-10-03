@@ -117,6 +117,30 @@
       "revId": "89e41d02916a7a364e967789068e2ad8e48918a5",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9178427b_d7231c28",
+        "filename": "lftools/openstack/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 127
+      },
+      "writtenOn": "2019-10-03T15:58:38Z",
+      "side": 1,
+      "message": "looks like click.argument doesn\u0027t take a help value *shrug*",
+      "parentUuid": "7208394e_eddeaa00",
+      "range": {
+        "startLine": 279,
+        "startChar": 16,
+        "endLine": 279,
+        "endChar": 28
+      },
+      "revId": "89e41d02916a7a364e967789068e2ad8e48918a5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
