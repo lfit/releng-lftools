@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "19e5472e_40f68a05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-10-03T15:39:02Z",
+      "side": 1,
+      "message": "Agreed, this is likely todo with the lftools, since openstack cli works well. I forgot to try with the openstack cli when I getting an error earlier.",
+      "parentUuid": "02beb37e_c9365f5d",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 8
+      },
+      "revId": "89e41d02916a7a364e967789068e2ad8e48918a5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1054c9d4_4b557ec7",
         "filename": "lftools/openstack/cmd.py",
         "patchSetId": 1
