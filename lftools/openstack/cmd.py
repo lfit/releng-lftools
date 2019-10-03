@@ -276,16 +276,17 @@ def list(ctx, days):
 
 
 @click.command()
-@click.argument('volume')
+@click.argument('volume_id',
+    help='ID of volume to delete')
 @click.option(
     '--minutes', type=int, default=0,
     help='Delete volumes if older than x minutes.')
 @click.pass_context
-def remove(ctx, volume, minutes):
+def remove(ctx, volume_id, minutes):
     """Remove volumes."""
     os_volume.remove(
         ctx.obj['os_cloud'],
-        volume_name=volume,
+        volume_id=volume_id,
         minutes=minutes)
 
 

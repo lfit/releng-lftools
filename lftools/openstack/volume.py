@@ -73,14 +73,15 @@ def cleanup(os_cloud, days=0):
     _remove_volumes_from_cloud(filtered_volumes, cloud)
 
 
-def remove(os_cloud, volume_name, minutes=0):
+def remove(os_cloud, volume_id, minutes=0):
     """Remove a volume from cloud.
 
     :arg str os_cloud: Cloud name as defined in OpenStack clouds.yaml.
+    :arg str volume_id: Volume ID to delete
     :arg int minutes: Only delete volume if it is older than number of minutes.
     """
     cloud = shade.openstack_cloud(cloud=os_cloud)
-    volume = cloud.get_volume(volume_name)
+    volume = cloud.get_volume_by_id(volume_id)
 
     if not volume:
         print("ERROR: volume not found.")
@@ -91,4 +92,4 @@ def remove(os_cloud, volume_name, minutes=0):
         print('WARN: volume "{}" is not older than {} minutes.'.format(
             volume.name, minutes))
     else:
-        cloud.delete_volume(volume.name)
+        cloud.delete_volume(volume.id)
