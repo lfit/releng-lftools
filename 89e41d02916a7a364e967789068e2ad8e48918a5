@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1e9fac50_1bb89fa2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-10-03T15:32:43Z",
+      "side": 1,
+      "message": "this is precisely the issue with the current openstack cron jobs, although ... delete with the id does not work with the openstack cli.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 8
+      },
+      "revId": "89e41d02916a7a364e967789068e2ad8e48918a5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1054c9d4_4b557ec7",
         "filename": "lftools/openstack/cmd.py",
         "patchSetId": 1
