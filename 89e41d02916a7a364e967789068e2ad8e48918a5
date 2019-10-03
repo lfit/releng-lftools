@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "02beb37e_c9365f5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 127
+      },
+      "writtenOn": "2019-10-03T15:36:35Z",
+      "side": 1,
+      "message": "But you\u0027re not using OpenStack CLI to delete, you\u0027re actually using this command, which is grabbing the ID, then trying to delete by name.",
+      "parentUuid": "1e9fac50_1bb89fa2",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 8
+      },
+      "revId": "89e41d02916a7a364e967789068e2ad8e48918a5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1054c9d4_4b557ec7",
         "filename": "lftools/openstack/cmd.py",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "89e41d02916a7a364e967789068e2ad8e48918a5",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7208394e_eddeaa00",
+        "filename": "lftools/openstack/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 127
+      },
+      "writtenOn": "2019-10-03T15:36:35Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1054c9d4_4b557ec7",
+      "range": {
+        "startLine": 279,
+        "startChar": 16,
+        "endLine": 279,
+        "endChar": 28
+      },
+      "revId": "89e41d02916a7a364e967789068e2ad8e48918a5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
