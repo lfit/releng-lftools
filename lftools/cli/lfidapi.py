@@ -14,6 +14,9 @@ import logging
 
 import click
 
+import inspect
+import textwrap
+
 from lftools.lfidapi import helper_create_group
 from lftools.lfidapi import helper_invite
 from lftools.lfidapi import helper_match_ldap_to_info
@@ -32,12 +35,27 @@ def lfidapi(ctx):
 
 @click.command()
 @click.argument('group')
+@click.option('--infostyle', is_flag=True, required=False,)
 @click.pass_context
-def search_members(ctx, group):
+def search_members(ctx, group, infostyle):
     """List members of a group."""
     members = helper_search_members(group)
-    for member in members:
-        log.info('%s <%s>' % (member['username'], member['mail']))
+
+    if infostyle:
+        for member in members:
+            company = email=member['mail'].split('@')[1]
+            string = """\
+- name: "{name}"
+  email: "{email}" 
+  company: "{company}"
+  id: "{name}"\
+""".format(name=member['username'], email=member['mail'], company=company)
+            print(textwrap.dedent(string))
+
+    else:
+        for member in members:
+            log.info('%s <%s>' % (member['username'], member['mail']))
+
 
 
 @click.command()
