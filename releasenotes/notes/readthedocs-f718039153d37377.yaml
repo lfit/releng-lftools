@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    Add support for RTD subprojects, including list, details, create, delete.

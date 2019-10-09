@@ -138,3 +138,39 @@ def test_project_build_trigger():
                   url='https://readthedocs.org/api/v3/projects/testproject1/versions/latest/builds/', # noqa
                   json=data, status=201)
     assert rtd.project_build_trigger('testproject1', 'latest')
+
+
+@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, 'rtd'),)
+@responses.activate
+def test_subproject_list(datafiles):
+    os.chdir(str(datafiles))
+    json_file = open('subproject_list.json', 'r')
+    json_data = json.loads(json_file.read())
+    responses.add(responses.GET,
+                  url='https://readthedocs.org/api/v3/projects/TestProject1/subprojects/',  # noqa
+                  json=json_data, status=200, match_querystring=True)
+    assert 'testproject2' in rtd.subproject_list('TestProject1')
+
+
+@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, 'rtd'),)
+@responses.activate
+def test_subproject_details(datafiles):
+    os.chdir(str(datafiles))
+    json_file = open('subproject_details.json', 'r')
+    json_data = json.loads(json_file.read())
+    responses.add(responses.GET,
+                  url='https://readthedocs.org/api/v3/projects/TestProject1/subprojects/testproject2/',  # NOQA
+                  json=json_data, status=200)
+    assert 'child' in rtd.subproject_details('TestProject1', 'testproject2')
+
+
+@responses.activate
+def test_subproject_create():
+    responses.add(responses.POST,
+                  url='https://readthedocs.org/api/v3/projects/TestProject1/subprojects/',  # NOQA
+                  status=201)
+    assert rtd.subproject_create('TestProject1', 'testproject2')
+
+
+def test_subproject_delete():
+    assert "untested because responses doesn't have DELETE support"

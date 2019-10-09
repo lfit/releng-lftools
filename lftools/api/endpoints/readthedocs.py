@@ -212,3 +212,87 @@ class ReadTheDocs(client.RestApi):
         result = self.post('projects/{}/versions/{}/builds/'
                            .format(project, version))[1]
         return result
+
+    def subproject_list(self, project):
+        """Return a list of subprojects.
+
+        This returns the list of subprojects by their slug name ['slug'],
+        not their pretty name ['name'].
+
+        :param kwargs:
+        :return: [subprojects]
+        """
+        result = self.get('projects/{}/subprojects/'.format(project))[1]  # NOQA
+        more_results = None
+        data = result['results']
+        subproject_list = []
+
+        if result['next']:
+            more_results = result['next'].rsplit('/', 1)[-1]
+
+        if more_results:
+            while more_results is not None:
+                get_more_results = self.get('projects/{}/subprojects/'
+                                            .format(project) + more_results)[1]
+                data.append(get_more_results['results'])
+                more_results = get_more_results['next']
+
+                if more_results is not None:
+                    more_results = more_results.rsplit('/', 1)[-1]
+
+        for subproject in data:
+            subproject_list.append(subproject['child']['slug'])
+
+        return subproject_list
+
+    def subproject_details(self, project, subproject):
+        """Retrieve the details of a specific subproject.
+
+        :param project:
+        :param subproject:
+        :return:
+        """
+        result = self.get('projects/{}/subprojects/{}/'
+                          .format(project, subproject))[1]
+        return result
+
+    def subproject_create(self, project, subproject, alias=None):
+        """Create a subproject.
+
+        Subprojects are actually just top-level projects that
+        get subordinated to another project. Create the subproject
+        using project_create, then make it a subproject with
+        this function.
+
+        :param project: The top-level project's slug
+        :param subproject: The other project's slug that is to be subordinated
+        :param alias: An alias (not required). (user-defined slug)
+        :return:
+        """
+
+        data = {
+            'child': subproject,
+            'alias': alias
+        }
+        json_data = json.dumps(data)
+        result = self.post('projects/{}/subprojects/'
+                           .format(project), data=json_data)
+        return result
+
+    def subproject_delete(self, project, subproject):
+        """Deletes the project/sub relationship.
+
+        :param project:
+        :param subproject:
+        :return:
+        """
+        result = self.delete('projects/{}/subprojects/{}/'
+                             .format(project, subproject))
+
+        if hasattr(result, 'status_code'):
+            if result.status_code == 204:
+                return True
+            else:
+                return False, result.status_code
+        else:
+            return False

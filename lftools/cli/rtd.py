@@ -124,6 +124,57 @@ def project_build_trigger(ctx, project_slug, version_slug):
     log.info(pformat(data))
 
 
+@click.command(name='subproject-list')
+@click.argument('project-slug')
+@click.pass_context
+def subproject_list(ctx, project_slug):
+    """Get a list of Read the Docs subprojects for a project.
+
+    Returns a list of RTD subprojects for a given
+    project.
+    """
+    r = readthedocs.ReadTheDocs()
+    for subproject in r.subproject_list(project_slug):
+        log.info(subproject)
+
+
+@click.command(name='subproject-details')
+@click.argument('project-slug')
+@click.argument('subproject-slug')
+@click.pass_context
+def subproject_details(ctx, project_slug, subproject_slug):
+    """Retrieve subproject's details."""
+    r = readthedocs.ReadTheDocs()
+    data = r.subproject_details(project_slug, subproject_slug)
+    log.info(pformat(data))
+
+
+@click.command(name='subproject-create')
+@click.argument('project-slug')
+@click.argument('subproject-slug')
+@click.pass_context
+def subproject_create(ctx, project_slug, subproject_slug):
+    """Creates a project-subproject relationship."""
+    r = readthedocs.ReadTheDocs()
+    data = r.subproject_create(project_slug, subproject_slug)
+    log.info(pformat(data))
+
+
+@click.command(name='subproject-delete')
+@click.argument('project-slug')
+@click.argument('subproject-slug')
+@click.pass_context
+def subproject_delete(ctx, project_slug, subproject_slug):
+    """Deletes a project-subproject relationship."""
+    r = readthedocs.ReadTheDocs()
+    data = r.subproject_delete(project_slug, subproject_slug)
+    if data:
+        log.info("Successfully removed the {} {} relationship"
+                 .format(project_slug, subproject_slug))
+    else:
+        log.error("Request failed. Is there a subproject relationship?")
+
+
 rtd.add_command(project_list)
 rtd.add_command(project_details)
 rtd.add_command(project_version_list)
@@ -132,3 +183,7 @@ rtd.add_command(project_create)
 rtd.add_command(project_build_list)
 rtd.add_command(project_build_details)
 rtd.add_command(project_build_trigger)
+rtd.add_command(subproject_list)
+rtd.add_command(subproject_details)
+rtd.add_command(subproject_create)
+rtd.add_command(subproject_delete)
