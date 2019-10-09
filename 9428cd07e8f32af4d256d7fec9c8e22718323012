@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5769d83d_1d56d837",
+        "filename": "requirements.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-10-09T06:53:44Z",
+      "side": 1,
+      "message": "Aric, any idea on why this is failing on removing the xdg~\u003d1.0.7?\n\nhttps://jenkins.opendaylight.org/releng/view/Merge-Jobs/job/aaa-merge-sodium/279/console",
+      "range": {
+        "startLine": 12,
+        "startChar": 33,
+        "endLine": 12,
+        "endChar": 97
+      },
+      "revId": "9428cd07e8f32af4d256d7fec9c8e22718323012",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
