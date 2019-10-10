@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d90fe304_5141ff1c",
+        "filename": "lftools/api/endpoints/readthedocs.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-10-10T16:31:43Z",
+      "side": 1,
+      "message": "I agree, I prefer verbosity here",
+      "parentUuid": "42464859_4ddb3020",
+      "range": {
+        "startLine": 225,
+        "startChar": 26,
+        "endLine": 225,
+        "endChar": 52
+      },
+      "revId": "8b5cf6d373f57d723e20287ba7f205ec6f597679",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "90e30e30_928b72dc",
         "filename": "lftools/api/endpoints/readthedocs.py",
         "patchSetId": 1
