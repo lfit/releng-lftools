@@ -68,6 +68,30 @@
       "revId": "8b5cf6d373f57d723e20287ba7f205ec6f597679",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "136c3a79_f28a4383",
+        "filename": "lftools/cli/rtd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-10T16:28:08Z",
+      "side": 1,
+      "message": "Not really. The reason I have pformat for the others is that they dump out a lot of json to the console, whereas this just dumps out the slug name of the project, e.g. test-project-1, so it really doesn\u0027t need the extra formatting.",
+      "parentUuid": "0dd73d2f_794c9db1",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 1
+      },
+      "revId": "8b5cf6d373f57d723e20287ba7f205ec6f597679",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
