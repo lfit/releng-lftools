@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50de51ed_c640eeb5",
+        "filename": "lftools/api/endpoints/readthedocs.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2019-10-10T09:57:17Z",
+      "side": 1,
+      "message": "since this string occurs multiple times in this file, possibly consider moving to a variable?",
+      "range": {
+        "startLine": 225,
+        "startChar": 26,
+        "endLine": 225,
+        "endChar": 52
+      },
+      "revId": "8b5cf6d373f57d723e20287ba7f205ec6f597679",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90e30e30_928b72dc",
+        "filename": "lftools/api/endpoints/readthedocs.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2019-10-10T09:57:17Z",
+      "side": 1,
+      "message": "an occurrence",
+      "range": {
+        "startLine": 235,
+        "startChar": 44,
+        "endLine": 235,
+        "endChar": 69
+      },
+      "revId": "8b5cf6d373f57d723e20287ba7f205ec6f597679",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dd73d2f_794c9db1",
+        "filename": "lftools/cli/rtd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2019-10-10T09:57:17Z",
+      "side": 1,
+      "message": "should this have an invocation of pformat() around subproject like the others?",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 1
+      },
+      "revId": "8b5cf6d373f57d723e20287ba7f205ec6f597679",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
