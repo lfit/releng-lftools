@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "50e77be5_80fdb026",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-14T18:50:04Z",
+      "side": 1,
+      "message": "I added a separate function called check_s3_bucket_status that is called during deploy_logs_s3()",
+      "parentUuid": "ff3ca1bb_616c5be8",
+      "range": {
+        "startLine": 138,
+        "startChar": 53,
+        "endLine": 138,
+        "endChar": 81
+      },
+      "revId": "b7026f47ca0d51dc9a3ebc47f6ee16c17704d7c7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a977d0ee_3bc5eeff",
         "filename": "lftools/deploy.py",
         "patchSetId": 7
