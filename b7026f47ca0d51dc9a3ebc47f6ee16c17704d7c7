@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d31f27c0_3293839c",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-14T20:27:19Z",
+      "side": 1,
+      "message": "This is just for me verifying the paths for testing",
+      "parentUuid": "a977d0ee_3bc5eeff",
+      "range": {
+        "startLine": 268,
+        "startChar": 44,
+        "endLine": 269,
+        "endChar": 4
+      },
+      "revId": "b7026f47ca0d51dc9a3ebc47f6ee16c17704d7c7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4cc89d68_51b0d122",
         "filename": "lftools/deploy.py",
         "patchSetId": 7
