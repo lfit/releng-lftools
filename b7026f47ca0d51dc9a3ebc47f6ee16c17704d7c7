@@ -68,6 +68,30 @@
       "revId": "b7026f47ca0d51dc9a3ebc47f6ee16c17704d7c7",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16046de9_705d4daa",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-14T17:09:12Z",
+      "side": 1,
+      "message": "It\u0027s only setting the encoding as gzip, not the content type.\nBelow is an example:\n\n(.virtualenv) Houas-MBP:new hyang$ curl -s -I http://lf-testhy-2019-10-10.s3-website-us-west-2.amazonaws.com/ci-management-packer-verify/13/console-timestamp.log.gz | grep \"^Content-Type:\"\nContent-Type: text/plain\n\n(.virtualenv) Houas-MBP:new hyang$ curl -s -I http://lf-testhy-2019-10-10.s3-website-us-west-2.amazonaws.com/ci-management-packer-verify/13/console-timestamp.log.gz | grep \"^Content-Encoding:\"\nContent-Encoding: gzip",
+      "parentUuid": "4cc89d68_51b0d122",
+      "range": {
+        "startLine": 524,
+        "startChar": 0,
+        "endLine": 533,
+        "endChar": 45
+      },
+      "revId": "b7026f47ca0d51dc9a3ebc47f6ee16c17704d7c7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
