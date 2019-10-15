@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5da386a_2f114f70",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-15T21:12:53Z",
+      "side": 1,
+      "message": "This is the object expiration policy that I set for all objects in the bucket. Again I am not finding any options for expiring the bucket all together, and we will probably need a cleanup scripts to remove old and empty buckets.",
+      "range": {
+        "startLine": 638,
+        "startChar": 8,
+        "endLine": 651,
+        "endChar": 9
+      },
+      "revId": "24d321213925384a16a5bcc2763d574c04618177",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
