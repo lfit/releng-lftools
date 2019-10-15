@@ -96,6 +96,29 @@
     },
     {
       "key": {
+        "uuid": "5445c9de_e4682341",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-15T21:08:28Z",
+      "side": 1,
+      "message": "Anil, profile_name will need to be set as a variable. We will need to add the keys to Jenkins, what were you planning to do for this?",
+      "range": {
+        "startLine": 525,
+        "startChar": 46,
+        "endLine": 525,
+        "endChar": 50
+      },
+      "revId": "b7026f47ca0d51dc9a3ebc47f6ee16c17704d7c7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4cc89d68_51b0d122",
         "filename": "lftools/deploy.py",
         "patchSetId": 7
