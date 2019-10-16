@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "0a2cd418_088407ec",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-16T19:43:03Z",
+      "side": 1,
+      "message": "Ok I think the disconnect here was what I asked in the email about how the other files/dirs like sar reports, packages_*, utils, library, southbound were in nexus, but those are part of the lftools deploy archives, which zip up those and unpacks them in nexus. Is that correct?\n\nIf that is the case, I need to add an upload to s3 option for the deploy_archives_s3.",
+      "parentUuid": "f01a8346_eb4260f1",
+      "range": {
+        "startLine": 658,
+        "startChar": 0,
+        "endLine": 689,
+        "endChar": 15
+      },
+      "revId": "2e52d664b1350e2fb20cc0d32c799a8e2e6371f4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "63d73bf9_0667cca1",
         "filename": "releasenotes/notes/add-s3-to-log-shipping-1fad234f538c13f4.yaml",
         "patchSetId": 11
