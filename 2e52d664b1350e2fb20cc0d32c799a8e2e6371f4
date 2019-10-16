@@ -118,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "659caee5_c655fb82",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-16T19:47:57Z",
+      "side": 1,
+      "message": "I am having a bit of trouble with this. Because I create the index.html in deploy_logs_s3 and it won\u0027t include anything that deploy_archives_s3 uploads. If I combine the functions the two functions, then the new function would have to have additional parameters which then breaks click command deploy logs.",
+      "parentUuid": "0a2cd418_088407ec",
+      "range": {
+        "startLine": 658,
+        "startChar": 0,
+        "endLine": 689,
+        "endChar": 15
+      },
+      "revId": "2e52d664b1350e2fb20cc0d32c799a8e2e6371f4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "63d73bf9_0667cca1",
         "filename": "releasenotes/notes/add-s3-to-log-shipping-1fad234f538c13f4.yaml",
         "patchSetId": 11
