@@ -14,7 +14,6 @@ import concurrent.futures
 from datetime import timedelta
 from defusedxml.minidom import parseString
 import errno
-import glob2  # Switch to glob when Python < 3.5 support is dropped
 import gzip
 import io
 import json
@@ -26,9 +25,7 @@ from multiprocessing import cpu_count
 from multiprocessing.dummy import Pool as ThreadPool
 import os
 import re
-import requests
 import shutil
-import six
 import subprocess
 import sys
 import tempfile
@@ -579,7 +576,6 @@ def deploy_logs_s3(s3_bucket, s3_path, build_url):
     for file in files:
         if os.path.isfile(file):
             base_name = os.path.basename(file)
-            print(base_name)
             file_list.append(file)
 
     # Perform parallel upload
@@ -680,7 +676,6 @@ def deploy_s3_zip(s3_bucket, zip_file, s3_path):
     log.debug('Uploading {} to {}'.format(zip_file, s3_bucket))
     path = os.path.split(zip_file)
     object_name = s3_path + path[1]
-    print(object_name)
 
     try:
         from botocore.exceptions import ClientError
