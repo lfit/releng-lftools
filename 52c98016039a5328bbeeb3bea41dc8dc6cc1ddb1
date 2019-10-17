@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "7124cd7a_e4f89ff2",
+        "filename": "lftools/shell/__init__.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-10-17T23:50:03Z",
+      "side": 1,
+      "message": "Oh, weird. Ok then.",
+      "parentUuid": "b9853ee4_149a46c2",
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4ef2e03_393fee14",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 7
@@ -107,6 +125,30 @@
     },
     {
       "key": {
+        "uuid": "522024dd_0667aa99",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-10-17T23:50:03Z",
+      "side": 1,
+      "message": "If there are multiple branches (as is implied by a for loop), you\u0027re only going to return the hashes of the last branch in the list. You\u0027re not appending. If there are three branches, \"hashes\" will get assigned the first set of hashes, then overwrite with the second set, then overwrite with the third, and then exit the loop and only return the third set.",
+      "parentUuid": "f76e6ec8_99d9ecaa",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 45
+      },
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75580c6c_b35b84e4",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 7
@@ -142,6 +184,30 @@
       "side": 1,
       "message": "Python automatically returns a non-zero code on exception.",
       "parentUuid": "75580c6c_b35b84e4",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f178fc1_07d36e4b",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-10-17T23:50:03Z",
+      "side": 1,
+      "message": "You\u0027re catching the exception. The program will continue to execute.",
+      "parentUuid": "c285bdbd_8ce20349",
       "range": {
         "startLine": 45,
         "startChar": 4,
