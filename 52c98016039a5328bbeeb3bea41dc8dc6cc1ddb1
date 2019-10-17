@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b9853ee4_149a46c2",
+        "filename": "lftools/shell/__init__.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-17T23:37:17Z",
+      "side": 1,
+      "message": "You do if you want to pass tox.",
+      "parentUuid": "ac13780b_4e09791b",
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4ef2e03_393fee14",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 7
@@ -65,6 +83,30 @@
     },
     {
       "key": {
+        "uuid": "f76e6ec8_99d9ecaa",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-17T23:37:17Z",
+      "side": 1,
+      "message": "No, because this is a list of hashes for each branch",
+      "parentUuid": "46a85274_cbad0fe0",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 45
+      },
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75580c6c_b35b84e4",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 7
@@ -88,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "c285bdbd_8ce20349",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-17T23:37:17Z",
+      "side": 1,
+      "message": "Python automatically returns a non-zero code on exception.",
+      "parentUuid": "75580c6c_b35b84e4",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93df1fab_b596a597",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 7
@@ -108,6 +174,30 @@
       "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4e42368_8f98ffad",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-17T23:37:17Z",
+      "side": 1,
+      "message": "Python automatically returns a non-zero code on exception.",
+      "parentUuid": "93df1fab_b596a597",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 20
+      },
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     },
     {
       "key": {
@@ -154,6 +244,30 @@
       "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "264e10b4_ffe3c9a4",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-17T23:37:17Z",
+      "side": 1,
+      "message": "Python automatically returns a non-zero code on exception.",
+      "parentUuid": "c34441ad_3f554bb7",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 20
+      },
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
