@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ffe49c7_2da53a68",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-10-17T12:38:49Z",
+      "side": 1,
+      "message": "do _not_ hardcode the region it\u0027s upto the project configure this, this should simply be what is derived from s3_url or the ini files.",
+      "range": {
+        "startLine": 590,
+        "startChar": 14,
+        "endLine": 590,
+        "endChar": 59
+      },
+      "revId": "addd1c4db3119536d10799d5a1913677142a8145",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9abea9d2_736225cd",
+        "filename": "tox.ini",
+        "patchSetId": 12
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-10-17T12:38:49Z",
+      "side": 1,
+      "message": "this should be a separate change",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 20
+      },
+      "revId": "addd1c4db3119536d10799d5a1913677142a8145",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
