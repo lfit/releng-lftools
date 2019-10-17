@@ -149,6 +149,30 @@
     },
     {
       "key": {
+        "uuid": "97421a47_28954ca4",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-17T23:58:43Z",
+      "side": 1,
+      "message": "Good catch, it\u0027s a matter of naughty variable reuse. There should be a hashlist that gets appended to and returned, not hashes",
+      "parentUuid": "522024dd_0667aa99",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 45
+      },
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75580c6c_b35b84e4",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 7
