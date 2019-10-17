@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5efb6801_5dea5fe0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-17T20:54:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ce05661_30ea4ea3",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "2e52d664b1350e2fb20cc0d32c799a8e2e6371f4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ad1dbcc_5bc3d1d1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 11
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "2d6a2e1d_ac266982",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-17T20:54:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ad1dbcc_5bc3d1d1",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "2e52d664b1350e2fb20cc0d32c799a8e2e6371f4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5de3e70b_16347e69",
         "filename": "lftools/deploy.py",
         "patchSetId": 11
@@ -59,6 +107,30 @@
       "writtenOn": "2019-10-16T16:23:50Z",
       "side": 1,
       "message": "is there an option we can get the file size listing in the index.html?",
+      "range": {
+        "startLine": 555,
+        "startChar": 21,
+        "endLine": 555,
+        "endChar": 28
+      },
+      "revId": "2e52d664b1350e2fb20cc0d32c799a8e2e6371f4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eaad903d_f5f5635c",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-17T20:54:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5de3e70b_16347e69",
       "range": {
         "startLine": 555,
         "startChar": 21,
@@ -190,6 +262,30 @@
     },
     {
       "key": {
+        "uuid": "6cee6131_7e07ef28",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-17T20:54:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a75a06ed_59ffac04",
+      "range": {
+        "startLine": 658,
+        "startChar": 0,
+        "endLine": 689,
+        "endChar": 15
+      },
+      "revId": "2e52d664b1350e2fb20cc0d32c799a8e2e6371f4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63d73bf9_0667cca1",
         "filename": "releasenotes/notes/add-s3-to-log-shipping-1fad234f538c13f4.yaml",
         "patchSetId": 11
@@ -236,6 +332,30 @@
     },
     {
       "key": {
+        "uuid": "af661070_1bfc11df",
+        "filename": "releasenotes/notes/add-s3-to-log-shipping-1fad234f538c13f4.yaml",
+        "patchSetId": 11
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-17T20:54:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63d73bf9_0667cca1",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 4,
+        "endChar": 39
+      },
+      "revId": "2e52d664b1350e2fb20cc0d32c799a8e2e6371f4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "888cf93c_cec3b7f0",
         "filename": "releasenotes/notes/add-s3-to-log-shipping-1fad234f538c13f4.yaml",
         "patchSetId": 11
@@ -259,6 +379,30 @@
     },
     {
       "key": {
+        "uuid": "b632f58c_f9229069",
+        "filename": "releasenotes/notes/add-s3-to-log-shipping-1fad234f538c13f4.yaml",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-17T20:54:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "888cf93c_cec3b7f0",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 17
+      },
+      "revId": "2e52d664b1350e2fb20cc0d32c799a8e2e6371f4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1616ff6c_ead46a73",
         "filename": "requirements-test.txt",
         "patchSetId": 11
@@ -270,6 +414,30 @@
       "writtenOn": "2019-10-16T16:23:50Z",
       "side": 1,
       "message": "asciibetically",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 4
+      },
+      "revId": "2e52d664b1350e2fb20cc0d32c799a8e2e6371f4",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d5e12ac_c93d5599",
+        "filename": "requirements-test.txt",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-17T20:54:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1616ff6c_ead46a73",
       "range": {
         "startLine": 7,
         "startChar": 0,
