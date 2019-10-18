@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "00d902b6_9b7b5372",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-18T19:12:59Z",
+      "side": 1,
+      "message": "I broke it up into 2 separate functions",
+      "parentUuid": "0a5310de_82db117b",
+      "range": {
+        "startLine": 550,
+        "startChar": 0,
+        "endLine": 550,
+        "endChar": 1
+      },
+      "revId": "d572321e1724691bea1197acb5fe13b739d7a6c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e768a6a9_ac15a856",
         "filename": "lftools/deploy.py",
         "patchSetId": 13
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "63e5579b_5589b757",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-18T19:12:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e768a6a9_ac15a856",
+      "range": {
+        "startLine": 865,
+        "startChar": 0,
+        "endLine": 865,
+        "endChar": 1
+      },
+      "revId": "d572321e1724691bea1197acb5fe13b739d7a6c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6af0b81e_b8a5a7f2",
         "filename": "tests/test_deploy.py",
         "patchSetId": 13
@@ -68,6 +116,30 @@
       "revId": "d572321e1724691bea1197acb5fe13b739d7a6c6",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be0fb4c1_82431b22",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-18T19:12:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6af0b81e_b8a5a7f2",
+      "range": {
+        "startLine": 785,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 1
+      },
+      "revId": "d572321e1724691bea1197acb5fe13b739d7a6c6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
