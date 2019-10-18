@@ -16,6 +16,24 @@
       "revId": "576333c7781846f5e9b2d8d0f3cfb8aa1d3486e8",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aab1a09b_da8d1b58",
+        "filename": "docs/installation.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-10-18T15:45:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d004137c_950fe0f8",
+      "revId": "576333c7781846f5e9b2d8d0f3cfb8aa1d3486e8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
