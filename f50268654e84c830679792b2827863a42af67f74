@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "748a3e5f_3a4357d7",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-10-18T18:26:59Z",
+      "side": 1,
+      "message": "This will exit 1 even if there is nothing in the \"missing\" list.\n\nThere should also be an exit(1) below, after logging the error. I thought this was just misplaced.",
+      "parentUuid": "8a269b63_38d9d5fa",
+      "range": {
+        "startLine": 69,
+        "startChar": 12,
+        "endLine": 69,
+        "endChar": 19
+      },
+      "revId": "f50268654e84c830679792b2827863a42af67f74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d42f3ed4_20ae8b58",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 10
@@ -107,6 +131,30 @@
       "side": 1,
       "message": "Normally, but in this case Andy wants it to exit 1 if there are any mismatches found",
       "parentUuid": "c825be5a_8e2a2dd5",
+      "range": {
+        "startLine": 103,
+        "startChar": 12,
+        "endLine": 103,
+        "endChar": 19
+      },
+      "revId": "f50268654e84c830679792b2827863a42af67f74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "156e801b_4b9108ea",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-10-18T18:26:59Z",
+      "side": 1,
+      "message": "As long as there are hashes (i.e. there are any commits on any branches), this method will exit 1. That\u0027s definitely not what we want. It needs to be conditional.\n\nThere should also be an exit(1) after logging the error below.",
+      "parentUuid": "edc5b031_1d8c70ff",
       "range": {
         "startLine": 103,
         "startChar": 12,
