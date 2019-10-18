@@ -410,6 +410,30 @@
     },
     {
       "key": {
+        "uuid": "7a221303_33a9697a",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-18T01:17:20Z",
+      "side": 1,
+      "message": "see my comment about the wrong cli line :) \nthis patch wasn\u0027t supposed to be pushed, I had two directories going (oops). Cleaning up the other one now.",
+      "parentUuid": "6fd2b8da_b340db21",
+      "range": {
+        "startLine": 78,
+        "startChar": 20,
+        "endLine": 83,
+        "endChar": 63
+      },
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c34441ad_3f554bb7",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 7
