@@ -268,6 +268,30 @@
     },
     {
       "key": {
+        "uuid": "66023bdd_1543bbfa",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-10-18T00:01:15Z",
+      "side": 1,
+      "message": "I would suggest you either exit(1) or return False.",
+      "parentUuid": "a54bb443_01334100",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 0
+      },
+      "revId": "52c98016039a5328bbeeb3bea41dc8dc6cc1ddb1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "93df1fab_b596a597",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 7
