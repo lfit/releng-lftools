@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d38c9d1f_d557606f",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-10-18T17:25:17Z",
+      "side": 1,
+      "message": "This should be below, in the except block.",
+      "range": {
+        "startLine": 69,
+        "startChar": 12,
+        "endLine": 69,
+        "endChar": 19
+      },
+      "revId": "f50268654e84c830679792b2827863a42af67f74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d42f3ed4_20ae8b58",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-10-18T17:25:17Z",
+      "side": 1,
+      "message": "What are you popping here? I would suggest commenting on this in the code, because if there\u0027s some known value that\u0027s going to be at the top of the hashes list that we want to get rid of, you should document it.",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "f50268654e84c830679792b2827863a42af67f74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c825be5a_8e2a2dd5",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-10-18T17:25:17Z",
+      "side": 1,
+      "message": "This should be below, in the except block.",
+      "range": {
+        "startLine": 103,
+        "startChar": 12,
+        "endLine": 103,
+        "endChar": 19
+      },
+      "revId": "f50268654e84c830679792b2827863a42af67f74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
