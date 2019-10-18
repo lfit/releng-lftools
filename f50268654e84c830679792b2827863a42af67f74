@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8a269b63_38d9d5fa",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-18T18:14:40Z",
+      "side": 1,
+      "message": "Normally, but in this case Andy wants it to exit 1 if there are any mismatches found",
+      "parentUuid": "d38c9d1f_d557606f",
+      "range": {
+        "startLine": 69,
+        "startChar": 12,
+        "endLine": 69,
+        "endChar": 19
+      },
+      "revId": "f50268654e84c830679792b2827863a42af67f74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d42f3ed4_20ae8b58",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 10
@@ -68,6 +92,30 @@
       "revId": "f50268654e84c830679792b2827863a42af67f74",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edc5b031_1d8c70ff",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-18T18:14:40Z",
+      "side": 1,
+      "message": "Normally, but in this case Andy wants it to exit 1 if there are any mismatches found",
+      "parentUuid": "c825be5a_8e2a2dd5",
+      "range": {
+        "startLine": 103,
+        "startChar": 12,
+        "endLine": 103,
+        "endChar": 19
+      },
+      "revId": "f50268654e84c830679792b2827863a42af67f74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
