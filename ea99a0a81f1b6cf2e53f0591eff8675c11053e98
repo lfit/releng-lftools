@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4eca628_2a5ba041",
+        "filename": "docs/installation.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-10-22T10:17:19Z",
+      "side": 1,
+      "message": "Perhaps we should give a sample how to get an virtual environment with python3?\n\nvirtualenv -p python3 envname",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 1
+      },
+      "revId": "ea99a0a81f1b6cf2e53f0591eff8675c11053e98",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
