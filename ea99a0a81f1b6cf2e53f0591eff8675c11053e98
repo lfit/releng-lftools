@@ -22,6 +22,30 @@
       "revId": "ea99a0a81f1b6cf2e53f0591eff8675c11053e98",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8278edff_dfd542a7",
+        "filename": "docs/installation.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-10-22T12:11:44Z",
+      "side": 1,
+      "message": "There are many ways to create a virtualenv, since we have given the link above that is not really required, write about each and every install method here.",
+      "parentUuid": "d4eca628_2a5ba041",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 1
+      },
+      "revId": "ea99a0a81f1b6cf2e53f0591eff8675c11053e98",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
