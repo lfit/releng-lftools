@@ -1,0 +1,120 @@
+# SPDX-License-Identifier: EPL-1.0
+##############################################################################
+# Copyright (c) 2018 The Linux Foundation and others.
+#
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+##############################################################################
+"""Generate a CSV of a Projects Commiters.
+
+Prereqs:
+- yum install python-devel openldap-devel
+- pip install python-ldap
+"""
+
+from __future__ import print_function
+
+import subprocess
+import sys
+
+import ldap
+
+
+
+def helper_yaml4info(group):
+    """Build yaml of committers for your INFO.yaml."""
+    status = subprocess.call(['yaml4info', group])
+    sys.exit(status)
+
+
+def helper_csv(groups):
+    ldap_server="ldaps://pdx-wl-lb-lfldap.web.codeaurora.org"
+    ldap_user_base='ou=Users,dc=freestandards,dc=org'
+    ldap_group_base='ou=Groups,dc=freestandards,dc=org'
+
+    """Query an Ldap server."""
+    # groups needs to be a list
+    groups = groups.split(' ')
+
+    def ldap_connect(ldap_object):
+        """Start the connection to LDAP."""
+        try:
+            ldap_object.protocol_version = ldap.VERSION3
+            ldap_object.simple_bind_s()
+        except ldap.LDAPError as e:
+            if type(e.message) == dict and e.message.has_key('desc'):
+                print(e.message['desc'])
+            else:
+                print(e)
+            sys.exit(0)
+
+    def eprint(*args, **kwargs):
+        """Print to stderr."""
+        print(*args, file=sys.stderr, **kwargs)
+
+    def ldap_disconnect(ldap_object):
+        """Stop the connnection to LDAP."""
+        ldap_object.unbind_s()
+
+    def ldap_query(ldap_object, dn, search_filter, attrs):
+        """Perform an LDAP query and return the results."""
+        try:
+            ldap_result_id = ldap_object.search(dn, ldap.SCOPE_SUBTREE, search_filter, attrs)
+            result_set = []
+            while 1:
+                result_type, result_data = ldap_object.result(ldap_result_id, 0)
+                if (result_data == []):
+                    break
+                else:
+                    # if you are expecting multiple results you can append them
+                    # otherwise you can just wait until the initial result and break out
+                    if result_type == ldap.RES_SEARCH_ENTRY:
+                        result_set.append(result_data)
+            return result_set
+        except ldap.LDAPError as e:
+            sys.exit(1)
+
+    def package_groups(groups):
+        """Package a set of groups from LDIF into a Python dictionary.
+
+        containing the groups member uids.
+        """
+        group_list = []
+        cut_length = len(ldap_user_base)+1
+        for group in groups:
+            group_d = dict(name=group[0][0])
+            members = []
+            for group_attrs in group:
+                for member in group_attrs[1]['member']:
+                    members.append(member[:-cut_length])
+            group_d['members'] = members
+            group_list.append(group_d)
+        return group_list
+
+    def user_to_csv(user):
+        """Covert LDIF user info to CSV of uid,mail,cn."""
+        attrs = (user[0][0][1])
+        return ",".join([attrs['uid'][0].decode('utf-8'), attrs['cn'][0].decode('utf-8'), attrs['mail'][0].decode('utf-8')])
+
+    def main(groups):
+        """Preform an LDAP query."""
+        l = ldap.initialize(ldap_server)
+        ldap_connect(l)
+        for arg in groups:
+            groups = ldap_query(l, ldap_group_base, "cn=%s" % arg, ["member"])
+            group_dict = package_groups(groups)
+            cut_length = len(ldap_group_base)+1
+            for group_bar in group_dict:
+                group_name = group_bar['name'][3:-cut_length]
+                for user in group_bar['members']:
+                    user = (user.decode('utf-8'))
+                    user_info = ldap_query(l, ldap_user_base, user, ["uid", "cn", "mail"])
+                    try:
+                        print("%s,%s" % (group_name, user_to_csv(user_info)))
+                    except:
+                        eprint("Error parsing user: %s" % user)
+                        continue
+        ldap_disconnect(l)
+    main(groups)
