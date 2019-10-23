@@ -9,7 +9,6 @@
 ##############################################################################
 """Use the LFIDAPI to add, remove and list members as well as create groups."""
 
-import sys
 import json
 import logging
 
@@ -52,8 +51,6 @@ def helper_search_members(group):
     headers = {'Authorization': 'Bearer ' + access_token}
     response = requests.get(url, headers=headers)
     check_response_code(response)
-    #print(response)
-    #sys.exit(1)
     result = (response.json())
     members = result["members"]
     log.debug(json.dumps(members, indent=4, sort_keys=True))
