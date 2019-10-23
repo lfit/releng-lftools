@@ -9,15 +9,20 @@
 ##############################################################################
 """Script to insert missing values from ldap into a projects INFO.yaml."""
 
+import inspect
 import logging
+import re
 import sys
 
 import click
 from pygerrit2 import GerritRestAPI
+from pygerrit2 import HTTPBasicAuth
 import ruamel.yaml
 import yaml
 
+from lftools import config
 from lftools.github_helper import prvotes
+from lftools.ldap_cli import helper_yaml4info
 
 log = logging.getLogger(__name__)
 
@@ -27,6 +32,88 @@ log = logging.getLogger(__name__)
 def infofile(ctx):
     """INFO.yaml TOOLS."""
     pass
+
+
+@click.command(name='create-info-file')
+@click.argument('gerrit_url', required=True)
+@click.argument('gerrit_project', required=True)
+@click.pass_context
+def create_info_file(ctx, gerrit_url, gerrit_project):
+    """Create an initial INFO file.
+    gerrit_project example: project/full-name
+    gerrit_url example: gerrit.umbrella.com"""
+
+    user = config.get_setting("gerrit", "username")
+    pass1 = config.get_setting("gerrit", "password")
+    auth = HTTPBasicAuth(user, pass1)
+    url = ("https://{}/r".format(gerrit_url))
+    rest = GerritRestAPI(url=url, auth=auth)
+    headers = {'Content-Type': 'application/json; charset=UTF-8'}
+    projectid_encoded = gerrit_project.replace("/", "%2F")
+    access_str = 'projects/{}/access'.format(projectid_encoded)
+    result = rest.get(access_str, headers=headers)
+    project_dashed = gerrit_project.replace("/", "_")
+    project_dashed = project_dashed.replace("-", "_")
+    umbrella = gerrit_url.split(".")[1]
+    if 'inherits_from' in result:
+        inherits = (result['inherits_from']['id'])
+        if inherits != "All-Projects":
+            print("    Inherits from:", inherits)
+            print("Better Check this unconventional inherit")
+    owner = (result['local']['refs/*']['permissions']['owner']['rules'])
+    for x in owner:
+        match = re.search(r"[^=]+(?=,)", x)
+        ldap_group = (match.group(0))
+
+    long_string = """---
+project: '{0}'
+project_creation_date: ''
+project_category: ''
+lifecycle_state: 'Incubation'
+project_lead: &{1}_{0}_ptl
+    name: ''
+    email: ''
+    id: ''
+    company: ''
+    timezone: ''
+primary_contact: *{1}_{0}_ptl
+issue_tracking:
+    type: 'jira'
+    url: 'https://jira.{1}.org/projects/'
+    key: '{0}'
+mailing_list:
+    type: 'groups.io'
+    url: 'technical-discuss@lists.{1}.org'
+    tag: '[]'
+realtime_discussion:
+    type: 'irc'
+    server: 'freenode.net'
+    channel: '#'
+meetings:
+    - type: 'gotomeeting+irc'
+      agenda: 'https://wiki.opnfv.org/display/'
+      url: 'https://global.gotomeeting.com/join/819733085'
+      server: 'freenode.net'
+      channel: '#opnfv-meeting'
+      repeats: 'weekly'
+      time: ''""".format(project_dashed, umbrella)
+
+    tsc_string = """
+tsc:
+    approval: ''
+    changes:
+        - type: ''
+          name: ''
+          link: ''
+"""
+    tsc_string = inspect.cleandoc(tsc_string)
+    print(long_string)
+    print("repositories:")
+    print("    - {}".format(gerrit_project))
+    print("committers:")
+    print("    - <<: *{1}_{0}_ptl".format(project_dashed, umbrella))
+    helper_yaml4info(ldap_group)
+    print(tsc_string)
 
 
 @click.command(name='get-committers')
@@ -42,6 +129,7 @@ def get_committers(ctx, file, full, id):
         project = yaml.safe_load(yaml_file)
 
     def print_committer_info(committer, full):
+        """Print committers."""
         if full:
             print("    - name: {}".format(committer['name']))
             print("      email: {}".format(committer['email']))
@@ -50,7 +138,6 @@ def get_committers(ctx, file, full, id):
     def list_committers(full, id, project):
         """List commiters from the INFO.yaml file."""
         lookup = project.get('committers', [])
-
         for item in lookup:
             if id:
                 if item['id'] == id:
@@ -59,7 +146,6 @@ def get_committers(ctx, file, full, id):
                 else:
                     continue
             print_committer_info(item, full)
-
     list_committers(full, id, project)
 
 
@@ -225,3 +311,4 @@ def check_votes(ctx, info_file, endpoint, change_number, tsc, github_repo):
 infofile.add_command(get_committers)
 infofile.add_command(sync_committers)
 infofile.add_command(check_votes)
+infofile.add_command(create_info_file)
