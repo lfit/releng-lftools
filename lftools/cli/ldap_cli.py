@@ -1,4 +1,3 @@
-#!/usr/bin/env python2
 # SPDX-License-Identifier: EPL-1.0
 ##############################################################################
 # Copyright (c) 2018 The Linux Foundation and others.
@@ -76,7 +75,7 @@ def autocorrectinfofile(ctx, gerrit_clone_base, ldap_group, repo, purpose, revie
 
 
 @click.command()
-@click.option('--ldap-server', default='ldaps://aws-us-west-2-lfit-openldap-2.linux-foundation.org',
+@click.option('--ldap-server', default='ldaps://pdx-wl-lb-lfldap.web.codeaurora.org',
               envvar='LDAP_SERVER', type=str, required=True)
 @click.option('--ldap-user-base', default='ou=Users,dc=freestandards,dc=org',
               envvar='LDAP_USER_BASE_DN', type=str, required=True)
@@ -146,8 +145,8 @@ def csv(ctx, ldap_server, ldap_group_base, ldap_user_base, groups):
 
     def user_to_csv(user):
         """Covert LDIF user info to CSV of uid,mail,cn."""
-        attrs = user[0][0][1]
-        return ",".join([attrs['uid'][0], attrs['cn'][0], attrs['mail'][0]])
+        attrs = (user[0][0][1])
+        return ",".join([attrs['uid'][0].decode('utf-8'), attrs['cn'][0].decode('utf-8'), attrs['mail'][0].decode('utf-8')])
 
     def main(groups):
         """Preform an LDAP query."""
@@ -160,6 +159,7 @@ def csv(ctx, ldap_server, ldap_group_base, ldap_user_base, groups):
             for group_bar in group_dict:
                 group_name = group_bar['name'][3:-cut_length]
                 for user in group_bar['members']:
+                    user = (user.decode('utf-8'))
                     user_info = ldap_query(l, ldap_user_base, user, ["uid", "cn", "mail"])
                     try:
                         print("%s,%s" % (group_name, user_to_csv(user_info)))
