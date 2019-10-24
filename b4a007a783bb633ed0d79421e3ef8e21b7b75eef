@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71758871_17a8dbc3",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-10-24T07:11:30Z",
+      "side": 1,
+      "message": "Should this and other places be hardcoded to opnfv?",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 1
+      },
+      "revId": "b4a007a783bb633ed0d79421e3ef8e21b7b75eef",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
