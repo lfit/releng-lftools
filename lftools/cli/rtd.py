@@ -154,7 +154,7 @@ def subproject_details(ctx, project_slug, subproject_slug):
 @click.argument('subproject-slug')
 @click.pass_context
 def subproject_create(ctx, project_slug, subproject_slug):
-    """Creates a project-subproject relationship."""
+    """Create a project-subproject relationship."""
     r = readthedocs.ReadTheDocs()
     data = r.subproject_create(project_slug, subproject_slug)
     log.info(pformat(data))
@@ -165,7 +165,7 @@ def subproject_create(ctx, project_slug, subproject_slug):
 @click.argument('subproject-slug')
 @click.pass_context
 def subproject_delete(ctx, project_slug, subproject_slug):
-    """Deletes a project-subproject relationship."""
+    """Delete a project-subproject relationship."""
     r = readthedocs.ReadTheDocs()
     data = r.subproject_delete(project_slug, subproject_slug)
     if data:
