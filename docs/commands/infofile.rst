@@ -23,6 +23,15 @@ sync-committers
  .. program-output:: lftools infofile sync-committers --help
 
 
+Creating an info file requires a connection to the VPN
+
+create-info-file
+----------------
+
+ .. program-output:: lftools infofile create-info-file --help
+
+
+
 API for check votes requires a [github] section in ~/.config/lftools/lftools.ini:
 
 .. code-block:: bash
