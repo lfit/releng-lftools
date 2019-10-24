@@ -10,27 +10,25 @@
 ##############################################################################
 """Library of functions for deploying artifacts to Nexus."""
 
-from datetime import timedelta
-from defusedxml.minidom import parseString
-from multiprocessing import cpu_count
 import concurrent.futures
 import errno
-import glob2  # Switch to glob when Python < 3.5 support is dropped
 import gzip
 import io
 import logging
 import math
+from multiprocessing import cpu_count
 import os
 import re
-import requests
 import shutil
-import six
 import subprocess
 import sys
 import tempfile
-import time
 import zipfile
 
+from defusedxml.minidom import parseString
+import glob2  # Switch to glob when Python < 3.5 support is dropped
+import requests
+import six
 
 log = logging.getLogger(__name__)
 
@@ -272,7 +270,7 @@ def copy_archives(workspace, pattern=None):
             try:
                 shutil.move(src, dest)
             except IOError as e:  # Switch to FileNotFoundError when Python 2 support is dropped.
-                log.debug("Missing path, will create it {}".format(os.path.dirname(dest)))
+                log.debug("Missing path, will create it {}.\n{}".format(os.path.dirname(dest), e))
                 os.makedirs(os.path.dirname(dest))
                 shutil.move(src, dest)
         else:
@@ -592,9 +590,6 @@ def upload_maven_file_to_nexus(nexus_url, nexus_repo_id,
         raise requests.HTTPError("Nexus Error: {}".format(error_msg))
 
 
-
-
-
 def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
     """Deploy a local directory of files to a Nexus repository.
 
@@ -671,6 +666,9 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
             filename = futures[future]
             try:
                 data = future.result()
+                # remove pyflake warning
+                if data == data:
+                    pass
             except Exception as e:
                 log.error('Uploading {}: {}'.format(filename, e))
 
@@ -698,7 +696,7 @@ def deploy_nexus_stage(nexus_url, staging_profile_id, deploy_dir):
                         staging repo.
     deploy_dir:         The directory to deploy. (Ex: /tmp/m2repo)
 
-   # Sample:
+    # Sample:
         lftools deploy nexus-stage http://192.168.1.26:8081/nexus 4e6f95cd2344 /tmp/slask
             Deploying Maven artifacts to staging repo...
             Staging repository aaf-1005 created.
