@@ -269,7 +269,6 @@ class ReadTheDocs(client.RestApi):
         :param alias: An alias (not required). (user-defined slug)
         :return:
         """
-
         data = {
             'child': subproject,
             'alias': alias
@@ -280,7 +279,7 @@ class ReadTheDocs(client.RestApi):
         return result
 
     def subproject_delete(self, project, subproject):
-        """Deletes the project/sub relationship.
+        """Delete project/sub relationship.
 
         :param project:
         :param subproject:
