@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc91b8a2_ef8813fa",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-10-25T10:42:38Z",
+      "side": 1,
+      "message": "Hardcoded to opnfv?",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 1
+      },
+      "revId": "a6b3a0c2b0e05e57343de8ef1e38b216128d0748",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8423f757_e5bfa64c",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-10-25T10:42:38Z",
+      "side": 1,
+      "message": "Hardcoded..",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 1
+      },
+      "revId": "a6b3a0c2b0e05e57343de8ef1e38b216128d0748",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "577b25b5_955762b6",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-10-25T10:42:38Z",
+      "side": 1,
+      "message": "I got the following to my screen\ncommitters:\n    - \u003c\u003c: *akraino_ta_openstack_ansible_galera_client_ptl\ncommitters:\nUsage: lftools ldap [OPTIONS] COMMAND [ARGS]...\nTry \"lftools ldap --help\" for help.\n\nError: No such command \"csv\".\ntsc:\n    approval: \u0027\u0027\n    changes:\n        - type: \u0027\u0027\n          name: \u0027\u0027\n          link: \u0027\u0027",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 3
+      },
+      "revId": "a6b3a0c2b0e05e57343de8ef1e38b216128d0748",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
