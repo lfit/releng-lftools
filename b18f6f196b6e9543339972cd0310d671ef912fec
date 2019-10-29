@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "54c08d66_44ecd35f",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-10-29T13:46:21Z",
+      "side": 1,
+      "message": "Hmm, actually I think this part is fine.. I don\u0027t see us using the envvar anywhere..\n\n\nHowever I think  @click.option(\u0027-tmpdir\u0027, \u0027--tmpdir\u0027, multiple\u003dFalse) needs to have required\u003dFalse, or it will break  logs-deploy.sh which is not passing a tmpdir currently.",
+      "parentUuid": "310a1650_9cee5448",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 48
+      },
+      "revId": "b18f6f196b6e9543339972cd0310d671ef912fec",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e13ceb63_33cb117f",
         "filename": "lftools/deploy.py",
         "patchSetId": 16
