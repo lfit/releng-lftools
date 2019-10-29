@@ -22,6 +22,30 @@
       "revId": "46751ebf7f702e304b6de94245109c6628a199da",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b22800b_dba7d63a",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-10-29T18:38:19Z",
+      "side": 1,
+      "message": "good catch thanks, I\u0027ll add a check",
+      "parentUuid": "8e5d9792_42c7f43c",
+      "range": {
+        "startLine": 45,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "46751ebf7f702e304b6de94245109c6628a199da",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
