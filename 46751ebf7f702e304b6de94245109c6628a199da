@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e5d9792_42c7f43c",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-10-29T18:18:51Z",
+      "side": 1,
+      "message": "Ah, here\u0027s the issue. If the git log command only returns one commit, there is no trailing blank entry. You end up popping the only entry on the list, and returning an empty list to the caller. You\u0027ll need to add a quick check to ensure that the last entry is empty before popping it.",
+      "range": {
+        "startLine": 45,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "46751ebf7f702e304b6de94245109c6628a199da",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
