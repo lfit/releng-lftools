@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "310a1650_9cee5448",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-10-29T13:41:49Z",
+      "side": 1,
+      "message": "why did you change this, it has impacts on other scripts that use this    \n\n nexus_url\u003d\"${NEXUSPROXY:-$NEXUS_URL}\"\n nexus_path\u003d\"${SILO}/${JENKINS_HOSTNAME}/${JOB_NAME}/${BUILD_NUMBER}\"\n\nplease refer to global-jjb logs-deploy.sh",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 48
+      },
+      "revId": "b18f6f196b6e9543339972cd0310d671ef912fec",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e13ceb63_33cb117f",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 16
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-10-29T13:41:49Z",
+      "side": 1,
+      "message": "afaik this is dropped.",
+      "range": {
+        "startLine": 516,
+        "startChar": 11,
+        "endLine": 516,
+        "endChar": 102
+      },
+      "revId": "b18f6f196b6e9543339972cd0310d671ef912fec",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
