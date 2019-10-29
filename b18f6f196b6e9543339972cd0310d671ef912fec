@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "8786a30c_6c27f1f1",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2019-10-29T18:01:11Z",
+      "side": 1,
+      "message": "Netrc is not required for s3, but we haven\u0027t discussed how credentials will be used in jenkins yet. Code actually has zowe profile hardcoded in right now in lftools/deploy.py.",
+      "parentUuid": "174addd1_90864ea3",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 48
+      },
+      "revId": "b18f6f196b6e9543339972cd0310d671ef912fec",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e13ceb63_33cb117f",
         "filename": "lftools/deploy.py",
         "patchSetId": 16
