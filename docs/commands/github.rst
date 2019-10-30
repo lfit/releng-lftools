@@ -49,10 +49,10 @@ votes
 
 
 
-API requires a [github] section in ~/.config/lftools/lftools.ini:
+API requires a [github] or [github.OrgName] section in ~/.config/lftools/lftools.ini:
 
 .. code-block:: bash
 
-   [github]
+   [github] or [github.org]
    token = REDACTED
 
