@@ -184,6 +184,12 @@ def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki
             if repo.name == repository:
                 repo_actual = (repo)
 
+        try:
+            repo_actual
+        except NameError:
+            print("repo not found")
+            exit(1)
+
         for team in teams():
             if team.name == add_team:
                 print(team.id)
