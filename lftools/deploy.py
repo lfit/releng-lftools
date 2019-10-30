@@ -26,7 +26,7 @@ import tempfile
 import zipfile
 
 from defusedxml.minidom import parseString
-import glob2  # Switch to glob when Python < 3.5 support is dropped
+import glob
 import requests
 import six
 
@@ -47,7 +47,7 @@ def _compress_text(dir):
     paths = []
     for _type in compress_types:
         search = os.path.join(dir, _type)
-        paths.extend(glob2.glob(search, recursive=True))
+        paths.extend(glob.glob(search, recursive=True))
 
     for _file in paths:
         with open(_file, 'rb') as src, gzip.open('{}.gz'.format(_file), 'wb') as dest:
@@ -253,7 +253,7 @@ def copy_archives(workspace, pattern=None):
             continue
 
         search = os.path.join(workspace, p)
-        paths.extend(glob2.glob(search, recursive=True))
+        paths.extend(glob.glob(search, recursive=True))
     log.debug('Files found: {}'.format(paths))
 
     no_dups_paths = _remove_duplicates_and_sort(paths)
@@ -635,7 +635,7 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
     file_list = []
     previous_dir = os.getcwd()
     os.chdir(deploy_dir)
-    files = glob2.glob('**/*')
+    files = glob.glob('**/*', recursive=True)
     for file in files:
         if os.path.isfile(file):
             base_name = os.path.basename(file)
