@@ -12,10 +12,10 @@
 
 __author__ = 'Thanh Ha'
 
+import configparser
 import logging
 import os.path
 
-from six.moves import configparser
 from xdg import XDG_CONFIG_HOME
 
 log = logging.getLogger(__name__)
@@ -30,17 +30,21 @@ def get_config():
     return config
 
 
+def has_section(section):
+    """Get a configuration from a section."""
+    config = get_config()
+    return config.has_section(section)
+
+
 def get_setting(section, option=None):
     """Get a configuration from a section."""
     config = get_config()
-
     if option:
         try:
             return config.get(section, option)
         except (configparser.NoOptionError,
                 configparser.NoSectionError) as e:
             raise e
-
     else:
         try:
             return config.options(section)
