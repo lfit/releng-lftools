@@ -34,6 +34,7 @@ class RestApi(object):
             self.password = self.creds['password']
             self.r = requests.Session()
             self.r.auth = (self.username, self.password)
+            self.r.headers.update({'Content-Type': 'application/json; charset=UTF-8'})
 
         if self.creds['authtype'] == 'token':
             self.token = self.creds['token']
