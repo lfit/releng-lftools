@@ -25,7 +25,7 @@ LFTOOLS_CONFIG_FILE = os.path.join(XDG_CONFIG_HOME, 'lftools', 'lftools.ini')
 
 def get_config():
     """Get the config object."""
-    config = configparser.ConfigParser()
+    config = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())  # noqa
     config.read(LFTOOLS_CONFIG_FILE)
     return config
 
