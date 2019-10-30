@@ -34,6 +34,7 @@ class RestApi(object):
             self.password = self.creds['password']
             self.r = requests.Session()
             self.r.auth = (self.username, self.password)
+            self.r.headers.update({'Content-Type': 'application/json; charset=UTF-8'})
 
         if self.creds['authtype'] == 'token':
             self.token = self.creds['token']
@@ -42,25 +43,30 @@ class RestApi(object):
                                    .format(self.token)})
             self.r.headers.update({'Content-Type': 'application/json'})
 
-    def _request(self, url, method, data=None, timeout=10):
+    def _request(self, url, method, data=None, timeout=30):
         """Execute the request."""
         resp = self.r.request(method, self.endpoint + url, data=data, timeout=timeout)
 
-        if resp.text:
-            try:
-                print(resp.text)
-                if resp.headers['Content-Type'] == 'application/json':
-                    body = json.loads(resp.text)
-                else:
-                    body = resp.text
-            except ValueError:
-                body = None
-
-        else:
-            body = None
+        if resp.status_code == 409:
+            print("Conflict")
             return resp
 
-        return resp, body
+        else:
+            if resp.text:
+                try:
+                    if 'application/json' in resp.headers['Content-Type']:
+                        remove_xssi_magic = resp.text.replace(')]}\'', '')
+                        body = json.loads(remove_xssi_magic)
+                    else:
+                        body = resp.text
+                except ValueError:
+                    body = None
+
+            else:
+                body = None
+                return resp
+
+            return resp, body
 
     def get(self, url, **kwargs):
         """HTTP GET request."""
