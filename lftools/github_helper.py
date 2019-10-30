@@ -33,8 +33,9 @@ def helper_list(ctx, organization, repos, audit, full, teams, team, repofeatures
     except GithubException as ghe:
         log.error(ghe)
 
+    # Extend this to check if a repo exists
     if repos:
-        log.info("All repos for organization: ", orgName)
+        print("All repos for organization: ", orgName)
         repos = org.get_repos()
         for repo in repos:
             log.info(repo.name)
