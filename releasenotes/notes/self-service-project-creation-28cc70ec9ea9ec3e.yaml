@@ -1,0 +1,29 @@
+---
+prelude: >
+    Changes to lftools needed for project creation to happen
+    via command line logic.
+features:
+  - |
+    lftools gerrit createproject
+    lftools gerrit prepareproject
+    lftools gerrit addinfojob
+    lftools gerrit addinfofile
+issues:
+  - |
+    Addinfofile trips up on extended characters in usernames.
+    Project lead must be added by hand to lftools infofile create.
+upgrade:
+  - |
+    lftools.ini needs configuration on internal jenkins for auth.
+    Documenting and implementing this is an internal endevor and beyond
+    the scope of these release notes.
+fixes:
+  - |
+    Use proper python3 config parser.
+    Add has_section check for configparser
+    lftools github update repo will properly return "repo not found"
+    lftools infofile create will now take tsc approval string and set date.
+    lftools infofile will allow INFO.yaml to be created before ldap group.
+    yaml4info now correclty outputs to STDOUT so that its output can be properly
+    captured and printed by python.
+    lfidapi now correctly exits if a group does not exist.
