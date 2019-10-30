@@ -1,0 +1,6 @@
+---
+deprecations:
+  - |
+    Drop support for python3.4(EOL) lftools now requires python > 3.6
+    This allows us to remove remaining pins, and to move from glob2 to
+    builtin glob
