@@ -11,6 +11,7 @@
 
 import json
 import logging
+import sys
 
 from email_validator import validate_email
 import requests
@@ -46,19 +47,24 @@ def helper_check_group_exists(group):
 
 def helper_search_members(group):
     """List members of a group."""
-    access_token, url = oauth_helper()
-    url = PARSE(url, group)
-    headers = {'Authorization': 'Bearer ' + access_token}
-    response = requests.get(url, headers=headers)
-    try:
-        check_response_code(response)
-    except requests.HTTPError as e:
-        log.error(e)
-        exit(1)
-    result = (response.json())
-    members = result["members"]
-    log.debug(json.dumps(members, indent=4, sort_keys=True))
-    return members
+    response_code = helper_check_group_exists(group)
+    if response_code != 200:
+        log.error("Code: {} Group {} does not exists exiting...".format(response_code, group))
+        sys.exit(1)
+    else:
+        access_token, url = oauth_helper()
+        url = PARSE(url, group)
+        headers = {'Authorization': 'Bearer ' + access_token}
+        response = requests.get(url, headers=headers)
+        try:
+            check_response_code(response)
+        except requests.HTTPError as e:
+            log.error(e)
+            exit(1)
+        result = (response.json())
+        members = result["members"]
+        log.debug(json.dumps(members, indent=4, sort_keys=True))
+        return members
 
 
 def helper_user(user, group, delete):
