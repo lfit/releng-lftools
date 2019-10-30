@@ -11,10 +11,12 @@
 
 from __future__ import print_function
 
-import subprocess
+from subprocess import check_output
+from subprocess import STDOUT
 
 
 def helper_yaml4info(group):
     """Build yaml of committers for your INFO.yaml."""
-    status = subprocess.call(['yaml4info', group])
+    command = ["yaml4info", group]
+    status = check_output(command, stderr=STDOUT).decode()
     return status
