@@ -9,6 +9,7 @@
 ##############################################################################
 """Script to insert missing values from ldap into a projects INFO.yaml."""
 
+import datetime
 import inspect
 import logging
 import re
@@ -39,8 +40,12 @@ def infofile(ctx):
 @click.argument('gerrit_project', required=True)
 @click.option('--directory', type=str, required=False, default="r",
               help='custom gerrit directory, eg not /r/')
+@click.option('--empty', is_flag=True, required=False,
+              help='Create info file for uncreated project.')
+@click.option('--tsc_approval', type=str, required=False, default="missing",
+              help='optionally provde a tsc approval link')
 @click.pass_context
-def create_info_file(ctx, gerrit_url, gerrit_project, directory):
+def create_info_file(ctx, gerrit_url, gerrit_project, directory, empty, tsc_approval):
     """Create an initial INFO file.
 
     gerrit_project example: project/full-name
@@ -55,30 +60,44 @@ def create_info_file(ctx, gerrit_url, gerrit_project, directory):
     headers = {'Content-Type': 'application/json; charset=UTF-8'}
     projectid_encoded = gerrit_project.replace("/", "%2F")
     access_str = 'projects/{}/access'.format(projectid_encoded)
-    result = rest.get(access_str, headers=headers)
-    project_dashed = gerrit_project.replace("/", "_")
-    project_dashed = project_dashed.replace("-", "_")
+    # project name with only underscores for info file anchors.
+    # project name with only dashes for ldap groups.
+    project_underscored = gerrit_project.replace("/", "_")
+    project_underscored = project_underscored.replace("-", "_")
+    project_dashed = project_underscored.replace("_", "-")
+
     umbrella = gerrit_url.split(".")[1]
     match = re.search(r"(?<=\.).*", gerrit_url)
     umbrella_tld = match.group(0)
-    if 'inherits_from' in result:
-        inherits = (result['inherits_from']['id'])
-        if inherits != "All-Projects":
-            print("    Inherits from:", inherits)
-            print("Better Check this unconventional inherit")
 
-    try:
-        owner = (result['local']['refs/*']['permissions']['owner']['rules'])
-    except:
-        print("ERROR: Check project config, no owner set!")
+    if not empty:
+        result = rest.get(access_str, headers=headers)
 
-    for x in owner:
-        match = re.search(r"[^=]+(?=,)", x)
-        ldap_group = (match.group(0))
+        if 'inherits_from' in result:
+            inherits = (result['inherits_from']['id'])
+            if inherits != "All-Projects":
+                print("    Inherits from:", inherits)
+                print("Better Check this unconventional inherit")
+
+        try:
+            owner = (result['local']['refs/*']['permissions']['owner']['rules'])
+        except:
+            print("ERROR: Check project config, no owner set!")
+
+        for x in owner:
+            match = re.search(r"[^=]+(?=,)", x)
+            ldap_group = (match.group(0))
+
+    if umbrella == 'o-ran-sc':
+        umbrella = "oran"
+
+    date = (datetime.datetime.now().strftime("%Y-%m-%d"))
+
+    ldap_group = "{}-gerrit-{}-committers".format(umbrella, project_dashed)
 
     long_string = """---
 project: '{0}'
-project_creation_date: ''
+project_creation_date: '{3}'
 project_category: ''
 lifecycle_state: 'Incubation'
 project_lead: &{1}_{0}_ptl
@@ -107,23 +126,33 @@ meetings:
       server: 'freenode.net'
       channel: '#{1}'
       repeats: ''
-      time: ''""".format(project_dashed, umbrella, umbrella_tld)
+      time: ''""".format(project_underscored, umbrella, umbrella_tld, date)
 
     tsc_string = """
 tsc:
-    approval: ''
+    # yamllint disable rule:line-length
+    approval: '{}'
     changes:
         - type: ''
           name: ''
           link: ''
+""".format(tsc_approval, end='')
+    empty_committer = """    - name: ''
+      email: ''
+      company: ''
+      id: ''
 """
     tsc_string = inspect.cleandoc(tsc_string)
     print(long_string)
     print("repositories:")
     print("    - {}".format(gerrit_project))
     print("committers:")
-    print("    - <<: *{1}_{0}_ptl".format(project_dashed, umbrella))
-    helper_yaml4info(ldap_group)
+    print("    - <<: *{1}_{0}_ptl".format(project_underscored, umbrella, end=''))
+    if not empty:
+        this = helper_yaml4info(ldap_group)
+        print(this, end='')
+    else:
+        print(empty_committer, end='')
     print(tsc_string)
 
 
