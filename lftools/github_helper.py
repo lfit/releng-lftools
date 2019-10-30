@@ -24,7 +24,14 @@ log = logging.getLogger(__name__)
 
 def helper_list(ctx, organization, repos, audit, full, teams, team, repofeatures):
     """List options for github org repos."""
-    token = config.get_setting("github", "token")
+    # Optionally pick token based on gitub org
+
+    if config.has_section("github"):
+        token = config.get_setting("github", "token")
+    else:
+        section = "github.{}".format(organization)
+        token = config.get_setting(section, "token")
+
     g = Github(token)
     orgName = organization
 
@@ -33,8 +40,9 @@ def helper_list(ctx, organization, repos, audit, full, teams, team, repofeatures
     except GithubException as ghe:
         log.error(ghe)
 
+    # Extend this to check if a repo exists
     if repos:
-        log.info("All repos for organization: ", orgName)
+        print("All repos for organization: ", orgName)
         repos = org.get_repos()
         for repo in repos:
             log.info(repo.name)
