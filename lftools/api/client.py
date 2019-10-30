@@ -34,6 +34,7 @@ class RestApi(object):
             self.password = self.creds['password']
             self.r = requests.Session()
             self.r.auth = (self.username, self.password)
+            self.r.headers.update({'Content-Type': 'application/json; charset=UTF-8'})
 
         if self.creds['authtype'] == 'token':
             self.token = self.creds['token']
@@ -48,9 +49,9 @@ class RestApi(object):
 
         if resp.text:
             try:
-                print(resp.text)
-                if resp.headers['Content-Type'] == 'application/json':
-                    body = json.loads(resp.text)
+                if 'application/json' in resp.headers['Content-Type']:
+                    remove_xssi_magic = resp.text.replace(')]}\'', '')
+                    body = json.loads(remove_xssi_magic)
                 else:
                     body = resp.text
             except ValueError:
