@@ -11,11 +11,11 @@
 
 __author__ = 'Thanh Ha'
 
+import configparser
 import getpass
 import logging
 
 import click
-from six.moves import configparser
 from six.moves import input
 
 from lftools import config as conf
