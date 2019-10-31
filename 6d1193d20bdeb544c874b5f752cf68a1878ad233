@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f915e5d6_9e9153b5",
+        "filename": "releasenotes/notes/lftools-python-85ad1e90d01c51fb.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2019-10-31T17:09:38Z",
+      "side": 1,
+      "message": "I think this is an incorrect use of \"deprecations\" here. Usually deprecating something means the feature is no longer supported but can still be used and may be removed at a future time. In this case it looks like users have no choice but to upgrade so I would put this as an \"upgrade\" note and them bumping the major version of lftools when it is released.",
+      "revId": "6d1193d20bdeb544c874b5f752cf68a1878ad233",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
