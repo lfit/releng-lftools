@@ -25,10 +25,15 @@ class ReadTheDocs(client.RestApi):
 
     def __init__(self, **params):
         """Initialize the class."""
-        if 'token' not in params:
-            params['token'] = config.get_setting('rtd', 'token')
-        if 'endpoint' not in params:
-            params['endpoint'] = config.get_setting('rtd', 'endpoint')
+        self.params = params
+        if 'creds' not in self.params:
+            creds = {
+                'authtype': 'token',
+                'token': config.get_setting('rtd', 'token'),
+                'endpoint': config.get_setting('rtd', 'endpoint')
+            }
+            params['creds'] = creds
+
         super(ReadTheDocs, self).__init__(**params)
 
     def project_list(self):

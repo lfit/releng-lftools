@@ -13,7 +13,12 @@ import responses
 
 import lftools.api.client as client
 
-c = client.RestApi(endpoint='', token='xyz')
+creds = {
+    'authtype': 'token',
+    'endpoint': '',
+    'token': 'xyz'
+}
+c = client.RestApi(creds=creds)
 
 
 @responses.activate

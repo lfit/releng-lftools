@@ -16,8 +16,12 @@ import responses
 
 import lftools.api.endpoints.readthedocs as client
 
-rtd = client.ReadTheDocs(endpoint='https://readthedocs.org/api/v3/',
-                         token='xyz')
+creds = {
+    'authtype': 'token',
+    'endpoint': 'https://readthedocs.org/api/v3/',
+    'token': 'xyz'
+}
+rtd = client.ReadTheDocs(creds=creds)
 
 FIXTURE_DIR = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), 'fixtures',)

@@ -20,15 +20,19 @@ class RestApi(object):
     def __init__(self, **params):
         """Initialize the REST API class."""
         self.params = params
-        self.endpoint = self.params['endpoint']
-        self.token = self.params['token']
+
+        if params['creds']:
+            self.creds = params['creds']
 
         if 'timeout' not in self.params:
             self.timeout = None
 
-        self.r = requests.Session()
-        self.r.headers.update({'Authorization': 'Token {}'.format(self.token)})
-        self.r.headers.update({'Content-Type': 'application/json'})
+        if self.creds['authtype'] == 'token':
+            self.endpoint = self.creds['endpoint']
+            self.token = self.creds['token']
+            self.r = requests.Session()
+            self.r.headers.update({'Authorization': 'Token {}'.format(self.token)})  # NOQA
+            self.r.headers.update({'Content-Type': 'application/json'})
 
     def _request(self, url, method, data=None, timeout=10):
         """Execute the requested request."""
