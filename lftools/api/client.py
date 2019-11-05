@@ -27,17 +27,26 @@ class RestApi(object):
         if 'timeout' not in self.params:
             self.timeout = None
 
+        self.endpoint = self.creds['endpoint']
+
         if self.creds['authtype'] == 'token':
-            self.endpoint = self.creds['endpoint']
             self.token = self.creds['token']
             self.r = requests.Session()
             self.r.headers.update({'Authorization': 'Token {}'.format(self.token)})  # NOQA
             self.r.headers.update({'Content-Type': 'application/json'})
 
     def _request(self, url, method, data=None, timeout=10):
-        """Execute the requested request."""
-        resp = self.r.request(method, self.endpoint + url, data=data,
-                              timeout=timeout)
+        """Execute the request."""
+
+        if self.creds['authtype'] == 'basic':
+            username = self.creds['username']
+            password = self.creds['password']
+            resp = self.r.request(method, self.endpoint + url,
+                                  data=data, timeout=timeout,
+                                  auth=(username, password))
+        else:
+            resp = self.r.request(method, self.endpoint + url,
+                                  data=data, timeout=timeout)
 
         if resp.text:
             try:
