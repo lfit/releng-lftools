@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    Add support to packagecloud in lftools.
+    This feature will help to push and promote
+    artifacts to packagecloud.
