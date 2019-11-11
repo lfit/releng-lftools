@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f066396f_f83ea572",
+        "filename": "requirements.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 182
+      },
+      "writtenOn": "2019-11-11T22:19:04Z",
+      "side": 1,
+      "message": "Did you want to remove \u0027glob\u0027?",
+      "revId": "61348f95409a49283ee53824d3e7c5f6f6eb3d45",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
