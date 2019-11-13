@@ -303,6 +303,23 @@ def delete_images(settings_file, url, images):
     for image in images:
         _nexus.delete_image(image)
 
+def get_activity_text (act):
+    tmp_list = []
+    act_soup = bs4.BeautifulSoup(str(act), 'xml')
+    stagingProperties = act_soup.find_all("stagingProperty")
+    for stagingProperty in stagingProperties:
+        value = stagingProperty.find("value")
+        name = stagingProperty.find("name")
+        tmp_list.append(value.text)
+    txt_str = ' --> '.join(map(str, tmp_list))
+    return txt_str
+
+def add_str_if_not_exist (new_str, existing_str_lst):
+    addthis = True
+    for fail2txt in existing_str_lst:
+        if new_str.text in fail2txt:
+            addthis = False
+    return addthis
 
 def release_staging_repos(repos, verify, nexus_url=""):
     """Release one or more staging repos.
@@ -329,50 +346,60 @@ def release_staging_repos(repos, verify, nexus_url=""):
         soup = bs4.BeautifulSoup(response.text, 'xml')
         values = soup.find_all("value")
         names = soup.find_all("name")
+        activities = soup.find_all("stagingActivityEvent")
         failures = []
+        failures2 = []
         successes = []
         isrepoclosed = []
 
-        # Check for failures
+        for act in activities:
+            # Check for failures
+            if re.search('ruleFailed', act.text):
+                failures2.append (get_activity_text(act))
+            if re.search('repositoryCloseFailed', act.text):
+                failures2.append (get_activity_text(act))
+            # Check if already released
+            if re.search('repositoryReleased', act.text):
+                successes.append (get_activity_text(act))
+            # Check if already Closed
+            if re.search('repositoryClosed', act.text):
+                isrepoclosed.append (get_activity_text(act))
+
+        # Check for other failures (old code part). only add them if not already there
+        # Should be possible to remove this part, but could not find a sample XML with these values.
         for message in values:
             if re.search('StagingRulesFailedException', message.text):
-                failures.append(message)
+                if add_str_if_not_exist (message, failures2):
+                    failures.append(message.text)
             if re.search('Invalid', message.text):
-                failures.append(message)
+                if add_str_if_not_exist (message, failures2):
+                    failures.append(message.text)
 
-        # Check if already released
-        for name in names:
-            if re.search('repositoryReleased', name.text):
-                successes.append(name)
-
-        # Ensure Repository is in Closed state
-        for name in names:
-            if re.search('repositoryClosed', name.text):
-                isrepoclosed.append(name)
-
-        if len(failures) != 0:
-            log.info(failures)
+        # Start check result
+        if len(failures) != 0 or len(failures2) != 0:
+            log.info('\n'.join(map(str, failures2)))
+            log.info('\n'.join(map(str, failures)))
             log.info("One or more rules failed")
             sys.exit(1)
         else:
             log.info("PASS: No rules have failed")
 
         if len(successes) != 0:
-            log.info(successes)
+            log.info('\n'.join(map(str, successes)))
             log.info("Nothing to do: Repository already released")
             sys.exit(0)
 
-        if len(isrepoclosed) != 1:
+        if len(isrepoclosed) == 0:
             log.info(isrepoclosed)
             log.info("Repository is not in closed state")
             sys.exit(1)
         else:
-            log.info("PASS: Repository is in closed state")
+            log.info("PASS: Repository {} is in closed state".format(isrepoclosed[0]))
 
         log.info("Successfully verfied {}".format(str(repo)))
 
     if not verify:
-        print("running release")
+        log.info("running release")
         for repo in repos:
             data = {"data": {"stagedRepositoryIds": [repo]}}
             log.debug("Sending data: {}".format(data))
