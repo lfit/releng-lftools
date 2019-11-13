@@ -12,6 +12,7 @@
 
 import concurrent.futures
 import errno
+import glob
 import gzip
 import io
 import logging
@@ -26,7 +27,6 @@ import tempfile
 import zipfile
 
 from defusedxml.minidom import parseString
-import glob
 import requests
 import six
 
