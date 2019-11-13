@@ -411,6 +411,23 @@ class TestFetchNexus3Catalog:
         rdh.get_nexus3_catalog ('onap', 'aaf')
         assert len(rdh.NexusCatalog) == 18
 
+    def test_get_all_onap_and_specify_1_repo_1(self):
+        rdh.NexusCatalog = []
+        rdh.initialize ('onap')
+        responses.add(responses.GET, self.url, body=self.answer, status=200)
+        rdh.get_nexus3_catalog ('onap', '', 'clamp')
+        assert len(rdh.NexusCatalog) == 1
+        assert rdh.NexusCatalog[0][1] == 'clamp'
+
+
+    def test_get_all_onap_and_specify_1_repo_2(self):
+        rdh.NexusCatalog = []
+        rdh.initialize ('onap')
+        responses.add(responses.GET, self.url, body=self.answer, status=200)
+        rdh.get_nexus3_catalog ('onap', '', 'clamp-dashboard-logstash')
+        assert len(rdh.NexusCatalog) == 1
+        assert rdh.NexusCatalog[0][1] == 'clamp-dashboard-logstash'
+
 
 class TestFetchAllTagsAndUpdate:
     _test_image_long_id = 'sha256:3450464d68c9443dedc8bfe3272a23e6441c37f707c42d32fee0ebdbcd319d2c'
@@ -565,7 +582,7 @@ class TestFetchAllTagsAndUpdate:
 
     def test_start_no_copy(self, responses, mocker):
         self.initiate_test_fetch(responses, mocker)
-        rdh.start_point ('onap', '', False)
+        rdh.start_point ('onap', '', '', False)
         assert self.counter.pull == 0
         assert self.counter.tag == 0
         assert self.counter.push == 0
@@ -573,7 +590,7 @@ class TestFetchAllTagsAndUpdate:
 
     def test_start_copy(self, responses, mocker):
         self.initiate_test_fetch(responses, mocker)
-        rdh.start_point ('onap', '', False, False, True)
+        rdh.start_point ('onap', '', '', False, False, True)
         assert len(rdh.NexusCatalog) == 3
         assert len(rdh.projects) == 3
         assert len(rdh.projects[0].tags_2_copy.valid) == 1
@@ -589,7 +606,7 @@ class TestFetchAllTagsAndUpdate:
 
     def test_start_copy_repo(self, responses, mocker):
         self.initiate_test_fetch(responses, mocker, 'sanity')
-        rdh.start_point ('onap', 'sanity', False, False, True)
+        rdh.start_point ('onap', 'sanity', '', False, False, True)
         assert len(rdh.NexusCatalog) == 1
         assert len(rdh.projects) == 1
         assert len(rdh.projects[0].tags_2_copy.valid) == 1
