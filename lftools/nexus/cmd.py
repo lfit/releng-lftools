@@ -329,16 +329,47 @@ def release_staging_repos(repos, verify, nexus_url=""):
         soup = bs4.BeautifulSoup(response.text, 'xml')
         values = soup.find_all("value")
         names = soup.find_all("name")
+        activities = soup.find_all("stagingActivityEvent")
         failures = []
+        failures2 = []
         successes = []
         isrepoclosed = []
 
         # Check for failures
+        for act in activities:
+            if re.search('ruleFailed', act.text):
+                tmp_list = []
+                act_soup = bs4.BeautifulSoup(str(act), 'xml')
+                stagingProperties = act_soup.find_all("stagingProperty")
+                for stagingProperty in stagingProperties:
+                    act_values = stagingProperty.find_all("value")
+                    for act_value in act_values:
+                        tmp_list.append(act_value.text)
+                failures2.append(' --> '.join(map(str, tmp_list)))
+
+        # Check for failures. only add them if not already there
         for message in values:
             if re.search('StagingRulesFailedException', message.text):
-                failures.append(message)
+                addthis = True
+                for fail2txt in failures2:
+                    if message.text in fail2txt:
+                        addthis = False
+                if addthis:
+                    failures.append(message.text)
             if re.search('Invalid', message.text):
-                failures.append(message)
+                addthis = True
+                for fail2txt in failures2:
+                    if message.text in fail2txt:
+                        addthis = False
+                if addthis:
+                    failures.append(message.text)
+            if re.search('Missing', message.text):
+                addthis = True
+                for fail2txt in failures2:
+                    if message.text in fail2txt:
+                        addthis = False
+                if addthis:
+                    failures.append(message.text)
 
         # Check if already released
         for name in names:
@@ -350,9 +381,11 @@ def release_staging_repos(repos, verify, nexus_url=""):
             if re.search('repositoryClosed', name.text):
                 isrepoclosed.append(name)
 
-        if len(failures) != 0:
-            log.info(failures)
+        if len(failures) != 0 or len(failures2) != 0:
             log.info("One or more rules failed")
+            log.info('\n'.join(map(str, failures2)))
+            log.info('\n'.join(map(str, failures)))
+
             sys.exit(1)
         else:
             log.info("PASS: No rules have failed")
