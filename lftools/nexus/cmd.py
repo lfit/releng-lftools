@@ -339,6 +339,8 @@ def release_staging_repos(repos, verify, nexus_url=""):
                 failures.append(message)
             if re.search('Invalid', message.text):
                 failures.append(message)
+            if re.search('Missing:', message.text):
+                failures.append(message)
 
         # Check if already released
         for name in names:
