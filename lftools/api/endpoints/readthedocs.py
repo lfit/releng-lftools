@@ -46,26 +46,13 @@ class ReadTheDocs(client.RestApi):
         :param kwargs:
         :return: [projects]
         """
-        result = self.get('projects/')[1]  # NOQA
-        more_results = None
+        result = self.get('projects/?limit=999')[1]  # NOQA
         data = result['results']
         project_list = []
 
-        if result['next']:
-            more_results = result['next'].rsplit('/', 1)[-1]
-
-        if more_results:
-            while more_results is not None:
-                get_more_results = self.get('projects/' + more_results)[1]
-                data.append(get_more_results['results'])
-                more_results = get_more_results['next']
-
-                if more_results is not None:
-                    more_results = more_results.rsplit('/', 1)[-1]
-
         for project in data:
-            project_list.append(project['slug'])
-
+            if 'slug' in project:
+                project_list.append(project['slug'])
         return project_list
 
     def project_details(self, project):
@@ -143,6 +130,22 @@ class ReadTheDocs(client.RestApi):
         result = self.patch('projects/{}/version/{}/'.format(project, version),
                             data=json_data)
         return result
+
+    def project_update(self, project, *args):
+        """Update any project details.
+
+        :param project: Project's name (slug).
+        :param args: Any of the JSON keys allows by RTD API.
+        :return: Bool
+        """
+        data = args[0]
+        json_data = json.dumps(data)
+        result = self.patch('projects/{}/'.format(project), data=json_data)
+
+        if result.status_code == 204:
+            return True, result.status_code
+        else:
+            return False, result.status_code
 
     def project_create(self, name, repository_url, repository_type, homepage,
                        programming_language, language, **kwargs):
@@ -227,23 +230,9 @@ class ReadTheDocs(client.RestApi):
         :param kwargs:
         :return: [subprojects]
         """
-        result = self.get('projects/{}/subprojects/'.format(project))[1]  # NOQA
-        more_results = None
+        result = self.get('projects/{}/subprojects/?limit=999'.format(project))[1]  # NOQA
         data = result['results']
         subproject_list = []
-
-        if result['next']:
-            more_results = result['next'].rsplit('/', 1)[-1]
-
-        if more_results:
-            while more_results is not None:
-                get_more_results = self.get('projects/{}/subprojects/'
-                                            .format(project) + more_results)[1]
-                data.append(get_more_results['results'])
-                more_results = get_more_results['next']
-
-                if more_results is not None:
-                    more_results = more_results.rsplit('/', 1)[-1]
 
         for subproject in data:
             subproject_list.append(subproject['child']['slug'])

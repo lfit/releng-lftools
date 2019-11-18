@@ -151,7 +151,7 @@ def test_subproject_list(datafiles):
     json_file = open('subproject_list.json', 'r')
     json_data = json.loads(json_file.read())
     responses.add(responses.GET,
-                  url='https://readthedocs.org/api/v3/projects/TestProject1/subprojects/',  # noqa
+                  url='https://readthedocs.org/api/v3/projects/TestProject1/subprojects/?limit=999',  # noqa
                   json=json_data, status=200, match_querystring=True)
     assert 'testproject2' in rtd.subproject_list('TestProject1')
 
