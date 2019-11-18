@@ -92,6 +92,21 @@ def project_create(ctx, project_name, repository_url, repository_type,
     log.info(pformat(data))
 
 
+@click.command(name='project-update',
+               context_settings=dict(ignore_unknown_options=True,
+                                     allow_extra_args=True,))
+@click.argument('project-name')
+@click.pass_context
+def project_update(ctx, project_name):
+    """Create a new project."""
+    r = readthedocs.ReadTheDocs()
+    d = dict()
+    for item in ctx.args:
+        d.update([item.split('=')])
+    data = r.project_update(project_name, d)
+    log.info(pformat(data))
+
+
 @click.command(name='project-build-list')
 @click.argument('project-slug')
 @click.pass_context
@@ -183,6 +198,7 @@ rtd.add_command(project_create)
 rtd.add_command(project_build_list)
 rtd.add_command(project_build_details)
 rtd.add_command(project_build_trigger)
+rtd.add_command(project_update)
 rtd.add_command(subproject_list)
 rtd.add_command(subproject_details)
 rtd.add_command(subproject_create)

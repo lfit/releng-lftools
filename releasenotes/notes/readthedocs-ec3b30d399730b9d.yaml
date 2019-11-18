@@ -1,0 +1,9 @@
+---
+features:
+  - |
+    Add the ability to update existing project's properties. This is done by invoking
+    lftools rtd project-update PROJECT_NAME key='value' where key is the name of a json
+    API key for the RTD API and value is the new value you require.
+fixes:
+  - |
+    Fixed issues with project and subproject listing.
