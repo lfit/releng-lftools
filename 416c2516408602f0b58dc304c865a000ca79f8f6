@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06a8a04a_c7382f5f",
+        "filename": "releasenotes/notes/readthedocs-ec3b30d399730b9d.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2019-11-18T23:33:17Z",
+      "side": 1,
+      "message": "to update",
+      "range": {
+        "startLine": 4,
+        "startChar": 20,
+        "endLine": 4,
+        "endChar": 28
+      },
+      "revId": "416c2516408602f0b58dc304c865a000ca79f8f6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
