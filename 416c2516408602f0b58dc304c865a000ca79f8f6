@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9b0cf791_0ab76e13",
+        "filename": "lftools/api/endpoints/readthedocs.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-11-19T00:23:27Z",
+      "side": 1,
+      "message": "I scrapped the pagination method I previously wrote as I found it a bit cumbersome, up to 3s per request from the RTD API.\n\nSince the reality is that this is for RTD, I picked 999 because the likelihood of that many docs projects under a single account is likely zero (AFAIK).",
+      "parentUuid": "9ba414e4_45f8c2cd",
+      "revId": "416c2516408602f0b58dc304c865a000ca79f8f6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06a8a04a_c7382f5f",
         "filename": "releasenotes/notes/readthedocs-ec3b30d399730b9d.yaml",
         "patchSetId": 1
