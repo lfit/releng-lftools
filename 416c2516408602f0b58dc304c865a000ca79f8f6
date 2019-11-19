@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "77b2e9c5_de4edc29",
+        "filename": "lftools/api/endpoints/readthedocs.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-11-19T00:59:36Z",
+      "side": 1,
+      "message": "Sounds good to me :)\nJust worried if sometime in the future someone actually has that many... very low probability, and most likely we can ignore it. \nWill it take to long to check how many docs they have? and flag if to many?",
+      "parentUuid": "9b0cf791_0ab76e13",
+      "revId": "416c2516408602f0b58dc304c865a000ca79f8f6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06a8a04a_c7382f5f",
         "filename": "releasenotes/notes/readthedocs-ec3b30d399730b9d.yaml",
         "patchSetId": 1
