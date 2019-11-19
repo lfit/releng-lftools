@@ -57,6 +57,30 @@
       "revId": "416c2516408602f0b58dc304c865a000ca79f8f6",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69e39bf9_435976fe",
+        "filename": "releasenotes/notes/readthedocs-ec3b30d399730b9d.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2019-11-19T00:28:20Z",
+      "side": 1,
+      "message": "Fixed in patchset 2, thanks",
+      "parentUuid": "06a8a04a_c7382f5f",
+      "range": {
+        "startLine": 4,
+        "startChar": 20,
+        "endLine": 4,
+        "endChar": 28
+      },
+      "revId": "416c2516408602f0b58dc304c865a000ca79f8f6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
