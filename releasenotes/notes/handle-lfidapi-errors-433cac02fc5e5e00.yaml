@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Catch and print errors thrown by check_response_code in lftools/lfidapi.py.
