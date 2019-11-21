@@ -18,6 +18,7 @@ ignore_length_regex = Signed-off-by,
 [all.Documentation]
 bears = WriteGoodLintBear
 files = docs/**/*.rst
+ignore += docs/commands/nexus.rst
 
 [all.MarkDown]
 bears = MarkdownBear,SpaceConsistencyBear,WriteGoodLintBear

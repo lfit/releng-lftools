@@ -164,14 +164,14 @@ def create_repos(config_file, settings_file):
         # Create Role
         try:
             role_id = _nexus.get_role(name)
-            log.info('Creating {} role.'.format(role_id))
+            log.info('Role {} already exists.'.format(role_id))
         except LookupError as e:
             role_id = _nexus.create_role(name, privs)
 
         # Create user
         try:
             _nexus.get_user(name)
-            log.info('Creating {} user.'.format(name))
+            log.info('User {} already exists.'.format(name))
         except LookupError as e:
             _nexus.create_user(name, email, role_id, password, extra_privs)
 
@@ -220,6 +220,59 @@ def create_repos(config_file, settings_file):
     for repo in config['repositories']:
         build_repo(repo, repo, config['repositories'][repo],
                    config['base_groupId'], global_privs, config['email_domain'])
+
+
+def create_roles(config_file, settings_file):
+    """Create Nexus roles as defined by configuration file.
+
+    :arg str config: Configuration file containing role definitions that
+        will be used to create the new Nexus roles.
+    :arg str settings: Settings file containing administrative credentials and
+        information.
+    """
+    with open(config_file, 'r') as f:
+        config = yaml.safe_load(f)
+    with open(settings_file, 'r') as f:
+        settings = yaml.safe_load(f)
+
+    for setting in ['nexus', 'user', 'password']:
+        if setting not in settings:
+            log.error('{} needs to be defined in {}'.format(setting,
+                                                            settings_file))
+            sys.exit(1)
+
+    _nexus = Nexus(settings['nexus'], settings['user'], settings['password'])
+
+    required_settings = ['name', 'roles']
+    for role in config:
+        for setting in required_settings:
+            if setting not in config[role]:
+                log.error('{} not defined for role {}. Please ensure that {} '
+                          'are defined for each role in {}'.format(
+                              setting, role, required_settings, config_file))
+                sys.exit(1)
+
+        subrole_ids = []
+        for subrole in config[role]["roles"]:
+            subrole_id = _nexus.get_role(subrole)
+            subrole_ids.append(subrole_id)
+        config[role]["roles"] = subrole_ids
+
+        if "description" not in config[role]:
+            config[role]["description"] = config[role]["name"]
+
+        if "privileges" in config[role]:
+            priv_ids = []
+            for priv in config[role]["privileges"]:
+                priv_ids.append(_nexus.get_priv_by_name(priv))
+            config[role]["privileges"] = priv_ids
+        else:
+            config[role]["privileges"] = []
+
+    for role in config:
+        _nexus.create_role(config[role]["name"], config[role]["privileges"],
+                           role, config[role]["description"],
+                           config[role]["roles"])
 
 
 def search(settings_file, url, repo, pattern):

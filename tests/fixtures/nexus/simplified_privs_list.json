@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "resourceURI": "http://nexus.localhost/service/local/privileges/1",
+            "name": "Status - (read)",
+            "description": "Give permission to query the nexus server for it's status.  This privilege is required by the anonymous user so that the UI can retrieve anonymous permissions on startup.",
+            "type": "method",
+            "userManaged": false,
+            "properties": [
+                {
+                    "key": "method",
+                    "value": "read"
+                },
+                {
+                    "key": "permission",
+                    "value": "nexus:status"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "resourceURI": "http://nexus.localhost/service/local/privileges/2",
+            "name": "Login to UI",
+            "description": "Give permission to allow a user to login to nexus.",
+            "type": "method",
+            "userManaged": false,
+            "properties": [
+                {
+                    "key": "method",
+                    "value": "read"
+                },
+                {
+                    "key": "permission",
+                    "value": "nexus:authentication"
+                }
+            ]
+        }
+    ]
+}

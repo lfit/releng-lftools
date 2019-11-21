@@ -1,0 +1,15 @@
+---
+lf-deployment:
+  name: LF Deployment Role
+  roles:
+    - nx-deployment
+    - analytics
+LF Deployment By Name:
+  name: LF Dep Role
+  privileges:
+    - Status - (read)
+    - Login to UI
+  roles:
+    - Nexus Deployment Role
+    - Analytics
+  description: "A role where I defined its contained roles by name"

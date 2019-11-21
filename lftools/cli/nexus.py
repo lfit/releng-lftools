@@ -60,6 +60,19 @@ def repo(ctx, config, settings):
     nexuscmd.create_repos(config, settings)
 
 
+@create.command()
+@click.option(
+    '-c', '--config', type=str, required=True,
+    help='Role config file for how the Nexus role should be created.')
+@click.option(
+    '-s', '--settings', type=str, required=True,
+    help='Config file containing administrative settings.')
+@click.pass_context
+def role(ctx, config, settings):
+    """Create a Nexus role as defined by a role-config.yaml file."""
+    nexuscmd.create_roles(config, settings)
+
+
 @nexus.group()
 @click.pass_context
 def docker(ctx):
