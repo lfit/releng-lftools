@@ -50,7 +50,11 @@ def helper_search_members(group):
     url = PARSE(url, group)
     headers = {'Authorization': 'Bearer ' + access_token}
     response = requests.get(url, headers=headers)
-    check_response_code(response)
+    try:
+        check_response_code(response)
+    except requests.HTTPError as e:
+        log.error(e)
+        exit(1)
     result = (response.json())
     members = result["members"]
     log.debug(json.dumps(members, indent=4, sort_keys=True))
@@ -69,7 +73,11 @@ def helper_user(user, group, delete):
     else:
         log.info('Adding %s to %s' % (user, group))
         response = requests.put(url, json=data, headers=headers)
-    check_response_code(response)
+    try:
+        check_response_code(response)
+    except requests.HTTPError as e:
+        log.error(e)
+        exit(1)
     result = (response.json())
     log.debug(json.dumps(result, indent=4, sort_keys=True))
 
@@ -85,7 +93,11 @@ def helper_invite(email, group):
     if validate_email(email):
         log.info('Inviting %s to join %s' % (email, group))
         response = requests.post(url, json=data, headers=headers)
-        check_response_code(response)
+        try:
+            check_response_code(response)
+        except requests.HTTPError as e:
+            log.error(e)
+            exit(1)
         result = (response.json())
         log.debug(json.dumps(result, indent=4, sort_keys=True))
     else:
@@ -97,7 +109,7 @@ def helper_create_group(group):
     """Create group."""
     response_code = helper_check_group_exists(group)
     if response_code == 200:
-        log.error("Group %s already exists exiting..." % group)
+        log.error("Group %s already exists. Exiting..." % group)
     else:
         access_token, url = oauth_helper()
         url = '{}/'.format(url)
@@ -106,7 +118,11 @@ def helper_create_group(group):
         log.debug(data)
         log.info('Creating group %s' % group)
         response = requests.post(url, json=data, headers=headers)
-        check_response_code(response)
+        try:
+            check_response_code(response)
+        except requests.HTTPError as e:
+            log.error(e)
+            exit(1)
         result = (response.json())
         log.debug(json.dumps(result, indent=4, sort_keys=True))
 
@@ -159,7 +175,7 @@ def helper_match_ldap_to_info(info_file, group, githuborg, noop):
 
     for user in all_users:
         removed_by_patch = [item for item in ldap_committers if item not in info_committers]
-        if (user in removed_by_patch):
+        if user in removed_by_patch:
             log.info("%s found in group %s " % (user, group))
             if noop is False:
                 log.info("Removing user %s from group %s" % (user, group))
@@ -170,7 +186,7 @@ def helper_match_ldap_to_info(info_file, group, githuborg, noop):
                     helper_user(user, group, "--delete")
 
         added_by_patch = [item for item in info_committers if item not in ldap_committers]
-        if (user in added_by_patch):
+        if user in added_by_patch:
             log.info("%s not found in group %s" % (user, group))
             if noop is False:
                 log.info("Adding user %s to group %s" % (user, group))
