@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aef7d352_3c9929ac",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-11-21T01:58:38Z",
+      "side": 1,
+      "message": "Whats the thoughts on having big code blocks among the cli functions? \nI would prefere to keep the actual code away from the cli part if possible. makes it easier to write test code etc. Or?",
+      "revId": "0673d3f85da37236df35ade122cf27fee12634ec",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d90c9386_f457231c",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-11-21T01:58:38Z",
+      "side": 1,
+      "message": "Not sure what your aim is here.\nunderscored contains the / -\u003e _ and - -\u003e _, but not the / -\u003e -\nperhaps replace underscored with dashed?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 7
+      },
+      "revId": "0673d3f85da37236df35ade122cf27fee12634ec",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a457809e_624df8de",
+        "filename": "lftools/github_helper.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-11-21T01:58:38Z",
+      "side": 1,
+      "message": "Why change to print from log.info?",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 13
+      },
+      "revId": "0673d3f85da37236df35ade122cf27fee12634ec",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
