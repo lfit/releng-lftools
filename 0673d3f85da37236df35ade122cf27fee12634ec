@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1ed5d4f8_713335a4",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-11-22T15:20:58Z",
+      "side": 1,
+      "message": "yes I am planning on moving away from GerritRestAPI and using the one DW has built into\nlftools, we will see how that goes.",
+      "parentUuid": "aef7d352_3c9929ac",
+      "revId": "0673d3f85da37236df35ade122cf27fee12634ec",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d90c9386_f457231c",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 31
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "23093a43_d79d85cb",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-11-22T15:20:58Z",
+      "side": 1,
+      "message": "gerrit_project is something like foo/bar/baz\nin the info file we need \u0026opnfv_foo_bar_baz_ptl\n\nand project dashed we need for ldap group {}-gerrit-{}-committers\n\nI do need to remove line 65. it does nothing.",
+      "parentUuid": "d90c9386_f457231c",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 7
+      },
+      "revId": "0673d3f85da37236df35ade122cf27fee12634ec",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a457809e_624df8de",
         "filename": "lftools/github_helper.py",
         "patchSetId": 31
@@ -53,6 +95,30 @@
       "writtenOn": "2019-11-21T01:58:38Z",
       "side": 1,
       "message": "Why change to print from log.info?",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 13
+      },
+      "revId": "0673d3f85da37236df35ade122cf27fee12634ec",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "845e2689_a0f5186d",
+        "filename": "lftools/github_helper.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-11-22T15:20:58Z",
+      "side": 1,
+      "message": "If you use this locally, it does not print to the console.\nAnyhow this function is only needed locally it is not called by jenkins.",
+      "parentUuid": "a457809e_624df8de",
       "range": {
         "startLine": 45,
         "startChar": 8,
