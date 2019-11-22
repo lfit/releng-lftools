@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "22c11bed_b9f8d751",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-11-22T02:12:34Z",
+      "side": 1,
+      "message": "Yes, fixed in latest version :)",
+      "parentUuid": "52db1f9c_7ea5c2d9",
+      "range": {
+        "startLine": 160,
+        "startChar": 21,
+        "endLine": 160,
+        "endChar": 34
+      },
+      "revId": "33b2b2f831b8842c2e17b113f3f4697f9e440ab7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "04c2db63_2b49ad4d",
         "filename": "lftools/nexus/release_docker_hub.py",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "75c80bc6_be175612",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-11-22T02:12:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04c2db63_2b49ad4d",
+      "range": {
+        "startLine": 511,
+        "startChar": 25,
+        "endLine": 511,
+        "endChar": 31
+      },
+      "revId": "33b2b2f831b8842c2e17b113f3f4697f9e440ab7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f2b97e5_5b942e10",
         "filename": "tests/test_release_docker_hub.py",
         "patchSetId": 3
@@ -62,6 +110,24 @@
       "revId": "33b2b2f831b8842c2e17b113f3f4697f9e440ab7",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d72a227c_7b5a671c",
+        "filename": "tests/test_release_docker_hub.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-11-22T02:12:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f2b97e5_5b942e10",
+      "revId": "33b2b2f831b8842c2e17b113f3f4697f9e440ab7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
