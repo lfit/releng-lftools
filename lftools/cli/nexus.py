@@ -157,22 +157,26 @@ def release(ctx, repos, verify, server):
     help='Only repos containing this string will be selected. '
          'Default set to blank string, which is every repo.')
 @click.option(
+    '-e', '--exact', is_flag=True, required=False, default=False,
+    help='Only exact match repo name will be used. '
+         'If used, --repo parameter can not be empty.')
+@click.option(
     '-s', '--summary', is_flag=True, required=False,
     help='Prints a summary of missing docker tags.')
 @click.option(
     '-v', '--verbose', is_flag=True, required=False,
     help='Prints all collected repo/tag information.')
 @click.option(
-    '-c', '--copy', is_flag=True, required=False,
+    '-c', '--copy', is_flag=True, required=False, default=False,
     help='Copy missing tags from Nexus3 repos to Docker Hub repos.')
 @click.option(
     '-p', '--progbar', is_flag=True, required=False, default=False,
     help='Display a progress bar for the time consuming jobs.')
 @click.pass_context
-def copy_from_nexus3_to_dockerhub(ctx, org, repo, summary, verbose, copy, progbar):
+def copy_from_nexus3_to_dockerhub(ctx, org, repo, exact, summary, verbose, copy, progbar):
     """Find missing repos in Docker Hub, Copy from Nexus3.
 
     Will by default list all missing repos in Docker Hub, compared to Nexus3.
     If -c (--copy) is provided, it will copy the repos from Nexus3 to Docker Hub.
     """
-    rdh.start_point(org, repo, summary, verbose, copy, progbar)
+    rdh.start_point(org, repo, exact, summary, verbose, copy, progbar)
