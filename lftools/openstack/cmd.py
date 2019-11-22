@@ -224,6 +224,16 @@ def delete(ctx, name_or_id, force, timeout):
         timeout=timeout)
 
 
+@click.command()
+@click.argument('stack_name')
+@click.pass_context
+def cost(ctx, stack_name):
+    """Get Stack Cost"""
+    os_stack.cost(
+        ctx.obj['os_cloud'],
+        stack_name)
+
+
 @click.command(name='delete-stale')
 @click.argument('jenkins_urls', nargs=-1)
 @click.pass_context
@@ -242,6 +252,7 @@ def delete_stale(ctx, jenkins_urls):
 stack.add_command(create)
 stack.add_command(delete)
 stack.add_command(delete_stale)
+stack.add_command(cost)
 
 
 @openstack.group()
