@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Added --specified_repo to the releasedockerhub command. This enables
+    user to only work on a specific repo
