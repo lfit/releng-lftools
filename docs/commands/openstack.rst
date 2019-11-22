@@ -81,3 +81,13 @@ delete
 Delete existing stack.
 
 .. program-output:: lftools openstack --os-cloud docs stack delete --help
+
+
+cost
+^^^^
+
+Get total cost of existing stack.
+
+.. program-output:: lftools openstack --os-cloud docs stack cost --help
+
+Return sum of costs for each member of the running stack.

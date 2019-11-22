@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    Add openstack cost command. The cost is sum of the costs of each member of
+    the running stack.
+    https://jira.linuxfoundation.org/browse/RELENG-2550
