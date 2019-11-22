@@ -201,7 +201,11 @@ def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki
 @click.argument('privacy')
 @click.pass_context
 def createteam(ctx, organization, name, repo, privacy):
-    """Create a Github team within an Organization."""
+    """Create a Github team within an Organization.
+
+    Privacy should be set to closed
+    This allows us to control group membership.
+    """
     token = config.get_setting("github", "token")
     g = Github(token)
     orgName = organization
