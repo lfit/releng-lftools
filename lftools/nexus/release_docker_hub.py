@@ -448,11 +448,12 @@ class ProjectClass:
                         raise requests.HTTPError(retry_text)
 
 
-def get_nexus3_catalog(org_name='', find_pattern=''):
+def get_nexus3_catalog(org_name='', find_pattern='', exact_match=False):
     """Main function to collect all Nexus3 repositories.
 
     This function will collect the Nexus catalog for all projects starting with
     'org_name' as well as containing a pattern if specified.
+    If exact_match is specified, it will use the pattern as a unique repo name within the org_name.
 
     If you do it manually, you give the following command.
         curl -s https://nexus3.onap.org:10002/v2/_catalog
@@ -468,10 +469,11 @@ def get_nexus3_catalog(org_name='', find_pattern=''):
         org_name     : Organizational name, for instance 'onap'
         find_pattern : A pattern, that if specified, needs to be part of the
                        repository name.
-                        for instance,
-                         ''     : this pattern finds all repositories.
-                         'eleo' : this pattern finds all repositories with 'eleo'
+                       for instance,
+                        ''     : this pattern finds all repositories.
+                        'eleo' : this pattern finds all repositories with 'eleo'
                                  in its name. --> chameleon
+        exact_match  : If specified, find_pattern is a unique repo name
 
     """
     global NexusCatalog
@@ -481,6 +483,8 @@ def get_nexus3_catalog(org_name='', find_pattern=''):
     containing_str = ''
     if len(find_pattern) > 0:
         containing_str = ', and containing "{}"'.format(find_pattern)
+    if exact_match:
+        containing_str = ', and reponame = "{}"'.format(find_pattern)
     info_str = "Collecting information from Nexus with projects with org = {}".format(org_name)
     log.info("{}{}.".format(info_str, containing_str))
 
@@ -503,11 +507,16 @@ def get_nexus3_catalog(org_name='', find_pattern=''):
         for word in TmpCatalog:
             # Remove all projects that do not start with org_name
             if word.startswith(org_name):
-                # If  a specific search string has been specified, searc = h for it
+                use_this_repo = False
+                # Remove org_name/ from word, so we only get repository left
+                project = (org_name, word[len(org_name)+1:])
+                # If  a specific search string has been specified, search for it
                 # Empty string will match all words
-                if word.find(find_pattern) >= 0:
-                    # Remove onap/ from word, so we only get repository left
-                    project = (org_name, word[len(org_name)+1:])
+                if word.find(find_pattern) >= 0 and not exact_match:
+                    use_this_repo = True
+                if exact_match and project[1] == find_pattern:
+                    use_this_repo = True
+                if use_this_repo:
                     NexusCatalog.append(project)
                     log.debug("Added project {} to my list".format(project[1]))
                     if len(project[1]) > project_max_len_chars:
@@ -724,11 +733,15 @@ def print_nbr_tags_to_copy():
     log.info("Summary: {} tags that should be copied from Nexus3 to Docker Hub.".format(_tot_tags))
 
 
-def start_point(org_name, find_pattern='', summary=False,
+def start_point(org_name, find_pattern='', exact_match=False, summary=False,
                 verbose=False, copy=False, progbar=False):
     """Main function."""
+    # Verify find_pattern and specified_repo are not both used.
+    if len(find_pattern) == 0 and exact_match:
+        log.error("You need to provide a Pattern to go with the --exact flag")
+        return
     initialize(org_name)
-    if not get_nexus3_catalog(org_name, find_pattern):
+    if not get_nexus3_catalog(org_name, find_pattern, exact_match):
         log.info("Could not get any catalog from Nexus3 with org = {}".format(org_name))
         return
 
