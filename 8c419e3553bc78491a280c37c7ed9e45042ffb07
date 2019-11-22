@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35989c84_de139838",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-11-22T03:15:11Z",
+      "side": 1,
+      "message": "\"Match the exact repo name\"",
+      "range": {
+        "startLine": 161,
+        "startChar": 10,
+        "endLine": 161,
+        "endChar": 50
+      },
+      "revId": "8c419e3553bc78491a280c37c7ed9e45042ffb07",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd0aa8b8_beb78664",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-11-22T03:15:11Z",
+      "side": 1,
+      "message": "Is this related to the change in question? Looks like something is sneaked in :-)",
+      "range": {
+        "startLine": 170,
+        "startChar": 50,
+        "endLine": 170,
+        "endChar": 64
+      },
+      "revId": "8c419e3553bc78491a280c37c7ed9e45042ffb07",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44db19c7_6a144321",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2019-11-22T03:15:11Z",
+      "side": 1,
+      "message": "extra space in the line, not required",
+      "range": {
+        "startLine": 513,
+        "startChar": 21,
+        "endLine": 513,
+        "endChar": 22
+      },
+      "revId": "8c419e3553bc78491a280c37c7ed9e45042ffb07",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    }
+  ]
+}
