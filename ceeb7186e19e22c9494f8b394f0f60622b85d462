@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "843b5d25_9705a804",
+        "filename": "lftools/openstack/stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 127
+      },
+      "writtenOn": "2019-11-22T21:22:42Z",
+      "side": 1,
+      "message": "I\u0027m not sure how to use `shade` to accomplish this.  I also believe that `shade` is being deprecated and moved into `openstacksdk`.",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 49
+      },
+      "revId": "ceeb7186e19e22c9494f8b394f0f60622b85d462",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
