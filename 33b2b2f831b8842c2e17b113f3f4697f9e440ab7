@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52db1f9c_7ea5c2d9",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-11-22T01:18:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be set to True? Is this not a flag?",
+      "range": {
+        "startLine": 160,
+        "startChar": 21,
+        "endLine": 160,
+        "endChar": 34
+      },
+      "revId": "33b2b2f831b8842c2e17b113f3f4697f9e440ab7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04c2db63_2b49ad4d",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-11-22T01:18:41Z",
+      "side": 1,
+      "message": "Project-specific; this should be generic.",
+      "range": {
+        "startLine": 511,
+        "startChar": 25,
+        "endLine": 511,
+        "endChar": 31
+      },
+      "revId": "33b2b2f831b8842c2e17b113f3f4697f9e440ab7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f2b97e5_5b942e10",
+        "filename": "tests/test_release_docker_hub.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2019-11-22T01:18:41Z",
+      "side": 1,
+      "message": "Extra blank line.",
+      "revId": "33b2b2f831b8842c2e17b113f3f4697f9e440ab7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
