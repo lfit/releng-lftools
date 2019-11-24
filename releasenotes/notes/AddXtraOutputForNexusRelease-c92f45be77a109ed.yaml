@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Print rule failures for unclosed repos
