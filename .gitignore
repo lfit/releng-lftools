@@ -26,6 +26,7 @@ anonymous-cli-metrics.json
 .eggs/
 .pytest_cache/
 .tox/
+.venv/
 __pycache__/
 *.egg-info/
 *.pyc
