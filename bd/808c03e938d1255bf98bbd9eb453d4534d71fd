@@ -1,0 +1,8 @@
+Verified+1: Jenkins CI <releng+lf-jenkins@linuxfoundation.org>
+Code-Review+2: Daniel Pono Takamori <dtakamori@contractor.linuxfoundation.org>
+Code-Review+2: Anil Belur <abelur@linuxfoundation.org>
+Submitted-by: Bengt Thuree <bthuree@linuxfoundation.org>
+Submitted-at: Wed, 27 Nov 2019 02:07:02 +0000
+Reviewed-on: https://gerrit.linuxfoundation.org/infra/c/releng/lftools/+/62388
+Project: releng/lftools
+Branch: refs/heads/master
