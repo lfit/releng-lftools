@@ -8,7 +8,7 @@ setuptools>=36.5.0
 six
 python-jenkins
 tqdm
-xdg
+xdg==3.0.2
 pygithub
 httplib2
 email_validator
