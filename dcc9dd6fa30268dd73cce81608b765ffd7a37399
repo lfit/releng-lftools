@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "da768600_f41517e4",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 50
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-12-04T16:57:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f9738ba9_ad850422",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 1
+      },
+      "revId": "dcc9dd6fa30268dd73cce81608b765ffd7a37399",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "320c6882_c51f9c4d",
         "filename": "releasenotes/notes/self-service-project-creation-28cc70ec9ea9ec3e.yaml",
         "patchSetId": 50
