@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "910fe228_afc18573",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 50
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-12-04T05:50:01Z",
+      "side": 1,
+      "message": "Is this something you want to fix now?\nIf not, perhaps change the TODO to Limits or something?",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 1
+      },
+      "revId": "dcc9dd6fa30268dd73cce81608b765ffd7a37399",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8a7cc38_9117ec6f",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 50
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-12-04T05:50:01Z",
+      "side": 1,
+      "message": "Could we add a template here on how it should look like?\n- type : \u003cAddition or Removal\u003e\n  name : \u003cName of the person\u003e\n  link : \u003cLink to html version of approval (tsc for adding, ptl for removing)\u003e",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 1
+      },
+      "revId": "dcc9dd6fa30268dd73cce81608b765ffd7a37399",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "320c6882_c51f9c4d",
+        "filename": "releasenotes/notes/self-service-project-creation-28cc70ec9ea9ec3e.yaml",
+        "patchSetId": 50
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-12-04T05:50:01Z",
+      "side": 1,
+      "message": "correctly",
+      "range": {
+        "startLine": 31,
+        "startChar": 18,
+        "endLine": 31,
+        "endChar": 27
+      },
+      "revId": "dcc9dd6fa30268dd73cce81608b765ffd7a37399",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
