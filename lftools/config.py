@@ -12,10 +12,10 @@
 
 __author__ = 'Thanh Ha'
 
+import configparser
 import logging
 import os.path
 
-from six.moves import configparser
 from xdg import XDG_CONFIG_HOME
 
 log = logging.getLogger(__name__)
@@ -25,9 +25,16 @@ LFTOOLS_CONFIG_FILE = os.path.join(XDG_CONFIG_HOME, 'lftools', 'lftools.ini')
 
 def get_config():
     """Get the config object."""
-    config = configparser.ConfigParser()
+    #config = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())  # noqa
+    config = configparser.ConfigParser()  # noqa
     config.read(LFTOOLS_CONFIG_FILE)
     return config
+
+
+def has_section(section):
+    """Get a configuration from a section."""
+    config = get_config()
+    return config.has_section(section)
 
 
 def get_setting(section, option=None):
