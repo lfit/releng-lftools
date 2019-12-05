@@ -52,9 +52,6 @@ def create_info_file(ctx, gerrit_url, gerrit_project, directory, empty, tsc_appr
     gerrit_url example: gerrit.umbrella.com
     directory example: /gerrit/ (rather than most projects /r/)
     """
-    user = config.get_setting("gerrit", "username")
-    pass1 = config.get_setting("gerrit", "password")
-    auth = HTTPBasicAuth(user, pass1)
     url = ("https://{}/{}".format(gerrit_url, directory))
     rest = GerritRestAPI(url=url, auth=auth)
     headers = {'Content-Type': 'application/json; charset=UTF-8'}
@@ -71,6 +68,9 @@ def create_info_file(ctx, gerrit_url, gerrit_project, directory, empty, tsc_appr
     umbrella_tld = match.group(0)
 
     if not empty:
+        user = config.get_setting("gerrit", "username")
+        pass1 = config.get_setting("gerrit", "password")
+        auth = HTTPBasicAuth(user, pass1)
         result = rest.get(access_str, headers=headers)
 
         if 'inherits_from' in result:
