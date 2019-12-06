@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2db4cd86_f09f2e53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-12-06T00:01:29Z",
+      "side": 1,
+      "message": "What am I missing? I do not see any reference to this in the patch",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 1
+      },
+      "revId": "b5bf86af7969129c94c019d8c312790b0ce62d64",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
