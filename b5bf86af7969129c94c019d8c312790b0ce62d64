@@ -22,6 +22,29 @@
       "revId": "b5bf86af7969129c94c019d8c312790b0ce62d64",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2c157a8_93509c67",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2019-12-06T00:09:35Z",
+      "side": 1,
+      "message": "@bengt if you pass --empty this part never happens.",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 56
+      },
+      "revId": "b5bf86af7969129c94c019d8c312790b0ce62d64",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
