@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e0afc560_f7bbc84b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-12-10T23:44:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2db4cd86_f09f2e53",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 1
+      },
+      "revId": "b5bf86af7969129c94c019d8c312790b0ce62d64",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2c157a8_93509c67",
         "filename": "lftools/cli/infofile.py",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "b5bf86af7969129c94c019d8c312790b0ce62d64",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8094049e_65f5de1e",
+        "filename": "lftools/cli/infofile.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2019-12-10T23:44:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2c157a8_93509c67",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 56
+      },
+      "revId": "b5bf86af7969129c94c019d8c312790b0ce62d64",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
