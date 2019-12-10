@@ -53,6 +53,6 @@ API requires a [github] or [github.OrgName] section in ~/.config/lftools/lftools
 
 .. code-block:: bash
 
-   [github] or [github.org]
+   [github] or [github.orgName]
    token = REDACTED
 

@@ -37,7 +37,11 @@ def github_cli(ctx):
 @click.pass_context
 def submit_pr(ctx, organization, repo, pr):
     """Submit a pr if mergeable."""
-    token = config.get_setting("github", "token")
+    if config.get_setting("github." + organization, "token"):
+        token = config.get_setting("github." + organization, "token")
+    else:
+        token = config.get_setting("github", "token")
+
     g = Github(token)
     orgName = organization
     try:
@@ -104,7 +108,11 @@ def createrepo(ctx, organization, repository, description, has_issues, has_proje
     By default has_issues has_wiki and has_projects is set to false.
     See --help to create a repo with these enabled.
     """
-    token = config.get_setting("github", "token")
+    if config.get_setting("github." + organization, "token"):
+        token = config.get_setting("github." + organization, "token")
+    else:
+        token = config.get_setting("github", "token")
+
     g = Github(token)
     orgName = organization
     has_issues = has_issues or False
@@ -155,7 +163,10 @@ def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki
     By default has_issues has_wiki and has_projects is set to false.
     See --help to use this command to enable these options.
     """
-    token = config.get_setting("github", "token")
+    if config.get_setting("github." + organization, "token"):
+        token = config.get_setting("github." + organization, "token")
+    else:
+        token = config.get_setting("github", "token")
     g = Github(token)
     orgName = organization
 
@@ -212,7 +223,11 @@ def createteam(ctx, organization, name, repo, privacy):
     Privacy should be set to closed
     This allows us to control group membership.
     """
-    token = config.get_setting("github", "token")
+    if config.get_setting("github." + organization, "token"):
+        token = config.get_setting("github." + organization, "token")
+    else:
+        token = config.get_setting("github", "token")
+
     g = Github(token)
     orgName = organization
     print("Creating team {} for repo {} under organization {} ".format(name, repo, orgName))
