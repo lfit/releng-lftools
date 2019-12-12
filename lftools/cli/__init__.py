@@ -29,6 +29,7 @@ from lftools.cli.jenkins import jenkins_cli
 from lftools.cli.lfidapi import lfidapi
 from lftools.cli.license import license
 from lftools.cli.nexus import nexus
+from lftools.cli.nexus3 import nexus3
 from lftools.cli.rtd import rtd
 from lftools.cli.schema import schema
 from lftools.cli.sign import sign
@@ -87,6 +88,7 @@ cli.add_command(infofile)
 cli.add_command(jenkins_cli, name='jenkins')
 cli.add_command(license)
 cli.add_command(nexus)
+cli.add_command(nexus3)
 cli.add_command(rtd)
 cli.add_command(schema)
 cli.add_command(lfidapi)
