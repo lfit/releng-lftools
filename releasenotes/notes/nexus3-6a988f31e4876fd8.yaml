@@ -1,0 +1,23 @@
+---
+features:
+  - |
+    Nexus3 API operations.
+
+    Usage: lftools nexus3 [OPTIONS] FQDN COMMAND [ARGS]...
+
+    .. code-block:: none
+
+       Commands:
+           asset       Asset primary interface.
+           privilege   Privilege primary interface.
+           repository  Repository primary interface.
+           role        Role primary interface.
+           script      Script primary interface.
+           tag         Tag primary interface.
+           task        Task primary interface.
+           user        User primary interface.
+
+    .. code-block:: none
+
+       Options:
+         --help             Show this message and exit.
