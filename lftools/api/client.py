@@ -21,39 +21,63 @@ class RestApi(object):
         """Initialize the REST API class."""
         self.params = params
 
-        if params['creds']:
-            self.creds = params['creds']
+        if params["creds"]:
+            self.creds = params["creds"]
 
-        if 'timeout' not in self.params:
+        if "timeout" not in self.params:
             self.timeout = None
 
-        self.endpoint = self.creds['endpoint']
+        self.endpoint = self.creds["endpoint"]
 
-        if self.creds['authtype'] == 'basic':
-            self.username = self.creds['username']
-            self.password = self.creds['password']
+        if self.creds["authtype"] == "basic":
+            self.username = self.creds["username"]
+            self.password = self.creds["password"]
             self.r = requests.Session()
             self.r.auth = (self.username, self.password)
-            self.r.headers.update({'Content-Type': 'application/json; charset=UTF-8'})
+            self.r.headers.update(
+                {"Content-Type": "application/json; charset=UTF-8"}
+            )
 
-        if self.creds['authtype'] == 'token':
-            self.token = self.creds['token']
+        if self.creds["authtype"] == "token":
+            self.token = self.creds["token"]
             self.r = requests.Session()
-            self.r.headers.update({'Authorization': 'Token {}'
-                                   .format(self.token)})
-            self.r.headers.update({'Content-Type': 'application/json'})
+            self.r.headers.update(
+                {"Authorization": "Token {}".format(self.token)}
+            )
+            self.r.headers.update({"Content-Type": "application/json"})
 
     def _request(self, url, method, data=None, timeout=30):
         """Execute the request."""
-        resp = self.r.request(method, self.endpoint + url, data=data, timeout=timeout)
+        resp = self.r.request(
+            method, self.endpoint + url, data=data, timeout=timeout
+        )
 
+        # Some massaging to make our gerrit python code work
         if resp.status_code == 409:
             return resp
 
+        # otherwise abort on any actual HTTP errors and suppress traceback
+        try:
+            resp.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise e
+        except requests.exceptions.HTTPError as e:
+            raise e.args
+        except requests.exceptions.ConnectionError as e:
+            raise e
+        except requests.exceptions.ProxyError as e:
+            raise e
+        except requests.exceptions.Timeout as e:
+            raise e
+        except requests.exceptions.URLRequired as e:
+            raise e
+        except requests.exceptions.InvalidURL as e:
+            raise e
+
         if resp.text:
             try:
-                if 'application/json' in resp.headers['Content-Type']:
-                    remove_xssi_magic = resp.text.replace(')]}\'', '')
+                if "application/json" in resp.headers["Content-Type"]:
+                    remove_xssi_magic = resp.text.replace(")]}'", "")
                     body = json.loads(remove_xssi_magic)
                 else:
                     body = resp.text
@@ -68,20 +92,20 @@ class RestApi(object):
 
     def get(self, url, **kwargs):
         """HTTP GET request."""
-        return self._request(url, 'GET', **kwargs)
+        return self._request(url, "GET", **kwargs)
 
     def patch(self, url, **kwargs):
         """HTTP PATCH request."""
-        return self._request(url, 'PATCH', **kwargs)
+        return self._request(url, "PATCH", **kwargs)
 
     def post(self, url, **kwargs):
         """HTTP POST request."""
-        return self._request(url, 'POST', **kwargs)
+        return self._request(url, "POST", **kwargs)
 
     def put(self, url, **kwargs):
         """HTTP PUT request."""
-        return self._request(url, 'PUT', **kwargs)
+        return self._request(url, "PUT", **kwargs)
 
     def delete(self, url, **kwargs):
         """HTTP DELETE request."""
-        return self._request(url, 'DELETE', **kwargs)
+        return self._request(url, "DELETE", **kwargs)
