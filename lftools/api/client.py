@@ -10,6 +10,7 @@
 """REST API interface using Requests."""
 
 import json
+import sys
 
 import requests
 
@@ -47,8 +48,28 @@ class RestApi(object):
         """Execute the request."""
         resp = self.r.request(method, self.endpoint + url, data=data, timeout=timeout)
 
+        # Some massaging to make our gerrit python code work
         if resp.status_code == 409:
             return resp
+
+        # otherwise, we abort on any actual HTTP errors and suppress traceback
+        # sys.tracebacklimit = 0
+        try:
+            resp.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise e
+        except requests.exceptions.HTTPError as e:
+            raise e.args
+        except requests.exceptions.ConnectionError as e:
+            raise e
+        except requests.exceptions.ProxyError as e:
+            raise e
+        except requests.exceptions.Timeout as e:
+            raise e
+        except requests.exceptions.URLRequired as e:
+            raise e
+        except requests.exceptions.InvalidURL as e:
+            raise e
 
         if resp.text:
             try:
