@@ -19,6 +19,7 @@ It supports the following commands:
     lfidapi
     license
     nexus
+    nexus3
     openstack
     rtd
     schema
