@@ -111,7 +111,7 @@ class Gerrit(client.RestApi):
         gerrit_project_dashed = gerrit_project.replace("/", "-")
         gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe='', encoding=None, errors=None)
         filename = 'info-{}.yaml'.format(gerrit_project_dashed)
-        payload = self.create_change(filename, gerrit_project, issue_id, signed_off_by)
+        payload = self.create_change(filename, jjbrepo, issue_id, signed_off_by)
         log.info(payload)
 
         access_str = 'changes/'
@@ -370,11 +370,11 @@ class Gerrit(client.RestApi):
 
         access_str = 'projects/{}'.format(gerrit_project)
         payload = json.dumps({
-            "description": "{0}",
+            "description": "{}".format(description),
             "submit_type": "INHERIT",
             "create_empty_commit": "True",
             "owners": [
-                "{1}".format(description, ldapgroup)
+                "{}".format(ldapgroup)
                 ]
         })
 
