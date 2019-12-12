@@ -10,11 +10,11 @@
 ##############################################################################
 """Configuration subsystem for lftools."""
 
-__author__ = 'Thanh Ha'
 
 import configparser
 import logging
 import os.path
+import sys
 
 from xdg import XDG_CONFIG_HOME
 
@@ -25,7 +25,6 @@ LFTOOLS_CONFIG_FILE = os.path.join(XDG_CONFIG_HOME, 'lftools', 'lftools.ini')
 
 def get_config():
     """Get the config object."""
-    #config = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())  # noqa
     config = configparser.ConfigParser()  # noqa
     config.read(LFTOOLS_CONFIG_FILE)
     return config
@@ -39,6 +38,7 @@ def has_section(section):
 
 def get_setting(section, option=None):
     """Get a configuration from a section."""
+    sys.tracebacklimit = 0
     config = get_config()
 
     if option:
