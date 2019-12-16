@@ -111,19 +111,23 @@ class Gerrit(client.RestApi):
         gerrit_project_dashed = gerrit_project.replace("/", "-")
         gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe='', encoding=None, errors=None)
         filename = 'info-{}.yaml'.format(gerrit_project_dashed)
-        payload = self.create_change(filename, jjbrepo, issue_id, signed_off_by)
-        log.info(payload)
 
-        access_str = 'changes/'
-        result = self.post(access_str, data=payload)[1]
-        log.info(result)
-        log.info(result['id'])
-        changeid = (result['id'])
+        if not reviewid:
+            payload = self.create_change(filename, jjbrepo, issue_id, signed_off_by)
+            log.info(payload)
+            access_str = 'changes/'
+            result = self.post(access_str, data=payload)[1]
+            log.info(result)
+            log.info(result['id'])
+            changeid = (result['id'])
+        else:
+            changeid = reviewid
 
         my_inline_file = """---
 - project:
     name: {0}-info
     project-name: {0}
+    build-node: centos7-builder-2c-1g
     jobs:
       - gerrit-info-yaml-verify
     project: {1}
@@ -139,15 +143,14 @@ class Gerrit(client.RestApi):
         result = self.put(access_str, data=payload)
         log.info(result)
 
-        if not reviewid:
-            access_str = 'changes/{}/edit:publish'.format(changeid)
-            headers = {'Content-Type': 'application/json; charset=UTF-8'}
-            self.r.headers.update(headers)
-            payload = json.dumps({
-                "notify": "NONE",
-                })
-            result = self.post(access_str, data=payload)
-            log.info(result)
+        access_str = 'changes/{}/edit:publish'.format(changeid)
+        headers = {'Content-Type': 'application/json; charset=UTF-8'}
+        self.r.headers.update(headers)
+        payload = json.dumps({
+            "notify": "NONE",
+            })
+        result = self.post(access_str, data=payload)
+        log.info(result)
         return(result)
 
     def vote_on_change(self, fqdn, gerrit_project, changeid, **kwargs):
