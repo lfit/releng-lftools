@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71282b9c_5e90ff84",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-01-09T20:39:29Z",
+      "side": 1,
+      "message": "Shouldn\u0027t there be some sort of error handling here if to test for file upload success/failure? This function should return something testable, so that the multi-threaded upload has a condition to evaluate to determine if it was successful or not.",
+      "range": {
+        "startLine": 547,
+        "startChar": 8,
+        "endLine": 547,
+        "endChar": 11
+      },
+      "revId": "ba3c822ff677283e0c07f449b9de0a68aee7e3fe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87900e04_ad8a62dd",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-01-09T20:39:29Z",
+      "side": 1,
+      "message": "For consistency\u0027s sake we should use the existing asynch approach we\u0027ve established in the deploy_nexus function.\n\nThis will also allow you to check the result of each upload thread to ensure the upload completed successfully. Right now I don\u0027t see where the upload is confirmed good or not.\n\nYou should also have some sort of cap on the number of workers too, just to be nice. All this is already in the above-mentioned function, so it\u0027s really just some copy/paste/test work to make the change.",
+      "revId": "ba3c822ff677283e0c07f449b9de0a68aee7e3fe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
