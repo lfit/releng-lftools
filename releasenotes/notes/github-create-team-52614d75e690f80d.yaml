@@ -1,0 +1,5 @@
+---
+fixes:
+  - |
+    lftools github create-team no longer requires repo
+    it is now an option

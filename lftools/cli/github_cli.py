@@ -214,8 +214,9 @@ def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki
 @click.command(name='create-team')
 @click.argument('organization')
 @click.argument('name')
-@click.argument('repo')
 @click.argument('privacy')
+@click.option('--repo', type=str, required=False,
+              help='Assign team to repo')
 @click.pass_context
 def createteam(ctx, organization, name, repo, privacy):
     """Create a Github team within an Organization.
@@ -236,39 +237,50 @@ def createteam(ctx, organization, name, repo, privacy):
     except GithubException as ghe:
         print(ghe)
 
-    try:
-        repos = org.get_repos
-    except GithubException as ghe:
-        print(ghe)
+    if repo:
+        try:
+            repos = org.get_repos
+        except GithubException as ghe:
+            print(ghe)
+
+        my_repos = [repo]
+        repos = [repo for repo in repos() if repo.name in my_repos]
+        for repo in repos:
+            print(repo)
+        if repos:
+            print("repo found")
+        else:
+            print("repo not found")
+            sys.exit(1)
 
     try:
         teams = org.get_teams
     except GithubException as ghe:
         print(ghe)
 
-    my_repos = [repo]
-    repos = [repo for repo in repos() if repo.name in my_repos]
-    for repo in repos:
-        print(repo)
-
-    if repos:
-        print("repo found")
-    else:
-        print("repo not found")
-        sys.exit(1)
-
     for team in teams():
         if team.name == name:
             print("team {} already exists".format(team))
             sys.exit(1)
-    try:
-        org.create_team(
-            name=name,
-            repo_names=repos,
-            privacy=privacy
-        )
-    except GithubException as ghe:
-        print(ghe)
+
+    if repo:
+        try:
+            org.create_team(
+                name=name,
+                repo_names=repos,
+                privacy=privacy
+            )
+        except GithubException as ghe:
+            print(ghe)
+
+    if not repo:
+        try:
+            org.create_team(
+                name=name,
+                privacy=privacy
+            )
+        except GithubException as ghe:
+            print(ghe)
 
 
 @click.command(name='user')
