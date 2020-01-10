@@ -10,6 +10,8 @@
 
 """Nexus3 REST API sub-interfaces."""
 
+__author__ = 'DW Talton'
+
 from .asset import *
 from .privilege import *
 from .repository import *
@@ -20,21 +22,21 @@ from .task import *
 from .user import *
 
 
-@click.group()
+@click.group(name="nexus3")
 @click.argument("fqdn")
 @click.pass_context
-def nexus3(ctx, fqdn):
-    """Provide an interface to Nexus3."""
-    nexus_obj = nexus.Nexus(fqdn=fqdn)
-    ctx.obj = {"nexus": nexus_obj}
+def nexus_three(ctx, fqdn):
+    """The Nexus3 API Interface."""
+    nexus3_obj = nexus3.Nexus3(fqdn=fqdn)
+    ctx.obj = {"nexus3": nexus3_obj}
     pass
 
 
-nexus3.add_command(asset)
-nexus3.add_command(privilege)
-nexus3.add_command(repository)
-nexus3.add_command(role)
-nexus3.add_command(script)
-nexus3.add_command(tag)
-nexus3.add_command(task)
-nexus3.add_command(user)
+nexus_three.add_command(asset)
+nexus_three.add_command(privilege)
+nexus_three.add_command(repository)
+nexus_three.add_command(role)
+nexus_three.add_command(script)
+nexus_three.add_command(tag)
+nexus_three.add_command(task)
+nexus_three.add_command(user)
