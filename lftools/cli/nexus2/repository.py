@@ -8,44 +8,39 @@
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
 
-"""Nexus3 REST API user interface."""
+"""Nexus2 REST API repository interface."""
 
 __author__ = 'DW Talton'
 
 import logging
+from pprint import pformat
 
 import click
 from tabulate import tabulate
-
-from lftools.api.endpoints import nexus3  # noqa: F401
 
 log = logging.getLogger(__name__)
 
 
 @click.group()
 @click.pass_context
-def user(ctx):
-    """User primary interface."""
+def repo(ctx):
+    """Repository primary interface."""
     pass
 
 
-@user.command(name="search")
-@click.argument("username")
+@repo.command(name="list")
 @click.pass_context
-def search_user(ctx, username):
-    """Search users."""
-    r = ctx.obj["nexus3"]
-    data = r.list_user(username)
+def repo_list(ctx):
+    """List repositories."""
+    r = ctx.obj["nexus2"]
+    data = r.repo_list()
     log.info(
         tabulate(
             data,
             headers=[
-                "User ID",
-                "First Name",
-                "Last Name",
-                "Email Address",
-                "Status",
-                "Roles",
-            ],
-        )
-    )
+                "Name",
+                "Type",
+                "Provider",
+                "ID"
+            ]
+        ))

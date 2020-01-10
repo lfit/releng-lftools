@@ -1,0 +1,25 @@
+add maven2 repo:
+
+endpoint: http://192.168.1.31:8081/nexus/service/local/repositories
+POST
+returns 201
+json
+
+{"data":{"repoType":"hosted","id":"don-repo-id","name":"don-repo-name","writePolicy":"ALLOW_WRITE_ONCE","browseable":true,"indexable":true,"exposed":true,"notFoundCacheTTL":1440,"repoPolicy":"RELEASE","provider":"maven2","providerRole":"org.sonatype.nexus.proxy.repository.Repository","downloadRemoteIndexes":false,"checksumPolicy":"IGNORE"}}
+
+OR PARSED
+
+data: {repoType: "hosted", id: "don-repo-id", name: "don-repo-name", writePolicy: "ALLOW_WRITE_ONCE",…}
+repoType: "hosted"
+id: "don-repo-id"
+name: "don-repo-name"
+writePolicy: "ALLOW_WRITE_ONCE"
+browseable: true
+indexable: true
+exposed: true
+notFoundCacheTTL: 1440
+repoPolicy: "RELEASE"
+provider: "maven2"
+providerRole: "org.sonatype.nexus.proxy.repository.Repository"
+downloadRemoteIndexes: false
+checksumPolicy: "IGNORE"

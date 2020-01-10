@@ -9,12 +9,15 @@
 ##############################################################################
 
 """Nexus3 REST API task interface."""
+
+__author__ = 'DW Talton'
+
 import logging
 
 import click
 from tabulate import tabulate
 
-from lftools.api.endpoints import nexus  # noqa: F401
+from lftools.api.endpoints import nexus3  # noqa: F401
 
 log = logging.getLogger(__name__)
 
@@ -30,7 +33,7 @@ def task(ctx):
 @click.pass_context
 def list_tasks(ctx):
     """List tasks."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.list_tasks()
     log.info(
         tabulate(

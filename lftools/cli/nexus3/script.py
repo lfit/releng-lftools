@@ -10,11 +10,13 @@
 
 """Nexus3 REST API script interface."""
 
+__author__ = 'DW Talton'
+
 import logging
 
 import click
 
-from lftools.api.endpoints import nexus  # noqa: F401
+from lftools.api.endpoints import nexus3  # noqa: F401
 
 log = logging.getLogger(__name__)
 
@@ -32,7 +34,7 @@ def script(ctx):
 @click.pass_context
 def create_script(ctx, name, filename):
     """Create a new script."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.create_script(name, filename)
     log.info(data)
 
@@ -42,7 +44,7 @@ def create_script(ctx, name, filename):
 @click.pass_context
 def delete_script(ctx, name):
     """Delete a script."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.delete_script(name)
     log.info(data)
 
@@ -51,7 +53,7 @@ def delete_script(ctx, name):
 @click.pass_context
 def list_scripts(ctx):
     """List all scripts."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.list_scripts()
     log.info(data)
 
@@ -61,7 +63,7 @@ def list_scripts(ctx):
 @click.pass_context
 def read_script(ctx, name):
     """Get script contents."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.read_script(name)
     log.info(data)
 
@@ -71,7 +73,7 @@ def read_script(ctx, name):
 @click.pass_context
 def run_script(ctx, name):
     """Run a script."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.run_script(name)
     log.info(data)
 
@@ -82,6 +84,6 @@ def run_script(ctx, name):
 @click.pass_context
 def update_script(ctx, name, content):
     """Update script contents."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.update_script(name, content)
     log.info(data)
