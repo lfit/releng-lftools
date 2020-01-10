@@ -10,12 +10,14 @@
 
 """Nexus3 REST API asset interface."""
 
+__author__ = 'DW Talton'
+
 import logging
 from pprint import pformat
 
 import click
 
-from lftools.api.endpoints import nexus
+from lftools.api.endpoints import nexus3
 
 log = logging.getLogger(__name__)
 
@@ -32,7 +34,7 @@ def asset(ctx):
 @click.pass_context
 def asset_list(ctx, repository):
     """List assets."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.list_assets(repository)
     for item in data:
         log.info(pformat(item))
@@ -45,7 +47,7 @@ def asset_list(ctx, repository):
 @click.pass_context
 def asset_search(ctx, query_string, repository, details):
     """Search assets."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.search_asset(query_string, repository, details)
 
     if details:

@@ -1,0 +1,19 @@
+---
+features:
+  - |
+    Nexus2 API operations.
+
+    Usage: lftools nexus2 [OPTIONS] COMMAND [ARGS]...
+
+    .. code-block:: none
+
+       Commands:
+           privilege   Privilege primary interface.
+           repository  Repository primary interface.
+           role        Role primary interface.
+           user        User primary interface.
+
+    .. code-block:: none
+
+       Options:
+         --help             Show this message and exit.
