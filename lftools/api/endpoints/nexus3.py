@@ -9,6 +9,9 @@
 ##############################################################################
 
 """Nexus3 REST API interface."""
+
+__author__ = 'DW Talton'
+
 import json
 import logging
 
@@ -18,7 +21,7 @@ import lftools.api.client as client
 log = logging.getLogger(__name__)
 
 
-class Nexus(client.RestApi):
+class Nexus3(client.RestApi):
     """API endpoint wrapper for Nexus3."""
 
     def __init__(self, **params):
@@ -34,7 +37,7 @@ class Nexus(client.RestApi):
             }
             params["creds"] = creds
 
-        super(Nexus, self).__init__(**params)
+        super(Nexus3, self).__init__(**params)
 
     def create_role(self, name, description, privileges, roles):
         """Create a new role.
