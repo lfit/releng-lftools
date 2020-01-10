@@ -10,6 +10,8 @@
 ##############################################################################
 """Functions for DCO check tasks."""
 
+__author__ = 'DW Talton'
+
 import logging
 from os import chdir
 from os import getcwd

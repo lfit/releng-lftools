@@ -8,31 +8,30 @@
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
 
-"""Nexus3 REST API repository interface."""
+"""Nexus2 REST API sub-interfaces."""
 
 __author__ = 'DW Talton'
 
-import logging
-from pprint import pformat
 
-import click
+from lftools.api.endpoints import nexus2
 
-from lftools.api.endpoints import nexus3  # noqa: F401
+from .privilege import *
+from .repository import *
+from .role import *
+from .user import *
 
-log = logging.getLogger(__name__)
 
-
-@click.group()
+@click.group(name="nexus2")
+@click.argument('fqdn')
 @click.pass_context
-def repository(ctx):
-    """Repository primary interface."""
+def nexus_two(ctx, fqdn):
+    """The Nexus2 API Interface."""
+    nexus2_obj = nexus2.Nexus2(fqdn=fqdn)
+    ctx.obj = {"nexus2": nexus2_obj}
     pass
 
 
-@repository.command(name="list")
-@click.pass_context
-def list_repositories(ctx):
-    """List repositories."""
-    r = ctx.obj["nexus3"]
-    data = r.list_repositories()
-    log.info(pformat(data))
+nexus_two.add_command(privilege)
+nexus_two.add_command(repo)
+nexus_two.add_command(role)
+nexus_two.add_command(user)
