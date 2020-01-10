@@ -34,9 +34,10 @@ class RestApi(object):
             self.password = self.creds["password"]
             self.r = requests.Session()
             self.r.auth = (self.username, self.password)
-            self.r.headers.update(
-                {"Content-Type": "application/json; charset=UTF-8"}
-            )
+            self.r.headers.update({
+                "Content-Type": "application/json; charset=UTF-8",
+                "Accept": "application/json"
+            })
 
         if self.creds["authtype"] == "token":
             self.token = self.creds["token"]
@@ -48,14 +49,20 @@ class RestApi(object):
 
     def _request(self, url, method, data=None, timeout=30):
         """Execute the request."""
-        resp = self.r.request(
-            method, self.endpoint + url, data=data, timeout=timeout
-        )
+        resp = self.r.request(method,
+                              self.endpoint + url,
+                              data=data,
+                              timeout=timeout)
 
         # Some massaging to make our gerrit python code work
         if resp.status_code == 409:
             return resp
 
+<<<<<<< HEAD
+=======
+        resp.raise_for_status()
+
+>>>>>>> 4fc3e38... Add nexus2 API endpoints
         if resp.text:
             try:
                 if "application/json" in resp.headers["Content-Type"]:
