@@ -5,7 +5,11 @@ ignore = .tox/**,
     .gitreview,
     .gitmodules,
     .pytest_cache/**,
-    node_modules/**
+    node_modules/**,
+    docs/conf.py,
+    lftools/cli/nexus2/**,
+    lftools/cli/nexus3/**,
+    .venv/**
 
 [all.Git]
 bears = GitCommitBear
@@ -33,8 +37,6 @@ bears = BanditBear,
     PyFlakesBear,
     PyImportSortBear
 files = lftools/**.py
-ignore += docs/conf.py
-ignore += lftools/cli/nexus3/*.py
 known_first_party_imports = lftools
 known_third_party_imports =
     defusedxml,

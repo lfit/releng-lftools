@@ -10,13 +10,15 @@
 
 """Nexus3 REST API role interface."""
 
+__author__ = 'DW Talton'
+
 import logging
 from pprint import pformat
 
 import click
 from tabulate import tabulate
 
-from lftools.api.endpoints import nexus  # noqa: F401
+from lftools.api.endpoints import nexus3  # noqa: F401
 
 log = logging.getLogger(__name__)
 
@@ -32,7 +34,7 @@ def role(ctx):
 @click.pass_context
 def list_roles(ctx):
     """List roles."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.list_roles()
     log.info(tabulate(data, headers=["Roles"]))
 
@@ -45,6 +47,6 @@ def list_roles(ctx):
 @click.pass_context
 def create_role(ctx, name, description, privileges, roles):
     """Create roles."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.create_role(name, description, privileges, roles)
     log.info(pformat(data))
