@@ -21,7 +21,9 @@ NEXUS_URL_ENV = 'NEXUS_URL'
 @click.group()
 @click.pass_context
 def nexus(ctx):
-    """Provide an interface to Nexus."""
+    """(Deprecated) Use the Nexus2 API Interface.
+
+    Provide an interface to Nexus."""
     pass
 
 
