@@ -10,12 +10,14 @@
 
 """Nexus3 REST API repository interface."""
 
+__author__ = 'DW Talton'
+
 import logging
 from pprint import pformat
 
 import click
 
-from lftools.api.endpoints import nexus  # noqa: F401
+from lftools.api.endpoints import nexus3  # noqa: F401
 
 log = logging.getLogger(__name__)
 
@@ -31,6 +33,6 @@ def repository(ctx):
 @click.pass_context
 def list_repositories(ctx):
     """List repositories."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.list_repositories()
     log.info(pformat(data))
