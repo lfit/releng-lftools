@@ -9,7 +9,6 @@
 ##############################################################################
 """CLI main for lftools."""
 
-__author__ = 'Thanh Ha'
 
 import configparser
 import getpass
@@ -28,6 +27,7 @@ from lftools.cli.infofile import infofile
 from lftools.cli.jenkins import jenkins_cli
 from lftools.cli.lfidapi import lfidapi
 from lftools.cli.license import license
+from lftools.cli.nexus2 import nexus2
 from lftools.cli.nexus3 import nexus3
 from lftools.cli.nexus import nexus
 from lftools.cli.rtd import rtd
