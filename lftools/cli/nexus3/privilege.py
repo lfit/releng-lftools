@@ -10,6 +10,8 @@
 
 """Nexus3 REST API privileges interface."""
 
+__author__ = 'DW Talton'
+
 import logging
 
 import click
@@ -29,7 +31,7 @@ def privilege(ctx):
 @click.pass_context
 def list_privileges(ctx):
     """List privileges."""
-    r = ctx.obj["nexus"]
+    r = ctx.obj["nexus3"]
     data = r.list_privileges()
     log.info(
         tabulate(data, headers=["Type", "Name", "Description", "Read Only"])

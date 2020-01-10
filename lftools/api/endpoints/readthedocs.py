@@ -10,6 +10,8 @@
 
 """Read the Docs REST API interface."""
 
+__author__ = 'DW Talton'
+
 import json
 
 from lftools import config

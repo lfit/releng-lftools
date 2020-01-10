@@ -9,6 +9,8 @@
 ##############################################################################
 """Script to check a git repository for commits missing DCO."""
 
+__author__ = 'DW Talton'
+
 import sys
 
 import click
