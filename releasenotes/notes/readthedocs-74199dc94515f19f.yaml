@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    Enable project_version_update API method.
+    Allows enabling or disabling a project version (visibility in the
+    U/I) via an api call.
