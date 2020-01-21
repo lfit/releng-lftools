@@ -59,9 +59,23 @@ def project_version_list(ctx, project_slug):
     """Retrieve project version list."""
     r = readthedocs.ReadTheDocs()
     data = r.project_version_list(project_slug)
-
     for version in data:
         log.info(version)
+
+
+@click.command(name='project-version-update')
+@click.argument('project-slug')
+@click.argument('version-slug')
+@click.argument('active', type=click.BOOL)
+@click.pass_context
+def project_version_update(ctx, project_slug, version_slug, active):
+    """Update projects active versions.
+
+    active must be one of true or false
+    """
+    r = readthedocs.ReadTheDocs()
+    data = r.project_version_update(project_slug, version_slug, active)
+    log.info(data)
 
 
 @click.command(name='project-version-details')
@@ -160,7 +174,7 @@ def subproject_list(ctx, project_slug):
 def subproject_details(ctx, project_slug, subproject_slug):
     """Retrieve subproject's details."""
     r = readthedocs.ReadTheDocs()
-    data = r.subproject_details(project_slug, subproject_slug)
+    data = r.subproject_details(project_slug, subproject_slug, "expand=active_versions")
     log.info(pformat(data))
 
 
@@ -193,6 +207,7 @@ def subproject_delete(ctx, project_slug, subproject_slug):
 rtd.add_command(project_list)
 rtd.add_command(project_details)
 rtd.add_command(project_version_list)
+rtd.add_command(project_version_update)
 rtd.add_command(project_version_details)
 rtd.add_command(project_create)
 rtd.add_command(project_build_list)
