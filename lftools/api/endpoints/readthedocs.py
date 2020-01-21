@@ -62,7 +62,7 @@ class ReadTheDocs(client.RestApi):
         :param kwargs:
         :return: {result}
         """
-        result = self.get('projects/{}/'.format(project))[1]
+        result = self.get('projects/{}/?expand=active_versions'.format(project))[1]
         return result
 
     def project_version_list(self, project):
@@ -109,25 +109,21 @@ class ReadTheDocs(client.RestApi):
                           .format(project, version))[1]
         return result
 
-    # This is implemented per their docs, however they do not appear to have
-    # it working yet as this always returns a 404
-    def project_version_update(self, project, version, active,
-                               privacy_level):
+    def project_version_update(self, project, version, active):
         """Edit a version.
 
         :param project: The project slug
         :param version: The version slug
         :param active: 'true' or 'false'
-        :param privacy_level: 'public' or 'private'
         :return: {result}
         """
         data = {
-            'active': active,
-            'privacy_level': privacy_level
+            "active": active
         }
 
         json_data = json.dumps(data)
-        result = self.patch('projects/{}/version/{}/'.format(project, version),
+        print(json_data)
+        result = self.patch('projects/{}/versions/{}/'.format(project, version),
                             data=json_data)
         return result
 
