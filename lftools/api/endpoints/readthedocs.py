@@ -109,8 +109,6 @@ class ReadTheDocs(client.RestApi):
                           .format(project, version))[1]
         return result
 
-    # This is implemented per their docs, however they do not appear to have
-    # it working yet as this always returns a 404
     def project_version_update(self, project, version, active,
                                privacy_level):
         """Edit a version.
@@ -127,7 +125,7 @@ class ReadTheDocs(client.RestApi):
         }
 
         json_data = json.dumps(data)
-        result = self.patch('projects/{}/version/{}/'.format(project, version),
+        result = self.patch('projects/{}/versions/{}'.format(project, version),
                             data=json_data)
         return result
 
