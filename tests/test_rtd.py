@@ -78,14 +78,13 @@ def test_project_version_details(datafiles):
 @responses.activate
 def test_project_version_update():
     data = {
-        'active': 'true',
-        'privacy_level': 'public'
+        'active': True
     }
     responses.add(responses.PATCH,
-                  url='https://readthedocs.org/api/v3/projects/TestProject1/version/latest/', # noqa
+                  url='https://readthedocs.org/api/v3/projects/TestProject1/versions/latest/', # noqa
                   json=data, status=204)
     assert rtd.project_version_update('TestProject1', 'latest',
-                                      'true', 'public')
+                                      'True')
 
 
 @responses.activate

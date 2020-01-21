@@ -30,6 +30,12 @@ project-version-details
 .. program-output:: lftools rtd project-version-details --help
 
 
+project-version-update
+----------------------
+
+.. program-output:: lftools rtd project-version-update --help
+
+
 project-create
 --------------
 
