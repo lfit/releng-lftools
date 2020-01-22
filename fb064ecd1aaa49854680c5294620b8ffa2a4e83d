@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69db5088_30c9058e",
+        "filename": "lftools/api/endpoints/readthedocs.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2020-01-22T12:36:53Z",
+      "side": 1,
+      "message": "maybe this debug code should be removed first?",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 1
+      },
+      "revId": "fb064ecd1aaa49854680c5294620b8ffa2a4e83d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4f9eb90_b21e6f1c",
+        "filename": "lftools/cli/rtd.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2020-01-22T12:36:53Z",
+      "side": 1,
+      "message": "does this update a SINGLE version (in)active, or multiple?",
+      "range": {
+        "startLine": 72,
+        "startChar": 30,
+        "endLine": 72,
+        "endChar": 38
+      },
+      "revId": "fb064ecd1aaa49854680c5294620b8ffa2a4e83d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
