@@ -39,6 +39,24 @@
       "revId": "ba3c822ff677283e0c07f449b9de0a68aee7e3fe",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2df8f479_28654b7d",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-01-22T22:43:37Z",
+      "side": 1,
+      "message": "sorry just getting back into this again, which lines are you referring too for the deploy nexus piece?",
+      "parentUuid": "87900e04_ad8a62dd",
+      "revId": "ba3c822ff677283e0c07f449b9de0a68aee7e3fe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
