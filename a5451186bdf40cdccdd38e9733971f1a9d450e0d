@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f86fd6a4_ad281be5",
+        "filename": "lftools/api/endpoints/readthedocs.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2020-01-22T21:08:27Z",
+      "side": 1,
+      "message": "why switch to double quotes?  in every other place in this file you have quoted strings with apostrophes aka single quotes.",
+      "range": {
+        "startLine": 121,
+        "startChar": 12,
+        "endLine": 121,
+        "endChar": 20
+      },
+      "revId": "a5451186bdf40cdccdd38e9733971f1a9d450e0d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
