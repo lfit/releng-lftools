@@ -107,7 +107,7 @@ class ReadTheDocs(client.RestApi):
         """
         result = self.get('projects/{}/versions/{}/'
                           .format(project, version))[1]
-        return result
+        return json.dumps(result, indent=2)
 
     def project_version_update(self, project, version, active):
         """Edit version activity.
@@ -188,7 +188,7 @@ class ReadTheDocs(client.RestApi):
                           .format(project), **kwargs)[1]
 
         if result['count'] > 0:
-            return result
+            return json.dumps(result, indent=2)
         else:
             return "There are no active builds."
 
@@ -202,7 +202,7 @@ class ReadTheDocs(client.RestApi):
         """
         result = self.get('projects/{}/builds/{}/'
                           .format(project, build_id))[1]
-        return result
+        return json.dumps(result, indent=2)
 
     def project_build_trigger(self, project, version):
         """Trigger a project build.
@@ -214,7 +214,7 @@ class ReadTheDocs(client.RestApi):
         """
         result = self.post('projects/{}/versions/{}/builds/'
                            .format(project, version))[1]
-        return result
+        return json.dumps(result, indent=2)
 
     def subproject_list(self, project):
         """Return a list of subprojects.

@@ -116,7 +116,7 @@ def test_project_build_list(datafiles):
     responses.add(responses.GET,
                   url='https://readthedocs.org/api/v3/projects/testproject1/builds/?running=True', # noqa
                   json=json_data, status=200, match_querystring=True)
-    assert 'success' in rtd.project_build_list('testproject1')['results'][0]
+    assert 'success' in rtd.project_build_list('testproject1')
 
 
 @pytest.mark.datafiles(os.path.join(FIXTURE_DIR, 'rtd'),)
