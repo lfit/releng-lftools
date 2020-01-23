@@ -22,6 +22,30 @@
       "revId": "a5451186bdf40cdccdd38e9733971f1a9d450e0d",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "050364f5_c28c6ca3",
+        "filename": "lftools/api/endpoints/readthedocs.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-01-23T11:06:15Z",
+      "side": 1,
+      "message": "It\u0027s because DW wrote this originally, and I am modifying it and the api docs use double quotes.\nI can\u0027t imagine it matters further than for consistency, just going to merge tihs as is, I have more work to do on this file.",
+      "parentUuid": "f86fd6a4_ad281be5",
+      "range": {
+        "startLine": 121,
+        "startChar": 12,
+        "endLine": 121,
+        "endChar": 20
+      },
+      "revId": "a5451186bdf40cdccdd38e9733971f1a9d450e0d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
