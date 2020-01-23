@@ -86,7 +86,7 @@ def project_version_details(ctx, project_slug, version_slug):
     """Retrieve project version details."""
     r = readthedocs.ReadTheDocs()
     data = r.project_version_details(project_slug, version_slug)
-    log.info(pformat(data))
+    log.info(data)
 
 
 @click.command(name='project-create')
@@ -128,7 +128,7 @@ def project_build_list(ctx, project_slug):
     """Retrieve a list of a project's builds."""
     r = readthedocs.ReadTheDocs()
     data = r.project_build_list(project_slug)
-    log.info(pformat(data))
+    log.info(data)
 
 
 @click.command(name='project-build-details')
@@ -139,7 +139,7 @@ def project_build_details(ctx, project_slug, build_id):
     """Retrieve specific project build details."""
     r = readthedocs.ReadTheDocs()
     data = r.project_build_details(project_slug, build_id)
-    log.info(pformat(data))
+    log.info(data)
 
 
 @click.command(name='project-build-trigger')
@@ -150,7 +150,7 @@ def project_build_trigger(ctx, project_slug, version_slug):
     """Trigger a new build."""
     r = readthedocs.ReadTheDocs()
     data = r.project_build_trigger(project_slug, version_slug)
-    log.info(pformat(data))
+    log.info(data)
 
 
 @click.command(name='subproject-list')
