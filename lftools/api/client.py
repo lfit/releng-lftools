@@ -56,24 +56,6 @@ class RestApi(object):
         if resp.status_code == 409:
             return resp
 
-        # otherwise abort on any actual HTTP errors and suppress traceback
-        try:
-            resp.raise_for_status()
-        except requests.exceptions.RequestException as e:
-            raise e
-        except requests.exceptions.HTTPError as e:
-            raise e.args
-        except requests.exceptions.ConnectionError as e:
-            raise e
-        except requests.exceptions.ProxyError as e:
-            raise e
-        except requests.exceptions.Timeout as e:
-            raise e
-        except requests.exceptions.URLRequired as e:
-            raise e
-        except requests.exceptions.InvalidURL as e:
-            raise e
-
         if resp.text:
             try:
                 if "application/json" in resp.headers["Content-Type"]:
@@ -83,7 +65,6 @@ class RestApi(object):
                     body = resp.text
             except ValueError:
                 body = None
-
         else:
             body = None
             return resp
