@@ -22,6 +22,30 @@
       "revId": "a712f0aef30b673c5b32e3fe879c6e0c1635a927",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ae17f29_c8ce97e8",
+        "filename": "tox.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-01-31T20:29:02Z",
+      "side": 0,
+      "message": "Except that running tox is how I do my pre-commit installation ;)\n\nI think it\u0027s a good idea to keep this in as anyone that runs tox locally will end up getting it installed then",
+      "parentUuid": "a3da709d_27f62efb",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 0
+      },
+      "revId": "a712f0aef30b673c5b32e3fe879c6e0c1635a927",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
