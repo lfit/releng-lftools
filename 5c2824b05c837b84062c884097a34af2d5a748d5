@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7e8130ed_3b0416f3",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-02-05T19:43:04Z",
+      "side": 1,
+      "message": "I would add a line here like\nlog.info(\u0027Attempting to upload file {}\u0027.format(file))\nSo that way we can see where we\u0027re at in the whole  process",
+      "revId": "5c2824b05c837b84062c884097a34af2d5a748d5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4689bfb1_eaa1422e",
         "filename": "lftools/deploy.py",
         "patchSetId": 20
