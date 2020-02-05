@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3c9c49e2_e7d42135",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-05T21:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e8130ed_3b0416f3",
+      "revId": "5c2824b05c837b84062c884097a34af2d5a748d5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4689bfb1_eaa1422e",
         "filename": "lftools/deploy.py",
         "patchSetId": 20
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "60f0c301_2f29e020",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-05T21:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4689bfb1_eaa1422e",
+      "range": {
+        "startLine": 546,
+        "startChar": 42,
+        "endLine": 546,
+        "endChar": 43
+      },
+      "revId": "5c2824b05c837b84062c884097a34af2d5a748d5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "151c1837_93fb855b",
         "filename": "lftools/deploy.py",
         "patchSetId": 20
@@ -62,6 +104,30 @@
       "revId": "5c2824b05c837b84062c884097a34af2d5a748d5",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "933012e9_d09fb7d4",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-05T21:51:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "151c1837_93fb855b",
+      "range": {
+        "startLine": 548,
+        "startChar": 33,
+        "endLine": 548,
+        "endChar": 44
+      },
+      "revId": "5c2824b05c837b84062c884097a34af2d5a748d5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
