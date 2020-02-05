@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4689bfb1_eaa1422e",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-02-05T19:35:47Z",
+      "side": 1,
+      "message": "To avoid having a bad time, use \u0027is\u0027 when comparing to None, e.g. if mimetypes.guess_type... is None and ....",
+      "range": {
+        "startLine": 546,
+        "startChar": 42,
+        "endLine": 546,
+        "endChar": 43
+      },
+      "revId": "5c2824b05c837b84062c884097a34af2d5a748d5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "151c1837_93fb855b",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-02-05T19:35:47Z",
+      "side": 1,
+      "message": "In order to have asynchronous uploads work, you must return True or False from the upload attempt.\n\nSo, all upload attempts should be wrapped in a if/else statement. From the if part return True, and Return False from the else. Check out the _deploy_nexus_upload function to see it in action",
+      "range": {
+        "startLine": 548,
+        "startChar": 33,
+        "endLine": 548,
+        "endChar": 44
+      },
+      "revId": "5c2824b05c837b84062c884097a34af2d5a748d5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
