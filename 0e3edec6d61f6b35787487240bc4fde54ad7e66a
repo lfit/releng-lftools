@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e30b251a_79ae642e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-06T16:50:42Z",
+      "side": 1,
+      "message": "I think this is a result of my vim plugins.",
+      "parentUuid": "899e9ed4_5e306678",
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "633ca8e2_5139848f",
         "filename": "lftools/cli/deploy.py",
         "patchSetId": 23
@@ -39,6 +57,30 @@
       "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "247e0177_44ba19f3",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-06T16:50:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "633ca8e2_5139848f",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 1
+      },
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "cc439337_91c9e119",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-06T16:50:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2601faf3_2de4eec6",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 3
+      },
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5117dbd7_8c048d57",
         "filename": "lftools/deploy.py",
         "patchSetId": 23
@@ -85,6 +151,30 @@
       "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0407c932_b28d4516",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-06T16:50:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5117dbd7_8c048d57",
+      "range": {
+        "startLine": 495,
+        "startChar": 9,
+        "endLine": 495,
+        "endChar": 13
+      },
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     },
     {
       "key": {
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "ed3fe90c_f5e46c9c",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-06T16:50:42Z",
+      "side": 1,
+      "message": "Changed all to io.open",
+      "parentUuid": "fd978f18_f2c403f4",
+      "range": {
+        "startLine": 529,
+        "startChar": 9,
+        "endLine": 529,
+        "endChar": 11
+      },
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0c977640_ebe46347",
         "filename": "lftools/deploy.py",
         "patchSetId": 23
@@ -125,6 +239,24 @@
       "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd24ae09_724aa6a8",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-06T16:50:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c977640_ebe46347",
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "0f79e7c5_4e640f72",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-06T16:50:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f18e51c_d4962dd9",
+      "range": {
+        "startLine": 535,
+        "startChar": 9,
+        "endLine": 535,
+        "endChar": 11
+      },
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a42d7bd_8cb379ec",
         "filename": "lftools/deploy.py",
         "patchSetId": 23
@@ -165,6 +321,24 @@
       "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "131fb2ab_d7e23afc",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-06T16:50:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a42d7bd_8cb379ec",
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     },
     {
       "key": {
@@ -188,6 +362,30 @@
       "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a4feb41_2cff28d4",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-06T16:50:42Z",
+      "side": 1,
+      "message": "As far as I know we only have aws in us-west-2. I will look to make it more dynamic.",
+      "parentUuid": "9a146ca6_34cde909",
+      "range": {
+        "startLine": 640,
+        "startChar": 0,
+        "endLine": 640,
+        "endChar": 3
+      },
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     },
     {
       "key": {
