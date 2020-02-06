@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6f7fbd4e_48ee2bb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-06T16:52:31Z",
+      "side": 1,
+      "message": "Should I change all the formatting back to what is in master?",
+      "parentUuid": "e30b251a_79ae642e",
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "633ca8e2_5139848f",
         "filename": "lftools/cli/deploy.py",
         "patchSetId": 23
