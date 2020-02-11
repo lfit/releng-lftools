@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0b895565_c1436b7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-02-11T08:34:49Z",
+      "side": 1,
+      "message": "I think so, but lets check with the rest of the team and see what they think.",
+      "parentUuid": "6f7fbd4e_48ee2bb6",
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "633ca8e2_5139848f",
         "filename": "lftools/cli/deploy.py",
         "patchSetId": 23
