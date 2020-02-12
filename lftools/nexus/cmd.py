@@ -14,6 +14,8 @@ import csv
 import logging
 import re
 import sys
+from time import sleep
+import xml.etree.ElementTree as et  # nosec
 
 import bs4
 import requests
@@ -409,15 +411,14 @@ def release_staging_repos(repos, verify, nexus_url=""):
                    credentials['password'])
 
     for repo in repos:
-        # Verfiy repo before releasing
-        verify_request_url = "{}/staging/repository/{}/activity".format(_nexus.baseurl, repo)
-        log.info("Request URL: {}".format(verify_request_url))
-        response = requests.get(verify_request_url, auth=_nexus.auth)
+        # Verify repo before releasing
+        activity_url = "{}/staging/repository/{}/activity".format(_nexus.baseurl, repo)
+        log.info("Request URL: {}".format(activity_url))
+        response = requests.get(activity_url, auth=_nexus.auth)
 
         if response.status_code != 200:
             raise requests.HTTPError("Verification of repo failed with the following error:"
                                      "\n{}: {}".format(response.status_code, response.text))
-            sys.exit(1)
 
         soup = bs4.BeautifulSoup(response.text, 'xml')
         values = soup.find_all("value")
@@ -425,7 +426,7 @@ def release_staging_repos(repos, verify, nexus_url=""):
         failures = []
         failures2 = []
         successes = []
-        isrepoclosed = []
+        is_repo_closed = []
 
         for act in activities:
             # Check for failures
@@ -438,7 +439,7 @@ def release_staging_repos(repos, verify, nexus_url=""):
                 successes.append(get_activity_text(act))
             # Check if already Closed
             if re.search('repositoryClosed', act.text):
-                isrepoclosed.append(get_activity_text(act))
+                is_repo_closed.append(get_activity_text(act))
 
         # Check for other failures (old code part). only add them if not already there
         # Should be possible to remove this part, but could not find a sample XML with these values.
@@ -464,22 +465,22 @@ def release_staging_repos(repos, verify, nexus_url=""):
             log.info("Nothing to do: Repository already released")
             sys.exit(0)
 
-        if len(isrepoclosed) == 0:
-            log.info(isrepoclosed)
+        if len(is_repo_closed) == 0:
+            log.info(is_repo_closed)
             log.info("Repository is not in closed state")
             sys.exit(1)
         else:
-            log.info("PASS: Repository {} is in closed state".format(isrepoclosed[0]))
+            log.info("PASS: Repository {} is in closed state".format(is_repo_closed[0]))
 
-        log.info("Successfully verfied {}".format(str(repo)))
+        log.info("Successfully verified {}".format(str(repo)))
 
     if not verify:
         log.info("running release")
         for repo in repos:
             data = {"data": {"stagedRepositoryIds": [repo]}}
-            log.debug("Sending data: {}".format(data))
+            log.info("Sending data: {}".format(data))
             request_url = "{}/staging/bulk/promote".format(_nexus.baseurl)
-            log.debug("Request URL: {}".format(request_url))
+            log.info("Request URL: {}".format(request_url))
             response = requests.post(request_url, json=data, auth=_nexus.auth)
 
             if response.status_code != 201:
@@ -487,4 +488,22 @@ def release_staging_repos(repos, verify, nexus_url=""):
                                          "\n{}: {}".format(response.status_code,
                                                            response.text))
             else:
-                log.debug("Successfully released {}".format(str(repo)))
+                log.info("Successfully released {}".format(str(repo)))
+
+            # Hang out until the repo is fully closed
+            log.info("Polling for repo to enter the closed state.")
+            closed = False
+            activity_url = "{}/staging/repository/{}/activity".format(_nexus.baseurl, repo)
+            while closed is False:
+                response = requests.get(activity_url, auth=_nexus.auth).text
+                root = et.fromstring(response)  # nosec
+                events = root.findall('./stagingActivity')
+                for event in events:
+                    name = event.find('name')
+                    if name.text == "close":
+                        stopped = event.find('stopped')
+                        log.info('Repo closed at: {}'.format(stopped.text))
+                        closed = True
+                    else:
+                        log.info('Repo is not fully closed, sleeping for five minutes.')
+                        sleep(300)
