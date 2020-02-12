@@ -5,7 +5,8 @@ ignore = .tox/**,
     .gitreview,
     .gitmodules,
     .pytest_cache/**,
-    node_modules/**
+    node_modules/**,
+    .venv/**
 
 [all.Documentation]
 bears = WriteGoodLintBear
