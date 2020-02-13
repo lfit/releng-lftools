@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd979eb2_bae94e44",
+        "filename": "releasenotes/notes/add-s3-to-log-shipping-1fad234f538c13f4.yaml",
+        "patchSetId": 29
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2020-02-13T21:56:41Z",
+      "side": 1,
+      "message": "This isn\u0027t done anymore right?",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 10
+      },
+      "revId": "7d33edc3364cc2fbf3502eea906c65beaee271cc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b0d9e93_b62370a8",
+        "filename": "requirements-test.txt",
+        "patchSetId": 29
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2020-02-13T21:56:41Z",
+      "side": 1,
+      "message": "Are these still needed?",
+      "revId": "7d33edc3364cc2fbf3502eea906c65beaee271cc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96230c5b_d5c372e7",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2020-02-13T21:56:41Z",
+      "side": 1,
+      "message": "If these aren\u0027t being used they should be removed.",
+      "revId": "7d33edc3364cc2fbf3502eea906c65beaee271cc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
