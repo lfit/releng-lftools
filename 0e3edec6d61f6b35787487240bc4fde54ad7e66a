@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "41763258_26b71c6e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-13T17:22:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b895565_c1436b7c",
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "633ca8e2_5139848f",
         "filename": "lftools/cli/deploy.py",
         "patchSetId": 23
