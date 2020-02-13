@@ -22,6 +22,30 @@
       "revId": "24d321213925384a16a5bcc2763d574c04618177",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c51ad3a7_8553d43c",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-13T17:45:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a5da386a_2f114f70",
+      "range": {
+        "startLine": 638,
+        "startChar": 8,
+        "endLine": 651,
+        "endChar": 9
+      },
+      "revId": "24d321213925384a16a5bcc2763d574c04618177",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
