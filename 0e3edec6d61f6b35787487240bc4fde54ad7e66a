@@ -457,6 +457,24 @@
       "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "854fff44_e74842e4",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-02-13T17:23:57Z",
+      "side": 1,
+      "message": "Since we are no longer creating the bucket ad hoc, this should be removed actually.",
+      "parentUuid": "463ab597_47c3752a",
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
