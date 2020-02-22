@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32b97c60_6307a009",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2020-02-22T11:35:08Z",
+      "side": 1,
+      "message": "maybe it\u0027s worth emitting a warning if os.path.exists returns false, to indicate that something is weird?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 1
+      },
+      "revId": "37834d4f23e97fe60df94f773d0615bdc0382151",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dcb95a7_e113a314",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2020-02-22T11:35:08Z",
+      "side": 1,
+      "message": "I suggest adding a test that sets up with this sequence:\n\n    mkdir d1\n    cd d1\n    ln -s .. link-to-parent",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 10,
+        "endChar": 7
+      },
+      "revId": "37834d4f23e97fe60df94f773d0615bdc0382151",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
