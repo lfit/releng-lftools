@@ -1,0 +1,17 @@
+aaa:controller,infrautils,mdsal,odlparent,yangtools
+bgpcep:controller,infrautils,mdsal,netconf,odlparent,yangtools
+controller:mdsal,odlparent,yangtools
+coe:controller,mdsal,netconf,odlparent
+daexim:controller,infrautils,mdsal,netconf,odlparent,yangtools
+genius:controller,daexim,infrautils,mdsal,netconf,odlparent,openflowplugin,ovsdb,serviceutils,yangtools
+infrautils:odlparent
+integration/distribution:aaa,integration,odlparent
+lispflowmapping:controller,mdsal,netconf,neutron,odlparent
+mdsal:odlparent,yangtools
+netconf:aaa,controller,mdsal,odlparent,yangtools
+netvirt:aaa,coe,controller,genius,infrautils,mdsal,netconf,neutron,odlparent,openflowplugin,ovsdb,serviceutils,sfc,yangtools
+neutron:aaa,controller,infrautils,mdsal,netconf,odlparent,ovsdb,yangtools
+openflowplugin:controller,infrautils,mdsal,netconf,odlparent,serviceutils,yangtools
+ovsdb:aaa,controller,infrautils,mdsal,netconf,odlparent,yangtools
+serviceutils:controller,infrautils,mdsal,odlparent,yangtools
+sfc:aaa,controller,genius,infrautils,lispflowmapping,mdsal,netconf,odlparent,openflowplugin,ovsdb,serviceutils
