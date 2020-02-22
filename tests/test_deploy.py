@@ -11,6 +11,7 @@
 
 import os
 import sys
+import tempfile
 
 import pytest
 import requests
@@ -132,7 +133,7 @@ def test_deploy_archive(cli_runner, datafiles, responses):
     )
 def test_deploy_archive2(datafiles):
     """Test deploy_archives() command when archives dir is missing."""
-    os.chdir(str(datafiles))
+    os.chdir(tempfile.mkdtemp(prefix='lftools-test.'))
     workspace_dir = os.path.join(str(datafiles), 'workspace-noarchives')
 
     with pytest.raises(OSError) as excinfo:
@@ -145,7 +146,7 @@ def test_deploy_archive2(datafiles):
     )
 def test_deploy_archive3(datafiles):
     """Test deploy_archives() command when archives dir is a file instead of a dir."""
-    os.chdir(str(datafiles))
+    os.chdir(tempfile.mkdtemp(prefix='lftools-test.'))
     workspace_dir = os.path.join(str(datafiles), 'workspace-archivesfile')
 
     with pytest.raises(OSError) as excinfo:
@@ -158,7 +159,7 @@ def test_deploy_archive3(datafiles):
     )
 def test_deploy_archive4(cli_runner, datafiles, responses):
     """Test deploy_archives() command when using duplicated patterns."""
-    os.chdir(str(datafiles))
+    os.chdir(tempfile.mkdtemp(prefix='lftools-test.'))
     workspace_dir = os.path.join(str(datafiles), 'workspace-patternfile')
     pattern=["**/*.log", "**/hs_err_*.log", "**/target/**/feature.xml", "**/target/failsafe-reports/failsafe-summary.xml", "**/target/surefire-reports/*-output.txt", "**/target/surefire-reports/*-output.txt", "**/target/failsafe-reports/failsafe-summary.xml", "**/*"]
     result = deploy_sys.copy_archives(workspace_dir, pattern)

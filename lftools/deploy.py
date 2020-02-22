@@ -50,9 +50,12 @@ def _compress_text(dir):
         paths.extend(glob.glob(search, recursive=True))
 
     for _file in paths:
-        with open(_file, 'rb') as src, gzip.open('{}.gz'.format(_file), 'wb') as dest:
-            shutil.copyfileobj(src, dest)
-            os.remove(_file)
+        # glob may follow symlink paths that open can't find
+        if os.path.exists(_file):
+            log.debug("Compressing file {}".format(_file))
+            with open(_file, 'rb') as src, gzip.open('{}.gz'.format(_file), 'wb') as dest:
+                shutil.copyfileobj(src, dest)
+                os.remove(_file)
 
     os.chdir(save_dir)
 
@@ -217,7 +220,7 @@ def copy_archives(workspace, pattern=None):
         :arg str pattern: Space-separated list of Unix style glob patterns.
             (default: None)
     """
-    archives_dir = os.path.join(workspace, 'archives')
+    archives_dir = os.path.join(workspace, "archives")
     dest_dir = os.getcwd()
 
     log.debug('Copying files from {} with pattern \'{}\' to {}.'.format(
@@ -233,11 +236,14 @@ def copy_archives(workspace, pattern=None):
             for file_or_dir in os.listdir(archives_dir):
                 f = os.path.join(archives_dir, file_or_dir)
                 try:
-                    log.debug('Moving {}'.format(f))
-                    shutil.move(f, dest_dir)
+                    log.debug('Copying {}'.format(f))
+                    shutil.copy2(f, dest_dir, follow_symlinks=False)
+                except IsADirectoryError:
+                    os.makedirs(os.path.join(dest_dir, file_or_dir),
+                                exist_ok=True)
                 except shutil.Error as e:
                     log.error(e)
-                    raise OSError(errno.EPERM, 'Could not move to', archives_dir)
+                    raise OSError(errno.EPERM, 'Could not copy to', archives_dir)
     else:
         log.error('Archives dir {} does not exist.'.format(archives_dir))
         raise OSError(errno.ENOENT, 'Missing directory', archives_dir)
@@ -262,6 +268,7 @@ def copy_archives(workspace, pattern=None):
         if len(os.path.basename(src)) > 255:
             log.warn('Filename {} is over 255 characters. Skipping...'.format(
                 os.path.basename(src)))
+            continue
 
         dest = os.path.join(dest_dir, src[len(workspace)+1:])
         log.debug('{} -> {}'.format(src, dest))
@@ -269,9 +276,9 @@ def copy_archives(workspace, pattern=None):
         if os.path.isfile(src):
             try:
                 shutil.move(src, dest)
-            except IOError as e:  # Switch to FileNotFoundError when Python 2 support is dropped.
+            except FileNotFoundError as e:
                 log.debug("Missing path, will create it {}.\n{}".format(os.path.dirname(dest), e))
-                os.makedirs(os.path.dirname(dest))
+                os.makedirs(os.path.dirname(dest), exist_ok=True)
                 shutil.move(src, dest)
         else:
             log.info('Not copying directories: {}.'.format(src))
