@@ -269,7 +269,6 @@ class Gerrit(client.RestApi):
         port=29418
         project={1}
         defaultbranch=master
-        asd=asdf
         """.format(fqdn, gerrit_project)
         my_inline_file_size = len(my_inline_file.encode('utf-8'))
         headers = {'Content-Type': 'text/plain',
