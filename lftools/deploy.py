@@ -588,7 +588,7 @@ def upload_maven_file_to_nexus(
         raise requests.HTTPError("Nexus Error: {}".format(error_msg))
 
 
-def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
+def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False, workers=2):
     """Deploy a local directory of files to a Nexus repository.
 
     One purpose of this is so that we can get around the problematic
@@ -649,13 +649,9 @@ def deploy_nexus(nexus_repo_url, deploy_dir, snapshot=False):
 
             file_list.append(file)
 
-    # Multithreaded upload
-    # default threads to CPU count / 2 so we're a nice neighbor to other builds
-
     log.info("#######################################################")
     log.info("Deploying directory {} to {}".format(deploy_dir, nexus_repo_url))
 
-    workers = int(cpu_count() / 2)
     with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
         # this creates a dict where the key is the Future object, and the value is the file name
         # see concurrent.futures.Future for more info
