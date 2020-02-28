@@ -7,6 +7,7 @@ httplib2
 jsonschema
 lxml
 oauth2client
+pre-commit==1.21.0
 pygerrit2
 pygithub
 python-jenkins
