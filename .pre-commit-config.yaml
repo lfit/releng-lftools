@@ -1,11 +1,10 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v1.3.0
+    rev: v1.2.3
     hooks:
       - id: trailing-whitespace
-
-  - repo: https://github.com/jorisroovers/gitlint
-    rev: v0.12.0
+  - repo: https://github.com/ambv/black
+    rev: stable
     hooks:
-      - id: gitlint
+    - id: black
