@@ -1,8 +1,0 @@
----
-fixes:
-  - |
-    Change the copy_archives method used by deploy_archives to use copy2 with
-    follow_symlinks set to False, which will copy symlinks as symlinks, rather
-    than following their path. Since glob does not have an option to not follow
-    symlinks, we instead just check for file existence to ignore issues with
-    globbing symlinked paths that "open" fails to find.

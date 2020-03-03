@@ -11,7 +11,6 @@
 
 import os
 import sys
-import tempfile
 
 import pytest
 import requests
@@ -63,26 +62,6 @@ def test_copy_archive_dir(cli_runner, datafiles):
     """Test copy_archives() command to ensure archives dir is copied."""
     os.chdir(str(datafiles))
     workspace_dir = os.path.join(str(datafiles), 'workspace')
-    stage_dir = str(datafiles.mkdir("stage_archive"))
-
-    os.chdir(stage_dir)
-    result = cli_runner.invoke(
-        cli.cli,
-        ['--debug', 'deploy', 'copy-archives', workspace_dir],
-        obj={})
-    assert result.exit_code == 0
-
-    assert os.path.exists(os.path.join(stage_dir, 'test.log'))
-
-
-@pytest.mark.datafiles(
-    os.path.join(FIXTURE_DIR, 'deploy'),
-    )
-def test_copy_archive_dir_symlinks(cli_runner, datafiles):
-    """Test copy_archives() command with symlink loop and a broken symlink, in
-    order to test that these conditions are handled properly."""
-    os.chdir(str(datafiles))
-    workspace_dir = os.path.join(str(datafiles), 'workspace-symlinks')
     stage_dir = str(datafiles.mkdir("stage_archive"))
 
     os.chdir(stage_dir)
@@ -153,7 +132,7 @@ def test_deploy_archive(cli_runner, datafiles, responses):
     )
 def test_deploy_archive2(datafiles):
     """Test deploy_archives() command when archives dir is missing."""
-    os.chdir(tempfile.mkdtemp(prefix='lftools-test.'))
+    os.chdir(str(datafiles))
     workspace_dir = os.path.join(str(datafiles), 'workspace-noarchives')
 
     with pytest.raises(OSError) as excinfo:
@@ -166,7 +145,7 @@ def test_deploy_archive2(datafiles):
     )
 def test_deploy_archive3(datafiles):
     """Test deploy_archives() command when archives dir is a file instead of a dir."""
-    os.chdir(tempfile.mkdtemp(prefix='lftools-test.'))
+    os.chdir(str(datafiles))
     workspace_dir = os.path.join(str(datafiles), 'workspace-archivesfile')
 
     with pytest.raises(OSError) as excinfo:
@@ -179,7 +158,7 @@ def test_deploy_archive3(datafiles):
     )
 def test_deploy_archive4(cli_runner, datafiles, responses):
     """Test deploy_archives() command when using duplicated patterns."""
-    os.chdir(tempfile.mkdtemp(prefix='lftools-test.'))
+    os.chdir(str(datafiles))
     workspace_dir = os.path.join(str(datafiles), 'workspace-patternfile')
     pattern=["**/*.log", "**/hs_err_*.log", "**/target/**/feature.xml", "**/target/failsafe-reports/failsafe-summary.xml", "**/target/surefire-reports/*-output.txt", "**/target/surefire-reports/*-output.txt", "**/target/failsafe-reports/failsafe-summary.xml", "**/*"]
     result = deploy_sys.copy_archives(workspace_dir, pattern)
