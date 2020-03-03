@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f50f7206_41870404",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2020-03-03T15:11:48Z",
+      "side": 1,
+      "message": "I\u0027m trying to trace thru this code assuming that the archives_dir has exactly one directory within it.  For example, \"patches\" which is what the ccsdk people are missing.  In the old code, that directory was moved from the archives areas to the new destination.  In the new code, I think a directory \"patches\" will be created, but am fairly certain that the CONTENTS are not copied because os.listdir() does not recurse into the directory.\n\nIf I\u0027m on point there, that just might explain why log files are not being archived as expected.\n\nThis logs area has a patches subdir:\n\nhttps://logs.onap.org/production/vex-yul-ecomp-jenkins-1/ccsdk-parent-maven-stage-master/181/\n\nThis logs area has NO patches subdir:\n\nhttps://logs.onap.org/production/vex-yul-ecomp-jenkins-1/ccsdk-parent-maven-stage-master/182/\n\nHTH",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 46
+      },
+      "revId": "3fad9329a6de8384446fb63215311d29e8aab363",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
