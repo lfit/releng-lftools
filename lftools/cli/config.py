@@ -9,7 +9,7 @@
 ##############################################################################
 """CLI interface for config subsystem."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 import logging
 import sys
@@ -22,41 +22,40 @@ from lftools import config
 log = logging.getLogger(__name__)
 
 
-@click.group(name='config')
+@click.group(name="config")
 @click.pass_context
 def config_sys(ctx):
     """Configuration subsystem."""
     pass
 
 
-@click.command(name='get')
-@click.argument('section', type=str)
-@click.argument('option', type=str, required=False)
+@click.command(name="get")
+@click.argument("section", type=str)
+@click.argument("option", type=str, required=False)
 @click.pass_context
 def get_setting(ctx, section, option):
     """Print section or setting from config file."""
     try:
         result = config.get_setting(section, option)
-    except (configparser.NoOptionError,
-            configparser.NoSectionError) as e:
+    except (configparser.NoOptionError, configparser.NoSectionError) as e:
         log.error(e)
         sys.exit(1)
 
     if isinstance(result, list):
         for i in result:
-            log.info('{}: {}'.format(i, config.get_setting(section, i)))
+            log.info("{}: {}".format(i, config.get_setting(section, i)))
     else:
         log.info(result)
 
 
-@click.command(name='set')
-@click.argument('section')
-@click.argument('option')
-@click.argument('value')
+@click.command(name="set")
+@click.argument("section")
+@click.argument("option")
+@click.argument("value")
 @click.pass_context
 def set_setting(ctx, section, option, value):
     """Set a setting in the config file."""
-    log.debug('Set config\n[{}]\n{}:{}'.format(section, option, value))
+    log.debug("Set config\n[{}]\n{}:{}".format(section, option, value))
     config.set_setting(section, option, value)
 
 

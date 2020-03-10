@@ -9,7 +9,7 @@
 ##############################################################################
 """Jenkins token functions."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 import logging
 
@@ -26,14 +26,11 @@ def get_token(name, url, username, password, change=False):
     api token.
     """
     if change:
-        log.debug('Resetting Jenkins API token on {}'.format(url))
+        log.debug("Resetting Jenkins API token on {}".format(url))
     else:
-        log.debug('Fetching Jenkins API token from {}'.format(url))
+        log.debug("Fetching Jenkins API token from {}".format(url))
 
-    server = jenkins.Jenkins(
-        url,
-        username=username,
-        password=password)
+    server = jenkins.Jenkins(url, username=username, password=password)
 
     get_token = """
 import hudson.model.*
@@ -44,7 +41,9 @@ User u = User.get("{}")
 ApiTokenProperty t = u.getProperty(ApiTokenProperty.class)
 def token = t.tokenStore.generateNewToken("{}")
 println token.plainValue
-""".format(username, name)
+""".format(
+        username, name
+    )
 
     token = server.run_script(get_token)
     return token

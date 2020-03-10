@@ -9,7 +9,7 @@
 ##############################################################################
 """Script to check a git repository for commits missing DCO."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 import sys
 
@@ -26,7 +26,7 @@ def dco(ctx):
 
 
 @click.command()
-@click.argument('repo-path', required=False)
+@click.argument("repo-path", required=False)
 @click.pass_context
 def check(ctx, repo_path):
     """Check repository for commits missing DCO.
@@ -44,7 +44,7 @@ def check(ctx, repo_path):
 
 
 @click.command()
-@click.argument('repo-path', required=False)
+@click.argument("repo-path", required=False)
 @click.pass_context
 def match(ctx, repo_path):
     """Check for commits whose DCO does not match the commit author's email.

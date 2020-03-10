@@ -10,7 +10,7 @@
 ##############################################################################
 """Scans code for a valid license header."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 
 import logging
@@ -29,20 +29,21 @@ def get_header_text(_file):
 
     Note: This function only supports '#' comments for license headers.
     """
-    text = ''
-    with open(_file, 'r') as data:
+    text = ""
+    with open(_file, "r") as data:
         lines = data.readlines()
         for line in lines:
-            result = re.search(r'\s*[#]', line)
+            result = re.search(r"\s*[#]", line)
             if not result:
                 break
-            string = re.sub(r'^\s*#+', '', line).strip()
-            if (bool(re.match('Copyright', string, re.I))  # Ignore the Copyright line
-                    or bool(re.match('^#!', line, re.I))):  # Ignore #! shebang lines
+            string = re.sub(r"^\s*#+", "", line).strip()
+            if bool(re.match("Copyright", string, re.I)) or bool(  # Ignore the Copyright line
+                re.match("^#!", line, re.I)
+            ):  # Ignore #! shebang lines
                 continue
-            text += ' {}'.format(string)
+            text += " {}".format(string)
     # Strip unnecessary spacing
-    text = re.sub('\s+', ' ', text).strip()
+    text = re.sub("\s+", " ", text).strip()
     return text
 
 
@@ -56,7 +57,7 @@ def check_license(license_file, code_file):
     code_header = get_header_text(code_file)
 
     if not license_header in code_header:
-        log.error('{} is missing or has incorrect license header.'.format(code_file))
+        log.error("{} is missing or has incorrect license header.".format(code_file))
         return 1
 
     return 0
@@ -75,4 +76,4 @@ def check_license_directory(license_file, directory, regex=".+\.py$"):
     if missing_license:
         sys.exit(1)
 
-    log.info('Scan completed did not detect any files missing license headers.')
+    log.info("Scan completed did not detect any files missing license headers.")

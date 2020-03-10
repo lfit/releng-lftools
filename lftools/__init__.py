@@ -12,8 +12,8 @@
 ##############################################################################
 """lftools package."""
 
-__author__ = 'Thanh Ha'
-__summary__ = 'Linux Foundation Release Engineering Tools'
+__author__ = "Thanh Ha"
+__summary__ = "Linux Foundation Release Engineering Tools"
 
 import logging
 import sys
@@ -22,10 +22,9 @@ import sys
 class LogFormatter(logging.Formatter):
     """Custom log formatter."""
 
-    default_fmt = logging.Formatter('%(levelname)s: %(message)s')
-    debug_fmt = logging.Formatter(
-        '%(levelname)s: %(name)s:%(lineno)d: %(message)s')
-    info_fmt = logging.Formatter('%(message)s')
+    default_fmt = logging.Formatter("%(levelname)s: %(message)s")
+    debug_fmt = logging.Formatter("%(levelname)s: %(name)s:%(lineno)d: %(message)s")
+    info_fmt = logging.Formatter("%(message)s")
 
     def format(self, record):
         """Format log messages depending on log level."""

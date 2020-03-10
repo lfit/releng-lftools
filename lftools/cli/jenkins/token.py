@@ -9,7 +9,7 @@
 ##############################################################################
 """Jenkins token commands."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 import logging
 import os
@@ -32,35 +32,33 @@ def token(ctx):
 
 
 @click.command()
-@click.option('--name', type=str, default="token-created-by-lftools",
-              help='set token name')
+@click.option("--name", type=str, default="token-created-by-lftools", help="set token name")
 @click.pass_context
 def change(ctx, name):
     """Generate a new API token."""
-    jenkins = ctx.obj['jenkins']
-    username = ctx.obj['username']
-    password = ctx.obj['password']
+    jenkins = ctx.obj["jenkins"]
+    username = ctx.obj["username"]
+    password = ctx.obj["password"]
 
     if not username or not password:
-        log.error('Username or password not set.')
+        log.error("Username or password not set.")
         sys.exit(1)
 
-    log.info(get_token(name, jenkins.url, change=True,
-                       username=username, password=password))
+    log.info(get_token(name, jenkins.url, change=True, username=username, password=password))
 
 
 @click.command()
-@click.argument('name')
-@click.argument('url')
+@click.argument("name")
+@click.argument("url")
 @click.pass_context
 def init(ctx, name, url):
     """Initialize jenkins_jobs.ini config for new server section."""
-    jenkins = ctx.obj['jenkins']
-    username = ctx.obj['username']
-    password = ctx.obj['password']
+    jenkins = ctx.obj["jenkins"]
+    username = ctx.obj["username"]
+    password = ctx.obj["password"]
 
     if not username or not password:
-        log.error('Username or password not set.')
+        log.error("Username or password not set.")
         sys.exit(1)
 
     _require_jjb_ini(jenkins.config_file)
@@ -68,39 +66,38 @@ def init(ctx, name, url):
     config = configparser.ConfigParser()
     config.read(jenkins.config_file)
 
-    token = get_token(url, change=True,
-                      username=username, password=password)
+    token = get_token(url, change=True, username=username, password=password)
     try:
         config.add_section(name)
     except configparser.DuplicateSectionError as e:
         log.error(e)
         sys.exit(1)
 
-    config.set(name, 'url', url)
-    config.set(name, 'user', lftools_cfg.get_setting('global', 'username'))
-    config.set(name, 'password', token)
+    config.set(name, "url", url)
+    config.set(name, "user", lftools_cfg.get_setting("global", "username"))
+    config.set(name, "password", token)
 
-    with open(jenkins.config_file, 'w') as configfile:
+    with open(jenkins.config_file, "w") as configfile:
         config.write(configfile)
 
 
-@click.command(name='print')
+@click.command(name="print")
 @click.pass_context
 def print_token(ctx):
     """Print current API token."""
-    jenkins = ctx.obj['jenkins']
-    username = ctx.obj['username']
-    password = ctx.obj['password']
+    jenkins = ctx.obj["jenkins"]
+    username = ctx.obj["username"]
+    password = ctx.obj["password"]
 
     if not username or not password:
-        log.error('Username or password not set.')
+        log.error("Username or password not set.")
         sys.exit(1)
 
     log.info(get_token(jenkins.url, username=username, password=password))
 
 
 @click.command()
-@click.argument('servers', nargs=-1, required=False)
+@click.argument("servers", nargs=-1, required=False)
 @click.pass_context
 def reset(ctx, servers):
     """Regenerate API tokens for configurations in jenkins_jobs.ini.
@@ -114,24 +111,23 @@ def reset(ctx, servers):
     If the server parameter is NOT passed then all servers listed in the
     configuration file will be reset via multi-server mode.
     """
-    jenkins = ctx.obj['jenkins']
-    username = ctx.obj['username']
-    password = ctx.obj['password']
+    jenkins = ctx.obj["jenkins"]
+    username = ctx.obj["username"]
+    password = ctx.obj["password"]
 
     if not username or not password:
-        log.error('Username or password not set.')
+        log.error("Username or password not set.")
         sys.exit(1)
 
     _require_jjb_ini(jenkins.config_file)
 
     def _reset_key(config, server):
-        url = config.get(server, 'url')
+        url = config.get(server, "url")
 
         try:
-            token = get_token(url, change=True,
-                              username=username, password=password)
-            config.set(server, 'password', token)
-            with open(jenkins.config_file, 'w') as configfile:
+            token = get_token(url, change=True, username=username, password=password)
+            config.set(server, "password", token)
+            with open(jenkins.config_file, "w") as configfile:
                 config.write(configfile)
             return token
         except requests.exceptions.ConnectionError as e:
@@ -152,20 +148,20 @@ def reset(ctx, servers):
         cfg_sections = list(servers)
 
     for section in cfg_sections:
-        if not config.has_option(section, 'url'):
-            log.debug('Section does not contain a url, skipping...')
+        if not config.has_option(section, "url"):
+            log.debug("Section does not contain a url, skipping...")
             continue
 
-        log.info('Resetting API key for {}'.format(section))
+        log.info("Resetting API key for {}".format(section))
         if _reset_key(config, section):
             success += 1
         else:
             fail += 1
-            log.error('Failed to reset API key for {}'.format(section))
+            log.error("Failed to reset API key for {}".format(section))
 
-    log.info('Update configurations complete.')
-    log.info('Success: {}'.format(success))
-    log.info('Failed: {}'.format(fail))
+    log.info("Update configurations complete.")
+    log.info("Success: {}".format(success))
+    log.info("Failed: {}".format(fail))
 
 
 token.add_command(change)
@@ -176,6 +172,5 @@ token.add_command(reset)
 
 def _require_jjb_ini(config):
     if not os.path.isfile(config):
-        log.error('jenkins_jobs.ini not found in any of the search paths. '
-                  'Please provide one before proceeding.')
+        log.error("jenkins_jobs.ini not found in any of the search paths. " "Please provide one before proceeding.")
         sys.exit(1)

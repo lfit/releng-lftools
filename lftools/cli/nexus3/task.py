@@ -10,7 +10,7 @@
 
 """Nexus3 REST API task interface."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 import logging
 
@@ -35,9 +35,4 @@ def list_tasks(ctx):
     """List tasks."""
     r = ctx.obj["nexus3"]
     data = r.list_tasks()
-    log.info(
-        tabulate(
-            data,
-            headers=["Name", "Message", "Current State", "Last Run Result"],
-        )
-    )
+    log.info(tabulate(data, headers=["Name", "Message", "Current State", "Last Run Result"],))

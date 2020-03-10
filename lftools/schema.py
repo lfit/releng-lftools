@@ -31,10 +31,7 @@ def check_schema_file(yamlfile, schemafile):
         schema_file = yaml.safe_load(_)
 
     # Load the schema
-    validation = jsonschema.Draft4Validator(
-        schema_file,
-        format_checker=jsonschema.FormatChecker()
-    )
+    validation = jsonschema.Draft4Validator(schema_file, format_checker=jsonschema.FormatChecker())
 
     validation.iter_errors(yaml_file)
     # Look for errors

@@ -30,10 +30,10 @@ def github_cli(ctx):
     pass
 
 
-@click.command(name='submit-pr')
-@click.argument('organization')
-@click.argument('repo')
-@click.argument('pr', type=int)
+@click.command(name="submit-pr")
+@click.argument("organization")
+@click.argument("repo")
+@click.argument("pr", type=int)
 @click.pass_context
 def submit_pr(ctx, organization, repo, pr):
     """Submit a pr if mergeable."""
@@ -60,10 +60,10 @@ def submit_pr(ctx, organization, repo, pr):
         sys.exit(1)
 
 
-@click.command(name='votes')
-@click.argument('organization')
-@click.argument('repo')
-@click.argument('pr', type=int)
+@click.command(name="votes")
+@click.argument("organization")
+@click.argument("repo")
+@click.argument("pr", type=int)
 @click.pass_context
 def votes(ctx, organization, repo, pr):
     """Helper for votes."""
@@ -71,36 +71,27 @@ def votes(ctx, organization, repo, pr):
     print("Approvals:", approval_list)
 
 
-@click.command(name='list')
-@click.argument('organization')
-@click.option('--audit', is_flag=True, required=False,
-              help='List members without 2fa')
-@click.option('--repos', is_flag=True, required=False,
-              help='List all repos')
-@click.option('--full', is_flag=True, required=False,
-              help='All members and their respective teams')
-@click.option('--teams', is_flag=True, required=False,
-              help='List avaliable teams')
-@click.option('--team', type=str, required=False,
-              help='List members of a team')
-@click.option('--repofeatures', is_flag=True, required=False,
-              help='List enabled features for repos in an org')
+@click.command(name="list")
+@click.argument("organization")
+@click.option("--audit", is_flag=True, required=False, help="List members without 2fa")
+@click.option("--repos", is_flag=True, required=False, help="List all repos")
+@click.option("--full", is_flag=True, required=False, help="All members and their respective teams")
+@click.option("--teams", is_flag=True, required=False, help="List avaliable teams")
+@click.option("--team", type=str, required=False, help="List members of a team")
+@click.option("--repofeatures", is_flag=True, required=False, help="List enabled features for repos in an org")
 @click.pass_context
 def list(ctx, organization, repos, audit, full, teams, team, repofeatures):
     """List options for github org repos."""
     helper_list(ctx, organization, repos, audit, full, teams, team, repofeatures)
 
 
-@click.command(name='create-repo')
-@click.argument('organization')
-@click.argument('repository')
-@click.argument('description')
-@click.option('--has_issues', is_flag=True, required=False,
-              help='Repo should have issues')
-@click.option('--has_projects', is_flag=True, required=False,
-              help='Repo should have projects')
-@click.option('--has_wiki', is_flag=True, required=False,
-              help='Repo should have wiki')
+@click.command(name="create-repo")
+@click.argument("organization")
+@click.argument("repository")
+@click.argument("description")
+@click.option("--has_issues", is_flag=True, required=False, help="Repo should have issues")
+@click.option("--has_projects", is_flag=True, required=False, help="Repo should have projects")
+@click.option("--has_wiki", is_flag=True, required=False, help="Repo should have wiki")
 @click.pass_context
 def createrepo(ctx, organization, repository, description, has_issues, has_projects, has_wiki):
     """Create a Github repo within an Organization.
@@ -143,19 +134,14 @@ def createrepo(ctx, organization, repository, description, has_issues, has_proje
         print(ghe)
 
 
-@click.command(name='update-repo')
-@click.argument('organization')
-@click.argument('repository')
-@click.option('--has_issues', is_flag=True, required=False,
-              help='Repo should have issues')
-@click.option('--has_projects', is_flag=True, required=False,
-              help='Repo should have projects')
-@click.option('--has_wiki', is_flag=True, required=False,
-              help='Repo should have wiki')
-@click.option('--add_team', type=str, required=False,
-              help='Add team to repo')
-@click.option('--remove_team', type=str, required=False,
-              help='remove team from repo')
+@click.command(name="update-repo")
+@click.argument("organization")
+@click.argument("repository")
+@click.option("--has_issues", is_flag=True, required=False, help="Repo should have issues")
+@click.option("--has_projects", is_flag=True, required=False, help="Repo should have projects")
+@click.option("--has_wiki", is_flag=True, required=False, help="Repo should have wiki")
+@click.option("--add_team", type=str, required=False, help="Add team to repo")
+@click.option("--remove_team", type=str, required=False, help="remove team from repo")
 @click.pass_context
 def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki, add_team, remove_team):
     """Update a Github repo within an Organization.
@@ -193,7 +179,7 @@ def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki
 
         for repo in repos:
             if repo.name == repository:
-                repo_actual = (repo)
+                repo_actual = repo
 
         try:
             repo_actual
@@ -211,12 +197,11 @@ def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki
                 team.remove_from_repos(repo_actual)
 
 
-@click.command(name='create-team')
-@click.argument('organization')
-@click.argument('name')
-@click.argument('privacy')
-@click.option('--repo', type=str, required=False,
-              help='Assign team to repo')
+@click.command(name="create-team")
+@click.argument("organization")
+@click.argument("name")
+@click.argument("privacy")
+@click.option("--repo", type=str, required=False, help="Assign team to repo")
 @click.pass_context
 def createteam(ctx, organization, name, repo, privacy):
     """Create a Github team within an Organization.
@@ -265,32 +250,23 @@ def createteam(ctx, organization, name, repo, privacy):
 
     if repo:
         try:
-            org.create_team(
-                name=name,
-                repo_names=repos,
-                privacy=privacy
-            )
+            org.create_team(name=name, repo_names=repos, privacy=privacy)
         except GithubException as ghe:
             print(ghe)
 
     if not repo:
         try:
-            org.create_team(
-                name=name,
-                privacy=privacy
-            )
+            org.create_team(name=name, privacy=privacy)
         except GithubException as ghe:
             print(ghe)
 
 
-@click.command(name='user')
-@click.argument('organization')
-@click.argument('user')
-@click.argument('team')
-@click.option('--delete', is_flag=True, required=False,
-              help='Remove user from org')
-@click.option('--admin', is_flag=True, required=False,
-              help='User is admin for org, or a maintaner of a team')
+@click.command(name="user")
+@click.argument("organization")
+@click.argument("user")
+@click.argument("team")
+@click.option("--delete", is_flag=True, required=False, help="Remove user from org")
+@click.option("--admin", is_flag=True, required=False, help="User is admin for org, or a maintaner of a team")
 @click.pass_context
 def user(ctx, organization, user, team, delete, admin):
     """Add and Remove users from an org team."""

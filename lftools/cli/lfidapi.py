@@ -30,20 +30,19 @@ def lfidapi(ctx):
 
 
 @click.command()
-@click.argument('group')
+@click.argument("group")
 @click.pass_context
 def search_members(ctx, group):
     """List members of a group."""
     members = helper_search_members(group)
     for member in members:
-        log.info('%s <%s>' % (member['username'], member['mail']))
+        log.info("%s <%s>" % (member["username"], member["mail"]))
 
 
 @click.command()
-@click.argument('user')
-@click.option('--delete', is_flag=True, required=False,
-              help='remove user from group')
-@click.argument('group')
+@click.argument("user")
+@click.option("--delete", is_flag=True, required=False, help="remove user from group")
+@click.argument("group")
 @click.pass_context
 def user(ctx, user, group, delete):
     """Add and remove users from groups."""
@@ -51,8 +50,8 @@ def user(ctx, user, group, delete):
 
 
 @click.command()
-@click.argument('email')
-@click.argument('group')
+@click.argument("email")
+@click.argument("group")
 @click.pass_context
 def invite(ctx, email, group):
     """Email invitation to join group."""
@@ -60,7 +59,7 @@ def invite(ctx, email, group):
 
 
 @click.command()
-@click.argument('group')
+@click.argument("group")
 @click.pass_context
 def create_group(ctx, group):
     """Create group."""
@@ -68,12 +67,10 @@ def create_group(ctx, group):
 
 
 @click.command()
-@click.argument('info_file')
-@click.argument('group')
-@click.option('--githuborg', type=str, required=False,
-              help='github org name')
-@click.option('--noop', is_flag=True, required=False,
-              help='show what would be changed')
+@click.argument("info_file")
+@click.argument("group")
+@click.option("--githuborg", type=str, required=False, help="github org name")
+@click.option("--noop", is_flag=True, required=False, help="show what would be changed")
 @click.pass_context
 def match_ldap_to_info(ctx, info_file, group, githuborg, noop):
     """Match an LDAP or GITHUB group membership to an INFO.yaml file."""

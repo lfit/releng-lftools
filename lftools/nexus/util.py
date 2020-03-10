@@ -10,7 +10,7 @@
 ##############################################################################
 """Utility functions for Nexus."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 import logging
 
@@ -19,4 +19,4 @@ log = logging.getLogger(__name__)
 
 def create_repo_target_regex(group_id):
     """Create a repo_target for Nexus use."""
-    return '^/{}/.*'.format(group_id.replace('.', '[/\.]'))
+    return "^/{}/.*".format(group_id.replace(".", "[/\.]"))

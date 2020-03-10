@@ -29,14 +29,12 @@ def gerrit_cli(ctx):
     pass
 
 
-@click.command(name='addfile')
-@click.argument('gerrit_fqdn')
-@click.argument('gerrit_project')
-@click.argument('filename')
-@click.option('--issue_id', type=str, required=False,
-              help='For projects that enforce an issue id for changesets')
-@click.option('--file_location', type=str, required=False,
-              help='option allos you to specify full path and file name')
+@click.command(name="addfile")
+@click.argument("gerrit_fqdn")
+@click.argument("gerrit_project")
+@click.argument("filename")
+@click.option("--issue_id", type=str, required=False, help="For projects that enforce an issue id for changesets")
+@click.option("--file_location", type=str, required=False, help="option allos you to specify full path and file name")
 @click.pass_context
 def addfile(ctx, gerrit_fqdn, gerrit_project, filename, issue_id, file_location):
     """Add an file for review to a Project.
@@ -53,14 +51,12 @@ def addfile(ctx, gerrit_fqdn, gerrit_project, filename, issue_id, file_location)
     log.info(pformat(data))
 
 
-@click.command(name='addinfojob')
-@click.argument('gerrit_fqdn')
-@click.argument('gerrit_project')
-@click.argument('jjbrepo')
-@click.option('--reviewid', type=str, required=False,
-              help='ammend a review rather than making a new one')
-@click.option('--issue_id', type=str, required=False,
-              help='For projects that enforce an issue id for changesets')
+@click.command(name="addinfojob")
+@click.argument("gerrit_fqdn")
+@click.argument("gerrit_project")
+@click.argument("jjbrepo")
+@click.option("--reviewid", type=str, required=False, help="ammend a review rather than making a new one")
+@click.option("--issue_id", type=str, required=False, help="For projects that enforce an issue id for changesets")
 @click.pass_context
 def addinfojob(ctx, gerrit_fqdn, gerrit_project, jjbrepo, reviewid, issue_id):
     """Add an INFO job for a new Project.
@@ -81,11 +77,10 @@ def addinfojob(ctx, gerrit_fqdn, gerrit_project, jjbrepo, reviewid, issue_id):
     log.info(pformat(data))
 
 
-@click.command(name='addgitreview')
-@click.argument('gerrit_fqdn')
-@click.argument('gerrit_project')
-@click.option('--issue_id', type=str, required=False,
-              help='For projects that enforce an issue id for changesets')
+@click.command(name="addgitreview")
+@click.argument("gerrit_fqdn")
+@click.argument("gerrit_project")
+@click.option("--issue_id", type=str, required=False, help="For projects that enforce an issue id for changesets")
 @click.pass_context
 def addgitreview(ctx, gerrit_fqdn, gerrit_project, issue_id):
     """Add git review to a project.
@@ -99,9 +94,9 @@ def addgitreview(ctx, gerrit_fqdn, gerrit_project, issue_id):
     log.info(pformat(data))
 
 
-@click.command(name='addgithubrights')
-@click.argument('gerrit_fqdn')
-@click.argument('gerrit_project')
+@click.command(name="addgithubrights")
+@click.argument("gerrit_fqdn")
+@click.argument("gerrit_project")
 @click.pass_context
 def addgithubrights(ctx, gerrit_fqdn, gerrit_project):
     """Grant Github read for a project.
@@ -114,9 +109,9 @@ def addgithubrights(ctx, gerrit_fqdn, gerrit_project):
     log.info(pformat(data))
 
 
-@click.command(name='abandonchanges')
-@click.argument('gerrit_fqdn')
-@click.argument('gerrit_project')
+@click.command(name="abandonchanges")
+@click.argument("gerrit_fqdn")
+@click.argument("gerrit_project")
 @click.pass_context
 def abandonchanges(ctx, gerrit_fqdn, gerrit_project):
     """Abandon all OPEN changes for a gerrit project.
@@ -128,16 +123,15 @@ def abandonchanges(ctx, gerrit_fqdn, gerrit_project):
     data = g.abandon_changes(gerrit_fqdn, gerrit_project)
     log.info(pformat(data))
 
+
 # Creates a gerrit project if project does not exist and adds ldap group as owner.
 # Limits: does not support inherited permissions from other than All-Projects.
-@click.command(name='createproject')
-@click.argument('gerrit_fqdn')
-@click.argument('gerrit_project')
-@click.argument('ldap_group')
-@click.option('--description', type=str, required=True,
-              help='Project Description')
-@click.option('--check', is_flag=True,
-              help='just check if the project exists')
+@click.command(name="createproject")
+@click.argument("gerrit_fqdn")
+@click.argument("gerrit_project")
+@click.argument("ldap_group")
+@click.option("--description", type=str, required=True, help="Project Description")
+@click.option("--check", is_flag=True, help="just check if the project exists")
 @click.pass_context
 def createproject(ctx, gerrit_fqdn, gerrit_project, ldap_group, description, check):
     """Create a project via the gerrit API.
@@ -157,9 +151,9 @@ def createproject(ctx, gerrit_fqdn, gerrit_project, ldap_group, description, che
     log.info(pformat(data))
 
 
-@click.command(name='list-project-permissions')
-@click.argument('gerrit_fqdn')
-@click.argument('project')
+@click.command(name="list-project-permissions")
+@click.argument("gerrit_fqdn")
+@click.argument("project")
 @click.pass_context
 def list_project_permissions(ctx, gerrit_fqdn, project):
     """List Owners of a Project."""
@@ -169,9 +163,9 @@ def list_project_permissions(ctx, gerrit_fqdn, project):
         log.info(pformat(ldap_group))
 
 
-@click.command(name='list-project-inherits-from')
-@click.argument('gerrit_fqdn')
-@click.argument('gerrit_project')
+@click.command(name="list-project-inherits-from")
+@click.argument("gerrit_fqdn")
+@click.argument("gerrit_project")
 @click.pass_context
 def list_project_inherits_from(ctx, gerrit_fqdn, gerrit_project):
     """List who a project inherits from."""

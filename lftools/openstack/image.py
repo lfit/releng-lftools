@@ -10,7 +10,7 @@
 ##############################################################################
 """Image related sub-commands for openstack command."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 from datetime import datetime
 from datetime import timedelta
@@ -37,13 +37,13 @@ def _filter_images(images, days=0, hide_public=False, ci_managed=True):
     for image in images:
         if hide_public and image.is_public:
             continue
-        if ci_managed and image.metadata.get('ci_managed', None) != 'yes':
+        if ci_managed and image.metadata.get("ci_managed", None) != "yes":
             continue
         if image.protected:
             continue
         if days and (
-                datetime.strptime(image.created_at, '%Y-%m-%dT%H:%M:%SZ')
-                >= datetime.now() - timedelta(days=days)):
+            datetime.strptime(image.created_at, "%Y-%m-%dT%H:%M:%SZ") >= datetime.now() - timedelta(days=days)
+        ):
             continue
 
         filtered.append(image)
@@ -71,26 +71,30 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
     :arg str clouds: If passed, comma-separated list of clouds to remove image
         from. Otherwise os_cloud will be used.
     """
+
     def _remove_images_from_cloud(images, cloud):
-        print('Removing {} images from {}.'.format(len(images), cloud.cloud_config.name))
+        print("Removing {} images from {}.".format(len(images), cloud.cloud_config.name))
         for image in images:
             if image.is_protected:
-                print('WARNING: Image {} is protected. Cannot remove...'.format(image.name))
+                print("WARNING: Image {} is protected. Cannot remove...".format(image.name))
                 continue
 
             try:
                 result = cloud.delete_image(image.name)
             except shade.exc.OpenStackCloudException as e:
-                if str(e).startswith('Multiple matches found for'):
-                    print('WARNING: {}. Skipping image...'.format(str(e)))
+                if str(e).startswith("Multiple matches found for"):
+                    print("WARNING: {}. Skipping image...".format(str(e)))
                     continue
                 else:
-                    print('ERROR: Unexpected exception: {}'.format(str(e)))
+                    print("ERROR: Unexpected exception: {}".format(str(e)))
                     raise
 
             if not result:
-                print('WARNING: Failed to remove \"{}\" from {}. Possibly already deleted.'
-                      .format(image.name, cloud.cloud_config.name))
+                print(
+                    'WARNING: Failed to remove "{}" from {}. Possibly already deleted.'.format(
+                        image.name, cloud.cloud_config.name
+                    )
+                )
             else:
                 print('Removed "{}" from {}.'.format(image.name, cloud.cloud_config.name))
 
@@ -112,66 +116,63 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
 
 def share(os_cloud, image, clouds):
     """Share image with another tenant."""
+
     def _get_image_id(os_cloud, image):
-        cmd = ['openstack', '--os-cloud', os_cloud, 'image', 'list',
-               '--name', image, '-f', 'value', '-c', 'ID']
+        cmd = ["openstack", "--os-cloud", os_cloud, "image", "list", "--name", image, "-f", "value", "-c", "ID"]
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = p.communicate()
-        log.debug('exit code: {}'.format(p.returncode))
-        log.debug(stderr.decode('utf-8'))
+        log.debug("exit code: {}".format(p.returncode))
+        log.debug(stderr.decode("utf-8"))
         if p.returncode:
             sys.exit(1)
 
-        image_id = stdout.decode('utf-8').strip()
-        log.debug('image_id: {}'.format(image_id))
+        image_id = stdout.decode("utf-8").strip()
+        log.debug("image_id: {}".format(image_id))
         return image_id
 
     def _mark_image_shared(os_cloud, image):
-        cmd = ['openstack', '--os-cloud', os_cloud, 'image', 'set', '--shared', image]
+        cmd = ["openstack", "--os-cloud", os_cloud, "image", "set", "--shared", image]
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = p.communicate()
-        log.debug('exit code: {}'.format(p.returncode))
-        log.debug(stderr.decode('utf-8'))
+        log.debug("exit code: {}".format(p.returncode))
+        log.debug(stderr.decode("utf-8"))
         if p.returncode:
             sys.exit(1)
 
     def _get_token(cloud):
-        cmd = ['openstack', '--os-cloud', cloud, 'token', 'issue',
-               '-c', 'project_id', '-f', 'value']
+        cmd = ["openstack", "--os-cloud", cloud, "token", "issue", "-c", "project_id", "-f", "value"]
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = p.communicate()
-        log.debug('exit code: {}'.format(p.returncode))
-        log.debug(stderr.decode('utf-8'))
+        log.debug("exit code: {}".format(p.returncode))
+        log.debug(stderr.decode("utf-8"))
         if p.returncode:
             sys.exit(1)
 
-        token = stdout.decode('utf-8').strip()
-        log.debug('token: {}'.format(token))
+        token = stdout.decode("utf-8").strip()
+        log.debug("token: {}".format(token))
         return token
 
     def _share_to_cloud(os_cloud, image, token):
-        log.debug('Sharing image {} to {}'.format(image, token))
-        cmd = ['openstack', '--os-cloud', os_cloud, 'image', 'add', 'project',
-               image, token]
+        log.debug("Sharing image {} to {}".format(image, token))
+        cmd = ["openstack", "--os-cloud", os_cloud, "image", "add", "project", image, token]
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = p.communicate()
-        log.debug('exit code: {}'.format(p.returncode))
-        log.debug(stderr.decode('utf-8'))
+        log.debug("exit code: {}".format(p.returncode))
+        log.debug(stderr.decode("utf-8"))
 
         if p.returncode:
-            if stderr.decode('utf-8').startswith('409 Conflict'):
-                log.info('  Image is already shared.')
+            if stderr.decode("utf-8").startswith("409 Conflict"):
+                log.info("  Image is already shared.")
             else:
                 sys.exit(1)
 
     def _accept_shared_image(cloud, image):
-        log.debug('Accepting image {}'.format(image))
-        cmd = ['openstack', '--os-cloud', cloud, 'image', 'set',
-               '--accept', image]
+        log.debug("Accepting image {}".format(image))
+        cmd = ["openstack", "--os-cloud", cloud, "image", "set", "--accept", image]
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = p.communicate()
-        log.debug('exit code: {}'.format(p.returncode))
-        log.debug(stderr.decode('utf-8'))
+        log.debug("exit code: {}".format(p.returncode))
+        log.debug(stderr.decode("utf-8"))
         if p.returncode:
             sys.exit(1)
 
@@ -180,19 +181,19 @@ def share(os_cloud, image, clouds):
     _mark_image_shared(os_cloud, image_id)
 
     for cloud in clouds:
-        log.info('Sharing to {}.'.format(cloud))
+        log.info("Sharing to {}.".format(cloud))
         _share_to_cloud(os_cloud, image_id, _get_token(cloud))
         _accept_shared_image(cloud, image_id)
 
 
-def upload(os_cloud, image, name, disk_format='qcow2'):
+def upload(os_cloud, image, name, disk_format="qcow2"):
     """Upload image to openstack."""
     log.info('Uploading image {} with name "{}".'.format(image, name))
     cloud = shade.openstack_cloud(cloud=os_cloud)
 
-    if re.match(r'^http[s]?://', image):
-        tmp = tempfile.NamedTemporaryFile(suffix='.img')
-        log.info('URL provided downloading image locally to {}.'.format(tmp.name))
+    if re.match(r"^http[s]?://", image):
+        tmp = tempfile.NamedTemporaryFile(suffix=".img")
+        log.info("URL provided downloading image locally to {}.".format(tmp.name))
         urllib.request.urlretrieve(image, tmp.name)  # nosec
         image = tmp.name
 
@@ -202,4 +203,4 @@ def upload(os_cloud, image, name, disk_format='qcow2'):
         log.info(str(e))
         sys.exit(1)
 
-    log.info('Upload complete.')
+    log.info("Upload complete.")

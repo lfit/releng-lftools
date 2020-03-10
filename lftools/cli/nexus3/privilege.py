@@ -10,7 +10,7 @@
 
 """Nexus3 REST API privileges interface."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 import logging
 
@@ -33,6 +33,4 @@ def list_privileges(ctx):
     """List privileges."""
     r = ctx.obj["nexus3"]
     data = r.list_privileges()
-    log.info(
-        tabulate(data, headers=["Type", "Name", "Description", "Read Only"])
-    )
+    log.info(tabulate(data, headers=["Type", "Name", "Description", "Read Only"]))

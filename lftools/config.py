@@ -20,7 +20,7 @@ from xdg import XDG_CONFIG_HOME
 
 log = logging.getLogger(__name__)
 
-LFTOOLS_CONFIG_FILE = os.path.join(XDG_CONFIG_HOME, 'lftools', 'lftools.ini')
+LFTOOLS_CONFIG_FILE = os.path.join(XDG_CONFIG_HOME, "lftools", "lftools.ini")
 
 
 def get_config():
@@ -44,8 +44,7 @@ def get_setting(section, option=None):
     if option:
         try:
             return config.get(section, option)
-        except (configparser.NoOptionError,
-                configparser.NoSectionError) as e:
+        except (configparser.NoOptionError, configparser.NoSectionError) as e:
             raise e
 
     else:
@@ -60,5 +59,5 @@ def set_setting(section, option, value):
     config = get_config()
     config.set(section, option, value)
 
-    with open(LFTOOLS_CONFIG_FILE, 'w') as configfile:
+    with open(LFTOOLS_CONFIG_FILE, "w") as configfile:
         config.write(configfile)

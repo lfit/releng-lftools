@@ -32,15 +32,15 @@ class Gerrit(client.RestApi):
     def __init__(self, **params):
         """Initialize the class."""
         self.params = params
-        self.fqdn = self.params['fqdn']
-        if 'creds' not in self.params:
+        self.fqdn = self.params["fqdn"]
+        if "creds" not in self.params:
             creds = {
-                'authtype': 'basic',
-                'username': config.get_setting(self.fqdn, 'username'),
-                'password': config.get_setting(self.fqdn, 'password'),
-                'endpoint': config.get_setting(self.fqdn, 'endpoint')
+                "authtype": "basic",
+                "username": config.get_setting(self.fqdn, "username"),
+                "password": config.get_setting(self.fqdn, "password"),
+                "endpoint": config.get_setting(self.fqdn, "endpoint"),
             }
-            params['creds'] = creds
+            params["creds"] = creds
 
         super(Gerrit, self).__init__(**params)
 
@@ -57,36 +57,33 @@ class Gerrit(client.RestApi):
         filename /tmp/INFO.yaml
         file_location="somedir/example-INFO.yaml"
         """
-        signed_off_by = config.get_setting(fqdn, 'sob')
+        signed_off_by = config.get_setting(fqdn, "sob")
         basename = os.path.basename(filename)
         payload = self.create_change(basename, gerrit_project, issue_id, signed_off_by)
 
         if file_location:
-            file_location = urllib.parse.quote(file_location, safe='', encoding=None, errors=None)
+            file_location = urllib.parse.quote(file_location, safe="", encoding=None, errors=None)
             basename = file_location
         log.info(payload)
 
-        access_str = 'changes/'
+        access_str = "changes/"
         result = self.post(access_str, data=payload)[1]
-        log.info(result['id'])
-        changeid = (result['id'])
+        log.info(result["id"])
+        changeid = result["id"]
 
         my_file = open(filename)
         my_file_size = os.stat(filename)
-        headers = {'Content-Type': 'text/plain',
-                   'Content-length': '{}'.format(my_file_size)}
+        headers = {"Content-Type": "text/plain", "Content-length": "{}".format(my_file_size)}
         self.r.headers.update(headers)
-        access_str = 'changes/{}/edit/{}'.format(changeid, basename)
+        access_str = "changes/{}/edit/{}".format(changeid, basename)
         payload = my_file
         result = self.put(access_str, data=payload)
         log.info(result)
 
-        access_str = 'changes/{}/edit:publish'.format(changeid)
-        headers = {'Content-Type': 'application/json; charset=UTF-8'}
+        access_str = "changes/{}/edit:publish".format(changeid)
+        headers = {"Content-Type": "application/json; charset=UTF-8"}
         self.r.headers.update(headers)
-        payload = json.dumps({
-            "notify": "NONE",
-        })
+        payload = json.dumps({"notify": "NONE",})
         result = self.post(access_str, data=payload)
         return result
         ##############################################################
@@ -107,19 +104,19 @@ class Gerrit(client.RestApi):
         """
         ###############################################################
         # Setup
-        signed_off_by = config.get_setting(fqdn, 'sob')
+        signed_off_by = config.get_setting(fqdn, "sob")
         gerrit_project_dashed = gerrit_project.replace("/", "-")
-        gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe='', encoding=None, errors=None)
-        filename = 'info-{}.yaml'.format(gerrit_project_dashed)
+        gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
+        filename = "info-{}.yaml".format(gerrit_project_dashed)
 
         if not reviewid:
             payload = self.create_change(filename, jjbrepo, issue_id, signed_off_by)
             log.info(payload)
-            access_str = 'changes/'
+            access_str = "changes/"
             result = self.post(access_str, data=payload)[1]
             log.info(result)
-            log.info(result['id'])
-            changeid = (result['id'])
+            log.info(result["id"])
+            changeid = result["id"]
         else:
             changeid = reviewid
 
@@ -131,27 +128,27 @@ class Gerrit(client.RestApi):
     jobs:
       - gerrit-info-yaml-verify
     project: {1}
-    branch: master\n""".format(gerrit_project_dashed, gerrit_project)
-        my_inline_file_size = len(my_inline_file.encode('utf-8'))
-        headers = {'Content-Type': 'text/plain',
-                   'Content-length': '{}'.format(my_inline_file_size)}
+    branch: master\n""".format(
+            gerrit_project_dashed, gerrit_project
+        )
+        my_inline_file_size = len(my_inline_file.encode("utf-8"))
+        headers = {"Content-Type": "text/plain", "Content-length": "{}".format(my_inline_file_size)}
         self.r.headers.update(headers)
-        access_str = 'changes/{0}/edit/jjb%2F{1}%2Finfo-{2}.yaml'.format(
-            changeid, gerrit_project_encoded, gerrit_project_dashed)
+        access_str = "changes/{0}/edit/jjb%2F{1}%2Finfo-{2}.yaml".format(
+            changeid, gerrit_project_encoded, gerrit_project_dashed
+        )
         payload = my_inline_file
         log.info(access_str)
         result = self.put(access_str, data=payload)
         log.info(result)
 
-        access_str = 'changes/{}/edit:publish'.format(changeid)
-        headers = {'Content-Type': 'application/json; charset=UTF-8'}
+        access_str = "changes/{}/edit:publish".format(changeid)
+        headers = {"Content-Type": "application/json; charset=UTF-8"}
         self.r.headers.update(headers)
-        payload = json.dumps({
-            "notify": "NONE",
-            })
+        payload = json.dumps({"notify": "NONE",})
         result = self.post(access_str, data=payload)
         log.info(result)
-        return(result)
+        return result
 
     def vote_on_change(self, fqdn, gerrit_project, changeid, **kwargs):
         """Helper that votes on a change.
@@ -159,23 +156,18 @@ class Gerrit(client.RestApi):
         POST /changes/{change-id}/revisions/{revision-id}/review
         """
         log.info(fqdn, gerrit_project, changeid)
-        access_str = 'changes/{}/revisions/2/review'.format(changeid)
-        headers = {'Content-Type': 'application/json; charset=UTF-8'}
+        access_str = "changes/{}/revisions/2/review".format(changeid)
+        headers = {"Content-Type": "application/json; charset=UTF-8"}
         self.r.headers.update(headers)
-        payload = json.dumps({
-            "tag": "automation",
-            "message": "Vote on file",
-            "labels": {
-                "Verified": +1,
-                "Code-Review": +2,
-            }
-            })
+        payload = json.dumps(
+            {"tag": "automation", "message": "Vote on file", "labels": {"Verified": +1, "Code-Review": +2,}}
+        )
 
         result = self.post(access_str, data=payload)
         # Code for projects that don't allow self merge.
-        if config.get_setting(self.fqdn + '.second'):
-            second_username = config.get_setting(self.fqdn + '.second', 'username')
-            second_password = config.get_setting(self.fqdn + '.second', 'password')
+        if config.get_setting(self.fqdn + ".second"):
+            second_username = config.get_setting(self.fqdn + ".second", "username")
+            second_password = config.get_setting(self.fqdn + ".second", "password")
             self.r.auth = (second_username, second_password)
             result = self.post(access_str, data=payload)
             self.r.auth = (self.username, self.password)
@@ -184,26 +176,26 @@ class Gerrit(client.RestApi):
     def submit_change(self, fqdn, gerrit_project, changeid, payload, **kwargs):
         """Method so submit a change."""
         # submit a change id
-        access_str = 'changes/{}/submit'.format(changeid)
+        access_str = "changes/{}/submit".format(changeid)
         log.info(access_str)
-        headers = {'Content-Type': 'application/json; charset=UTF-8'}
+        headers = {"Content-Type": "application/json; charset=UTF-8"}
         self.r.headers.update(headers)
         result = self.post(access_str, data=payload)
         return result
 
     def abandon_changes(self, fqdn, gerrit_project, **kwargs):
         """."""
-        gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe='', encoding=None, errors=None)
-        access_str = 'changes/?q=project:{}'.format(gerrit_project_encoded)
+        gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
+        access_str = "changes/?q=project:{}".format(gerrit_project_encoded)
         log.info(access_str)
-        headers = {'Content-Type': 'application/json; charset=UTF-8'}
+        headers = {"Content-Type": "application/json; charset=UTF-8"}
         self.r.headers.update(headers)
         result = self.get(access_str)[1]
-        payload = {'message': 'Abandoned by automation'}
+        payload = {"message": "Abandoned by automation"}
         for id in result:
-            if (id['status']) == "NEW":
-                id = (id['id'])
-                access_str = 'changes/{}/abandon'.format(id)
+            if (id["status"]) == "NEW":
+                id = id["id"]
+                access_str = "changes/{}/abandon".format(id)
                 log.info(access_str)
                 result = self.post(access_str, data=payload)[1]
                 return result
@@ -211,23 +203,21 @@ class Gerrit(client.RestApi):
     def create_change(self, filename, gerrit_project, issue_id, signed_off_by, **kwargs):
         """Method to create a gerrit change."""
         if issue_id:
-            subject = (
-                'Automation adds {0}\n\nIssue-ID: {1}\n\nSigned-off-by: {2}'.format(filename, issue_id, signed_off_by))
+            subject = "Automation adds {0}\n\nIssue-ID: {1}\n\nSigned-off-by: {2}".format(
+                filename, issue_id, signed_off_by
+            )
         else:
-            subject = (
-                'Automation adds {0}\n\nSigned-off-by: {1}'.format(filename, signed_off_by))
-        payload = json.dumps({
-            "project": '{}'.format(gerrit_project),
-            "subject": '{}'.format(subject),
-            "branch": 'master',
-            })
+            subject = "Automation adds {0}\n\nSigned-off-by: {1}".format(filename, signed_off_by)
+        payload = json.dumps(
+            {"project": "{}".format(gerrit_project), "subject": "{}".format(subject), "branch": "master",}
+        )
         return payload
 
     def sanity_check(self, fqdn, gerrit_project, **kwargs):
         """Preform a sanity check."""
         # Sanity check
-        gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe='', encoding=None, errors=None)
-        mylist = ['projects/', 'projects/{}'.format(gerrit_project_encoded)]
+        gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
+        mylist = ["projects/", "projects/{}".format(gerrit_project_encoded)]
         for access_str in mylist:
             log.info(access_str)
             try:
@@ -247,7 +237,7 @@ class Gerrit(client.RestApi):
         gerrit_project test/test1
         issue_id: CIMAN-33
         """
-        signed_off_by = config.get_setting(fqdn, 'sob')
+        signed_off_by = config.get_setting(fqdn, "sob")
         self.sanity_check(fqdn, gerrit_project)
 
         ###############################################################
@@ -256,10 +246,10 @@ class Gerrit(client.RestApi):
         payload = self.create_change(filename, gerrit_project, issue_id, signed_off_by)
         log.info(payload)
 
-        access_str = 'changes/'
+        access_str = "changes/"
         result = self.post(access_str, data=payload)[1]
         log.info(result)
-        changeid = (result['id'])
+        changeid = result["id"]
 
         ###############################################################
         # Add a file to a change set.
@@ -269,12 +259,13 @@ class Gerrit(client.RestApi):
         port=29418
         project={1}
         defaultbranch=master
-        """.format(fqdn, gerrit_project)
-        my_inline_file_size = len(my_inline_file.encode('utf-8'))
-        headers = {'Content-Type': 'text/plain',
-                   'Content-length': '{}'.format(my_inline_file_size)}
+        """.format(
+            fqdn, gerrit_project
+        )
+        my_inline_file_size = len(my_inline_file.encode("utf-8"))
+        headers = {"Content-Type": "text/plain", "Content-length": "{}".format(my_inline_file_size)}
         self.r.headers.update(headers)
-        access_str = 'changes/{}/edit/{}'.format(changeid, filename)
+        access_str = "changes/{}/edit/{}".format(changeid, filename)
         payload = my_inline_file
         result = self.put(access_str, data=payload)
 
@@ -284,12 +275,10 @@ class Gerrit(client.RestApi):
             exit(0)
 
         else:
-            access_str = 'changes/{}/edit:publish'.format(changeid)
-            headers = {'Content-Type': 'application/json; charset=UTF-8'}
+            access_str = "changes/{}/edit:publish".format(changeid)
+            headers = {"Content-Type": "application/json; charset=UTF-8"}
             self.r.headers.update(headers)
-            payload = json.dumps({
-                "notify": "NONE",
-                })
+            payload = json.dumps({"notify": "NONE",})
             result = self.post(access_str, data=payload)
             log.info(result)
 
@@ -305,28 +294,29 @@ class Gerrit(client.RestApi):
         ###############################################################
         # Github Rights
 
-        gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe='', encoding=None, errors=None)
+        gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
         # GET /groups/?m=test%2F HTTP/1.0
-        access_str = 'groups/?m=GitHub%20Replication'
+        access_str = "groups/?m=GitHub%20Replication"
         log.info(access_str)
         result = self.get(access_str)[1]
         time.sleep(5)
-        githubid = (result['GitHub Replication']['id'])
+        githubid = result["GitHub Replication"]["id"]
         log.info(githubid)
 
         # POST /projects/MyProject/access HTTP/1.0
         if githubid:
-            payload = json.dumps({
-                "add": {
-                    "refs/*": {
-                        "permissions": {
-                            "read": {
-                                "rules": {
-                                    "{}".format(githubid): {
-                                        "action": "{}".format("ALLOW")
-                                        }}}}}}
-            })
-            access_str = 'projects/{}/access'.format(gerrit_project_encoded)
+            payload = json.dumps(
+                {
+                    "add": {
+                        "refs/*": {
+                            "permissions": {
+                                "read": {"rules": {"{}".format(githubid): {"action": "{}".format("ALLOW")}}}
+                            }
+                        }
+                    }
+                }
+            )
+            access_str = "projects/{}/access".format(gerrit_project_encoded)
             result = self.post(access_str, data=payload)[1]
             pretty = json.dumps(result, indent=4, sort_keys=True)
             log.info(pretty)
@@ -347,9 +337,9 @@ class Gerrit(client.RestApi):
         --description="This is a demo project"
 
         """
-        gerrit_project = urllib.parse.quote(gerrit_project, safe='', encoding=None, errors=None)
+        gerrit_project = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
 
-        access_str = 'projects/{}'.format(gerrit_project)
+        access_str = "projects/{}".format(gerrit_project)
 
         result = self.get(access_str)[0]
         if result.status_code == 404:
@@ -370,15 +360,15 @@ class Gerrit(client.RestApi):
         ldapgroup = "ldap:cn={},ou=Groups,dc=freestandards,dc=org".format(ldap_group)
         log.info(ldapgroup)
 
-        access_str = 'projects/{}'.format(gerrit_project)
-        payload = json.dumps({
-            "description": "{}".format(description),
-            "submit_type": "INHERIT",
-            "create_empty_commit": "True",
-            "owners": [
-                "{}".format(ldapgroup)
-                ]
-        })
+        access_str = "projects/{}".format(gerrit_project)
+        payload = json.dumps(
+            {
+                "description": "{}".format(description),
+                "submit_type": "INHERIT",
+                "create_empty_commit": "True",
+                "owners": ["{}".format(ldapgroup)],
+            }
+        )
 
         log.info(payload)
         result = self.put(access_str, data=payload)
@@ -386,16 +376,16 @@ class Gerrit(client.RestApi):
 
     def list_project_permissions(self, project):
         """List a projects owners."""
-        result = self.get('access/?project={}'.format(project))[1][project]['local']
+        result = self.get("access/?project={}".format(project))[1][project]["local"]
         group_list = []
         for k, v in result.items():
-            for kk, vv in result[k]['permissions']['owner']['rules'].items():
-                group_list.append(kk.replace('ldap:cn=', '').replace(',ou=Groups,dc=freestandards,dc=org', ''))
+            for kk, vv in result[k]["permissions"]["owner"]["rules"].items():
+                group_list.append(kk.replace("ldap:cn=", "").replace(",ou=Groups,dc=freestandards,dc=org", ""))
         return group_list
 
     def list_project_inherits_from(self, gerrit_project):
         """List who a project inherits from."""
-        gerrit_project = urllib.parse.quote(gerrit_project, safe='', encoding=None, errors=None)
-        result = self.get('projects/{}/access'.format(gerrit_project))[1]
-        inherits = (result['inherits_from']['id'])
+        gerrit_project = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
+        result = self.get("projects/{}/access".format(gerrit_project))[1]
+        inherits = result["inherits_from"]["id"]
         return inherits

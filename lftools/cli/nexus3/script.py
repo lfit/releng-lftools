@@ -10,7 +10,7 @@
 
 """Nexus3 REST API script interface."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 import logging
 

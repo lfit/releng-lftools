@@ -10,7 +10,7 @@
 ##############################################################################
 """CLI configuration for openstack command."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 
 import click

@@ -23,9 +23,9 @@ def schema(ctx):
     pass
 
 
-@click.command(name='verify')
-@click.argument('yamlfile')
-@click.argument('schemafile')
+@click.command(name="verify")
+@click.argument("yamlfile")
+@click.argument("schemafile")
 @click.pass_context
 def verify_schema(ctx, yamlfile, schemafile):
     """Verify YAML Schema.

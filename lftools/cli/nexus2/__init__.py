@@ -10,7 +10,7 @@
 
 """Nexus2 REST API sub-interfaces."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 
 from lftools.api.endpoints import nexus2
@@ -22,7 +22,7 @@ from .user import *
 
 
 @click.group(name="nexus2")
-@click.argument('fqdn')
+@click.argument("fqdn")
 @click.pass_context
 def nexus_two(ctx, fqdn):
     """The Nexus2 API Interface."""

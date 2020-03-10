@@ -9,7 +9,7 @@
 ##############################################################################
 """Jenkins node information."""
 
-__author__ = 'Trevor Bramwell'
+__author__ = "Trevor Bramwell"
 
 import click
 
@@ -25,18 +25,18 @@ def offline_str(status):
 @click.pass_context
 def nodes(ctx):
     """Find information about builders connected to Jenkins Master."""
-    jenkins = ctx.obj['jenkins']
-    ctx.obj['nodes'] = jenkins.server.get_nodes()
+    jenkins = ctx.obj["jenkins"]
+    ctx.obj["nodes"] = jenkins.server.get_nodes()
 
 
 @click.command()
 @click.pass_context
 def list_nodes(ctx):
     """List Jenkins nodes."""
-    node_list = ctx.obj['nodes']
+    node_list = ctx.obj["nodes"]
 
     for node in node_list:
-        print("%s [%s]" % (node['name'], offline_str(node['offline'])))
+        print("%s [%s]" % (node["name"], offline_str(node["offline"])))
 
 
-nodes.add_command(list_nodes, name='list')
+nodes.add_command(list_nodes, name="list")

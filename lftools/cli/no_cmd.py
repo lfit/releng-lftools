@@ -10,7 +10,7 @@
 ##############################################################################
 """CLI configuration for ldap command."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 
 import click

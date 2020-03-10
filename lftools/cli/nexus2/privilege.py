@@ -10,7 +10,7 @@
 
 """Nexus2 REST API user interface."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 import logging
 
@@ -33,14 +33,7 @@ def list(ctx):
     """List privileges."""
     r = ctx.obj["nexus2"]
     data = r.privilege_list()
-    log.info(
-        tabulate(
-            data,
-            headers=[
-                "Name",
-                "ID"
-            ]
-        ))
+    log.info(tabulate(data, headers=["Name", "ID"]))
 
 
 @privilege.command(name="create")

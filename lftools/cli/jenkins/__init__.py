@@ -9,7 +9,7 @@
 ##############################################################################
 """Jenkins information."""
 
-__author__ = 'Trevor Bramwell'
+__author__ = "Trevor Bramwell"
 
 
 import logging
@@ -28,27 +28,30 @@ log = logging.getLogger(__name__)
 
 
 @click.group()
+@click.option("-c", "--conf", type=str, default=None, help="Path to jenkins_jobs.ini config.")
 @click.option(
-    '-c', '--conf', type=str, default=None,
-    help='Path to jenkins_jobs.ini config.')
-@click.option(
-    '-s', '--server', type=str, envvar='JENKINS_URL', default='jenkins',
-    help='The URL to a Jenkins server. Alternatively the jenkins_jobs.ini '
-    'section to parse for url/user/password configuration if available.')
-@click.option('-u', '--user', type=str, envvar='JENKINS_USER', default='admin')
-@click.option('-p', '--password', type=str, envvar='JENKINS_PASSWORD')
+    "-s",
+    "--server",
+    type=str,
+    envvar="JENKINS_URL",
+    default="jenkins",
+    help="The URL to a Jenkins server. Alternatively the jenkins_jobs.ini "
+    "section to parse for url/user/password configuration if available.",
+)
+@click.option("-u", "--user", type=str, envvar="JENKINS_USER", default="admin")
+@click.option("-p", "--password", type=str, envvar="JENKINS_PASSWORD")
 @click.pass_context
 def jenkins_cli(ctx, server, user, password, conf):
     """Query information about the Jenkins Server."""
     # Initial the Jenkins object and pass it to sub-commands
-    ctx.obj['jenkins'] = Jenkins(server, user, password, config_file=conf)
+    ctx.obj["jenkins"] = Jenkins(server, user, password, config_file=conf)
 
 
 @click.command()
 @click.pass_context
 def get_credentials(ctx):
     """Print all available Credentials."""
-    jenkins = ctx.obj['jenkins']
+    jenkins = ctx.obj["jenkins"]
     groovy_script = """
 import com.cloudbees.plugins.credentials.*
 
@@ -71,14 +74,14 @@ for (c in creds) {
 
 
 @click.command()
-@click.argument('groovy_file')
+@click.argument("groovy_file")
 @click.pass_context
 def groovy(ctx, groovy_file):
     """Run a groovy script."""
-    with open(groovy_file, 'r') as f:
+    with open(groovy_file, "r") as f:
         data = f.read()
 
-    jenkins = ctx.obj['jenkins']
+    jenkins = ctx.obj["jenkins"]
     result = jenkins.server.run_script(data)
     log.info(result)
 
@@ -88,7 +91,7 @@ def groovy(ctx, groovy_file):
 @click.pass_context
 def quiet_down(ctx, n):
     """Put Jenkins into 'Quiet Down' mode."""
-    jenkins = ctx.obj['jenkins']
+    jenkins = ctx.obj["jenkins"]
     version = jenkins.server.get_version()
     # Ask permission first
     if n:
@@ -96,21 +99,23 @@ def quiet_down(ctx, n):
             jenkins.server.quiet_down()
         except HTTPError as m:
             if m.code == 405:
-                log.error("\n[%s]\nJenkins %s does not support Quiet Down "
-                          "without a CSRF Token. (CVE-2017-04-26)\nPlease "
-                          "file a bug with 'python-jenkins'" % (m, version))
+                log.error(
+                    "\n[%s]\nJenkins %s does not support Quiet Down "
+                    "without a CSRF Token. (CVE-2017-04-26)\nPlease "
+                    "file a bug with 'python-jenkins'" % (m, version)
+                )
             else:
                 raise m
 
 
 @click.command()
 @click.option(
-    '--force', is_flag=True, default=False,
-    help='Forcibly remove nodes, use only if the non-force version fails.')
+    "--force", is_flag=True, default=False, help="Forcibly remove nodes, use only if the non-force version fails."
+)
 @click.pass_context
 def remove_offline_nodes(ctx, force):
     """Remove any offline nodes."""
-    jenkins = ctx.obj['jenkins']
+    jenkins = ctx.obj["jenkins"]
     groovy_script = """
 import hudson.model.*
 
@@ -170,12 +175,12 @@ for (node in Jenkins.instance.computers) {
     log.info(result)
 
 
-jenkins_cli.add_command(plugins_init, name='plugins')
+jenkins_cli.add_command(plugins_init, name="plugins")
 jenkins_cli.add_command(nodes)
 jenkins_cli.add_command(builds)
-jenkins_cli.add_command(get_credentials, name='get-credentials')
+jenkins_cli.add_command(get_credentials, name="get-credentials")
 jenkins_cli.add_command(groovy)
 jenkins_cli.add_command(jobs)
-jenkins_cli.add_command(quiet_down, name='quiet-down')
-jenkins_cli.add_command(remove_offline_nodes, name='remove-offline-nodes')
+jenkins_cli.add_command(quiet_down, name="quiet-down")
+jenkins_cli.add_command(remove_offline_nodes, name="remove-offline-nodes")
 jenkins_cli.add_command(token)

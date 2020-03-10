@@ -14,22 +14,17 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-with open('requirements.txt') as f:
+with open("requirements.txt") as f:
     install_reqs = f.read().splitlines()
 
-with open('requirements-test.txt') as f:
+with open("requirements-test.txt") as f:
     f.readline()  # Skip the first -rrequirements.txt line
     test_reqs = f.read().splitlines()
 
 setup(
-    setup_requires=['pbr', 'pytest-runner'],
+    setup_requires=["pbr", "pytest-runner"],
     pbr=True,
     install_requires=install_reqs,
-    packages=find_packages(exclude=[
-        '*.tests',
-        '*.tests.*',
-        'tests.*',
-        'tests'
-    ]),
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     tests_require=test_reqs,
 )

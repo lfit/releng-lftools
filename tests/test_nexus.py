@@ -18,8 +18,7 @@ from lftools.nexus import cmd
 from lftools.nexus import util
 
 
-FIXTURE_DIR = os.path.join(
-    os.path.dirname(os.path.realpath(__file__)), 'fixtures')
+FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtures")
 
 
 @pytest.fixture
@@ -29,7 +28,7 @@ def nexus2_obj_create(responses):
     responses.add(responses.GET, baseurl_endpoint, status=200)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, 'nexus'))
+@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "nexus"))
 def test_create_roles(datafiles, responses, nexus2_obj_create):
     """Test create_roles() method with good config."""
     os.chdir(str(datafiles))
@@ -54,34 +53,26 @@ def test_create_roles(datafiles, responses, nexus2_obj_create):
 def test_create_repo_target_regex():
     """Test create_repo_target_regex() command."""
 
-    odlparent = util.create_repo_target_regex('org.opendaylight.odlparent')
+    odlparent = util.create_repo_target_regex("org.opendaylight.odlparent")
     odlparent_regex = re.compile(odlparent)
     assert odlparent_regex.match(
-        '/org/opendaylight/odlparent/odlparent'
-        '/4.0.0-SNAPSHOT/odlparent-4.0.0-20180424.132124-69.pom'
+        "/org/opendaylight/odlparent/odlparent" "/4.0.0-SNAPSHOT/odlparent-4.0.0-20180424.132124-69.pom"
     )
 
-    honeycomb = util.create_repo_target_regex('org.opendaylight.honeycomb.vbd')
+    honeycomb = util.create_repo_target_regex("org.opendaylight.honeycomb.vbd")
     honeycomb_regex = re.compile(honeycomb)
     assert honeycomb_regex.match(
-        '/org/opendaylight/honeycomb/vbd/odl-vbd'
-        '/1.4.0-SNAPSHOT/odl-vbd-1.4.0-20180422.024456-12-features.xml'
+        "/org/opendaylight/honeycomb/vbd/odl-vbd" "/1.4.0-SNAPSHOT/odl-vbd-1.4.0-20180422.024456-12-features.xml"
     )
 
-    mso = util.create_repo_target_regex('org.openecomp.mso')
+    mso = util.create_repo_target_regex("org.openecomp.mso")
     mso_regex = re.compile(mso)
-    assert mso_regex.match(
-        '/org/openecomp/mso/'
-        '1.1.0-SNAPSHOT/mso-1.1.0-20170606.171056-26.pom'
-    )
+    assert mso_regex.match("/org/openecomp/mso/" "1.1.0-SNAPSHOT/mso-1.1.0-20170606.171056-26.pom")
 
-    dcaegen2 = util.create_repo_target_regex('org.onap.dcaegen2')
+    dcaegen2 = util.create_repo_target_regex("org.onap.dcaegen2")
     dcaegen2_regex = re.compile(dcaegen2)
-    assert dcaegen2_regex.match(
-        '/org/onap/dcaegen2/'
-        '1.2.0-SNAPSHOT/dcaegen2-1.2.0-20180403.182529-10.pom'
-    )
+    assert dcaegen2_regex.match("/org/onap/dcaegen2/" "1.2.0-SNAPSHOT/dcaegen2-1.2.0-20180403.182529-10.pom")
 
-    vpp = util.create_repo_target_regex('io.fd.vpp')
+    vpp = util.create_repo_target_regex("io.fd.vpp")
     vpp_regex = re.compile(vpp)
-    assert vpp_regex.match('/io/fd/vpp/jvpp/16.06/jvpp-16.06.jar')
+    assert vpp_regex.match("/io/fd/vpp/jvpp/16.06/jvpp-16.06.jar")

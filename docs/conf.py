@@ -20,17 +20,18 @@
 import os
 import sys
 import sphinx_bootstrap_theme
-sys.path.insert(0, os.path.abspath('..'))
+
+sys.path.insert(0, os.path.abspath(".."))
 
 from pbr.version import VersionInfo
 
 from docs_conf.conf import *
 
-version = str(VersionInfo('lftools'))
-release = str(VersionInfo('lftools'))
+version = str(VersionInfo("lftools"))
+release = str(VersionInfo("lftools"))
 
 # Linkcheck Options
-linkcheck_ignore= [
-    r'https://testing\.googleblog\.com/.*',
-    r'https://nexus\.example\.com',
+linkcheck_ignore = [
+    r"https://testing\.googleblog\.com/.*",
+    r"https://nexus\.example\.com",
 ]

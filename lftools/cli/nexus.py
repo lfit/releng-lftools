@@ -15,7 +15,7 @@ import click
 from lftools.nexus import cmd as nexuscmd
 import lftools.nexus.release_docker_hub as rdh
 
-NEXUS_URL_ENV = 'NEXUS_URL'
+NEXUS_URL_ENV = "NEXUS_URL"
 
 
 @click.group()
@@ -29,7 +29,7 @@ def nexus(ctx):
 
 
 @click.command()
-@click.option('-s', '--settings', type=str, required=True)
+@click.option("-s", "--settings", type=str, required=True)
 @click.pass_context
 def reorder_staged_repos(ctx, settings):
     """Reorder staging repositories in Nexus.
@@ -52,11 +52,9 @@ def create(ctx):
 
 @create.command()
 @click.option(
-    '-c', '--config', type=str, required=True,
-    help='Repo config file for how the Nexus repository should be created.')
-@click.option(
-    '-s', '--settings', type=str, required=True,
-    help='Config file containing administrative settings.')
+    "-c", "--config", type=str, required=True, help="Repo config file for how the Nexus repository should be created."
+)
+@click.option("-s", "--settings", type=str, required=True, help="Config file containing administrative settings.")
 @click.pass_context
 def repo(ctx, config, settings):
     """Create a Nexus repository as defined by a repo-config.yaml file."""
@@ -65,11 +63,9 @@ def repo(ctx, config, settings):
 
 @create.command()
 @click.option(
-    '-c', '--config', type=str, required=True,
-    help='Role config file for how the Nexus role should be created.')
-@click.option(
-    '-s', '--settings', type=str, required=True,
-    help='Config file containing administrative settings.')
+    "-c", "--config", type=str, required=True, help="Role config file for how the Nexus role should be created."
+)
+@click.option("-s", "--settings", type=str, required=True, help="Config file containing administrative settings.")
 @click.pass_context
 def role(ctx, config, settings):
     """Create a Nexus role as defined by a role-config.yaml file."""
@@ -86,24 +82,27 @@ def docker(ctx):
 def docker_params(command):
     """Common options and arguments for all docker subcommands."""
     command = click.option(
-        '--settings', type=str,
-        help=('Yaml file containing "nexus" (url), "user", and "password" '
-              'definitions.'))(command)
+        "--settings", type=str, help=('Yaml file containing "nexus" (url), "user", and "password" ' "definitions.")
+    )(command)
     command = click.option(
-        '-s', '--server', type=str,
-        help=('Nexus server URL. Can also be set as {} in the environment. '
-              'This will override any URL set in settings.yaml.').format(
-                  NEXUS_URL_ENV))(command)
-    command = click.argument('REPO', type=str)(command)
-    command = click.argument('PATTERN', type=str, default="*")(command)
+        "-s",
+        "--server",
+        type=str,
+        help=(
+            "Nexus server URL. Can also be set as {} in the environment. "
+            "This will override any URL set in settings.yaml."
+        ).format(NEXUS_URL_ENV),
+    )(command)
+    command = click.argument("REPO", type=str)(command)
+    command = click.argument("PATTERN", type=str, default="*")(command)
     return command
 
 
 @docker.command(name="list")
 @docker_params
 @click.option(
-    '--csv', type=click.Path(dir_okay=False, writable=True),
-    help='Write a csv file of the search results to PATH.')
+    "--csv", type=click.Path(dir_okay=False, writable=True), help="Write a csv file of the search results to PATH."
+)
 @click.pass_context
 def list_images(ctx, settings, server, repo, pattern, csv):
     """List images matching the PATTERN.
@@ -120,8 +119,7 @@ def list_images(ctx, settings, server, repo, pattern, csv):
 
 @docker.command(name="delete")
 @docker_params
-@click.option(
-    '-y', '--yes', is_flag=True, help="Answer yes to all prompts")
+@click.option("-y", "--yes", is_flag=True, help="Answer yes to all prompts")
 @click.pass_context
 def delete_images(ctx, settings, server, repo, pattern, yes):
     """Delete all images matching the PATTERN.
@@ -130,20 +128,23 @@ def delete_images(ctx, settings, server, repo, pattern, yes):
     to delete images NOT matching the string.
     """
     images = nexuscmd.search(settings, server, repo, pattern)
-    if yes or click.confirm("Would you like to delete all {} images?".format(
-            str(len(images)))):
+    if yes or click.confirm("Would you like to delete all {} images?".format(str(len(images)))):
         nexuscmd.delete_images(settings, server, images)
 
 
 @nexus.command()
 @click.pass_context
-@click.argument('REPOS', type=str, nargs=-1)
-@click.option('-v', '--verify-only', 'verify', is_flag=True, required=False)
+@click.argument("REPOS", type=str, nargs=-1)
+@click.option("-v", "--verify-only", "verify", is_flag=True, required=False)
 @click.option(
-    '-s', '--server', type=str,
-    help=('Nexus server URL. Can also be set as {} in the environment. '
-          'This will override any URL set in settings.yaml.').format(
-              NEXUS_URL_ENV))
+    "-s",
+    "--server",
+    type=str,
+    help=(
+        "Nexus server URL. Can also be set as {} in the environment. "
+        "This will override any URL set in settings.yaml."
+    ).format(NEXUS_URL_ENV),
+)
 def release(ctx, repos, verify, server):
     """Release one or more staging repositories."""
     if not server and NEXUS_URL_ENV in environ:
@@ -152,29 +153,41 @@ def release(ctx, repos, verify, server):
 
 
 @docker.command(name="releasedockerhub")
+@click.option("-o", "--org", type=str, required=True, help="Specify repository organization.")
 @click.option(
-    '-o', '--org', type=str, required=True,
-    help='Specify repository organization.')
+    "-r",
+    "--repo",
+    type=str,
+    default="",
+    required=False,
+    help="Only repos containing this string will be selected. " "Default set to blank string, which is every repo.",
+)
 @click.option(
-    '-r', '--repo', type=str, default='', required=False,
-    help='Only repos containing this string will be selected. '
-         'Default set to blank string, which is every repo.')
+    "-e",
+    "--exact",
+    is_flag=True,
+    required=False,
+    default=False,
+    help="Match the exact repo name. " "If used, --repo parameter can not be empty.",
+)
+@click.option("-s", "--summary", is_flag=True, required=False, help="Prints a summary of missing docker tags.")
+@click.option("-v", "--verbose", is_flag=True, required=False, help="Prints all collected repo/tag information.")
 @click.option(
-    '-e', '--exact', is_flag=True, required=False, default=False,
-    help='Match the exact repo name. '
-         'If used, --repo parameter can not be empty.')
+    "-c",
+    "--copy",
+    is_flag=True,
+    required=False,
+    default=False,
+    help="Copy missing tags from Nexus3 repos to Docker Hub repos.",
+)
 @click.option(
-    '-s', '--summary', is_flag=True, required=False,
-    help='Prints a summary of missing docker tags.')
-@click.option(
-    '-v', '--verbose', is_flag=True, required=False,
-    help='Prints all collected repo/tag information.')
-@click.option(
-    '-c', '--copy', is_flag=True, required=False, default=False,
-    help='Copy missing tags from Nexus3 repos to Docker Hub repos.')
-@click.option(
-    '-p', '--progbar', is_flag=True, required=False, default=False,
-    help='Display a progress bar for the time consuming jobs.')
+    "-p",
+    "--progbar",
+    is_flag=True,
+    required=False,
+    default=False,
+    help="Display a progress bar for the time consuming jobs.",
+)
 @click.pass_context
 def copy_from_nexus3_to_dockerhub(ctx, org, repo, exact, summary, verbose, copy, progbar):
     """Find missing repos in Docker Hub, Copy from Nexus3.

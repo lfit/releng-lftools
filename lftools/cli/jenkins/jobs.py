@@ -9,7 +9,7 @@
 ##############################################################################
 """Jenkins Jobs."""
 
-__author__ = 'Anil Belur'
+__author__ = "Anil Belur"
 
 import click
 
@@ -43,22 +43,22 @@ def jobs(ctx):
 
 
 @click.command()
-@click.argument('regex')
+@click.argument("regex")
 @click.pass_context
 def enable(ctx, regex):
     """Enable all Jenkins jobs matching REGEX."""
-    jenkins = ctx.obj['jenkins']
+    jenkins = ctx.obj["jenkins"]
 
     result = jenkins.server.run_script(enable_disable_jobs.format(regex, "enable"))
     print(result)
 
 
 @click.command()
-@click.argument('regex')
+@click.argument("regex")
 @click.pass_context
 def disable(ctx, regex):
     """Disable all Jenkins jobs matching REGEX."""
-    jenkins = ctx.obj['jenkins']
+    jenkins = ctx.obj["jenkins"]
 
     result = jenkins.server.run_script(enable_disable_jobs.format(regex, "disable"))
     print(result)

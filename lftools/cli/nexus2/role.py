@@ -10,7 +10,7 @@
 
 """Nexus2 REST API user interface."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 import logging
 
@@ -33,25 +33,15 @@ def role_list(ctx):
     """List users."""
     r = ctx.obj["nexus2"]
     data = r.role_list()
-    log.info(
-        tabulate(
-            data,
-            headers=[
-                "ID",
-                "Name",
-                "Roles",
-                "Privileges"
-            ],
-            tablefmt="grid"
-        ))
+    log.info(tabulate(data, headers=["ID", "Name", "Roles", "Privileges"], tablefmt="grid"))
 
 
 @role.command(name="create")
 @click.argument("role_id")
 @click.argument("role_name")
-@click.option('-d', "role_description", required=False)
-@click.option('-r', "roles_list", required=False)
-@click.option('-p', "privileges_list", required=False)
+@click.option("-d", "role_description", required=False)
+@click.option("-r", "roles_list", required=False)
+@click.option("-p", "privileges_list", required=False)
 @click.pass_context
 def role_create(ctx, role_id, role_name, role_description, roles_list, privileges_list):
     """Create a new role."""

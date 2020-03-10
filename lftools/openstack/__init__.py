@@ -9,4 +9,4 @@
 ##############################################################################
 """lftools openstack package."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"

@@ -10,7 +10,7 @@
 
 """Nexus3 REST API interface."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 import json
 import logging
@@ -132,9 +132,7 @@ class Nexus3(client.RestApi):
 
         :param repository: repo name
         """
-        result = self.get("v1/assets?repository={}".format(repository))[1][
-            "items"
-        ]
+        result = self.get("v1/assets?repository={}".format(repository))[1]["items"]
         if not result:
             return "This repository has no assets"
         else:
@@ -156,9 +154,7 @@ class Nexus3(client.RestApi):
 
         :param repository: the repo name
         """
-        result = self.get("v1/components?repository={}".format(repository))[1][
-            "items"
-        ]
+        result = self.get("v1/components?repository={}".format(repository))[1]["items"]
         if not result:
             return "This repository has no components"
         else:
@@ -170,12 +166,7 @@ class Nexus3(client.RestApi):
         list_of_privileges = []
         for privilege in result:
             list_of_privileges.append(
-                [
-                    privilege["type"],
-                    privilege["name"],
-                    privilege["description"],
-                    privilege["readOnly"],
-                ]
+                [privilege["type"], privilege["name"], privilege["description"], privilege["readOnly"],]
             )
         return list_of_privileges
 
@@ -221,11 +212,7 @@ class Nexus3(client.RestApi):
             while token is not None:
                 for tag in result["items"]:
                     list_of_tags.append(tag["name"])
-                result = self.get(
-                    "v1/tags?continuationToken={}".format(
-                        result["continuationToken"]
-                    )
-                )[1]
+                result = self.get("v1/tags?continuationToken={}".format(result["continuationToken"]))[1]
                 token = result["continuationToken"]
         else:
             for tag in result["items"]:
@@ -242,12 +229,7 @@ class Nexus3(client.RestApi):
         list_of_tasks = []
         for task in result:
             list_of_tasks.append(
-                [
-                    task["name"],
-                    task["message"],
-                    task["currentState"],
-                    task["lastRunResult"],
-                ]
+                [task["name"], task["message"], task["currentState"], task["lastRunResult"],]
             )
         return list_of_tasks
 
@@ -296,9 +278,7 @@ class Nexus3(client.RestApi):
         """
         data = {"tag": tag}
         json_data = json.dumps(data)
-        result = self.post(
-            "v1/staging/move/{}".format(destination_repo), data=json_data
-        )
+        result = self.post("v1/staging/move/{}".format(destination_repo), data=json_data)
         return result
 
     def read_script(self, name):
@@ -337,10 +317,7 @@ class Nexus3(client.RestApi):
             "repository": repository,
         }
         json_data = json.dumps(data)
-        result = self.get(
-            "v1/search/assets?q={}&repository={}".format(query, repository),
-            data=json_data,
-        )[1]["items"]
+        result = self.get("v1/search/assets?q={}&repository={}".format(query, repository), data=json_data,)[1]["items"]
         list_of_assets = []
 
         if details:

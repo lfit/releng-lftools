@@ -127,7 +127,7 @@ def helper_list(ctx, organization, repos, audit, full, teams, team, repofeatures
                     team_members.append(user.login)
                     log.info("  - '{}'".format(user.login))
 
-        return(team_members)
+        return team_members
 
 
 def prvotes(organization, repo, pr):
@@ -152,7 +152,7 @@ def prvotes(organization, repo, pr):
     for approve in approvals:
         if approve.state == ("APPROVED"):
             approval_list.append(approve.user.login)
-    return(approval_list)
+    return approval_list
 
 
 def helper_user_github(ctx, organization, user, team, delete, admin):
@@ -187,7 +187,7 @@ def helper_user_github(ctx, organization, user, team, delete, admin):
     my_teams = [team]
     this_team = [team for team in teams() if team.name in my_teams]
     for t in this_team:
-        team_id = (t.id)
+        team_id = t.id
     team = org.get_team(team_id)
     teams = []
     teams.append(team)

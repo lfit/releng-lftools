@@ -9,7 +9,7 @@
 ##############################################################################
 """Version bump script for Maven based projects."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 
 import logging
@@ -56,7 +56,7 @@ def version(ctx):
 
 
 @click.command()
-@click.argument('release-tag')
+@click.argument("release-tag")
 @click.pass_context
 def bump(ctx, release_tag):
     """Version bump pom files in a Maven project by x.(y+1).z or x.y.(z+1).
@@ -69,12 +69,12 @@ def bump(ctx, release_tag):
     3. Change x.y.z-SNAPSHOT versions to x.(y+1).0-SNAPSHOT
     4. Change x.y.z-RELEASE_TAG versions to x.y.(z+1)-SNAPSHOT and
     """
-    status = subprocess.call(['version', 'bump', release_tag])
+    status = subprocess.call(["version", "bump", release_tag])
     sys.exit(status)
 
 
 @click.command()
-@click.argument('release-tag')
+@click.argument("release-tag")
 @click.pass_context
 def release(ctx, release_tag):
     """Version bump pom files in a Maven project from SNAPSHOT to RELEASE_TAG.
@@ -82,16 +82,14 @@ def release(ctx, release_tag):
     Searches poms for all instances of SNAPSHOT version and changes it to
     RELEASE_TAG.
     """
-    status = subprocess.call(['version', 'release', release_tag])
+    status = subprocess.call(["version", "release", release_tag])
     sys.exit(status)
 
 
 @click.command()
-@click.argument('release-tag')
-@click.argument('patch-dir')
-@click.option(
-    '--project', default='OpenDaylight',
-    help='Project name to use when tagging. (Default: OpenDaylight)')
+@click.argument("release-tag")
+@click.argument("patch-dir")
+@click.option("--project", default="OpenDaylight", help="Project name to use when tagging. (Default: OpenDaylight)")
 @click.pass_context
 def patch(ctx, release_tag, patch_dir, project):
     """Patch a project with git.bundles and then version bump.
@@ -102,7 +100,7 @@ def patch(ctx, release_tag, patch_dir, project):
     if not os.path.isdir(patch_dir):
         log.error("{} is not a valid directory.".format(patch_dir))
         sys.exit(404)
-    status = subprocess.call(['version', 'patch', release_tag, patch_dir, project])
+    status = subprocess.call(["version", "patch", release_tag, patch_dir, project])
     sys.exit(status)
 
 

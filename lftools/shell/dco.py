@@ -10,7 +10,7 @@
 ##############################################################################
 """Functions for DCO check tasks."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 import logging
 from os import chdir
@@ -24,23 +24,27 @@ log = logging.getLogger(__name__)
 def get_branches(path=getcwd(), invert=False):
     """Get a list of branches."""
     if invert:
-        invert = '--invert-grep'
+        invert = "--invert-grep"
     else:
-        invert = ''
+        invert = ""
     chdir(path)
     try:
-        branches = subprocess.check_output(  # nosec
-            "git branch -r | grep -v origin/HEAD", shell=True)\
-            .decode(encoding="UTF-8") \
+        branches = (
+            subprocess.check_output("git branch -r | grep -v origin/HEAD", shell=True)  # nosec
+            .decode(encoding="UTF-8")
             .splitlines()
+        )
         hashlist = []
         for branch in branches:
             branch = branch.strip()
-            hashes = subprocess.check_output(  # nosec
-                'git log {} --no-merges --pretty="%H %ae" --grep "Signed-off-by" {}'  # noqa
-                .format(branch, invert), shell=True)\
-                .decode(encoding="UTF-8")\
-                .split('\n')
+            hashes = (
+                subprocess.check_output(  # nosec
+                    'git log {} --no-merges --pretty="%H %ae" --grep "Signed-off-by" {}'.format(branch, invert),  # noqa
+                    shell=True,
+                )
+                .decode(encoding="UTF-8")
+                .split("\n")
+            )
             hashlist = hashlist + hashes
         if hashlist:
             # remove a trailing blank list entry
@@ -64,7 +68,7 @@ def check(path=getcwd()):
             missing = []
             for commit in hashes:
                 if commit:
-                    missing.append(commit.split(' ')[0])
+                    missing.append(commit.split(" ")[0])
 
             if missing:
                 # de-dupe the commit list
@@ -87,28 +91,26 @@ def match(path=getcwd()):
             exit(exit_code)
         else:
             for commit in hashes:
-                commit_id = commit.split(' ')[0]
+                commit_id = commit.split(" ")[0]
                 if commit_id:
                     commit_log_message = subprocess.check_output(  # nosec
-                        "git log --format=%B -n 1 {}"
-                        .format(commit_id), shell=True)\
+                        "git log --format=%B -n 1 {}".format(commit_id), shell=True
+                    ).decode(encoding="UTF-8")
+                    commit_author_email = (
+                        subprocess.check_output("git log --format='%ae' {}^!".format(commit_id), shell=True)  # nosec
                         .decode(encoding="UTF-8")
-                    commit_author_email = subprocess.check_output(  # nosec
-                        "git log --format='%ae' {}^!"
-                        .format(commit_id), shell=True)\
-                        .decode(encoding="UTF-8").strip()
-                    sob_email_regex = '(?=Signed\-off\-by: )*[\<](.*)[\>]'  # noqa
-                    sob_results = re.findall(sob_email_regex,
-                                             commit_log_message)
+                        .strip()
+                    )
+                    sob_email_regex = "(?=Signed\-off\-by: )*[\<](.*)[\>]"  # noqa
+                    sob_results = re.findall(sob_email_regex, commit_log_message)
 
                     if commit_author_email in sob_results:
                         continue
                     else:
-                        log.info("For commit ID {}: \n\tCommitter is {}"
-                                 "\n\tbut commit is signed off by {}\n"
-                                 .format(commit_id,
-                                         commit_author_email,
-                                         sob_results))
+                        log.info(
+                            "For commit ID {}: \n\tCommitter is {}"
+                            "\n\tbut commit is signed off by {}\n".format(commit_id, commit_author_email, sob_results)
+                        )
                         exit_code = 1
             exit(exit_code)
     except subprocess.CalledProcessError as e:

@@ -9,7 +9,7 @@
 ##############################################################################
 """Jenkins build information."""
 
-__author__ = 'Trevor Bramwell'
+__author__ = "Trevor Bramwell"
 
 import click
 
@@ -25,27 +25,27 @@ def builds(ctx):
 @click.pass_context
 def running(ctx):
     """Show all the currently running builds."""
-    jenkins = ctx.obj['jenkins']
+    jenkins = ctx.obj["jenkins"]
     running_builds = jenkins.server.get_running_builds()
 
     for build in running_builds:
-        print("- %s on %s" % (build['name'], build['node']))
+        print("- %s on %s" % (build["name"], build["node"]))
 
 
 @click.command()
 @click.pass_context
 def queued(ctx):
     """Show all jobs waiting in the queue and their status."""
-    jenkins = ctx.obj['jenkins']
+    jenkins = ctx.obj["jenkins"]
     queue = jenkins.server.get_queue_info()
 
     queue_length = len(queue)
     print("Build Queue (%s)" % queue_length)
     for build in queue:
-        print(" - %s" % (build['task']['name'])),
-        if build['stuck']:
+        print(" - %s" % (build["task"]["name"])),
+        if build["stuck"]:
             print("[Stuck]")
-        if build['blocked']:
+        if build["blocked"]:
             print("[Blocked]")
 
 

@@ -33,7 +33,8 @@ def oauth_helper():
         refresh_token=refresh_token,
         token_expiry=None,
         token_uri=token_uri,
-        user_agent=None)
+        user_agent=None,
+    )
     credentials.refresh(httplib2.Http())
     access_token = credentials.access_token
     return access_token, url

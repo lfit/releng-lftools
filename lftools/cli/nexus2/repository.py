@@ -10,7 +10,7 @@
 
 """Nexus2 REST API repository interface."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 import logging
 
@@ -33,16 +33,7 @@ def repo_list(ctx):
     """List repositories."""
     r = ctx.obj["nexus2"]
     data = r.repo_list()
-    log.info(
-        tabulate(
-            data,
-            headers=[
-                "Name",
-                "Type",
-                "Provider",
-                "ID"
-            ]
-        ))
+    log.info(tabulate(data, headers=["Name", "Type", "Provider", "ID"]))
 
 
 @repo.command(name="create")
@@ -51,7 +42,7 @@ def repo_list(ctx):
 @click.argument("repo_name")
 @click.argument("repo_provider")
 @click.argument("repo_policy")
-@click.option('-u', '--upstream-repo', 'repo_upstream_url')
+@click.option("-u", "--upstream-repo", "repo_upstream_url")
 @click.pass_context
 def create(ctx, repo_type, repo_id, repo_name, repo_provider, repo_policy, repo_upstream_url):
     """Create a new repository."""

@@ -10,7 +10,7 @@
 ##############################################################################
 """Object related sub-commands for openstack command."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 import shade
 

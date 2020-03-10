@@ -9,7 +9,7 @@
 ##############################################################################
 """Script to GPG or Sigul sign files."""
 
-__author__ = 'Thanh Ha'
+__author__ = "Thanh Ha"
 
 
 import subprocess
@@ -26,87 +26,79 @@ def sign(ctx):
     pass
 
 
-@click.command(name='dir')
-@click.argument('directory')
-@click.option(
-    '-m', '--mode', type=str, default='parallel',
-    help='Signing mode serial|parallel')
+@click.command(name="dir")
+@click.argument("directory")
+@click.option("-m", "--mode", type=str, default="parallel", help="Signing mode serial|parallel")
 @click.pass_context
 def directory(ctx, directory, mode):
     """GPG signs all of the files in a directory."""
-    status = subprocess.call(['sign', 'dir', directory, mode])
+    status = subprocess.call(["sign", "dir", directory, mode])
     sys.exit(status)
 
 
-@click.command(name='git-tag')
-@click.argument('tag')
+@click.command(name="git-tag")
+@click.argument("tag")
 @click.pass_context
 def git_tag(ctx, tag):
     """Sigul sign an annotated git tag."""
-    status = subprocess.call(['sign', 'git-tag', tag])
+    status = subprocess.call(["sign", "git-tag", tag])
     sys.exit(status)
 
 
-@click.command(name='container')
-@click.argument('manifest')
-@click.argument('tag')
+@click.command(name="container")
+@click.argument("manifest")
+@click.argument("tag")
 @click.pass_context
 def container(ctx, manifest, tag):
     """Sigul sign a Docker container."""
-    status = subprocess.call(['sign', 'container', manifest, tag])
+    status = subprocess.call(["sign", "container", manifest, tag])
     sys.exit(status)
 
 
-@click.command(name='nexus')
-@click.argument('nexus-repo-url')
+@click.command(name="nexus")
+@click.argument("nexus-repo-url")
 @click.option(
-    '-d', '--sign-dir', type=str,
+    "-d",
+    "--sign-dir",
+    type=str,
     default=None,
-    help='Local directory to clone repository. (default /tmp/gpg-signatures.*)')
-@click.option(
-    '-m', '--mode', type=str, default='parallel',
-    help='Signing mode serial|parallel')
-@click.option(
-    '-w', '--sign-with', type=str, default='gpg',
-    help='Sign artifacts with GPG or Sigul. (default gpg)')
+    help="Local directory to clone repository. (default /tmp/gpg-signatures.*)",
+)
+@click.option("-m", "--mode", type=str, default="parallel", help="Signing mode serial|parallel")
+@click.option("-w", "--sign-with", type=str, default="gpg", help="Sign artifacts with GPG or Sigul. (default gpg)")
 @click.pass_context
 def nexus(ctx, sign_dir, sign_with, nexus_repo_url, mode):
     """Fetch and GPG or Sigul sign a Nexus repo."""
     if not sign_dir:
-        sign_dir = tempfile.mkdtemp(prefix='gpg-signatures.')
-    status = subprocess.call(['sign', 'nexus', '-d', sign_dir, '-m', mode, '-w', sign_with, nexus_repo_url])
+        sign_dir = tempfile.mkdtemp(prefix="gpg-signatures.")
+    status = subprocess.call(["sign", "nexus", "-d", sign_dir, "-m", mode, "-w", sign_with, nexus_repo_url])
     sys.exit(status)
 
 
-@click.command(name='sigul')
-@click.argument('directory')
-@click.option(
-    '-m', '--mode', type=str, default='parallel',
-    help='Signing mode serial|parallel')
+@click.command(name="sigul")
+@click.argument("directory")
+@click.option("-m", "--mode", type=str, default="parallel", help="Signing mode serial|parallel")
 @click.pass_context
 def sigul(ctx, directory, mode):
     """Sigul signs all of the files in a directory."""
-    status = subprocess.call(['sign', 'sigul', directory, mode])
+    status = subprocess.call(["sign", "sigul", directory, mode])
     sys.exit(status)
 
 
-@click.command(name='deploy-nexus')
-@click.argument('nexus-url', envvar='NEXUS_URL')
-@click.argument('nexus-repo', envvar='NEXUS_REPO')
-@click.argument('staging-profile-id', envvar='STAGING_PROFILE_ID')
+@click.command(name="deploy-nexus")
+@click.argument("nexus-url", envvar="NEXUS_URL")
+@click.argument("nexus-repo", envvar="NEXUS_REPO")
+@click.argument("staging-profile-id", envvar="STAGING_PROFILE_ID")
 @click.option(
-    '-d', '--sign-dir', type=str,
+    "-d",
+    "--sign-dir",
+    type=str,
     default=None,
-    help='Local directory to clone repository. (default /tmp/gpg-signatures.*)')
-@click.option(
-    '-m', '--mode', type=str, default='parallel',
-    help='Signing mode serial|parallel')
-@click.option(
-    '-r', '--root-domain', type=str, default='org',
-    help='Root download path of staging repo. (default org)')
-@click.option(
-    '-w', '--sign-with', type=str, default='gpg',
-    help='Sign artifacts with GPG or Sigul. (default gpg)')
+    help="Local directory to clone repository. (default /tmp/gpg-signatures.*)",
+)
+@click.option("-m", "--mode", type=str, default="parallel", help="Signing mode serial|parallel")
+@click.option("-r", "--root-domain", type=str, default="org", help="Root download path of staging repo. (default org)")
+@click.option("-w", "--sign-with", type=str, default="gpg", help="Sign artifacts with GPG or Sigul. (default gpg)")
 @click.pass_context
 def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, sign_with, root_domain, mode):
     """Sign artifacts from a Nexus repo then upload to a staging repo.
@@ -121,17 +113,17 @@ def deploy_nexus(ctx, nexus_url, nexus_repo, staging_profile_id, sign_dir, sign_
     # as a workaround we have to at least give it 1 directory deep. Since most
     # LF projects are 'org' domain default is org but can be override with the
     # -r option.
-    nexus_url = nexus_url.rstrip('/')
+    nexus_url = nexus_url.rstrip("/")
     nexus_repo_url = "{}/content/repositories/{}/{}".format(nexus_url, nexus_repo, root_domain)
 
     if not sign_dir:
-        sign_dir = tempfile.mkdtemp(prefix='gpg-signatures.')
+        sign_dir = tempfile.mkdtemp(prefix="gpg-signatures.")
 
-    status = subprocess.call(['sign', 'nexus', '-d', sign_dir, '-m', mode, '-w', sign_with, nexus_repo_url])
+    status = subprocess.call(["sign", "nexus", "-d", sign_dir, "-m", mode, "-w", sign_with, nexus_repo_url])
     if status:
         sys.exit(status)
 
-    status = subprocess.call(['deploy', 'nexus-stage', nexus_url, staging_profile_id, sign_dir])
+    status = subprocess.call(["deploy", "nexus-stage", nexus_url, staging_profile_id, sign_dir])
     sys.exit(status)
 
 

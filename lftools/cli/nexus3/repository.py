@@ -10,7 +10,7 @@
 
 """Nexus3 REST API repository interface."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 import logging
 from pprint import pformat

@@ -10,7 +10,7 @@
 
 """Nexus3 REST API sub-interfaces."""
 
-__author__ = 'DW Talton'
+__author__ = "DW Talton"
 
 from .asset import *
 from .privilege import *

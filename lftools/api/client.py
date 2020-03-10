@@ -34,25 +34,17 @@ class RestApi(object):
             self.password = self.creds["password"]
             self.r = requests.Session()
             self.r.auth = (self.username, self.password)
-            self.r.headers.update({
-                "Content-Type": "application/json; charset=UTF-8",
-                "Accept": "application/json"
-            })
+            self.r.headers.update({"Content-Type": "application/json; charset=UTF-8", "Accept": "application/json"})
 
         if self.creds["authtype"] == "token":
             self.token = self.creds["token"]
             self.r = requests.Session()
-            self.r.headers.update(
-                {"Authorization": "Token {}".format(self.token)}
-            )
+            self.r.headers.update({"Authorization": "Token {}".format(self.token)})
             self.r.headers.update({"Content-Type": "application/json"})
 
     def _request(self, url, method, data=None, timeout=30):
         """Execute the request."""
-        resp = self.r.request(method,
-                              self.endpoint + url,
-                              data=data,
-                              timeout=timeout)
+        resp = self.r.request(method, self.endpoint + url, data=data, timeout=timeout)
 
         # Some massaging to make our gerrit python code work
         if resp.status_code == 409:
