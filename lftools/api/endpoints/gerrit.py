@@ -122,19 +122,22 @@ class Gerrit(client.RestApi):
 
         my_inline_file = """---
 - project:
+    name: {0}-project-view
+    project-name: {0}
+    views:
+      - project-view\n
     name: {0}-info
     project-name: {0}
-    build-node: centos7-builder-2c-1g
+    build-node: centos7-builder-1c-1g
     jobs:
       - gerrit-info-yaml-verify
-    project: {1}
-    branch: master\n""".format(
+    project: {1}\n""".format(
             gerrit_project_dashed, gerrit_project
         )
         my_inline_file_size = len(my_inline_file.encode("utf-8"))
         headers = {"Content-Type": "text/plain", "Content-length": "{}".format(my_inline_file_size)}
         self.r.headers.update(headers)
-        access_str = "changes/{0}/edit/jjb%2F{1}%2Finfo-{2}.yaml".format(
+        access_str = "changes/{0}/edit/jjb%2F{1}%2F{2}.yaml".format(
             changeid, gerrit_project_encoded, gerrit_project_dashed
         )
         payload = my_inline_file
