@@ -98,7 +98,7 @@ class Gerrit(client.RestApi):
 
         Example:
 
-        gerrit_fqdn gerrit.o-ran-sc.org
+        fqdn gerrit.o-ran-sc.org
         gerrit_project test/test1
         jjbrepo ci-mangement
         """
@@ -107,7 +107,7 @@ class Gerrit(client.RestApi):
         signed_off_by = config.get_setting(fqdn, "sob")
         gerrit_project_dashed = gerrit_project.replace("/", "-")
         gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
-        filename = "info-{}.yaml".format(gerrit_project_dashed)
+        filename = "{}.yaml".format(gerrit_project_dashed)
 
         if not reviewid:
             payload = self.create_change(filename, jjbrepo, issue_id, signed_off_by)
@@ -120,23 +120,30 @@ class Gerrit(client.RestApi):
         else:
             changeid = reviewid
 
+        if fqdn == "gerrit.o-ran-sc.org":
+            buildnode = "centos7-builder-1c-1g"
+        else:
+            buildnode = "centos7-builder-2c-1g"
+
         my_inline_file = """---
 - project:
-    name: {0}-info
+    name: {0}-project-view
     project-name: {0}
-    build-node: centos7-builder-2c-1g
-    jobs:
-      - gerrit-info-yaml-verify
+    views:
+      - project-view\n
+- project:
+    name: {0}-info
     project: {1}
-    branch: master\n""".format(
-            gerrit_project_dashed, gerrit_project
+    project-name: {0}
+    build-node: {2}
+    jobs:
+      - gerrit-info-yaml-verify\n""".format(
+            gerrit_project_dashed, gerrit_project, buildnode
         )
         my_inline_file_size = len(my_inline_file.encode("utf-8"))
         headers = {"Content-Type": "text/plain", "Content-length": "{}".format(my_inline_file_size)}
         self.r.headers.update(headers)
-        access_str = "changes/{0}/edit/jjb%2F{1}%2Finfo-{2}.yaml".format(
-            changeid, gerrit_project_encoded, gerrit_project_dashed
-        )
+        access_str = "changes/{0}/edit/jjb%2F{1}%2F{1}.yaml".format(changeid, gerrit_project_dashed)
         payload = my_inline_file
         log.info(access_str)
         result = self.put(access_str, data=payload)
@@ -233,7 +240,7 @@ class Gerrit(client.RestApi):
 
         Example:
 
-        gerrit_fqdn gerrit.o-ran-sc.org
+        fqdn gerrit.o-ran-sc.org
         gerrit_project test/test1
         issue_id: CIMAN-33
         """
