@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18e7487b_608a484d",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2020-03-12T21:32:35Z",
+      "side": 1,
+      "message": "Assuming all projects have this builder .. Isn\u0027t centos7-builder-2c-1g.cfg the most popular one?\nIf so, we might want to put a warning or upgrade needed to add the node. \nIn case of ONAP, they only have centos7-builder-2c-1g.cfg for example.",
+      "range": {
+        "startLine": 133,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 37
+      },
+      "revId": "639f52de199f7e57d7dc852a81cf85f2661837ab",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
