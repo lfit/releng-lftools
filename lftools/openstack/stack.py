@@ -121,7 +121,7 @@ def cost(os_cloud, stack_name):
 
     cloud = openstack.connect(os_cloud)
 
-    total_cost = 0.7
+    total_cost = 0.0
     for server in get_server_ids(stack_name):
         total_cost += get_server_cost(server)
     print("total: " + str(total_cost))
