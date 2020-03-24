@@ -50,9 +50,14 @@ def _compress_text(dir):
         paths.extend(glob.glob(search, recursive=True))
 
     for _file in paths:
-        with open(_file, "rb") as src, gzip.open("{}.gz".format(_file), "wb") as dest:
-            shutil.copyfileobj(src, dest)
-            os.remove(_file)
+        # glob may follow symlink paths that open can't find
+        if os.path.exists(_file):
+            log.debug("Compressing file {}".format(_file))
+            with open(_file, "rb") as src, gzip.open("{}.gz".format(_file), "wb") as dest:
+                shutil.copyfileobj(src, dest)
+                os.remove(_file)
+        else:
+            log.info("Could not open path from glob {}".format(_file))
 
     os.chdir(save_dir)
 
