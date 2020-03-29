@@ -33,6 +33,7 @@ from lftools.cli.nexus import nexus
 from lftools.cli.rtd import rtd
 from lftools.cli.schema import schema
 from lftools.cli.sign import sign
+from lftools.cli.utils import utils
 from lftools.cli.version import version
 
 log = logging.getLogger(__name__)
@@ -92,6 +93,7 @@ cli.add_command(rtd)
 cli.add_command(schema)
 cli.add_command(lfidapi)
 cli.add_command(sign)
+cli.add_command(utils)
 cli.add_command(version)
 
 try:
