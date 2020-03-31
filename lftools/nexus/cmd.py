@@ -31,6 +31,7 @@ log = logging.getLogger(__name__)
 
 def get_credentials(settings_file, url=None):
     """Return credentials for Nexus instantiation."""
+
     if settings_file:
         try:
             with open(settings_file, "r") as f:
@@ -112,7 +113,7 @@ def reorder_staged_repos(settings_file):
     _nexus.update_repo_group_details(repo_id, repo_update)
 
 
-def create_repos(config_file, settings_file):
+def create_repos(config_file, settings_file, url):
     """Create repositories as defined by configuration file.
 
     :arg str config: Configuration file containing repository definitions that
@@ -120,22 +121,34 @@ def create_repos(config_file, settings_file):
     :arg str settings: Settings file containing administrative credentials and
         information.
     """
+    if not settings_file:
+        from lftools import config
+
+        settings_url = url.replace("https://", "")
+        password = config.get_setting(settings_url, "password")
+        username = config.get_setting(settings_url, "username")
+
     with open(config_file, "r") as f:
         config = yaml.safe_load(f)
-    with open(settings_file, "r") as f:
-        settings = yaml.safe_load(f)
+    if settings_file:
+        with open(settings_file, "r") as f:
+            settings = yaml.safe_load(f)
 
     for setting in ["email_domain", "base_groupId", "repositories"]:
         if not setting in config:
             log.error("{} needs to be defined in {}".format(setting, config_file))
             sys.exit(1)
 
-    for setting in ["nexus", "user", "password"]:
-        if not setting in settings:
-            log.error("{} needs to be defined in {}".format(setting, settings_file))
-            sys.exit(1)
+    if settings_file:
+        for setting in ["nexus", "user", "password"]:
+            if not setting in settings:
+                log.error("{} needs to be defined in {}".format(setting, settings_file))
+                sys.exit(1)
 
-    _nexus = Nexus(settings["nexus"], settings["user"], settings["password"])
+    if settings_file:
+        _nexus = Nexus(settings["nexus"], settings["user"], settings["password"])
+    else:
+        _nexus = Nexus(url, username, password)
 
     def create_nexus_perms(name, targets, email, password, extra_privs=[]):
         # Create target
@@ -174,10 +187,10 @@ def create_repos(config_file, settings_file):
         except LookupError as e:
             _nexus.create_user(name, email, role_id, password, extra_privs)
 
-    def build_repo(repo, repoId, config, base_groupId, global_privs, email_domain):
+    def build_repo(repo, repoId, config, base_groupId, global_privs, email_domain, strict=True):
         log.info("-> Building for {}.{} in Nexus".format(base_groupId, repo))
         groupId = "{}.{}".format(base_groupId, repo)
-        target = util.create_repo_target_regex(groupId)
+        target = util.create_repo_target_regex(groupId, strict)
 
         if not global_privs and not "extra_privs" in config:
             extra_privs = []
@@ -204,10 +217,20 @@ def create_repos(config_file, settings_file):
         global_privs = config["global_privs"]
     else:
         global_privs = []
+    if "strict_url_regex" in config:
+        strict = config["strict_url_regex"]
+    else:
+        strict = True
 
     for repo in config["repositories"]:
         build_repo(
-            repo, repo, config["repositories"][repo], config["base_groupId"], global_privs, config["email_domain"]
+            repo,
+            repo,
+            config["repositories"][repo],
+            config["base_groupId"],
+            global_privs,
+            config["email_domain"],
+            strict,
         )
 
 
@@ -221,6 +244,7 @@ def create_roles(config_file, settings_file):
     """
     with open(config_file, "r") as f:
         config = yaml.safe_load(f)
+
     with open(settings_file, "r") as f:
         settings = yaml.safe_load(f)
 
