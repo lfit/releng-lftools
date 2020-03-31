@@ -37,3 +37,28 @@ def search_user(ctx, username):
     r = ctx.obj["nexus3"]
     data = r.list_user(username)
     log.info(tabulate(data, headers=["User ID", "First Name", "Last Name", "Email Address", "Status", "Roles",],))
+
+
+@user.command(name="create")
+@click.argument("username")
+@click.argument("first_name")
+@click.argument("last_name")
+@click.argument("email_address")
+@click.argument("roles")
+@click.argument("password", required=False)
+@click.pass_context
+def user_create(ctx, username, first_name, last_name, email_address, roles, password):
+    """Create a new user account."""
+    r = ctx.obj["nexus3"]
+    data = r.create_user(username, first_name, last_name, email_address, roles, password)
+    log.info(data)
+
+
+@user.command(name="delete")
+@click.argument("username")
+@click.pass_context
+def user_delete(ctx, username):
+    """Delete a user account."""
+    r = ctx.obj["nexus3"]
+    data = r.delete_user(username)
+    log.info(data)

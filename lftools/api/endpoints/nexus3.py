@@ -16,6 +16,7 @@ import json
 import logging
 
 from lftools import config
+from lftools import helpers
 import lftools.api.client as client
 
 log = logging.getLogger(__name__)
@@ -103,6 +104,40 @@ class Nexus3(client.RestApi):
         else:
             return "Failed to create tag {}".format(name)
 
+    def create_user(self, username, first_name, last_name, email_address, roles, password=None):
+        """Create a new user.
+
+        @param username:
+        @param first_name:
+        @param last_name:
+        @param email:
+        @param status:
+        @param roles:
+        @param password:
+        """
+        list_of_roles = roles.split(",")
+        data = {
+            "userId": username,
+            "firstName": first_name,
+            "lastName": last_name,
+            "emailAddress": email_address,
+            "status": "active",
+            "roles": list_of_roles,
+        }
+
+        if password:
+            data["password"] = password
+        else:
+            data["password"] = helpers.generate_password()
+
+        json_data = json.dumps(data)
+        result = self.post("beta/security/users", data=json_data)[0]
+
+        if result.status_code == 200:
+            return "User {} successfully created with password {}".format(username, data["password"])
+        else:
+            log.error("Failed to create user {}".format(username))
+
     def delete_script(self, name):
         """Delete a script from the server.
 
@@ -126,6 +161,19 @@ class Nexus3(client.RestApi):
             return "Tag {} successfully deleted.".format(name)
         else:
             return "Failed to delete tag {}.".format(name)
+
+    def delete_user(self, username):
+        """Delete a user.
+
+        @param username:
+        """
+        result = self.delete("beta/security/users/{}".format(username))
+
+        if hasattr(result, "status_code"):
+            if result.status_code == 204:
+                return "Successfully deleted user {}".format(username)
+        else:
+            return "Failed to delete user {} with error: {}".format(username, result[1])
 
     def list_assets(self, repository, **kwargs):
         """List the assets of a given repo.
