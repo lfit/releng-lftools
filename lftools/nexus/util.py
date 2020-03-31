@@ -19,4 +19,7 @@ log = logging.getLogger(__name__)
 
 def create_repo_target_regex(group_id):
     """Create a repo_target for Nexus use."""
-    return "^/{}/.*".format(group_id.replace(".", "[/\.]"))
+    repotarget = "^/{}/.*".format(group_id.replace(".", "[/\.]"))
+    # Replace - with regex
+    return repotarget.replace("-", "[/\.]")
+
