@@ -1,0 +1,11 @@
+---
+fixes:
+  - |
+    project names with many dashes such as
+    integration-simulators-pnf-simulator
+    should allow . or - in their pom.xml
+    fix the regex to replace - with [/\.]
+    when creating a new nexus2 Repository target.
+
+    This is enabled by setting strict_url_regex=False in config file.
+

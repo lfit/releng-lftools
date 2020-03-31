@@ -52,13 +52,29 @@ def create(ctx):
 
 @create.command()
 @click.option(
-    "-c", "--config", type=str, required=True, help="Repo config file for how the Nexus repository should be created."
+    "-c",
+    "--configfile",
+    type=str,
+    required=True,
+    help="Repo config file for how the Nexus repository should be created.",
 )
-@click.option("-s", "--settings", type=str, required=True, help="Config file containing administrative settings.")
+@click.option(
+    "-s", "--settings", type=str, required=False, help="Optional config file containing administrative settings."
+)
+@click.option(
+    "-u",
+    "--url",
+    type=str,
+    required=False,
+    help=(
+        "Nexus server URL. In the format https:// Can also be set as {} in the environment."
+        "This will override any URL set in settings.yaml."
+    ).format(NEXUS_URL_ENV),
+)
 @click.pass_context
-def repo(ctx, config, settings):
+def repo(ctx, configfile, url, settings=False):
     """Create a Nexus repository as defined by a repo-config.yaml file."""
-    nexuscmd.create_repos(config, settings)
+    nexuscmd.create_repos(configfile, settings, url)
 
 
 @create.command()
