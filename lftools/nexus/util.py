@@ -17,6 +17,18 @@ import logging
 log = logging.getLogger(__name__)
 
 
-def create_repo_target_regex(group_id):
-    """Create a repo_target for Nexus use."""
-    return "^/{}/.*".format(group_id.replace(".", "[/\.]"))
+def create_repo_target_regex(group_id, strict=True):
+    """
+    Create a repo_target for Nexus use.
+
+    Example: group_id = "org.o-ran-sc.org"
+    Strict = False : --> "/org/o/ran/sc/org
+    Strict = True  : --> "/org/o-ran-sc/org/"
+    """
+
+    repotarget = "^/{}/.*".format(group_id.replace(".", "[/\.]"))
+    if strict:
+        return repotarget
+    else:
+        # Replace - with regex
+        return repotarget.replace("-", "[/\.]")

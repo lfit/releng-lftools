@@ -174,10 +174,10 @@ def create_repos(config_file, settings_file):
         except LookupError as e:
             _nexus.create_user(name, email, role_id, password, extra_privs)
 
-    def build_repo(repo, repoId, config, base_groupId, global_privs, email_domain):
+    def build_repo(repo, repoId, config, base_groupId, global_privs, email_domain, strict=True):
         log.info("-> Building for {}.{} in Nexus".format(base_groupId, repo))
         groupId = "{}.{}".format(base_groupId, repo)
-        target = util.create_repo_target_regex(groupId)
+        target = util.create_repo_target_regex(groupId, strict)
 
         if not global_privs and not "extra_privs" in config:
             extra_privs = []
@@ -204,10 +204,20 @@ def create_repos(config_file, settings_file):
         global_privs = config["global_privs"]
     else:
         global_privs = []
+    if "strict_url_regex" in config:
+        strict = config["strict_url_regex"]
+    else:
+        strict = True
 
     for repo in config["repositories"]:
         build_repo(
-            repo, repo, config["repositories"][repo], config["base_groupId"], global_privs, config["email_domain"]
+            repo,
+            repo,
+            config["repositories"][repo],
+            config["base_groupId"],
+            global_privs,
+            config["email_domain"],
+            strict,
         )
 
 

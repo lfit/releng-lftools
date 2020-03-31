@@ -53,26 +53,59 @@ def test_create_roles(datafiles, responses, nexus2_obj_create):
 def test_create_repo_target_regex():
     """Test create_repo_target_regex() command."""
 
-    odlparent = util.create_repo_target_regex("org.opendaylight.odlparent")
-    odlparent_regex = re.compile(odlparent)
-    assert odlparent_regex.match(
-        "/org/opendaylight/odlparent/odlparent" "/4.0.0-SNAPSHOT/odlparent-4.0.0-20180424.132124-69.pom"
-    )
+    test_url_3_par = [
+        [False, "org.o-ran-sc.org", "/org/o/ran/sc/org/"],
+        [
+            False,
+            "org.opendaylight.odlparent",
+            "/org/opendaylight/odlparent/odlparent/4.0.0-SNAPSHOT/odlparent-4.0.0-20180424.132124-69.pom",
+        ],
+        [
+            False,
+            "org.opendaylight.honeycomb.vbd",
+            "/org/opendaylight/honeycomb/vbd/odl-vbd/1.4.0-SNAPSHOT/odl-vbd-1.4.0-20180422.024456-12-features.xml",
+        ],
+        [False, "org.openecomp.mso", "/org/openecomp/mso/1.1.0-SNAPSHOT/mso-1.1.0-20170606.171056-26.pom"],
+        [False, "org.onap.dcaegen2", "/org/onap.dcaegen2/1.2.0-SNAPSHOT/dcaegen2-1.2.0-20180403.182529-10.pom"],
+        [False, "io.fd.vpp", "/io/fd/vpp/jvpp/16.06/jvpp-16.06.jar"],
+        [True, "org.o-ran-sc.org", "/org/o-ran-sc/org/"],
+        [True, "org.o-ran-sc.org", "/org/o-ran-sc/org/ric-plt-lib-rmr"],
+        [
+            True,
+            "org.opendaylight.odlparent",
+            "/org/opendaylight/odlparent/odlparent/4.0.0-SNAPSHOT/odlparent-4.0.0-20180424.132124-69.pom",
+        ],
+        [
+            True,
+            "org.opendaylight.honeycomb.vbd",
+            "/org/opendaylight/honeycomb/vbd/odl-vbd/1.4.0-SNAPSHOT/odl-vbd-1.4.0-20180422.024456-12-features.xml",
+        ],
+        [True, "org.openecomp.mso", "/org/openecomp/mso/1.1.0-SNAPSHOT/mso-1.1.0-20170606.171056-26.pom"],
+        [True, "org.onap.dcaegen2", "/org/onap/dcaegen2/1.2.0-SNAPSHOT/dcaegen2-1.2.0-20180403.182529-10.pom"],
+        [True, "io.fd.vpp", "/io/fd/vpp/jvpp/16.06/jvpp-16.06.jar"],
+    ]
 
-    honeycomb = util.create_repo_target_regex("org.opendaylight.honeycomb.vbd")
-    honeycomb_regex = re.compile(honeycomb)
-    assert honeycomb_regex.match(
-        "/org/opendaylight/honeycomb/vbd/odl-vbd" "/1.4.0-SNAPSHOT/odl-vbd-1.4.0-20180422.024456-12-features.xml"
-    )
+    for url in test_url_3_par:
+        a = util.create_repo_target_regex(url[1], url[0])
+        a_regex = re.compile(a)
+        assert a_regex.match(url[2]) != None
 
-    mso = util.create_repo_target_regex("org.openecomp.mso")
-    mso_regex = re.compile(mso)
-    assert mso_regex.match("/org/openecomp/mso/" "1.1.0-SNAPSHOT/mso-1.1.0-20170606.171056-26.pom")
+    test_url_2_par = [
+        ["org.o-ran-sc.org", "/org/o-ran-sc/org/"],
+        [
+            "org.opendaylight.odlparent",
+            "/org/opendaylight/odlparent/odlparent/4.0.0-SNAPSHOT/odlparent-4.0.0-20180424.132124-69.pom",
+        ],
+        [
+            "org.opendaylight.honeycomb.vbd",
+            "/org/opendaylight/honeycomb/vbd/odl-vbd/1.4.0-SNAPSHOT/odl-vbd-1.4.0-20180422.024456-12-features.xml",
+        ],
+        ["org.openecomp.mso", "/org/openecomp/mso/1.1.0-SNAPSHOT/mso-1.1.0-20170606.171056-26.pom"],
+        ["org.onap.dcaegen2", "/org/onap/dcaegen2/1.2.0-SNAPSHOT/dcaegen2-1.2.0-20180403.182529-10.pom"],
+        ["io.fd.vpp", "/io/fd/vpp/jvpp/16.06/jvpp-16.06.jar"],
+    ]
 
-    dcaegen2 = util.create_repo_target_regex("org.onap.dcaegen2")
-    dcaegen2_regex = re.compile(dcaegen2)
-    assert dcaegen2_regex.match("/org/onap/dcaegen2/" "1.2.0-SNAPSHOT/dcaegen2-1.2.0-20180403.182529-10.pom")
-
-    vpp = util.create_repo_target_regex("io.fd.vpp")
-    vpp_regex = re.compile(vpp)
-    assert vpp_regex.match("/io/fd/vpp/jvpp/16.06/jvpp-16.06.jar")
+    for url in test_url_2_par:
+        a = util.create_repo_target_regex(url[0])
+        a_regex = re.compile(a)
+        assert a_regex.match(url[1]) != None
