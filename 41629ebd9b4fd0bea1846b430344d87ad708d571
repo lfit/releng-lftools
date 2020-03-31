@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e68493af_32b309a7",
+        "filename": "lftools/nexus/util.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 114
+      },
+      "writtenOn": "2020-03-31T19:38:38Z",
+      "side": 1,
+      "message": "I think it would really help to show two examples of group_id values passed to here, and the repo targets that are acceptable.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "41629ebd9b4fd0bea1846b430344d87ad708d571",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
