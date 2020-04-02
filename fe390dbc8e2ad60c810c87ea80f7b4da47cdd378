@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "47cf5f4d_2d836ef2",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-04-02T18:00:15Z",
+      "side": 1,
+      "message": "the default is false so I can do an \u0027if settings\u0027",
+      "parentUuid": "fef9f8f6_cafafffe",
+      "range": {
+        "startLine": 75,
+        "startChar": 31,
+        "endLine": 75,
+        "endChar": 45
+      },
+      "revId": "fe390dbc8e2ad60c810c87ea80f7b4da47cdd378",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dc6410a0_f44c2cef",
         "filename": "lftools/nexus/cmd.py",
         "patchSetId": 4
@@ -76,6 +100,30 @@
       "writtenOn": "2020-04-02T14:38:29Z",
       "side": 1,
       "message": "Not sure how this works, with default value False, but assuming otherwise it is a string pointing to a file name.",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 8
+      },
+      "revId": "fe390dbc8e2ad60c810c87ea80f7b4da47cdd378",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65a665f0_00e2c54d",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-04-02T18:00:15Z",
+      "side": 1,
+      "message": "yeah if you pass a settings file from click then its not False.",
+      "parentUuid": "682bd9bc_2b78fcb6",
       "range": {
         "startLine": 134,
         "startChar": 0,
