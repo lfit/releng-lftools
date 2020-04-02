@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6b3efe2_ff7a02a8",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-02T14:38:29Z",
+      "side": 1,
+      "message": "Has to be of format https://....  ?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 1
+      },
+      "revId": "fe390dbc8e2ad60c810c87ea80f7b4da47cdd378",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fef9f8f6_cafafffe",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-02T14:38:29Z",
+      "side": 1,
+      "message": "Is settings a file name, or a boolean?",
+      "range": {
+        "startLine": 75,
+        "startChar": 31,
+        "endLine": 75,
+        "endChar": 45
+      },
+      "revId": "fe390dbc8e2ad60c810c87ea80f7b4da47cdd378",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc6410a0_f44c2cef",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-02T14:38:29Z",
+      "side": 1,
+      "message": "Missing describing url",
+      "revId": "fe390dbc8e2ad60c810c87ea80f7b4da47cdd378",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "682bd9bc_2b78fcb6",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-02T14:38:29Z",
+      "side": 1,
+      "message": "Not sure how this works, with default value False, but assuming otherwise it is a string pointing to a file name.",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 8
+      },
+      "revId": "fe390dbc8e2ad60c810c87ea80f7b4da47cdd378",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
