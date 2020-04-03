@@ -34,6 +34,24 @@
       "revId": "dd612b1cb63e27016580b25a6d179f420e34a5fb",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc080107_8679aa66",
+        "filename": "lftools/cli/utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-03T23:22:18Z",
+      "side": 1,
+      "message": "Actually, I realized it\u0027s weird to set it here since it\u0027s set in the actual method itself too. I think I had originally set it here because it was complaining about setting it to None. Either way, fixed with this new patchset.",
+      "parentUuid": "8491b802_dff00735",
+      "revId": "dd612b1cb63e27016580b25a6d179f420e34a5fb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
