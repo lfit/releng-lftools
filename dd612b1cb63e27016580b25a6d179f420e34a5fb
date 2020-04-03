@@ -16,6 +16,24 @@
       "revId": "dd612b1cb63e27016580b25a6d179f420e34a5fb",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8491b802_dff00735",
+        "filename": "lftools/cli/utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-03T23:10:34Z",
+      "side": 1,
+      "message": "It could (actually up in the click.argument, but following your comment yes, it can be moved to the arg level). Probably cleaner that way too.",
+      "parentUuid": "5d617d47_07add867",
+      "revId": "dd612b1cb63e27016580b25a6d179f420e34a5fb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
