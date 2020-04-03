@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d617d47_07add867",
+        "filename": "lftools/cli/utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 266
+      },
+      "writtenOn": "2020-04-03T22:53:58Z",
+      "side": 1,
+      "message": "could just length\u003d12 here instead?",
+      "revId": "dd612b1cb63e27016580b25a6d179f420e34a5fb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
