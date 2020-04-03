@@ -255,7 +255,7 @@ class Nexus2(client.RestApi):
 
         return user_list
 
-    def user_create(self, username, firstname, lastname, email, roles):
+    def user_create(self, username, firstname, lastname, email, roles, password=None):
         """Add a new user.
 
         :param username: the username
@@ -275,6 +275,9 @@ class Nexus2(client.RestApi):
                 "roles": role_list,
             }
         }
+
+        if password:
+            data["data"]["password"] = password
 
         json_data = json.dumps(data)
         result = self.post("service/local/users", data=json_data)

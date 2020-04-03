@@ -42,11 +42,12 @@ def user_list(ctx):
 @click.argument("lastname")
 @click.argument("email")
 @click.argument("roles")
+@click.argument("password", required=False)
 @click.pass_context
-def user_create(ctx, username, firstname, lastname, email, roles):
+def user_create(ctx, username, firstname, lastname, email, roles, password):
     """Add a new user."""
     r = ctx.obj["nexus2"]
-    data = r.user_create(username, firstname, lastname, email, roles)
+    data = r.user_create(username, firstname, lastname, email, roles, password)
     log.info(data)
 
 
