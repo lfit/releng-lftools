@@ -19,6 +19,8 @@ import requests
 from lftools import cli
 import lftools.nexus.release_docker_hub as rdh
 
+FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtures",)
+
 
 def test_remove_http_from_url():
     """Test _remove_http_from_url."""
@@ -58,9 +60,10 @@ def test_tag_class_valid_tags():
     """Test TagClass"""
     org = "onap"
     repo = "base/sdc-sanity"
+    repo_from_file = False
     test_tags = ["1.2.3", "1.22.333", "111.22.3", "10.11.12", "1.0.3"]
     rdh.initialize(org)
-    tags = rdh.TagClass(org, repo)
+    tags = rdh.TagClass(org, repo, repo_from_file)
     for tag in test_tags:
         tags.add_tag(tag)
     assert len(tags.valid) == len(test_tags)
@@ -71,6 +74,8 @@ def test_tag_class_invalid_tags():
     """Test TagClass"""
     org = "onap"
     repo = "base/sdc-sanity"
+
+    repo_from_file = False
     test_tags = [
         "v1.2.3",
         "1.22",
@@ -89,7 +94,7 @@ def test_tag_class_invalid_tags():
         "1.1.2-STAGING-20181231T234559Z",
     ]
     rdh.initialize(org)
-    tags = rdh.TagClass(org, repo)
+    tags = rdh.TagClass(org, repo, repo_from_file)
     for tag in test_tags:
         tags.add_tag(tag)
     assert len(tags.invalid) == len(test_tags)
@@ -100,8 +105,9 @@ def test_tag_class_repository_exist():
     """Test TagClass"""
     org = "onap"
     repo = "base/sdc-sanity"
+    repo_from_file = False
     rdh.initialize(org)
-    tags = rdh.TagClass(org, repo)
+    tags = rdh.TagClass(org, repo, repo_from_file)
     assert tags.repository_exist == True
 
 
@@ -109,13 +115,14 @@ def test_nexus_tag_class(responses):
     """Test NexusTagClass"""
     org = "onap"
     repo = "base/sdc-sanity"
+    repo_from_file = False
     url = "https://nexus3.onap.org:10002/v2/onap/base/sdc-sanity/tags/list"
     answer = '{"name":"onap/base_sdc-sanity","tags":["latest","1.3.0","1.3.1","1.4.0","1.4.1","v1.0.0"]}'
     answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1"]
     answer_invalid_tags = ["latest", "v1.0.0"]
     responses.add(responses.GET, url, body=answer, status=200)
     rdh.initialize(org)
-    test_tags = rdh.NexusTagClass(org, repo)
+    test_tags = rdh.NexusTagClass(org, repo, repo_from_file)
     for tag in answer_valid_tags:
         assert tag in test_tags.valid
     for tag in answer_invalid_tags:
@@ -128,6 +135,7 @@ def test_docker_tag_class(responses):
     """Test DockerTagClass"""
     org = "onap"
     repo = "base-sdc-sanity"
+    repo_from_file = False
     url = "https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags"
     answer = """[{"layer": "", "name": "latest"},
         {"layer": "", "name": "1.3.0"},
@@ -140,7 +148,7 @@ def test_docker_tag_class(responses):
     answer_invalid_tags = ["latest", "v1.0.0"]
     responses.add(responses.GET, url, body=answer, status=200)
     rdh.initialize(org)
-    test_tags = rdh.DockerTagClass(org, repo)
+    test_tags = rdh.DockerTagClass(org, repo, repo_from_file)
     for tag in answer_valid_tags:
         assert tag in test_tags.valid
     for tag in answer_invalid_tags:
@@ -237,7 +245,7 @@ class TestProjectClass:
             "lftools.nexus.release_docker_hub.ProjectClass._docker_cleanup", side_effect=self.mocked_docker_cleanup
         )
 
-        project = ("onap", "base/sdc-sanity")
+        project = ["onap", "base/sdc-sanity", ""]
 
         nexus_url = "https://nexus3.onap.org:10002/v2/onap/base/sdc-sanity/tags/list"
         nexus_answer = '{"name":"onap/base_sdc-sanity","tags":["1.3.0","1.3.1","1.4.0","1.4.1","v1.0.0"]}'
@@ -290,7 +298,7 @@ class TestProjectClass:
             "lftools.nexus.release_docker_hub.ProjectClass._docker_cleanup", side_effect=self.mocked_docker_cleanup
         )
 
-        project = ("onap", "base/sdc-sanity")
+        project = ["onap", "base/sdc-sanity", ""]
 
         nexus_url = "https://nexus3.onap.org:10002/v2/onap/base/sdc-sanity/tags/list"
         nexus_answer = '{"name":"onap/base_sdc-sanity","tags":["1.3.0","1.3.1","1.4.0","v1.0.0"]}'
@@ -343,7 +351,7 @@ class TestProjectClass:
             "lftools.nexus.release_docker_hub.ProjectClass._docker_cleanup", side_effect=self.mocked_docker_cleanup
         )
 
-        project = ("onap", "base/sdc-sanity")
+        project = ["onap", "base/sdc-sanity", ""]
         nexus_url = "https://nexus3.onap.org:10002/v2/onap/base/sdc-sanity/tags/list"
         nexus_answer = '{"name":"onap/base_sdc-sanity","tags":["1.3.0","1.3.1","1.4.0","v1.0.0"]}'
         docker_url = "https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags"
@@ -413,6 +421,7 @@ class TestProjectClass:
         assert self.counter.cleanup == 90
 
 
+@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "nexus"),)
 class TestFetchNexus3Catalog:
 
     url = "https://nexus3.onap.org:10002/v2/_catalog"
@@ -458,6 +467,18 @@ class TestFetchNexus3Catalog:
         rdh.get_nexus3_catalog("onap", "clamp-dashboard-logstash", True)
         assert len(rdh.NexusCatalog) == 1
         assert rdh.NexusCatalog[0][1] == "clamp-dashboard-logstash"
+
+    def test_get_all_onap_and_specify_repo_file(self, datafiles):
+        repo_names_file = os.path.join(str(datafiles), "releasedockerhub_reponamelist1.txt")
+        rdh.NexusCatalog = []
+        rdh.initialize("onap")
+        responses.add(responses.GET, self.url, body=self.answer, status=200)
+        rdh.get_nexus3_catalog("onap", repo_names_file, False, True)
+        assert len(rdh.NexusCatalog) == 4
+        assert rdh.NexusCatalog[0][1] == "dcae_dmaapbc"
+        assert rdh.NexusCatalog[1][1] == "onap/aaf/aaf_core"
+        assert rdh.NexusCatalog[2][1] == "onap/clamp"
+        assert rdh.NexusCatalog[3][1] == "onap/vfc/nfvo/svnfm/nokiav2"
 
 
 class TestFetchAllTagsAndUpdate:

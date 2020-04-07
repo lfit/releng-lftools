@@ -204,11 +204,21 @@ def release(ctx, repos, verify, server):
     default=False,
     help="Display a progress bar for the time consuming jobs.",
 )
+@click.option(
+    "-f",
+    "--repofile",
+    is_flag=True,
+    default=False,
+    required=False,
+    help="Repo Name is a file name, which contains one repo per row."
+    " Syntax : 'org', 'repo', 'dockername' "
+    "\bSample : 'onap', 'aaf/aaf_service', 'aaf-aaf_service'",
+)
 @click.pass_context
-def copy_from_nexus3_to_dockerhub(ctx, org, repo, exact, summary, verbose, copy, progbar):
+def copy_from_nexus3_to_dockerhub(ctx, org, repo, exact, summary, verbose, copy, progbar, repofile):
     """Find missing repos in Docker Hub, Copy from Nexus3.
 
     Will by default list all missing repos in Docker Hub, compared to Nexus3.
     If -c (--copy) is provided, it will copy the repos from Nexus3 to Docker Hub.
     """
-    rdh.start_point(org, repo, exact, summary, verbose, copy, progbar)
+    rdh.start_point(org, repo, exact, summary, verbose, copy, progbar, repofile)
