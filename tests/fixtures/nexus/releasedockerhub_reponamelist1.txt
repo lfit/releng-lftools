@@ -1,0 +1,4 @@
+dcae_dmaapbc
+onap/aaf/aaf_core
+onap/clamp
+onap/vfc/nfvo/svnfm/nokiav2
