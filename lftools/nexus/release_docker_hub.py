@@ -195,6 +195,7 @@ class NexusTagClass(TagClass):
         retries = 0
         while retries < 20:
             try:
+                ## FIXME
                 r = _request_get(NEXUS3_BASE + "/v2/" + org_name + "/" + repo_name + "/tags/list")
                 break
             except requests.HTTPError as excinfo:
@@ -258,6 +259,7 @@ class DockerTagClass(TagClass):
         retries = 0
         while retries < 20:
             try:
+                ## FIXME
                 r = _request_get(self._docker_base + "/" + org_name + "/" + repo_name + "/tags")
                 break
             except requests.HTTPError as excinfo:
@@ -451,7 +453,30 @@ class ProjectClass:
                         raise requests.HTTPError(retry_text)
 
 
-def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False):
+def repo_is_in_file(check_repo="", repo_file_name=""):
+    """Function to verify of a repo name exists in a file name.
+
+    The file contains rows of repo names to be included.
+        acumos-portal-fe
+        acumos/acumos-axure-client
+
+    Function will return True if a match is found
+
+    """
+    with open("{}".format(repo_file_name)) as f:
+        content = str(f.readlines())
+    log.info("Content of repo file")
+    log.info(content)
+    for row in content:
+        log.info("Comparing {} with {} from file".format(check_repo, row))
+        if check_repo == row:
+            log.info("Found a match")
+            return True
+    log.info("NO match found")
+    return False
+
+
+def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False, repo_is_filename=False):
     """Main function to collect all Nexus3 repositories.
 
     This function will collect the Nexus catalog for all projects starting with
@@ -477,6 +502,7 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False):
                         'eleo' : this pattern finds all repositories with 'eleo'
                                  in its name. --> chameleon
         exact_match  : If specified, find_pattern is a unique repo name
+        repo_is_filename: If specified, find_pattern is a filename, which contains a repo name per row
 
     """
     global NexusCatalog
@@ -509,21 +535,24 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False):
         TmpCatalog = raw_catalog[1].split(",")
         for word in TmpCatalog:
             # Remove all projects that do not start with org_name
-            if word.startswith(org_name):
-                use_this_repo = False
-                # Remove org_name/ from word, so we only get repository left
-                project = (org_name, word[len(org_name) + 1 :])
-                # If a specific search string has been specified, search for it
-                # Empty string will match all words
-                if word.find(find_pattern) >= 0 and not exact_match:
-                    use_this_repo = True
-                if exact_match and project[1] == find_pattern:
-                    use_this_repo = True
-                if use_this_repo:
-                    NexusCatalog.append(project)
-                    log.debug("Added project {} to my list".format(project[1]))
-                    if len(project[1]) > project_max_len_chars:
-                        project_max_len_chars = len(project[1])
+            use_this_repo = False
+            if repo_is_filename and repo_is_in_file(word, find_pattern):
+                use_this_repo = True
+            else:
+                if word.startswith(org_name):
+                    # Remove org_name/ from word, so we only get repository left
+                    project = (org_name, word[len(org_name) + 1 :])
+                    # If a specific search string has been specified, search for it
+                    # Empty string will match all words
+                    if word.find(find_pattern) >= 0 and not exact_match:
+                        use_this_repo = True
+                    if exact_match and project[1] == find_pattern:
+                        use_this_repo = True
+            if use_this_repo:
+                NexusCatalog.append(project)
+                log.debug("Added project {} to my list".format(project[1]))
+                if len(project[1]) > project_max_len_chars:
+                    project_max_len_chars = len(project[1])
         log.debug(
             "# TmpCatalog {}, NexusCatalog {}, DIFF = {}".format(
                 len(TmpCatalog), len(NexusCatalog), len(TmpCatalog) - len(NexusCatalog)
@@ -742,14 +771,23 @@ def print_nbr_tags_to_copy():
     log.info("Summary: {} tags that should be copied from Nexus3 to Docker Hub.".format(_tot_tags))
 
 
-def start_point(org_name, find_pattern="", exact_match=False, summary=False, verbose=False, copy=False, progbar=False):
+def start_point(
+    org_name,
+    find_pattern="",
+    exact_match=False,
+    summary=False,
+    verbose=False,
+    copy=False,
+    progbar=False,
+    repofile=False,
+):
     """Main function."""
     # Verify find_pattern and specified_repo are not both used.
     if len(find_pattern) == 0 and exact_match:
         log.error("You need to provide a Pattern to go with the --exact flag")
         return
     initialize(org_name)
-    if not get_nexus3_catalog(org_name, find_pattern, exact_match):
+    if not get_nexus3_catalog(org_name, find_pattern, exact_match, repofile):
         log.info("Could not get any catalog from Nexus3 with org = {}".format(org_name))
         return
 
