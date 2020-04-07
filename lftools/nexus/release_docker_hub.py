@@ -126,15 +126,17 @@ class TagClass:
     Parameter:
         org_name  : The organization part of the repository. (onap)
         repo_name : The Nexus3 repository name (aaf/aaf_service)
+        repo_from_file : Repository name was taken from input file.
     """
 
-    def __init__(self, org_name, repo_name):
+    def __init__(self, org_name, repo_name, repo_from_file):
         """Initialize this class."""
         self.valid = []
         self.invalid = []
         self.repository_exist = True
         self.org = org_name
         self.repo = repo_name
+        self.repofromfile = repo_from_file
 
     def _validate_tag(self, check_tag):
         """Local helper function to simplify validity check of version number.
@@ -171,6 +173,8 @@ class NexusTagClass(TagClass):
         curl -s https://nexus3.onap.org:10002/v2/onap/aaf/aaf_service/tags/list
     which gives you the following output:
         {"name":"onap/aaf/aaf_service","tags":["2.1.1","2.1.3","2.1.4","2.1.5","2.1.6","2.1.7","2.1.8"]}
+    # https://nexus3.edgexfoundry.org/repository/docker.staging/v2/docker-device-rest-go/tags/list
+    # https://nexus3.edgexfoundry.org:10002/v2/docker-device-rest-go/tags/list
 
     When we fetch the tags from the Nexus3 repository url, they are returned like
         {"name":"onap/aaf/aaf_service","tags":["2.1.1","2.1.3","2.1.4","2.1.5"]}
@@ -181,6 +185,7 @@ class NexusTagClass(TagClass):
     Parameter:
         org_name  : The organization part of the repository. (onap)
         repo_name : The Nexus3 repository name (aaf/aaf_service)
+        repo_from_file : The reponame came from an input file.
 
     Result:
         Will fetch all tags from the Nexus3 repository URL, and store each tag
@@ -188,14 +193,18 @@ class NexusTagClass(TagClass):
         If no repository is found, self.repository_exist will be set to False.
     """
 
-    def __init__(self, org_name, repo_name):
+    def __init__(self, org_name, repo_name, repo_from_file):
         """Initialize this class."""
-        TagClass.__init__(self, org_name, repo_name)
-        log.debug("Fetching nexus3 tags for {}/{}".format(org_name, repo_name))
+        TagClass.__init__(self, org_name, repo_name, repo_from_file)
         retries = 0
+        # Default to <org>/<repo>
+        org_repo_name = "{}/{}".format(org_name, repo_name)
+        if repo_from_file:
+            org_repo_name = "{}".format(repo_name)
+        log.debug("Fetching nexus3 tags for {}".format(org_repo_name))
         while retries < 20:
             try:
-                r = _request_get(NEXUS3_BASE + "/v2/" + org_name + "/" + repo_name + "/tags/list")
+                r = _request_get(NEXUS3_BASE + "/v2/" + org_repo_name + "/tags/list")
                 break
             except requests.HTTPError as excinfo:
                 log.debug("Fetching Nexus3 tags. {}".format(excinfo))
@@ -216,7 +225,7 @@ class NexusTagClass(TagClass):
             if len(TmpSplittedTags) > 0:
                 for tag_2_add in TmpSplittedTags:
                     self.add_tag(tag_2_add)
-                    log.debug("Nexus {}/{} has tag {}".format(org_name, repo_name, tag_2_add))
+                    log.debug("Nexus {} has tag {}".format(org_repo_name, tag_2_add))
         else:
             self.repository_exist = False
 
@@ -242,6 +251,7 @@ class DockerTagClass(TagClass):
     Parameter:
         org_name  : The organization part of the repository. (onap)
         repo_name : The Docker Hub repository name (aaf-aaf_service)
+        repo_from_file : The reponame came from an input file.
 
     Result:
         Will fetch all tags from the Docker Repository URL, and store each tag
@@ -251,14 +261,18 @@ class DockerTagClass(TagClass):
 
     _docker_base = "https://registry.hub.docker.com/v1/repositories"
 
-    def __init__(self, org_name, repo_name):
+    def __init__(self, org_name, repo_name, repo_from_file):
         """Initialize this class."""
-        TagClass.__init__(self, org_name, repo_name)
-        log.debug("Fetching docker tags for {}/{}".format(org_name, repo_name))
+        TagClass.__init__(self, org_name, repo_name, repo_from_file)
+        if repo_from_file:
+            combined_repo_name = repo_name
+        else:
+            combined_repo_name = "{}/{}".format(org_name, repo_name)
+        log.debug("Fetching docker tags for {}".format(combined_repo_name))
         retries = 0
         while retries < 20:
             try:
-                r = _request_get(self._docker_base + "/" + org_name + "/" + repo_name + "/tags")
+                r = _request_get(self._docker_base + "/" + combined_repo_name + "/tags")
                 break
             except requests.HTTPError as excinfo:
                 log.debug("Fetching Docker Hub tags. {}".format(excinfo))
@@ -281,7 +295,7 @@ class DockerTagClass(TagClass):
                     tmp_tuple = tuple.split(":")
                     if len(tmp_tuple) > 1:
                         self.add_tag(tmp_tuple[2].strip())
-                        log.debug("Docker {}/{} has tag {}".format(org_name, repo_name, tmp_tuple[2]))
+                        log.debug("Docker {} has tag {}".format(combined_repo_name, tmp_tuple[2]))
         else:
             self.repository_exist = False
 
@@ -293,8 +307,8 @@ class ProjectClass:
     Nexus3 to Docker Hub.
 
     Parameters:
-        nexus_proj : Tuple with 'org' and 'repo'
-            ('onap', 'aaf/aaf_service')
+        nexus_proj :  list with ['org', 'repo', 'dockername']
+            ['onap', 'aaf/aaf_service', 'aaf-aaf_service']
 
     Upon class Initialize the following happens.
       * Set Nexus and Docker repository names.
@@ -308,10 +322,14 @@ class ProjectClass:
         """Initialize this class."""
         self.org_name = nexus_proj[0]
         self.nexus_repo_name = nexus_proj[1]
-        self._set_docker_repo_name(self.nexus_repo_name)
-        self.nexus_tags = NexusTagClass(self.org_name, self.nexus_repo_name)
-        self.docker_tags = DockerTagClass(self.org_name, self.docker_repo_name)
-        self.tags_2_copy = TagClass(self.org_name, self.nexus_repo_name)
+        repo_from_file = len(nexus_proj[2]) > 0
+        if repo_from_file:
+            self.docker_repo_name = nexus_proj[2].strip()
+        else:
+            self._set_docker_repo_name(self.nexus_repo_name)
+        self.nexus_tags = NexusTagClass(self.org_name, self.nexus_repo_name, repo_from_file)
+        self.docker_tags = DockerTagClass(self.org_name, self.docker_repo_name, repo_from_file)
+        self.tags_2_copy = TagClass(self.org_name, self.nexus_repo_name, repo_from_file)
         self._populate_tags_to_copy()
         self.docker_client = docker.from_env()
 
@@ -451,7 +469,52 @@ class ProjectClass:
                         raise requests.HTTPError(retry_text)
 
 
-def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False):
+def repo_is_in_file(check_repo="", repo_file_name=""):
+    """Function to verify of a repo name exists in a file name.
+
+    The file contains rows of repo names to be included.
+        acumos-portal-fe
+        acumos/acumos-axure-client
+
+    Function will return True if a match is found
+
+    """
+    with open("{}".format(repo_file_name)) as f:
+        for line in f.readlines():
+            row = line.rstrip()
+            reponame = row.split(";")[0]
+            log.debug("Comparing {} with {} from file".format(check_repo, reponame))
+            if check_repo == reponame:
+                log.debug("Found a match")
+                return True
+    log.debug("NO match found")
+    return False
+
+
+def get_docker_name_from_file(check_repo="", repo_file_name=""):
+    """Function to verify of a repo name exists in a file name.
+
+    The file contains rows of repo names to be included.
+        acumos-portal-fe
+        acumos/acumos-axure-client
+
+    Function will return True if a match is found
+
+    """
+    with open("{}".format(repo_file_name)) as f:
+        for line in f.readlines():
+            row = line.rstrip()
+            reponame = row.split(";")[0]
+            dockername = row.split(";")[1]
+            log.debug("Comparing {} with {} from file".format(check_repo, reponame))
+            if check_repo == reponame:
+                log.debug("Found a match")
+                return dockername
+    log.debug("NO match found")
+    return ""
+
+
+def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False, repo_is_filename=False):
     """Main function to collect all Nexus3 repositories.
 
     This function will collect the Nexus catalog for all projects starting with
@@ -469,14 +532,16 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False):
     Nexus3 catalog starts with <org_name>/<repo name>
 
     Parameters:
-        org_name     : Organizational name, for instance 'onap'
-        find_pattern : A pattern, that if specified, needs to be part of the
-                       repository name.
-                       for instance,
-                        ''     : this pattern finds all repositories.
-                        'eleo' : this pattern finds all repositories with 'eleo'
-                                 in its name. --> chameleon
-        exact_match  : If specified, find_pattern is a unique repo name
+        org_name        : Organizational name, for instance 'onap'
+        find_pattern    : A pattern, that if specified, needs to be part of the
+                          repository name.
+                          for instance,
+                           ''     : this pattern finds all repositories.
+                           'eleo' : this pattern finds all repositories with 'eleo'
+                                    in its name. --> chameleon
+        exact_match     : If specified, find_pattern is a unique repo name
+        repo_is_filename: If specified, find_pattern is a filename, which contains a repo name per row
+                            org_name is irrelevant in this case
 
     """
     global NexusCatalog
@@ -488,7 +553,9 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False):
         containing_str = ', and containing "{}"'.format(find_pattern)
     if exact_match:
         containing_str = ', and reponame = "{}"'.format(find_pattern)
-    info_str = "Collecting information from Nexus with projects with org = {}".format(org_name)
+    if repo_is_filename:
+        containing_str = ', and repos are found in "{}"'.format(find_pattern)
+    info_str = "Collecting information from Nexus from projects with org = {}".format(org_name)
     log.info("{}{}.".format(info_str, containing_str))
 
     try:
@@ -509,21 +576,25 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False):
         TmpCatalog = raw_catalog[1].split(",")
         for word in TmpCatalog:
             # Remove all projects that do not start with org_name
-            if word.startswith(org_name):
-                use_this_repo = False
-                # Remove org_name/ from word, so we only get repository left
-                project = (org_name, word[len(org_name) + 1 :])
-                # If a specific search string has been specified, search for it
-                # Empty string will match all words
-                if word.find(find_pattern) >= 0 and not exact_match:
-                    use_this_repo = True
-                if exact_match and project[1] == find_pattern:
-                    use_this_repo = True
-                if use_this_repo:
-                    NexusCatalog.append(project)
-                    log.debug("Added project {} to my list".format(project[1]))
-                    if len(project[1]) > project_max_len_chars:
-                        project_max_len_chars = len(project[1])
+            use_this_repo = False
+            if repo_is_filename and repo_is_in_file(word, find_pattern):
+                use_this_repo = True
+                project = [org_name, word, get_docker_name_from_file(word, find_pattern)]
+            else:
+                if word.startswith(org_name):
+                    # Remove org_name/ from word, so we only get repository left
+                    project = [org_name, word[len(org_name) + 1 :], ""]
+                    # If a specific search string has been specified, search for it
+                    # Empty string will match all words
+                    if word.find(find_pattern) >= 0 and not exact_match:
+                        use_this_repo = True
+                    if exact_match and project[1] == find_pattern:
+                        use_this_repo = True
+            if use_this_repo:
+                NexusCatalog.append(project)
+                log.debug("Added project {} to my list".format(project[1]))
+                if len(project[1]) > project_max_len_chars:
+                    project_max_len_chars = len(project[1])
         log.debug(
             "# TmpCatalog {}, NexusCatalog {}, DIFF = {}".format(
                 len(TmpCatalog), len(NexusCatalog), len(TmpCatalog) - len(NexusCatalog)
@@ -742,14 +813,23 @@ def print_nbr_tags_to_copy():
     log.info("Summary: {} tags that should be copied from Nexus3 to Docker Hub.".format(_tot_tags))
 
 
-def start_point(org_name, find_pattern="", exact_match=False, summary=False, verbose=False, copy=False, progbar=False):
+def start_point(
+    org_name,
+    find_pattern="",
+    exact_match=False,
+    summary=False,
+    verbose=False,
+    copy=False,
+    progbar=False,
+    repofile=False,
+):
     """Main function."""
     # Verify find_pattern and specified_repo are not both used.
     if len(find_pattern) == 0 and exact_match:
         log.error("You need to provide a Pattern to go with the --exact flag")
         return
     initialize(org_name)
-    if not get_nexus3_catalog(org_name, find_pattern, exact_match):
+    if not get_nexus3_catalog(org_name, find_pattern, exact_match, repofile):
         log.info("Could not get any catalog from Nexus3 with org = {}".format(org_name))
         return
 

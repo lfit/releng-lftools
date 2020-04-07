@@ -1,0 +1,20 @@
+features:
+  - |
+    Add --repofile to  releasedockerhub
+
+    Enables providing a file with the repo names.
+
+       -f, --repofile  Repo Name is a file name,
+                       which contains one repo per row
+
+    Sample
+    lftools nexus docker releasedockerhub --org onap --repo /tmp/test_repos.txt --repofile
+
+    Where the input file has the following syntax, one repo per row,
+    'Nexus3 docker.release repo'; 'dockerhub dockername'
+
+    Sample
+    onap/org.onap.dcaegen2.deployments.tls-init-container;  onap/org.onap.dcaegen2.deployments.tls-init-container
+    onap/policy-api;    onap/policy-api
+    onap/clamp-backend; onap/clamp-backend
+    onap/msb/msb_apigateway;    onap/msb-msb_apigateway
