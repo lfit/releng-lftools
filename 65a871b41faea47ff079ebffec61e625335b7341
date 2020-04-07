@@ -22,6 +22,30 @@
       "revId": "65a871b41faea47ff079ebffec61e625335b7341",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96ad0f78_4e8e251b",
+        "filename": "requirements.txt",
+        "patchSetId": 70
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-07T18:49:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c98c21ac_e5252ea1",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 5
+      },
+      "revId": "65a871b41faea47ff079ebffec61e625335b7341",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
