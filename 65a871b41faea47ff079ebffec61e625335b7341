@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c98c21ac_e5252ea1",
+        "filename": "requirements.txt",
+        "patchSetId": 70
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-07T17:49:03Z",
+      "side": 1,
+      "message": "Please pin this to the specific version you\u0027re using",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 5
+      },
+      "revId": "65a871b41faea47ff079ebffec61e625335b7341",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
