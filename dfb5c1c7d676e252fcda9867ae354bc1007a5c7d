@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5893f453_11acd9b1",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 71
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-09T01:28:17Z",
+      "side": 1,
+      "message": "Could this part be turned into a small function, that is called up to three times?\nIterate over a list, something like\nfor _dir in (logs_dir, silo_dir, jenkins_node_dir):\n  try_upload (_dir, file)",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 515,
+        "endChar": 4
+      },
+      "revId": "dfb5c1c7d676e252fcda9867ae354bc1007a5c7d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e59080d1_dd6163c6",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 71
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-09T01:28:17Z",
+      "side": 1,
+      "message": "Hmm, yes, refactor I would say",
+      "revId": "dfb5c1c7d676e252fcda9867ae354bc1007a5c7d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
