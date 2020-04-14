@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35fca4df_d5f67de2",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2020-04-14T12:24:52Z",
+      "side": 1,
+      "message": "I dont understand what this does, please add more info in the commit message along with a release notes.",
+      "range": {
+        "startLine": 213,
+        "startChar": 9,
+        "endLine": 213,
+        "endChar": 69
+      },
+      "revId": "faf555386d921a3ebef7749e270ab3646b85afe3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
