@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4d9de4e0_b803079e",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-15T17:23:20Z",
+      "side": 1,
+      "message": "This should be above the os.chdir(work_dir), and it should be the workspace directory.",
+      "parentUuid": "df86a9e2_875dd62d",
+      "range": {
+        "startLine": 431,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 1
+      },
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da0eb3c9_0bcf6d8a",
         "filename": "lftools/deploy.py",
         "patchSetId": 72
@@ -39,6 +63,24 @@
       "revId": "20e09597039171be0883af762eac37c5db146162",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0df9832_21c3dfe9",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-15T17:23:20Z",
+      "side": 1,
+      "message": "When we upload to S3, the file path is \"logs/$SILO/$JENKINS_HOSTNAME/$JOB_NAME/$BUILD_NUMBER/\". We then have a lambda that generates an index.html file for each \"directory\" but, the lambda only generates the index.html file if there is data in the directory. So this file is basically the data that is used to put into \"logs\", \"$SILO\", and \"$JENKINS_HOSTNAME\", to ensure that the index.html is generated/updated every time log files are shipped up, otherwise the directory structure breaks(you get a 404 because the index.html file is never created) or the top/root level index.html file doesn\u0027t get updated with the new directory tree of the logs you shipped.",
+      "parentUuid": "da0eb3c9_0bcf6d8a",
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "b12c95a9_c3027ad6",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-15T17:23:20Z",
+      "side": 1,
+      "message": "Really the file name should equal _tmpfile. We aren\u0027t looking for file with _tmpfile in the name.",
+      "parentUuid": "b86a4bda_c664171d",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 7
+      },
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ac55730_6382e00c",
         "filename": "lftools/deploy.py",
         "patchSetId": 72
@@ -76,6 +142,30 @@
       "writtenOn": "2020-04-15T02:19:32Z",
       "side": 1,
       "message": "Could this part also be part of _tmpfile_upload? Lots of repetitive code otherwise",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 507,
+        "endChar": 4
+      },
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "910f547a_f819c46b",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-15T17:23:20Z",
+      "side": 1,
+      "message": "Can you give more context?",
+      "parentUuid": "7ac55730_6382e00c",
       "range": {
         "startLine": 505,
         "startChar": 0,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "6a689bd8_f008fadd",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-15T17:23:20Z",
+      "side": 1,
+      "message": "Not sure what you mean here.",
+      "parentUuid": "fec13119_7a47030b",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 1
+      },
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "69659296_d38ee2e6",
         "filename": "lftools/deploy.py",
         "patchSetId": 72
@@ -122,6 +236,30 @@
       "writtenOn": "2020-04-15T02:19:32Z",
       "side": 1,
       "message": "Same",
+      "range": {
+        "startLine": 520,
+        "startChar": 0,
+        "endLine": 524,
+        "endChar": 1
+      },
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e02f7627_9c616799",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-15T17:23:20Z",
+      "side": 1,
+      "message": "Same ^^^",
+      "parentUuid": "69659296_d38ee2e6",
       "range": {
         "startLine": 520,
         "startChar": 0,
