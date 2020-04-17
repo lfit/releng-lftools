@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9f110b3_f4e943ab",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 74
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-17T17:31:59Z",
+      "side": 1,
+      "message": "Some of this will work and some won\u0027t. The async upload in lines 541-543 is reliant on a true/false state. So we need the if statement in _deploy_s3_upload, and it will need to return true or false. Another thing we need is to properly rename the functions. Lastly for line 442, to answer your question, \u003d\u003d compares the values and is checks if it refers to the same object or not, so we should be using is versus \u003d\u003d.",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 33
+      },
+      "revId": "7f3d55efa1357094419d3d7d392d9ac36e52e542",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
