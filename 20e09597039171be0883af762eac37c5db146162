@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "0c5229d9_48bb20e4",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-17T02:07:57Z",
+      "side": 1,
+      "message": "Perhaps change the info to \"Creating a required data file\" or similar, so no one deletes these rows in the future...",
+      "parentUuid": "a0df9832_21c3dfe9",
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b86a4bda_c664171d",
         "filename": "lftools/deploy.py",
         "patchSetId": 72
@@ -131,6 +149,30 @@
     },
     {
       "key": {
+        "uuid": "b0c5d76b_02fb6f1b",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-17T02:07:57Z",
+      "side": 1,
+      "message": "My Python is not at Expert level (yet), but should you not use \u0027\u003d\u003d\u0027 or \u0027is\u0027 instead of \u0027in\u0027?\nFrom google\nYou can use in and not in operators to check the existence of a string in another string. They are also known as membership operator.",
+      "parentUuid": "b12c95a9_c3027ad6",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 7
+      },
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ac55730_6382e00c",
         "filename": "lftools/deploy.py",
         "patchSetId": 72
@@ -166,6 +208,30 @@
       "side": 1,
       "message": "Can you give more context?",
       "parentUuid": "7ac55730_6382e00c",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 507,
+        "endChar": 4
+      },
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de90594f_0304cef2",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-17T02:07:57Z",
+      "side": 1,
+      "message": "I\u0027ll try to update code for your consideration",
+      "parentUuid": "910f547a_f819c46b",
       "range": {
         "startLine": 505,
         "startChar": 0,
