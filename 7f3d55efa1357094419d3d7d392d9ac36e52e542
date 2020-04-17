@@ -22,6 +22,30 @@
       "revId": "7f3d55efa1357094419d3d7d392d9ac36e52e542",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3819e2b0_1452b6ad",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 74
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-17T17:37:21Z",
+      "side": 1,
+      "message": "Sorry I mean\u0027t 541-563. Also for each if statement in _s3_put_file, it needs to return true/false, which passes that state to _deploy_s3_upload.",
+      "parentUuid": "a9f110b3_f4e943ab",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 33
+      },
+      "revId": "7f3d55efa1357094419d3d7d392d9ac36e52e542",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
