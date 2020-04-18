@@ -46,6 +46,30 @@
       "revId": "7f3d55efa1357094419d3d7d392d9ac36e52e542",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4159dde0_cd927f5a",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 74
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-18T02:21:26Z",
+      "side": 1,
+      "message": "Hmm. Ok, I have not tested it, hint, unit test :).\nBut I thought I did not change anything with True/False?\n_tmpfile_upload returns True/False.\n\nold\n            try:\n                s3.Bucket(s3_bucket).upload_file(file, \"{}{}\".format(s3_path, file))\n            except ClientError as e:\n                log.error(e)\n                return False\n            return True\nnew\n        return _tmpfile_upload(s3_path, file)\nwhere _tmpfile_upload returns False/True\n\nOr what am I missing?\n\n442: Checking with is makes more sense than using in. :)",
+      "parentUuid": "3819e2b0_1452b6ad",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 33
+      },
+      "revId": "7f3d55efa1357094419d3d7d392d9ac36e52e542",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
