@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "a076dcf6_ebfd1fe2",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c10b3fac_e1af879f",
+      "range": {
+        "startLine": 547,
+        "startChar": 8,
+        "endLine": 547,
+        "endChar": 11
+      },
+      "revId": "ba3c822ff677283e0c07f449b9de0a68aee7e3fe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87900e04_ad8a62dd",
         "filename": "lftools/deploy.py",
         "patchSetId": 18
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "2df8f479_28654b7d",
+      "revId": "ba3c822ff677283e0c07f449b9de0a68aee7e3fe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a187891_e23dc6c8",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02d01c99_8316ec7f",
       "revId": "ba3c822ff677283e0c07f449b9de0a68aee7e3fe",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false

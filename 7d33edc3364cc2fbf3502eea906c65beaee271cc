@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "531c4312_f910ace5",
+        "filename": "releasenotes/notes/add-s3-to-log-shipping-1fad234f538c13f4.yaml",
+        "patchSetId": 29
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b39a731_a31821d9",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 10
+      },
+      "revId": "7d33edc3364cc2fbf3502eea906c65beaee271cc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b0d9e93_b62370a8",
         "filename": "requirements-test.txt",
         "patchSetId": 29
@@ -84,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "81a88c7a_65b7aa51",
+        "filename": "requirements-test.txt",
+        "patchSetId": 29
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "751960e0_0ff4149e",
+      "revId": "7d33edc3364cc2fbf3502eea906c65beaee271cc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96230c5b_d5c372e7",
         "filename": "tests/test_deploy.py",
         "patchSetId": 29
@@ -113,6 +155,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "96230c5b_d5c372e7",
+      "revId": "7d33edc3364cc2fbf3502eea906c65beaee271cc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a6bbb5d_820538f2",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57adcf45_a38ae527",
       "revId": "7d33edc3364cc2fbf3502eea906c65beaee271cc",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false

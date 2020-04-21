@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "f03f8d64_6a3d58cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41763258_26b71c6e",
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "633ca8e2_5139848f",
         "filename": "lftools/cli/deploy.py",
         "patchSetId": 23
@@ -126,6 +144,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "633ca8e2_5139848f",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 1
+      },
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9dd9ca_6f0179ed",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "247e0177_44ba19f3",
       "range": {
         "startLine": 137,
         "startChar": 0,
@@ -185,6 +227,30 @@
     },
     {
       "key": {
+        "uuid": "f56f700b_dad30822",
+        "filename": "lftools/cli/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc439337_91c9e119",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 3
+      },
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5117dbd7_8c048d57",
         "filename": "lftools/deploy.py",
         "patchSetId": 23
@@ -220,6 +286,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "5117dbd7_8c048d57",
+      "range": {
+        "startLine": 495,
+        "startChar": 9,
+        "endLine": 495,
+        "endChar": 13
+      },
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "156ee0ab_664ab9b1",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0407c932_b28d4516",
       "range": {
         "startLine": 495,
         "startChar": 9,
@@ -472,6 +562,24 @@
       "side": 1,
       "message": "Since we are no longer creating the bucket ad hoc, this should be removed actually.",
       "parentUuid": "463ab597_47c3752a",
+      "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ab05df5_1742b501",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "854fff44_e74842e4",
       "revId": "0e3edec6d61f6b35787487240bc4fde54ad7e66a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false

@@ -70,6 +70,30 @@
       "revId": "7f3d55efa1357094419d3d7d392d9ac36e52e542",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f66faa3_8d0d6f0a",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 74
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T18:37:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4159dde0_cd927f5a",
+      "range": {
+        "startLine": 429,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 33
+      },
+      "revId": "7f3d55efa1357094419d3d7d392d9ac36e52e542",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
