@@ -49,6 +49,23 @@
     },
     {
       "key": {
+        "uuid": "a16acf53_1c6550ee",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T16:43:25Z",
+      "side": 1,
+      "message": "io.open() is an alias of the open() method. I would remove all the io.\u0027s if you can, it makes it more readable.",
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "da0eb3c9_0bcf6d8a",
         "filename": "lftools/deploy.py",
         "patchSetId": 72
@@ -99,6 +116,24 @@
       "revId": "20e09597039171be0883af762eac37c5db146162",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c7c9c0c_320e26d8",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T16:43:25Z",
+      "side": 1,
+      "message": "Do we even need to log this? Is it just to give us an update of where we are in the process? If so, I agree with Bengt here that it should be friendlier for someone who doesn\u0027t know the codebase.",
+      "parentUuid": "0c5229d9_48bb20e4",
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     },
     {
       "key": {
@@ -170,6 +205,30 @@
       "revId": "20e09597039171be0883af762eac37c5db146162",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6a6f040_832099c8",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T16:43:25Z",
+      "side": 1,
+      "message": "Unless I\u0027m blind (?) I don\u0027t even see where _tmpfile gets used.",
+      "parentUuid": "b0c5d76b_02fb6f1b",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 7
+      },
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     },
     {
       "key": {
