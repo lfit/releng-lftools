@@ -137,6 +137,23 @@
     },
     {
       "key": {
+        "uuid": "3bba0d58_d7775113",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 72
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T16:52:25Z",
+      "side": 1,
+      "message": "please comment what this is for for us simple-minded folk 😄",
+      "revId": "20e09597039171be0883af762eac37c5db146162",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b86a4bda_c664171d",
         "filename": "lftools/deploy.py",
         "patchSetId": 72
