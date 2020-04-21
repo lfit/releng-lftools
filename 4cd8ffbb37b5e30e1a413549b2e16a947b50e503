@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8bbd802_42bbc8cf",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 75
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T16:27:30Z",
+      "side": 1,
+      "message": "if _ExtraArgs:",
+      "revId": "4cd8ffbb37b5e30e1a413549b2e16a947b50e503",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a603a00_5980a21e",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 75
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 340
+      },
+      "writtenOn": "2020-04-21T16:27:30Z",
+      "side": 1,
+      "message": "I think I would use application/octet-stream instead of text/plain. If mimetypes can\u0027t figure it out, then it\u0027s some kind of binary data, and application/octet-stream is often the catch-all for this type of thing.",
+      "revId": "4cd8ffbb37b5e30e1a413549b2e16a947b50e503",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
