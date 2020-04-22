@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a17e5934_6857cf7f",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 80
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-22T03:46:40Z",
+      "side": 1,
+      "message": "This one should be before chdir...",
+      "range": {
+        "startLine": 431,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 1
+      },
+      "revId": "56ec7d75caa152150bde9e931aba56494b30fc26",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42ac4d24_33c1ccec",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 80
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-22T03:46:40Z",
+      "side": 1,
+      "message": "The refactored methods, presume it did not work or ?",
+      "range": {
+        "startLine": 500,
+        "startChar": 0,
+        "endLine": 500,
+        "endChar": 2
+      },
+      "revId": "56ec7d75caa152150bde9e931aba56494b30fc26",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d97a8c56_dd20aadf",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 80
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-22T03:46:40Z",
+      "side": 1,
+      "message": "Thought you mentioned this should be is instead of is.",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 7
+      },
+      "revId": "56ec7d75caa152150bde9e931aba56494b30fc26",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
