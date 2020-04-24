@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "10a3fa03_1878480a",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 93
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-24T22:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19b7d0af_ea98ac3c",
+      "revId": "9e854fa6114e59c5510d992dd9f4fd8290944e75",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80a45791_1aa3dbd5",
         "filename": "lftools/deploy.py",
         "patchSetId": 93
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8f438b83_d6bd73cc",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 93
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-24T22:05:37Z",
+      "side": 1,
+      "message": "Can\u0027t really get around this. If we don\u0027t specify the content type and specify it when uploading, s3 automatically sets it to application/octet-stream, which cannot be opened in browser. There is no catch all, because most files are:\n(\"ContentType\": \"None\", \"ContentEncoding\": \"None\")\n(\"ContentType\": \"text/plain\", \"ContentEncoding\": \"None\")\n(\"ContentType\": \"application/xml\", \"ContentEncoding\": \"gzip\")\n(\"ContentType\": \"text/csv\", \"ContentEncoding\": \"None\")\n(\"ContentType\": \"None\", \"ContentEncoding\": \"gzip\")",
+      "parentUuid": "80a45791_1aa3dbd5",
+      "revId": "9e854fa6114e59c5510d992dd9f4fd8290944e75",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d0180d5_a022cb46",
         "filename": "lftools/deploy.py",
         "patchSetId": 93
@@ -50,6 +86,24 @@
       "revId": "9e854fa6114e59c5510d992dd9f4fd8290944e75",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3db2608_d1c7b253",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 93
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 325
+      },
+      "writtenOn": "2020-04-24T22:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d0180d5_a022cb46",
+      "revId": "9e854fa6114e59c5510d992dd9f4fd8290944e75",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
