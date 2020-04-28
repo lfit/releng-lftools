@@ -89,6 +89,8 @@ def create_info_file(ctx, gerrit_url, gerrit_project, directory, empty, tsc_appr
 
     if umbrella == "o-ran-sc":
         umbrella = "oran"
+    if umbrella == "opendaylight":
+        umbrella = "odl"
 
     date = datetime.datetime.now().strftime("%Y-%m-%d")
 
