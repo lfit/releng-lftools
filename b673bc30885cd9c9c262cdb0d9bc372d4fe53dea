@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "823d364a_b0bbd256",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-04-29T15:50:44Z",
+      "side": 1,
+      "message": "Maybe explain that \u0027repo\u0027 here means a nexus3 docker.release repository",
+      "range": {
+        "startLine": 215,
+        "startChar": 25,
+        "endLine": 215,
+        "endChar": 41
+      },
+      "revId": "b673bc30885cd9c9c262cdb0d9bc372d4fe53dea",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b21661e1_ccb3ba2b",
+        "filename": "releasenotes/notes/ReleaseDockerHub-RepoInputFile-1027258b656a98e8.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-04-29T15:50:44Z",
+      "side": 1,
+      "message": "this file needs fixing.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 10
+      },
+      "revId": "b673bc30885cd9c9c262cdb0d9bc372d4fe53dea",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
