@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5092efd5_b67718b1",
+        "filename": "lftools/cli/nexus.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-30T02:52:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "823d364a_b0bbd256",
+      "range": {
+        "startLine": 215,
+        "startChar": 25,
+        "endLine": 215,
+        "endChar": 41
+      },
+      "revId": "b673bc30885cd9c9c262cdb0d9bc372d4fe53dea",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b21661e1_ccb3ba2b",
         "filename": "releasenotes/notes/ReleaseDockerHub-RepoInputFile-1027258b656a98e8.yaml",
         "patchSetId": 7
@@ -45,6 +69,30 @@
       "revId": "b673bc30885cd9c9c262cdb0d9bc372d4fe53dea",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e86a95d_15506030",
+        "filename": "releasenotes/notes/ReleaseDockerHub-RepoInputFile-1027258b656a98e8.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-04-30T02:52:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b21661e1_ccb3ba2b",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 10
+      },
+      "revId": "b673bc30885cd9c9c262cdb0d9bc372d4fe53dea",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
