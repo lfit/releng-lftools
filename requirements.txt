@@ -16,7 +16,7 @@ dnspython==1.16.0
 docker==4.2.0
 email-validator==1.0.5
 filelock==3.0.12
-httplib2==0.17.0
+httplib2==0.18.0
 identify==1.4.11
 idna==2.9
 jsonschema==3.2.0
