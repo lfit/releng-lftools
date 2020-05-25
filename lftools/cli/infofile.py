@@ -317,7 +317,7 @@ def check_votes(ctx, info_file, endpoint, change_number, tsc, github_repo):
         have_voted_length = len(have_voted)
         log.info("Number of Committers:")
         log.info(len(info_committers))
-        committer_lenght = len(info_committers)
+        committer_length = len(info_committers)
         log.info("Committers that have voted:")
         log.info(have_voted)
         log.info(have_voted_length)
@@ -330,8 +330,8 @@ def check_votes(ctx, info_file, endpoint, change_number, tsc, github_repo):
             sys.exit(1)
 
         if have_voted_length != 0:
-            majority = committer_lenght / have_voted_length
-            if majority >= 1:
+            majority = have_voted_length / committer_length
+            if majority >= 0.5:
                 log.info("Majority committer vote reached")
                 if tsc:
                     log.info("Need majority of tsc")
