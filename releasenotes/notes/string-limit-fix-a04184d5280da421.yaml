@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Requests can't handle a put call for very large data objects. However, it
+    can accept the data as a file-like object instead, and the size issue will
+    not show up. Documented here: https://github.com/psf/requests/issues/2717.

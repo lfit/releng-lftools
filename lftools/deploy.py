@@ -156,7 +156,7 @@ def _request_put_file(url, file_to_upload, parameters=None):
         if parameters:
             resp = requests.put(url, data=parameters, files=files)
         else:
-            resp = requests.put(url, data=upload_file.read())
+            resp = requests.put(url, data=upload_file)
     except requests.exceptions.MissingSchema:
         raise requests.HTTPError("Not valid URL format. Check for https:// etc..: {}".format(url))
     except requests.exceptions.ConnectTimeout:
