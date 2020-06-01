@@ -267,10 +267,11 @@ def createteam(ctx, organization, name, repo, privacy):
 @click.argument("team")
 @click.option("--delete", is_flag=True, required=False, help="Remove user from org")
 @click.option("--admin", is_flag=True, required=False, help="User is admin for org, or a maintaner of a team")
+@click.option("--single", is_flag=True, required=False, help="Return info on a single user")
 @click.pass_context
-def user(ctx, organization, user, team, delete, admin):
+def user(ctx, organization, user, team, delete, admin, single):
     """Add and Remove users from an org team."""
-    helper_user_github(ctx, organization, user, team, delete, admin)
+    helper_user_github(ctx, organization, user, team, delete, admin, single)
 
 
 github_cli.add_command(submit_pr)

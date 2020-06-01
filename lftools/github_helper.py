@@ -118,16 +118,17 @@ def helper_list(ctx, organization, repos, audit, full, teams, team, repofeatures
         except GithubException as ghe:
             log.error(ghe)
 
-        team_members = []
-
         for t in teams():
             if t.name == team:
-                log.info("{}".format(t.name))
+                team_members = []
                 for user in t.get_members():
-                    team_members.append(user.login)
-                    log.info("  - '{}'".format(user.login))
-
-        return team_members
+                    team_members.append([user.login, user.name, user.email, user.company])
+                    log.info("    - name: '{}'".format(user.name))
+                    log.info("      email: '{}'".format(user.email))
+                    log.info("      company: '{}'".format(user.company))
+                    log.info("      github_id: '{}'".format(user.login))
+                    log.info("      timezone: 'Unknown/Unknown'")
+                return team_members
 
 
 def prvotes(organization, repo, pr):
@@ -155,7 +156,7 @@ def prvotes(organization, repo, pr):
     return approval_list
 
 
-def helper_user_github(ctx, organization, user, team, delete, admin):
+def helper_user_github(ctx, organization, user, team, delete, admin, single):
     """Add and Remove users from an org team."""
     token = config.get_setting("github", "token")
     g = Github(token)
@@ -166,11 +167,19 @@ def helper_user_github(ctx, organization, user, team, delete, admin):
         log.error(ghe)
     try:
         user_object = g.get_user(user)
-        log.info(user_object)
+        #log.info(user_object)
+        if single:
+            print("    - name: '{}'".format(user_object.name))
+            print("      email: '{}'".format(user_object.email))
+            print("      company: '{}'".format(user_object.company))
+            print("      id: '{}'".format(user))
+            print("      company: 'Unknown/Unknown'")
+            sys.exit(0)
     except GithubException as ghe:
         log.error(ghe)
         log.info("user {} not found".format(user))
         sys.exit(1)
+
     # check if user is a member
     try:
         is_member = org.has_in_members(user_object)
