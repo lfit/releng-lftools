@@ -23,6 +23,7 @@ import yaml
 
 from lftools import config
 from lftools.github_helper import prvotes
+from lftools.github_helper import helper_list
 from lftools.ldap_cli import helper_yaml4info
 
 log = logging.getLogger(__name__)
@@ -33,6 +34,83 @@ log = logging.getLogger(__name__)
 def infofile(ctx):
     """INFO.yaml TOOLS."""
     pass
+
+
+@click.command(name="create-info-file-github")
+@click.argument("github_org", required=True)
+@click.argument("github_repo", required=True)
+@click.option("--empty", is_flag=True, required=False, help="Create info file for uncreated project.")
+@click.option(
+    "--tsc_approval", type=str, required=False, default="missing", help="optionally provde a tsc approval link"
+)
+@click.pass_context
+def create_info_file_github(ctx, github_org, github_repo, empty, tsc_approval):
+
+    date = datetime.datetime.now().strftime("%Y-%m-%d")
+    committers = "{}-committers".format(github_repo)
+
+    long_string = """---
+project: '{0}'
+project_creation_date: '{3}'
+project_category: ''
+lifecycle_state: 'Incubation'
+project_lead: &{1}_{0}_ptl
+    name: ''
+    email: ''
+    github_id: ''
+    company: ''
+    timezone: ''
+primary_contact: *{1}_{0}_ptl
+issue_tracking:
+    type: 'jira'
+    url: 'https://jira.{2}/projects/'
+    key: '{0}'
+mailing_list:
+    type: 'groups.io'
+    url: 'technical-discuss@lists.{2}'
+    tag: '[]'
+realtime_discussion:
+    type: 'irc'
+    server: 'freenode.net'
+    channel: '#{1}'
+meetings:
+    - type: 'gotomeeting+irc'
+      agenda: 'https://wiki.{2}/display/'
+      url: ''
+      server: 'freenode.net'
+      channel: '#{1}'
+      repeats: ''
+      time: ''""".format(
+        github_repo, github_org, github_org, date
+    )
+    tsc_string = """
+tsc:
+    # yamllint disable rule:line-length
+    approval: '{}'
+    changes:
+        - type: ''
+          name: ''
+          link: ''
+""".format(
+        tsc_approval, end=""
+    )
+    empty_committer = """    - name: ''
+      email: ''
+      company: ''
+      github_id: ''
+      timezone: ''
+"""
+    tsc_string = inspect.cleandoc(tsc_string)
+    print(long_string)
+    print("repositories:")
+    print("    - {}".format(github_repo))
+    print("committers:")
+    print("    - <<: *{1}_{0}_ptl".format(github_repo, github_org, end=""))
+    if not empty:
+        this = helper_list(False, github_org, False, False, False, False, committers, False)
+    else:
+        print(empty_committer, end="")
+    print(tsc_string)
 
 
 @click.command(name="create-info-file")
@@ -130,7 +208,6 @@ meetings:
       time: ''""".format(
         project_underscored, umbrella, umbrella_tld, date
     )
-
     tsc_string = """
 tsc:
     # yamllint disable rule:line-length
@@ -353,3 +430,4 @@ infofile.add_command(get_committers)
 infofile.add_command(sync_committers)
 infofile.add_command(check_votes)
 infofile.add_command(create_info_file)
+infofile.add_command(create_info_file_github)
