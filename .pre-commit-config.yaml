@@ -4,7 +4,13 @@ repos:
     rev: v1.2.3
     hooks:
       - id: trailing-whitespace
+
   - repo: https://github.com/ambv/black
     rev: stable
     hooks:
     - id: black
+
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.13.1
+    hooks:
+      - id: gitlint
