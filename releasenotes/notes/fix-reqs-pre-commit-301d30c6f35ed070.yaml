@@ -1,0 +1,5 @@
+---
+fixes:
+  - |
+    Removes pre-commit as a dependency of lftools. This was an unnecessary
+    dependency as lftools does not use pre-commit at runtime in anyway.
