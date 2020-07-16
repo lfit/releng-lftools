@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Remove pinned distlib requirement. Distlib is a common requirement for
+    other libraries, and having it pinned is causing failures in builds. It is
+    not explicitly used in lftools, so it does not need to be pinned. Fixes
+    `ERROR: virtualenv 20.0.26 has requirement distlib<1,>=0.3.1, but you'll
+    have distlib 0.3.0 which is incompatible.`
