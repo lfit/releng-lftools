@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Remove pinned distlib requirement. Distlib is a common requirement for
+    other libraries, and having it pinned is causing failures in builds. It is
+    not explicitly used in lftools, so it does not need to be pinned.
