@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35af4427_99fa6eef",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-07-23T14:51:46Z",
+      "side": 1,
+      "message": "Convert tab to spaces",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 1
+      },
+      "revId": "7d6aed1b285adf0a7cc0a9cb9b49e8e5d44e8bbe",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
