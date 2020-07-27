@@ -1,0 +1,14 @@
+---
+upgrade:
+  - |
+    Pin osc-lib to 2.2.0 to allow sharing images between projects.
+
+    Using lftools openstack image share returns an error
+    Error: "You are not authorized to find project with the name".
+
+    The issue is seen because of bug in osc_lib [1], and fixed in version
+    osc_lib==2.2.0
+
+    [1] https://bugs.launchpad.net/ubuntu/+source/python-openstackclient/+bug/1864203
+    [2] https://opendev.org/openstack/osc-lib/commit/1ff3720daefd98a77557e5692fd7052b5930ae6c
+    [3] https://jira.linuxfoundation.org/browse/RELENG-3099
