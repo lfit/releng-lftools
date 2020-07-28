@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e99ee8b_79082b8f",
+        "filename": "releasenotes/notes/openstack-276ef6e079124325.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-07-28T18:31:24Z",
+      "side": 1,
+      "message": "The openstack image upload has been updated to default to raw uploads.\nThis has been done as the LF Openstack cloud provider prefers raw format\nand having images uploaded in qcow2 format causes issues with services.",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 6,
+        "endChar": 34
+      },
+      "revId": "05dd10429c4a5eb17c33c21eff12b16833c4d361",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
