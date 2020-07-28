@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    The openstack image upload has been updated to default to raw uploads.
+    This has been done as the LF Openstack cloud provider prefers raw format
+    and having images uploaded in qcow2 format causes issues with services.
+    Openstack cmd and upload should default to raw not qcow.

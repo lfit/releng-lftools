@@ -186,7 +186,7 @@ def share(os_cloud, image, clouds):
         _accept_shared_image(cloud, image_id)
 
 
-def upload(os_cloud, image, name, disk_format="qcow2"):
+def upload(os_cloud, image, name, disk_format="raw"):
     """Upload image to openstack."""
     log.info('Uploading image {} with name "{}".'.format(image, name))
     cloud = shade.openstack_cloud(cloud=os_cloud)
