@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Openstack cmd and upload should default to raw not qcow.
+    builds were timing out. Internally ceph is converting from qcow2 to raw.
+    Which can cause the time outs.

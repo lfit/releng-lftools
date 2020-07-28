@@ -82,7 +82,7 @@ def share(ctx, image, dest):
 @click.command()
 @click.argument("image")
 @click.argument("name", nargs=-1, required=True)
-@click.option("--disk-format", type=str, default="qcow2", help="Disk format of image. (default: qcow2)")
+@click.option("--disk-format", type=str, default="raw", help="Disk format of image. (default: raw)")
 @click.pass_context
 def upload(ctx, image, name, disk_format):
     """Upload image to OpenStack cloud."""
