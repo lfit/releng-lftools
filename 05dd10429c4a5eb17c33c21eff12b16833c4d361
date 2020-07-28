@@ -22,6 +22,30 @@
       "revId": "05dd10429c4a5eb17c33c21eff12b16833c4d361",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e447cb19_336857a6",
+        "filename": "releasenotes/notes/openstack-276ef6e079124325.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-07-28T21:08:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e99ee8b_79082b8f",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 6,
+        "endChar": 34
+      },
+      "revId": "05dd10429c4a5eb17c33c21eff12b16833c4d361",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
