@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b1b4a77_39f96342",
+        "filename": "lftools/openstack/cmd.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2020-07-29T00:27:53Z",
+      "side": 1,
+      "message": "This does not validate the input image type while setting the default, if the user gives an image that is not qcow, the cmd should return an error or warning.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 1
+      },
+      "revId": "6b5656cb0eb6a526abe7fd1da5dbc258bfe5b7b6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
