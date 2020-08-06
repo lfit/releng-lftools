@@ -14,6 +14,8 @@ __author__ = "Thanh Ha"
 
 
 import click
+import subprocess
+import re
 
 from lftools.openstack import image as os_image
 from lftools.openstack import object as os_object
@@ -87,6 +89,16 @@ def share(ctx, image, dest):
 def upload(ctx, image, name, disk_format):
     """Upload image to OpenStack cloud."""
     name = " ".join(name)
+
+    disktype = subprocess.check_output(['qemu-img', 'info', image]).decode('utf-8')
+    pattern = disk_format
+    result = re.search(pattern, disktype)
+    if result:
+        print("PASS Image format matches {}".format(disk_format))
+    else:
+        print("ERROR Image is not in {} format".format(disk_format))
+        exit(1)
+
     os_image.upload(ctx.obj["os_cloud"], image, name, disk_format)
 
 
