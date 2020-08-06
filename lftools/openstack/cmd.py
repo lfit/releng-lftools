@@ -39,7 +39,7 @@ def image(ctx):
 
 @click.command()
 @click.option(
-    "--ci-managed", type=bool, default=True, help="Filter only images that have the ci_managed=yes metadata set."
+    "--ci-managed", type=bool, default=False, help="Filter only images that have the ci_managed=yes metadata set."
 )
 @click.option("--days", type=int, default=0, help="Find images older than or equal to days.")
 @click.option("--hide-public", type=bool, default=False, help="Ignore public images.")
@@ -60,7 +60,7 @@ def cleanup(ctx, days, hide_public, ci_managed, clouds):
 
 @click.command()
 @click.option(
-    "--ci-managed", type=bool, default=True, help="Filter only images that have the ci_managed=yes metadata set."
+    "--ci-managed", type=bool, default=False, help="Filter only images that have the ci_managed=yes metadata set."
 )
 @click.option("--days", type=int, default=0, help="Find images older than or equal to days.")
 @click.option("--hide-public", type=bool, default=False, help="Ignore public images.")
