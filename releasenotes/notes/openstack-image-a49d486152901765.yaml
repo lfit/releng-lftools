@@ -1,0 +1,13 @@
+---
+upgrade:
+  - |
+    lftools image upload command:
+    NOTE: `qemu-img` is now required to be installed and on the path for image
+    uploading to work
+
+fixes:
+  - |
+    lftools image upload command:
+    Previously image was not verified to match the type of image specified
+    prior to upload. Image is now checked with `qemu-img` before upload to
+    ensure it is of the correct type.
