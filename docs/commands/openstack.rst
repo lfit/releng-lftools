@@ -3,6 +3,7 @@ OpenStack
 *********
 
 Requires a `pip install lftools[openstack]` to activate this command.
+Requires `qemu-img` binary to upload images
 
 .. program-output:: lftools openstack --help
 
