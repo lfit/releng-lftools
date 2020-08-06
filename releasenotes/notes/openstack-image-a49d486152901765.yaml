@@ -1,0 +1,11 @@
+---
+upgrade:
+  - |
+    lftools image upload command:
+    openstack image upload now requires `qemu-img` binary
+fixes:
+  - |
+    lftools image upload command:
+    Previously image was not verified to match the type of image specified
+    prior to upload. Image is now checked with `qemu-img` before upload to
+    ensure it is of the correct type.
