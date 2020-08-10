@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5fe68b5_e6d5b7a6",
+        "filename": "releasenotes/notes/openstack-image-a49d486152901765.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-08-10T17:50:12Z",
+      "side": 1,
+      "message": "Add the following:\n\nNOTE: `qemu-img` is now required to be installed and on the path for image uploading to work",
+      "revId": "d0513f111437a99e397380d219ac2f19e819b6cf",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
