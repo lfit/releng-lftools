@@ -16,6 +16,24 @@
       "revId": "d0513f111437a99e397380d219ac2f19e819b6cf",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b6dc8da_45e94663",
+        "filename": "releasenotes/notes/openstack-image-a49d486152901765.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-08-10T18:34:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5fe68b5_e6d5b7a6",
+      "revId": "d0513f111437a99e397380d219ac2f19e819b6cf",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
