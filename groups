@@ -1,5 +1,5 @@
 # UUID                                                                            	Group Name
 #
-a8155819d81751ca34e13ec13ef63f6d02aea967                                          	saml/lfinfra-gerrit-releng-lftools-committers
+42efe104771d2f6ce2893e0ec6ea149f8da9a006                                          	saml/lf-gerrit-releng-lftools-committers
 d68d00a2419f8ff627fc120cf9dd9055ae422153                                          	GitHub Replication
 ldap:cn=lfinfra-gerrit-releng-lftools-committers,ou=Groups,dc=freestandards,dc=org	ldap/lfinfra-gerrit-releng-lftools-committers
