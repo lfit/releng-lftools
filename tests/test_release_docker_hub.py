@@ -56,61 +56,6 @@ def test_format_image_id():
         assert rdh._format_image_id(id[0]) == id[1]
 
 
-def test_tag_class_valid_tags():
-    """Test TagClass"""
-    org = "onap"
-    repo = "base/sdc-sanity"
-    repo_from_file = False
-    test_tags = ["1.2.3", "1.22.333", "111.22.3", "10.11.12", "1.0.3"]
-    rdh.initialize(org)
-    tags = rdh.TagClass(org, repo, repo_from_file)
-    for tag in test_tags:
-        tags.add_tag(tag)
-    assert len(tags.valid) == len(test_tags)
-    assert len(tags.invalid) == 0
-
-
-def test_tag_class_invalid_tags():
-    """Test TagClass"""
-    org = "onap"
-    repo = "base/sdc-sanity"
-
-    repo_from_file = False
-    test_tags = [
-        "v1.2.3",
-        "1.22",
-        "111.22.3a",
-        "10.11.12.3",
-        "draft",
-        "1.2.jan14",
-        "1.2.3.4.5.6.7.8",
-        "1",
-        "latest",
-        "v0.1.0",
-        "1.1-20170906T011834",
-        "2.0-20180221T152423",
-        "1.3.0-20181121T1329",
-        "1.1.2-SNAPSHOT-20181231T234559Z",
-        "1.1.2-STAGING-20181231T234559Z",
-    ]
-    rdh.initialize(org)
-    tags = rdh.TagClass(org, repo, repo_from_file)
-    for tag in test_tags:
-        tags.add_tag(tag)
-    assert len(tags.invalid) == len(test_tags)
-    assert len(tags.valid) == 0
-
-
-def test_tag_class_repository_exist():
-    """Test TagClass"""
-    org = "onap"
-    repo = "base/sdc-sanity"
-    repo_from_file = False
-    rdh.initialize(org)
-    tags = rdh.TagClass(org, repo, repo_from_file)
-    assert tags.repository_exist == True
-
-
 def test_nexus_tag_class(responses):
     """Test NexusTagClass"""
     org = "onap"
@@ -155,6 +100,127 @@ def test_docker_tag_class(responses):
         assert tag in test_tags.invalid
     assert len(test_tags.valid) == len(answer_valid_tags)
     assert len(test_tags.invalid) == len(answer_invalid_tags)
+
+
+def test_tag_class_repository_exist():
+    """Test TagClass"""
+    org = "onap"
+    repo = "base/sdc-sanity"
+    repo_from_file = False
+    rdh.initialize(org)
+    tags = rdh.TagClass(org, repo, repo_from_file)
+    assert tags.repository_exist == True
+
+
+@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "nexus"),)
+class TestTagsRegExpClass:
+    """Test Tags and Regexp for Versions.
+
+    This class contains all the test cases for Valid/Invalid tags and Version RegExp.
+    """
+
+    def test_tag_class_valid_tags(self):
+        """Test TagClass"""
+        org = "onap"
+        repo = "base/sdc-sanity"
+        repo_from_file = False
+        test_tags = ["1.2.3", "1.22.333", "111.22.3", "10.11.12", "1.0.3"]
+        rdh.initialize(org)
+        tags = rdh.TagClass(org, repo, repo_from_file)
+        for tag in test_tags:
+            tags.add_tag(tag)
+        assert len(tags.valid) == len(test_tags)
+        assert len(tags.invalid) == 0
+
+    def test_tag_class_invalid_tags(self):
+        """Test TagClass"""
+        org = "onap"
+        repo = "base/sdc-sanity"
+
+        repo_from_file = False
+        test_tags = [
+            "v1.2.3",
+            "1.22",
+            "111.22.3a",
+            "10.11.12.3",
+            "draft",
+            "1.2.jan14",
+            "1.2.3.4.5.6.7.8",
+            "1",
+            "latest",
+            "v0.1.0",
+            "1.1-20170906T011834",
+            "2.0-20180221T152423",
+            "1.3.0-20181121T1329",
+            "1.1.2-SNAPSHOT-20181231T234559Z",
+            "1.1.2-STAGING-20181231T234559Z",
+        ]
+        rdh.initialize(org)
+        tags = rdh.TagClass(org, repo, repo_from_file)
+        for tag in test_tags:
+            tags.add_tag(tag)
+        assert len(tags.invalid) == len(test_tags)
+        assert len(tags.valid) == 0
+
+    def test_tag_class_manual_version_regexp_str_valid_tags(self):
+        """Test TagClass"""
+        org = "onap"
+        repo = "base/sdc-sanity"
+        test_regexp = "^v\d+.\d+.\d+$"
+        repo_from_file = False
+        test_tags = ["v1.2.3", "v1.22.333", "v111.22.3", "v10.11.12", "v1.0.3"]
+        rdh.initialize(org, test_regexp)
+        tags = rdh.TagClass(org, repo, repo_from_file)
+        for tag in test_tags:
+            tags.add_tag(tag)
+        assert len(tags.valid) == len(test_tags)
+        assert len(tags.invalid) == 0
+
+    def test_tag_class_manual_version_regexp_str_invalid_tags(self):
+        """Test TagClass"""
+        org = "onap"
+        repo = "base/sdc-sanity"
+        test_regexp = "v^\d+.\d+.\d+$"
+        repo_from_file = False
+        test_tags = [
+            "1.2.3",
+            "1.22",
+            "111.22.3a",
+            "10.11.12.3",
+            "draft",
+            "1.2.jan14",
+            "1.2.3.4.5.6.7.8",
+            "1",
+            "latest",
+            "0.1.0",
+            "1.1-20170906T011834",
+            "2.0-20180221T152423",
+            "1.3.0-20181121T1329",
+            "1.1.2-SNAPSHOT-20181231T234559Z",
+            "1.1.2-STAGING-20181231T234559Z",
+        ]
+        rdh.initialize(org, test_regexp)
+        tags = rdh.TagClass(org, repo, repo_from_file)
+        for tag in test_tags:
+            tags.add_tag(tag)
+        assert len(tags.invalid) == len(test_tags)
+        assert len(tags.valid) == 0
+
+    def test_tag_class_manual_version_regexp_str_from_file_valid(self, datafiles):
+        org = "onap"
+        test_regexp_from_file = os.path.join(str(datafiles), "releasedockerhub_good_regexp")
+        repo_from_file = False
+        rdh.initialize(org, test_regexp_from_file)
+        assert rdh.validate_regexp() == True
+        assert rdh.VERSION_REGEXP == "^\d+.\d+"
+
+    def test_tag_class_manual_version_regexp_str_from_file_invalid(self, datafiles):
+        org = "onap"
+        test_regexp_from_file = os.path.join(str(datafiles), "releasedockerhub_bad_regexp")
+        repo_from_file = False
+        rdh.initialize(org, test_regexp_from_file)
+        assert rdh.validate_regexp() == False
+        assert rdh.VERSION_REGEXP == "["
 
 
 class TestProjectClass:
