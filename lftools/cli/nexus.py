@@ -216,6 +216,16 @@ def release(ctx, repos, verify, server):
     " Sample:                                                       "
     " onap/msb/msb_apigateway; onap/msb-msb_apigateway",
 )
+@click.option(
+    "-x",
+    "--version-regexp",
+    type=str,
+    default="",
+    required=False,
+    help="Specify a file which contains a regexp expression to validate version number."
+    " File sample:                                                  "
+    " ^\d+.\d+.\d+$                                                 "
+)
 @click.pass_context
 def copy_from_nexus3_to_dockerhub(ctx, org, repo, exact, summary, verbose, copy, progbar, repofile):
     """Find missing repos in Docker Hub, Copy from Nexus3.
