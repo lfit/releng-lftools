@@ -61,6 +61,8 @@ NEXUS3_BASE = ""
 NEXUS3_CATALOG = ""
 NEXUS3_PROJ_NAME_HEADER = ""
 DOCKER_PROJ_NAME_HEADER = ""
+VERSION_REGEXP = ""
+ONAP_VERSION_REGEXP = "^\d+.\d+.\d+$"
 
 
 def _remove_http_from_url(url):
@@ -103,7 +105,20 @@ def _request_get(url):
     return resp
 
 
-def initialize(org_name):
+def which_version_regexp_to_use(input_regexp_or_filename):
+    """Set version regexp as per user request.
+
+    regexp is either a regexp to be directly used, or its a file name,
+    and the file contains the regexp to use
+    """
+    global VERSION_REGEXP
+    if len(input_regexp_or_filename) == 0:
+        VERSION_REGEXP = ONAP_VERSION_REGEXP
+    else:
+        VERSION_REGEXP = input_regexp_or_filename
+
+
+def initialize(org_name, input_regexp_or_filename=""):
     """Set constant strings."""
     global NEXUS3_BASE
     global NEXUS3_CATALOG
@@ -113,6 +128,7 @@ def initialize(org_name):
     NEXUS3_CATALOG = NEXUS3_BASE + "/v2/_catalog"
     NEXUS3_PROJ_NAME_HEADER = "Nexus3 Project Name"
     DOCKER_PROJ_NAME_HEADER = "Docker HUB Project Name"
+    which_version_regexp_to_use(input_regexp_or_filename)
 
 
 class TagClass:
@@ -148,7 +164,8 @@ class TagClass:
           where keyword = STAGING or SNAPSHOT
           '^\d+.\d+.\d+-(STAGING|SNAPSHOT)-(20\d{2})(\d{2})(\d{2})T([01]\d|2[0-3])([0-5]\d)([0-5]\d)Z$'
         """
-        pattern = re.compile(r"^\d+.\d+.\d+$")
+        log.debug(">>{}<< version_regexp".format(VERSION_REGEXP))
+        pattern = re.compile(r"{}".format(VERSION_REGEXP))
         log.debug("validate tag {} in {} --> {}".format(check_tag, self.repo, pattern.match(check_tag)))
         return pattern.match(check_tag)
 
@@ -822,13 +839,14 @@ def start_point(
     copy=False,
     progbar=False,
     repofile=False,
+    version_regexp="",
 ):
     """Main function."""
     # Verify find_pattern and specified_repo are not both used.
     if len(find_pattern) == 0 and exact_match:
         log.error("You need to provide a Pattern to go with the --exact flag")
         return
-    initialize(org_name)
+    initialize(org_name, version_regexp)
     if not get_nexus3_catalog(org_name, find_pattern, exact_match, repofile):
         log.info("Could not get any catalog from Nexus3 with org = {}".format(org_name))
         return
