@@ -216,11 +216,21 @@ def release(ctx, repos, verify, server):
     " Sample:                                                       "
     " onap/msb/msb_apigateway; onap/msb-msb_apigateway",
 )
+@click.option(
+    "-x",
+    "--version_regexp",
+    type=str,
+    default="",
+    required=False,
+    help="Specify a file which contains a regexp expression to validate version number."
+    " File sample:                                                  "
+    " ^\d+.\d+.\d+$                                                 ",
+)
 @click.pass_context
-def copy_from_nexus3_to_dockerhub(ctx, org, repo, exact, summary, verbose, copy, progbar, repofile):
+def copy_from_nexus3_to_dockerhub(ctx, org, repo, exact, summary, verbose, copy, progbar, repofile, version_regexp):
     """Find missing repos in Docker Hub, Copy from Nexus3.
 
     Will by default list all missing repos in Docker Hub, compared to Nexus3.
     If -c (--copy) is provided, it will copy the repos from Nexus3 to Docker Hub.
     """
-    rdh.start_point(org, repo, exact, summary, verbose, copy, progbar, repofile)
+    rdh.start_point(org, repo, exact, summary, verbose, copy, progbar, repofile, version_regexp)
