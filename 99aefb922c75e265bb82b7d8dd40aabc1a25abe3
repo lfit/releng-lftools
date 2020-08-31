@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e14254d_6aabe844",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-08-31T16:07:07Z",
+      "side": 1,
+      "message": "Could we use a different name for this? \"ONAP\" seems very specific for something that is very generic. Maybe \"SEMVER_REGEXP\" or \"DEFAULT_REGEXP\" or something like that.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 19
+      },
+      "revId": "99aefb922c75e265bb82b7d8dd40aabc1a25abe3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a7d4b01_1785f100",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-08-31T16:07:07Z",
+      "side": 1,
+      "message": "In this case, we are setting VERSION_REGEXP to a filename, rather than the file\u0027s contents, are we not? That seems wrong, unless I\u0027m misunderstanding how this is intended to work.",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 49
+      },
+      "revId": "99aefb922c75e265bb82b7d8dd40aabc1a25abe3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
