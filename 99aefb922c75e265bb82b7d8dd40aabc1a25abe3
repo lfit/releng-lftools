@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "622228d5_2b562ae2",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-09-01T01:19:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e14254d_6aabe844",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 19
+      },
+      "revId": "99aefb922c75e265bb82b7d8dd40aabc1a25abe3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0a7d4b01_1785f100",
         "filename": "lftools/nexus/release_docker_hub.py",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-08-31T16:07:07Z",
       "side": 1,
       "message": "In this case, we are setting VERSION_REGEXP to a filename, rather than the file\u0027s contents, are we not? That seems wrong, unless I\u0027m misunderstanding how this is intended to work.",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 49
+      },
+      "revId": "99aefb922c75e265bb82b7d8dd40aabc1a25abe3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16e132d8_d5f3b5ad",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-09-01T01:19:20Z",
+      "side": 1,
+      "message": "You are not wrong :) \nCurrently I am a bit confused. And looking for feedback.\nOriginally I thought to have the regexp in a file, but changed during the way to have it as part of the command line. \nStill thinking a file would be good for complicated regexp like the proposed ONAP one which is\n\u0027^\\d+.\\d+.\\d+-(STAGING|SNAPSHOT)-(20\\d{2})(\\d{2})(\\d{2})T([01]\\d|2[0-3])([0-5]\\d)([0-5]\\d)Z$\u0027\n\nI\u0027ll try to code it so that if it is a filename, take the contents, if not a filename, use it as a regexp.",
+      "parentUuid": "0a7d4b01_1785f100",
       "range": {
         "startLine": 118,
         "startChar": 8,
