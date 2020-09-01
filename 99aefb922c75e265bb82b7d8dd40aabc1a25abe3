@@ -93,6 +93,30 @@
       "revId": "99aefb922c75e265bb82b7d8dd40aabc1a25abe3",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a66009df_9dfbfed7",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-09-01T08:47:13Z",
+      "side": 1,
+      "message": "Ok, added code to handle\n1) input_regexp_or_filename is empty, then use the default\n2) input_regexp_or_filename is a regexp, then use this one\n3) input_regexp_or_filename is a file name, then use the first row in that file.\nVerify that regexp is a valid regexp.",
+      "parentUuid": "16e132d8_d5f3b5ad",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 49
+      },
+      "revId": "99aefb922c75e265bb82b7d8dd40aabc1a25abe3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
