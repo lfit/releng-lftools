@@ -117,6 +117,30 @@
       "revId": "99aefb922c75e265bb82b7d8dd40aabc1a25abe3",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8dda688_edfe937c",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2020-09-01T08:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a66009df_9dfbfed7",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 49
+      },
+      "revId": "99aefb922c75e265bb82b7d8dd40aabc1a25abe3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
