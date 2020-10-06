@@ -15,6 +15,7 @@ import logging
 import os
 import time
 import urllib
+import sys
 
 from lftools import config
 import lftools.api.client as client
@@ -232,7 +233,7 @@ class Gerrit(client.RestApi):
             except:
                 log.info("Not found {}".format(access_str))
                 exit(1)
-            log.info("found {}".format(access_str))
+            log.info("found {} {}".format(access_str, mylist))
         return result
 
     def add_git_review(self, fqdn, gerrit_project, issue_id, **kwargs):
@@ -296,6 +297,19 @@ class Gerrit(client.RestApi):
             result = self.submit_change(fqdn, gerrit_project, changeid, payload)
             log.info(result)
 
+    def create_saml_group(self, fqdn, ldap_group, **kwargs):
+        """create saml group from ldap group."""
+        ###############################################################
+        payload = json.dumps({"visible_to_all": "false"})
+
+        saml_group = "saml/{}".format(ldap_group)
+        saml_group_encoded = urllib.parse.quote(saml_group, safe="", encoding=None, errors=None)
+        log.info(saml_group_encoded)
+        access_str = "groups/{}".format(saml_group_encoded)
+        log.info(access_str)
+        result = self.put(access_str, data=payload)
+        return result
+
     def add_github_rights(self, fqdn, gerrit_project, **kwargs):
         """Grant github read to a project."""
         ###############################################################
@@ -334,7 +348,7 @@ class Gerrit(client.RestApi):
         """Create a project via the gerrit API.
 
         Creates a gerrit project.
-        Sets ldap group as owner.
+        Converts ldap group to saml group and sets as owner.
 
         Example:
 
@@ -354,8 +368,15 @@ class Gerrit(client.RestApi):
             log.info("Project not found.")
             projectexists = False
 
+        elif result.status_code == 401:
+            log.info(result)
+            log.info("Unauthorized.")
+            projectexists = True
+            sys.exit(1)
+
         else:
             log.info("found {}".format(access_str))
+            log.info(result)
             projectexists = True
 
         if projectexists:
@@ -364,8 +385,8 @@ class Gerrit(client.RestApi):
         if check:
             exit(0)
 
-        ldapgroup = "ldap:cn={},ou=Groups,dc=freestandards,dc=org".format(ldap_group)
-        log.info(ldapgroup)
+        saml_group = "saml/{}".format(ldap_group)
+        log.info(saml_group)
 
         access_str = "projects/{}".format(gerrit_project)
         payload = json.dumps(
@@ -373,7 +394,7 @@ class Gerrit(client.RestApi):
                 "description": "{}".format(description),
                 "submit_type": "INHERIT",
                 "create_empty_commit": "True",
-                "owners": ["{}".format(ldapgroup)],
+                "owners": ["{}".format(saml_group)],
             }
         )
 
