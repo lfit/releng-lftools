@@ -1,0 +1,10 @@
+---
+features:
+  - |
+    Enhancements for saml support.
+
+    #. Added lftools gerrit create-saml-group.
+    #. Takes a gerrit endpoint and an ldap group as parameters.
+    #. Creates a saml group for this ldap group so that project creation can be automated.
+    #. Project creation call now translates ldap group to saml group and adds saml group as project owner.
+
