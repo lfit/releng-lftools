@@ -1,0 +1,7 @@
+---
+new:
+  - |
+    Added lftools gerrit create-saml-group
+    Takes a gerrit endpoint and an ldap group as options
+    Creates a saml group for this ldap group so that project creation
+    can be automated.
