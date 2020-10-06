@@ -150,6 +150,15 @@ def createproject(ctx, gerrit_fqdn, gerrit_project, ldap_group, description, che
     data = g.create_project(gerrit_fqdn, gerrit_project, ldap_group, description, check)
     log.info(pformat(data))
 
+@click.command(name="create-saml-group")
+@click.argument("gerrit_fqdn")
+@click.argument("ldap_group")
+@click.pass_context
+def create_saml_group(ctx, gerrit_fqdn, ldap_group):
+    """List Owners of a Project."""
+    g = gerrit.Gerrit(fqdn=gerrit_fqdn)
+    data = g.create_saml_group(gerrit_fqdn, ldap_group)
+    print(pformat(data))
 
 @click.command(name="list-project-permissions")
 @click.argument("gerrit_fqdn")
@@ -180,5 +189,6 @@ gerrit_cli.add_command(addgitreview)
 gerrit_cli.add_command(addgithubrights)
 gerrit_cli.add_command(createproject)
 gerrit_cli.add_command(abandonchanges)
+gerrit_cli.add_command(create_saml_group)
 gerrit_cli.add_command(list_project_permissions)
 gerrit_cli.add_command(list_project_inherits_from)
