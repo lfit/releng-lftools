@@ -48,6 +48,12 @@ createproject
 .. program-output:: lftools gerrit createproject --help
 
 
+create-saml-group
+-----------------
+
+.. program-output:: lftools gerrit create-saml-group --help
+
+
 addinfojob
 ----------
 .. program-output:: lftools gerrit addinfojob --help
