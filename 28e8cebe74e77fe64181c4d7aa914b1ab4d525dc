@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c797ba44_ec933cd4",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-06T21:05:40Z",
+      "side": 1,
+      "message": "Are there any keyword args that are being passed here? If so, they should be documented. If not, you should probably just remove the kwargs parameter.",
+      "range": {
+        "startLine": 300,
+        "startChar": 50,
+        "endLine": 300,
+        "endChar": 58
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "637d7711_b4352222",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-06T21:05:40Z",
+      "side": 1,
+      "message": "Capitalize first word.",
+      "range": {
+        "startLine": 301,
+        "startChar": 11,
+        "endLine": 301,
+        "endChar": 17
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68563b0a_5f0615f3",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-06T21:05:40Z",
+      "side": 1,
+      "message": "Some context on this and the next log call would be helpful. Such as:\nlog.info(\"Encoded SAML group name: {}\".format(saml_group_encoded))",
+      "range": {
+        "startLine": 307,
+        "startChar": 8,
+        "endLine": 307,
+        "endChar": 36
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62370473_8ce2cd8d",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-06T21:05:40Z",
+      "side": 1,
+      "message": "Why set this var right before exiting?",
+      "range": {
+        "startLine": 374,
+        "startChar": 12,
+        "endLine": 374,
+        "endChar": 32
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9843e4ab_2848dff3",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-06T21:05:40Z",
+      "side": 1,
+      "message": "Why import sys and do a sys.exit here, rather than just exit(1)?",
+      "range": {
+        "startLine": 375,
+        "startChar": 12,
+        "endLine": 375,
+        "endChar": 23
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e957fa03_a22a36b8",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-06T21:05:40Z",
+      "side": 1,
+      "message": "Again, context would help here.",
+      "range": {
+        "startLine": 389,
+        "startChar": 8,
+        "endLine": 389,
+        "endChar": 28
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86cba073_5d2303a3",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-06T21:05:40Z",
+      "side": 1,
+      "message": "I believe this should be a log.info call rather than print.",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 9
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5400bebb_a4f43066",
+        "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-06T21:05:40Z",
+      "side": 1,
+      "message": "I don\u0027t see \"new\" in the reno template. Should this be included in \"features\"?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 3
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ded6b8f_bd03f0b4",
+        "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-06T21:05:40Z",
+      "side": 1,
+      "message": "Please add punctuation.",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
