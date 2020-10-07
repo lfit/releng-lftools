@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7d9f5315_bb9afa62",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-10-07T17:25:14Z",
+      "side": 1,
+      "message": "..Uh. I think i need those for the auth bits to get passed, all the other functions have them",
+      "parentUuid": "c797ba44_ec933cd4",
+      "range": {
+        "startLine": 300,
+        "startChar": 50,
+        "endLine": 300,
+        "endChar": 58
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "637d7711_b4352222",
         "filename": "lftools/api/endpoints/gerrit.py",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aab4bf20_29f46bff",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-10-07T17:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "637d7711_b4352222",
+      "range": {
+        "startLine": 301,
+        "startChar": 11,
+        "endLine": 301,
+        "endChar": 17
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9f86ad9f_f8a4fffd",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-10-07T17:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68563b0a_5f0615f3",
+      "range": {
+        "startLine": 307,
+        "startChar": 8,
+        "endLine": 307,
+        "endChar": 36
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62370473_8ce2cd8d",
         "filename": "lftools/api/endpoints/gerrit.py",
         "patchSetId": 8
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "c63768e0_a635fbbc",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-10-07T17:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62370473_8ce2cd8d",
+      "range": {
+        "startLine": 374,
+        "startChar": 12,
+        "endLine": 374,
+        "endChar": 32
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9843e4ab_2848dff3",
         "filename": "lftools/api/endpoints/gerrit.py",
         "patchSetId": 8
@@ -114,6 +210,30 @@
       "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "125805ed_e1adc3cd",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-10-07T17:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9843e4ab_2848dff3",
+      "range": {
+        "startLine": 375,
+        "startChar": 12,
+        "endLine": 375,
+        "endChar": 23
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "2371ad6c_39e13555",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-10-07T17:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86cba073_5d2303a3",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 9
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5400bebb_a4f43066",
         "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
         "patchSetId": 8
@@ -186,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "ff7f48c2_0a8ded02",
+        "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-10-07T17:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5400bebb_a4f43066",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 3
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ded6b8f_bd03f0b4",
         "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
         "patchSetId": 8
@@ -206,6 +374,30 @@
       "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28587724_f18bad78",
+        "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 12
+      },
+      "writtenOn": "2020-10-07T17:25:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ded6b8f_bd03f0b4",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
