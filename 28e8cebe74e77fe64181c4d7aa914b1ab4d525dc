@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ca897e48_8ca8985f",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-07T18:06:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7d9f5315_bb9afa62",
+      "range": {
+        "startLine": 300,
+        "startChar": 50,
+        "endLine": 300,
+        "endChar": 58
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "637d7711_b4352222",
         "filename": "lftools/api/endpoints/gerrit.py",
         "patchSetId": 8
