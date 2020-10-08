@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "be67769b_d8e49fca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-10-08T20:48:16Z",
+      "side": 1,
+      "message": "Do we have a Jira Issue for this work? If so, please include it. If not, please make one and then include it.",
+      "revId": "12338c708783522b13f7a8af6da2c6f70e19419e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77bdb192_04a6ad36",
+        "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-10-08T20:48:16Z",
+      "side": 1,
+      "message": "given the way this is written it should be a bulleted listed",
+      "revId": "12338c708783522b13f7a8af6da2c6f70e19419e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "90861a60_7de8c25a",
         "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
         "patchSetId": 9
@@ -13,6 +47,30 @@
       "writtenOn": "2020-10-07T18:22:08Z",
       "side": 1,
       "message": "as parameters?",
+      "range": {
+        "startLine": 5,
+        "startChar": 49,
+        "endLine": 5,
+        "endChar": 56
+      },
+      "revId": "12338c708783522b13f7a8af6da2c6f70e19419e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6c3d031_6db6f2f6",
+        "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-10-08T20:48:16Z",
+      "side": 1,
+      "message": "yes parameters would be a better wording",
+      "parentUuid": "90861a60_7de8c25a",
       "range": {
         "startLine": 5,
         "startChar": 49,
