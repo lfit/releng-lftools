@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "096c5a77_e9f1a8c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-10-09T16:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be67769b_d8e49fca",
+      "revId": "12338c708783522b13f7a8af6da2c6f70e19419e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "77bdb192_04a6ad36",
         "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
         "patchSetId": 9
@@ -33,6 +51,24 @@
       "revId": "12338c708783522b13f7a8af6da2c6f70e19419e",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddb83119_edca2798",
+        "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-10-09T16:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77bdb192_04a6ad36",
+      "revId": "12338c708783522b13f7a8af6da2c6f70e19419e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     },
     {
       "key": {
@@ -80,6 +116,30 @@
       "revId": "12338c708783522b13f7a8af6da2c6f70e19419e",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "226ffefe_53580520",
+        "filename": "releasenotes/notes/gerrit-create-saml-groups-63ac96a53c1df0c3.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-10-09T16:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6c3d031_6db6f2f6",
+      "range": {
+        "startLine": 5,
+        "startChar": 49,
+        "endLine": 5,
+        "endChar": 56
+      },
+      "revId": "12338c708783522b13f7a8af6da2c6f70e19419e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }

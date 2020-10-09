@@ -284,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "b6a713e5_10e4cf4d",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-10-09T16:49:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e957fa03_a22a36b8",
+      "range": {
+        "startLine": 389,
+        "startChar": 8,
+        "endLine": 389,
+        "endChar": 28
+      },
+      "revId": "28e8cebe74e77fe64181c4d7aa914b1ab4d525dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86cba073_5d2303a3",
         "filename": "lftools/cli/gerrit.py",
         "patchSetId": 8
