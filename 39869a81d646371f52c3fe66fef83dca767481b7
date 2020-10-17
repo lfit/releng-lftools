@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b73b07c7_4061a21b",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2020-10-17T14:46:29Z",
+      "side": 1,
+      "message": "Getting this object should be outside the for loop. With it inside the loop you\u0027re getting the object multiple times and that\u0027s not efficient, especially if cloud._get_project_info() is doing what I think it\u0027s doing actually communicating back to the cloud to get this information!",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 87,
+        "endChar": 52
+      },
+      "revId": "39869a81d646371f52c3fe66fef83dca767481b7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
+    }
+  ]
+}
