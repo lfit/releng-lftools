@@ -1,0 +1,10 @@
+---
+fixes:
+  - |
+    Check image owner and visibility on image cleanup
+
+    Recently update on the cloud provider has caused the builder-cron-openstack
+    job to fail, and exposed a bug in our cleanup scripts.
+
+    Check the visibility and ownerid of the image before attempting to remove
+    and image.

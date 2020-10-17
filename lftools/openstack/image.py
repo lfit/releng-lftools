@@ -74,9 +74,23 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
 
     def _remove_images_from_cloud(images, cloud):
         print("Removing {} images from {}.".format(len(images), cloud.cloud_config.name))
+        project_info = cloud._get_project_info()
         for image in images:
+
             if image.is_protected:
                 print("WARNING: Image {} is protected. Cannot remove...".format(image.name))
+                continue
+
+            if image.visibility == "shared":
+                print("WARNING: Image {} is shared. Cannot remove...".format(image.name))
+                continue
+
+            if project_info["id"] != image.owner:
+                print(
+                    "WARNING: Image {} not owned by project {}. Cannot remove...".format(
+                        image.name, cloud.cloud_config.name
+                    )
+                )
                 continue
 
             try:
