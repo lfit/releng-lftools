@@ -22,6 +22,30 @@
       "revId": "185687034f74d439890053c835ce53f85fe742fc",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "479a1d89_d78b7966",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2020-10-19T22:09:25Z",
+      "side": 1,
+      "message": "I agree, all the prints have to changed in the lftools from print to log.{info,warning,debug} etc. With this CR its out of scope and need this fixed asap to get the builder openstack cron to get working properly again. I\u0027d recommend opening a Jira ticket to address the print statements.",
+      "parentUuid": "b982a2fd_f7ef7dbb",
+      "range": {
+        "startLine": 85,
+        "startChar": 16,
+        "endLine": 93,
+        "endChar": 17
+      },
+      "revId": "185687034f74d439890053c835ce53f85fe742fc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": true
     }
   ]
 }
