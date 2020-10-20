@@ -46,6 +46,30 @@
       "revId": "185687034f74d439890053c835ce53f85fe742fc",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05afe4b3_52503eff",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2020-10-20T00:42:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "479a1d89_d78b7966",
+      "range": {
+        "startLine": 85,
+        "startChar": 16,
+        "endLine": 93,
+        "endChar": 17
+      },
+      "revId": "185687034f74d439890053c835ce53f85fe742fc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09",
+      "unresolved": false
     }
   ]
 }
