@@ -1,0 +1,14 @@
+---
+
+features:
+  - |
+    This patch adds the possibility for the user to change the Version Schema.
+    This is done by the new --version_regexp <regexp> parameter.
+    If this parameter is not used, then the ONAP #.#.# ("^\d+.\d+.\d+$") regexp will be used.
+
+    The parameter can be an regexp, like "^\d+.\d+.\d+$", or a file name, which contains a longer regexp.
+
+
+    Sample command
+    lftools nexus docker releasedockerhub -o onap -r aai -v --version_regexp "^\d+.\d+.\d+$"
+
