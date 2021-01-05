@@ -57,7 +57,7 @@ def list(os_cloud, days=0, hide_public=False, ci_managed=True):
 
     filtered_images = _filter_images(images, days, hide_public, ci_managed)
     for image in filtered_images:
-        print(image.name)
+        log.info(image.name)
 
 
 def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
@@ -73,7 +73,7 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
     """
 
     def _remove_images_from_cloud(images, cloud):
-        print("Removing {} images from {}.".format(len(images), cloud.cloud_config.name))
+        log.info("Removing {} images from {}.".format(len(images), cloud.cloud_config.name))
         project_info = cloud._get_project_info()
         for image in images:
 
@@ -95,20 +95,20 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
                 result = cloud.delete_image(image.name)
             except shade.exc.OpenStackCloudException as e:
                 if str(e).startswith("Multiple matches found for"):
-                    print("WARNING: {}. Skipping image...".format(str(e)))
+                    log.warning("{}. Skipping image...".format(str(e)))
                     continue
                 else:
-                    print("ERROR: Unexpected exception: {}".format(str(e)))
+                    log.error("Unexpected exception: {}".format(str(e)))
                     raise
 
             if not result:
-                print(
-                    'WARNING: Failed to remove "{}" from {}. Possibly already deleted.'.format(
+                log.warning(
+                    'Failed to remove "{}" from {}. Possibly already deleted.'.format(
                         image.name, cloud.cloud_config.name
                     )
                 )
             else:
-                print('Removed "{}" from {}.'.format(image.name, cloud.cloud_config.name))
+                log.info('Removed "{}" from {}.'.format(image.name, cloud.cloud_config.name))
 
     cloud = shade.openstack_cloud(cloud=os_cloud)
     if clouds:
