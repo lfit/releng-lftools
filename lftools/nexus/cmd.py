@@ -492,6 +492,8 @@ def release_staging_repos(repos, verify, nexus_url=""):
             log.info("Sending data: {}".format(data))
             request_url = "{}/staging/bulk/promote".format(_nexus.baseurl)
             log.info("Request URL: {}".format(request_url))
+            log.info("Requesting Nexus to release {}".format(repo))
+
             response = requests.post(request_url, json=data, auth=_nexus.auth)
 
             if response.status_code != 201:
@@ -499,22 +501,25 @@ def release_staging_repos(repos, verify, nexus_url=""):
                     "Release failed with the following error:" "\n{}: {}".format(response.status_code, response.text)
                 )
             else:
-                log.info("Successfully released {}".format(str(repo)))
+                log.info("Nexus is now working on releasing {}".format(str(repo)))
 
             # Hang out until the repo is fully closed
-            log.info("Polling for repo to enter the closed state.")
+            log.info("Waiting for Nexus to complete releasing {}".format(str(repo)))
             closed = False
+            wait_seconds = 20
+            wait_itteration = 0
             activity_url = "{}/staging/repository/{}/activity".format(_nexus.baseurl, repo)
             while closed is False:
-                response = requests.get(activity_url, auth=_nexus.auth).text
-                root = et.fromstring(response)  # nosec
-                events = root.findall("./stagingActivity")
-                for event in events:
-                    name = event.find("name")
-                    if name.text == "close":
-                        stopped = event.find("stopped")
-                        log.info("Repo closed at: {}".format(stopped.text))
-                        closed = True
-                    else:
-                        log.info("Repo is not fully closed, sleeping for five minutes.")
-                        sleep(300)
+                sleep(wait_seconds)
+                wait_itteration = wait_itteration + 1
+                log.info("Still waiting... {:>4d} seconds gone".format(total_wait_seconds * wait_itteration))
+                if (wait_itteration % 2) != 0:
+                    response = requests.get(activity_url, auth=_nexus.auth).text
+                    root = et.fromstring(response)  # nosec
+                    events = root.findall("./stagingActivity")
+                    for event in events:
+                        name = event.find("name")
+                        if name.text == "close":
+                            stopped = event.find("stopped")
+                            log.info("Repo released and closed at: {}".format(stopped.text))
+                            closed = True

@@ -1,0 +1,5 @@
+---
+other:
+  - |
+    Changed the printouts to console when releasing a staging repo.
+    Printout every 20 seconds, and checking if released every 40 second.
