@@ -31,7 +31,7 @@ PyGithub==1.46
 PyJWT==1.7.1
 pyrsistent==0.15.7
 python-jenkins==1.7.0
-PyYAML==5.3
+PyYAML
 requests==2.23.0
 rsa==4.0
 ruamel.yaml==0.16.10

@@ -27,37 +27,61 @@ def dco(ctx):
 
 @click.command()
 @click.argument("repo-path", required=False)
+@click.option(
+    "--signoffs",
+    type=str,
+    required=False,
+    default="dco_signoffs",
+    help="Specify a directory to check for DCO signoff text files",
+)
 @click.pass_context
-def check(ctx, repo_path):
+def check(ctx, repo_path, signoffs):
     """Check repository for commits missing DCO.
 
     This check will exclude merge commits and empty commits.
     It operates in your current working directory which has to
     be a git repository.  Alternatively, you can opt to pass in the
     path to a git repo.
+
+    By default, this will also check for DCO signoff files in a directory
+    named "dco_signoffs".  To check in a different directory, use the
+    --signoffs option.
+
     Refer to https://developercertificate.org/
     """
     if not repo_path:
         repo_path = "."
-    status = dco_checker.check(repo_path)
+    status = dco_checker.check(repo_path, signoffs)
     sys.exit(status)
 
 
 @click.command()
 @click.argument("repo-path", required=False)
+@click.option(
+    "--signoffs",
+    type=str,
+    required=False,
+    default="dco_signoffs",
+    help="Specify a directory to check for DCO signoff text files",
+)
 @click.pass_context
-def match(ctx, repo_path):
+def match(ctx, repo_path, signoffs):
     """Check for commits whose DCO does not match the commit author's email.
 
     This check will exclude merge commits and empty commits.
     It operates in your current working directory which has to
     be a git repository.  Alternatively, you can opt to pass in the
     path to a git repo.
+
+    By default, this will also check for DCO signoff files in a directory
+    named "dco_signoffs".  To check in a different directory, use the
+    --signoffs option.
+
     Refer to https://developercertificate.org/
     """
     if not repo_path:
         repo_path = "."
-    status = dco_checker.match(repo_path)
+    status = dco_checker.match(repo_path, signoffs)
     sys.exit(status)
 
 
