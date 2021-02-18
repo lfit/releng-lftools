@@ -13,10 +13,11 @@
 __author__ = "DW Talton"
 
 import logging
+import os
 from os import chdir
 from os import getcwd
 import re
-import subprocess  # nosec
+import subprocess
 
 log = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ def get_branches(path=getcwd(), invert=False):
     chdir(path)
     try:
         branches = (
-            subprocess.check_output("git branch -r | grep -v origin/HEAD", shell=True)  # nosec
+            subprocess.check_output("git branch -r | grep -v origin/HEAD", shell=True)
             .decode(encoding="UTF-8")
             .splitlines()
         )
@@ -38,8 +39,8 @@ def get_branches(path=getcwd(), invert=False):
         for branch in branches:
             branch = branch.strip()
             hashes = (
-                subprocess.check_output(  # nosec
-                    'git log {} --no-merges --pretty="%H %ae" --grep "Signed-off-by" {}'.format(branch, invert),  # noqa
+                subprocess.check_output(
+                    'git log {} --no-merges --pretty="%H %ae" --grep ' + '"Signed-off-by" {}'.format(branch, invert),
                     shell=True,
                 )
                 .decode(encoding="UTF-8")
@@ -57,7 +58,7 @@ def get_branches(path=getcwd(), invert=False):
         exit(1)
 
 
-def check(path=getcwd()):
+def check(path=getcwd(), signoffs_dir="dco_signoffs"):
     """Check repository for commits missing DCO."""
     chdir(path)
     try:
@@ -70,9 +71,21 @@ def check(path=getcwd()):
                 if commit:
                     missing.append(commit.split(" ")[0])
 
-            if missing:
-                # de-dupe the commit list
-                missing_list = list(dict.fromkeys(missing))
+            if not missing:
+                exit(0)
+
+            # de-dupe the commit list
+            missing_list = list(dict.fromkeys(missing))
+
+            # Check for dco_signoffs file
+            if os.path.isdir(signoffs_dir):
+                missing_list = [
+                    commit
+                    for commit in missing_list
+                    if subprocess.run(["grep", "-Ri", commit, signoffs_dir], capture_output=True).returncode
+                ]
+
+            if missing_list:
                 for commit in missing_list:
                     log.info("{}".format(commit))
                 exit(1)
@@ -93,20 +106,18 @@ def match(path=getcwd()):
             for commit in hashes:
                 commit_id = commit.split(" ")[0]
                 if commit_id:
-                    commit_log_message = subprocess.check_output(  # nosec
+                    commit_log_message = subprocess.check_output(
                         "git log --format=%B -n 1 {}".format(commit_id), shell=True
                     ).decode(encoding="UTF-8")
                     commit_author_email = (
-                        subprocess.check_output("git log --format='%ae' {}^!".format(commit_id), shell=True)  # nosec
+                        subprocess.check_output("git log --format='%ae' {}^!".format(commit_id), shell=True)
                         .decode(encoding="UTF-8")
                         .strip()
                     )
-                    sob_email_regex = "(?=Signed\-off\-by: )*[\<](.*)[\>]"  # noqa
+                    sob_email_regex = r"(?=Signed\-off\-by: )*[\<](.*)[\>]"
                     sob_results = re.findall(sob_email_regex, commit_log_message)
 
-                    if commit_author_email in sob_results:
-                        continue
-                    else:
+                    if not commit_author_email in sob_results:
                         log.info(
                             "For commit ID {}: \n\tCommitter is {}"
                             "\n\tbut commit is signed off by {}\n".format(commit_id, commit_author_email, sob_results)
