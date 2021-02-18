@@ -13,10 +13,11 @@
 __author__ = "DW Talton"
 
 import logging
+import os
 from os import chdir
 from os import getcwd
 import re
-import subprocess  # nosec
+import subprocess
 
 log = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ def get_branches(path=getcwd(), invert=False):
     chdir(path)
     try:
         branches = (
-            subprocess.check_output("git branch -r | grep -v origin/HEAD", shell=True)  # nosec
+            subprocess.check_output("git branch -r | grep -v origin/HEAD", shell=True)
             .decode(encoding="UTF-8")
             .splitlines()
         )
@@ -38,8 +39,8 @@ def get_branches(path=getcwd(), invert=False):
         for branch in branches:
             branch = branch.strip()
             hashes = (
-                subprocess.check_output(  # nosec
-                    'git log {} --no-merges --pretty="%H %ae" --grep "Signed-off-by" {}'.format(branch, invert),  # noqa
+                subprocess.check_output(
+                    'git log {} --no-merges --pretty="%H %ae" --grep "Signed-off-by" {}'.format(branch, invert),
                     shell=True,
                 )
                 .decode(encoding="UTF-8")
@@ -57,7 +58,7 @@ def get_branches(path=getcwd(), invert=False):
         exit(1)
 
 
-def check(path=getcwd()):
+def check(path=getcwd(), signoffs_dir="dco_signoffs"):
     """Check repository for commits missing DCO."""
     chdir(path)
     try:
@@ -70,9 +71,21 @@ def check(path=getcwd()):
                 if commit:
                     missing.append(commit.split(" ")[0])
 
-            if missing:
-                # de-dupe the commit list
-                missing_list = list(dict.fromkeys(missing))
+            if not missing:
+                exit(0)
+
+            # de-dupe the commit list
+            missing_list = list(dict.fromkeys(missing))
+
+            # Check for dco_signoffs file
+            if os.path.isdir(signoffs_dir):
+                missing_list = [
+                    commit
+                    for commit in missing_list
+                    if subprocess.run(["grep", "-Ri", commit, signoffs_dir], capture_output=True).returncode
+                ]
+
+            if missing_list:
                 for commit in missing_list:
                     log.info("{}".format(commit))
                 exit(1)
@@ -81,7 +94,7 @@ def check(path=getcwd()):
         exit(1)
 
 
-def match(path=getcwd()):
+def match(path=getcwd(), signoffs_dir="dco_signoffs"):
     """Check for commits where DCO does not match the commit author's email."""
     chdir(path)
     try:
@@ -89,30 +102,44 @@ def match(path=getcwd()):
         exit_code = 0
         if not hashes:
             exit(exit_code)
-        else:
-            for commit in hashes:
-                commit_id = commit.split(" ")[0]
-                if commit_id:
-                    commit_log_message = subprocess.check_output(  # nosec
-                        "git log --format=%B -n 1 {}".format(commit_id), shell=True
-                    ).decode(encoding="UTF-8")
-                    commit_author_email = (
-                        subprocess.check_output("git log --format='%ae' {}^!".format(commit_id), shell=True)  # nosec
-                        .decode(encoding="UTF-8")
-                        .strip()
-                    )
-                    sob_email_regex = "(?=Signed\-off\-by: )*[\<](.*)[\>]"  # noqa
-                    sob_results = re.findall(sob_email_regex, commit_log_message)
 
-                    if commit_author_email in sob_results:
+        # de-dupe the commit list
+        hashes_list = list(dict.fromkeys(hashes))
+
+        for commit in hashes_list:
+            commit_id = commit.split(" ")[0]
+            if commit_id:
+                commit_log_message = subprocess.check_output(
+                    "git log --format=%B -n 1 {}".format(commit_id), shell=True
+                ).decode(encoding="UTF-8")
+                commit_author_email = (
+                    subprocess.check_output("git log --format='%ae' {}^!".format(commit_id), shell=True)
+                    .decode(encoding="UTF-8")
+                    .strip()
+                )
+                sob_email_regex = r"(?=Signed\-off\-by: ).*[\<](.*)[\>]"
+                sob_results = re.findall(sob_email_regex, commit_log_message)
+
+                if not commit_author_email in sob_results and os.path.isdir(signoffs_dir):
+                    dco_file = subprocess.run(
+                        ["grep", "-Rli", commit_author_email, signoffs_dir], capture_output=True
+                    ).stdout
+                    # If commit_author_email and commit_id are in the same file, do not print info
+                    if (
+                        dco_file
+                        and not subprocess.run(
+                            ["grep", "-li", commit_id, dco_file.strip()], capture_output=True
+                        ).returncode
+                    ):
                         continue
-                    else:
-                        log.info(
-                            "For commit ID {}: \n\tCommitter is {}"
-                            "\n\tbut commit is signed off by {}\n".format(commit_id, commit_author_email, sob_results)
-                        )
-                        exit_code = 1
-            exit(exit_code)
+
+                log.info(
+                    "For commit ID {}: \n\tCommitter is {}"
+                    "\n\tbut commit is signed off by {}\n".format(commit_id, commit_author_email, sob_results)
+                )
+                exit_code = 1
+
+        exit(exit_code)
     except subprocess.CalledProcessError as e:
         log.error(e)
         exit(1)

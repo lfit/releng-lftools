@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    ``lftools dco check`` will now include a check for signoff files to remove
+    commits from the "missing DCO" list. By default, this will check the
+    directory "dco_signoffs", but the ``--signoffs`` option can be used to
+    specify a different directory.
