@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ec2d8c_c47c798b",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-22T18:42:20Z",
+      "side": 1,
+      "message": "Line is overlong, please wrap",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28535cc1_9e52565b",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-22T18:42:20Z",
+      "side": 1,
+      "message": "You\u0027ve added the signoff directory checking for the \u0027quick and dirty\u0027 DCO checker, but not the more strict DCO \u0027match\u0027 checker. It should be supported on both",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5759d50f_6aedaef7",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-22T18:42:20Z",
+      "side": 1,
+      "message": "You split this line. Were you intending to break it across lines (to fix the wrapping?) or for some other reason?",
+      "range": {
+        "startLine": 43,
+        "startChar": 69,
+        "endLine": 43,
+        "endChar": 74
+      },
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c202d82a_ee6e4e9f",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-22T18:42:20Z",
+      "side": 1,
+      "message": "Wrap long line",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf03710_3399576e",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-22T18:42:20Z",
+      "side": 1,
+      "message": "wrap long line",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
