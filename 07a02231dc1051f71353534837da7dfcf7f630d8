@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc0043f3_26033152",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-02-22T20:39:22Z",
+      "side": 1,
+      "message": "All of our formatting settings are set to 120. In fact, I tried to wrap lines at 80, and the Black pre-commit function failed and told me to leave them as one line.\n\nPlease see:\n.editorconfig\npyproject.toml\ntox.ini",
+      "parentUuid": "e7ec2d8c_c47c798b",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28535cc1_9e52565b",
         "filename": "lftools/cli/dco.py",
         "patchSetId": 2
@@ -60,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b342d76d_f1ccbd7f",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-02-22T20:39:22Z",
+      "side": 1,
+      "message": "Whoops, when fixing the issues causing Black to fail, I missed this in my cleanup.",
+      "parentUuid": "5759d50f_6aedaef7",
+      "range": {
+        "startLine": 43,
+        "startChar": 69,
+        "endLine": 43,
+        "endChar": 74
+      },
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c202d82a_ee6e4e9f",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 2
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "290d7fdb_739c2ed0",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-02-22T20:39:22Z",
+      "side": 1,
+      "message": "See other comment about 120 char line limit.",
+      "parentUuid": "c202d82a_ee6e4e9f",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7bf03710_3399576e",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 2
@@ -88,6 +148,24 @@
       "writtenOn": "2021-02-22T18:42:20Z",
       "side": 1,
       "message": "wrap long line",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "634c5172_55e39137",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-02-22T20:39:22Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "7bf03710_3399576e",
       "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
