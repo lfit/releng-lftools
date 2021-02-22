@@ -36,6 +36,24 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa4d8dfc_8543e5dd",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-22T21:15:22Z",
+      "side": 1,
+      "message": "*sigh* ok. I still don\u0027t like that, but since it\u0027s what we\u0027ve apparently got in the config, so be it",
+      "parentUuid": "bc0043f3_26033152",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28535cc1_9e52565b",
@@ -135,6 +153,24 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9846a90_820cc6a6",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-22T21:15:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "290d7fdb_739c2ed0",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bf03710_3399576e",
@@ -166,6 +202,24 @@
       "side": 1,
       "message": "See above.",
       "parentUuid": "7bf03710_3399576e",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "537ed03a_98a9640b",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-02-22T21:15:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "634c5172_55e39137",
       "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
