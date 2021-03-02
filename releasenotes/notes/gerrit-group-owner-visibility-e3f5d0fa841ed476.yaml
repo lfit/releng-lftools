@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    When creating a new Gerrit repository, the matching native group should be owned
+    by the Administrators group. Make this group visible to allow the reviewers
+    plugin to work.
+

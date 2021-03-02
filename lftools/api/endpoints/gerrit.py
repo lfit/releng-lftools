@@ -299,7 +299,7 @@ class Gerrit(client.RestApi):
     def create_saml_group(self, fqdn, ldap_group, **kwargs):
         """Create saml group from ldap group."""
         ###############################################################
-        payload = json.dumps({"visible_to_all": "false"})
+        payload = json.dumps({"visible_to_all": "true"})
         saml_group = "saml/{}".format(ldap_group)
         saml_group_encoded = urllib.parse.quote(saml_group, safe="", encoding=None, errors=None)
         access_str = "groups/{}".format(saml_group_encoded)
@@ -390,7 +390,7 @@ class Gerrit(client.RestApi):
                 "description": "{}".format(description),
                 "submit_type": "INHERIT",
                 "create_empty_commit": "True",
-                "owners": ["{}".format(saml_group)],
+                "owners": "Administrators",
             }
         )
 
