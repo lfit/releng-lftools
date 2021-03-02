@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f376d8e_0cd83588",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-03-02T22:29:47Z",
+      "side": 1,
+      "message": "What would this change do to the process of setting up a new project? It seems to me that this would now require us to manually add the gerrit-\u003cproject\u003e-committers SAML group. Is that correct? And would we need to also remove the Administrators group manually?",
+      "range": {
+        "startLine": 393,
+        "startChar": 26,
+        "endLine": 393,
+        "endChar": 43
+      },
+      "revId": "487100bfbbfcf03f2ba4f5894d26e84ecb2137f3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
