@@ -71,6 +71,24 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fc3808b_5ab57936",
+        "filename": "lftools/cli/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-03-02T20:33:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28535cc1_9e52565b",
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5759d50f_6aedaef7",
@@ -108,6 +126,30 @@
       "side": 1,
       "message": "Whoops, when fixing the issues causing Black to fail, I missed this in my cleanup.",
       "parentUuid": "5759d50f_6aedaef7",
+      "range": {
+        "startLine": 43,
+        "startChar": 69,
+        "endLine": 43,
+        "endChar": 74
+      },
+      "revId": "07a02231dc1051f71353534837da7dfcf7f630d8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98576ab8_ecb9db30",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-03-02T20:33:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b342d76d_f1ccbd7f",
       "range": {
         "startLine": 43,
         "startChar": 69,

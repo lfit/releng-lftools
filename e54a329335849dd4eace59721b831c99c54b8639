@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed05f6e_ac16deb9",
+        "filename": "lftools/shell/dco.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-03-02T20:33:33Z",
+      "side": 1,
+      "message": "This was an important fix. Without the period, it was basically just grabbing anything in angle brackets, because the SOB part was optional.",
+      "range": {
+        "startLine": 120,
+        "startChar": 57,
+        "endLine": 120,
+        "endChar": 59
+      },
+      "revId": "e54a329335849dd4eace59721b831c99c54b8639",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
