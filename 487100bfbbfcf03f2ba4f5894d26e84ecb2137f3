@@ -22,6 +22,30 @@
       },
       "revId": "487100bfbbfcf03f2ba4f5894d26e84ecb2137f3",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d41b07_e9bd0ed1",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2021-03-03T01:12:06Z",
+      "side": 1,
+      "message": "Thanks for your question Eric. Actually, I think I am changing the wrong owners part. \nThis change will cause this part to be affected:\nhttps://gerrit.onap.org/r/admin/repos/aaf/authz,access\nright?\n\nI meant to change the Gerrit native group owner.. for example\nhttps://gerrit.onap.org/r/admin/groups/79d4dc9fb75a8df711d1295e297f96fe785191a3\nIn this example, this group owner should be Administrators\n\n\nLet me find that part and correct it.",
+      "parentUuid": "3f376d8e_0cd83588",
+      "range": {
+        "startLine": 393,
+        "startChar": 26,
+        "endLine": 393,
+        "endChar": 43
+      },
+      "revId": "487100bfbbfcf03f2ba4f5894d26e84ecb2137f3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
