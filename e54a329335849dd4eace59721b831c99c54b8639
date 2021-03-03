@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9b147051_11d32ce4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-03-03T18:22:23Z",
+      "side": 1,
+      "message": "Passing a bad path would effectively disable this. I could document that.",
+      "parentUuid": "6e283b7f_01095599",
+      "revId": "e54a329335849dd4eace59721b831c99c54b8639",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7ed05f6e_ac16deb9",
         "filename": "lftools/shell/dco.py",
         "patchSetId": 3
