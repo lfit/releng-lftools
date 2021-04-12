@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a14e7e6_d079d7a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-04-12T16:11:36Z",
+      "side": 1,
+      "message": "Remove this blank line. Issue information should be part of the footer, not message body",
+      "revId": "92d7644ab5b0a456ea82209483441b2a6a87be6d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d237839a_859d6388",
