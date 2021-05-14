@@ -103,6 +103,7 @@ def upload(ctx, image, name, disk_format):
 
 
 image.add_command(cleanup)
+image.add_command(protect)
 image.add_command(list)
 image.add_command(share)
 image.add_command(upload)

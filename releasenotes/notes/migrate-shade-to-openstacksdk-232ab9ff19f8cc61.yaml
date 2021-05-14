@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    As shade library for openstack is deprecated, we are migrating to openstacks    dk. Migrating only for image commands of opensdk, others will follow.
