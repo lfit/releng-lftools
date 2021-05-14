@@ -71,6 +71,12 @@ def list(ctx, days, hide_public, ci_managed):
     """List cloud images."""
     os_image.list(ctx.obj["os_cloud"], ci_managed=ci_managed, days=days, hide_public=hide_public)
 
+@click.command()
+@click.pass_context
+def protect(ctx, ci_managed):
+    """Protect ci-managed cloud images."""
+    os_image.protect_images(ctx.obj["os_cloud"])
+
 
 @click.command()
 @click.argument("image")
@@ -103,6 +109,7 @@ def upload(ctx, image, name, disk_format):
 
 
 image.add_command(cleanup)
+image.add_command(protect)
 image.add_command(list)
 image.add_command(share)
 image.add_command(upload)

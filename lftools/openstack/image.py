@@ -20,7 +20,9 @@ import subprocess
 import sys
 import tempfile
 
-import shade
+import openstack
+import openstack.config
+from openstack.cloud.exc import OpenStackCloudException
 from six.moves import urllib
 
 log = logging.getLogger(__name__)
@@ -52,7 +54,7 @@ def _filter_images(images, days=0, hide_public=False, ci_managed=True):
 
 def list(os_cloud, days=0, hide_public=False, ci_managed=True):
     """List images found according to parameters."""
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     images = cloud.list_images()
 
     filtered_images = _filter_images(images, days, hide_public, ci_managed)
@@ -93,7 +95,7 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
 
             try:
                 result = cloud.delete_image(image.name)
-            except shade.exc.OpenStackCloudException as e:
+            except OpenStackCloudException as e:
                 if str(e).startswith("Multiple matches found for"):
                     log.warning("{}. Skipping image...".format(str(e)))
                     continue
@@ -110,11 +112,11 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
             else:
                 log.info('Removed "{}" from {}.'.format(image.name, cloud.cloud_config.name))
 
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     if clouds:
         cloud_list = []
         for c in clouds.split(","):
-            cloud_list.append(shade.openstack_cloud(cloud=c))
+            cloud_list.append(openstack.connection.from_config(cloud=c))
 
     images = cloud.list_images()
     filtered_images = _filter_images(images, days, hide_public, ci_managed)
@@ -201,7 +203,7 @@ def share(os_cloud, image, clouds):
 def upload(os_cloud, image, name, disk_format="raw"):
     """Upload image to openstack."""
     log.info('Uploading image {} with name "{}".'.format(image, name))
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
 
     if re.match(r"^http[s]?://", image):
         tmp = tempfile.NamedTemporaryFile(suffix=".img")
@@ -216,3 +218,24 @@ def upload(os_cloud, image, name, disk_format="raw"):
         sys.exit(1)
 
     log.info("Upload complete.")
+
+def protect_images(os_cloud):
+    """Protect images created by ci-management"""
+    def _protect_images(os_cloud, image_id):
+        cmd = ["openstack", "--os-cloud", os_cloud, "image", "set", "--protected", image_id]
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        log.debug("exit code: {}".format(p.returncode))
+        log.debug(stderr.decode("utf-8"))
+        if p.returncode:
+            sys.exit(1)
+
+    log.info("Protecting images created with ci-management")
+    cloud = openstack.connection.from_config(cloud=os_cloud)
+    images = cloud.list_images()
+    filtered_images = _filter_images(images, ci_managed=True)
+    for image in filtered_images:
+        if image.is_protected == False:
+            log.info("Image {} is not protected. Applying protected flag.".format(image.name))
+            _protect_images(os_cloud, image.id)
+    log.info("Protected all images created with ci-management")
