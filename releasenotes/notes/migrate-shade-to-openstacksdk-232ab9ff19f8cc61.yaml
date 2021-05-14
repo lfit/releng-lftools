@@ -1,0 +1,4 @@
+---
+other:
+  - |
+    The shade library for openstack is deprecated. We are switching to the openstacksdk for image commands.

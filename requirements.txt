@@ -45,3 +45,4 @@ urllib3==1.25.8
 websocket-client==0.57.0
 wrapt==1.12.1
 xdg==3.0.2
+openstacksdk==0.56.0
