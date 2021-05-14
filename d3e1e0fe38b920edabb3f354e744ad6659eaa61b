@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f40a771_01f8ab09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 480
+      },
+      "writtenOn": "2021-05-14T16:53:32Z",
+      "side": 1,
+      "message": "Replacing shade library with openstacksdk for openstack image commands.\nAdding a new command to protect images created by ci-management.",
+      "revId": "d3e1e0fe38b920edabb3f354e744ad6659eaa61b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
