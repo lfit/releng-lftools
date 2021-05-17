@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f9bf5d_a2749220",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-17T16:07:51Z",
+      "side": 1,
+      "message": "Please capitalize this. RE standard is that all commit subject lines should be capitlized. I know that the conventional commit standard uses lower case, but we believe that the subjects should always be capitalized. We\u0027ll be getting the gitlint pre-commit hook in soon on this repo to enforce this.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 1
+      },
+      "revId": "9492de4119b81417372dc6844f52e0e81f623c60",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4031f9c0_5c176b23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-17T16:07:51Z",
+      "side": 1,
+      "message": "You state that you\u0027re doing two different things here.\n\n1) replacing the library\n2) adding a command.\n\nPlease break this into two separate changes.\n\nChange 1 (use this change-id for it) should be a \u0027Refactor\u0027 change to replace the library and all changes needed to support that. Please make sure you add a reno changelog related to the library switch\n\nChange 2 (which should be a dependent change) should be the \u0027Feat\u0027 change to add the new feature. Please add a reno changelog detailing the addition of the new command",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 64
+      },
+      "revId": "9492de4119b81417372dc6844f52e0e81f623c60",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd03cfcd_367c5ff9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-17T16:07:51Z",
+      "side": 1,
+      "message": "Per my comments. Please make sure that this is two different changes (read the comments on the commit message for more details). I won\u0027t do a full code review until that is done.",
+      "revId": "9492de4119b81417372dc6844f52e0e81f623c60",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
