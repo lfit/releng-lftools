@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "878fa7b2_bac5d058",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-18T17:23:06Z",
+      "side": 1,
+      "message": "Please do not shout.\n\n\"Refactor: Migrate shade library to openstacksdk\u0027\n\nSubject lines should be in the imperative mode (that is no past tense)",
+      "revId": "c29054333202e555beb46e9d02817404ec8475b7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf98292_fb58f81f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-18T17:23:06Z",
+      "side": 1,
+      "message": "IIRC there is a RELENG issue associated with this. Please add it in the footer as:\n\nIssue: RELENG-3392",
+      "revId": "c29054333202e555beb46e9d02817404ec8475b7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47e7590b_1f96e990",
+        "filename": "releasenotes/notes/migrate-shade-to-openstacksdk-232ab9ff19f8cc61.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-18T17:23:06Z",
+      "side": 1,
+      "message": "Should be a \u0027other\u0027 since reno doesn\u0027t have a refactor category.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 8
+      },
+      "revId": "c29054333202e555beb46e9d02817404ec8475b7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0945eee_1e160488",
+        "filename": "releasenotes/notes/migrate-shade-to-openstacksdk-232ab9ff19f8cc61.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-18T17:23:06Z",
+      "side": 1,
+      "message": "Make this more imperative:\n\nThe shade library for openstack is deprecated. We are switching to the openstacksdk for\nimage commands.",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 4,
+        "endChar": 152
+      },
+      "revId": "c29054333202e555beb46e9d02817404ec8475b7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
