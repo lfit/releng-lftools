@@ -18,6 +18,24 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6243c71e_4d2cd6c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-18T18:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "878fa7b2_bac5d058",
+      "revId": "c29054333202e555beb46e9d02817404ec8475b7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bf98292_fb58f81f",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-05-18T17:23:06Z",
       "side": 1,
       "message": "IIRC there is a RELENG issue associated with this. Please add it in the footer as:\n\nIssue: RELENG-3392",
+      "revId": "c29054333202e555beb46e9d02817404ec8475b7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd89f484_564446d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-18T18:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bf98292_fb58f81f",
       "revId": "c29054333202e555beb46e9d02817404ec8475b7",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
@@ -58,6 +94,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cd4e9f2_78218d91",
+        "filename": "releasenotes/notes/migrate-shade-to-openstacksdk-232ab9ff19f8cc61.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-18T18:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47e7590b_1f96e990",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 8
+      },
+      "revId": "c29054333202e555beb46e9d02817404ec8475b7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0945eee_1e160488",
@@ -71,6 +131,30 @@
       "writtenOn": "2021-05-18T17:23:06Z",
       "side": 1,
       "message": "Make this more imperative:\n\nThe shade library for openstack is deprecated. We are switching to the openstacksdk for\nimage commands.",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 4,
+        "endChar": 152
+      },
+      "revId": "c29054333202e555beb46e9d02817404ec8475b7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcbf7bb5_23f92c90",
+        "filename": "releasenotes/notes/migrate-shade-to-openstacksdk-232ab9ff19f8cc61.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-18T18:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0945eee_1e160488",
       "range": {
         "startLine": 4,
         "startChar": 4,
