@@ -218,3 +218,26 @@ def upload(os_cloud, image, name, disk_format="raw"):
         sys.exit(1)
 
     log.info("Upload complete.")
+
+
+def protect_images(os_cloud):
+    """Protect images created by ci-management"""
+
+    def _protect_ci_managed_image(os_cloud, image_id):
+        cmd = ["openstack", "--os-cloud", os_cloud, "image", "set", "--protected", image_id]
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        log.debug("exit code: {}".format(p.returncode))
+        log.debug(stderr.decode("utf-8"))
+        if p.returncode:
+            sys.exit(1)
+
+    log.info("Protecting images created with ci-management.")
+    cloud = openstack.connection.from_config(cloud=os_cloud)
+    images = cloud.list_images()
+    filtered_images = _filter_images(images, ci_managed=True)
+    for image in filtered_images:
+        if image.is_protected == False:
+            log.info("Image {} is not protected. Applying protected flag.".format(image.name))
+            _protect_ci_managed_image(os_cloud, image.id)
+    log.info("Protected all images created with ci-management.")
