@@ -102,10 +102,18 @@ def upload(ctx, image, name, disk_format):
     os_image.upload(ctx.obj["os_cloud"], image, name, disk_format)
 
 
+@click.command()
+@click.pass_context
+def protect(ctx, ci_managed):
+    """Protect ci-managed cloud images. """
+    os_image.protect_images(ctx.obj["os_cloud"])
+
+
 image.add_command(cleanup)
 image.add_command(list)
 image.add_command(share)
 image.add_command(upload)
+image.add_command(protect)
 
 
 @openstack.group()

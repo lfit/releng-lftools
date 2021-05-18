@@ -1,0 +1,6 @@
+---
+features: |
+    Adding a new command (protect) to openstack image.
+    This command will set is_protected flag to true for all images created by ci-management. No parameters required.
+    |
+    | lftools openstack image protect
