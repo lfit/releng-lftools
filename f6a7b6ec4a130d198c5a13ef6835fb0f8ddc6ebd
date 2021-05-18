@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea17a951_bc801444",
+        "filename": "lftools/openstack/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-05-18T20:45:37Z",
+      "side": 1,
+      "message": "This isn\u0027t declared as an option, nor is it passed to the protect_images method. If it\u0027s not needed by this command, you should remove it from this function definition.",
+      "range": {
+        "startLine": 107,
+        "startChar": 17,
+        "endLine": 107,
+        "endChar": 27
+      },
+      "revId": "f6a7b6ec4a130d198c5a13ef6835fb0f8ddc6ebd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f9ad2cb_af1770a1",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-05-18T20:45:37Z",
+      "side": 1,
+      "message": "I know this is nitpicking a bit, but should this be named \"_protect_image\", since it only protects one image at a time? That would also serve to differentiate it from its parent function\u0027s name.",
+      "range": {
+        "startLine": 226,
+        "startChar": 8,
+        "endLine": 226,
+        "endChar": 23
+      },
+      "revId": "f6a7b6ec4a130d198c5a13ef6835fb0f8ddc6ebd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af687747_f41d1ac1",
         "filename": "releasenotes/notes/add-protect-command-to-openstack-image-63ce4cdff64b5c4a.yaml",
         "patchSetId": 1
