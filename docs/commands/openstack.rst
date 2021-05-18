@@ -33,6 +33,13 @@ list
 
 .. program-output:: lftools openstack --os-cloud docs image list --help
 
+protect
+^^^^
+
+This command protects the images created by ci-management on a cloud.
+
+.. program-output:: lftools openstack --os-cloud docs image protect --help
+
 object
 ------
 
