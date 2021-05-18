@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af687747_f41d1ac1",
+        "filename": "releasenotes/notes/add-protect-command-to-openstack-image-63ce4cdff64b5c4a.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-05-18T20:31:45Z",
+      "side": 1,
+      "message": "What\u0027s with the pipe?",
+      "range": {
+        "startLine": 6,
+        "startChar": 4,
+        "endLine": 6,
+        "endChar": 6
+      },
+      "revId": "f6a7b6ec4a130d198c5a13ef6835fb0f8ddc6ebd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
