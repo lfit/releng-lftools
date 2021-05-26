@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93160449_f3bbd00e",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-05-26T18:50:18Z",
+      "side": 1,
+      "message": "You\u0027ll need to change the name here as well.",
+      "range": {
+        "startLine": 242,
+        "startChar": 12,
+        "endLine": 242,
+        "endChar": 27
+      },
+      "revId": "1a577079c2b0ecb4b018089d35129964d8b87af7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
