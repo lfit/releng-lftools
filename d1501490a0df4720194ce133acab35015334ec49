@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e090b1e_83db6002",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2021-05-30T04:20:01Z",
+      "side": 1,
+      "message": "Docs are missing. Please add them to docs/commands/openstack.rst\n\ncode change LGTM!",
+      "revId": "d1501490a0df4720194ce133acab35015334ec49",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
