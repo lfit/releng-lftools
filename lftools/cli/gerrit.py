@@ -46,6 +46,11 @@ def addfile(ctx, gerrit_fqdn, gerrit_project, filename, issue_id, file_location)
     gerrit_url gerrit.o-ran-sc.org/r
     gerrit_project test/test1
     """
+
+    # Ensure lowercase on strings
+    gerrit_fqdn = gerrit_fqdn.lower()
+    gerrit_project = gerrit_project.lower()
+
     g = gerrit.Gerrit(fqdn=gerrit_fqdn)
     data = g.add_file(gerrit_fqdn, gerrit_project, filename, issue_id, file_location)
     log.info(pformat(data))
@@ -72,6 +77,12 @@ def addinfojob(ctx, gerrit_fqdn, gerrit_project, jjbrepo, reviewid, issue_id):
     gerrit_project test/test1
     jjbrepo ci-mangement
     """
+
+    # Ensure lowercase on strings
+    gerrit_fqdn = gerrit_fqdn.lower()
+    gerrit_project = gerrit_project.lower()
+    jjbrepo = jjbrepo.lower()
+
     g = gerrit.Gerrit(fqdn=gerrit_fqdn)
     data = g.add_info_job(gerrit_fqdn, gerrit_project, jjbrepo, reviewid, issue_id)
     log.info(pformat(data))
@@ -89,6 +100,10 @@ def addgitreview(ctx, gerrit_fqdn, gerrit_project, issue_id):
     gerrit_url gerrit.o-ran-sc.org
     gerrit_project test/test1
     """
+    # Ensure lowercase on strings
+    gerrit_fqdn = gerrit_fqdn.lower()
+    gerrit_project = gerrit_project.lower()
+
     g = gerrit.Gerrit(fqdn=gerrit_fqdn)
     data = g.add_git_review(gerrit_fqdn, gerrit_project, issue_id)
     log.info(pformat(data))
@@ -104,6 +119,10 @@ def addgithubrights(ctx, gerrit_fqdn, gerrit_project):
     gerrit_url gerrit.o-ran-sc.org
     gerrit_project test/test1
     """
+    # Ensure lowercase on strings
+    gerrit_fqdn = gerrit_fqdn.lower()
+    gerrit_project = gerrit_project.lower()
+
     g = gerrit.Gerrit(fqdn=gerrit_fqdn)
     data = g.add_github_rights(gerrit_fqdn, gerrit_project)
     log.info(pformat(data))
@@ -119,6 +138,10 @@ def abandonchanges(ctx, gerrit_fqdn, gerrit_project):
     gerrit_url gerrit.o-ran-sc.org
     gerrit_project test/test1
     """
+    # Ensure lowercase on strings
+    gerrit_fqdn = gerrit_fqdn.lower()
+    gerrit_project = gerrit_project.lower()
+
     g = gerrit.Gerrit(fqdn=gerrit_fqdn)
     data = g.abandon_changes(gerrit_fqdn, gerrit_project)
     log.info(pformat(data))
@@ -146,6 +169,11 @@ def createproject(ctx, gerrit_fqdn, gerrit_project, ldap_group, description, che
     ldap_group oran-gerrit-test-test1-committers
 
     """
+    # Ensure lowercase
+    gerrit_fqdn = gerrit_fqdn.lower()
+    gerrit_project = gerrit_project.lower()
+    ldap_group = ldap_group.lower()
+
     g = gerrit.Gerrit(fqdn=gerrit_fqdn)
     data = g.create_project(gerrit_fqdn, gerrit_project, ldap_group, description, check)
     log.info(pformat(data))
@@ -157,6 +185,10 @@ def createproject(ctx, gerrit_fqdn, gerrit_project, ldap_group, description, che
 @click.pass_context
 def create_saml_group(ctx, gerrit_fqdn, ldap_group):
     """Create saml group based on ldap group."""
+    # Ensure lowercase on strings
+    gerrit_fqdn = gerrit_fqdn.lower()
+    ldap_group = ldap_group.lower()
+
     g = gerrit.Gerrit(fqdn=gerrit_fqdn)
     data = g.create_saml_group(gerrit_fqdn, ldap_group)
     log.info(pformat(data))
@@ -168,6 +200,10 @@ def create_saml_group(ctx, gerrit_fqdn, ldap_group):
 @click.pass_context
 def list_project_permissions(ctx, gerrit_fqdn, project):
     """List Owners of a Project."""
+    # Ensure lowercase on strings
+    gerrit_fqdn = gerrit_fqdn.lower()
+    project = project.lower()
+
     g = gerrit.Gerrit(fqdn=gerrit_fqdn)
     data = g.list_project_permissions(project)
     for ldap_group in data:
@@ -180,6 +216,10 @@ def list_project_permissions(ctx, gerrit_fqdn, project):
 @click.pass_context
 def list_project_inherits_from(ctx, gerrit_fqdn, gerrit_project):
     """List who a project inherits from."""
+    # Ensure lowercase on strings
+    gerrit_fqdn = gerrit_fqdn.lower()
+    gerrit_project = gerrit_project.lower()
+
     g = gerrit.Gerrit(fqdn=gerrit_fqdn)
     data = g.list_project_inherits_from(gerrit_project)
     log.info(data)
