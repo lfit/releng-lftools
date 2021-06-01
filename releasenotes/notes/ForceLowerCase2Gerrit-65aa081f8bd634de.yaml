@@ -1,0 +1,11 @@
+
+features:
+  - |
+    Force all parameters to Gerrit to have lowercase. That includes repository
+    name, fqdn, etc.
+
+fixes:
+  - |
+    Without this fix, there is a possibility to create a repo with a capital
+    letter (A1 for instance), and this will cause issues with the ldap/auth
+    tables.

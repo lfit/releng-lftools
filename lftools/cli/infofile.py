@@ -51,6 +51,10 @@ def create_info_file(ctx, gerrit_url, gerrit_project, directory, empty, tsc_appr
     gerrit_url example: gerrit.umbrella.com
     directory example: /gerrit/ (rather than most projects /r/)
     """
+    # Ensure strings are lowercase
+    gerrit_url = gerrit_url.lower()
+    gerrit_project = gerrit_project.lower()
+
     url = "https://{}/{}".format(gerrit_url, directory)
     projectid_encoded = gerrit_project.replace("/", "%2F")
     # project name with only underscores for info file anchors.
