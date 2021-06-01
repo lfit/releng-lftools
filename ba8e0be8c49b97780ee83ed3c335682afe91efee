@@ -16,6 +16,23 @@
       "message": "This fix is supposed to ensure that we do not get any more capital letters into ldap/auth0.\nJust wondering if this will possible break some existing functionality which I have not considered.\nWould appreciate some comments on if I am on the right way or not, or possible what I have missed/misunderstood.\n\nhttps://jira.linuxfoundation.org/browse/IT-21927\n\nI give it -1 to ensure it is not merged... at this time.",
       "revId": "ba8e0be8c49b97780ee83ed3c335682afe91efee",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44bb03c8_2eb39897",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2021-06-01T19:57:25Z",
+      "side": 1,
+      "message": "I think a note in the docs would be useful, that says all info files changes repo names will be created in lower case.",
+      "revId": "ba8e0be8c49b97780ee83ed3c335682afe91efee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
