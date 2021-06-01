@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "814aac80_37367f9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2021-06-01T12:16:42Z",
+      "side": 1,
+      "message": "This fix is supposed to ensure that we do not get any more capital letters into ldap/auth0.\nJust wondering if this will possible break some existing functionality which I have not considered.\nWould appreciate some comments on if I am on the right way or not, or possible what I have missed/misunderstood.\n\nhttps://jira.linuxfoundation.org/browse/IT-21927\n\nI give it -1 to ensure it is not merged... at this time.",
+      "revId": "ba8e0be8c49b97780ee83ed3c335682afe91efee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
