@@ -41,7 +41,7 @@ soupsieve==2.0
 tabulate==0.8.6
 toml==0.10.0
 tqdm==4.43.0
-urllib3==1.25.8
+urllib3==1.26.5
 websocket-client==0.57.0
 wrapt==1.12.1
 xdg==3.0.2
