@@ -16,6 +16,23 @@
       "message": "This all looks good. I do, however, have one issue. You\u0027re adding a function to set the protected flag, but we also need a function to remove the protected flag from images that are no longer needed.\n\nI\u0027ll give a +2 once you respond with a card related to this work as I don\u0027t expect it to be part of this change.",
       "revId": "86b6c807f55cef7d3e793da4cbaea2388010cb51",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6f46e68_08d6e7f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2021-06-08T16:23:12Z",
+      "side": 1,
+      "message": "How about some unit test to verify the logic? Or is this overkill?",
+      "revId": "86b6c807f55cef7d3e793da4cbaea2388010cb51",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
