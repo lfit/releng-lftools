@@ -67,6 +67,46 @@
       "message": "I think a note in the docs would be useful, that says all info files changes repo names will be created in lower case.",
       "revId": "ba8e0be8c49b97780ee83ed3c335682afe91efee",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ee8118f_5890a150",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-06-09T13:39:31Z",
+      "side": 1,
+      "message": "So, I\u0027ve been reading over the verify and merge jobs that we are using that exercise this and I\u0027ve come to the conclusion that we probably need to be making the lowercase changes there as doing it here is going to cause a case mismatch with what the job is expecting.",
+      "revId": "ba8e0be8c49b97780ee83ed3c335682afe91efee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "131761f1_7297c02f",
+        "filename": "releasenotes/notes/ForceLowerCase2Gerrit-65aa081f8bd634de.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-06-09T13:39:31Z",
+      "side": 1,
+      "message": "This fix note is self referential to the change, but when the release notes get generated it won\u0027t make sense. Please make it something that stands alone. More like:\n\nFixed repository and group name creation to always be lowercase.",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 11
+      },
+      "revId": "ba8e0be8c49b97780ee83ed3c335682afe91efee",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
