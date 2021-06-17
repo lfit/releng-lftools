@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60eb2f6b_5cc5f6d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-06-17T21:42:54Z",
+      "side": 1,
+      "message": "Bad commit message. This does not conform to Semantic Commit Messages (which don\u0027t seem to be failing here yet :-/ ) this should be:\n\nFeat: Add script for renaming the default branch",
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d7cca4f_5bf956f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-06-17T21:42:54Z",
+      "side": 1,
+      "message": "You need to add the following _above_ this line but attached to the footer (no blank space between it and this DCO line)\n\nIssue: RELENG-3450",
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff241357_96bf9b4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-06-17T21:42:54Z",
+      "side": 1,
+      "message": "Need a reno change note.\n\nTo create one you need to do the following:\n\ntox -e reno new rename_default_branch\n\nYou will be as part of the output a file path that is created. You need to edit that file and remove all but the section for new features with information as to what and why it is being added.",
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5411a4b_307442c1",
+        "filename": "shell/rename.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-06-17T21:42:54Z",
+      "side": 1,
+      "message": "We use 4 space expanded tabs. Please fix all occurances of hard tabs",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 1
+      },
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
