@@ -123,6 +123,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7b3118f_558229c1",
+        "filename": "shell/rename.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-06-23T01:13:24Z",
+      "side": 1,
+      "message": "Actually, just remove user. It\u0027s never used.",
+      "parentUuid": "eded21f7_575a82da",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 15
+      },
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5411a4b_307442c1",
         "filename": "shell/rename.sh",
         "patchSetId": 1
