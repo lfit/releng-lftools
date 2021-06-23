@@ -54,6 +54,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9412d661_d8a6e964",
+        "filename": "shell/rename.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-06-23T01:12:33Z",
+      "side": 1,
+      "message": "These should all be parameterized. These are good default values, but we need to be able to overwrite them.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 16
+      },
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c105ed5e_0f96d8c0",
+        "filename": "shell/rename.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-06-23T01:12:33Z",
+      "side": 1,
+      "message": "This doesn\u0027t appear to be used anywhere.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 26
+      },
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eded21f7_575a82da",
+        "filename": "shell/rename.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-06-23T01:12:33Z",
+      "side": 1,
+      "message": "I think repo should be the first of these. It\u0027s more likely to be overwritten than user.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 15
+      },
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5411a4b_307442c1",
         "filename": "shell/rename.sh",
         "patchSetId": 1
@@ -70,6 +139,98 @@
         "startChar": 0,
         "endLine": 12,
         "endChar": 1
+      },
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee7d2b57_eeda5cef",
+        "filename": "shell/rename.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-06-23T01:12:33Z",
+      "side": 1,
+      "message": "Where is the command \"printInfo\" coming from? Should these just be echos?",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 10
+      },
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b9d9e4a_93ad2b10",
+        "filename": "shell/rename.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-06-23T01:12:33Z",
+      "side": 1,
+      "message": "What\u0027s being read here?",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 8
+      },
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63a41c00_d30bb588",
+        "filename": "shell/rename.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-06-23T01:12:33Z",
+      "side": 1,
+      "message": "REPLY has not been previously defined.",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 22,
+        "endChar": 33
+      },
+      "revId": "a1486f1691475ce33db607acc33808be40dcef10",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e96b9a26_46f04446",
+        "filename": "shell/rename.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2021-06-23T01:12:33Z",
+      "side": 1,
+      "message": "This should be removed. We don\u0027t want to push local changes in this script. If anything, this should be a force pull, so that we are just grabbing what\u0027s on the remote.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 28
       },
       "revId": "a1486f1691475ce33db607acc33808be40dcef10",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
