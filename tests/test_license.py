@@ -15,10 +15,15 @@ import pytest
 
 from lftools import cli
 
-FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtures",)
+FIXTURE_DIR = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    "fixtures",
+)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "license"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "license"),
+)
 def test_check_license(cli_runner, datafiles):
     """Test check_license() command."""
     os.chdir(str(datafiles))
@@ -34,7 +39,9 @@ def test_check_license(cli_runner, datafiles):
     assert result.exit_code == 1
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "license"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "license"),
+)
 def test_check_license_directory(cli_runner, datafiles):
     """Test check_license_directory() command."""
     os.chdir(str(datafiles))

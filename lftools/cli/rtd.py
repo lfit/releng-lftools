@@ -106,7 +106,13 @@ def project_create(ctx, project_name, repository_url, repository_type, homepage,
     log.info(pformat(data))
 
 
-@click.command(name="project-update", context_settings=dict(ignore_unknown_options=True, allow_extra_args=True,))
+@click.command(
+    name="project-update",
+    context_settings=dict(
+        ignore_unknown_options=True,
+        allow_extra_args=True,
+    ),
+)
 @click.argument("project-name")
 @click.pass_context
 def project_update(ctx, project_name):

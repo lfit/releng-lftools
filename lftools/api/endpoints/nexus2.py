@@ -131,7 +131,11 @@ class Nexus2(client.RestApi):
             )
             if repo_provider == "site":
                 data["data"].update(
-                    {"repoPolicy": "MIXED", "writePolicy": "ALLOW_WRITE", "indexable": False,}
+                    {
+                        "repoPolicy": "MIXED",
+                        "writePolicy": "ALLOW_WRITE",
+                        "indexable": False,
+                    }
                 )
 
         if repo_type == "proxy":

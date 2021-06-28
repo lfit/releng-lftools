@@ -36,7 +36,19 @@ def search_user(ctx, username):
     """Search users."""
     r = ctx.obj["nexus3"]
     data = r.list_user(username)
-    log.info(tabulate(data, headers=["User ID", "First Name", "Last Name", "Email Address", "Status", "Roles",],))
+    log.info(
+        tabulate(
+            data,
+            headers=[
+                "User ID",
+                "First Name",
+                "Last Name",
+                "Email Address",
+                "Status",
+                "Roles",
+            ],
+        )
+    )
 
 
 @user.command(name="create")

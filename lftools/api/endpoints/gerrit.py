@@ -83,7 +83,11 @@ class Gerrit(client.RestApi):
         access_str = "changes/{}/edit:publish".format(changeid)
         headers = {"Content-Type": "application/json; charset=UTF-8"}
         self.r.headers.update(headers)
-        payload = json.dumps({"notify": "NONE",})
+        payload = json.dumps(
+            {
+                "notify": "NONE",
+            }
+        )
         result = self.post(access_str, data=payload)
         return result
         ##############################################################
@@ -152,7 +156,11 @@ class Gerrit(client.RestApi):
         access_str = "changes/{}/edit:publish".format(changeid)
         headers = {"Content-Type": "application/json; charset=UTF-8"}
         self.r.headers.update(headers)
-        payload = json.dumps({"notify": "NONE",})
+        payload = json.dumps(
+            {
+                "notify": "NONE",
+            }
+        )
         result = self.post(access_str, data=payload)
         log.info(result)
         return result
@@ -167,7 +175,14 @@ class Gerrit(client.RestApi):
         headers = {"Content-Type": "application/json; charset=UTF-8"}
         self.r.headers.update(headers)
         payload = json.dumps(
-            {"tag": "automation", "message": "Vote on file", "labels": {"Verified": +1, "Code-Review": +2,}}
+            {
+                "tag": "automation",
+                "message": "Vote on file",
+                "labels": {
+                    "Verified": +1,
+                    "Code-Review": +2,
+                },
+            }
         )
 
         result = self.post(access_str, data=payload)
@@ -216,7 +231,11 @@ class Gerrit(client.RestApi):
         else:
             subject = "Automation adds {0}\n\nSigned-off-by: {1}".format(filename, signed_off_by)
         payload = json.dumps(
-            {"project": "{}".format(gerrit_project), "subject": "{}".format(subject), "branch": "master",}
+            {
+                "project": "{}".format(gerrit_project),
+                "subject": "{}".format(subject),
+                "branch": "master",
+            }
         )
         return payload
 
@@ -285,7 +304,11 @@ class Gerrit(client.RestApi):
             access_str = "changes/{}/edit:publish".format(changeid)
             headers = {"Content-Type": "application/json; charset=UTF-8"}
             self.r.headers.update(headers)
-            payload = json.dumps({"notify": "NONE",})
+            payload = json.dumps(
+                {
+                    "notify": "NONE",
+                }
+            )
             result = self.post(access_str, data=payload)
             log.info(result)
 

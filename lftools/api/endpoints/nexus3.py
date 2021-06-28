@@ -214,7 +214,12 @@ class Nexus3(client.RestApi):
         list_of_privileges = []
         for privilege in result:
             list_of_privileges.append(
-                [privilege["type"], privilege["name"], privilege["description"], privilege["readOnly"],]
+                [
+                    privilege["type"],
+                    privilege["name"],
+                    privilege["description"],
+                    privilege["readOnly"],
+                ]
             )
         return list_of_privileges
 
@@ -277,7 +282,12 @@ class Nexus3(client.RestApi):
         list_of_tasks = []
         for task in result:
             list_of_tasks.append(
-                [task["name"], task["message"], task["currentState"], task["lastRunResult"],]
+                [
+                    task["name"],
+                    task["message"],
+                    task["currentState"],
+                    task["lastRunResult"],
+                ]
             )
         return list_of_tasks
 
@@ -365,7 +375,9 @@ class Nexus3(client.RestApi):
             "repository": repository,
         }
         json_data = json.dumps(data)
-        result = self.get("v1/search/assets?q={}&repository={}".format(query, repository), data=json_data,)[1]["items"]
+        result = self.get("v1/search/assets?q={}&repository={}".format(query, repository), data=json_data,)[
+            1
+        ]["items"]
         list_of_assets = []
 
         if details:

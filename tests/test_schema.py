@@ -15,10 +15,15 @@ import pytest
 
 from lftools import cli
 
-FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtures",)
+FIXTURE_DIR = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    "fixtures",
+)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "schema"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "schema"),
+)
 def test_check_license(cli_runner, datafiles):
     """Test check_schema() command."""
     os.chdir(str(datafiles))

@@ -19,7 +19,10 @@ import requests
 from lftools import cli
 import lftools.nexus.release_docker_hub as rdh
 
-FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtures",)
+FIXTURE_DIR = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    "fixtures",
+)
 
 
 def test_remove_http_from_url():
@@ -112,7 +115,9 @@ def test_tag_class_repository_exist():
     assert tags.repository_exist == True
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "nexus"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
 class TestTagsRegExpClass:
     """Test Tags and Regexp for Versions.
 
@@ -487,7 +492,9 @@ class TestProjectClass:
         assert self.counter.cleanup == 90
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "nexus"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
 class TestFetchNexus3Catalog:
 
     url = "https://nexus3.onap.org:10002/v2/_catalog"

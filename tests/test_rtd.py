@@ -19,10 +19,15 @@ import lftools.api.endpoints.readthedocs as client
 creds = {"authtype": "token", "endpoint": "https://readthedocs.org/api/v3/", "token": "xyz"}
 rtd = client.ReadTheDocs(creds=creds)
 
-FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtures",)
+FIXTURE_DIR = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    "fixtures",
+)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "rtd"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "rtd"),
+)
 @responses.activate
 def test_project_list(datafiles):
     os.chdir(str(datafiles))
@@ -32,7 +37,9 @@ def test_project_list(datafiles):
     assert "TestProject1" in rtd.project_list()
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "rtd"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "rtd"),
+)
 @responses.activate
 def test_project_details(datafiles):
     os.chdir(str(datafiles))
@@ -44,7 +51,9 @@ def test_project_details(datafiles):
     assert "slug" in rtd.project_details("TestProject1")
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "rtd"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "rtd"),
+)
 @responses.activate
 def test_project_version_list(datafiles):
     os.chdir(str(datafiles))
@@ -60,7 +69,9 @@ def test_project_version_list(datafiles):
     assert "test-trigger6" in rtd.project_version_list("TestProject1")
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "rtd"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "rtd"),
+)
 @responses.activate
 def test_project_version_details(datafiles):
     os.chdir(str(datafiles))
@@ -102,7 +113,9 @@ def test_project_create():
     )
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "rtd"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "rtd"),
+)
 @responses.activate
 def test_project_build_list(datafiles):
     os.chdir(str(datafiles))
@@ -118,7 +131,9 @@ def test_project_build_list(datafiles):
     assert "success" in rtd.project_build_list("testproject1")
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "rtd"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "rtd"),
+)
 @responses.activate
 def test_project_build_details(datafiles):
     os.chdir(str(datafiles))
@@ -145,7 +160,9 @@ def test_project_build_trigger():
     assert rtd.project_build_trigger("testproject1", "latest")
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "rtd"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "rtd"),
+)
 @responses.activate
 def test_subproject_list(datafiles):
     os.chdir(str(datafiles))
@@ -161,7 +178,9 @@ def test_subproject_list(datafiles):
     assert "testproject2" in rtd.subproject_list("TestProject1")
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "rtd"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "rtd"),
+)
 @responses.activate
 def test_subproject_details(datafiles):
     os.chdir(str(datafiles))

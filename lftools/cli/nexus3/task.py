@@ -35,4 +35,9 @@ def list_tasks(ctx):
     """List tasks."""
     r = ctx.obj["nexus3"]
     data = r.list_tasks()
-    log.info(tabulate(data, headers=["Name", "Message", "Current State", "Last Run Result"],))
+    log.info(
+        tabulate(
+            data,
+            headers=["Name", "Message", "Current State", "Last Run Result"],
+        )
+    )

@@ -17,10 +17,15 @@ import pytest
 
 from lftools import cli
 
-FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtures",)
+FIXTURE_DIR = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    "fixtures",
+)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "version_bump"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "version_bump"),
+)
 def test_version_bump(cli_runner, datafiles):
     """Test version bump command."""
     os.chdir(str(datafiles))
@@ -33,7 +38,9 @@ def test_version_bump(cli_runner, datafiles):
         assert filecmp.cmp(pom, expected_pom)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "version_release"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "version_release"),
+)
 def test_version_release(cli_runner, datafiles):
     """Test version release command."""
     os.chdir(str(datafiles))

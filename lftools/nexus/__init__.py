@@ -88,7 +88,13 @@ class Nexus:
         """Create a target with the given patterns."""
         url = os.path.join(self.baseurl, "repo_targets")
 
-        target = {"data": {"contentClass": "any", "patterns": patterns, "name": name,}}
+        target = {
+            "data": {
+                "contentClass": "any",
+                "patterns": patterns,
+                "name": name,
+            }
+        }
 
         json_data = json.dumps(target).encode(encoding="latin-1")
 
@@ -132,7 +138,9 @@ class Nexus:
             "data": {
                 "name": name,
                 "description": name,
-                "method": [priv,],
+                "method": [
+                    priv,
+                ],
                 "repositoryGroupId": "",
                 "repositoryId": "",
                 "repositoryTargetId": target_id,
@@ -223,7 +231,10 @@ class Nexus:
                 "email": "{}-deploy@{}".format(name, domain),
                 "firstName": name,
                 "lastName": "Deployment",
-                "roles": [role_id, "nx-deployment",],
+                "roles": [
+                    role_id,
+                    "nx-deployment",
+                ],
                 "password": password,
                 "status": "active",
             }

@@ -19,7 +19,10 @@ from lftools import cli
 import lftools.deploy as deploy_sys
 
 
-FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtures",)
+FIXTURE_DIR = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)),
+    "fixtures",
+)
 
 
 def test_log_and_exit():
@@ -54,7 +57,9 @@ def test_log_and_exit():
     assert excinfo.type == SystemExit
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_copy_archive_dir(cli_runner, datafiles):
     """Test copy_archives() command to ensure archives dir is copied."""
     os.chdir(str(datafiles))
@@ -68,7 +73,9 @@ def test_copy_archive_dir(cli_runner, datafiles):
     assert os.path.exists(os.path.join(stage_dir, "test.log"))
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_copy_archive_pattern(cli_runner, datafiles):
     """Test copy_archives() command to ensure glob patterns are copied."""
     os.chdir(str(datafiles))
@@ -94,7 +101,9 @@ def test_copy_archive_pattern(cli_runner, datafiles):
     )
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_deploy_archive(cli_runner, datafiles, responses):
     """Test deploy_archives() command for expected upload cases."""
     os.chdir(str(datafiles))
@@ -119,7 +128,9 @@ def test_deploy_archive(cli_runner, datafiles, responses):
     assert result.exit_code == 1
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_deploy_archive2(datafiles):
     """Test deploy_archives() command when archives dir is missing."""
     os.chdir(str(datafiles))
@@ -130,7 +141,9 @@ def test_deploy_archive2(datafiles):
     assert workspace_dir in str(excinfo.value)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_deploy_archive3(datafiles):
     """Test deploy_archives() command when archives dir is a file instead of a dir."""
     os.chdir(str(datafiles))
@@ -141,7 +154,9 @@ def test_deploy_archive3(datafiles):
     assert workspace_dir in str(excinfo.value)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_deploy_archive4(cli_runner, datafiles, responses):
     """Test deploy_archives() command when using duplicated patterns."""
     os.chdir(str(datafiles))
@@ -266,7 +281,9 @@ def test_remove_duplicates_and_sort():
         assert deploy_sys._remove_duplicates_and_sort(tst[0]) == tst[1]
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_deploy_logs(cli_runner, datafiles, responses):
     """Test deploy_logs() command for expected upload cases."""
     os.chdir(str(datafiles))
@@ -289,7 +306,9 @@ def test_deploy_logs(cli_runner, datafiles, responses):
     assert result.exit_code == 0
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_deploy_nexus_zip(cli_runner, datafiles, responses):
     os.chdir(str(datafiles))
     nexus_url = "https://nexus.example.org"
@@ -298,7 +317,9 @@ def test_deploy_nexus_zip(cli_runner, datafiles, responses):
 
     # Test success
     success_upload_url = "{}/service/local/repositories/{}/content-compressed/{}".format(
-        nexus_url, nexus_repo, nexus_path,
+        nexus_url,
+        nexus_repo,
+        nexus_path,
     )
     responses.add(responses.POST, success_upload_url, status=201)
     result = cli_runner.invoke(
@@ -336,7 +357,11 @@ def test_deploy_nexus_zip(cli_runner, datafiles, responses):
   </body>
 </html>
 """
-    upload_404_url = "{}/service/local/repositories/{}/content-compressed/{}".format(nexus_url, "logs2", nexus_path,)
+    upload_404_url = "{}/service/local/repositories/{}/content-compressed/{}".format(
+        nexus_url,
+        "logs2",
+        nexus_path,
+    )
     responses.add(responses.POST, upload_404_url, body=upload_404, status=404)
     result = cli_runner.invoke(
         cli.cli,
@@ -731,7 +756,9 @@ def test__upload_maven_file_to_nexus(responses, mocker):
     assert "Something went wrong" in str(excinfo.value)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_deploy_nexus_snapshot(datafiles, responses):
     """Test deploy_nexus with snapshot.
 
@@ -762,7 +789,9 @@ def test_deploy_nexus_snapshot(datafiles, responses):
     deploy_sys.deploy_nexus(nexus_url, deploy_dir, snapshot)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_deploy_nexus_nosnapshot(datafiles, responses):
     """Test deploy_nexus with no snapshot.
 
@@ -786,7 +815,9 @@ def test_deploy_nexus_nosnapshot(datafiles, responses):
     deploy_sys.deploy_nexus(nexus_url, deploy_dir)
 
 
-@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "deploy"),)
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "deploy"),
+)
 def test_deploy_nexus_stage(datafiles, responses):
     """Test deploy_nexus_stage."""
     url = "http://valid.deploy.stage"
