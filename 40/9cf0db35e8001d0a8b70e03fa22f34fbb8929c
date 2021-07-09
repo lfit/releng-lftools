@@ -1,0 +1,8 @@
+Verified+1: Jenkins CI <releng+lf-jenkins@linuxfoundation.org>
+Code-Review+1: Guillaume Lambert <guillaume.lambert@orange.com>
+Code-Review+2: Eric Ball <eball@linuxfoundation.org>
+Submitted-by: Eric Ball <eball@linuxfoundation.org>
+Submitted-at: Fri, 09 Jul 2021 23:39:13 +0000
+Reviewed-on: https://gerrit.linuxfoundation.org/infra/c/releng/lftools/+/68175
+Project: releng/lftools
+Branch: refs/heads/master
