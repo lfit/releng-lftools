@@ -503,23 +503,24 @@ def release_staging_repos(repos, verify, nexus_url=""):
             else:
                 log.info("Nexus is now working on releasing {}".format(str(repo)))
 
-            # Hang out until the repo is fully closed
+            # Hang out until the repo is fully released
             log.info("Waiting for Nexus to complete releasing {}".format(str(repo)))
-            closed = False
+            released = False
             wait_seconds = 20
-            wait_itteration = 0
+            wait_iteration = 0
             activity_url = "{}/staging/repository/{}/activity".format(_nexus.baseurl, repo)
-            while closed is False:
-                sleep(wait_seconds)
-                wait_itteration = wait_itteration + 1
-                log.info("Still waiting... {:>4d} seconds gone".format(total_wait_seconds * wait_itteration))
-                if (wait_itteration % 2) != 0:
-                    response = requests.get(activity_url, auth=_nexus.auth).text
-                    root = et.fromstring(response)  # nosec
-                    events = root.findall("./stagingActivity")
-                    for event in events:
-                        name = event.find("name")
-                        if name.text == "close":
-                            stopped = event.find("stopped")
-                            log.info("Repo released and closed at: {}".format(stopped.text))
-                            closed = True
+            sleep(5)  # Quick sleep to allow small repos to release.
+            while released is False:
+                response = requests.get(activity_url, auth=_nexus.auth).text
+                root = et.fromstring(response)  # nosec
+                events = root.findall("./stagingActivity")
+                for event in events:
+                    name = event.find("name")
+                    if name.text == "release":
+                        stopped = event.find("stopped")
+                        log.info("Repo released at: {}".format(stopped.text))
+                        released = True
+                if not released:
+                    sleep(wait_seconds)
+                    wait_iteration += 1
+                    log.info("Still waiting... {:>4d} seconds gone".format(wait_seconds * wait_iteration))
