@@ -22,6 +22,13 @@ FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixture
 
 
 @pytest.fixture
+def mock_get_credentials(mocker):
+    rtn = {"nexus": "http://nexus.localhost", "user": "user", "password": "password"}
+    mocker.patch("lftools.nexus.cmd.get_credentials", return_value=rtn)
+    mocker.patch("time.sleep", return_value=True)
+
+
+@pytest.fixture
 def nexus2_obj_create(responses):
     """Create the proper responses for the init of a nexus object"""
     baseurl_endpoint = re.compile(".*nexus.*/service/local/repo_targets")
@@ -48,6 +55,28 @@ def test_create_roles(datafiles, responses, nexus2_obj_create):
     responses.add(responses.POST, roles_url, role2_return, status=201)
 
     cmd.create_roles("role_config-good.yaml", "settings.yaml")
+
+
+@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "nexus"))
+def test_release_staging_repos(datafiles, responses, nexus2_obj_create, mock_get_credentials):
+    """Test create_roles() method with good config."""
+    os.chdir(str(datafiles))
+    baseurl = "http://nexus.localhost/service/local"
+    repos = ["test-release-repo"]
+    activity_url = "{}/staging/repository/{}/activity".format(baseurl, repos[0])
+    request_url = "{}/staging/bulk/promote".format(baseurl)
+
+    closed_return = open("staging_activities_closed.xml", "r").read()
+    released_return = open("staging_activities_released.xml", "r").read()
+
+    responses.add(responses.GET, activity_url, closed_return, status=200)
+    responses.add(responses.POST, request_url, status=201)
+    # While checking for the "release" activity, we return once without it in
+    # order to exercise the code for "if not released".
+    responses.add(responses.GET, activity_url, closed_return, status=200)
+    responses.add(responses.GET, activity_url, released_return, status=200)
+
+    cmd.release_staging_repos(repos, False)
 
 
 def test_create_repo_target_regex():
