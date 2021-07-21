@@ -1,0 +1,16 @@
+---
+fixes:
+  - |
+    nexus.release_staging_repos was failing with an error due to an undeclared
+    variable. Upon inspection, there were several other issues at play as well:
+    * No unit test (which would have caught an undeclared variable).
+    * Initial sleep of 20s is significantly longer than many repos take to
+    release.
+    * Only checked release status every 40s, while printing every 20s.
+    * Rather than checking release status, we were checking for "close"
+    status. Nexus closes repos before releasing them, so this is not the
+    correct status to look for when waiting for the repo to release.
+
+    A unit test has been added, several variables issues have been corrected,
+    timing was adjusted (waiting just 5 seconds before the initial check for
+    success), and the code will now check for "release" status.
