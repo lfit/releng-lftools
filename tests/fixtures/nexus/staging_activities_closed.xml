@@ -1,0 +1,34 @@
+<list>
+    <stagingActivity>
+        <name>open</name>
+        <events>
+            <stagingActivityEvent>
+                <timestamp>2021-01-01T01:01:01.000Z</timestamp>
+                <name>repositoryCreated</name>
+                <severity>0</severity>
+                <properties>
+                    <stagingProperty>
+                        <name>id</name>
+                        <value>test-release-repo</value>
+                    </stagingProperty>
+                </properties>
+            </stagingActivityEvent>
+        </events>
+    </stagingActivity>
+    <stagingActivity>
+        <name>close</name>
+        <events>
+            <stagingActivityEvent>
+                <timestamp>2021-01-01T01:01:02.000Z</timestamp>
+                <name>repositoryClosed</name>
+                <severity>0</severity>
+                <properties>
+                    <stagingProperty>
+                        <name>id</name>
+                        <value>test-release-repo</value>
+                    </stagingProperty>
+                </properties>
+            </stagingActivityEvent>
+        </events>
+    </stagingActivity>
+</list>
