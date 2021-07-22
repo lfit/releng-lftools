@@ -229,6 +229,8 @@ deploy_logs() {
     env | grep -v -E "COOKIE|DOCKER|HUDSON|KEY|PASSWORD|SSH|TOKEN" | sort > "_build-enviroment-variables.log"
 
     # Print system info before collecting logs
+    local set_opts="$-"
+    set +e  # disable exit on errors
     touch "_sys-info.log"
     {
         local sys_cmds
@@ -251,6 +253,7 @@ deploy_logs() {
             fi
         done
     } 2>&1 | tee -a "_sys-info.log"
+    grep -q e <<< "$set_opts" && set -e # re-enable exit on errors
 
     # Magic string used to trim console logs at the appropriate level during wget
     MAGIC_STRING="-----END_OF_BUILD-----"
