@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a62f4193_445099c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 579
+      },
+      "writtenOn": "2021-07-22T19:17:52Z",
+      "side": 1,
+      "message": "FD.io CI jobs started randomly failing on the \u0027sar\u0027 command during \u0027lftools deploy log\u0027 execution.  This data is not critical, thus there is no need to fail the log upload if any of the commands generating data into _sys-info.log",
+      "revId": "49a78e35120875cacfd94495e8574260100dc638",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
