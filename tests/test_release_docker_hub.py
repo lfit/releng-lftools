@@ -14,6 +14,7 @@ import os
 import pytest
 import requests
 import responses
+import datetime
 
 import lftools.nexus.release_docker_hub as rdh
 
@@ -111,6 +112,28 @@ def test_tag_class_repository_exist():
     rdh.initialize(org)
     tags = rdh.TagClass(org, repo, repo_from_file)
     assert tags.repository_exist == True
+
+
+def test_fetch_last_run_timestamp():
+    # Running to close to last run
+    last_run = rdh.fetch_last_run_timestamp()
+    current_time = datetime.datetime.now()
+    assert (current_time - last_run).total_seconds() < 1
+
+
+def test_to_close_to_last_run():
+    # Verify logic for checking if enough time has passed since last run
+    orig_time = datetime.datetime.now()
+    last_run = orig_time
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == True
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours - 1)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == True
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours, seconds=-1)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == True
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours, minutes=1)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == False
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours * 2)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == False
 
 
 @pytest.mark.datafiles(
@@ -687,7 +710,6 @@ class TestFetchAllTagsAndUpdate:
         assert len(rdh.projects[0].tags_2_copy.valid) == 1
         assert len(rdh.projects[1].tags_2_copy.valid) == 0
         assert len(rdh.projects[2].tags_2_copy.valid) == 2
-
         assert rdh.projects[0].tags_2_copy.valid[0] == "1.4.0"
         assert rdh.projects[2].tags_2_copy.valid[0] == "1.3.1"
         assert rdh.projects[2].tags_2_copy.valid[1] == "1.3.2"
@@ -710,7 +732,12 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.push == 3
         assert self.counter.cleanup == 3
 
+    def mocked_fetch_last_run_timestamp(self):
+        """Mocking fetch_last_run_timestamp."""
+        return datetime.datetime.now() - datetime.timedelta(hours=rdh.throttling_delay_hours * 2)
+
     def test_start_no_copy(self, responses, mocker):
+        mocker.patch("lftools.nexus.release_docker_hub.fetch_last_run_timestamp", side_effect=self.mocked_fetch_last_run_timestamp)
         self.initiate_test_fetch(responses, mocker)
         rdh.start_point("onap", "", False, False)
         assert self.counter.pull == 0
@@ -719,6 +746,7 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.cleanup == 0
 
     def test_start_copy(self, responses, mocker):
+        mocker.patch("lftools.nexus.release_docker_hub.fetch_last_run_timestamp", side_effect=self.mocked_fetch_last_run_timestamp)
         self.initiate_test_fetch(responses, mocker)
         rdh.start_point("onap", "", False, False, False, True)
         assert len(rdh.NexusCatalog) == 3
@@ -735,6 +763,7 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.cleanup == 3
 
     def test_start_copy_repo(self, responses, mocker):
+        mocker.patch("lftools.nexus.release_docker_hub.fetch_last_run_timestamp", side_effect=self.mocked_fetch_last_run_timestamp)
         self.initiate_test_fetch(responses, mocker, "sanity")
         rdh.start_point("onap", "sanity", False, False, False, True)
         assert len(rdh.NexusCatalog) == 1
@@ -746,7 +775,8 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.push == 1
         assert self.counter.cleanup == 1
 
-    def test_start_bogus_orgs(self, responses):
+    def test_start_bogus_orgs(self, responses, mocker):
+        mocker.patch("lftools.nexus.release_docker_hub.fetch_last_run_timestamp", side_effect=self.mocked_fetch_last_run_timestamp)
         self.initiate_bogus_org_test_fetch(responses, "bogus_org321")
         rdh.start_point("bogus_org321")
         assert len(rdh.NexusCatalog) == 0
