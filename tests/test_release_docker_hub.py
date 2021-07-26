@@ -9,7 +9,9 @@
 ##############################################################################
 """Test deploy command."""
 
+import datetime
 import os
+from unittest import mock
 
 import pytest
 import requests
@@ -111,6 +113,94 @@ def test_tag_class_repository_exist():
     rdh.initialize(org)
     tags = rdh.TagClass(org, repo, repo_from_file)
     assert tags.repository_exist == True
+
+
+def create_time_obj_from_str(in_str):
+    # Create a datetie obj from a str
+    return datetime.datetime.strptime(in_str, "%Y-%m-%d %H:%M:%S")
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
+def test_fetch_last_run_timestamp(datafiles, responses):
+    # Test fetch_last_run_timestamp
+    url = "https://api.ipify.org"
+    answer = "10.10.10.10"
+    responses.add(responses.GET, url, body=answer, status=200)
+    # mocker.patch("lftools.nexus.release_docker_hub.fetch_my_public_ip", side_effect=self.mocked_fetch_my_public_ip)
+    errordate_file = os.path.join(str(datafiles), "releasedockerhub_error_date")
+    correctdate_file = os.path.join(str(datafiles), "releasedockerhub_correct_date")
+    nofile_file = os.path.join(str(datafiles), "releasedockerhub_DONTEXIST")
+    empty_file = os.path.join(str(datafiles), "releasedockerhub_EMPTYFILE")
+    zero_date = "1901-01-01 01:01:01"
+    correct_date = "2021-08-05 11:22:33"
+
+    last_run = rdh.fetch_last_run_timestamp(correctdate_file)
+    assert last_run == create_time_obj_from_str(correct_date)
+    last_run = rdh.fetch_last_run_timestamp(errordate_file)
+    assert last_run == create_time_obj_from_str(zero_date)
+    last_run = rdh.fetch_last_run_timestamp(nofile_file)
+    assert last_run == create_time_obj_from_str(zero_date)
+    last_run = rdh.fetch_last_run_timestamp(empty_file)
+    assert last_run == create_time_obj_from_str(zero_date)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
+def test_store_timestamp_to_last_run_file(datafiles, responses):
+    def _test_store_timestamp_to_last_run_file(datafiles, store_file):
+        # Test store_timestamp_to_last_run_file
+        # We check that store time is between current time and + 1 sec
+        current_time = datetime.datetime.now()
+        current_time = current_time.replace(microsecond=0)
+        current_time_plus_1sec = current_time + datetime.timedelta(seconds=1)
+        store_time_str = "1901-01-01 01:02:03"
+        rdh.store_timestamp_to_last_run_file(store_file)
+        my_ip = "10.10.10.10"
+        with open(store_file, "r") as fp:
+            for i in fp.readlines():
+                tmp = i.split(";")
+                if tmp[0].strip() == my_ip:
+                    store_time_str = tmp[1].strip()
+                    break
+        store_time_obj = create_time_obj_from_str(store_time_str)
+        assert current_time <= store_time_obj
+        assert current_time_plus_1sec > store_time_obj
+
+    # Test store_timestamp_to_last_run_file
+    # We check that store time is between current time and + 1 sec
+
+    store_file_empty = os.path.join(str(datafiles), "releasedockerhub_STORE_FILE-empty")
+    store_file_not_exist_one_row = os.path.join(str(datafiles), "releasedockerhub_STORE_FILE-NOT-exist-one-row")
+    store_file_exist_one_row = os.path.join(str(datafiles), "releasedockerhub_STORE_FILE-exist-one-row")
+    store_file = os.path.join(str(datafiles), "releasedockerhub_STORE_FILE")
+    url = "https://api.ipify.org"
+    answer = "10.10.10.10"
+
+    responses.add(responses.GET, url, body=answer, status=200)
+    _test_store_timestamp_to_last_run_file(datafiles, store_file_empty)
+    _test_store_timestamp_to_last_run_file(datafiles, store_file_not_exist_one_row)
+    _test_store_timestamp_to_last_run_file(datafiles, store_file_exist_one_row)
+    _test_store_timestamp_to_last_run_file(datafiles, store_file)
+
+
+def test_to_close_to_last_run():
+    # Verify logic for checking if enough time has passed since last run
+    orig_time = datetime.datetime.now()
+    last_run = orig_time
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_seconds) == True
+    last_run = orig_time - datetime.timedelta(seconds=rdh.throttling_delay_seconds - 3600)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_seconds) == True
+    last_run = orig_time - datetime.timedelta(
+        seconds=rdh.throttling_delay_seconds - 1,
+    )
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_seconds) == True
+    last_run = orig_time - datetime.timedelta(seconds=rdh.throttling_delay_seconds + 60)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_seconds) == False
+    last_run = orig_time - datetime.timedelta(seconds=rdh.throttling_delay_seconds * 2)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_seconds) == False
 
 
 @pytest.mark.datafiles(
@@ -685,7 +775,6 @@ class TestFetchAllTagsAndUpdate:
         assert len(rdh.projects[0].tags_2_copy.valid) == 1
         assert len(rdh.projects[1].tags_2_copy.valid) == 0
         assert len(rdh.projects[2].tags_2_copy.valid) == 2
-
         assert rdh.projects[0].tags_2_copy.valid[0] == "1.4.0"
         assert rdh.projects[2].tags_2_copy.valid[0] == "1.3.1"
         assert rdh.projects[2].tags_2_copy.valid[1] == "1.3.2"
@@ -708,8 +797,19 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.push == 3
         assert self.counter.cleanup == 3
 
+    def mocked_fetch_last_run_timestamp(self, filename):
+        """Mocking fetch_last_run_timestamp."""
+        return datetime.datetime.now() - datetime.timedelta(seconds=rdh.throttling_delay_seconds * 2)
+
     def test_start_no_copy(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_test_fetch(responses, mocker)
+        url = "https://api.ipify.org"
+        answer = "10.10.10.10"
+        responses.add(responses.GET, url, body=answer, status=200)
         rdh.start_point("onap", "", False, False)
         assert self.counter.pull == 0
         assert self.counter.tag == 0
@@ -717,7 +817,14 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.cleanup == 0
 
     def test_start_copy(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_test_fetch(responses, mocker)
+        url = "https://api.ipify.org"
+        answer = "10.10.10.10"
+        responses.add(responses.GET, url, body=answer, status=200)
         rdh.start_point("onap", "", False, False, False, True)
         assert len(rdh.NexusCatalog) == 3
         assert len(rdh.projects) == 3
@@ -733,7 +840,14 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.cleanup == 3
 
     def test_start_copy_repo(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_test_fetch(responses, mocker, "sanity")
+        url = "https://api.ipify.org"
+        answer = "10.10.10.10"
+        responses.add(responses.GET, url, body=answer, status=200)
         rdh.start_point("onap", "sanity", False, False, False, True)
         assert len(rdh.NexusCatalog) == 1
         assert len(rdh.projects) == 1
@@ -744,8 +858,15 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.push == 1
         assert self.counter.cleanup == 1
 
-    def test_start_bogus_orgs(self, responses):
+    def test_start_bogus_orgs(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_bogus_org_test_fetch(responses, "bogus_org321")
+        # url = "https://api.ipify.org"
+        # answer = '10.10.10.10'
+        # responses.add(responses.GET, url, body=answer, status=200)
         rdh.start_point("bogus_org321")
         assert len(rdh.NexusCatalog) == 0
         assert len(rdh.projects) == 0
