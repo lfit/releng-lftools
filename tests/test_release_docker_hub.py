@@ -9,7 +9,9 @@
 ##############################################################################
 """Test deploy command."""
 
+import datetime
 import os
+from unittest import mock
 
 import pytest
 import requests
@@ -111,6 +113,67 @@ def test_tag_class_repository_exist():
     rdh.initialize(org)
     tags = rdh.TagClass(org, repo, repo_from_file)
     assert tags.repository_exist == True
+
+
+def create_time_obj_from_str(in_str):
+    # Create a datetie obj from a str
+    return datetime.datetime.strptime(in_str, "%Y-%m-%d %H:%M:%S")
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
+def test_fetch_last_run_timestamp(datafiles):
+    # Test fetch_last_run_timestamp
+    errordate_file = os.path.join(str(datafiles), "releasedockerhub_error_date")
+    correctdate_file = os.path.join(str(datafiles), "releasedockerhub_correct_date")
+    nofile_file = os.path.join(str(datafiles), "releasedockerhub_DONTEXIST")
+    empty_file = os.path.join(str(datafiles), "releasedockerhub_EMPTYFILE")
+    zero_date = "1901-01-01 01:01:01"
+    correct_date = "2021-08-05 11:22:33"
+
+    last_run = rdh.fetch_last_run_timestamp(correctdate_file)
+    assert last_run == create_time_obj_from_str(correct_date)
+    last_run = rdh.fetch_last_run_timestamp(errordate_file)
+    assert last_run == create_time_obj_from_str(zero_date)
+    last_run = rdh.fetch_last_run_timestamp(nofile_file)
+    assert last_run == create_time_obj_from_str(zero_date)
+    last_run = rdh.fetch_last_run_timestamp(empty_file)
+    assert last_run == create_time_obj_from_str(zero_date)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
+def test_store_timestamp_to_last_run_file(datafiles):
+    # Test store_timestamp_to_last_run_file
+    # We check that store time is between current time and + 1 sec
+    current_time = datetime.datetime.now()
+    current_time = current_time.replace(microsecond=0)
+    current_time_plus_1sec = current_time + datetime.timedelta(seconds=1)
+    store_file = os.path.join(str(datafiles), "releasedockerhub_STORE_FILE")
+    rdh.store_timestamp_to_last_run_file(store_file)
+    with open(store_file, "r") as _file:
+        store_time_str = _file.read()
+        store_time_str = store_time_str.rstrip()
+    store_time_obj = create_time_obj_from_str(store_time_str)
+    assert current_time <= store_time_obj
+    assert current_time_plus_1sec > store_time_obj
+
+
+def test_to_close_to_last_run():
+    # Verify logic for checking if enough time has passed since last run
+    orig_time = datetime.datetime.now()
+    last_run = orig_time
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == True
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours - 1)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == True
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours, seconds=-1)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == True
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours, minutes=1)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == False
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours * 2)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == False
 
 
 @pytest.mark.datafiles(
@@ -687,7 +750,6 @@ class TestFetchAllTagsAndUpdate:
         assert len(rdh.projects[0].tags_2_copy.valid) == 1
         assert len(rdh.projects[1].tags_2_copy.valid) == 0
         assert len(rdh.projects[2].tags_2_copy.valid) == 2
-
         assert rdh.projects[0].tags_2_copy.valid[0] == "1.4.0"
         assert rdh.projects[2].tags_2_copy.valid[0] == "1.3.1"
         assert rdh.projects[2].tags_2_copy.valid[1] == "1.3.2"
@@ -710,7 +772,15 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.push == 3
         assert self.counter.cleanup == 3
 
+    def mocked_fetch_last_run_timestamp(self, filename):
+        """Mocking fetch_last_run_timestamp."""
+        return datetime.datetime.now() - datetime.timedelta(hours=rdh.throttling_delay_hours * 2)
+
     def test_start_no_copy(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_test_fetch(responses, mocker)
         rdh.start_point("onap", "", False, False)
         assert self.counter.pull == 0
@@ -719,6 +789,10 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.cleanup == 0
 
     def test_start_copy(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_test_fetch(responses, mocker)
         rdh.start_point("onap", "", False, False, False, True)
         assert len(rdh.NexusCatalog) == 3
@@ -735,6 +809,10 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.cleanup == 3
 
     def test_start_copy_repo(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_test_fetch(responses, mocker, "sanity")
         rdh.start_point("onap", "sanity", False, False, False, True)
         assert len(rdh.NexusCatalog) == 1
@@ -746,7 +824,11 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.push == 1
         assert self.counter.cleanup == 1
 
-    def test_start_bogus_orgs(self, responses):
+    def test_start_bogus_orgs(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_bogus_org_test_fetch(responses, "bogus_org321")
         rdh.start_point("bogus_org321")
         assert len(rdh.NexusCatalog) == 0
