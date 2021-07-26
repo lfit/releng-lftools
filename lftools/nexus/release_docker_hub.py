@@ -25,29 +25,34 @@ Workflow if you do it manually
     docker image rm --force 991170554e6e
 
 Filter
-Find all projects that starts with org and contains repo (if specified).
+Find all PROJECTS that starts with org and contains repo (if specified).
 
-Set the repo to "" to find all projects that starts with org
+Set the repo to "" to find all PROJECTS that starts with org
 
-Set the repo to a str to find all projects that contains that string
+Set the repo to a str to find all PROJECTS that contains that string
   and starts with org
     repo = "aaf_co"   # onap/aaf/aaf_config,onap/aaf/aaf_core
     repo = "aaf_cm"   # onap/aaf/aaf_cm
     repo = "aa"
-    repo = ""         # Find all projects
+    repo = ""         # Find all PROJECTS
 
 lftools nexus docker releasedockerhub
 """
 from __future__ import print_function
 
+import datetime
+import json
 import logging
 import multiprocessing
 import os
 import re
+import shutil
 import socket
+import tempfile
 from multiprocessing.dummy import Pool as ThreadPool
 from time import sleep
 
+import boto3
 import docker
 import requests
 import tqdm
@@ -55,9 +60,17 @@ import urllib3
 
 log = logging.getLogger(__name__)
 
-NexusCatalog = []
-projects = []
-TotTagsToBeCopied = 0
+NEXUSCATALOG = []
+PROJECTS = []
+# TOTTAGSTOBECOPIED = 0
+
+# Dockerhub has started limiting access to
+# - 100 requests for anonymous and
+# - 200 for non-anonymous access
+# This script is using anonymous access to get the dockerhub tags
+# and non-anonymous access to do the push.
+# States 21600 seconds
+THROTTLING_DELAY_SECONDS = 21600
 
 NEXUS3_BASE = ""
 NEXUS3_CATALOG = ""
@@ -65,6 +78,12 @@ NEXUS3_PROJ_NAME_HEADER = ""
 DOCKER_PROJ_NAME_HEADER = ""
 VERSION_REGEXP = ""
 DEFAULT_REGEXP = r"^\d+.\d+.\d+$"
+
+LOCAL_S3_COPY = tempfile.mkdtemp()
+LASTRUN_FILENAME = "{}/last_run_of_release_docker_hub.txt".format(LOCAL_S3_COPY)
+LASTRUN_FORMAT = "%Y-%m-%d %H:%M:%S"
+NO_TIMESTAMP_STR = "1901-01-01 01:01:01"
+USE_S3_BUCKET = True
 
 
 def _remove_http_from_url(url):
@@ -146,6 +165,29 @@ def initialize(org_name, input_regexp_or_filename=""):
     NEXUS3_PROJ_NAME_HEADER = "Nexus3 Project Name"
     DOCKER_PROJ_NAME_HEADER = "Docker HUB Project Name"
     which_version_regexp_to_use(input_regexp_or_filename)
+
+
+def AnonymousThrottlingStatus():
+    """Performs a call to docker to find out the current throttling status.
+    >>> print (resp.headers["ratelimit-remaining"])
+        95;w=21600
+    >>> print (resp.headers["ratelimit-limit"])
+        100;w=21600
+    """
+
+    # Get token
+    resp = _request_get(
+        "https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull"
+    )
+    data = json.loads(resp.text)
+    token = data["token"]
+    # Use token to get throttle status
+    headers = {"Authorization": "Bearer {}".format(token)}
+    url = "https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest"
+    resp = requests.get(url, headers=headers)
+    limit = resp.headers["ratelimit-limit"].split(";")[0]
+    remaining = resp.headers["ratelimit-remaining"].split(";")[0]
+    return limit, remaining
 
 
 class TagClass:
@@ -306,6 +348,7 @@ class DockerTagClass(TagClass):
         while retries < 20:
             try:
                 r = _request_get(self._docker_base + "/" + combined_repo_name + "/tags")
+                # I got some throttling issues due to too fast between gets, so lets sleep a bit after each
                 sleep(0.5)
                 break
             except requests.HTTPError as excinfo:
@@ -317,11 +360,23 @@ class DockerTagClass(TagClass):
 
         log.debug("r.status_code = {}, ok={}".format(r.status_code, r.status_code == requests.codes.ok))
         if r.status_code == 429:
-            # Speed throttling in effect. Cancel program
-            raise requests.HTTPError(
-                "Speed throttling in effect. To fast accessing dockerhub for tags.\n {}".format(r.text)
-            )
-        if r.status_code == requests.codes.ok:
+            # To distinguish between accessing to fast, versus to many to fast.
+            pull_rate_limit = "reached your pull rate limit" in r.text
+            if pull_rate_limit:
+                # Throttling in effect. Cancel program
+                print_anonymous_throttling_stats()
+                store_timestamp_to_last_run_file(LASTRUN_FILENAME)
+                raise requests.HTTPError(
+                    "Throttling in effect. {} Docker pulls. Wait {} seconds. \n {}".format(
+                        len(PROJECTS), THROTTLING_DELAY_SECONDS, r.text
+                    )
+                )
+            else:
+                # Speed throttling in effect. Cancel program
+                raise requests.HTTPError(
+                    "Speed throttling in effect. To fast accessing dockerhub for tags.\n {}".format(r.text)
+                )
+        elif r.status_code == requests.codes.ok:
             raw_tags = r.text
             raw_tags = raw_tags.replace("}]", "")
             raw_tags = raw_tags.replace("[{", "")
@@ -446,7 +501,8 @@ class ProjectClass:
         self._pull_tag_push_msg(
             "Pushing  docker image {} with tag {}".format(self.calc_docker_project_name(), tag), count, retry_text
         )
-        self.docker_client.images.push(self.calc_docker_project_name(), tag=tag)
+        res = self.docker_client.images.push(self.calc_docker_project_name(), tag=tag)
+        return res
 
     def _docker_cleanup(self, count, image, tag, retry_text="", progbar=False):
         """Remove the local copy of the image."""
@@ -465,7 +521,7 @@ class ProjectClass:
         to Docker Hub repository.
 
         It has 4 stages, pull, tag, push and cleanup.
-        Each of these stages, will be retried 10 times upon failures.
+        Each of these stages, will be retried a number of times upon failures.
         """
         if len(self.tags_2_copy.valid) == 0:
             return
@@ -556,7 +612,7 @@ def get_docker_name_from_file(check_repo="", repo_file_name=""):
 def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False, repo_is_filename=False):
     """Main function to collect all Nexus3 repositories.
 
-    This function will collect the Nexus catalog for all projects starting with
+    This function will collect the Nexus catalog for all PROJECTS starting with
     'org_name' as well as containing a pattern if specified.
     If exact_match is specified, it will use the pattern as a unique repo name within the org_name.
 
@@ -583,7 +639,7 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False, repo_is_
                             org_name is irrelevant in this case
 
     """
-    global NexusCatalog
+    global NEXUSCATALOG
     global project_max_len_chars
 
     project_max_len_chars = 0
@@ -594,7 +650,7 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False, repo_is_
         containing_str = ', and reponame = "{}"'.format(find_pattern)
     if repo_is_filename:
         containing_str = ', and repos are found in "{}"'.format(find_pattern)
-    info_str = "Collecting information from Nexus from projects with org = {}".format(org_name)
+    info_str = "Collecting information from Nexus from PROJECTS with org = {}".format(org_name)
     log.info("{}{}.".format(info_str, containing_str))
 
     try:
@@ -614,7 +670,7 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False, repo_is_
         raw_catalog = raw_catalog.split(":")
         TmpCatalog = raw_catalog[1].split(",")
         for word in TmpCatalog:
-            # Remove all projects that do not start with org_name
+            # Remove all PROJECTS that do not start with org_name
             use_this_repo = False
             if repo_is_filename and repo_is_in_file(word, find_pattern):
                 use_this_repo = True
@@ -630,13 +686,13 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False, repo_is_
                     if exact_match and project[1] == find_pattern:
                         use_this_repo = True
             if use_this_repo:
-                NexusCatalog.append(project)
+                NEXUSCATALOG.append(project)
                 log.debug("Added project {} to my list".format(project[1]))
                 if len(project[1]) > project_max_len_chars:
                     project_max_len_chars = len(project[1])
         log.debug(
-            "# TmpCatalog {}, NexusCatalog {}, DIFF = {}".format(
-                len(TmpCatalog), len(NexusCatalog), len(TmpCatalog) - len(NexusCatalog)
+            "# TmpCatalog {}, NEXUSCATALOG {}, DIFF = {}".format(
+                len(TmpCatalog), len(NEXUSCATALOG), len(TmpCatalog) - len(NEXUSCATALOG)
             )
         )
     return True
@@ -645,12 +701,12 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False, repo_is_
 def fetch_all_tags(progbar=False):
     """Fetch all tags function.
 
-    This function will use multi-threading to fetch all tags for all projects in
+    This function will use multi-threading to fetch all tags for all PROJECTS in
     Nexus3 Catalog.
     """
-    NbrProjects = len(NexusCatalog)
+    NbrProjects = len(NEXUSCATALOG)
     log.info(
-        "Fetching tags from Nexus3 and Docker Hub for {} projects with version regexp >>{}<<".format(
+        "Fetching tags from Nexus3 and Docker Hub for {} PROJECTS with version regexp >>{}<<".format(
             NbrProjects, VERSION_REGEXP
         )
     )
@@ -669,18 +725,18 @@ def fetch_all_tags(progbar=False):
                     ('onap', 'aaf/aaf_service')
         """
         new_proj = ProjectClass(proj)
-        projects.append(new_proj)
+        PROJECTS.append(new_proj)
         if progbar:
             pbar.update(1)
 
     pool = ThreadPool(multiprocessing.cpu_count())
-    pool.map(_fetch_all_tags, NexusCatalog)
+    pool.map(_fetch_all_tags, NEXUSCATALOG)
     pool.close()
     pool.join()
 
     if progbar:
         pbar.close()
-    projects.sort()
+    PROJECTS.sort()
 
 
 def copy_from_nexus_to_docker(progbar=False):
@@ -689,7 +745,7 @@ def copy_from_nexus_to_docker(progbar=False):
     This function will use multi-threading to copy all missing tags in the project list.
     """
     _tot_tags = 0
-    for proj in projects:
+    for proj in PROJECTS:
         _tot_tags = _tot_tags + len(proj.tags_2_copy.valid)
     log.info("About to start copying from Nexus3 to Docker Hub for {} missing tags".format(_tot_tags))
     if progbar:
@@ -709,11 +765,113 @@ def copy_from_nexus_to_docker(progbar=False):
             pbar.update(len(proj.tags_2_copy.valid))
 
     pool = ThreadPool(multiprocessing.cpu_count())
-    pool.map(_docker_pull_tag_push, projects)
+    pool.map(_docker_pull_tag_push, PROJECTS)
     pool.close()
     pool.join()
     if progbar:
         pbar.close()
+
+
+def fetch_my_public_ip():
+    # fetches the public IP for this server
+    ip = requests.get("https://api.ipify.org").text
+    log.debug("My public IP address is: {}".format(ip))
+    return ip.strip()
+
+
+def copy_permanent_data_files_from_s3_bucket_to_local(local_target_dir, s3_bucket_name):
+    # Retrieves the permanent data files from s3 bucket, and stores
+    # them to temporary directory
+    # This function is unit tested only with s3 credentials on local computer
+    s3 = boto3.resource("s3")
+    s3_bucket = s3.Bucket(s3_bucket_name)
+    for obj in s3_bucket.objects.all():
+        s3_bucket.download_file(obj.key, "{}/{}".format(local_target_dir, obj.key))
+
+
+def store_permanent_data_files_from_local_to_s3_bucket(local_source_dir, s3_bucket_name):
+    # Store all files from the temporary directory to permanent storage
+    # in an s3 bucket
+    # This function is unit tested only with s3 credentials on local computer
+    s3 = boto3.resource("s3")
+    s3_bucket = s3.Bucket(s3_bucket_name)
+    for filename in os.listdir(local_source_dir):
+        f = os.path.join(local_source_dir, filename)
+        s3_bucket.upload_file(f, filename)
+
+
+def delete_file_from_s3_bucket(delete_this_file, s3_bucket_name):
+    # Delete one (1) file from the permanent storage
+    # in an s3 bucket
+    # This function is unit tested only with s3 credentials on local computer
+    s3 = boto3.resource("s3")
+    s3_object = s3.Object(s3_bucket_name, delete_this_file)
+    s3_object.delete()
+
+
+def fetch_last_run_timestamp(file_name):
+    # Fetching file with a list of IP; TimeStamp
+    # Returning the TimeStamp that corrsponds to my public_ip
+
+    date_time_str = NO_TIMESTAMP_STR
+    my_ip = fetch_my_public_ip()
+
+    try:
+        with open(file_name, "r") as fp:
+            for i in fp.readlines():
+                tmp = i.split(";")
+                log.debug("tmp[0]={}, tmp[1]={}".format(tmp[0], tmp[1]))
+                if tmp[0].strip() == my_ip:
+                    log.debug("Found correct IP")
+                    date_time_str = tmp[1].strip()
+                    break
+        log.debug("Did not find my IP ({}) among the list of last run timestamps".format(my_ip))
+
+    except OSError:
+        date_time_str = NO_TIMESTAMP_STR
+    try:
+        date_time_obj = datetime.datetime.strptime(date_time_str, LASTRUN_FORMAT)
+    except ValueError:
+        log.error("Wrong date format found >>{}<<, expected >>{}<<".format(date_time_str, LASTRUN_FORMAT))
+        log.error("For now, using default old timestamp {}".format(NO_TIMESTAMP_STR))
+        date_time_obj = datetime.datetime.strptime(NO_TIMESTAMP_STR, LASTRUN_FORMAT)
+    return date_time_obj
+
+
+def store_timestamp_to_last_run_file(file_name):
+    # Store the last run timestamp to permanent storage
+    sttime = datetime.datetime.now().strftime(LASTRUN_FORMAT)
+    my_ip = fetch_my_public_ip()
+    ip_time_lst = []
+    found_my_ip = False
+    try:
+        with open(file_name, "r") as fp:
+            for i in fp.readlines():
+                tmp = i.split(";")
+                tmp[0] = tmp[0].strip()
+                tmp[1] = tmp[1].strip()
+                if tmp[0] == my_ip:
+                    tmp[1] = sttime
+                    log.debug("Replacing timestamp for IP {} in last_run file".format(my_ip))
+                    found_my_ip = True
+                ip_time_lst.append((tmp[0], tmp[1]))
+    except OSError:
+        log.error("Last run timestamp file not found, assuming first time")
+    if not found_my_ip:
+        log.debug("Adding this IP {} and timestamp {} to the file last_run".format(my_ip, sttime))
+        ip_time_lst.append((my_ip, sttime))
+    try:
+        with open(file_name, "w") as _file:
+            for row in ip_time_lst:
+                _file.write("{} ; {}\n".format(row[0], row[1]))
+    except OSError:
+        log.error("Could not write timestamps to file")
+
+
+def to_close_to_last_run(last_run, THROTTLING_DELAY_SECONDS):
+    # Checks if interval between now and last_run is more than throttling delay.
+    earliest_time_for_next_run = last_run + datetime.timedelta(seconds=THROTTLING_DELAY_SECONDS)
+    return earliest_time_for_next_run >= datetime.datetime.now()
 
 
 def print_nexus_docker_proj_names():
@@ -725,7 +883,7 @@ def print_nexus_docker_proj_names():
     log.info(log_str)
     log.info("-" * project_max_len_chars * 2)
     docker_i = 0
-    for proj in projects:
+    for proj in PROJECTS:
         log_str = fmt_str.format(proj.nexus_repo_name)
         log_str = "{}{}".format(log_str, proj.docker_repo_name)
         log.info(log_str)
@@ -760,7 +918,7 @@ def print_tags_data(proj_name, tags):
 def print_nexus_valid_tags():
     """Print Nexus valid tags."""
     print_tags_header("Nexus Valid Tags", NEXUS3_PROJ_NAME_HEADER)
-    for proj in projects:
+    for proj in PROJECTS:
         print_tags_data(proj.nexus_repo_name, proj.nexus_tags.valid)
     log.info("")
 
@@ -768,7 +926,7 @@ def print_nexus_valid_tags():
 def print_nexus_invalid_tags():
     """Print Nexus invalid tags."""
     print_tags_header("Nexus InValid Tags", NEXUS3_PROJ_NAME_HEADER)
-    for proj in projects:
+    for proj in PROJECTS:
         print_tags_data(proj.nexus_repo_name, proj.nexus_tags.invalid)
     log.info("")
 
@@ -776,7 +934,7 @@ def print_nexus_invalid_tags():
 def print_docker_valid_tags():
     """Print Docker valid tags."""
     print_tags_header("Docker Valid Tags", DOCKER_PROJ_NAME_HEADER)
-    for proj in projects:
+    for proj in PROJECTS:
         print_tags_data(proj.docker_repo_name, proj.docker_tags.valid)
     log.info("")
 
@@ -784,7 +942,7 @@ def print_docker_valid_tags():
 def print_docker_invalid_tags():
     """Print Docker invalid tags."""
     print_tags_header("Docker InValid Tags", DOCKER_PROJ_NAME_HEADER)
-    for proj in projects:
+    for proj in PROJECTS:
         print_tags_data(proj.docker_repo_name, proj.docker_tags.invalid)
     log.info("")
 
@@ -793,7 +951,7 @@ def print_stats():
     """Print simple repo/tag statistics."""
     print_tags_header("Tag statistics (V=Valid, I=InValid)", NEXUS3_PROJ_NAME_HEADER)
     fmt_str = "{:<" + str(project_max_len_chars) + "} : "
-    for proj in projects:
+    for proj in PROJECTS:
         log.info(
             "{}Nexus V:{} I:{} -- Docker V:{} I:{}".format(
                 fmt_str.format(proj.nexus_repo_name),
@@ -815,7 +973,7 @@ def print_missing_docker_proj():
     log.info(log_str)
     log.info("-" * project_max_len_chars * 2)
     all_docker_repos_found = True
-    for proj in projects:
+    for proj in PROJECTS:
         if not proj.docker_tags.repository_exist:
             log_str = fmt_str.format(proj.nexus_repo_name)
             log_str = "{}{}".format(log_str, proj.docker_repo_name)
@@ -834,7 +992,7 @@ def print_nexus_tags_to_copy():
     log_str = "{}{}".format(log_str, "Tags to copy")
     log.info(log_str)
     log.info("-" * project_max_len_chars * 2)
-    for proj in projects:
+    for proj in PROJECTS:
         if len(proj.tags_2_copy.valid) > 0:
             log_str = ""
             tag_i = 0
@@ -851,12 +1009,18 @@ def print_nexus_tags_to_copy():
 def print_nbr_tags_to_copy():
     """Print how many tags that needs to be copied."""
     _tot_tags = 0
-    for proj in projects:
+    for proj in PROJECTS:
         _tot_tags = _tot_tags + len(proj.tags_2_copy.valid)
     log.info("Summary: {} tags that should be copied from Nexus3 to Docker Hub.".format(_tot_tags))
 
 
-def start_point(
+def print_anonymous_throttling_stats():
+    """Print anonymous throttling stats for this session."""
+    result = AnonymousThrottlingStatus()
+    log.info("Anonymous dockerhub throttling limit={}, remaining now {}.".format(result[0], result[1]))
+
+
+def main(
     org_name,
     find_pattern="",
     exact_match=False,
@@ -866,8 +1030,30 @@ def start_point(
     progbar=False,
     repofile=False,
     version_regexp="",
+    ignore_throttle_delay=False,
+    s3_bucket_name="",
 ):
     """Main function."""
+    if USE_S3_BUCKET:
+        if len(s3_bucket_name) == 0:
+            s3_bucket_name = "onap-dockerhub-release-logs-bucket"
+        log.info("Using S3 bucket : {}".format(USE_S3_BUCKET))
+        log.info("S3 bucket name for permanent data : {}".format(s3_bucket_name))
+        copy_permanent_data_files_from_s3_bucket_to_local(LOCAL_S3_COPY, s3_bucket_name)
+
+    # Check if last run was to close, avoid docker throttling issues
+    last_run_timestamp = fetch_last_run_timestamp(LASTRUN_FILENAME)
+    if not ignore_throttle_delay:
+        if to_close_to_last_run(last_run_timestamp, THROTTLING_DELAY_SECONDS):
+            print_anonymous_throttling_stats()
+            log.error(
+                "You need to wait {} seconds since last run which was done at {}".format(
+                    THROTTLING_DELAY_SECONDS,
+                    last_run_timestamp,
+                )
+            )
+            return
+
     # Verify find_pattern and specified_repo are not both used.
     if len(find_pattern) == 0 and exact_match:
         log.error("You need to provide a Pattern to go with the --exact flag")
@@ -891,7 +1077,15 @@ def start_point(
     if summary or verbose:
         print_missing_docker_proj()
         print_nexus_tags_to_copy()
+        print_anonymous_throttling_stats()
     if copy:
         copy_from_nexus_to_docker(progbar)
     else:
         print_nbr_tags_to_copy()
+
+    if USE_S3_BUCKET:
+        store_timestamp_to_last_run_file(LASTRUN_FILENAME)
+        store_permanent_data_files_from_local_to_s3_bucket(LOCAL_S3_COPY, s3_bucket_name)
+        # Remove temporary folder, since all files are now on s3 bucket
+        if os.path.exists(LOCAL_S3_COPY) and os.path.isdir(LOCAL_S3_COPY):
+            shutil.rmtree(LOCAL_S3_COPY)
