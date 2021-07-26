@@ -40,6 +40,7 @@ lftools nexus docker releasedockerhub
 """
 from __future__ import print_function
 
+import datetime
 import logging
 import multiprocessing
 import os
@@ -57,6 +58,8 @@ log = logging.getLogger(__name__)
 NexusCatalog = []
 projects = []
 TotTagsToBeCopied = 0
+# States 6 hours, but lets give them a bit more
+throttling_delay_hours = 8
 
 NEXUS3_BASE = ""
 NEXUS3_CATALOG = ""
@@ -64,6 +67,10 @@ NEXUS3_PROJ_NAME_HEADER = ""
 DOCKER_PROJ_NAME_HEADER = ""
 VERSION_REGEXP = ""
 DEFAULT_REGEXP = "^\d+.\d+.\d+$"
+
+lastrun_filename = "/tmp/last_run_of_release_docker_hub.txt"
+lastrun_format = "%Y-%m-%d %H:%M:%S"
+no_timestamp_str = "1901-01-01 01:01:01"
 
 
 def _remove_http_from_url(url):
@@ -709,6 +716,41 @@ def copy_from_nexus_to_docker(progbar=False):
         pbar.close()
 
 
+def fetch_last_run_timestamp(file_name):
+    # Fetch the last run timestamp from permanent storage
+    ### TODO: Use proper S3 bucket storage
+    date_time_str = no_timestamp_str
+    try:
+        with open(file_name, "r") as _file:
+            date_time_str = _file.read()
+            date_time_str = date_time_str.rstrip()
+    except:
+        date_time_str = no_timestamp_str
+
+    try:
+        date_time_obj = datetime.datetime.strptime(date_time_str, lastrun_format)
+    except:
+        log.error("Wrong date format found >> {} <<, expected >> {} <<".format(date_time_str, lastrun_format))
+        log.error("For now, using default old timestamp {}".format(no_timestamp_str))
+        date_time_obj = datetime.datetime.strptime(no_timestamp_str, lastrun_format)
+
+    return date_time_obj
+
+
+def store_timestamp_to_last_run_file(file_name):
+    # Store the last run timestamp to permanent storage
+    ### TODO: Use proper S3 bucket storage
+    sttime = datetime.datetime.now().strftime(lastrun_format)
+    with open(file_name, "w") as _file:
+        _file.write(sttime)
+
+
+def to_close_to_last_run(last_run, throttling_delay_hours):
+    # Checks if interval between now and last_run is more than throttling delay.
+    earliest_time_for_next_run = last_run + datetime.timedelta(hours=throttling_delay_hours)
+    return earliest_time_for_next_run >= datetime.datetime.now()
+
+
 def print_nexus_docker_proj_names():
     """Print Nexus3 - Docker Hub repositories."""
     fmt_str = "{:<" + str(project_max_len_chars) + "} : "
@@ -861,6 +903,17 @@ def start_point(
     version_regexp="",
 ):
     """Main function."""
+    # Check if last run was to close, avoid docker throttling issues
+    last_run_timestamp = fetch_last_run_timestamp(lastrun_filename)
+    if to_close_to_last_run(last_run_timestamp, throttling_delay_hours):
+        log.error(
+            "You need to wait {} hours since last run which was done at {}".format(
+                throttling_delay_hours, last_run_timestamp
+            )
+        )
+        return
+    store_timestamp_to_last_run_file(lastrun_filename)
+
     # Verify find_pattern and specified_repo are not both used.
     if len(find_pattern) == 0 and exact_match:
         log.error("You need to provide a Pattern to go with the --exact flag")
