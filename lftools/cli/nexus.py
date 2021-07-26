@@ -226,11 +226,42 @@ def release(ctx, repos, verify, server):
     " File sample:                                                  "
     r" ^\d+.\d+.\d+$                                                 ",
 )
+@click.option(
+    "-i",
+    "--ignorethrottledelay",
+    is_flag=True,
+    required=False,
+    default=False,
+    help="Ignore checking for throttle delay.",
+)
+@click.option(
+    "-3",
+    "--s3_bucket_name",
+    type=str,
+    default="",
+    required=False,
+    help="Which S3 bucket to use for permanent data storage.",
+)
 @click.pass_context
-def copy_from_nexus3_to_dockerhub(ctx, org, repo, exact, summary, verbose, copy, progbar, repofile, version_regexp):
+def copy_from_nexus3_to_dockerhub(
+    ctx,
+    org,
+    repo,
+    exact,
+    summary,
+    verbose,
+    copy,
+    progbar,
+    repofile,
+    version_regexp,
+    ignorethrottledelay,
+    s3_bucket_name,
+):
     """Find missing repos in Docker Hub, Copy from Nexus3.
 
     Will by default list all missing repos in Docker Hub, compared to Nexus3.
     If -c (--copy) is provided, it will copy the repos from Nexus3 to Docker Hub.
     """
-    rdh.start_point(org, repo, exact, summary, verbose, copy, progbar, repofile, version_regexp)
+    rdh.start_point(
+        org, repo, exact, summary, verbose, copy, progbar, repofile, version_regexp, ignorethrottledelay, s3_bucket_name
+    )
