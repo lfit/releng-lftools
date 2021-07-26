@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Dockerhub has implemented a throttling mechanism where after 100-200
+    calls to dockerhub, a 6 hour delay is enforced.
+    To handle this, the dockerreleasehub command has enforced a delay
+    of 6ish hours between use.
+    This forced delay can be ignored if " -i" is given as parameter.
