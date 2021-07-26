@@ -18,7 +18,7 @@ Workflow if you do it manually
     TAB1 https://nexus3.onap.org/#browse/search=repository_name%3Ddocker.release
     TAB2 https://hub.docker.com/r/onap
 
-    docker pull nexus3.onap.org:10002/onap/aaf/aaf_hello:2.1.3
+    docker  nexus3.onap.org:10002/onap/aaf/aaf_hello:2.1.3
     docker images --> imageid --> 991170554e6e
     docker tag 991170554e6e onap/aaf-aaf_hello:2.1.3
     docker push onap/aaf-aaf_hello:2.1.3
@@ -40,6 +40,7 @@ lftools nexus docker releasedockerhub
 """
 from __future__ import print_function
 
+import datetime
 import logging
 import multiprocessing
 import os
@@ -57,6 +58,8 @@ log = logging.getLogger(__name__)
 NexusCatalog = []
 projects = []
 TotTagsToBeCopied = 0
+# States 6 hours, but lets give them a bit more
+throttling_delay_hours = 8
 
 NEXUS3_BASE = ""
 NEXUS3_CATALOG = ""
@@ -64,6 +67,10 @@ NEXUS3_PROJ_NAME_HEADER = ""
 DOCKER_PROJ_NAME_HEADER = ""
 VERSION_REGEXP = ""
 DEFAULT_REGEXP = "^\d+.\d+.\d+$"
+
+lastrun_filename = "/tmp/last_run_of_release_docker_hub.txt"
+lastrun_format = "%Y-%m-%d %H:%M:%S"
+no_timestamp_str = "1901-01-01 01:01:01"
 
 
 def _remove_http_from_url(url):
@@ -335,7 +342,7 @@ class DockerTagClass(TagClass):
 class ProjectClass:
     """Main Project class.
 
-    Main Function of this class, is to pull, and push the missing images from
+    Main Function of this class, is to , and push the missing images from
     Nexus3 to Docker Hub.
 
     Parameters:
@@ -347,7 +354,7 @@ class ProjectClass:
       * Initialize the Nexus and Docker tag variables.
       * Find which tags are needed to be copied.
 
-    Main external function is docker_pull_tag_push
+    Main external function is docker__tag_push
     """
 
     def __init__(self, nexus_proj):
@@ -688,7 +695,7 @@ def copy_from_nexus_to_docker(progbar=False):
     if progbar:
         pbar = tqdm.tqdm(total=_tot_tags, bar_format="{l_bar}{bar}|{n_fmt}/{total_fmt} [{elapsed}]")
 
-    def _docker_pull_tag_push(proj):
+    def _docker__tag_push(proj):
         """Helper function for multi-threading.
 
         This function, will call the ProjectClass proj's docker_pull_tag_push.
@@ -702,11 +709,79 @@ def copy_from_nexus_to_docker(progbar=False):
             pbar.update(len(proj.tags_2_copy.valid))
 
     pool = ThreadPool(multiprocessing.cpu_count())
-    pool.map(_docker_pull_tag_push, projects)
+    pool.map(_docker__tag_push, projects)
     pool.close()
     pool.join()
     if progbar:
         pbar.close()
+
+
+def fetch_my_public_ip():
+    # fetches the public IP for this server
+    ip = requests.get("https://api.ipify.org").text
+    log.debug("My public IP address is: {}".format(ip))
+    return ip.strip()
+
+
+def fetch_last_run_timestamp(file_name):
+    # Fetching file with a list of IP; TimeStamp
+    # Returning the TimeStamp that corrsponds to my public_ip
+
+    result = []
+    date_time_str = no_timestamp_str
+    my_ip = fetch_my_public_ip()
+
+    try:
+        with open(file_name, "r") as fp:
+            for i in fp.readlines():
+                tmp = i.split(";")
+                log.debug("tmp[0]={}, tmp[1]={}".format(tmp[0], tmp[1]))
+                if tmp[0].strip() == my_ip:
+                    log.debug("Found correct IP")
+                    date_time_str = tmp[1].strip()
+                    break
+        log.debug("Did not find my IP ({}) among the list of last run timestamps".format(my_ip))
+
+    except:
+        date_time_str = no_timestamp_str
+    try:
+        date_time_obj = datetime.datetime.strptime(date_time_str, lastrun_format)
+    except:
+        log.error("Wrong date format found >>{}<<, expected >>{}<<".format(date_time_str, lastrun_format))
+        log.error("For now, using default old timestamp {}".format(no_timestamp_str))
+        date_time_obj = datetime.datetime.strptime(no_timestamp_str, lastrun_format)
+    return date_time_obj
+
+
+def store_timestamp_to_last_run_file(file_name):
+    # Store the last run timestamp to permanent storage
+    ### TODO: Use proper S3 bucket storage
+    sttime = datetime.datetime.now().strftime(lastrun_format)
+    my_ip = fetch_my_public_ip()
+    ip_time_lst = []
+    found_my_ip = False
+    with open(file_name, "r") as fp:
+        for i in fp.readlines():
+            tmp = i.split(";")
+            tmp[0] = tmp[0].strip()
+            tmp[1] = tmp[1].strip()
+            if tmp[0] == my_ip:
+                tmp[1] = sttime
+                log.debug("Replacing timestamp for IP {} in last_run file".format(my_ip))
+                found_my_ip = True
+            ip_time_lst.append((tmp[0], tmp[1]))
+    if not found_my_ip:
+        log.debug("Adding this IP {} and timestamp {} to the file last_run".format(my_ip, sttime))
+        ip_time_lst.append((my_ip, sttime))
+    with open(file_name, "w") as _file:
+        for row in ip_time_lst:
+            _file.write("{} ; {}\n".format(row[0], row[1]))
+
+
+def to_close_to_last_run(last_run, throttling_delay_hours):
+    # Checks if interval between now and last_run is more than throttling delay.
+    earliest_time_for_next_run = last_run + datetime.timedelta(hours=throttling_delay_hours)
+    return earliest_time_for_next_run >= datetime.datetime.now()
 
 
 def print_nexus_docker_proj_names():
@@ -861,6 +936,16 @@ def start_point(
     version_regexp="",
 ):
     """Main function."""
+    # Check if last run was to close, avoid docker throttling issues
+    last_run_timestamp = fetch_last_run_timestamp(lastrun_filename)
+    if to_close_to_last_run(last_run_timestamp, throttling_delay_hours):
+        log.error(
+            "You need to wait {} hours since last run which was done at {}".format(
+                throttling_delay_hours, last_run_timestamp
+            )
+        )
+        return
+
     # Verify find_pattern and specified_repo are not both used.
     if len(find_pattern) == 0 and exact_match:
         log.error("You need to provide a Pattern to go with the --exact flag")
@@ -888,3 +973,5 @@ def start_point(
         copy_from_nexus_to_docker(progbar)
     else:
         print_nbr_tags_to_copy()
+
+    store_timestamp_to_last_run_file(lastrun_filename)
