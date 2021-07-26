@@ -18,7 +18,7 @@ Workflow if you do it manually
     TAB1 https://nexus3.onap.org/#browse/search=repository_name%3Ddocker.release
     TAB2 https://hub.docker.com/r/onap
 
-    docker pull nexus3.onap.org:10002/onap/aaf/aaf_hello:2.1.3
+    docker  nexus3.onap.org:10002/onap/aaf/aaf_hello:2.1.3
     docker images --> imageid --> 991170554e6e
     docker tag 991170554e6e onap/aaf-aaf_hello:2.1.3
     docker push onap/aaf-aaf_hello:2.1.3
@@ -40,6 +40,7 @@ lftools nexus docker releasedockerhub
 """
 from __future__ import print_function
 
+import datetime
 import logging
 import multiprocessing
 import os
@@ -51,6 +52,7 @@ import docker
 import requests
 import tqdm
 import urllib3
+import json
 
 log = logging.getLogger(__name__)
 
@@ -58,12 +60,24 @@ NexusCatalog = []
 projects = []
 TotTagsToBeCopied = 0
 
+# Dockerhub has started limiting access to
+# - 100 requests for anonymous and
+# - 200 for non-anonymous access
+# This script is using anonymous access to get the dockerhub tags
+# and non-anonymous access to do the push.
+# States 21600 seconds, but lets give them a bit more
+throttling_delay_seconds = 21700
+
 NEXUS3_BASE = ""
 NEXUS3_CATALOG = ""
 NEXUS3_PROJ_NAME_HEADER = ""
 DOCKER_PROJ_NAME_HEADER = ""
 VERSION_REGEXP = ""
 DEFAULT_REGEXP = "^\d+.\d+.\d+$"
+
+lastrun_filename = "/tmp/last_run_of_release_docker_hub.txt"
+lastrun_format = "%Y-%m-%d %H:%M:%S"
+no_timestamp_str = "1901-01-01 01:01:01"
 
 
 def _remove_http_from_url(url):
@@ -145,6 +159,27 @@ def initialize(org_name, input_regexp_or_filename=""):
     NEXUS3_PROJ_NAME_HEADER = "Nexus3 Project Name"
     DOCKER_PROJ_NAME_HEADER = "Docker HUB Project Name"
     which_version_regexp_to_use(input_regexp_or_filename)
+
+
+class AnonymousThrottlingStatus:
+    def __init__(self):
+        """Initialize this class.
+        >>> print (resp.headers["ratelimit-remaining"])
+            95;w=21600
+        >>> print (resp.headers["ratelimit-limit"])
+            100;w=21600
+        """
+
+        # Get token
+        resp = _request_get("https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull")
+        data = json.loads(resp.text)
+        token = data['token']
+        # Use token to get throttle status
+        headers = {'Authorization': 'Bearer {}'.format(token)}
+        url = "https://registry-1.docker.io/v2/ratelimitpreview/test/manifests/latest"
+        resp = requests.get(url, headers=headers)
+        self.limit = resp.headers["ratelimit-limit"].split(";")[0]
+        self.remaining = resp.headers["ratelimit-remaining"].split(";")[0]
 
 
 class TagClass:
@@ -314,7 +349,12 @@ class DockerTagClass(TagClass):
                     return
 
         log.debug("r.status_code = {}, ok={}".format(r.status_code, r.status_code == requests.codes.ok))
-        if r.status_code == requests.codes.ok:
+        if r.status_code == 429:
+            ## Throttling in effect. Cancel program
+            print_anonymous_throttling_stats()
+            store_timestamp_to_last_run_file(lastrun_filename)
+            raise requests.HTTPError("Throttling in effect. {} Docker pulls so far. You need to wait {} seconds and possible reduce scope. \n{}".format(len(projects), throttling_delay_seconds, r.text))
+        elif r.status_code == requests.codes.ok:
             raw_tags = r.text
             raw_tags = raw_tags.replace("}]", "")
             raw_tags = raw_tags.replace("[{", "")
@@ -335,7 +375,7 @@ class DockerTagClass(TagClass):
 class ProjectClass:
     """Main Project class.
 
-    Main Function of this class, is to pull, and push the missing images from
+    Main Function of this class, is to , and push the missing images from
     Nexus3 to Docker Hub.
 
     Parameters:
@@ -347,7 +387,7 @@ class ProjectClass:
       * Initialize the Nexus and Docker tag variables.
       * Find which tags are needed to be copied.
 
-    Main external function is docker_pull_tag_push
+    Main external function is docker__tag_push
     """
 
     def __init__(self, nexus_proj):
@@ -439,7 +479,8 @@ class ProjectClass:
         self._pull_tag_push_msg(
             "Pushing  docker image {} with tag {}".format(self.calc_docker_project_name(), tag), count, retry_text
         )
-        self.docker_client.images.push(self.calc_docker_project_name(), tag=tag)
+        res = self.docker_client.images.push(self.calc_docker_project_name(), tag=tag)
+        return res
 
     def _docker_cleanup(self, count, image, tag, retry_text="", progbar=False):
         """Remove the local copy of the image."""
@@ -458,7 +499,7 @@ class ProjectClass:
         to Docker Hub repository.
 
         It has 4 stages, pull, tag, push and cleanup.
-        Each of these stages, will be retried 10 times upon failures.
+        Each of these stages, will be retried a number of times upon failures.
         """
         if len(self.tags_2_copy.valid) == 0:
             return
@@ -482,7 +523,10 @@ class ProjectClass:
                             break
 
                         if stage == "push":
-                            self._docker_push(cnt_break_loop, image, tag, retry_text, progbar)
+                            res = self._docker_push(cnt_break_loop, image, tag, retry_text, progbar)
+                            ## TODO: Should check for res containing Error or Throttling. Not sure how
+                            ## use getattr? search for "pull rate limit"
+                            ##       Return type: (generator or str)
                             break
 
                         if stage == "cleanup":
@@ -688,7 +732,7 @@ def copy_from_nexus_to_docker(progbar=False):
     if progbar:
         pbar = tqdm.tqdm(total=_tot_tags, bar_format="{l_bar}{bar}|{n_fmt}/{total_fmt} [{elapsed}]")
 
-    def _docker_pull_tag_push(proj):
+    def _docker__tag_push(proj):
         """Helper function for multi-threading.
 
         This function, will call the ProjectClass proj's docker_pull_tag_push.
@@ -702,11 +746,85 @@ def copy_from_nexus_to_docker(progbar=False):
             pbar.update(len(proj.tags_2_copy.valid))
 
     pool = ThreadPool(multiprocessing.cpu_count())
-    pool.map(_docker_pull_tag_push, projects)
+    pool.map(_docker__tag_push, projects)
     pool.close()
     pool.join()
     if progbar:
         pbar.close()
+
+
+def fetch_my_public_ip():
+    # fetches the public IP for this server
+    ip = requests.get("https://api.ipify.org").text
+    log.debug("My public IP address is: {}".format(ip))
+    return ip.strip()
+
+
+def fetch_last_run_timestamp(file_name):
+    # Fetching file with a list of IP; TimeStamp
+    # Returning the TimeStamp that corrsponds to my public_ip
+
+    result = []
+    date_time_str = no_timestamp_str
+    my_ip = fetch_my_public_ip()
+
+    try:
+        with open(file_name, "r") as fp:
+            for i in fp.readlines():
+                tmp = i.split(";")
+                log.debug("tmp[0]={}, tmp[1]={}".format(tmp[0], tmp[1]))
+                if tmp[0].strip() == my_ip:
+                    log.debug("Found correct IP")
+                    date_time_str = tmp[1].strip()
+                    break
+        log.debug("Did not find my IP ({}) among the list of last run timestamps".format(my_ip))
+
+    except:
+        date_time_str = no_timestamp_str
+    try:
+        date_time_obj = datetime.datetime.strptime(date_time_str, lastrun_format)
+    except:
+        log.error("Wrong date format found >>{}<<, expected >>{}<<".format(date_time_str, lastrun_format))
+        log.error("For now, using default old timestamp {}".format(no_timestamp_str))
+        date_time_obj = datetime.datetime.strptime(no_timestamp_str, lastrun_format)
+    return date_time_obj
+
+
+def store_timestamp_to_last_run_file(file_name):
+    # Store the last run timestamp to permanent storage
+    ### TODO: Use proper S3 bucket storage
+    sttime = datetime.datetime.now().strftime(lastrun_format)
+    my_ip = fetch_my_public_ip()
+    ip_time_lst = []
+    found_my_ip = False
+    try:
+        with open(file_name, "r") as fp:
+            for i in fp.readlines():
+                tmp = i.split(";")
+                tmp[0] = tmp[0].strip()
+                tmp[1] = tmp[1].strip()
+                if tmp[0] == my_ip:
+                    tmp[1] = sttime
+                    log.debug("Replacing timestamp for IP {} in last_run file".format(my_ip))
+                    found_my_ip = True
+                ip_time_lst.append((tmp[0], tmp[1]))
+    except:
+        log.error("Last run timestamp file not found, assuming first time")
+    if not found_my_ip:
+        log.debug("Adding this IP {} and timestamp {} to the file last_run".format(my_ip, sttime))
+        ip_time_lst.append((my_ip, sttime))
+    try:
+        with open(file_name, "w") as _file:
+            for row in ip_time_lst:
+                _file.write("{} ; {}\n".format(row[0], row[1]))
+    except:
+        log.error("Could not write timestamps to file")
+
+
+def to_close_to_last_run(last_run, throttling_delay_seconds):
+    # Checks if interval between now and last_run is more than throttling delay.
+    earliest_time_for_next_run = last_run + datetime.timedelta(seconds=throttling_delay_seconds)
+    return earliest_time_for_next_run >= datetime.datetime.now()
 
 
 def print_nexus_docker_proj_names():
@@ -849,6 +967,12 @@ def print_nbr_tags_to_copy():
     log.info("Summary: {} tags that should be copied from Nexus3 to Docker Hub.".format(_tot_tags))
 
 
+def print_anonymous_throttling_stats():
+    """Print anonymous throttling stats for this session."""
+    current = AnonymousThrottlingStatus()
+    log.info("Anonymous dockerhub throttling limit={}, remaining now {}.".format(current.limit, current.remaining))
+
+
 def start_point(
     org_name,
     find_pattern="",
@@ -861,6 +985,17 @@ def start_point(
     version_regexp="",
 ):
     """Main function."""
+    # Check if last run was to close, avoid docker throttling issues
+    last_run_timestamp = fetch_last_run_timestamp(lastrun_filename)
+    if to_close_to_last_run(last_run_timestamp, throttling_delay_seconds):
+        print_anonymous_throttling_stats()
+        log.error(
+            "You need to wait {} seconds since last run which was done at {}".format(
+                throttling_delay_seconds, last_run_timestamp,
+            )
+        )
+        return
+
     # Verify find_pattern and specified_repo are not both used.
     if len(find_pattern) == 0 and exact_match:
         log.error("You need to provide a Pattern to go with the --exact flag")
@@ -884,7 +1019,10 @@ def start_point(
     if summary or verbose:
         print_missing_docker_proj()
         print_nexus_tags_to_copy()
+        print_anonymous_throttling_stats()
     if copy:
         copy_from_nexus_to_docker(progbar)
     else:
         print_nbr_tags_to_copy()
+
+    store_timestamp_to_last_run_file(lastrun_filename)
