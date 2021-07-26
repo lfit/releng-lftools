@@ -9,6 +9,7 @@
 ##############################################################################
 """Test deploy command."""
 
+import datetime
 import os
 
 import pytest
@@ -16,6 +17,19 @@ import requests
 import responses
 
 import lftools.nexus.release_docker_hub as rdh
+
+"""
+Removing this part, since I don't know how to check for ~/.aws/credentials
+import unittest
+aws_key = "<secret>"
+aws_credentials = "~/.aws/credentials"
+aws_credentials_configured = False
+try:
+    with open(aws_credentials, "r") as fp:
+        aws_credentials_configured = aws_key in fp.read()
+except:
+    aws_credentials_configured = False
+"""
 
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
@@ -111,6 +125,163 @@ def test_tag_class_repository_exist():
     rdh.initialize(org)
     tags = rdh.TagClass(org, repo, repo_from_file)
     assert tags.repository_exist
+
+
+def create_time_obj_from_str(in_str):
+    # Create a datetie obj from a str
+    return datetime.datetime.strptime(in_str, "%Y-%m-%d %H:%M:%S")
+
+
+"""
+I have removed these unit tests, since I can not get the local ~/.aws/credentials file
+
+@unittest.skipUnless(aws_credentials_configured, "S3 bucket credentials not configured")
+
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
+def test_s3_bucket(datafiles):
+    # Testing s3 bucket store/fetch/delete, only if local credentials are
+    # configured.
+
+    def prepare(old_test_dir="No_DIRECTORY_SPECIFIED12345"):
+        if os.path.exists(old_test_dir) and os.path.isdir(old_test_dir):
+            shutil.rmtree(old_test_dir)
+        test_tmp_dir = tempfile.mkdtemp()
+        rnd.copy_permanent_data_files_from_s3_bucket_to_local(test_tmp_dir)
+        return test_tmp_dir
+
+    test_s3_file1 = os.path.join(str(datafiles), "releasedockerhub_s3_file1")
+    test_s3_file2 = os.path.join(str(datafiles), "releasedockerhub_s3_file2")
+
+    # Verify fetch works, but our file is not there
+    test_tmp_dir = prepare()
+    assert os.path.exists("{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file1))) == False
+    assert os.path.exists("{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file2))) == False
+
+    # Verify store to s3, and fetch works
+    test_tmp_dir = prepare(test_tmp_dir)
+    shutil.copyfile(test_s3_file1, test_tmp_dir)
+    store_permanent_data_files_from_local_to_s3_bucket(test_tmp_dir)
+    test_tmp_dir = prepare(test_tmp_dir)
+    assert os.path.exists("{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file1))) == True
+    assert os.path.exists("{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file2))) == False
+
+    # Verify update of file works
+    test_tmp_dir = prepare(test_tmp_dir)
+    shutil.copyfile(test_s3_file2, "{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file1)))
+    shutil.copyfile(test_s3_file2, test_tmp_dir)
+    store_permanent_data_files_from_local_to_s3_bucket(test_tmp_dir)
+    test_tmp_dir = prepare(test_tmp_dir)
+    assert os.path.exists("{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file1))) == True
+    assert os.path.exists("{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file2))) == True
+    assert (
+        filecmp(
+            "{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file1)),
+            "{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file2)),
+        )
+        == True
+    )
+
+    # Verify delete of file from s3 works
+    delete_file_from_s3_bucket(os.path.basename(test_s3_file1))
+    delete_file_from_s3_bucket(os.path.basename(test_s3_file2))
+    test_tmp_dir = prepare(test_tmp_dir)
+    assert os.path.exists("{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file1))) == False
+    assert os.path.exists("{}/{}".format(test_tmp_dir, os.path.basename(test_s3_file2))) == False
+    if os.path.exists(old_test_dir) and os.path.isdir(old_test_dir):
+        shutil.rmtree(old_test_dir)
+"""
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
+def test_fetch_last_run_timestamp(datafiles, responses):
+    # Test fetch_last_run_timestamp
+    url = "https://api.ipify.org"
+    answer = "10.10.10.10"
+    responses.add(responses.GET, url, body=answer, status=200)
+    # mocker.patch("lftools.nexus.release_docker_hub.fetch_my_public_ip", side_effect=self.mocked_fetch_my_public_ip)
+    errordate_file = os.path.join(str(datafiles), "releasedockerhub_error_date")
+    correctdate_file = os.path.join(str(datafiles), "releasedockerhub_correct_date")
+    nofile_file = os.path.join(str(datafiles), "releasedockerhub_DONTEXIST")
+    empty_file = os.path.join(str(datafiles), "releasedockerhub_EMPTYFILE")
+    zero_date = "1901-01-01 01:01:01"
+    correct_date = "2021-08-05 11:22:33"
+
+    last_run = rdh.fetch_last_run_timestamp(correctdate_file)
+    assert last_run == create_time_obj_from_str(correct_date)
+    last_run = rdh.fetch_last_run_timestamp(errordate_file)
+    assert last_run == create_time_obj_from_str(zero_date)
+    last_run = rdh.fetch_last_run_timestamp(nofile_file)
+    assert last_run == create_time_obj_from_str(zero_date)
+    last_run = rdh.fetch_last_run_timestamp(empty_file)
+    assert last_run == create_time_obj_from_str(zero_date)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
+def test_store_timestamp_to_last_run_file(datafiles, responses):
+    def _test_store_timestamp_to_last_run_file(datafiles, store_file):
+        # Test store_timestamp_to_last_run_file
+        # We check that store time is between current time and + 1 sec
+        current_time = datetime.datetime.now()
+        current_time = current_time.replace(microsecond=0)
+        current_time_plus_1sec = current_time + datetime.timedelta(seconds=1)
+        store_time_str = "1901-01-01 01:02:03"
+        rdh.store_timestamp_to_last_run_file(store_file)
+        my_ip = "10.10.10.10"
+        with open(store_file, "r") as fp:
+            for i in fp.readlines():
+                tmp = i.split(";")
+                if tmp[0].strip() == my_ip:
+                    store_time_str = tmp[1].strip()
+                    break
+        store_time_obj = create_time_obj_from_str(store_time_str)
+        assert current_time <= store_time_obj
+        assert current_time_plus_1sec > store_time_obj
+
+    # Test store_timestamp_to_last_run_file
+    # We check that store time is between current time and + 1 sec
+
+    store_file_empty = os.path.join(str(datafiles), "releasedockerhub_STORE_FILE-empty")
+    store_file_not_exist_one_row = os.path.join(str(datafiles), "releasedockerhub_STORE_FILE-NOT-exist-one-row")
+    store_file_exist_one_row = os.path.join(str(datafiles), "releasedockerhub_STORE_FILE-exist-one-row")
+    store_file = os.path.join(str(datafiles), "releasedockerhub_STORE_FILE")
+    url = "https://api.ipify.org"
+    answer = "10.10.10.10"
+
+    responses.add(responses.GET, url, body=answer, status=200)
+    _test_store_timestamp_to_last_run_file(datafiles, store_file_empty)
+    _test_store_timestamp_to_last_run_file(datafiles, store_file_not_exist_one_row)
+    _test_store_timestamp_to_last_run_file(datafiles, store_file_exist_one_row)
+    _test_store_timestamp_to_last_run_file(datafiles, store_file)
+
+
+def test_to_close_to_last_run():
+    # Verify logic for checking if enough time has passed since last run
+    orig_time = datetime.datetime.now()
+    last_run = orig_time
+    tmp1 = rdh.to_close_to_last_run(last_run, rdh.THROTTLING_DELAY_SECONDS)
+    assert tmp1
+    last_run = orig_time - datetime.timedelta(seconds=rdh.THROTTLING_DELAY_SECONDS - 3600)
+    tmp1 = rdh.to_close_to_last_run(last_run, rdh.THROTTLING_DELAY_SECONDS)
+    assert tmp1
+    last_run = orig_time - datetime.timedelta(
+        seconds=rdh.THROTTLING_DELAY_SECONDS - 1,
+    )
+    tmp1 = rdh.to_close_to_last_run(last_run, rdh.THROTTLING_DELAY_SECONDS)
+    assert tmp1
+    last_run = orig_time - datetime.timedelta(seconds=rdh.THROTTLING_DELAY_SECONDS + 60)
+    tmp1 = rdh.to_close_to_last_run(last_run, rdh.THROTTLING_DELAY_SECONDS)
+    assert not tmp1
+    last_run = orig_time - datetime.timedelta(seconds=rdh.THROTTLING_DELAY_SECONDS * 2)
+    tmp1 = rdh.to_close_to_last_run(last_run, rdh.THROTTLING_DELAY_SECONDS)
+    assert not tmp1
 
 
 @pytest.mark.datafiles(
@@ -499,55 +670,55 @@ class TestFetchNexus3Catalog:
      """
 
     def test_get_all_onap(self):
-        rdh.NexusCatalog = []
+        rdh.NEXUSCATALOG = []
         rdh.initialize("onap")
         responses.add(responses.GET, self.url, body=self.answer, status=200)
         rdh.get_nexus3_catalog("onap")
-        assert len(rdh.NexusCatalog) == 203
+        assert len(rdh.NEXUSCATALOG) == 203
 
     def test_get_all_onap_and_filter_1(self):
-        rdh.NexusCatalog = []
+        rdh.NEXUSCATALOG = []
         rdh.initialize("onap")
         responses.add(responses.GET, self.url, body=self.answer, status=200)
         rdh.get_nexus3_catalog("onap", "spike")
-        assert len(rdh.NexusCatalog) == 1
-        assert rdh.NexusCatalog[0][0] == "onap"
-        assert rdh.NexusCatalog[0][1] == "spike"
+        assert len(rdh.NEXUSCATALOG) == 1
+        assert rdh.NEXUSCATALOG[0][0] == "onap"
+        assert rdh.NEXUSCATALOG[0][1] == "spike"
 
     def test_get_all_onap_and_filter_18(self):
-        rdh.NexusCatalog = []
+        rdh.NEXUSCATALOG = []
         rdh.initialize("onap")
         responses.add(responses.GET, self.url, body=self.answer, status=200)
         rdh.get_nexus3_catalog("onap", "aaf")
-        assert len(rdh.NexusCatalog) == 18
+        assert len(rdh.NEXUSCATALOG) == 18
 
     def test_get_all_onap_and_specify_1_repo_1(self):
-        rdh.NexusCatalog = []
+        rdh.NEXUSCATALOG = []
         rdh.initialize("onap")
         responses.add(responses.GET, self.url, body=self.answer, status=200)
         rdh.get_nexus3_catalog("onap", "clamp", True)
-        assert len(rdh.NexusCatalog) == 1
-        assert rdh.NexusCatalog[0][1] == "clamp"
+        assert len(rdh.NEXUSCATALOG) == 1
+        assert rdh.NEXUSCATALOG[0][1] == "clamp"
 
     def test_get_all_onap_and_specify_1_repo_2(self):
-        rdh.NexusCatalog = []
+        rdh.NEXUSCATALOG = []
         rdh.initialize("onap")
         responses.add(responses.GET, self.url, body=self.answer, status=200)
         rdh.get_nexus3_catalog("onap", "clamp-dashboard-logstash", True)
-        assert len(rdh.NexusCatalog) == 1
-        assert rdh.NexusCatalog[0][1] == "clamp-dashboard-logstash"
+        assert len(rdh.NEXUSCATALOG) == 1
+        assert rdh.NEXUSCATALOG[0][1] == "clamp-dashboard-logstash"
 
     def test_get_all_onap_and_specify_repo_file(self, datafiles):
         repo_names_file = os.path.join(str(datafiles), "releasedockerhub_reponamelist1.txt")
-        rdh.NexusCatalog = []
+        rdh.NEXUSCATALOG = []
         rdh.initialize("onap")
         responses.add(responses.GET, self.url, body=self.answer, status=200)
         rdh.get_nexus3_catalog("onap", repo_names_file, False, True)
-        assert len(rdh.NexusCatalog) == 4
-        assert rdh.NexusCatalog[0][1] == "dcae_dmaapbc"
-        assert rdh.NexusCatalog[1][1] == "onap/aaf/aaf_core"
-        assert rdh.NexusCatalog[2][1] == "onap/clamp"
-        assert rdh.NexusCatalog[3][1] == "onap/vfc/nfvo/svnfm/nokiav2"
+        assert len(rdh.NEXUSCATALOG) == 4
+        assert rdh.NEXUSCATALOG[0][1] == "dcae_dmaapbc"
+        assert rdh.NEXUSCATALOG[1][1] == "onap/aaf/aaf_core"
+        assert rdh.NEXUSCATALOG[2][1] == "onap/clamp"
+        assert rdh.NEXUSCATALOG[3][1] == "onap/vfc/nfvo/svnfm/nokiav2"
 
 
 class TestFetchAllTagsAndUpdate:
@@ -652,8 +823,10 @@ class TestFetchAllTagsAndUpdate:
         """
         responses.add(responses.GET, url, body=answer, status=200)
 
-        rdh.NexusCatalog = []
-        rdh.projects = []
+        rdh.USE_S3_BUCKET = False
+
+        rdh.NEXUSCATALOG = []
+        rdh.PROJECTS = []
 
         responses.add(responses.GET, nexus_url1, body=nexus_answer1, status=200)
         responses.add(responses.GET, docker_url1, body=docker_answer1, status=200)
@@ -671,8 +844,8 @@ class TestFetchAllTagsAndUpdate:
             "Issues with URL: {} - <class 'requests.exceptions.ConnectionError'>".format(url)
         )
         responses.add(responses.GET, url, body=exception)
-        rdh.NexusCatalog = []
-        rdh.projects = []
+        rdh.NEXUSCATALOG = []
+        rdh.PROJECTS = []
         self.counter.pull = self.counter.tag = self.counter.push = self.counter.cleanup = 0
 
     def test_fetch_all_tags(self, responses, mocker):
@@ -680,22 +853,21 @@ class TestFetchAllTagsAndUpdate:
         rdh.initialize("onap")
         rdh.get_nexus3_catalog("onap")
         rdh.fetch_all_tags()
-        assert len(rdh.NexusCatalog) == 3
-        assert len(rdh.projects) == 3
-        assert len(rdh.projects[0].tags_2_copy.valid) == 1
-        assert len(rdh.projects[1].tags_2_copy.valid) == 0
-        assert len(rdh.projects[2].tags_2_copy.valid) == 2
-
-        assert rdh.projects[0].tags_2_copy.valid[0] == "1.4.0"
-        assert rdh.projects[2].tags_2_copy.valid[0] == "1.3.1"
-        assert rdh.projects[2].tags_2_copy.valid[1] == "1.3.2"
+        assert len(rdh.NEXUSCATALOG) == 3
+        assert len(rdh.PROJECTS) == 3
+        assert len(rdh.PROJECTS[0].tags_2_copy.valid) == 1
+        assert len(rdh.PROJECTS[1].tags_2_copy.valid) == 0
+        assert len(rdh.PROJECTS[2].tags_2_copy.valid) == 2
+        assert rdh.PROJECTS[0].tags_2_copy.valid[0] == "1.4.0"
+        assert rdh.PROJECTS[2].tags_2_copy.valid[0] == "1.3.1"
+        assert rdh.PROJECTS[2].tags_2_copy.valid[1] == "1.3.2"
 
     def test_fetch_from_bogus_orgs(self, responses, mocker):
         self.initiate_bogus_org_test_fetch(responses, "bogus_org321")
         rdh.initialize("bogus_org321")
         rdh.get_nexus3_catalog("bogus_org321")
-        assert len(rdh.NexusCatalog) == 0
-        assert len(rdh.projects) == 0
+        assert len(rdh.NEXUSCATALOG) == 0
+        assert len(rdh.PROJECTS) == 0
 
     def test_copy(self, responses, mocker):
         self.initiate_test_fetch(responses, mocker)
@@ -708,44 +880,68 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.push == 3
         assert self.counter.cleanup == 3
 
+    def mocked_fetch_last_run_timestamp(self, filename):
+        """Mocking fetch_last_run_timestamp."""
+        return datetime.datetime.now() - datetime.timedelta(seconds=rdh.THROTTLING_DELAY_SECONDS * 2)
+
     def test_start_no_copy(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_test_fetch(responses, mocker)
-        rdh.start_point("onap", "", False, False)
+        rdh.main("onap", "", False, False)
         assert self.counter.pull == 0
         assert self.counter.tag == 0
         assert self.counter.push == 0
         assert self.counter.cleanup == 0
 
     def test_start_copy(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_test_fetch(responses, mocker)
-        rdh.start_point("onap", "", False, False, False, True)
-        assert len(rdh.NexusCatalog) == 3
-        assert len(rdh.projects) == 3
-        assert len(rdh.projects[0].tags_2_copy.valid) == 1
-        assert len(rdh.projects[1].tags_2_copy.valid) == 0
-        assert len(rdh.projects[2].tags_2_copy.valid) == 2
-        assert rdh.projects[0].tags_2_copy.valid[0] == "1.4.0"
-        assert rdh.projects[2].tags_2_copy.valid[0] == "1.3.1"
-        assert rdh.projects[2].tags_2_copy.valid[1] == "1.3.2"
+        rdh.main("onap", "", False, False, False, True)
+        assert len(rdh.NEXUSCATALOG) == 3
+        assert len(rdh.PROJECTS) == 3
+        assert len(rdh.PROJECTS[0].tags_2_copy.valid) == 1
+        assert len(rdh.PROJECTS[1].tags_2_copy.valid) == 0
+        assert len(rdh.PROJECTS[2].tags_2_copy.valid) == 2
+        assert rdh.PROJECTS[0].tags_2_copy.valid[0] == "1.4.0"
+        assert rdh.PROJECTS[2].tags_2_copy.valid[0] == "1.3.1"
+        assert rdh.PROJECTS[2].tags_2_copy.valid[1] == "1.3.2"
         assert self.counter.pull == 3
         assert self.counter.tag == 3
         assert self.counter.push == 3
         assert self.counter.cleanup == 3
 
     def test_start_copy_repo(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_test_fetch(responses, mocker, "sanity")
-        rdh.start_point("onap", "sanity", False, False, False, True)
-        assert len(rdh.NexusCatalog) == 1
-        assert len(rdh.projects) == 1
-        assert len(rdh.projects[0].tags_2_copy.valid) == 1
-        assert rdh.projects[0].tags_2_copy.valid[0] == "1.4.0"
+        rdh.main("onap", "sanity", False, False, False, True)
+        assert len(rdh.NEXUSCATALOG) == 1
+        assert len(rdh.PROJECTS) == 1
+        assert len(rdh.PROJECTS[0].tags_2_copy.valid) == 1
+        assert rdh.PROJECTS[0].tags_2_copy.valid[0] == "1.4.0"
         assert self.counter.pull == 1
         assert self.counter.tag == 1
         assert self.counter.push == 1
         assert self.counter.cleanup == 1
 
-    def test_start_bogus_orgs(self, responses):
+    def test_start_bogus_orgs(self, responses, mocker):
+        mocker.patch(
+            "lftools.nexus.release_docker_hub.fetch_last_run_timestamp",
+            side_effect=self.mocked_fetch_last_run_timestamp,
+        )
         self.initiate_bogus_org_test_fetch(responses, "bogus_org321")
-        rdh.start_point("bogus_org321")
-        assert len(rdh.NexusCatalog) == 0
-        assert len(rdh.projects) == 0
+        # url = "https://api.ipify.org"
+        # answer = '10.10.10.10'
+        # responses.add(responses.GET, url, body=answer, status=200)
+        rdh.USE_S3_BUCKET = False
+        rdh.main("bogus_org321")
+        assert len(rdh.NEXUSCATALOG) == 0
+        assert len(rdh.PROJECTS) == 0
