@@ -15,6 +15,7 @@ import sys
 import pytest
 import responses
 import requests
+import datetime
 
 from lftools import cli
 import lftools.nexus.release_docker_hub as rdh
@@ -113,6 +114,28 @@ def test_tag_class_repository_exist():
     rdh.initialize(org)
     tags = rdh.TagClass(org, repo, repo_from_file)
     assert tags.repository_exist == True
+
+
+def test_fetch_last_run_timestamp():
+    # Running to close to last run
+    last_run = rdh.fetch_last_run_timestamp()
+    current_time = datetime.datetime.now()
+    assert (current_time - last_run).total_seconds() < 1
+
+
+def test_to_close_to_last_run():
+    # Verify logic for checking if enough time has passed since last run
+    orig_time = datetime.datetime.now()
+    last_run = orig_time
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == True
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours - 1)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == True
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours, seconds=-1)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == True
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours, minutes=1)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == False
+    last_run = orig_time - datetime.timedelta(hours=rdh.throttling_delay_hours * 2)
+    assert rdh.to_close_to_last_run(last_run, rdh.throttling_delay_hours) == False
 
 
 @pytest.mark.datafiles(
