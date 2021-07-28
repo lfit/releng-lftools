@@ -516,7 +516,7 @@ def release_staging_repos(repos, verify, nexus_url=""):
                 events = root.findall("./stagingActivity")
                 for event in events:
                     name = event.find("name")
-                    if name.text == "release":
+                    if name.text == "release" and event.find("stopped"):
                         stopped = event.find("stopped")
                         log.info("Repo released at: {}".format(stopped.text))
                         released = True
