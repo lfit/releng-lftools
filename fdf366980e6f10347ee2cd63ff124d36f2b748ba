@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb415410_bbe8b617",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-07-28T15:04:20Z",
+      "side": 1,
+      "message": "JSD issues should be converted to RELENG issues so that they become fully public record as to why the change was made. It\u0027s not good for an OSS repo to have these links to issues that may not be visible to everyone!",
+      "revId": "fdf366980e6f10347ee2cd63ff124d36f2b748ba",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
