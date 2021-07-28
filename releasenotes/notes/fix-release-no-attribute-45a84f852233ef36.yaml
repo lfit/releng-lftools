@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Add check for "stopped" event property before reading property text in
+    nexus.release_staging_repo, in order to avoid possible missing attribute
+    error.
