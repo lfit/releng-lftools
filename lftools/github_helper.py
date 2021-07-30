@@ -14,8 +14,7 @@ from __future__ import print_function
 import logging
 import sys
 
-from github import Github
-from github import GithubException
+from github import Github, GithubException
 
 from lftools import config
 

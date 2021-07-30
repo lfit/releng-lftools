@@ -12,8 +12,8 @@ from os import environ
 
 import click
 
-from lftools.nexus import cmd as nexuscmd
 import lftools.nexus.release_docker_hub as rdh
+from lftools.nexus import cmd as nexuscmd
 
 NEXUS_URL_ENV = "NEXUS_URL"
 

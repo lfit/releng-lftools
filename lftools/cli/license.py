@@ -16,8 +16,7 @@ import sys
 
 import click
 
-from lftools.license import check_license
-from lftools.license import check_license_directory
+from lftools.license import check_license, check_license_directory
 
 
 @click.group()

@@ -14,17 +14,16 @@ import csv
 import logging
 import re
 import sys
-from time import sleep
 import xml.etree.ElementTree as et  # nosec
+from time import sleep
 
 import bs4
 import requests
-from six.moves import configparser
 import yaml
+from six.moves import configparser
 
 from lftools import config
-from lftools.nexus import Nexus
-from lftools.nexus import util
+from lftools.nexus import Nexus, util
 
 log = logging.getLogger(__name__)
 

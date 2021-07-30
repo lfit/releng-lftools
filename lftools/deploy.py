@@ -27,10 +27,10 @@ import tempfile
 import zipfile
 
 import boto3
-from botocore.exceptions import ClientError
-from defusedxml.minidom import parseString
 import requests
 import six
+from botocore.exceptions import ClientError
+from defusedxml.minidom import parseString
 
 log = logging.getLogger(__name__)
 logging.getLogger("botocore").setLevel(logging.CRITICAL)

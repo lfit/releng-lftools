@@ -14,10 +14,9 @@ __author__ = "DW Talton"
 
 import logging
 import os
-from os import chdir
-from os import getcwd
 import re
 import subprocess
+from os import chdir, getcwd
 
 log = logging.getLogger(__name__)
 

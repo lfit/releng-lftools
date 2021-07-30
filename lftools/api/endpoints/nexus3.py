@@ -15,9 +15,8 @@ __author__ = "DW Talton"
 import json
 import logging
 
-from lftools import config
-from lftools import helpers
 import lftools.api.client as client
+from lftools import config, helpers
 
 log = logging.getLogger(__name__)
 

@@ -1,16 +1,29 @@
 ---
 repos:
+  ###########
+  # General #
+  ###########
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.4.0
     hooks:
       - id: trailing-whitespace
+
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.15.1
+    hooks:
+      - id: gitlint
+
+  ##########
+  # Python #
+  ##########
 
   - repo: https://github.com/ambv/black
     rev: 21.6b0
     hooks:
     - id: black
 
-  - repo: https://github.com/jorisroovers/gitlint
-    rev: v0.15.1
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.8.0
     hooks:
-      - id: gitlint
+      - id: isort

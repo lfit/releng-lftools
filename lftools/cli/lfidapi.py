@@ -13,11 +13,9 @@ import logging
 
 import click
 
-from lftools.lfidapi import helper_create_group
-from lftools.lfidapi import helper_invite
-from lftools.lfidapi import helper_match_ldap_to_info
-from lftools.lfidapi import helper_search_members
-from lftools.lfidapi import helper_user
+from lftools.lfidapi import (helper_create_group, helper_invite,
+                             helper_match_ldap_to_info, helper_search_members,
+                             helper_user)
 
 log = logging.getLogger(__name__)
 

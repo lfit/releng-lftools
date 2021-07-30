@@ -14,9 +14,7 @@ import re
 
 import pytest
 
-from lftools.nexus import cmd
-from lftools.nexus import util
-
+from lftools.nexus import cmd, util
 
 FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtures")
 

@@ -13,13 +13,12 @@ import json
 import logging
 import sys
 
-from email_validator import validate_email
 import requests
-from six.moves import urllib
 import yaml
+from email_validator import validate_email
+from six.moves import urllib
 
-from lftools.github_helper import helper_list
-from lftools.github_helper import helper_user_github
+from lftools.github_helper import helper_list, helper_user_github
 from lftools.oauth2_helper import oauth_helper
 
 log = logging.getLogger(__name__)

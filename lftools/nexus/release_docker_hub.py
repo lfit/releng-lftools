@@ -42,10 +42,10 @@ from __future__ import print_function
 
 import logging
 import multiprocessing
-from multiprocessing.dummy import Pool as ThreadPool
+import os
 import re
 import socket
-import os
+from multiprocessing.dummy import Pool as ThreadPool
 
 import docker
 import requests

@@ -13,11 +13,11 @@ import os
 import sys
 
 import pytest
-import responses
 import requests
+import responses
 
-from lftools import cli
 import lftools.nexus.release_docker_hub as rdh
+from lftools import cli
 
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),

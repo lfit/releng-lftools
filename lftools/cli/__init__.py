@@ -27,9 +27,9 @@ from lftools.cli.infofile import infofile
 from lftools.cli.jenkins import jenkins_cli
 from lftools.cli.lfidapi import lfidapi
 from lftools.cli.license import license
+from lftools.cli.nexus import nexus
 from lftools.cli.nexus2 import nexus_two
 from lftools.cli.nexus3 import nexus_three
-from lftools.cli.nexus import nexus
 from lftools.cli.rtd import rtd
 from lftools.cli.schema import schema
 from lftools.cli.sign import sign

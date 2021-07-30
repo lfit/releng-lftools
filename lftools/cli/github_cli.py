@@ -14,13 +14,10 @@ from __future__ import print_function
 import sys
 
 import click
-from github import Github
-from github import GithubException
+from github import Github, GithubException
 
 from lftools import config
-from lftools.github_helper import helper_list
-from lftools.github_helper import helper_user_github
-from lftools.github_helper import prvotes
+from lftools.github_helper import helper_list, helper_user_github, prvotes
 
 
 @click.group()
