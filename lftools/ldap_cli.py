@@ -11,8 +11,7 @@
 
 from __future__ import print_function
 
-from subprocess import check_output
-from subprocess import STDOUT
+from subprocess import STDOUT, check_output
 
 
 def helper_yaml4info(group):

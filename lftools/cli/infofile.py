@@ -16,10 +16,9 @@ import re
 import sys
 
 import click
-from pygerrit2 import GerritRestAPI
-from pygerrit2 import HTTPBasicAuth
 import ruamel.yaml
 import yaml
+from pygerrit2 import GerritRestAPI, HTTPBasicAuth
 
 from lftools import config
 from lftools.github_helper import prvotes

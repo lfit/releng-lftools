@@ -14,8 +14,8 @@ __author__ = "DW Talton"
 
 import json
 
-from lftools import config
 import lftools.api.client as client
+from lftools import config
 
 
 class ReadTheDocs(client.RestApi):

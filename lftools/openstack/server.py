@@ -12,9 +12,8 @@
 
 __author__ = "Anil Belur"
 
-from datetime import datetime
-from datetime import timedelta
 import sys
+from datetime import datetime, timedelta
 
 import shade
 

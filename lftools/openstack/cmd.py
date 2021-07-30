@@ -13,9 +13,10 @@
 __author__ = "Thanh Ha"
 
 
-import click
-import subprocess
 import re
+import subprocess
+
+import click
 
 from lftools.openstack import image as os_image
 from lftools.openstack import object as os_object

@@ -12,17 +12,17 @@
 
 __author__ = "Thanh Ha"
 
-from datetime import datetime
 import json
 import logging
 import sys
 import time
 import urllib.request
+from datetime import datetime
 
+import openstack
 import shade
 
 from lftools.jenkins import Jenkins
-import openstack
 
 log = logging.getLogger(__name__)
 

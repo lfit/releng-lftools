@@ -12,9 +12,8 @@
 
 __author__ = "Thanh Ha"
 
-from datetime import datetime
-from datetime import timedelta
 import sys
+from datetime import datetime, timedelta
 
 import shade
 

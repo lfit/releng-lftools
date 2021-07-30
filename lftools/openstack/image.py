@@ -12,13 +12,12 @@
 
 __author__ = "Thanh Ha"
 
-from datetime import datetime
-from datetime import timedelta
 import logging
 import re
 import subprocess
 import sys
 import tempfile
+from datetime import datetime, timedelta
 
 import openstack
 import openstack.config

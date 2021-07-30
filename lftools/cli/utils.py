@@ -10,8 +10,9 @@
 
 """lftools utils command."""
 
-import click
 import logging
+
+import click
 
 from lftools import helpers
 

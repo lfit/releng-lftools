@@ -15,9 +15,8 @@ import sys
 import pytest
 import requests
 
-from lftools import cli
 import lftools.deploy as deploy_sys
-
+from lftools import cli
 
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),

@@ -16,8 +16,8 @@ import os
 import time
 import urllib
 
-from lftools import config
 import lftools.api.client as client
+from lftools import config
 
 log = logging.getLogger(__name__)
 
