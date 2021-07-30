@@ -115,7 +115,7 @@ def test_create_repo_target_regex():
     for url in test_url_3_par:
         a = util.create_repo_target_regex(url[1], url[0])
         a_regex = re.compile(a)
-        assert a_regex.match(url[2]) != None
+        assert a_regex.match(url[2]) is not None
 
     test_url_2_par = [
         ["org.o-ran-sc.org", "/org/o-ran-sc/org/"],
@@ -135,4 +135,4 @@ def test_create_repo_target_regex():
     for url in test_url_2_par:
         a = util.create_repo_target_regex(url[0])
         a_regex = re.compile(a)
-        assert a_regex.match(url[1]) != None
+        assert a_regex.match(url[1]) is not None
