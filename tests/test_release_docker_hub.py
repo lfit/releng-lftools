@@ -270,7 +270,7 @@ class TestProjectClass:
 
     def mocked_docker_pull(self, nexus_image_str, count, tag, retry_text="", progbar=False):
         """Mocking Pull an image from Nexus."""
-        if not nexus_image_str in self._expected_nexus_image_str:
+        if nexus_image_str not in self._expected_nexus_image_str:
             raise ValueError("Wrong nexus project in pull")
         image = self.mock_image(self._test_image_long_id, self._test_image_short_id)
         self.counter.pull = self.counter.pull + 1
@@ -283,7 +283,7 @@ class TestProjectClass:
         """Mocking Tag the image with proper docker name and version."""
         if not image.id == self._test_image_long_id:
             raise ValueError("Wrong image id in remove")
-        if not tag in ["1.4.0", "1.4.1"]:
+        if tag not in ["1.4.0", "1.4.1"]:
             raise ValueError("Wrong tag in docker_tag")
         self.counter.tag = self.counter.tag + 1
         if self.counter.tag <= self.nbr_exc.tag:
@@ -293,7 +293,7 @@ class TestProjectClass:
         """Mocking Tag the image with proper docker name and version."""
         if not image.id == self._test_image_long_id:
             raise ValueError("Wrong image id in remove")
-        if not tag in ["1.4.0", "1.4.1"]:
+        if tag not in ["1.4.0", "1.4.1"]:
             raise ValueError("Wrong tag in push")
         self.counter.push = self.counter.push + 1
         if self.counter.push <= self.nbr_exc.push:
@@ -589,7 +589,7 @@ class TestFetchAllTagsAndUpdate:
 
     def mocked_docker_pull(self, nexus_image_str, count, tag, retry_text="", progbar=False):
         """Mocking Pull an image from Nexus."""
-        if not nexus_image_str in self._expected_nexus_image_str:
+        if nexus_image_str not in self._expected_nexus_image_str:
             print("IMAGESTR {}".format(nexus_image_str))
             raise ValueError("Wrong nexus project in pull")
         image = self.mock_image(self._test_image_long_id, self._test_image_short_id)
@@ -603,7 +603,7 @@ class TestFetchAllTagsAndUpdate:
         """Mocking Tag the image with proper docker name and version."""
         if not image.id == self._test_image_long_id:
             raise ValueError("Wrong image id in remove")
-        if not tag in ["1.4.0", "1.3.1", "1.3.2"]:
+        if tag not in ["1.4.0", "1.3.1", "1.3.2"]:
             raise ValueError("Wrong tag in docker_tag")
         self.counter.tag = self.counter.tag + 1
         if self.counter.tag <= self.nbr_exc.tag:
@@ -613,7 +613,7 @@ class TestFetchAllTagsAndUpdate:
         """Mocking Tag the image with proper docker name and version."""
         if not image.id == self._test_image_long_id:
             raise ValueError("Wrong image id in remove")
-        if not tag in ["1.4.0", "1.3.1", "1.3.2"]:
+        if tag not in ["1.4.0", "1.3.1", "1.3.2"]:
             raise ValueError("Wrong tag in push")
         self.counter.push = self.counter.push + 1
         if self.counter.push <= self.nbr_exc.push:

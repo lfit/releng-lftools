@@ -56,7 +56,7 @@ def check_license(license_file, code_file):
     license_header = get_header_text(license_file)
     code_header = get_header_text(code_file)
 
-    if not license_header in code_header:
+    if license_header not in code_header:
         log.error("{} is missing or has incorrect license header.".format(code_file))
         return 1
 

@@ -119,7 +119,7 @@ def match(path=getcwd(), signoffs_dir="dco_signoffs"):
                 sob_email_regex = r"(?=Signed\-off\-by: ).*[\<](.*)[\>]"
                 sob_results = re.findall(sob_email_regex, commit_log_message)
 
-                if not commit_author_email in sob_results and os.path.isdir(signoffs_dir):
+                if commit_author_email not in sob_results and os.path.isdir(signoffs_dir):
                     dco_file = subprocess.run(
                         ["grep", "-Rli", commit_author_email, signoffs_dir], capture_output=True
                     ).stdout
