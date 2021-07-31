@@ -84,7 +84,7 @@ def reorder_staged_repos(settings_file):
         settings = yaml.safe_load(f)
 
     for setting in ["nexus", "user", "password"]:
-        if not setting in settings:
+        if setting not in settings:
             log.error("{} needs to be defined".format(setting))
             sys.exit(1)
 
@@ -136,13 +136,13 @@ def create_repos(config_file, settings_file, url):
             settings = yaml.safe_load(f)
 
     for setting in ["email_domain", "base_groupId", "repositories"]:
-        if not setting in config:
+        if setting not in config:
             log.error("{} needs to be defined in {}".format(setting, config_file))
             sys.exit(1)
 
     if settings_file:
         for setting in ["nexus", "user", "password"]:
-            if not setting in settings:
+            if setting not in settings:
                 log.error("{} needs to be defined in {}".format(setting, settings_file))
                 sys.exit(1)
 
@@ -193,7 +193,7 @@ def create_repos(config_file, settings_file, url):
         groupId = "{}.{}".format(base_groupId, repo)
         target = util.create_repo_target_regex(groupId, strict)
 
-        if not global_privs and not "extra_privs" in config:
+        if not global_privs and "extra_privs" not in config:
             extra_privs = []
         elif global_privs:
             extra_privs = global_privs

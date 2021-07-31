@@ -400,7 +400,7 @@ class ProjectClass:
 
         if len(self.nexus_tags.valid) > 0:
             for nexustag in self.nexus_tags.valid:
-                if not nexustag in self.docker_tags.valid:
+                if nexustag not in self.docker_tags.valid:
                     log.debug("Need to copy tag {} from {}".format(nexustag, self.nexus_repo_name))
                     self.tags_2_copy.add_tag(nexustag)
 
