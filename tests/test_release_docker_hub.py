@@ -10,14 +10,12 @@
 """Test deploy command."""
 
 import os
-import sys
 
 import pytest
 import requests
 import responses
 
 import lftools.nexus.release_docker_hub as rdh
-from lftools import cli
 
 FIXTURE_DIR = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),

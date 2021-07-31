@@ -10,7 +10,6 @@
 """Test deploy command."""
 
 import os
-import sys
 
 import pytest
 import requests
