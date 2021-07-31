@@ -20,11 +20,11 @@
 import os
 import sys
 
-import sphinx_bootstrap_theme
+import sphinx_bootstrap_theme  # noqa
 
 sys.path.insert(0, os.path.abspath(".."))
 
-from docs_conf.conf import *
+from docs_conf.conf import *  # noqa
 from pbr.version import VersionInfo
 
 version = str(VersionInfo("lftools"))

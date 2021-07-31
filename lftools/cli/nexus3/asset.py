@@ -17,8 +17,6 @@ from pprint import pformat
 
 import click
 
-from lftools.api.endpoints import nexus3
-
 log = logging.getLogger(__name__)
 
 
