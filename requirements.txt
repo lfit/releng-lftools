@@ -3,7 +3,6 @@ aspy.yaml
 attrs
 beautifulsoup4
 boto3
-botocore
 bs4
 certifi
 cfgv
