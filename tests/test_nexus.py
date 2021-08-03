@@ -65,13 +65,14 @@ def test_release_staging_repos(datafiles, responses, nexus2_obj_create, mock_get
     request_url = "{}/staging/bulk/promote".format(baseurl)
 
     closed_return = open("staging_activities_closed.xml", "r").read()
+    releasing_return = open("staging_activities_releasing.xml", "r").read()
     released_return = open("staging_activities_released.xml", "r").read()
 
     responses.add(responses.GET, activity_url, closed_return, status=200)
     responses.add(responses.POST, request_url, status=201)
     # While checking for the "release" activity, we return once without it in
     # order to exercise the code for "if not released".
-    responses.add(responses.GET, activity_url, closed_return, status=200)
+    responses.add(responses.GET, activity_url, releasing_return, status=200)
     responses.add(responses.GET, activity_url, released_return, status=200)
 
     cmd.release_staging_repos(repos, False)
