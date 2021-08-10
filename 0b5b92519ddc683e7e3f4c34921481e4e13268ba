@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c72c3d0_6d6b48bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2021-08-10T11:46:53Z",
+      "side": 1,
+      "message": "LGTM! However, the change needs a release note included. This can be added to the change using.\n\ntox -e reno new \u003cissue-fixed\u003e \n\n",
+      "revId": "0b5b92519ddc683e7e3f4c34921481e4e13268ba",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
