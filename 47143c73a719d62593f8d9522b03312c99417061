@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5bd389fc_974e7139",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-08-10T16:56:34Z",
+      "side": 1,
+      "message": "This change is targeted against a branch that we shouldn\u0027t have. We have not yet migrated from master to main for our development. When we do, the master branch will be removed.\n\nPlease rebase this against latest master and target that branch. Additionally, we have extra requirements on commit message structure, in this case you\u0027re violating our subject line requirements of a semantic / conventional commit message, which CI would have flagged if you were developing against our active branch.\n\nThis should be:\nFix: Handle text/html mimetype for S3 uploads",
+      "revId": "47143c73a719d62593f8d9522b03312c99417061",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "817dac40_4aa48c25",
         "filename": "lftools/deploy.py",
         "patchSetId": 6
