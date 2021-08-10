@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817dac40_4aa48c25",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 579
+      },
+      "writtenOn": "2021-08-10T14:11:48Z",
+      "side": 1,
+      "message": "This overrides the current default type of files that are not recognized from same test below on line 458, changing the type of unidentified files from \u0027text/plain\u0027 to \u0027text/html\u0027.  Is that the intended behavior?\n\nThere should be only one test for unrecognized file types.",
+      "range": {
+        "startLine": 450,
+        "startChar": 13,
+        "endLine": 450,
+        "endChar": 53
+      },
+      "revId": "47143c73a719d62593f8d9522b03312c99417061",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
