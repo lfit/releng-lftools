@@ -429,6 +429,7 @@ def deploy_s3(s3_bucket, s3_path, build_url, workspace, pattern=None):
 
     def _upload_to_s3(file):
         extra_args = {"ContentType": "text/plain"}
+        text_html_extra_args = {"ContentType": "text/html", "ContentEncoding": mimetypes.guess_type(file)[1]}
         text_plain_extra_args = {"ContentType": "text/plain", "ContentEncoding": mimetypes.guess_type(file)[1]}
         app_xml_extra_args = {"ContentType": "application/xml'", "ContentEncoding": mimetypes.guess_type(file)[1]}
         if file == "_tmpfile":
@@ -440,6 +441,14 @@ def deploy_s3(s3_bucket, s3_path, build_url, workspace, pattern=None):
                     return False
                 return True
         if mimetypes.guess_type(file)[0] is None and mimetypes.guess_type(file)[1] is None:
+            try:
+                s3.Bucket(s3_bucket).upload_file(file, "{}{}".format(s3_path, file), ExtraArgs=extra_args)
+            except ClientError as e:
+                log.error(e)
+                return False
+            return True
+        elif mimetypes.guess_type(file)[0] in "text/html":
+            extra_args = text_html_extra_args
             try:
                 s3.Bucket(s3_bucket).upload_file(file, "{}{}".format(s3_path, file), ExtraArgs=extra_args)
             except ClientError as e:
