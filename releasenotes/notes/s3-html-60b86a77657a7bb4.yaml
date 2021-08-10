@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Handle content-type for html uploaded files to S3 storage correctly.
+    This fixes the issue with detecting and setting ExtraArgs for html
+    to text/html instead of text/plain.
