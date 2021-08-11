@@ -16,6 +16,23 @@
       "message": "See my comment on patchset 6",
       "revId": "7a5fa3ec037eec1026664198923518f4f26ae88d",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77cfe5fd_020cb3fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 581
+      },
+      "writtenOn": "2021-08-11T05:59:58Z",
+      "side": 1,
+      "message": "Support ticket to fix this was raised. \nhttps://jira.linuxfoundation.org/plugins/servlet/theme/portal/2/IT-22656\nCommunication will continue there. I am not going to push commits to this repository anymore.",
+      "revId": "7a5fa3ec037eec1026664198923518f4f26ae88d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
