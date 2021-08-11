@@ -33,6 +33,24 @@
       "message": "Support ticket to fix this was raised. \nhttps://jira.linuxfoundation.org/plugins/servlet/theme/portal/2/IT-22656\nCommunication will continue there. I am not going to push commits to this repository anymore.",
       "revId": "7a5fa3ec037eec1026664198923518f4f26ae88d",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d008e13b_7d6f91b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2021-08-11T12:59:22Z",
+      "side": 1,
+      "message": "Not sure why the change was abandoned. I have cherry-picked this to correct branch and fixed the review comments. Cheers.\n\n https://gerrit.linuxfoundation.org/infra/c/releng/lftools/+/68508",
+      "parentUuid": "77cfe5fd_020cb3fb",
+      "revId": "7a5fa3ec037eec1026664198923518f4f26ae88d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
