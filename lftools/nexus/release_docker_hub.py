@@ -642,6 +642,21 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False, repo_is_
     return True
 
 
+def fetch_old_nexus3_catalog():
+    # Fetch the old nexus3 catalog from file
+    apa = 1
+
+
+def create_delta_nexus3_catalog():
+    # Compare old nexus3 catalog with current Nexus3, and create delta of differences
+    apa = 1
+
+
+def update_old_nexus3_file_with_delta():
+    # Update the old nexus3 catalog on file, with the delta information
+    apa = 1
+
+
 def fetch_all_tags(progbar=False):
     """Fetch all tags function.
 
@@ -958,6 +973,9 @@ def start_point(
         log.info("Could not get any catalog from Nexus3 with org = {}".format(org_name))
         return
 
+    fetch_old_nexus3_catalog()
+    create_delta_nexus3_catalog()
+
     fetch_all_tags(progbar)
     if verbose:
         print_nexus_docker_proj_names()
@@ -971,6 +989,7 @@ def start_point(
         print_nexus_tags_to_copy()
     if copy:
         copy_from_nexus_to_docker(progbar)
+        update_old_nexus3_file_with_delta()
     else:
         print_nbr_tags_to_copy()
 
