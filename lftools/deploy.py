@@ -447,16 +447,16 @@ def deploy_s3(s3_bucket, s3_path, build_url, workspace, pattern=None):
                 log.error(e)
                 return False
             return True
-        elif mimetypes.guess_type(file)[0] in "text/html":
-            extra_args = text_html_extra_args
+        elif mimetypes.guess_type(file)[0] is None or mimetypes.guess_type(file)[0] in "text/plain":
+            extra_args = text_plain_extra_args
             try:
                 s3.Bucket(s3_bucket).upload_file(file, "{}{}".format(s3_path, file), ExtraArgs=extra_args)
             except ClientError as e:
                 log.error(e)
                 return False
             return True
-        elif mimetypes.guess_type(file)[0] is None or mimetypes.guess_type(file)[0] in "text/plain":
-            extra_args = text_plain_extra_args
+        elif mimetypes.guess_type(file)[0] in "text/html":
+            extra_args = text_html_extra_args
             try:
                 s3.Bucket(s3_bucket).upload_file(file, "{}{}".format(s3_path, file), ExtraArgs=extra_args)
             except ClientError as e:
