@@ -212,7 +212,6 @@ class TestTagsRegExpClass:
     def test_tag_class_manual_version_regexp_str_from_file_valid(self, datafiles):
         org = "onap"
         test_regexp_from_file = os.path.join(str(datafiles), "releasedockerhub_good_regexp")
-        repo_from_file = False
         rdh.initialize(org, test_regexp_from_file)
         assert rdh.validate_regexp() == True
         assert rdh.VERSION_REGEXP == "^\d+.\d+"
@@ -220,7 +219,6 @@ class TestTagsRegExpClass:
     def test_tag_class_manual_version_regexp_str_from_file_invalid(self, datafiles):
         org = "onap"
         test_regexp_from_file = os.path.join(str(datafiles), "releasedockerhub_bad_regexp")
-        repo_from_file = False
         rdh.initialize(org, test_regexp_from_file)
         assert rdh.validate_regexp() == False
         assert rdh.VERSION_REGEXP == "["
@@ -458,25 +456,25 @@ class TestProjectClass:
 
         # Verify that 90 timeout's on any stage failes.
         self.nbr_exc.pull = 90
-        with pytest.raises(requests.HTTPError) as excinfo:
+        with pytest.raises(requests.HTTPError):
             test_proj.docker_pull_tag_push()
 
         self.counter.pull = self.counter.tag = self.counter.push = self.counter.cleanup = 0
         self.nbr_exc.pull = 0
         self.nbr_exc.tag = 90
-        with pytest.raises(requests.HTTPError) as excinfo:
+        with pytest.raises(requests.HTTPError):
             test_proj.docker_pull_tag_push()
 
         self.counter.pull = self.counter.tag = self.counter.push = self.counter.cleanup = 0
         self.nbr_exc.pull = self.nbr_exc.tag = 0
         self.nbr_exc.push = 90
-        with pytest.raises(requests.HTTPError) as excinfo:
+        with pytest.raises(requests.HTTPError):
             test_proj.docker_pull_tag_push()
 
         self.counter.pull = self.counter.tag = self.counter.push = self.counter.cleanup = 0
         self.nbr_exc.pull = self.nbr_exc.tag = self.nbr_exc.push = 0
         self.nbr_exc.cleanup = 90
-        with pytest.raises(requests.HTTPError) as excinfo:
+        with pytest.raises(requests.HTTPError):
             test_proj.docker_pull_tag_push()
 
         # Verify 89 timeouts and the 90 is ok per stage

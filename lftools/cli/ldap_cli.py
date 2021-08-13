@@ -131,7 +131,7 @@ def csv(ctx, ldap_server, ldap_group_base, ldap_user_base, groups):
                     if result_type == ldap.RES_SEARCH_ENTRY:
                         result_set.append(result_data)
             return result_set
-        except ldap.LDAPError as e:
+        except ldap.LDAPError:
             sys.exit(1)
 
     def package_groups(groups):
