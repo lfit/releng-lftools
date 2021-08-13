@@ -110,7 +110,7 @@ class Gerrit(client.RestApi):
         # Setup
         signed_off_by = config.get_setting(fqdn, "sob")
         gerrit_project_dashed = gerrit_project.replace("/", "-")
-        gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
+        urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
         filename = "{}.yaml".format(gerrit_project_dashed)
 
         if not reviewid:

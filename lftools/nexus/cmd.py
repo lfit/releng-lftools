@@ -92,7 +92,7 @@ def reorder_staged_repos(settings_file):
 
     try:
         repo_id = _nexus.get_repo_group("Staging Repositories")
-    except LookupError as e:
+    except LookupError:
         log.error("Staging repository 'Staging Repositories' cannot be found")
         sys.exit(1)
 
@@ -155,7 +155,7 @@ def create_repos(config_file, settings_file, url):
         # Create target
         try:
             target_id = _nexus.get_target(name)
-        except LookupError as e:
+        except LookupError:
             target_id = _nexus.create_target(name, targets)
 
         # Create privileges
@@ -171,21 +171,21 @@ def create_repos(config_file, settings_file, url):
             try:
                 privs[priv] = _nexus.get_priv(name, priv)
                 log.info("Creating {} privileges.".format(priv))
-            except LookupError as e:
+            except LookupError:
                 privs[priv] = _nexus.create_priv(name, target_id, priv)
 
         # Create Role
         try:
             role_id = _nexus.get_role(name)
             log.info("Role {} already exists.".format(role_id))
-        except LookupError as e:
+        except LookupError:
             role_id = _nexus.create_role(name, privs)
 
         # Create user
         try:
             _nexus.get_user(name)
             log.info("User {} already exists.".format(name))
-        except LookupError as e:
+        except LookupError:
             _nexus.create_user(name, email, role_id, password, extra_privs)
 
     def build_repo(repo, repoId, config, base_groupId, global_privs, email_domain, strict=True):
