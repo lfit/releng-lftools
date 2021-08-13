@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Refactor image cleanup code to handle attribute types
+    and multi-cloud config correctly. (Issue-ID: RELENG-3869)
+
+    Error:
+    AttributeError: 'Connection' object has no attribute 'cloud_config'
