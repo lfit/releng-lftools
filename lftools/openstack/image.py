@@ -74,10 +74,10 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
     """
 
     def _remove_images_from_cloud(images, cloud):
-        log.info("Removing {} images from {}.".format(len(images), cloud.cloud_config.name))
+        log.info("Removing {} images from {}.".format(len(images), cloud.config._name))
         project_info = cloud._get_project_info()
-        for image in images:
 
+        for image in images:
             if image.is_protected:
                 log.warning("Image {} is protected. Cannot remove...".format(image.name))
                 continue
@@ -88,7 +88,7 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
 
             if project_info["id"] != image.owner:
                 log.warning(
-                    "Image {} not owned by project {}. Cannot remove...".format(image.name, cloud.cloud_config.name)
+                    "Image {} not owned by project {}. Cannot remove...".format(image.name, cloud.config._name)
                 )
                 continue
 
@@ -105,11 +105,11 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
             if not result:
                 log.warning(
                     'Failed to remove "{}" from {}. Possibly already deleted.'.format(
-                        image.name, cloud.cloud_config.name
+                        image.name, cloud.config._name
                     )
                 )
             else:
-                log.info('Removed "{}" from {}.'.format(image.name, cloud.cloud_config.name))
+                log.info('Removed "{}" from {}.'.format(image.name, cloud.config._name))
 
     cloud = openstack.connection.from_config(cloud=os_cloud)
     if clouds:

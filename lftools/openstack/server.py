@@ -47,7 +47,7 @@ def cleanup(os_cloud, days=0):
     """
 
     def _remove_servers_from_cloud(servers, cloud):
-        print("Removing {} servers from {}.".format(len(servers), cloud.cloud_config.name))
+        print("Removing {} servers from {}.".format(len(servers), cloud.config._name))
         for server in servers:
             try:
                 result = cloud.delete_server(server.name)
@@ -62,11 +62,11 @@ def cleanup(os_cloud, days=0):
             if not result:
                 print(
                     'WARNING: Failed to remove "{}" from {}. Possibly already deleted.'.format(
-                        server.name, cloud.cloud_config.name
+                        server.name, cloud.config._name
                     )
                 )
             else:
-                print('Removed "{}" from {}.'.format(server.name, cloud.cloud_config.name))
+                print('Removed "{}" from {}.'.format(server.name, cloud.config._name))
 
     cloud = shade.openstack_cloud(cloud=os_cloud)
     servers = cloud.list_servers()

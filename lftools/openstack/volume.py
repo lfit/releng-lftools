@@ -49,7 +49,7 @@ def cleanup(os_cloud, days=0):
     """
 
     def _remove_volumes_from_cloud(volumes, cloud):
-        print("Removing {} volumes from {}.".format(len(volumes), cloud.cloud_config.name))
+        print("Removing {} volumes from {}.".format(len(volumes), cloud.config._name))
         for volume in volumes:
             try:
                 result = cloud.delete_volume(volume.name)
@@ -64,11 +64,11 @@ def cleanup(os_cloud, days=0):
             if not result:
                 print(
                     'WARNING: Failed to remove "{}" from {}. Possibly already deleted.'.format(
-                        volume.name, cloud.cloud_config.name
+                        volume.name, cloud.config._name
                     )
                 )
             else:
-                print('Removed "{}" from {}.'.format(volume.name, cloud.cloud_config.name))
+                print('Removed "{}" from {}.'.format(volume.name, cloud.config._name))
 
     cloud = shade.openstack_cloud(cloud=os_cloud)
     volumes = cloud.list_volumes()
