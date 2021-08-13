@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    When checking mimetype during _upload_to_s3, the newly-added text/html type
+    was checking before it is checked for None, which is a potential TypeError.
+    By moving it after the variable is checked for None, the feature is safe
+    without requiring any further modifications.
