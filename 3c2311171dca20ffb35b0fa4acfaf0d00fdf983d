@@ -56,6 +56,30 @@
       },
       "revId": "3c2311171dca20ffb35b0fa4acfaf0d00fdf983d",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4fdcc29_67e6cfe2",
+        "filename": "tests/test_deploy.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 8
+      },
+      "writtenOn": "2021-08-13T23:21:57Z",
+      "side": 1,
+      "message": "Agreed. Let me fix that.",
+      "parentUuid": "efd83774_a147a5fe",
+      "range": {
+        "startLine": 288,
+        "startChar": 4,
+        "endLine": 288,
+        "endChar": 45
+      },
+      "revId": "3c2311171dca20ffb35b0fa4acfaf0d00fdf983d",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
