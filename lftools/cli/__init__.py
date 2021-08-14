@@ -61,7 +61,7 @@ def cli(ctx, debug, interactive, password, username):
         else:
             try:
                 username = conf.get_setting("global", "username")
-            except (configparser.NoOptionError, configparser.NoSectionError) as e:
+            except (configparser.NoOptionError, configparser.NoSectionError):
                 username = None
 
     if password is None:
@@ -70,7 +70,7 @@ def cli(ctx, debug, interactive, password, username):
         else:
             try:
                 password = conf.get_setting("global", "password")
-            except (configparser.NoOptionError, configparser.NoSectionError) as e:
+            except (configparser.NoOptionError, configparser.NoSectionError):
                 password = None
 
     ctx.obj["username"] = username

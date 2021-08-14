@@ -130,7 +130,7 @@ def reset(ctx, servers):
             with open(jenkins.config_file, "w") as configfile:
                 config.write(configfile)
             return token
-        except requests.exceptions.ConnectionError as e:
+        except requests.exceptions.ConnectionError:
             return None
 
     fail = 0
