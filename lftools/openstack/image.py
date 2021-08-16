@@ -74,10 +74,9 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
     """
 
     def _remove_images_from_cloud(images, cloud):
-        log.info("Removing {} images from {}.".format(len(images), cloud.cloud_config.name))
+        log.info("Removing {} images from {}.".format(len(images), cloud.config._name))
         project_info = cloud._get_project_info()
         for image in images:
-
             if image.is_protected:
                 log.warning("Image {} is protected. Cannot remove...".format(image.name))
                 continue
@@ -87,9 +86,7 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
                 continue
 
             if project_info["id"] != image.owner:
-                log.warning(
-                    "Image {} not owned by project {}. Cannot remove...".format(image.name, cloud.cloud_config.name)
-                )
+                log.warning("Image {} not owned by project {}. Cannot remove...".format(image.name, cloud.config._name))
                 continue
 
             try:
@@ -104,27 +101,26 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
 
             if not result:
                 log.warning(
-                    'Failed to remove "{}" from {}. Possibly already deleted.'.format(
-                        image.name, cloud.cloud_config.name
-                    )
+                    'Failed to remove "{}" from {}. Possibly already deleted.'.format(image.name, cloud.config._name)
                 )
             else:
-                log.info('Removed "{}" from {}.'.format(image.name, cloud.cloud_config.name))
+                log.info('Removed "{}" from {}.'.format(image.name, cloud.config._name))
 
-    cloud = openstack.connection.from_config(cloud=os_cloud)
+    cloud_list = []
     if clouds:
-        cloud_list = []
         for c in clouds.split(","):
-            cloud_list.append(openstack.connection.from_config(cloud=c))
+            cloud_list.append(c)
 
-    images = cloud.list_images()
-    filtered_images = _filter_images(images, days, hide_public, ci_managed)
+    if os_cloud not in cloud_list:
+        cloud_list.append(os_cloud)
 
-    if clouds:
-        for c in cloud_list:
-            _remove_images_from_cloud(filtered_images, c)
-    else:
-        _remove_images_from_cloud(filtered_images, cloud)
+    for c in cloud_list:
+        cloud = openstack.connection.from_config(cloud=c)
+        images = cloud.list_images()
+        if images:
+            filtered_images = _filter_images(images, days, hide_public, ci_managed)
+        if filtered_images:
+            _remove_images_from_cloud(filtered_images, cloud)
 
 
 def share(os_cloud, image, clouds):
