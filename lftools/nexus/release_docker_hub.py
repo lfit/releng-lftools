@@ -60,6 +60,7 @@ import urllib3
 log = logging.getLogger(__name__)
 
 NexusCatalog = []
+OrigNexusCatalog = []
 projects = []
 TotTagsToBeCopied = 0
 
@@ -70,6 +71,7 @@ TotTagsToBeCopied = 0
 # and non-anonymous access to do the push.
 # States 21600 seconds, but lets give them a bit more
 throttling_delay_seconds = 21700
+nexus3_batch_size = 70
 
 NEXUS3_BASE = ""
 NEXUS3_CATALOG = ""
@@ -80,6 +82,8 @@ DEFAULT_REGEXP = r"^\d+.\d+.\d+$"
 
 local_s3_copy = tempfile.mkdtemp()
 lastrun_filename = "{}/last_run_of_release_docker_hub.txt".format(local_s3_copy)
+lastnexusrepo_filename = "{}/last_nexus_repo.txt".format(local_s3_copy)
+
 lastrun_format = "%Y-%m-%d %H:%M:%S"
 no_timestamp_str = "1901-01-01 01:01:01"
 s3_bucket_name = "onap-dockerhub-release-logs-bucket"
@@ -170,10 +174,10 @@ def initialize(org_name, input_regexp_or_filename=""):
 class AnonymousThrottlingStatus:
     def __init__(self):
         """Initialize this class.
-        >>> print (resp.headers["ratelimit-remaining"])
-            95;w=21600
-        >>> print (resp.headers["ratelimit-limit"])
-            100;w=21600
+        print (resp.headers["ratelimit-remaining"])
+        95;w=21600
+        print (resp.headers["ratelimit-limit"])
+        100;w=21600
         """
 
         # Get token
@@ -765,6 +769,60 @@ def copy_from_nexus_to_docker(progbar=False):
         pbar.close()
 
 
+def fetch_last_nexus_repo_from_last_time(file_name):
+    # Fetching nexus3 repo name from file
+    # This is the last repo from the previous batch processed
+
+    last_nexus_repo = ""
+    try:
+        with open(file_name, "r") as fp:
+            last_nexus_repo = fp.read().strip()
+    except:
+        last_nexus_repo = ""
+    return last_nexus_repo
+
+
+def store_last_nexus_repo_from_this_time(file_name):
+    # Store the last run timestamp to permanent storage
+    last_nexus_repo = "{}/{}".format(NexusCatalog[-1][0], NexusCatalog[-1][1])
+    try:
+        with open(file_name, "w") as _file:
+            _file.write("{}".format(last_nexus_repo))
+    except:
+        log.error("Could not write last nexus repo to file")
+
+
+def use_next_batch_from_nexus3(file_name):
+    tmp_catalog = []
+    global NexusCatalog, OrigNexusCatalog
+    current_nbr_nexus3_repos = len(NexusCatalog)
+    if nexus3_batch_size > current_nbr_nexus3_repos:
+        # Nothing to do, we have less repos than throttling limit
+        log.debug("Using all repos we have gathered.")
+        return
+    log.debug("Will only use {} of the collected repos".format(nexus3_batch_size))
+    last_repo_name = fetch_last_nexus_repo_from_last_time(file_name)
+    for item in NexusCatalog:
+        # Check if we have max number of repos in tmp_catalog
+        if len(tmp_catalog) >= nexus3_batch_size:
+            break
+        repo_name = "{}/{}".format(item[0], item[1])
+        # Check if we have reached the last repo done on previous run
+        if last_repo_name < repo_name:
+            tmp_catalog.append(item)
+
+    # Check if tmp_catalog is maxed
+    if len(tmp_catalog) < nexus3_batch_size:
+        # It was not maxed, add from beginning of NexusCatalog
+        for item in NexusCatalog:
+            if len(tmp_catalog) >= nexus3_batch_size:
+                break
+            repo_name = "{}/{}".format(item[0], item[1])
+            tmp_catalog.append(item)
+    OrigNexusCatalog = NexusCatalog.copy()
+    NexusCatalog = tmp_catalog.copy()
+
+
 def fetch_my_public_ip():
     # fetches the public IP for this server
     ip = requests.get("https://api.ipify.org").text
@@ -839,7 +897,7 @@ def fetch_last_run_timestamp(file_name):
 
 
 def store_timestamp_to_last_run_file(file_name):
-    # Store the last run timestamp to permanent storage
+    # Store the last run timestamp
     sttime = datetime.datetime.now().strftime(lastrun_format)
     my_ip = fetch_my_public_ip()
     ip_time_lst = []
@@ -1020,6 +1078,10 @@ def print_anonymous_throttling_stats():
     log.info("Anonymous dockerhub throttling limit={}, remaining now {}.".format(current.limit, current.remaining))
 
 
+def filter_active(pattern=""):
+    return pattern == ""
+
+
 def start_point(
     org_name,
     find_pattern="",
@@ -1059,6 +1121,9 @@ def start_point(
         log.info("Could not get any catalog from Nexus3 with org = {}".format(org_name))
         return
 
+    if not filter_active(find_pattern):
+        use_next_batch_from_nexus3(lastnexusrepo_filename)
+
     fetch_all_tags(progbar)
     if verbose:
         print_nexus_docker_proj_names()
@@ -1073,6 +1138,8 @@ def start_point(
         print_anonymous_throttling_stats()
     if copy:
         copy_from_nexus_to_docker(progbar)
+        if not filter_active(find_pattern):
+            store_last_nexus_repo_from_this_time(lastnexusrepo_filename)
     else:
         print_nbr_tags_to_copy()
 
