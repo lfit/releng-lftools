@@ -637,6 +637,71 @@ class TestFetchNexus3Catalog:
         assert rdh.NexusCatalog[2][1] == "onap/clamp"
         assert rdh.NexusCatalog[3][1] == "onap/vfc/nfvo/svnfm/nokiav2"
 
+    def test_fetch_last_time_last_nexus_repo_1(self, datafiles):
+        data_file = os.path.join(str(datafiles), "releasedockerhub_last_run_last_nexus_repo_file_not_exists.txt")
+        assert rdh.fetch_last_nexus_repo_from_last_time (data_file) == ""
+
+    def test_fetch_last_time_last_nexus_repo_2(self, datafiles):
+        data_file = os.path.join(str(datafiles), "releasedockerhub_last_run_last_nexus_repo.txt")
+        assert rdh.fetch_last_nexus_repo_from_last_time (data_file) == "onap/aaf/aaf_core"
+
+    def test_store_this_run_last_nexus_repo_1(self, datafiles):
+        data_file = os.path.join(str(datafiles), "releasedockerhub_store_this_run_lst_nexus_repo.txt")
+        rdh.NexusCatalog = []
+        rdh.initialize("onap")
+        responses.add(responses.GET, self.url, body=self.answer, status=200)
+        rdh.get_nexus3_catalog("onap", "aaf")
+        rdh.store_last_nexus_repo_from_this_time(data_file)
+        row = ""
+        with open(data_file, "r") as fp:
+            row = fp.read()
+            assert row == "onap/aaf/testcaservice"
+
+    def test_use_next_batch_from_nexus3_1(self, datafiles):
+        data_file = os.path.join(str(datafiles), "releasedockerhub_last_run_last_nexus_repo_file_not_exists.txt")
+        repo_names_file = os.path.join(str(datafiles), "releasedockerhub_reponamelist1.txt")
+        rdh.NexusCatalog = []
+        rdh.initialize("onap")
+        responses.add(responses.GET, self.url, body=self.answer, status=200)
+        rdh.get_nexus3_catalog("onap", repo_names_file, False, True)
+        rdh.use_next_batch_from_nexus3(data_file)
+        assert len(rdh.NexusCatalog) == 4
+
+    def test_use_next_batch_from_nexus3_2(self, datafiles):
+        data_file = os.path.join(str(datafiles), "releasedockerhub_last_run_last_nexus_repo_file_not_exists.txt")
+        rdh.NexusCatalog = []
+        rdh.initialize("onap")
+        responses.add(responses.GET, self.url, body=self.answer, status=200)
+        rdh.get_nexus3_catalog("onap")
+        rdh.use_next_batch_from_nexus3(data_file)
+        assert len(rdh.NexusCatalog) == rdh.nexus3_batch_size
+
+    def test_use_next_batch_from_nexus3_3(self, datafiles):
+        # Previous run last one : aaf/aaf_core
+        # first start  : aaf/aaf_fs
+        # first end    : org.onap.dcaegen2.platform.deployment-handler
+        # second start : org.onap.dcaegen2.platform.inventory-api
+        # second end   : aaf/aaf_cass, rolled around, skipping all non ONAP
+        data_file = os.path.join(str(datafiles), "releasedockerhub_last_run_last_nexus_repo.txt")
+        store_file = os.path.join(str(datafiles), "releasedockerhub_store_this_run_lst_nexus_repo.txt")
+        rdh.NexusCatalog = []
+        rdh.initialize("onap")
+        responses.add(responses.GET, self.url, body=self.answer, status=200)
+        rdh.get_nexus3_catalog("onap")
+        rdh.use_next_batch_from_nexus3(data_file)
+        assert len(rdh.NexusCatalog) == rdh.nexus3_batch_size
+        assert rdh.NexusCatalog[0][1] == 'aaf/aaf_fs'
+        assert rdh.NexusCatalog[rdh.nexus3_batch_size-1][1] == 'org.onap.dcaegen2.platform.deployment-handler'
+        rdh.store_last_nexus_repo_from_this_time(store_file)
+        rdh.NexusCatalog = []
+        rdh.initialize("onap")
+        responses.add(responses.GET, self.url, body=self.answer, status=200)
+        rdh.get_nexus3_catalog("onap")
+        rdh.use_next_batch_from_nexus3(store_file)
+        assert len(rdh.NexusCatalog) == rdh.nexus3_batch_size
+        assert rdh.NexusCatalog[0][1] == 'org.onap.dcaegen2.platform.inventory-api'
+        assert rdh.NexusCatalog[rdh.nexus3_batch_size-1][1] == 'aaf/aaf_cass'
+
 
 class TestFetchAllTagsAndUpdate:
     _test_image_long_id = "sha256:3450464d68c9443dedc8bfe3272a23e6441c37f707c42d32fee0ebdbcd319d2c"
