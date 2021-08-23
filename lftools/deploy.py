@@ -431,7 +431,7 @@ def deploy_s3(s3_bucket, s3_path, build_url, workspace, pattern=None):
         extra_args = {"ContentType": "text/plain"}
         text_html_extra_args = {"ContentType": "text/html", "ContentEncoding": mimetypes.guess_type(file)[1]}
         text_plain_extra_args = {"ContentType": "text/plain", "ContentEncoding": mimetypes.guess_type(file)[1]}
-        app_xml_extra_args = {"ContentType": "application/xml'", "ContentEncoding": mimetypes.guess_type(file)[1]}
+        app_xml_extra_args = {"ContentType": "application/xml", "ContentEncoding": mimetypes.guess_type(file)[1]}
         if file == "_tmpfile":
             for dir in (logs_dir, silo_dir, jenkins_node_dir):
                 try:

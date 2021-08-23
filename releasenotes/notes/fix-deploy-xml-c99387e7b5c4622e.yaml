@@ -1,0 +1,5 @@
+---
+fixes:
+  - |
+    Typo error in xml mimetype deploy to S3 storage. Thais patch remove the
+    extra sign to correctly map mimetype to content-type.
