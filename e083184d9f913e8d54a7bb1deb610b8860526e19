@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d73c6b2e_c6626a76",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2021-08-30T22:26:50Z",
+      "side": 1,
+      "message": "Since this change was introduced and released Nexus staging repo promotion, seems very slow. \n\nhttps://logs.opendaylight.org/releng/vex-yul-odl-jenkins-1/mdsal-release-merge/66/console.log.gz\n[DIR]\t66/\t2021-08-12 12:23\t- lftools \u003d v0.35.5\n\nhttps://logs.opendaylight.org/releng/vex-yul-odl-jenkins-1/mdsal-release-merge/65/console.log.gz\n[DIR]\t65/\t2021-07-25 12:37\t- lftools \u003d v0.35.4  \t \n\nThe question is since we are waiting on events here, do you really need to sleep()?",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 520,
+        "endChar": 70
+      },
+      "revId": "e083184d9f913e8d54a7bb1deb610b8860526e19",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
