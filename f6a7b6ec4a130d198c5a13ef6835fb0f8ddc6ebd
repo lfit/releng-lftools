@@ -24,6 +24,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdea03dd_04761e0c",
+        "filename": "lftools/openstack/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 480
+      },
+      "writtenOn": "2021-08-30T14:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea17a951_bc801444",
+      "range": {
+        "startLine": 107,
+        "startChar": 17,
+        "endLine": 107,
+        "endChar": 27
+      },
+      "revId": "f6a7b6ec4a130d198c5a13ef6835fb0f8ddc6ebd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f9ad2cb_af1770a1",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-18T20:45:37Z",
       "side": 1,
       "message": "I know this is nitpicking a bit, but should this be named \"_protect_image\", since it only protects one image at a time? That would also serve to differentiate it from its parent function\u0027s name.",
+      "range": {
+        "startLine": 226,
+        "startChar": 8,
+        "endLine": 226,
+        "endChar": 23
+      },
+      "revId": "f6a7b6ec4a130d198c5a13ef6835fb0f8ddc6ebd",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9809fa2a_b5a8e1bc",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 480
+      },
+      "writtenOn": "2021-08-30T14:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f9ad2cb_af1770a1",
       "range": {
         "startLine": 226,
         "startChar": 8,
