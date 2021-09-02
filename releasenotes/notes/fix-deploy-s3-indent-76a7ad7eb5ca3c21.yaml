@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    Fix: Indent line correctly to call deploy s3 function.
+
+    When Unix style glob patterns are passed through the CLI option
+    the deploy_s3() function skips the step to push logs to the S3 bucket.

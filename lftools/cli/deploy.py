@@ -148,7 +148,7 @@ def s3(ctx, s3_bucket, s3_path, build_url, workspace, pattern):
     """Deploy logs and archives to a S3 bucket."""
     if not pattern:
         pattern = None
-        deploy_sys.deploy_s3(s3_bucket, s3_path, build_url, workspace, pattern)
+    deploy_sys.deploy_s3(s3_bucket, s3_path, build_url, workspace, pattern)
     log.info("Logs upload to S3 complete.")
 
 
