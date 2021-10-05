@@ -194,7 +194,7 @@ def _get_node_from_xml(xml_data, tag_name):
     try:
         dom1 = parseString(xml_data)
         childnode = dom1.getElementsByTagName(tag_name)[0]
-    except:
+    except Exception:
         _log_error_and_exit("Received bad XML, can not find tag {}".format(tag_name), xml_data)
     return childnode.firstChild.data
 
