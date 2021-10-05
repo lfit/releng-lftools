@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f8cd1aa_62e558ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-10-05T17:02:27Z",
+      "side": 1,
+      "message": "CI is failing because you\u0027re not following our commit message requirements.\n\nI would suggest the following:\n\nRefactor: Resolve flake8 E722 bare except\n\nYou\u0027re not actually changing functionality, just refactoring here",
+      "revId": "ef37640c50c6b4b6040c152ee5668cbb195b4f32",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
