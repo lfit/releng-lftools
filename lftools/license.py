@@ -43,7 +43,7 @@ def get_header_text(_file):
                 continue
             text += " {}".format(string)
     # Strip unnecessary spacing
-    text = re.sub("\s+", " ", text).strip()
+    text = re.sub(r"\s+", " ", text).strip()
     return text
 
 
@@ -63,7 +63,7 @@ def check_license(license_file, code_file):
     return 0
 
 
-def check_license_directory(license_file, directory, regex=".+\.py$"):
+def check_license_directory(license_file, directory, regex=r".+\.py$"):
     """Search a directory for files and calls check_license()."""
     missing_license = False
 

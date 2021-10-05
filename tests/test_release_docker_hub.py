@@ -169,7 +169,7 @@ class TestTagsRegExpClass:
         """Test TagClass"""
         org = "onap"
         repo = "base/sdc-sanity"
-        test_regexp = "^v\d+.\d+.\d+$"
+        test_regexp = r"^v\d+.\d+.\d+$"
         repo_from_file = False
         test_tags = ["v1.2.3", "v1.22.333", "v111.22.3", "v10.11.12", "v1.0.3"]
         rdh.initialize(org, test_regexp)
@@ -183,7 +183,7 @@ class TestTagsRegExpClass:
         """Test TagClass"""
         org = "onap"
         repo = "base/sdc-sanity"
-        test_regexp = "v^\d+.\d+.\d+$"
+        test_regexp = r"v^\d+.\d+.\d+$"
         repo_from_file = False
         test_tags = [
             "1.2.3",
@@ -214,7 +214,7 @@ class TestTagsRegExpClass:
         test_regexp_from_file = os.path.join(str(datafiles), "releasedockerhub_good_regexp")
         rdh.initialize(org, test_regexp_from_file)
         assert rdh.validate_regexp() == True
-        assert rdh.VERSION_REGEXP == "^\d+.\d+"
+        assert rdh.VERSION_REGEXP == r"^\d+.\d+"
 
     def test_tag_class_manual_version_regexp_str_from_file_invalid(self, datafiles):
         org = "onap"
