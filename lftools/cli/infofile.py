@@ -79,7 +79,7 @@ def create_info_file(ctx, gerrit_url, gerrit_project, directory, empty, tsc_appr
 
         try:
             owner = result["local"]["refs/*"]["permissions"]["owner"]["rules"]
-        except:
+        except Exception:
             print("ERROR: Check project config, no owner set!")
 
         for x in owner:

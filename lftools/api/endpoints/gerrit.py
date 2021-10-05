@@ -248,7 +248,7 @@ class Gerrit(client.RestApi):
             log.info(access_str)
             try:
                 result = self.get(access_str)[1]
-            except:
+            except Exception:
                 log.info("Not found {}".format(access_str))
                 exit(1)
             log.info("found {} {}".format(access_str, mylist))

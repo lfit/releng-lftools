@@ -173,7 +173,7 @@ def csv(ctx, ldap_server, ldap_group_base, ldap_user_base, groups):
                     user_info = ldap_query(l, ldap_user_base, user, ["uid", "cn", "mail"])
                     try:
                         print("%s,%s" % (group_name, user_to_csv(user_info)))
-                    except:
+                    except Exception:
                         eprint("Error parsing user: %s" % user)
                         continue
         ldap_disconnect(l)
