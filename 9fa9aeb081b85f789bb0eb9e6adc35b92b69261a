@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca24327f_6f21c288",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-10-05T17:03:58Z",
+      "side": 1,
+      "message": "CI is failing because you aren\u0027t following our commit message requirements. I suggest the following subject line:\n\nRefactor: Resolve W605 Invalid escape sequence\n\nSince you\u0027re not actually changing functionality or fixing a bug it\u0027s a refactor",
+      "revId": "9fa9aeb081b85f789bb0eb9e6adc35b92b69261a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
