@@ -63,7 +63,7 @@ NEXUS3_CATALOG = ""
 NEXUS3_PROJ_NAME_HEADER = ""
 DOCKER_PROJ_NAME_HEADER = ""
 VERSION_REGEXP = ""
-DEFAULT_REGEXP = "^\d+.\d+.\d+$"
+DEFAULT_REGEXP = r"^\d+.\d+.\d+$"
 
 
 def _remove_http_from_url(url):
@@ -171,7 +171,7 @@ class TagClass:
         self.repofromfile = repo_from_file
 
     def _validate_tag(self, check_tag):
-        """Local helper function to simplify validity check of version number.
+        r"""Local helper function to simplify validity check of version number.
 
         Returns true or false, depending if the version pattern is a valid one.
         Valid pattern is #.#.#, or in computer term "^\d+.\d+.\d+$"

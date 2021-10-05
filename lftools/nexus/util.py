@@ -26,9 +26,9 @@ def create_repo_target_regex(group_id, strict=True):
     Strict = True  : --> "/org/o-ran-sc/org/"
     """
 
-    repotarget = "^/{}/.*".format(group_id.replace(".", "[/\.]"))
+    repotarget = "^/{}/.*".format(group_id.replace(".", r"[/\.]"))
     if strict:
         return repotarget
     else:
         # Replace - with regex
-        return repotarget.replace("-", "[/\.]")
+        return repotarget.replace("-", r"[/\.]")
