@@ -17,8 +17,6 @@ import logging
 import click
 from tabulate import tabulate
 
-from lftools.api.endpoints import nexus3  # noqa: F401
-
 log = logging.getLogger(__name__)
 
 

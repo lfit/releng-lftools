@@ -13,12 +13,13 @@
 __author__ = "DW Talton"
 
 
-from lftools.api.endpoints import nexus2
+import click
+from privilege import privilege
+from repository import repo
+from role import role
+from user import user
 
-from .privilege import *
-from .repository import *
-from .role import *
-from .user import *
+from lftools.api.endpoints import nexus2
 
 
 @click.group(name="nexus2")
