@@ -110,7 +110,7 @@ def test_tag_class_repository_exist():
     repo_from_file = False
     rdh.initialize(org)
     tags = rdh.TagClass(org, repo, repo_from_file)
-    assert tags.repository_exist == True
+    assert tags.repository_exist
 
 
 @pytest.mark.datafiles(
@@ -213,14 +213,14 @@ class TestTagsRegExpClass:
         org = "onap"
         test_regexp_from_file = os.path.join(str(datafiles), "releasedockerhub_good_regexp")
         rdh.initialize(org, test_regexp_from_file)
-        assert rdh.validate_regexp() == True
+        assert rdh.validate_regexp()
         assert rdh.VERSION_REGEXP == r"^\d+.\d+"
 
     def test_tag_class_manual_version_regexp_str_from_file_invalid(self, datafiles):
         org = "onap"
         test_regexp_from_file = os.path.join(str(datafiles), "releasedockerhub_bad_regexp")
         rdh.initialize(org, test_regexp_from_file)
-        assert rdh.validate_regexp() == False
+        assert not rdh.validate_regexp()
         assert rdh.VERSION_REGEXP == "["
 
 
