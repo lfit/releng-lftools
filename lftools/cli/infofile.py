@@ -139,7 +139,7 @@ tsc:
           name: ''
           link: ''
 """.format(
-        tsc_approval, end=""
+        tsc_approval
     )
     empty_committer = """    - name: ''
       email: ''
@@ -151,7 +151,7 @@ tsc:
     print("repositories:")
     print("    - {}".format(gerrit_project))
     print("committers:")
-    print("    - <<: *{1}_{0}_ptl".format(project_underscored, umbrella, end=""))
+    print("    - <<: *{1}_{0}_ptl".format(project_underscored, umbrella))
     if not empty:
         this = helper_yaml4info(ldap_group)
         print(this, end="")

@@ -107,7 +107,7 @@ def cost(os_cloud, stack_name):
         resources = []
 
         def _is_nested(resource):
-            link_types = [l["rel"] for l in resource.links]
+            link_types = [link["rel"] for link in resource.links]
             if "nested" in link_types:
                 return True
             return False

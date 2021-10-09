@@ -156,7 +156,6 @@ def s3(ctx, s3_bucket, s3_path, build_url, workspace, pattern):
 @click.argument("nexus-url", envvar="NEXUS_URL")
 @click.argument("repo-id", envvar="REPO_ID")
 @click.argument("file-name", envvar="FILE_NAME")
-
 # Maven Config
 @click.option("-b", "--maven-bin", envvar="MAVEN_BIN", help="Path of maven binary.")
 @click.option("-gs", "--global-settings", envvar="GLOBAL_SETTINGS_FILE", help="Global settings file.")

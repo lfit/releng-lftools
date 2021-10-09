@@ -102,7 +102,7 @@ def csv(ctx, ldap_server, ldap_group_base, ldap_user_base, groups):
             ldap_object.protocol_version = ldap.VERSION3
             ldap_object.simple_bind_s()
         except ldap.LDAPError as e:
-            if type(e.message) == dict and e.message.has_key("desc"):
+            if type(e.message) == dict and "desc" in e.message:
                 print(e.message["desc"])
             else:
                 print(e)
@@ -159,24 +159,24 @@ def csv(ctx, ldap_server, ldap_group_base, ldap_user_base, groups):
         )
 
     def main(groups):
-        """Preform an LDAP query."""
-        l = ldap.initialize(ldap_server)
-        ldap_connect(l)
+        """Perform an LDAP query."""
+        ldap_obj = ldap.initialize(ldap_server)
+        ldap_connect(ldap_obj)
         for arg in groups:
-            groups = ldap_query(l, ldap_group_base, "cn=%s" % arg, ["member"])
+            groups = ldap_query(ldap_obj, ldap_group_base, "cn=%s" % arg, ["member"])
             group_dict = package_groups(groups)
             cut_length = len(ldap_group_base) + 1
             for group_bar in group_dict:
                 group_name = group_bar["name"][3:-cut_length]
                 for user in group_bar["members"]:
                     user = user.decode("utf-8")
-                    user_info = ldap_query(l, ldap_user_base, user, ["uid", "cn", "mail"])
+                    user_info = ldap_query(ldap_obj, ldap_user_base, user, ["uid", "cn", "mail"])
                     try:
                         print("%s,%s" % (group_name, user_to_csv(user_info)))
                     except Exception:
                         eprint("Error parsing user: %s" % user)
                         continue
-        ldap_disconnect(l)
+        ldap_disconnect(ldap_obj)
 
     main(groups)
 

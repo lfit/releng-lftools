@@ -25,7 +25,7 @@ import sphinx_bootstrap_theme  # noqa
 sys.path.insert(0, os.path.abspath(".."))
 
 from docs_conf.conf import *  # noqa
-from pbr.version import VersionInfo
+from pbr.version import VersionInfo  # noqa
 
 version = str(VersionInfo("lftools"))
 release = str(VersionInfo("lftools"))
