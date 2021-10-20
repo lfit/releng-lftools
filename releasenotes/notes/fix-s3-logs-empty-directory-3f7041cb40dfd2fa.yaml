@@ -1,0 +1,9 @@
+---
+fixes:
+  - |
+    Create an temp file for logs shipping with AWS S3 Buckets.
+
+    Since S3 buckets does not have an underlying file system, to view empty
+    directories, an temp file has to be created when referencing the directory.
+    This allows empty folders to be viewed through cloudfront, without which
+    a 404 error is returned.
