@@ -11,6 +11,7 @@
 """Library of functions for deploying artifacts to Nexus."""
 
 import concurrent.futures
+import datetime
 import errno
 import glob
 import gzip
@@ -268,7 +269,6 @@ def copy_archives(workspace, pattern=None):
     log.debug("Files found: {}".format(paths))
 
     no_dups_paths = _remove_duplicates_and_sort(paths)
-
     for src in no_dups_paths:
         if len(os.path.basename(src)) > 255:
             log.warn("Filename {} is over 255 characters. Skipping...".format(os.path.basename(src)))
@@ -285,6 +285,16 @@ def copy_archives(workspace, pattern=None):
                 shutil.move(src, dest)
         else:
             log.info("Not copying directories: {}.".format(src))
+
+    # Create a temp file to handle empty dirs in AWS S3 buckets.
+    if os.environ.get("S3_BUCKET") is not None:
+        now = datetime.datetime.now()
+        p = now.strftime("_%d%m%Y_%H%M%S_")
+        for dirpath, dirnames, files in os.walk(dest_dir):
+            if not files:
+                fd, tmp = tempfile.mkstemp(prefix=p, dir=dirpath)
+                os.close(fd)
+                log.debug("temp file created in dir: {}.".format(dirpath))
 
 
 def deploy_archives(nexus_url, nexus_path, workspace, pattern=None):
