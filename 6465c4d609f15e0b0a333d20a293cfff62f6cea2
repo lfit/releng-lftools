@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81ab3f19_8297a6ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2021-10-20T15:00:29Z",
+      "side": 1,
+      "message": "Change looks good to me. You\u0027re failing CI because black is modifying your formatting.\n\nPlease setup pre-commit in your environment on this repository and then amend your commit, this should resolve the issues that CI is having.",
+      "revId": "6465c4d609f15e0b0a333d20a293cfff62f6cea2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
