@@ -245,6 +245,12 @@ def copy_archives(workspace, pattern=None):
                 f = os.path.join(archives_dir, file_or_dir)
                 try:
                     log.debug("Moving {}".format(f))
+                    if os.path.isdir(dest_dir) is True and os.listdir(dest_dir) == []:
+                        fd, tmp = tempfile.mkstemp(suffix=".temp_",
+                                        dir=dest_dir)
+                        os.close(fd)
+                        log.debug(".temp file created in dir: {}.".format(dest_dir))
+
                     shutil.move(f, dest_dir)
                 except shutil.Error as e:
                     log.error(e)
@@ -282,6 +288,12 @@ def copy_archives(workspace, pattern=None):
             except IOError as e:  # Switch to FileNotFoundError when Python 2 support is dropped.
                 log.debug("Missing path, will create it {}.\n{}".format(os.path.dirname(dest), e))
                 os.makedirs(os.path.dirname(dest))
+                if os.path.isdir(dest) and os.listdir(dest) == []:
+                    fd, tmp = tempfile.mkstemp(suffix=".temp_",
+                                    dir=dest)
+                    os.close(fd)
+                    log.debug(".temp file created in dir: {}.".format(dest_dir))
+
                 shutil.move(src, dest)
         else:
             log.info("Not copying directories: {}.".format(src))
