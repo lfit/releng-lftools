@@ -11,6 +11,7 @@
 """Library of functions for deploying artifacts to Nexus."""
 
 import concurrent.futures
+import datetime
 import errno
 import glob
 import gzip
@@ -246,6 +247,12 @@ def copy_archives(workspace, pattern=None):
                 try:
                     log.debug("Moving {}".format(f))
                     shutil.move(f, dest_dir)
+                    tmp_pattern = re.compile(".temp.*")
+                    if not tmp_pattern.match(os.listdir(dest_dir)):
+                        # Create a hidden temp file for S3 bucket buckets to view empty folders
+                        with open(dest_dir + ".temp_" + datetime.strftime("%d%m%Y_%H%M%S"), "w") as file:
+                            file.write("")
+                            file.close()
                 except shutil.Error as e:
                     log.error(e)
                     raise OSError(errno.EPERM, "Could not move to", archives_dir)
@@ -283,6 +290,12 @@ def copy_archives(workspace, pattern=None):
                 log.debug("Missing path, will create it {}.\n{}".format(os.path.dirname(dest), e))
                 os.makedirs(os.path.dirname(dest))
                 shutil.move(src, dest)
+                tmp_pattern = re.compile(".temp.*")
+                if not tmp_pattern.match(os.listdir(dest_dir)):
+                    # Create a hidden temp file for S3 bucket buckets to view empty folders
+                    with open(dest_dir + ".temp_" + datetime.strftime("%d%m%Y_%H%M%S"), "w") as file:
+                        file.write("")
+                        file.close()
         else:
             log.info("Not copying directories: {}.".format(src))
 
