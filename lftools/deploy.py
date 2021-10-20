@@ -246,6 +246,10 @@ def copy_archives(workspace, pattern=None):
                 try:
                     log.debug("Moving {}".format(f))
                     shutil.move(f, dest_dir)
+                    if os.path.isdir(f) is True and os.listdir(f) == []:
+                        fd, tmp = tempfile.mkstemp(suffix=".temp_",
+                                        dir=dest_dir)
+                        os.close(fd)
                 except shutil.Error as e:
                     log.error(e)
                     raise OSError(errno.EPERM, "Could not move to", archives_dir)
@@ -283,6 +287,10 @@ def copy_archives(workspace, pattern=None):
                 log.debug("Missing path, will create it {}.\n{}".format(os.path.dirname(dest), e))
                 os.makedirs(os.path.dirname(dest))
                 shutil.move(src, dest)
+                if os.path.isdir(f) is True and os.listdir(f) == []:
+                    fd, tmp = tempfile.mkstemp(suffix=".temp_",
+                                    dir=dest_dir)
+                    os.close(fd)
         else:
             log.info("Not copying directories: {}.".format(src))
 
