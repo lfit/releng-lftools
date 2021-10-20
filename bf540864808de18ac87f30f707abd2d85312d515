@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c437edc_6d11066e",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2021-10-20T11:29:57Z",
+      "side": 1,
+      "message": ":: ?",
+      "revId": "bf540864808de18ac87f30f707abd2d85312d515",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cee2483_72d23d08",
+        "filename": "lftools/deploy.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2021-10-20T11:29:57Z",
+      "side": 1,
+      "message": ":: ?",
+      "revId": "bf540864808de18ac87f30f707abd2d85312d515",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
