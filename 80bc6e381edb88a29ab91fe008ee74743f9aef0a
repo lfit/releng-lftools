@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fe8e064_1ffd3769",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2021-10-21T11:22:49Z",
+      "side": 1,
+      "message": "The thing is hidden files are not recognized by the bucket, (without period) a temp_xxxxx name works.\n\nhttps://s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/25/cost/1/2/3/index.html ",
+      "revId": "80bc6e381edb88a29ab91fe008ee74743f9aef0a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
