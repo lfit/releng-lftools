@@ -16,6 +16,24 @@
       "message": "This doesn\u0027t seem limited to S3. Is there a way to do that, or will all archives have these files?",
       "revId": "669a7199597138f0e91ae615065885b890e8e9b0",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c3c471_4e8dc58d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2021-10-21T22:58:41Z",
+      "side": 1,
+      "message": "well yeah, not sure how to diff between the upstream caller is for S3|Nexus.",
+      "parentUuid": "d32a779e_336017d4",
+      "revId": "669a7199597138f0e91ae615065885b890e8e9b0",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
