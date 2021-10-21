@@ -16,6 +16,24 @@
       "message": "Change looks good to me. You\u0027re failing CI because black is modifying your formatting.\n\nPlease setup pre-commit in your environment on this repository and then amend your commit, this should resolve the issues that CI is having.",
       "revId": "6465c4d609f15e0b0a333d20a293cfff62f6cea2",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "448f80e9_ba93056b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2021-10-21T11:11:13Z",
+      "side": 1,
+      "message": "a few corner cases din\u0027t work since copy_archives() uses \u0027shutil.move(src, dest)\u0027, which moves subdirs (1/2/3/4) into logs, not skipping the creation of a .tmp file in the empty subdir. \n\ntested: \nlftools --debug deploy copy-archives /tmp/1001/ \u0027**/** **/cost/**/.yaml **/*.prop **/*.log **/target/surefire-reports/*-output.txt **/target/failsafe-reports/failsafe-summary.xml **/hs_err_*.log **/target/feature/feature.xml\u0027\n\n\n.\n./cost\n./cost/temp_470b8hlt\n./cost/1\n./cost/1/temp_1ybyk3jr\n./cost/1/2\n./cost/1/2/temp_4l7kl406\n./cost/1/2/3\n./cost/1/2/3/temp_zwbt7bb4\n./cost/1/2/3/4\n./cost/1/2/3/4/temp_qbe12mdc\n./cost/1/2/3/4/5\n./cost/1/2/3/4/5/test.yaml\n./s3-logs.opendaylight.org\n./s3-logs.opendaylight.org/temp_u7hehlmd\n./s3-logs.opendaylight.org/logs\n./s3-logs.opendaylight.org/logs/temp_pzo32sho\n./s3-logs.opendaylight.org/logs/sandbox\n./s3-logs.opendaylight.org/logs/sandbox/temp_j25qbipg\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/temp_shbrh1zp\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/temp_xwbnymte\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/tmppfsxfhp3.temp_\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/_build-details.log\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/sar-reports\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/sar-reports/sa20\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/sar-reports/sar20\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/sar-reports/index.html\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/packages_end.txt\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/console-timestamp.log\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/cost.csv\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/instance_meta_data.json\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/index.html\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/packages_diff.txt\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/_sys-info.log\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/console.log\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/sudo\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/sudo/secure\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/sudo/index.html\n./s3-logs.opendaylight.org/logs/sandbox/vex-yul-odl-jenkins-2/builder-openstack-cron/15/packages_start.txt",
+      "parentUuid": "81ab3f19_8297a6ba",
+      "revId": "6465c4d609f15e0b0a333d20a293cfff62f6cea2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
