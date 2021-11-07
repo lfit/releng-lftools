@@ -897,6 +897,9 @@ def deploy_nexus_stage(nexus_url, staging_profile_id, deploy_dir):
         _format_url(nexus_url), staging_repo_id
     )
 
+    sz_m2repo = sum(os.path.getsize(f) for f in os.listdir(deploy_dir) if os.path.isfile(f))
+    log.debug("Staging repository upload size: {} bytes".format(sz_m2repo))
+
     log.debug("Nexus Staging URL: {}".format(_format_url(deploy_nexus_url)))
     deploy_nexus(deploy_nexus_url, deploy_dir)
 

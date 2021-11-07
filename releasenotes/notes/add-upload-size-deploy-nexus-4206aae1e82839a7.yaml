@@ -1,0 +1,5 @@
+---
+fixes:
+  - |
+    Print upload size while deploying Nexus stage repositories. This is useful
+    while comparing the repository sizes being uploaded or released.
