@@ -1,0 +1,15 @@
+---
+project:
+    name: {{ project_name_dashed }}-project-view
+    project-name: {{ project_name_dashed }}
+    views:
+      - project-view
+
+project:
+    name: {{ project_name_dashed }}-info
+    project: {{ project_name }}
+    project-name: {{ project_name_dashed }}
+    build-node: {{ buildnode }}
+    branch: {{ default_branch }}
+    jobs:
+      - gerrit-info-yaml-verify
