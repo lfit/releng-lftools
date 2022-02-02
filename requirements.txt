@@ -14,9 +14,11 @@ dnspython
 docker==4.2.2
 email-validator
 filelock
+git
 httplib2
 identify
 idna
+jinja2
 jsonschema
 lxml
 multi-key-dict
