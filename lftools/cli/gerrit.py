@@ -18,6 +18,7 @@ from pprint import pformat
 import click
 
 from lftools.api.endpoints import gerrit
+from lftools.git.gerrit import Gerrit as git_gerrit
 
 log = logging.getLogger(__name__)
 
@@ -34,10 +35,10 @@ def gerrit_cli(ctx):
 @click.argument("gerrit_project")
 @click.argument("filename")
 @click.option("--issue_id", type=str, required=False, help="For projects that enforce an issue id for changesets")
-@click.option("--file_location", type=str, required=False, help="option allos you to specify full path and file name")
+@click.option("--file_location", type=str, required=False, help="File path within the repository")
 @click.pass_context
 def addfile(ctx, gerrit_fqdn, gerrit_project, filename, issue_id, file_location):
-    """Add an file for review to a Project.
+    """Add a file for review to a Project.
 
     Requires gerrit directory.
 
@@ -46,6 +47,9 @@ def addfile(ctx, gerrit_fqdn, gerrit_project, filename, issue_id, file_location)
     gerrit_url gerrit.o-ran-sc.org/r
     gerrit_project test/test1
     """
+    git = Gerrit(fqdn=gerrit_fqdn, project=gerrit_project)
+    git.add_file(filename, issue_id, file_location)
+
     g = gerrit.Gerrit(fqdn=gerrit_fqdn)
     data = g.add_file(gerrit_fqdn, gerrit_project, filename, issue_id, file_location)
     log.info(pformat(data))
@@ -55,10 +59,9 @@ def addfile(ctx, gerrit_fqdn, gerrit_project, filename, issue_id, file_location)
 @click.argument("gerrit_fqdn")
 @click.argument("gerrit_project")
 @click.argument("jjbrepo")
-@click.option("--reviewid", type=str, required=False, help="ammend a review rather than making a new one")
 @click.option("--issue_id", type=str, required=False, help="For projects that enforce an issue id for changesets")
 @click.pass_context
-def addinfojob(ctx, gerrit_fqdn, gerrit_project, jjbrepo, reviewid, issue_id):
+def addinfojob(ctx, gerrit_fqdn, gerrit_project, jjbrepo, issue_id):
     """Add an INFO job for a new Project.
 
     Adds info verify jenkins job for project.
@@ -72,9 +75,8 @@ def addinfojob(ctx, gerrit_fqdn, gerrit_project, jjbrepo, reviewid, issue_id):
     gerrit_project test/test1
     jjbrepo ci-mangement
     """
-    g = gerrit.Gerrit(fqdn=gerrit_fqdn)
-    data = g.add_info_job(gerrit_fqdn, gerrit_project, jjbrepo, reviewid, issue_id)
-    log.info(pformat(data))
+    git = git_gerrit(fqdn=gerrit_fqdn, project=jjbrepo)
+    git.add_info_job(gerrit_fqdn, gerrit_project, issue_id)
 
 
 @click.command(name="addgitreview")
@@ -89,9 +91,8 @@ def addgitreview(ctx, gerrit_fqdn, gerrit_project, issue_id):
     gerrit_url gerrit.o-ran-sc.org
     gerrit_project test/test1
     """
-    g = gerrit.Gerrit(fqdn=gerrit_fqdn)
-    data = g.add_git_review(gerrit_fqdn, gerrit_project, issue_id)
-    log.info(pformat(data))
+    git = git_gerrit(fqdn=gerrit_fqdn, project=gerrit_project)
+    git.add_git_review(gerrit_fqdn, gerrit_project, issue_id)
 
 
 @click.command(name="addgithubrights")
