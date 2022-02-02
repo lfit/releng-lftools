@@ -45,7 +45,7 @@ class Gerrit(client.RestApi):
         super(Gerrit, self).__init__(**params)
 
     def add_file(self, fqdn, gerrit_project, filename, issue_id, file_location, **kwargs):
-        """Add an file for review to a Project.
+        """Add a file for review to a Project.
 
         File can be sourced from any location
         but only lands in the root of the repo.
@@ -110,7 +110,6 @@ class Gerrit(client.RestApi):
         # Setup
         signed_off_by = config.get_setting(fqdn, "sob")
         gerrit_project_dashed = gerrit_project.replace("/", "-")
-        urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
         filename = "{}.yaml".format(gerrit_project_dashed)
 
         if not reviewid:
@@ -240,7 +239,7 @@ class Gerrit(client.RestApi):
         return payload
 
     def sanity_check(self, fqdn, gerrit_project, **kwargs):
-        """Preform a sanity check."""
+        """Perform a sanity check."""
         # Sanity check
         gerrit_project_encoded = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
         mylist = ["projects/", "projects/{}".format(gerrit_project_encoded)]
