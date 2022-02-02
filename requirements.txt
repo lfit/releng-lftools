@@ -17,6 +17,7 @@ filelock
 httplib2
 identify
 idna
+jinja2
 jsonschema
 lxml
 multi-key-dict
