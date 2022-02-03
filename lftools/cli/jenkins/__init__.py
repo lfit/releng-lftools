@@ -74,6 +74,32 @@ for (c in creds) {
 
 
 @click.command()
+@click.pass_context
+def get_secrets(ctx):
+    """Print all available secrets."""
+    jenkins = ctx.obj["jenkins"]
+    groovy_script = """
+import com.cloudbees.plugins.credentials.*
+
+println "Printing all secrets..."
+def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
+    com.cloudbees.plugins.credentials.common.StandardCredentials.class,
+    Jenkins.instance,
+    null,
+    null
+);
+
+for (c in creds) {
+    try {
+        println(c.id + " : " + c.secret )
+    } catch (MissingPropertyException) {}
+}
+"""
+    result = jenkins.server.run_script(groovy_script)
+    log.info(result)
+
+
+@click.command()
 @click.argument("groovy_file")
 @click.pass_context
 def groovy(ctx, groovy_file):
@@ -179,6 +205,7 @@ jenkins_cli.add_command(plugins_init, name="plugins")
 jenkins_cli.add_command(nodes)
 jenkins_cli.add_command(builds)
 jenkins_cli.add_command(get_credentials, name="get-credentials")
+jenkins_cli.add_command(get_secrets, name="get-secrets")
 jenkins_cli.add_command(groovy)
 jenkins_cli.add_command(jobs)
 jenkins_cli.add_command(quiet_down, name="quiet-down")
