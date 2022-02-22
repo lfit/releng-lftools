@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0c1c7c0_bc53a601",
+        "filename": "lftools/git/gerrit.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-02-22T21:41:03Z",
+      "side": 1,
+      "message": "Not all of our Gerrit systems use /r/ for their sub-URL. For instance, ODL is /gerrit/ and LF\u0027s Gerrit is /infra/. Technically Gerrit doesn\u0027t even need to have a sub-URL but we have always configured our systems to have one which matches up with what has been seen by the \"greater\" Gerrit community in general.",
+      "range": {
+        "startLine": 50,
+        "startChar": 34,
+        "endLine": 50,
+        "endChar": 39
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e99065f0_e249d483",
+        "filename": "lftools/git/gerrit.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-02-22T21:41:03Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be hard coded but a variable that is passed in with maybe a default if none is given.",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 47
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95b52ee8_b9b089e7",
+        "filename": "lftools/git/templates/gitreview",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-02-22T21:41:03Z",
+      "side": 1,
+      "message": "This needs to be a variable that can be tuned. Some / many of our projects are looking to transition to using \u0027main\u0027 instead of \u0027master\u0027",
+      "range": {
+        "startLine": 5,
+        "startChar": 14,
+        "endLine": 5,
+        "endChar": 20
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6be09831_7cbd701b",
+        "filename": "lftools/git/templates/project.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-02-22T21:41:03Z",
+      "side": 1,
+      "message": "Need to make sure that the selected branch (see comment in the gitreview template) is being used",
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9484cb2c_4dfbd8b1",
+        "filename": "tests/test_git.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-02-22T21:41:03Z",
+      "side": 1,
+      "message": "This is a real-world git URL. All the rest of the tests seem to be using gerrit.example.com for the FQDN. Is this intentional?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 61
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
