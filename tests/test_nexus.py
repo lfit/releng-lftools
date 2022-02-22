@@ -56,7 +56,7 @@ def test_create_roles(datafiles, responses, nexus2_obj_create):
 
 
 @pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "nexus"))
-def test_release_staging_repos(datafiles, responses, nexus2_obj_create, mock_get_credentials):
+def test_release_staging_repos(datafiles, responses, mocker, nexus2_obj_create, mock_get_credentials):
     """Test create_roles() method with good config."""
     os.chdir(str(datafiles))
     baseurl = "http://nexus.localhost/service/local"
@@ -67,6 +67,8 @@ def test_release_staging_repos(datafiles, responses, nexus2_obj_create, mock_get
     closed_return = open("staging_activities_closed.xml", "r").read()
     releasing_return = open("staging_activities_releasing.xml", "r").read()
     released_return = open("staging_activities_released.xml", "r").read()
+
+    mocker.patch.object(cmd, "sleep")
 
     responses.add(responses.GET, activity_url, closed_return, status=200)
     responses.add(responses.POST, request_url, status=201)
