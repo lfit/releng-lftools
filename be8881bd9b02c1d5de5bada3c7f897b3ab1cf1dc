@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2793030f_29af3f26",
+        "filename": "lftools/git/gerrit.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-02-23T17:43:59Z",
+      "side": 1,
+      "message": "Is the intent of this to delete the working tree when the object gets deleted?\n\nIf so, then, yes we should probably do it instead of just having it pass cleanly without doing anything.",
+      "parentUuid": "71366838_a5e9c82e",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 16
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e99065f0_e249d483",
         "filename": "lftools/git/gerrit.py",
         "patchSetId": 5
