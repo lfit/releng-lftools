@@ -95,6 +95,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f811bf8_c85a3dfe",
+        "filename": "lftools/git/gerrit.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-02-23T17:51:46Z",
+      "side": 1,
+      "message": "Yes, it\u0027ll delete the temp working directory that houses the git repo when the object is deleted.\n\nOk, I\u0027ve uncommented it.",
+      "parentUuid": "2793030f_29af3f26",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 16
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e99065f0_e249d483",
