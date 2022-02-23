@@ -24,6 +24,53 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49ec9fdf_bd610372",
+        "filename": "lftools/git/gerrit.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-02-23T17:37:50Z",
+      "side": 1,
+      "message": "Yeah, I was trying to work around the fact that I needed to split the protocol from the endpoint, but this is a pretty crappy workaround. And those different ways servers define their endpoints is part of the reason we have each system\u0027s endpoint defined in the lftools config. I\u0027ve changed this to just strip the protocol off the endpoint and use that instead.",
+      "parentUuid": "f0c1c7c0_bc53a601",
+      "range": {
+        "startLine": 50,
+        "startChar": 34,
+        "endLine": 50,
+        "endChar": 39
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71366838_a5e9c82e",
+        "filename": "lftools/git/gerrit.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-02-23T17:37:50Z",
+      "side": 1,
+      "message": "@Andy, any thoughts on this part?",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 16
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e99065f0_e249d483",
@@ -37,6 +84,30 @@
       "writtenOn": "2022-02-22T21:41:03Z",
       "side": 1,
       "message": "This shouldn\u0027t be hard coded but a variable that is passed in with maybe a default if none is given.",
+      "range": {
+        "startLine": 155,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 47
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "940348d8_b6a993fc",
+        "filename": "lftools/git/gerrit.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-02-23T17:37:50Z",
+      "side": 1,
+      "message": "This will have to stay, just because all of the jobs we have currently assume that this will be here. But I\u0027ve added an option to specify the agent, and this selection will only happen if the caller doesn\u0027t use that option.",
+      "parentUuid": "e99065f0_e249d483",
       "range": {
         "startLine": 155,
         "startChar": 8,
@@ -70,6 +141,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c19adf2a_f06703f1",
+        "filename": "lftools/git/templates/gitreview",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-02-23T17:37:50Z",
+      "side": 1,
+      "message": "Good point. I\u0027m already checking for that during init too. Fixed.",
+      "parentUuid": "95b52ee8_b9b089e7",
+      "range": {
+        "startLine": 5,
+        "startChar": 14,
+        "endLine": 5,
+        "endChar": 20
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6be09831_7cbd701b",
@@ -87,6 +182,24 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e27f0f5_0725e84f",
+        "filename": "lftools/git/templates/project.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-02-23T17:37:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6be09831_7cbd701b",
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9484cb2c_4dfbd8b1",
@@ -100,6 +213,30 @@
       "writtenOn": "2022-02-22T21:41:03Z",
       "side": 1,
       "message": "This is a real-world git URL. All the rest of the tests seem to be using gerrit.example.com for the FQDN. Is this intentional?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 61
+      },
+      "revId": "be8881bd9b02c1d5de5bada3c7f897b3ab1cf1dc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba3f3ad9_d027191f",
+        "filename": "tests/test_git.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-02-23T17:37:50Z",
+      "side": 1,
+      "message": "Yes, it\u0027s intentional (though admittedly not ideal). This was a major sticking point for me, because I really wanted to avoid using this method. But mocking everything out made the tests nearly useless, as they didn\u0027t really functionally test anything (since we\u0027re not really defining internal functionality, but a series of external git calls). And adding a static git repo to the fixtures was not only ugly (it\u0027s a lot of files, after all), but git really doesn\u0027t want to do it (by default, it will ignore a repo within a repo).\n\nSo after going pretty deep on both of those other methods, I found that this is the best option to really test that things are working. But everything is still mocked to fake values, because we\u0027re not actually interacting with the remote at all, other than the initial anonymous pull.",
+      "parentUuid": "9484cb2c_4dfbd8b1",
       "range": {
         "startLine": 33,
         "startChar": 0,
