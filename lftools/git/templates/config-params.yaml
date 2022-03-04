@@ -1,0 +1,3 @@
+---
+name: "{{ project_dashed }}"
+comment: "{{ project_dashed }}"

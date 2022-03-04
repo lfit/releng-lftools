@@ -184,6 +184,30 @@ def list_project_inherits_from(ctx, gerrit_fqdn, gerrit_project):
     log.info(data)
 
 
+@click.command(name="addmavenconfig")
+@click.argument("gerrit_fqdn")
+@click.argument("gerrit_project")
+@click.argument("jjbrepo")
+@click.option("--issue_id", type=str, required=False, help="For projects that enforce an issue id for changesets")
+@click.option("--nexus3", type=str, required=False, help="Specify a Nexus 3 server, e.g. nexus3.example.org")
+@click.option(
+    "--nexus3_ports",
+    type=str,
+    required=False,
+    help="Comma-separated list of ports supported by the Nexus 3 server specified",
+)
+@click.pass_context
+def addmavenconfig(ctx, gerrit_fqdn, gerrit_project, jjbrepo, issue_id, nexus3, nexus3_ports):
+    """Add maven config file for JCasC.
+
+    Example:
+    gerrit_url gerrit.o-ran-sc.org
+    gerrit_project test/test1
+    """
+    git = git_gerrit(fqdn=gerrit_fqdn, project=jjbrepo)
+    git.add_maven_config(gerrit_fqdn, gerrit_project, issue_id, nexus3, nexus3_ports)
+
+
 gerrit_cli.add_command(addinfojob)
 gerrit_cli.add_command(addfile)
 gerrit_cli.add_command(addgitreview)
@@ -193,3 +217,4 @@ gerrit_cli.add_command(abandonchanges)
 gerrit_cli.add_command(create_saml_group)
 gerrit_cli.add_command(list_project_permissions)
 gerrit_cli.add_command(list_project_inherits_from)
+gerrit_cli.add_command(addmavenconfig)
