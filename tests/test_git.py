@@ -9,6 +9,7 @@
 ##############################################################################
 """Test git command."""
 
+import configparser
 import os
 
 import pytest
@@ -117,3 +118,61 @@ defaultbranch=master"""
 
     Gerrit.add_file.assert_called_once_with(filepath, content)
     Gerrit.commit.assert_called_once_with(commit_msg, issue_id, push=True)
+
+
+@pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "git"))
+def test_add_maven_config(mock_init, datafiles, mocker):
+    fqdn = "gerrit.example.com"
+    gerrit_project = "project/subproject"
+    issue_id = "TEST-123"
+    commit_msg = "Chore: Automation adds project/subproject config files"
+
+    creds_path = "jenkins-config/managed-config-files/mavenSettings/project-subproject/serverCredentialMappings.yaml"
+    server_creds_content = """---
+serverCredentialMappings:
+  - serverId: "releases"
+    credentialsId: "project-subproject"
+  - serverId: "snapshots"
+    credentialsId: "project-subproject"
+  - serverId: "staging"
+    credentialsId: "project-subproject"
+  - serverId: "site"
+    credentialsId: "project-subproject\""""
+
+    get_setting_mock = mocker.patch("lftools.config.get_setting")
+    get_setting_mock.side_effect = configparser.NoOptionError(fqdn, "default_servers")
+    mocker.patch.object(Gerrit, "add_symlink")
+    mocker.patch.object(Gerrit, "add_file")
+    mocker.patch.object(Gerrit, "commit")
+
+    # Test 1 #
+    mock_init.add_maven_config(fqdn, gerrit_project, issue_id)
+    Gerrit.add_file.assert_called_with(creds_path, server_creds_content)
+    Gerrit.commit.assert_called_once_with(commit_msg, issue_id, push=True)
+
+    # Test 2 #
+    server_creds_content += """
+  - serverId: "nexus3.example.com:10001"
+    credentialsId: "project-subproject"
+  - serverId: "nexus3.example.com:10002"
+    credentialsId: "project-subproject\""""
+
+    mock_init.add_maven_config(fqdn, gerrit_project, issue_id, "nexus3.example.com", "10001,10002")
+    Gerrit.add_file.assert_called_with(creds_path, server_creds_content)
+
+    # Test 3 #
+    get_setting_mock = mocker.patch("lftools.config.get_setting")
+
+    def setting_response(*args, **kwargs):
+        if "additional_credentials" in args:
+            return '{"docker.io": "dockerhub-cred"}'
+        raise configparser.NoOptionError(fqdn, "default_servers")
+
+    get_setting_mock.side_effect = setting_response
+
+    server_creds_content += """
+  - serverId: "docker.io"
+    credentialsId: "dockerhub-cred\""""
+
+    mock_init.add_maven_config(fqdn, gerrit_project, issue_id, "nexus3.example.com", "10001,10002")
+    Gerrit.add_file.assert_called_with(creds_path, server_creds_content)
