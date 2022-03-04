@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    New method git.add_maven_config allows for adding settings files for new
+    projects via JCasC, rather than the old method of using a Groovy script to
+    manually add the file to Jenkins.
