@@ -10,9 +10,10 @@
 
 """Gerrit git interface."""
 
+import configparser
+import json
 import logging
 import os
-import shutil
 import tempfile
 import urllib
 
@@ -66,12 +67,6 @@ class Gerrit:
         default_ref = self.repo.git.rev_parse("origin/HEAD", abbrev_ref=True)
         self.default_branch = default_ref.split("/")[-1]
 
-    def __del__(self):
-        try:
-            shutil.rmtree(self.repo.working_tree_dir)
-        except FileNotFoundError:
-            log.info("Could not remove working directory {}".format(self.repo.working_tree_dir))
-
     def get_commit_hook(self, endpoint, working_dir):
         """Pulls in the Gerrit server's commit hook to add a changeId."""
         hook_url = urllib.parse.urljoin(endpoint, "tools/hooks/commit-msg")
@@ -92,17 +87,24 @@ class Gerrit:
             os.chmod(commit_msg_hook_path, 0o755)
 
     def add_file(self, filepath, content):
-        """Add a file to the current git repo.
-
-        Example:
-
-        local_path /tmp/INFO.yaml
-        file_path="somedir/example-INFO.yaml"
-        """
+        """Add a file to the current git repo."""
         if filepath.find("/") >= 0:
-            os.makedirs(os.path.split(filepath)[0])
+            try:
+                os.makedirs(os.path.split(filepath)[0])
+            except FileExistsError:
+                pass
         with open(filepath, "w") as newfile:
             newfile.write(content)
+        self.repo.git.add(filepath)
+
+    def add_symlink(self, filepath, target):
+        """Add a symlink to the current git repo."""
+        try:
+            os.symlink(target, filepath)
+        except FileExistsError:
+            if not os.path.islink(filepath):
+                log.error("{} exists and is not a symlink".format(filepath))
+                return
         self.repo.git.add(filepath)
 
     def commit(self, commit_msg, issue_id, push=False):
@@ -189,4 +191,78 @@ class Gerrit:
 
         self.add_file(filename, content)
         commit_msg = "Chore: Automation adds {}".format(filename)
+        self.commit(commit_msg, issue_id, push=True)
+
+    def add_maven_config(self, fqdn, gerrit_project, issue_id, nexus3_url="", nexus3_ports=""):
+        """Add the four required JCasC files to create settings for a new project."""
+        project_dashed = gerrit_project.replace("/", "-")
+        params_path = "config-params.yaml"
+        creds_path = "serverCredentialMappings.yaml"
+        content_path = "content"
+        sb_creds_path = "serverCredentialMappings.sandbox.yaml"
+        nexus3_ports = nexus3_ports.split(",")
+
+        try:
+            default_servers = config.get_setting(self.fqdn, "default_servers")
+            default_servers = default_servers.split(",")
+        except configparser.NoOptionError:
+            default_servers = ["releases", "snapshots", "staging", "site"]
+
+        additional_credentials = ""
+        try:
+            credential_json = config.get_setting(self.fqdn, "additional_credentials")
+            additional_credentials = json.loads(credential_json)
+        except configparser.NoOptionError:
+            log.debug("No additional credentials found")
+        except json.decoder.JSONDecodeError:
+            log.error(
+                'Improperly formatted JSON in "additional_credentials". '
+                + "Please ensure that all credentials are on a single line, and are not quoted."
+            )
+
+        if not nexus3_url:
+            try:
+                nexus3_url = config.get_setting(self.fqdn, "nexus3")
+            except configparser.NoOptionError:
+                pass  # If no url is passed in or present in lftools.ini, skip it.
+
+        if nexus3_url and not nexus3_ports:
+            try:
+                nexus3_ports = config.get_setting(self.fqdn, "nexus3_ports")
+                nexus3_ports = nexus3_ports.split(",")
+            except configparser.NoOptionError:
+                nexus3_ports = ["10001", "10002", "10003", "10004"]
+
+        jinja_env = Environment(loader=PackageLoader("lftools.git"), autoescape=select_autoescape())
+        template = jinja_env.get_template(params_path)
+        config_params_content = template.render(project_dashed=project_dashed)
+        log.debug("config-params.yaml contents:\n{}".format(config_params_content))
+
+        template = jinja_env.get_template(creds_path)
+        server_creds_content = template.render(
+            project_dashed=project_dashed,
+            default_servers=default_servers,
+            nexus3_url=nexus3_url,
+            nexus3_ports=nexus3_ports,
+            additional_credentials=additional_credentials,
+        )
+        log.debug("config-params.yaml contents:\n{}".format(server_creds_content))
+
+        config_path = "jenkins-config/managed-config-files/mavenSettings/{}".format(project_dashed)
+        try:
+            os.makedirs(config_path)
+        except FileExistsError:
+            pass
+
+        self.add_symlink(
+            os.path.join(config_path, content_path), "../../../managed-config-templates/mavenSettings-content"
+        )
+        self.add_symlink(
+            os.path.join(config_path, sb_creds_path),
+            "../../../managed-config-templates/mavenSettings-serverCredentialMappings.sandbox.yaml",
+        )
+        self.add_file(os.path.join(config_path, params_path), config_params_content)
+        self.add_file(os.path.join(config_path, creds_path), server_creds_content)
+
+        commit_msg = "Chore: Automation adds {} config files".format(gerrit_project)
         self.commit(commit_msg, issue_id, push=True)

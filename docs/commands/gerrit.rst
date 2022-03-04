@@ -81,3 +81,23 @@ addinfojob
      username = lfid2
      password = password2
      signed_off_by = Your Name <your@email.org>
+
+addmavenconfig
+--------------
+.. program-output:: lftools gerrit addmavenconfig --help
+
+
+An example of the lftools.ini entry for a Gerrit server making use of a full
+configuration:
+
+.. code-block:: none
+
+     [gerrit.example.org]
+     username = lfid
+     password = password
+     signed_off_by = Your Name <your@email.org>
+     endpoint = https://gerrit.example.org/
+     default_servers = releases,snapshots,staging,site
+     nexus3 = nexus3.example.org
+     nexus3_ports = 10001,10002,10003,10004
+     additional_credentials = {"docker.io": "dockerhub-cred", "nexus-iq": "nexus-iq-cred"}
