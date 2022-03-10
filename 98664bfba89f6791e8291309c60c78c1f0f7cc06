@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73c16a52_46ae6fd4",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-03-10T18:56:13Z",
+      "side": 1,
+      "message": "This needs clarification that the JSON string needs to be a single line non-quoted string since it\u0027s coming from an INI file",
+      "revId": "98664bfba89f6791e8291309c60c78c1f0f7cc06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0daa603a_8af3e6a6",
+        "filename": "lftools/git/gerrit.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-03-10T18:56:13Z",
+      "side": 1,
+      "message": "must be single line non-quoted in config file\n\nReword to make sense",
+      "range": {
+        "startLine": 218,
+        "startChar": 76,
+        "endLine": 218,
+        "endChar": 77
+      },
+      "revId": "98664bfba89f6791e8291309c60c78c1f0f7cc06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
