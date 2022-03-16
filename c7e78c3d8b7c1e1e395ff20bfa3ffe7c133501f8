@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c93b45_f4383441",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "This is only used in \"start_point\" (which should probably be named \"main\"), so you can move it there rather than having it as a global. Or it should be properly utilized as a global and not passed into the functions that work with it.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 80
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b25dc1_a7360c29",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "This is only used in fetch_last_run_timestamp. It can be moved there.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 40
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "644acb41_d04d816a",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "Global variables should be all UPPER_CASE named. And possibly used more judiciously.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 19
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b97ef108_136506d5",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "def_s3_bucket_name doesn\u0027t need to be a global. Or even a variable. It can just be assigned to the bucket name if it\u0027s empty in start_point.\ns3_bucket_name also doesn\u0027t need to be global. Just define it in start_point, and pass it to the other functions that use it.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 19
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d8d1a74_45292a75",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "This is a very odd use of a class. It should probably just be a function that returns either a dict or tuple.\n\nEither way, it needs top-level documentation.",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 74
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e5338fb_fb680b60",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "Looks like there was a find/replace that deleted the word \"pull\" in some awkward places. Please check all of these.",
+      "range": {
+        "startLine": 392,
+        "startChar": 4,
+        "endLine": 392,
+        "endChar": 73
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d51db7_2380c539",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "\"pull\" deleted.",
+      "range": {
+        "startLine": 404,
+        "startChar": 4,
+        "endLine": 404,
+        "endChar": 46
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47cefe7b_e34423e3",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "I don\u0027t believe pushes are rate limited. If we don\u0027t need to check res, this could probably just be reverted to what it was before.",
+      "range": {
+        "startLine": 540,
+        "startChar": 28,
+        "endLine": 545,
+        "endChar": 67
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b107c4_40f369f4",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "\"pull\" deleted.",
+      "range": {
+        "startLine": 751,
+        "startChar": 4,
+        "endLine": 751,
+        "endChar": 32
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63d7f6dc_e0829a06",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "\"pull\" deleted.",
+      "range": {
+        "startLine": 765,
+        "startChar": 4,
+        "endLine": 765,
+        "endChar": 41
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5394934f_e70cbc7d",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "If this is the only place that AnonymousThrottlingStatus is used, why not just have this do the work of AnonymousThrottlingStatus, and then print the results? Then you wouldn\u0027t need to have a separate function and worry about what the return values are.",
+      "range": {
+        "startLine": 1020,
+        "startChar": 0,
+        "endLine": 1023,
+        "endChar": 115
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42c3382b_b0140059",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "Regarding my comments on having s3_bucket_name and def_s3_bucket_name as local vars, I think this block should look something like this:\n    # in_s3_bucket_name should just be s3_bucket_name, since there\u0027s no longer a global\n    # with that name\n    if not s3_bucket_name:\n        s3_bucket_name \u003d \"onap-dockerhub-release-logs-bucket\"",
+      "range": {
+        "startLine": 1040,
+        "startChar": 4,
+        "endLine": 1043,
+        "endChar": 43
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "675655b9_4af2a191",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "Shouldn\u0027t all this (lines 1040-1048) be under an \"if USE_S3_BUCKET:\" check? That would also remove the need to check that var in the s3 bucket methods.",
+      "range": {
+        "startLine": 1040,
+        "startChar": 4,
+        "endLine": 1048,
+        "endChar": 68
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f509f0b3_365477c9",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "Again, shouldn\u0027t this be limited to \"if USE_S3_BUCKET:\"?",
+      "range": {
+        "startLine": 1092,
+        "startChar": 4,
+        "endLine": 1095,
+        "endChar": 36
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54391936_f7068c08",
+        "filename": "tests/test_release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-16T22:25:52Z",
+      "side": 1,
+      "message": "What\u0027s the issue with checking this?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 74
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
