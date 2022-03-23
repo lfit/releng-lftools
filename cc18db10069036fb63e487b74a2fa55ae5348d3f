@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18e2e77a_2015742e",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 871,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "Don\u0027t need to pass globals into functions.",
+      "range": {
+        "startLine": 871,
+        "startChar": 35,
+        "endLine": 871,
+        "endChar": 59
+      },
+      "revId": "cc18db10069036fb63e487b74a2fa55ae5348d3f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82cdd13c_e7a1fdab",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "The preferable way to do this would be:\n    limit, remaining \u003d AnonymousThrottlingStatus()\n    log.info(\"Anonymous dockerhub throttling limit\u003d{}, remaining now {}.\".format(limit, remaining))",
+      "range": {
+        "startLine": 1019,
+        "startChar": 4,
+        "endLine": 1020,
+        "endChar": 103
+      },
+      "revId": "cc18db10069036fb63e487b74a2fa55ae5348d3f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}

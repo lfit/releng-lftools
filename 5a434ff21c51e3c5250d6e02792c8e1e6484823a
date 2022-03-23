@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7478928a_d194d8d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "Sorry my comments are on an older patch; I started them earlier today. But everything I\u0027m posting applies to the current patch as well.",
+      "revId": "5a434ff21c51e3c5250d6e02792c8e1e6484823a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}

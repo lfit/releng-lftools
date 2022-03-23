@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99aa83b9_07fe6433",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "Unit tests can overwrite whatever they need to. If it\u0027s something that\u0027s frequently going to be changed, it\u0027s reasonable to have it as a global, but if you expect this to be its permanent value and you just MIGHT consider changing it some time in the future, that\u0027s not a great reason to have it as a global.",
+      "parentUuid": "ec0331af_a9b16ff7",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 80
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46b25dc1_a7360c29",
         "filename": "lftools/nexus/release_docker_hub.py",
         "patchSetId": 21
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Used in store_timestamp_to_last_run-file also :(",
       "parentUuid": "46b25dc1_a7360c29",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 40
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b3fa9f_55d0060c",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "NO_TIMESTAMP_STR is only used in fetch_last_run_timestamp.",
+      "parentUuid": "c37382c4_c1f865de",
       "range": {
         "startLine": 84,
         "startChar": 0,
@@ -508,6 +556,30 @@
       "side": 1,
       "message": "Good point, \nbut I think I prefere to have a separate calculating the throttling status method, to keep the printout method simple.\nI changed from class to method though",
       "parentUuid": "5394934f_e70cbc7d",
+      "range": {
+        "startLine": 1020,
+        "startChar": 0,
+        "endLine": 1023,
+        "endChar": 115
+      },
+      "revId": "c7e78c3d8b7c1e1e395ff20bfa3ffe7c133501f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d037017b_a114bdbb",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd1f70ac_d39f8d49",
       "range": {
         "startLine": 1020,
         "startChar": 0,

@@ -16,6 +16,190 @@
       "message": "Feedback is great, just put -1 to ensure it is not merged quite yet.",
       "revId": "48aa4d56d401dda7e67372783ec29b050b523d76",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb96c2d0_56a3d50d",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "Your find/replace for projects-\u003ePROJECTS replaced these instances of \"projects\", which should actually be lower case.",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 37,
+        "endChar": 41
+      },
+      "revId": "48aa4d56d401dda7e67372783ec29b050b523d76",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf36f99a_9fad87be",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "This comment should probably be a bit more general, e.g. \"Sleep half a second to avoid request throttling\".",
+      "range": {
+        "startLine": 351,
+        "startChar": 16,
+        "endLine": 351,
+        "endChar": 107
+      },
+      "revId": "48aa4d56d401dda7e67372783ec29b050b523d76",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4beeccb0_6b7ae048",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "*too fast, versus too many too fast.",
+      "range": {
+        "startLine": 364,
+        "startChar": 47,
+        "endLine": 364,
+        "endChar": 79
+      },
+      "revId": "48aa4d56d401dda7e67372783ec29b050b523d76",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1200c4_c6fbf068",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "PROJECTS-\u003eprojects",
+      "range": {
+        "startLine": 611,
+        "startChar": 57,
+        "endLine": 611,
+        "endChar": 65
+      },
+      "revId": "48aa4d56d401dda7e67372783ec29b050b523d76",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d31472_8d525bcf",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "PROJECTS-\u003eprojects",
+      "range": {
+        "startLine": 649,
+        "startChar": 55,
+        "endLine": 649,
+        "endChar": 63
+      },
+      "revId": "48aa4d56d401dda7e67372783ec29b050b523d76",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fc97b17_a462bc59",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "PROJECTS-\u003eprojects",
+      "range": {
+        "startLine": 669,
+        "startChar": 25,
+        "endLine": 669,
+        "endChar": 33
+      },
+      "revId": "48aa4d56d401dda7e67372783ec29b050b523d76",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03b748f_962cdf93",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "PROJECTS-\u003eprojects",
+      "range": {
+        "startLine": 700,
+        "startChar": 69,
+        "endLine": 700,
+        "endChar": 77
+      },
+      "revId": "48aa4d56d401dda7e67372783ec29b050b523d76",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc01b4e3_972fcccd",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-23T04:51:25Z",
+      "side": 1,
+      "message": "PROJECTS-\u003eprojects",
+      "range": {
+        "startLine": 705,
+        "startChar": 57,
+        "endLine": 705,
+        "endChar": 65
+      },
+      "revId": "48aa4d56d401dda7e67372783ec29b050b523d76",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
