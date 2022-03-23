@@ -18,6 +18,24 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b08e23f_01aba130",
+        "filename": "lftools/cli/gerrit.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-03-23T20:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73c16a52_46ae6fd4",
+      "revId": "98664bfba89f6791e8291309c60c78c1f0f7cc06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0daa603a_8af3e6a6",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-03-10T18:56:13Z",
       "side": 1,
       "message": "must be single line non-quoted in config file\n\nReword to make sense",
+      "range": {
+        "startLine": 218,
+        "startChar": 76,
+        "endLine": 218,
+        "endChar": 77
+      },
+      "revId": "98664bfba89f6791e8291309c60c78c1f0f7cc06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49dcab55_48a40522",
+        "filename": "lftools/git/gerrit.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-03-23T20:14:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0daa603a_8af3e6a6",
       "range": {
         "startLine": 218,
         "startChar": 76,
