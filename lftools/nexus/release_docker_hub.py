@@ -46,6 +46,7 @@ import os
 import re
 import socket
 from multiprocessing.dummy import Pool as ThreadPool
+from time import sleep
 
 import docker
 import requests
@@ -305,6 +306,7 @@ class DockerTagClass(TagClass):
         while retries < 20:
             try:
                 r = _request_get(self._docker_base + "/" + combined_repo_name + "/tags")
+                sleep(0.5)
                 break
             except requests.HTTPError as excinfo:
                 log.debug("Fetching Docker Hub tags. {}".format(excinfo))
@@ -314,6 +316,11 @@ class DockerTagClass(TagClass):
                     return
 
         log.debug("r.status_code = {}, ok={}".format(r.status_code, r.status_code == requests.codes.ok))
+        if r.status_code == 429:
+            # Speed throttling in effect. Cancel program
+            raise requests.HTTPError(
+                "Speed throttling in effect. To fast accessing dockerhub for tags.\n {}".format(r.text)
+            )
         if r.status_code == requests.codes.ok:
             raw_tags = r.text
             raw_tags = raw_tags.replace("}]", "")
