@@ -306,8 +306,16 @@ class DockerTagClass(TagClass):
         while retries < 20:
             try:
                 r = _request_get(self._docker_base + "/" + combined_repo_name + "/tags")
-                sleep(0.5)
-                break
+                if r.status_code == 429:
+                    # Docker returns 429 if we access it too fast to many times.
+                    # If it happends, delay 60 seconds, and try again, up to 19 times.
+                    log.debug(
+                        "To many docker gets to fast, wait 1 min - try {} - repo {}".format(retries, combined_repo_name)
+                    )
+                    sleep(60)
+                    retries = retries + 1
+                else:
+                    break
             except requests.HTTPError as excinfo:
                 log.debug("Fetching Docker Hub tags. {}".format(excinfo))
                 retries = retries + 1
