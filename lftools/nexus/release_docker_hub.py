@@ -45,8 +45,8 @@ import multiprocessing
 import os
 import re
 import socket
+import time
 from multiprocessing.dummy import Pool as ThreadPool
-from time import sleep
 
 import docker
 import requests
@@ -306,8 +306,16 @@ class DockerTagClass(TagClass):
         while retries < 20:
             try:
                 r = _request_get(self._docker_base + "/" + combined_repo_name + "/tags")
-                sleep(0.5)
-                break
+                if r.status_code == 429:
+                    # Docker returns 429 if we access it too fast too many times.
+                    # If it happends, delay 60 seconds, and try again, up to 19 times.
+                    log.debug(
+                        "Too many docker gets too fast, wait 1 min: {}, repo {}".format(retries, combined_repo_name)
+                    )
+                    time.sleep(60)
+                    retries = retries + 1
+                else:
+                    break
             except requests.HTTPError as excinfo:
                 log.debug("Fetching Docker Hub tags. {}".format(excinfo))
                 retries = retries + 1

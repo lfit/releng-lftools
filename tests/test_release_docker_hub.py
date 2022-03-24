@@ -103,6 +103,40 @@ def test_docker_tag_class(responses):
     assert len(test_tags.invalid) == len(answer_invalid_tags)
 
 
+def test_docker_tag_err_429_class(responses, mocker):
+    """Test DockerTagClass"""
+    mocker.patch("time.sleep", return_value=None)
+    org = "onap"
+    repo = "base-sdc-sanity"
+    repo_from_file = False
+    url = "https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags"
+    answer = """[{"layer": "", "name": "latest"},
+        {"layer": "", "name": "1.3.0"},
+        {"layer": "", "name": "1.3.1"},
+        {"layer": "", "name": "1.4.0"},
+        {"layer": "", "name": "1.4.1"},
+        {"layer": "", "name": "v1.0.0"}]
+    """
+    answer_429 = '{"detail": "Rate limit exceeded", "error": false}"'
+    answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1"]
+    answer_invalid_tags = ["latest", "v1.0.0"]
+    rdh.initialize(org)
+
+    # Do 19 failed and next one should work
+    for k in range(19):
+        responses.add(responses.GET, url, body=answer_429, status=429)
+    responses.add(responses.GET, url, body=answer, status=200)
+    test_tags = rdh.DockerTagClass(org, repo, repo_from_file)
+    assert len(test_tags.valid) == len(answer_valid_tags)
+    assert len(test_tags.invalid) == len(answer_invalid_tags)
+
+    # Do 20 failed, and all failes
+    for k in range(20):
+        responses.add(responses.GET, url, body=answer_429, status=429)
+    with pytest.raises(requests.HTTPError):
+        test_tags = rdh.DockerTagClass(org, repo, repo_from_file)
+
+
 def test_tag_class_repository_exist():
     """Test TagClass"""
     org = "onap"
