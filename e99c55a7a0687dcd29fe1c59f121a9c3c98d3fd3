@@ -16,6 +16,23 @@
       "message": "recheck",
       "revId": "e99c55a7a0687dcd29fe1c59f121a9c3c98d3fd3",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd1c3d07_7b20915f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2022-03-25T00:01:58Z",
+      "side": 1,
+      "message": "This seems like a big jump, from 0.5 seconds to 60. Is there a reason for increasing the wait 120x?\n\nAlso, to unit test functions that include a sleep without actually waiting, you can patch the sleep function to no-op. See my change here: https://gerrit.linuxfoundation.org/infra/c/releng/lftools/+/69720/3/tests/test_nexus.py",
+      "revId": "e99c55a7a0687dcd29fe1c59f121a9c3c98d3fd3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
