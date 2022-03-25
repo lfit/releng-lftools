@@ -33,6 +33,24 @@
       "message": "This seems like a big jump, from 0.5 seconds to 60. Is there a reason for increasing the wait 120x?\n\nAlso, to unit test functions that include a sleep without actually waiting, you can patch the sleep function to no-op. See my change here: https://gerrit.linuxfoundation.org/infra/c/releng/lftools/+/69720/3/tests/test_nexus.py",
       "revId": "e99c55a7a0687dcd29fe1c59f121a9c3c98d3fd3",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc420f8_0befbd45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-03-25T00:23:45Z",
+      "side": 1,
+      "message": "Ah, true, Ok, I will add some unit tests for it.\nI started with 1 second, but it retried so many times until it failed\nWent to 15 seconds and it has a number of retries.\nAt 30 or so, just a few retries, so decided to play it safe and went with 60.\nThis delay is only when the error 429 appears, so when I tested it only waits about 2 times. The previous fix I had waited 0.5 seconds after every get. Thjis worked fine for 5 days at my laptop, until the other day :(\nDon\u0027t know what treshhold dockerhub has for normal get access, the only throttling thing I found was in regards to pull\u0027s, which is what I originally thought caused my issues.",
+      "parentUuid": "cd1c3d07_7b20915f",
+      "revId": "e99c55a7a0687dcd29fe1c59f121a9c3c98d3fd3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
