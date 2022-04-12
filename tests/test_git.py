@@ -35,7 +35,12 @@ def mock_init(mocker, datafiles):
     ciman_dir = os.path.join(str(datafiles), "ci-management")
     os.makedirs(ciman_dir)
     os.chdir(ciman_dir)
-    Repo.clone_from(remote, ciman_dir)
+    try:
+        Repo.clone_from(remote, ciman_dir)
+    except Exception as ex:
+        print(ex)
+        pytest.skip("Could not reach gerrit.acumos.org")
+        return None
     Repo.init(ciman_dir)
 
     mocker.patch("tempfile.mkdtemp", return_value=ciman_dir)
@@ -53,6 +58,9 @@ def mock_init(mocker, datafiles):
 
 @pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "git"))
 def test_get_commit_hook(mock_init, responses, datafiles):
+    if not mock_init:
+        pytest.skip("Could not reach gerrit.acumos.org")
+        return
     os.chdir(str(datafiles))
     ciman_dir = os.path.join(str(datafiles), "ci-management")
     hook_url = "http://gerrit.example.com/tools/hooks/commit-msg"
@@ -66,6 +74,9 @@ def test_get_commit_hook(mock_init, responses, datafiles):
 
 @pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "git"))
 def test_add_info_job(mock_init, datafiles, mocker):
+    if not mock_init:
+        pytest.skip("Could not reach gerrit.acumos.org")
+        return
     fqdn = "gerrit.example.com"
     gerrit_project = "project/subproject"
     issue_id = "TEST-123"
@@ -99,6 +110,9 @@ project:
 
 @pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "git"))
 def test_add_git_review(mock_init, datafiles, mocker):
+    if not mock_init:
+        pytest.skip("Could not reach gerrit.acumos.org")
+        return
     fqdn = "gerrit.example.com"
     gerrit_project = "project/subproject"
     issue_id = "TEST-123"
@@ -122,6 +136,9 @@ defaultbranch=master"""
 
 @pytest.mark.datafiles(os.path.join(FIXTURE_DIR, "git"))
 def test_add_maven_config(mock_init, datafiles, mocker):
+    if not mock_init:
+        pytest.skip("Could not reach gerrit.acumos.org")
+        return
     fqdn = "gerrit.example.com"
     gerrit_project = "project/subproject"
     issue_id = "TEST-123"
