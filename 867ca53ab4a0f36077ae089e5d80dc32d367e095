@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b1307d8_f0028b3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-04-12T13:44:43Z",
+      "side": 1,
+      "message": "First attempt on not failing tox if gerrit.acumos.org is not available",
+      "revId": "867ca53ab4a0f36077ae089e5d80dc32d367e095",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
