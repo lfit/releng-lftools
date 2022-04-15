@@ -181,7 +181,7 @@ class Gerrit:
         gerrit_project test/test1
         issue_id: CIMAN-33
         """
-        gerrit_api.sanity_check(self.fqdn, gerrit_project)
+        gerrit_api.sanity_check(None, self.fqdn, gerrit_project)
         filename = ".gitreview"
 
         jinja_env = Environment(loader=PackageLoader("lftools.git"), autoescape=select_autoescape())

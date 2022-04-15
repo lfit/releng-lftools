@@ -84,13 +84,13 @@ def test_add_info_job(mock_init, datafiles, mocker):
     commit_msg = "Chore: Automation adds project-subproject.yaml"
     filepath = os.path.join(mock_init.repo.working_tree_dir, "jjb/project-subproject/project-subproject.yaml")
     content = """---
-project:
+- project:
     name: project-subproject-project-view
     project-name: project-subproject
     views:
       - project-view
 
-project:
+- project:
     name: project-subproject-info
     project: project/subproject
     project-name: project-subproject

@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Fix template for INFO jobs and a bad call to sanity_check in git.gerrit.
