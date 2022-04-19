@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ba70751_6ede74fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-04-19T23:32:29Z",
+      "side": 1,
+      "message": "Please reflow this. Gerrit shows it weird in the main page because \u0027useful\u0027 is 2 characters longer than it should be",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "925ad88f21d8a77bee8ca0a5e27c2ded74050883",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
