@@ -100,6 +100,36 @@ for (c in creds) {
 
 
 @click.command()
+@click.pass_context
+def get_private_keys(ctx):
+    """Print all available SSH User Private Keys."""
+    jenkins = ctx.obj["jenkins"]
+    groovy_script = """
+import com.cloudbees.plugins.credentials.*
+import com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey
+
+println "Printing all SSH User Private keys ..."
+def creds = com.cloudbees.plugins.credentials.CredentialsProvider.lookupCredentials(
+    com.cloudbees.plugins.credentials.Credentials.class,
+    Jenkins.instance,
+    null,
+    null
+);
+
+for (c in creds) {
+    if(c instanceof BasicSSHUserPrivateKey) {
+        println("SSH Private key ID: " + c.getId())
+        println("SSH User name: " + c.getUsername())
+        println("SSH Private key passphrase: " + c.getPassphrase())
+        println("SSH Private key: " + c.getPrivateKey())
+    }
+}
+"""
+    result = jenkins.server.run_script(groovy_script)
+    log.info(result)
+
+
+@click.command()
 @click.argument("groovy_file")
 @click.pass_context
 def groovy(ctx, groovy_file):
@@ -206,6 +236,7 @@ jenkins_cli.add_command(nodes)
 jenkins_cli.add_command(builds)
 jenkins_cli.add_command(get_credentials, name="get-credentials")
 jenkins_cli.add_command(get_secrets, name="get-secrets")
+jenkins_cli.add_command(get_private_keys, name="get-private-keys")
 jenkins_cli.add_command(groovy)
 jenkins_cli.add_command(jobs)
 jenkins_cli.add_command(quiet_down, name="quiet-down")
