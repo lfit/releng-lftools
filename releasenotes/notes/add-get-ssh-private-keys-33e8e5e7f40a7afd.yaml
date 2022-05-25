@@ -1,0 +1,7 @@
+---
+features:
+  - |
+    Add ``get-private-keys`` to lftools.jenkins.
+    ``get-private-keys`` retrives the private keys and passphrases stored in
+    the credential store. This feature will add the command ``get-private-keys``
+    in order to print these as well.
