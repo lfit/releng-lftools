@@ -33,6 +33,23 @@
       "message": "recheck",
       "revId": "5f05f266774fec4cf4fdc0481027c56e2b8b5a04",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06bd317_58406d4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2022-07-11T09:43:46Z",
+      "side": 1,
+      "message": "Not sure what to make of this?\nAnil, does this need a tweak to pass/validate?",
+      "revId": "5f05f266774fec4cf4fdc0481027c56e2b8b5a04",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
