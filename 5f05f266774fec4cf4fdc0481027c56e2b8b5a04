@@ -67,6 +67,24 @@
       "message": "https://github.com/csuhan/ReDet/issues/14\n\n\n    Try Python\u003e\u003d3.7\n    For Python\u003c\u003d3.6, you need:\n\ngit clone -b legacy_py3.6 https://github.com/QUVA-Lab/e2cnn.git\ncd e2cnn\npython setup.py install\n",
       "revId": "5f05f266774fec4cf4fdc0481027c56e2b8b5a04",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee0d15ef_1c9b60e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2022-07-11T22:18:21Z",
+      "side": 1,
+      "message": "Matt, Some of the older images have multiple versions of python installed (includes 3.6, 3.7 and 3.8 ....) We need to use {update-}alternatives cmd to set the python version to 3.8, at the start of the job. There is a similar script in global-jjb that sets the java/jdk version and we need do something similar.\n\nDon\u0027t have the cycles atm, if anyone wants to pick this up would be nice.",
+      "parentUuid": "c06bd317_58406d4f",
+      "revId": "5f05f266774fec4cf4fdc0481027c56e2b8b5a04",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
