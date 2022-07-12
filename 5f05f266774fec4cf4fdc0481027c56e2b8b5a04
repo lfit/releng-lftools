@@ -85,6 +85,24 @@
       "parentUuid": "c06bd317_58406d4f",
       "revId": "5f05f266774fec4cf4fdc0481027c56e2b8b5a04",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f1d927a_f05a0341",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2022-07-12T03:22:44Z",
+      "side": 1,
+      "message": "Bengt: python3.6 is EOL",
+      "parentUuid": "3953184b_b15811bc",
+      "revId": "5f05f266774fec4cf4fdc0481027c56e2b8b5a04",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
