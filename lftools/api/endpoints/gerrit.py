@@ -377,27 +377,21 @@ class Gerrit(client.RestApi):
         --description="This is a demo project"
 
         """
-        gerrit_project = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
+        gerrit_project = urllib.parse.quote(gerrit_project, encoding=None, errors=None)
 
-        access_str = "projects/{}".format(gerrit_project)
-
+        access_str = "projects/?query=name:{}".format(gerrit_project)
         result = self.get(access_str)[0]
-        if result.status_code == 404:
-            log.info(result)
-            log.info("Project not found.")
-            projectexists = False
+        jsonText = result.text.replace(")]}'\n", "").strip()
 
-        elif result.status_code == 401:
+        try:
+            resultsDict = json.loads(jsonText)
+        except json.decoder.JSONDecodeError:
             log.info(result)
-            log.info("Unauthorized.")
-            exit(1)
+            log.info("A problem was encountered while querying the Gerrit API.")
+            log.debug(result.text)
+            exit(result.status_code)
 
-        else:
-            log.info("found {}".format(access_str))
-            log.info(result)
-            projectexists = True
-
-        if projectexists:
+        if resultsDict:
             log.info("Project already exists")
             exit(1)
         if check:
