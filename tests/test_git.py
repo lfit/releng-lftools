@@ -14,7 +14,7 @@ import os
 
 import pytest
 
-from lftools.git.gerrit import Gerrit, Repo, gerrit_api
+from lftools.git.gerrit import Gerrit, Repo
 
 FIXTURE_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "fixtures")
 
@@ -126,7 +126,6 @@ defaultbranch=master"""
 
     mocker.patch.object(Gerrit, "add_file")
     mocker.patch.object(Gerrit, "commit")
-    mocker.patch.object(gerrit_api, "sanity_check")
 
     mock_init.add_git_review(fqdn, gerrit_project, issue_id)
 

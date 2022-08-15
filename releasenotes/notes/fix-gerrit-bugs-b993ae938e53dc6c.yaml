@@ -1,0 +1,10 @@
+---
+fixes:
+  - |
+    Only attempt to split nexus3_ports after we've checked that they exist, and
+    wrap that attempt in a try/except so that bad ports won't break other parts
+    of the job.
+  - |
+    Remove all instances of the gerrit_api.sanity_check function. This is too
+    tightly coupled with other parts of the Gerrit API, and does not perform
+    correctly in the git class.

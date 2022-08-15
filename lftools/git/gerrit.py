@@ -22,7 +22,6 @@ from git import Repo
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from lftools import config
-from lftools.api.endpoints.gerrit import Gerrit as gerrit_api
 
 log = logging.getLogger(__name__)
 
@@ -181,7 +180,6 @@ class Gerrit:
         gerrit_project test/test1
         issue_id: CIMAN-33
         """
-        gerrit_api.sanity_check(None, self.fqdn, gerrit_project)
         filename = ".gitreview"
 
         jinja_env = Environment(loader=PackageLoader("lftools.git"), autoescape=select_autoescape())
@@ -200,7 +198,6 @@ class Gerrit:
         creds_path = "serverCredentialMappings.yaml"
         content_path = "content"
         sb_creds_path = "serverCredentialMappings.sandbox.yaml"
-        nexus3_ports = nexus3_ports.split(",")
 
         try:
             default_servers = config.get_setting(self.fqdn, "default_servers")
@@ -232,6 +229,11 @@ class Gerrit:
                 nexus3_ports = nexus3_ports.split(",")
             except configparser.NoOptionError:
                 nexus3_ports = ["10001", "10002", "10003", "10004"]
+        elif nexus3_ports:
+            try:
+                nexus3_ports = nexus3_ports.split(",")
+            except AttributeError:
+                log.error("Invalid nexus3_ports designated.")
 
         jinja_env = Environment(loader=PackageLoader("lftools.git"), autoescape=select_autoescape())
         template = jinja_env.get_template(params_path)
