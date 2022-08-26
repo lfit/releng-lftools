@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Code refactored to pass MyPy validation. MyPy highlighted a few issues with
+    functional definitions that were overwriting each other in the command
+    subsystem but was not because of how it operates they weren't discovered.

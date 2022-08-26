@@ -56,7 +56,7 @@ def image(ctx):
     ),
 )
 @click.pass_context
-def cleanup(ctx, days, hide_public, ci_managed, clouds):
+def image_cleanup(ctx, days, hide_public, ci_managed, clouds):
     """Cleanup old images."""
     os_image.cleanup(ctx.obj["os_cloud"], ci_managed=ci_managed, days=days, hide_public=hide_public, clouds=clouds)
 
@@ -68,7 +68,7 @@ def cleanup(ctx, days, hide_public, ci_managed, clouds):
 @click.option("--days", type=int, default=0, help="Find images older than or equal to days.")
 @click.option("--hide-public", type=bool, default=False, help="Ignore public images.")
 @click.pass_context
-def list(ctx, days, hide_public, ci_managed):
+def image_list(ctx, days, hide_public, ci_managed):
     """List cloud images."""
     os_image.list(ctx.obj["os_cloud"], ci_managed=ci_managed, days=days, hide_public=hide_public)
 
@@ -103,8 +103,8 @@ def upload(ctx, image, name, disk_format):
     os_image.upload(ctx.obj["os_cloud"], image, name, disk_format)
 
 
-image.add_command(cleanup)
-image.add_command(list)
+image.add_command(image_cleanup, "cleanup")
+image.add_command(image_list, "list")
 image.add_command(share)
 image.add_command(upload)
 
@@ -133,10 +133,10 @@ def server(ctx):
     pass
 
 
-@click.command()
+@click.command(name="cleanup")
 @click.option("--days", type=int, default=0, help="Find servers older than or equal to days.")
 @click.pass_context
-def cleanup(ctx, days):
+def server_cleanup(ctx, days):
     """Cleanup old servers."""
     os_server.cleanup(ctx.obj["os_cloud"], days=days)
 
@@ -144,7 +144,7 @@ def cleanup(ctx, days):
 @click.command()
 @click.option("--days", type=int, default=0, help="Find servers older than or equal to days.")
 @click.pass_context
-def list(ctx, days):
+def server_list(ctx, days):
     """List cloud servers."""
     os_server.list(ctx.obj["os_cloud"], days=days)
 
@@ -153,14 +153,14 @@ def list(ctx, days):
 @click.argument("server")
 @click.option("--minutes", type=int, default=0, help="Delete server if older than x minutes.")
 @click.pass_context
-def remove(ctx, server, minutes):
+def server_remove(ctx, server, minutes):
     """Remove servers."""
     os_server.remove(ctx.obj["os_cloud"], server_name=server, minutes=minutes)
 
 
-server.add_command(cleanup)
-server.add_command(list)
-server.add_command(remove)
+server.add_command(server_cleanup, "cleanup")
+server.add_command(server_list, "list")
+server.add_command(server_remove, "remove")
 
 
 @openstack.group()
@@ -229,7 +229,7 @@ def volume(ctx):
 @click.command()
 @click.option("--days", type=int, default=0, help="Find volumes older than or equal to days.")
 @click.pass_context
-def cleanup(ctx, days):
+def volume_cleanup(ctx, days):
     """Cleanup old volumes."""
     os_volume.cleanup(ctx.obj["os_cloud"], days=days)
 
@@ -237,7 +237,7 @@ def cleanup(ctx, days):
 @click.command()
 @click.option("--days", type=int, default=0, help="Find volumes older than or equal to days.")
 @click.pass_context
-def list(ctx, days):
+def volume_list(ctx, days):
     """List cloud volumes."""
     os_volume.list(ctx.obj["os_cloud"], days=days)
 
@@ -246,11 +246,11 @@ def list(ctx, days):
 @click.argument("volume_id")
 @click.option("--minutes", type=int, default=0, help="Delete volumes if older than x minutes.")
 @click.pass_context
-def remove(ctx, volume_id, minutes):
+def volume_remove(ctx, volume_id, minutes):
     """Remove volumes."""
     os_volume.remove(ctx.obj["os_cloud"], volume_id=volume_id, minutes=minutes)
 
 
-volume.add_command(cleanup)
-volume.add_command(list)
-volume.add_command(remove)
+volume.add_command(volume_cleanup, "cleanup")
+volume.add_command(volume_list, "list")
+volume.add_command(volume_remove, "remove")
