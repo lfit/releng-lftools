@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23500170_1b5e21eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 577
+      },
+      "writtenOn": "2022-08-26T20:01:48Z",
+      "side": 1,
+      "message": "I\u0027ve seen that some changes on this repo have release notes, it doesn\u0027t seem a consistent practice so I wonder if it is required for this case",
+      "revId": "df799ab0f6c441b5b95945421b2300a428d6541e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
