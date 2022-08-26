@@ -103,6 +103,24 @@
       "parentUuid": "3953184b_b15811bc",
       "revId": "5f05f266774fec4cf4fdc0481027c56e2b8b5a04",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd304216_33b9a542",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-26T20:08:27Z",
+      "side": 1,
+      "message": "I\u0027ve fixed with with the merge of Iffaf00c6100237141140ba5524068964c406c8cc",
+      "parentUuid": "ee0d15ef_1c9b60e9",
+      "revId": "5f05f266774fec4cf4fdc0481027c56e2b8b5a04",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
