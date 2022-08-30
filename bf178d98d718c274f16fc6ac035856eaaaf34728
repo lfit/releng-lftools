@@ -22,6 +22,30 @@
       },
       "revId": "bf178d98d718c274f16fc6ac035856eaaaf34728",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16392091_4a14d4e7",
+        "filename": "lftools/openstack/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-30T15:18:53Z",
+      "side": 1,
+      "message": "Probably should be, but mypy wasn\u0027t complaining so that tells me that they are (currently) unique functions",
+      "parentUuid": "61ad098f_871f042c",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 24
+      },
+      "revId": "bf178d98d718c274f16fc6ac035856eaaaf34728",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
