@@ -45,6 +45,23 @@
       },
       "revId": "cceb88fd9d52a56cc9ae2184c36b2df0823826a9",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5cadf63_b76aaae8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-30T15:16:00Z",
+      "side": 1,
+      "message": "Missing Issue footer. This shouldn\u0027t have passed CI... I wonder why it did :-/",
+      "revId": "cceb88fd9d52a56cc9ae2184c36b2df0823826a9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
