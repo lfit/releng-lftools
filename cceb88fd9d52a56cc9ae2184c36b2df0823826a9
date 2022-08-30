@@ -22,6 +22,29 @@
       },
       "revId": "cceb88fd9d52a56cc9ae2184c36b2df0823826a9",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ca4077c_a08fad2d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-08-30T15:15:16Z",
+      "side": 1,
+      "message": "The \u0027A\u0027 should also be capitalized. Yes, I know both of us are nitpicking your commit message ;)",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 6
+      },
+      "revId": "cceb88fd9d52a56cc9ae2184c36b2df0823826a9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
