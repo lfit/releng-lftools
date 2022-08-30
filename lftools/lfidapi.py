@@ -35,7 +35,7 @@ def check_response_code(response):
 
 
 def helper_check_group_exists(group):
-    """List members of a group."""
+    """Check group exists."""
     access_token, url = oauth_helper()
     url = PARSE(url, group)
     headers = {"Authorization": "Bearer " + access_token}
