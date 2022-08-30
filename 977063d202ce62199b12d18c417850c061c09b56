@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcbf55cd_e21db118",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2022-08-30T15:40:48Z",
+      "side": 1,
+      "message": "Created and reference RELENG-4391 ticket, addressed commit message problems",
+      "revId": "977063d202ce62199b12d18c417850c061c09b56",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
