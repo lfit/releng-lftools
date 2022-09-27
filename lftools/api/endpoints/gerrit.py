@@ -377,7 +377,7 @@ class Gerrit(client.RestApi):
         --description="This is a demo project"
 
         """
-        gerrit_project = urllib.parse.quote(gerrit_project, encoding=None, errors=None)
+        gerrit_project = urllib.parse.quote(gerrit_project, safe="", encoding=None, errors=None)
 
         access_str = "projects/?query=name:{}".format(gerrit_project)
         result = self.get(access_str)[0]

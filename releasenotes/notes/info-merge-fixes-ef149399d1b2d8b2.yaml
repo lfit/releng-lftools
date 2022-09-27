@@ -1,0 +1,9 @@
+---
+fixes:
+  - |
+    Correct the file path for the JJB info file job. This was incorrectly set as
+    an absolute path, but it needs to be relative to the git repo root.
+  - |
+    Add the "safe" parameter to URL parsing in create_project. This removes the
+    default safe value which includes the forward slash. In this case, we do
+    want to escape slashes that are part of the repo name.
