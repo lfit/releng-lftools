@@ -89,12 +89,14 @@ class Gerrit:
         """Add a file to the current git repo."""
         if filepath.find("/") >= 0:
             try:
+                log.debug("Making directories for {}".format(filepath[0]))
                 os.makedirs(os.path.split(filepath)[0])
             except FileExistsError:
-                pass
+                log.debug("Directories already exist, skipping")
         with open(filepath, "w") as newfile:
             newfile.write(content)
         self.repo.git.add(filepath)
+        log.debug(self.repo.git.status())
 
     def add_symlink(self, filepath, target):
         """Add a symlink to the current git repo."""
@@ -166,7 +168,7 @@ class Gerrit:
         )
         log.debug("File contents:\n{}".format(content))
 
-        filepath = os.path.join(self.repo.working_tree_dir, "jjb/{0}/{0}.yaml".format(gerrit_project_dashed))
+        filepath = "jjb/{0}/{0}.yaml".format(gerrit_project_dashed)
         self.add_file(filepath, content)
         commit_msg = "Chore: Automation adds {}".format(filename)
         self.commit(commit_msg, issue_id, push=True)
