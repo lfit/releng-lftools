@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f40622aa_2b7bbab9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-10-25T05:05:23Z",
+      "side": 1,
+      "message": "Adding extra debug statements to try to figure out why an Nexus error (can not update artifact (already exist kind of) is not caught.\nMy unit test (which is the patch that this one is depending on) works fine with the Nexus XML activity that failed, but this script never caugth it 😞\nFor more information see https://jira.linuxfoundation.org/browse/RELENG-4488",
+      "revId": "3b874575d82d1791f6e5b1bda558d43d1be803b1",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
