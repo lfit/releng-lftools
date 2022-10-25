@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2076859c_3499ebe0",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2022-10-25T07:09:36Z",
+      "side": 1,
+      "message": "Please use log.debug() for printing all this debug statements\nlog.info() ends up adding a lot of debug onto the console logs.",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 55
+      },
+      "revId": "74b8578a6c6fd7aeb3991defe149816edfb00a6b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
