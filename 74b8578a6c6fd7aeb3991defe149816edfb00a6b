@@ -22,6 +22,30 @@
       },
       "revId": "74b8578a6c6fd7aeb3991defe149816edfb00a6b",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2208c616_35c742d6",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-10-25T08:44:11Z",
+      "side": 1,
+      "message": "and that\u0027s where I want them :( until the error happens again...",
+      "parentUuid": "2076859c_3499ebe0",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 55
+      },
+      "revId": "74b8578a6c6fd7aeb3991defe149816edfb00a6b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
