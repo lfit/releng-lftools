@@ -461,6 +461,22 @@ def release_staging_repos(repos, verify, nexus_url=""):
                 if add_str_if_not_exist(message, failures2):
                     failures.append(message.text)
 
+        # Extra output for debug reasons
+        log.info ("Extra output for debug reasons")
+        log.info("len(failures)       : {}".format(len(failures)))
+        log.info("len(failures2)      : {}".format(len(failures2)))
+        log.info("len(successes)      : {}".format(len(successes)))
+        log.info("len(is_repo_closed) : {}".format(len(is_repo_closed)))
+        log.info("failures")
+        log.info("\n".join(map(str, failures)))
+        log.info("failures2")
+        log.info("\n".join(map(str, failures2)))
+        log.info("successes")
+        log.info("\n".join(map(str, successes)))
+        log.info("is_repo_closed")
+        log.info("\n".join(map(str, is_repo_closed)))
+        log.info ("End extra output for debug reasons")
+
         # Start check result
         if len(failures) != 0 or len(failures2) != 0:
             log.info("\n".join(map(str, failures2)))
