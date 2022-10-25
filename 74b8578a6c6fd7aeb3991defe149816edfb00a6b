@@ -46,6 +46,30 @@
       },
       "revId": "74b8578a6c6fd7aeb3991defe149816edfb00a6b",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79624d16_b0ff9ca7",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2022-10-25T10:46:03Z",
+      "side": 1,
+      "message": "Not sure if you remember lftools is being used by multiple $projects and not sure if we want to see these message in ODL jobs logs.\n\nThis does not check for any conditions, so pretty much get called all the time.\n\nIf you want to reproduce the error:\n\n1. Use a staging repo that has rule failures.\n2. Use the -debug flag with lftools to trigger the log.debug()\n3. Modify the job to pull this change without this being merged.",
+      "parentUuid": "2208c616_35c742d6",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 55
+      },
+      "revId": "74b8578a6c6fd7aeb3991defe149816edfb00a6b",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
