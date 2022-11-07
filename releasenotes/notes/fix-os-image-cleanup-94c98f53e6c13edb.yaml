@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Correct parameter name in os image cleanup code
