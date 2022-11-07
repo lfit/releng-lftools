@@ -18,14 +18,13 @@ import subprocess
 import sys
 import tempfile
 from datetime import datetime, timedelta
+from six.moves import urllib
 
 import openstack
 import openstack.config
 from openstack.cloud.exc import OpenStackCloudException
-from six.moves import urllib
 
 log = logging.getLogger(__name__)
-
 
 def _filter_images(images, days=0, hide_public=False, ci_managed=True):
     """Filter image data and return list.
@@ -35,19 +34,31 @@ def _filter_images(images, days=0, hide_public=False, ci_managed=True):
     :arg bool hide_public: Whether or not to include public images.
     """
     filtered = []
+    bad_attribute = ""
     for image in images:
         if hide_public and image.is_public:
             continue
         if ci_managed and image.metadata.get("ci_managed", None) != "yes":
             continue
-        if image.protected:
-            continue
+        # Safely handle potentially problematic attributes
+        try:
+            if image.is_protected:
+                continue
+        except AttributeError:
+            bad_attribute = "image.is_protected"
+        try:
+            if image.protected:
+                continue
+        except AttributeError:
+            bad_attribute = "image.protected"
         if days and (
             datetime.strptime(image.created_at, "%Y-%m-%dT%H:%M:%SZ") >= datetime.now() - timedelta(days=days)
         ):
             continue
 
         filtered.append(image)
+    if bad_attribute:
+        log.warning("Use of " + bad_attribute + " resulted in an exception")
     return filtered
 
 
@@ -72,14 +83,24 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
     :arg str clouds: If passed, comma-separated list of clouds to remove image
         from. Otherwise os_cloud will be used.
     """
-
+    bad_attribute = ""
     def _remove_images_from_cloud(images, cloud):
         log.info("Removing {} images from {}.".format(len(images), cloud.config._name))
         project_info = cloud._get_project_info()
         for image in images:
-            if image.is_protected:
-                log.warning("Image {} is protected. Cannot remove...".format(image.name))
-                continue
+            # Safely handle potentially problematic attributes
+            try:
+                if image.is_protected:
+                    log.warning("Image {} is protected. Cannot remove...".format(image.name))
+                    continue
+            except AttributeError:
+                bad_attribute = "image.is_protected"
+            try:
+                if image.protected:
+                    log.warning("Image {} is protected. Cannot remove...".format(image.name))
+                    continue
+            except AttributeError:
+                bad_attribute = "image.protected"
 
             if image.visibility == "shared":
                 log.warning("Image {} is shared. Cannot remove...".format(image.name))
@@ -121,7 +142,8 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
             filtered_images = _filter_images(images, days, hide_public, ci_managed)
         if filtered_images:
             _remove_images_from_cloud(filtered_images, cloud)
-
+    if bad_attribute:
+        log.warning("Use of " + bad_attribute + " resulted in an exception")
 
 def share(os_cloud, image, clouds):
     """Share image with another tenant."""
