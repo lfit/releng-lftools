@@ -26,7 +26,6 @@ from six.moves import urllib
 
 log = logging.getLogger(__name__)
 
-
 def _filter_images(images, days=0, hide_public=False, ci_managed=True):
     """Filter image data and return list.
 
@@ -34,20 +33,33 @@ def _filter_images(images, days=0, hide_public=False, ci_managed=True):
         (Default: true)
     :arg bool hide_public: Whether or not to include public images.
     """
+    exception_caught = False
     filtered = []
     for image in images:
         if hide_public and image.is_public:
             continue
         if ci_managed and image.metadata.get("ci_managed", None) != "yes":
             continue
-        if image.protected:
-            continue
+        # Safely handle (potentially) deprecated/controversial attributes
+        try:
+            if image.is_protected:
+                continue
+        except:
+            # Output warning later; here would create a lot of duplicate console messages
+            exception_caught = True
+        try:
+            if image.protected:
+                continue
+        except:
+            exception_caught = True
         if days and (
             datetime.strptime(image.created_at, "%Y-%m-%dT%H:%M:%SZ") >= datetime.now() - timedelta(days=days)
         ):
             continue
 
         filtered.append(image)
+    if exception_caught == True:
+        log.warning("exception(s) related to (potentially duplicate/deprecated) attributes occurred")
     return filtered
 
 
@@ -72,14 +84,25 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
     :arg str clouds: If passed, comma-separated list of clouds to remove image
         from. Otherwise os_cloud will be used.
     """
-
+    exception_caught = False
     def _remove_images_from_cloud(images, cloud):
         log.info("Removing {} images from {}.".format(len(images), cloud.config._name))
         project_info = cloud._get_project_info()
         for image in images:
-            if image.is_protected:
-                log.warning("Image {} is protected. Cannot remove...".format(image.name))
-                continue
+            # Safely handle (potentially) deprecated/controversial attributes
+            try:
+                if image.is_protected:
+                    log.warning("Image {} is protected. Cannot remove...".format(image.name))
+                    continue
+            except:
+                # Output warning later; here would create a lot of duplicate console messages
+                exception_caught = True
+            try:
+                if image.protected:
+                    log.warning("Image {} is protected. Cannot remove...".format(image.name))
+                    continue
+            except:
+                exception_caught = True
 
             if image.visibility == "shared":
                 log.warning("Image {} is shared. Cannot remove...".format(image.name))
@@ -121,7 +144,8 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
             filtered_images = _filter_images(images, days, hide_public, ci_managed)
         if filtered_images:
             _remove_images_from_cloud(filtered_images, cloud)
-
+    if exception_caught == True:
+        log.warning("exception(s) related to (potentially duplicate/deprecated) attributes occurred")
 
 def share(os_cloud, image, clouds):
     """Share image with another tenant."""
