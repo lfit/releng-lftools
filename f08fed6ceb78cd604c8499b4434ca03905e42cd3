@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "155a07b4_2365a2f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2022-11-07T17:11:05Z",
+      "side": 1,
+      "message": "Strangely, is_protected was already used in one location, but NOT both locations in the existing code. I think somebody previously submitted a partial patch, or perhaps just missed the second location and didn\u0027t test their patch. I\u0027ve built and run this and the image cleanup code should now proceed.",
+      "revId": "f08fed6ceb78cd604c8499b4434ca03905e42cd3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
