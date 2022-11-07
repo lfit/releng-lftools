@@ -16,6 +16,29 @@
       "message": "Strangely, is_protected was already used in one location, but NOT both locations in the existing code. I think somebody previously submitted a partial patch, or perhaps just missed the second location and didn\u0027t test their patch. I\u0027ve built and run this and the image cleanup code should now proceed.",
       "revId": "f08fed6ceb78cd604c8499b4434ca03905e42cd3",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f782ba5_6cacff5a",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2022-11-07T17:23:45Z",
+      "side": 1,
+      "message": "Can we please put some handlers around this for in case this attribute doesn\u0027t even exist? I think part of our problem is that it sometimes exists as .protected, sometimes as .is_protected and sometimes doesn\u0027t exist at all! I\u0027ve seen objects come back without the attribute.",
+      "range": {
+        "startLine": 43,
+        "startChar": 11,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "f08fed6ceb78cd604c8499b4434ca03905e42cd3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
