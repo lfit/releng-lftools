@@ -22,6 +22,30 @@
       },
       "revId": "d84948c4d8c34c9d49b9a27bf1c18a6b54cc00d9",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d92f1f7d_c9a4c85f",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2022-11-08T11:10:51Z",
+      "side": 0,
+      "message": "Check for both values, but do so safely, with the modern attribute is_protected listed first, as that is the failure that is current breaking jobs. If either attribute doesn\u0027t exist, don\u0027t leverage the continue statement which protects the image from deletion/further handling by the script.",
+      "parentUuid": "b720b3ca_fbe12bab",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "d84948c4d8c34c9d49b9a27bf1c18a6b54cc00d9",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }

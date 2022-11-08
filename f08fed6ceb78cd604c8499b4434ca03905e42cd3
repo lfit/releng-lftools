@@ -39,6 +39,30 @@
       },
       "revId": "f08fed6ceb78cd604c8499b4434ca03905e42cd3",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c466197_5a2acf0c",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2022-11-08T11:10:51Z",
+      "side": 1,
+      "message": "Check for both attributes, but do so safely with exception handling wrapped around the comparator. If an exception occurs while checking an image, set a flag, then generate a single warning later, when script processing has completed. This prevents excessive console messages being generated. Have tested this by rebuilding lftools on my machine. The is_protected attribute appears to be the modern openstack parameter, which is causing the current jobs to fail. Listing it first should prevent exceptions being generated, and my tests show that to be the case.",
+      "parentUuid": "3f782ba5_6cacff5a",
+      "range": {
+        "startLine": 43,
+        "startChar": 11,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "f08fed6ceb78cd604c8499b4434ca03905e42cd3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
