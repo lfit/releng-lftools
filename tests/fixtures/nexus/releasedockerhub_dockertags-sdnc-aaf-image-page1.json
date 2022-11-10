@@ -1,0 +1,317 @@
+{
+  "count": 42,
+  "next": "https://registry.hub.docker.com/v2/namespaces/onap/repositories/sdnc-aaf-image/tags?page=2",
+  "previous": null,
+  "results": [
+    {
+      "creator": 2325232,
+      "id": 319290830,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:c8c341df3a7d463e48cd5e341e15f21a7198fe0d9c293c91700e96b996f1ab0f",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 557234034,
+          "status": "active",
+          "last_pulled": null,
+          "last_pushed": "2022-11-16T13:40:49.233111Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:40:49.233111Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "2.4.1",
+      "repository": 7064140,
+      "full_size": 557234034,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": null,
+      "tag_last_pushed": "2022-11-16T13:40:49.233111Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:c8c341df3a7d463e48cd5e341e15f21a7198fe0d9c293c91700e96b996f1ab0f"
+    },
+    {
+      "creator": 2325232,
+      "id": 300703414,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:d17567d5a3d0020af6f2064bc65cba124d64b7e7e815f7e0f7e25b7e3b37ca17",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 557307197,
+          "status": "active",
+          "last_pulled": null,
+          "last_pushed": "2022-11-16T13:40:21.200002Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:40:21.200002Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "2.4.0",
+      "repository": 7064140,
+      "full_size": 557307197,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": null,
+      "tag_last_pushed": "2022-11-16T13:40:21.200002Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:d17567d5a3d0020af6f2064bc65cba124d64b7e7e815f7e0f7e25b7e3b37ca17"
+    },
+    {
+      "creator": 2325232,
+      "id": 231797340,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:96bc38224a577b91c97c6f0d6c7c0dd0e959d386b69dd2fe58f4f289cd2b977f",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 537481235,
+          "status": "active",
+          "last_pulled": null,
+          "last_pushed": "2022-11-16T13:39:56.851344Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:39:56.851344Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "2.3.2",
+      "repository": 7064140,
+      "full_size": 537481235,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": null,
+      "tag_last_pushed": "2022-11-16T13:39:56.851344Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:96bc38224a577b91c97c6f0d6c7c0dd0e959d386b69dd2fe58f4f289cd2b977f"
+    },
+    {
+      "creator": 2325232,
+      "id": 216161298,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:1009b24d074d2ce0a63f96b9d45d75ca2f99f20b79538e29783238baf60d9137",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 537447461,
+          "status": "active",
+          "last_pulled": null,
+          "last_pushed": "2022-11-16T13:39:30.318668Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:39:30.318668Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "2.3.1",
+      "repository": 7064140,
+      "full_size": 537447461,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": null,
+      "tag_last_pushed": "2022-11-16T13:39:30.318668Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:1009b24d074d2ce0a63f96b9d45d75ca2f99f20b79538e29783238baf60d9137"
+    },
+    {
+      "creator": 2325232,
+      "id": 202282304,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:b539ba31e9f4a104ea1992de6aad618f459cc3d6cd6054b38cbe1e4c4f158539",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 537429155,
+          "status": "active",
+          "last_pulled": null,
+          "last_pushed": "2022-11-16T13:39:01.871341Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:39:01.871341Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "2.3.0",
+      "repository": 7064140,
+      "full_size": 537429155,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": null,
+      "tag_last_pushed": "2022-11-16T13:39:01.871341Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:b539ba31e9f4a104ea1992de6aad618f459cc3d6cd6054b38cbe1e4c4f158539"
+    },
+    {
+      "creator": 2325232,
+      "id": 198097412,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:5e85af277d3e23e57ad42769dde8861d7dfa9b9711b70274ce55ca04e2ee1ddf",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 580481229,
+          "status": "active",
+          "last_pulled": "2022-08-24T11:25:32.006305Z",
+          "last_pushed": "2022-11-16T13:38:33.483004Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:38:33.483004Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "2.2.5",
+      "repository": 7064140,
+      "full_size": 580481229,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": "2022-08-24T11:25:32.006305Z",
+      "tag_last_pushed": "2022-11-16T13:38:33.483004Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:5e85af277d3e23e57ad42769dde8861d7dfa9b9711b70274ce55ca04e2ee1ddf"
+    },
+    {
+      "creator": 2325232,
+      "id": 198091265,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:6184fb1b23a69ba2e73fb0f4f595edccf62b46791d0e589c1af6d446f68f075a",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 580504291,
+          "status": "active",
+          "last_pulled": "2022-06-06T12:29:54.613443Z",
+          "last_pushed": "2022-11-16T13:38:04.297666Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:38:04.297666Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "2.2.4",
+      "repository": 7064140,
+      "full_size": 580504291,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": "2022-06-06T12:29:54.613443Z",
+      "tag_last_pushed": "2022-11-16T13:38:04.297666Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:6184fb1b23a69ba2e73fb0f4f595edccf62b46791d0e589c1af6d446f68f075a"
+    },
+    {
+      "creator": 2325232,
+      "id": 177092981,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:f300a7cd3378d99897515e9dac2024c6cba7e4425d86d191d2c48a2b60091586",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 580986927,
+          "status": "active",
+          "last_pulled": "2022-08-24T11:25:29.775542Z",
+          "last_pushed": "2022-11-16T13:37:31.443813Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:37:31.443813Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "2.2.3",
+      "repository": 7064140,
+      "full_size": 580986927,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": "2022-08-24T11:25:29.775542Z",
+      "tag_last_pushed": "2022-11-16T13:37:31.443813Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:f300a7cd3378d99897515e9dac2024c6cba7e4425d86d191d2c48a2b60091586"
+    },
+    {
+      "creator": 2325232,
+      "id": 175682766,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:95a9cdf323df0682bee5f8fd63fc52f3eb37e32273908ea4c4c1f22a847fb8ea",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 580979955,
+          "status": "active",
+          "last_pulled": "2021-12-16T11:51:10.431711Z",
+          "last_pushed": "2022-11-16T13:37:03.075995Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:37:03.075995Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "2.2.2",
+      "repository": 7064140,
+      "full_size": 580979955,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": "2021-12-16T11:51:10.431711Z",
+      "tag_last_pushed": "2022-11-16T13:37:03.075995Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:95a9cdf323df0682bee5f8fd63fc52f3eb37e32273908ea4c4c1f22a847fb8ea"
+    },
+    {
+      "creator": 2325232,
+      "id": 173671347,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:4fd70b603a9db4be8f25ef19d2418e6d90c2283e7efbbcb0301e79f600c4c672",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 580979664,
+          "status": "active",
+          "last_pulled": "2021-12-16T11:50:37.482713Z",
+          "last_pushed": "2022-11-16T13:36:27.782756Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:36:27.782756Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "2.2.1",
+      "repository": 7064140,
+      "full_size": 580979664,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": "2021-12-16T11:50:37.482713Z",
+      "tag_last_pushed": "2022-11-16T13:36:27.782756Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:4fd70b603a9db4be8f25ef19d2418e6d90c2283e7efbbcb0301e79f600c4c672"
+    }
+  ]
+}
