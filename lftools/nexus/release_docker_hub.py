@@ -269,14 +269,18 @@ class DockerTagClass(TagClass):
     This class fetches and stores all docker tags for a repository.
 
     Doing this manually from command line, you will give this command:
-        curl -s https://registry.hub.docker.com/v1/repositories/onap/base_sdc-sanity/tags
-    which gives you the following output:
-        {"layer": "", "name": "latest"}, {"layer": "", "name": "1.3.0"},
-        {"layer": "", "name": "1.3.1"}, {"layer": "", "name": "1.4.0"},
-        {"layer": "", "name": "1.4.1"}, {"layer": "", "name": "v1.0.0"}]
+        curl -s https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/base_sdc-sanity/tags 
+    which gives you a json output. Just looking for the tag names we do this
+        curl -s https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/base_sdc-sanity/tags | jq -r ".results[].name"
+            latest
+            1.7.0
+            1.6.0
+            1.4.1
+            1.4.0
+            1.3.1
+            1.3.0
+            v1.0.0
 
-    When we fetch the tags from the docker repository url, they are returned like
-        [{"layer": "", "name": "latest"}, {"layer": "", "name": "v1.0.0"}]
     Hence, we need to extract all the tags, and add them to our list of valid or
     invalid tags.
     If we fail to collect the tags, we set the repository_exist flag to false.

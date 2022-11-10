@@ -80,9 +80,11 @@ def test_nexus_tag_class(responses):
 def test_docker_tag_class(responses):
     """Test DockerTagClass"""
     org = "onap"
-    repo = "base-sdc-sanity"
+    repo = "base_sdc-sanity"
     repo_from_file = False
-    url = "https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags"
+    url = "https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/base_sdc-sanity/tags"
+    FIXTURE releasedockerhub_dockertags2.json = base_sdc-sanity
+    FIXTURE releasedockerhub_dockertags1.json = pomba-aai-context-builder
     answer = """[{"layer": "", "name": "latest"},
         {"layer": "", "name": "1.3.0"},
         {"layer": "", "name": "1.3.1"},
@@ -90,7 +92,7 @@ def test_docker_tag_class(responses):
         {"layer": "", "name": "1.4.1"},
         {"layer": "", "name": "v1.0.0"}]
     """
-    answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1"]
+    answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1", "1.6.0, "1.7.0"]
     answer_invalid_tags = ["latest", "v1.0.0"]
     responses.add(responses.GET, url, body=answer, status=200)
     rdh.initialize(org)
