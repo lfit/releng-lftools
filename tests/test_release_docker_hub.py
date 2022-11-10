@@ -23,6 +23,14 @@ FIXTURE_DIR = os.path.join(
 )
 
 
+def data_from_file(filename):
+    """Return content from file"""
+    f = open(filename, "r")
+    file_content = f.read()
+    f.close()
+    return file_content
+
+
 def test_remove_http_from_url():
     """Test _remove_http_from_url."""
     test_url = [
@@ -60,11 +68,13 @@ def test_format_image_id():
 def test_nexus_tag_class(responses):
     """Test NexusTagClass"""
     org = "onap"
-    repo = "base/sdc-sanity"
+    repo = "sdc-helm-validator"
     repo_from_file = False
-    url = "https://nexus3.onap.org:10002/v2/onap/base/sdc-sanity/tags/list"
-    answer = '{"name":"onap/base_sdc-sanity","tags":["latest","1.3.0","1.3.1","1.4.0","1.4.1","v1.0.0"]}'
-    answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1"]
+    url = "https://nexus3.onap.org:10002/v2/onap/sdc-helm-validator/tags/list"
+    answer = (
+        '{"name":"onap/sdc-helm-validator","tags":["latest","1.3.0","1.3.1","1.4.0","1.4.1","1.6.0","1.7.0","v1.0.0"]}'
+    )
+    answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1", "1.6.0", "1.7.0"]
     answer_invalid_tags = ["latest", "v1.0.0"]
     responses.add(responses.GET, url, body=answer, status=200)
     rdh.initialize(org)
@@ -77,20 +87,17 @@ def test_nexus_tag_class(responses):
     assert len(test_tags.invalid) == len(answer_invalid_tags)
 
 
-def test_docker_tag_class(responses):
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
+def test_docker_tag_class(responses, datafiles):
     """Test DockerTagClass"""
     org = "onap"
-    repo = "base-sdc-sanity"
+    repo = "sdc-helm-validator"
     repo_from_file = False
-    url = "https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags"
-    answer = """[{"layer": "", "name": "latest"},
-        {"layer": "", "name": "1.3.0"},
-        {"layer": "", "name": "1.3.1"},
-        {"layer": "", "name": "1.4.0"},
-        {"layer": "", "name": "1.4.1"},
-        {"layer": "", "name": "v1.0.0"}]
-    """
-    answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1"]
+    url = "https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/sdc-helm-validator/tags"
+    answer = data_from_file(os.path.join(str(datafiles), "releasedockerhub_dockertags-sdc-helm-validator.json"))
+    answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1", "1.6.0", "1.7.0"]
     answer_invalid_tags = ["latest", "v1.0.0"]
     responses.add(responses.GET, url, body=answer, status=200)
     rdh.initialize(org)
@@ -103,23 +110,97 @@ def test_docker_tag_class(responses):
     assert len(test_tags.invalid) == len(answer_invalid_tags)
 
 
-def test_docker_tag_err_429_class(responses, mocker):
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
+def test_multiple_pages_4_dockertags(responses, datafiles):
+    org = "onap"
+    repo = "sdnc-aaf-image"
+    repo_from_file = False
+    url1 = "https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/sdnc-aaf-image/tags"
+    url2 = "https://registry.hub.docker.com/v2/namespaces/onap/repositories/sdnc-aaf-image/tags?page=2"
+    url3 = "https://registry.hub.docker.com/v2/namespaces/onap/repositories/sdnc-aaf-image/tags?page=3"
+    url4 = "https://registry.hub.docker.com/v2/namespaces/onap/repositories/sdnc-aaf-image/tags?page=4"
+    url5 = "https://registry.hub.docker.com/v2/namespaces/onap/repositories/sdnc-aaf-image/tags?page=5"
+    answer1 = data_from_file(os.path.join(str(datafiles), "releasedockerhub_dockertags-sdnc-aaf-image-page1.json"))
+    answer2 = data_from_file(os.path.join(str(datafiles), "releasedockerhub_dockertags-sdnc-aaf-image-page2.json"))
+    answer3 = data_from_file(os.path.join(str(datafiles), "releasedockerhub_dockertags-sdnc-aaf-image-page3.json"))
+    answer4 = data_from_file(os.path.join(str(datafiles), "releasedockerhub_dockertags-sdnc-aaf-image-page4.json"))
+    answer5 = data_from_file(os.path.join(str(datafiles), "releasedockerhub_dockertags-sdnc-aaf-image-page5.json"))
+    answer_valid_tags = [
+        "1.5.1",
+        "1.5.2",
+        "1.5.3",
+        "1.5.4",
+        "1.6.1",
+        "1.6.2",
+        "1.7.0",
+        "1.7.3",
+        "1.7.4",
+        "1.7.5",
+        "1.7.6",
+        "1.7.7",
+        "1.8.0",
+        "1.8.1",
+        "1.8.2",
+        "1.8.3",
+        "1.8.4",
+        "2.0.0",
+        "2.0.1",
+        "2.0.2",
+        "2.0.3",
+        "2.0.4",
+        "2.0.5",
+        "2.0.6",
+        "2.1.0",
+        "2.1.1",
+        "2.1.2",
+        "2.1.3",
+        "2.1.4",
+        "2.1.5",
+        "2.1.6",
+        "2.2.0",
+        "2.2.1",
+        "2.2.2",
+        "2.2.3",
+        "2.2.4",
+        "2.2.5",
+        "2.3.0",
+        "2.3.1",
+        "2.3.2",
+        "2.4.0",
+        "2.4.1",
+    ]
+    answer_invalid_tags = []
+    responses.add(responses.GET, url1, body=answer1, status=200)
+    responses.add(responses.GET, url2, body=answer2, status=200)
+    responses.add(responses.GET, url3, body=answer3, status=200)
+    responses.add(responses.GET, url4, body=answer4, status=200)
+    responses.add(responses.GET, url5, body=answer5, status=200)
+    rdh.initialize(org)
+    test_tags = rdh.DockerTagClass(org, repo, repo_from_file)
+    for tag in answer_valid_tags:
+        assert tag in test_tags.valid
+    for tag in answer_invalid_tags:
+        assert tag in test_tags.invalid
+    assert len(test_tags.valid) == len(answer_valid_tags)
+    assert len(test_tags.invalid) == len(answer_invalid_tags)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
+def test_docker_tag_err_429_class(responses, datafiles, mocker):
     """Test DockerTagClass"""
     mocker.patch("time.sleep", return_value=None)
     org = "onap"
-    repo = "base-sdc-sanity"
+    repo = "sdc-helm-validator"
     repo_from_file = False
-    url = "https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags"
-    answer = """[{"layer": "", "name": "latest"},
-        {"layer": "", "name": "1.3.0"},
-        {"layer": "", "name": "1.3.1"},
-        {"layer": "", "name": "1.4.0"},
-        {"layer": "", "name": "1.4.1"},
-        {"layer": "", "name": "v1.0.0"}]
-    """
-    answer_429 = '{"detail": "Rate limit exceeded", "error": false}"'
-    answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1"]
+    url = "https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/sdc-helm-validator/tags"
+    answer = data_from_file(os.path.join(str(datafiles), "releasedockerhub_dockertags-sdc-helm-validator.json"))
+    answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1", "1.6.0", "1.7.0"]
     answer_invalid_tags = ["latest", "v1.0.0"]
+    answer_429 = '{"detail": "Rate limit exceeded", "error": false}"'
     rdh.initialize(org)
 
     # Do 19 failed and next one should work
@@ -140,7 +221,7 @@ def test_docker_tag_err_429_class(responses, mocker):
 def test_tag_class_repository_exist():
     """Test TagClass"""
     org = "onap"
-    repo = "base/sdc-sanity"
+    repo = "sdc-helm-validator"
     repo_from_file = False
     rdh.initialize(org)
     tags = rdh.TagClass(org, repo, repo_from_file)
@@ -159,7 +240,7 @@ class TestTagsRegExpClass:
     def test_tag_class_valid_tags(self):
         """Test TagClass"""
         org = "onap"
-        repo = "base/sdc-sanity"
+        repo = "sdc-helm-validator"
         repo_from_file = False
         test_tags = ["1.2.3", "1.22.333", "111.22.3", "10.11.12", "1.0.3"]
         rdh.initialize(org)
@@ -172,7 +253,7 @@ class TestTagsRegExpClass:
     def test_tag_class_invalid_tags(self):
         """Test TagClass"""
         org = "onap"
-        repo = "base/sdc-sanity"
+        repo = "sdc-helm-validator"
 
         repo_from_file = False
         test_tags = [
@@ -202,7 +283,7 @@ class TestTagsRegExpClass:
     def test_tag_class_manual_version_regexp_str_valid_tags(self):
         """Test TagClass"""
         org = "onap"
-        repo = "base/sdc-sanity"
+        repo = "sdc-helm-validator"
         test_regexp = r"^v\d+.\d+.\d+$"
         repo_from_file = False
         test_tags = ["v1.2.3", "v1.22.333", "v111.22.3", "v10.11.12", "v1.0.3"]
@@ -216,7 +297,7 @@ class TestTagsRegExpClass:
     def test_tag_class_manual_version_regexp_str_invalid_tags(self):
         """Test TagClass"""
         org = "onap"
-        repo = "base/sdc-sanity"
+        repo = "sdc-helm-validator"
         test_regexp = r"v^\d+.\d+.\d+$"
         repo_from_file = False
         test_tags = [
@@ -258,6 +339,9 @@ class TestTagsRegExpClass:
         assert rdh.VERSION_REGEXP == "["
 
 
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
 class TestProjectClass:
     """Test ProjectClass.
 
@@ -270,8 +354,8 @@ class TestProjectClass:
     _test_image_long_id = "sha256:3450464d68c9443dedc8bfe3272a23e6441c37f707c42d32fee0ebdbcd319d2c"
     _test_image_short_id = "sha256:3450464d68"
     _expected_nexus_image_str = [
-        "nexus3.onap.org:10002/onap/base/sdc-sanity:1.4.0",
-        "nexus3.onap.org:10002/onap/base/sdc-sanity:1.4.1",
+        "nexus3.onap.org:10002/onap/sdc-helm-validator:1.4.0",
+        "nexus3.onap.org:10002/onap/sdc-helm-validator:1.4.1",
     ]
 
     class mock_image:
@@ -337,7 +421,7 @@ class TestProjectClass:
         if self.counter.cleanup <= self.nbr_exc.cleanup:
             raise requests.exceptions.ConnectionError("Connection Error")
 
-    def test_ProjectClass_2_missing(self, responses, mocker):
+    def test_ProjectClass_2_missing(self, responses, datafiles, mocker):
         """Test ProjectClass"""
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_pull", side_effect=self.mocked_docker_pull)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_tag", side_effect=self.mocked_docker_tag)
@@ -346,19 +430,18 @@ class TestProjectClass:
             "lftools.nexus.release_docker_hub.ProjectClass._docker_cleanup", side_effect=self.mocked_docker_cleanup
         )
 
-        project = ["onap", "base/sdc-sanity", ""]
+        project = ["onap", "sdc-helm-validator", ""]
 
-        nexus_url = "https://nexus3.onap.org:10002/v2/onap/base/sdc-sanity/tags/list"
-        nexus_answer = '{"name":"onap/base_sdc-sanity","tags":["1.3.0","1.3.1","1.4.0","1.4.1","v1.0.0"]}'
-        docker_url = "https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags"
-        docker_answer = """[{"layer": "", "name": "1.3.0"},
-            {"layer": "", "name": "1.3.1"},
-            {"layer": "", "name": "v1.0.0"}]
-        """
-        nexus_answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1"]
-        nexus_answer_invalid_tags = ["v1.0.0"]
-        docker_answer_valid_tags = ["1.3.0", "1.3.1"]
-        docker_answer_invalid_tags = ["v1.0.0"]
+        nexus_url = "https://nexus3.onap.org:10002/v2/onap/sdc-helm-validator/tags/list"
+        nexus_answer = '{"name":"onap/sdc-helm-validator","tags":["v1.0.0","1.3.0", "1.3.1", "1.4.0", "1.4.1","1.6.0", "1.7.0","latest"]}'
+        nexus_answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1", "1.6.0", "1.7.0"]
+        nexus_answer_invalid_tags = ["v1.0.0", "latest"]
+        docker_url = "https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/sdc-helm-validator/tags"
+        docker_answer = data_from_file(
+            os.path.join(str(datafiles), "releasedockerhub_dockertags-sdc-helm-validator-missing2.json")
+        )
+        docker_answer_valid_tags = ["1.3.0", "1.3.1", "1.6.0", "1.7.0"]
+        docker_answer_invalid_tags = ["latest", "v1.0.0"]
         docker_missing_tags = ["1.4.0", "1.4.1"]
 
         self.counter.pull = self.counter.tag = self.counter.push = self.counter.cleanup = 0
@@ -370,9 +453,9 @@ class TestProjectClass:
         test_proj = rdh.ProjectClass(project)
 
         assert test_proj.org_name == "onap"
-        assert test_proj.nexus_repo_name == "base/sdc-sanity"
-        assert test_proj.docker_repo_name == "base-sdc-sanity"
-        assert test_proj.calc_docker_project_name() == "onap/base-sdc-sanity"
+        assert test_proj.nexus_repo_name == "sdc-helm-validator"
+        assert test_proj.docker_repo_name == "sdc-helm-validator"
+        assert test_proj.calc_docker_project_name() == "onap/sdc-helm-validator"
 
         assert len(test_proj.nexus_tags.valid) == len(nexus_answer_valid_tags)
         assert len(test_proj.docker_tags.valid) == len(docker_answer_valid_tags)
@@ -390,7 +473,7 @@ class TestProjectClass:
         assert self.counter.push == 2
         assert self.counter.cleanup == 2
 
-    def test_ProjectClass_1_missing(self, responses, mocker):
+    def test_ProjectClass_1_missing(self, responses, datafiles, mocker):
         """Test ProjectClass"""
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_pull", side_effect=self.mocked_docker_pull)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_tag", side_effect=self.mocked_docker_tag)
@@ -399,20 +482,21 @@ class TestProjectClass:
             "lftools.nexus.release_docker_hub.ProjectClass._docker_cleanup", side_effect=self.mocked_docker_cleanup
         )
 
-        project = ["onap", "base/sdc-sanity", ""]
+        project = ["onap", "sdc-helm-validator", ""]
 
-        nexus_url = "https://nexus3.onap.org:10002/v2/onap/base/sdc-sanity/tags/list"
-        nexus_answer = '{"name":"onap/base_sdc-sanity","tags":["1.3.0","1.3.1","1.4.0","v1.0.0"]}'
-        docker_url = "https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags"
-        docker_answer = """[{"layer": "", "name": "1.3.0"},
-            {"layer": "", "name": "1.3.1"},
-            {"layer": "", "name": "v1.0.0"}]
-        """
-        nexus_answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0"]
-        nexus_answer_invalid_tags = ["v1.0.0"]
-        docker_answer_valid_tags = ["1.3.0", "1.3.1"]
-        docker_answer_invalid_tags = ["v1.0.0"]
-        docker_missing_tags = ["1.4.0"]
+        nexus_url = "https://nexus3.onap.org:10002/v2/onap/sdc-helm-validator/tags/list"
+        nexus_answer = '{"name":"onap/sdc-helm-validator","tags":["v1.0.0","1.3.0", "1.3.1", "1.4.0", "1.4.1","1.6.0", "1.7.0","latest"]}'
+        nexus_answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1", "1.6.0", "1.7.0"]
+        nexus_answer_invalid_tags = ["v1.0.0", "latest"]
+        docker_url = "https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/sdc-helm-validator/tags"
+        docker_answer = data_from_file(
+            os.path.join(str(datafiles), "releasedockerhub_dockertags-sdc-helm-validator-missing1.json")
+        )
+        docker_answer_valid_tags = ["1.3.0", "1.3.1", "1.4.1", "1.6.0", "1.7.0"]
+        docker_answer_invalid_tags = ["latest", "v1.0.0"]
+        docker_missing_tags = [
+            "1.4.0",
+        ]
 
         self.counter.pull = self.counter.tag = self.counter.push = self.counter.cleanup = 0
 
@@ -423,9 +507,9 @@ class TestProjectClass:
         test_proj = rdh.ProjectClass(project)
 
         assert test_proj.org_name == "onap"
-        assert test_proj.nexus_repo_name == "base/sdc-sanity"
-        assert test_proj.docker_repo_name == "base-sdc-sanity"
-        assert test_proj.calc_docker_project_name() == "onap/base-sdc-sanity"
+        assert test_proj.nexus_repo_name == "sdc-helm-validator"
+        assert test_proj.docker_repo_name == "sdc-helm-validator"
+        assert test_proj.calc_docker_project_name() == "onap/sdc-helm-validator"
 
         assert len(test_proj.nexus_tags.valid) == len(nexus_answer_valid_tags)
         assert len(test_proj.docker_tags.valid) == len(docker_answer_valid_tags)
@@ -443,7 +527,7 @@ class TestProjectClass:
         assert self.counter.push == 1
         assert self.counter.cleanup == 1
 
-    def test_ProjectClass_socket_timeout(self, responses, mocker):
+    def test_ProjectClass_socket_timeout(self, responses, datafiles, mocker):
         """Test ProjectClass"""
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_pull", side_effect=self.mocked_docker_pull)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_tag", side_effect=self.mocked_docker_tag)
@@ -452,19 +536,20 @@ class TestProjectClass:
             "lftools.nexus.release_docker_hub.ProjectClass._docker_cleanup", side_effect=self.mocked_docker_cleanup
         )
 
-        project = ["onap", "base/sdc-sanity", ""]
-        nexus_url = "https://nexus3.onap.org:10002/v2/onap/base/sdc-sanity/tags/list"
-        nexus_answer = '{"name":"onap/base_sdc-sanity","tags":["1.3.0","1.3.1","1.4.0","v1.0.0"]}'
-        docker_url = "https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags"
-        docker_answer = """[{"layer": "", "name": "1.3.0"},
-            {"layer": "", "name": "1.3.1"},
-            {"layer": "", "name": "v1.0.0"}]
-        """
-        nexus_answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0"]
-        nexus_answer_invalid_tags = ["v1.0.0"]
-        docker_answer_valid_tags = ["1.3.0", "1.3.1"]
-        docker_answer_invalid_tags = ["v1.0.0"]
-        docker_missing_tags = ["1.4.0"]
+        project = ["onap", "sdc-helm-validator", ""]
+        nexus_url = "https://nexus3.onap.org:10002/v2/onap/sdc-helm-validator/tags/list"
+        nexus_answer = '{"name":"onap/sdc-helm-validator","tags":["v1.0.0","1.3.0", "1.3.1", "1.4.0", "1.4.1","1.6.0", "1.7.0","latest"]}'
+        nexus_answer_valid_tags = ["1.3.0", "1.3.1", "1.4.0", "1.4.1", "1.6.0", "1.7.0"]
+        nexus_answer_invalid_tags = ["v1.0.0", "latest"]
+        docker_url = "https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/sdc-helm-validator/tags"
+        docker_answer = data_from_file(
+            os.path.join(str(datafiles), "releasedockerhub_dockertags-sdc-helm-validator-missing1.json")
+        )
+        docker_answer_valid_tags = ["1.3.0", "1.3.1", "1.4.1", "1.6.0", "1.7.0"]
+        docker_answer_invalid_tags = ["latest", "v1.0.0"]
+        docker_missing_tags = [
+            "1.4.0",
+        ]
 
         self.counter.pull = self.counter.tag = self.counter.push = self.counter.cleanup = 0
 
@@ -475,9 +560,9 @@ class TestProjectClass:
         test_proj = rdh.ProjectClass(project)
 
         assert test_proj.org_name == "onap"
-        assert test_proj.nexus_repo_name == "base/sdc-sanity"
-        assert test_proj.docker_repo_name == "base-sdc-sanity"
-        assert test_proj.calc_docker_project_name() == "onap/base-sdc-sanity"
+        assert test_proj.nexus_repo_name == "sdc-helm-validator"
+        assert test_proj.docker_repo_name == "sdc-helm-validator"
+        assert test_proj.calc_docker_project_name() == "onap/sdc-helm-validator"
 
         assert len(test_proj.nexus_tags.valid) == len(nexus_answer_valid_tags)
         assert len(test_proj.docker_tags.valid) == len(docker_answer_valid_tags)
@@ -584,11 +669,14 @@ class TestFetchNexus3Catalog:
         assert rdh.NexusCatalog[3][1] == "onap/vfc/nfvo/svnfm/nokiav2"
 
 
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
 class TestFetchAllTagsAndUpdate:
     _test_image_long_id = "sha256:3450464d68c9443dedc8bfe3272a23e6441c37f707c42d32fee0ebdbcd319d2c"
     _test_image_short_id = "sha256:3450464d68"
     _expected_nexus_image_str = [
-        "nexus3.onap.org:10002/onap/base/sdc-sanity:1.4.0",
+        "nexus3.onap.org:10002/onap/sdc-helm-validator:1.4.0",
         "nexus3.onap.org:10002/onap/gizmo2:1.3.1",
         "nexus3.onap.org:10002/onap/gizmo2:1.3.2",
     ]
@@ -657,34 +745,37 @@ class TestFetchAllTagsAndUpdate:
         if self.counter.cleanup <= self.nbr_exc.cleanup:
             raise requests.exceptions.ConnectionError("Connection Error")
 
-    def initiate_test_fetch(self, responses, mocker, repo=""):
+    def initiate_test_fetch(self, responses, datafiles, mocker, repo=""):
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_pull", side_effect=self.mocked_docker_pull)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_tag", side_effect=self.mocked_docker_tag)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_push", side_effect=self.mocked_docker_push)
         mocker.patch(
             "lftools.nexus.release_docker_hub.ProjectClass._docker_cleanup", side_effect=self.mocked_docker_cleanup
         )
-        url = "https://nexus3.onap.org:10002/v2/_catalog"
-        answer = '{"repositories":["onap/base/sdc-sanity","onap/gizmo","onap/gizmo2"]}'
+        catalog_url = "https://nexus3.onap.org:10002/v2/_catalog"
+        catalog_answer = '{"repositories":["onap/sdc-helm-validator","onap/gizmo","onap/gizmo2"]}'
 
-        nexus_url1 = "https://nexus3.onap.org:10002/v2/onap/base/sdc-sanity/tags/list"
-        nexus_answer1 = '{"name":"onap/base_sdc-sanity","tags":["1.3.0","1.3.1","1.4.0","v1.0.0"]}'
-        docker_url1 = "https://registry.hub.docker.com/v1/repositories/onap/base-sdc-sanity/tags"
-        docker_answer1 = """[{"layer": "", "name": "1.3.0"},
-            {"layer": "", "name": "1.3.1"},
-            {"layer": "", "name": "v1.0.0"}]
-        """
+        # Missing one tag in docker
+        nexus_url1 = "https://nexus3.onap.org:10002/v2/onap/sdc-helm-validator/tags/list"
+        nexus_answer1 = '{"name":"onap/sdc-helm-validator","tags":["v1.0.0","1.3.0", "1.3.1", "1.4.0", "1.4.1","1.6.0", "1.7.0","latest"]}'
+        docker_url1 = "https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/sdc-helm-validator/tags"
+        docker_answer1 = data_from_file(
+            os.path.join(str(datafiles), "releasedockerhub_dockertags-sdc-helm-validator-missing1.json")
+        )
+
+        # No missing tags
         nexus_url2 = "https://nexus3.onap.org:10002/v2/onap/gizmo/tags/list"
-        nexus_answer2 = '{"name":"onap/gizmo","tags":["1.3.0"]}'
-        docker_url2 = "https://registry.hub.docker.com/v1/repositories/onap/gizmo/tags"
-        docker_answer2 = """[{"layer": "", "name": "1.3.0"}]
-        """
+        nexus_answer2 = '{"name":"onap/gizmo","tags":["1.2.0","1.2.1","1.3.0","1.3.1","1.3.2","1.4.0","1.5.2"]}'
+        docker_url2 = "https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/gizmo/tags"
+        docker_answer2 = data_from_file(os.path.join(str(datafiles), "releasedockerhub_dockertags-gizmo.json"))
+
+        # Missing two tags in docker
         nexus_url3 = "https://nexus3.onap.org:10002/v2/onap/gizmo2/tags/list"
-        nexus_answer3 = '{"name":"onap/gizmo2","tags":["1.3.0", "1.3.1", "1.3.2"]}'
-        docker_url3 = "https://registry.hub.docker.com/v1/repositories/onap/gizmo2/tags"
-        docker_answer3 = """[{"layer": "", "name": "1.3.0"}]
-        """
-        responses.add(responses.GET, url, body=answer, status=200)
+        nexus_answer3 = '{"name":"onap/gizmo2","tags":["1.2.1","1.3.1","1.3.2"]}'
+        docker_url3 = "https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/gizmo2/tags"
+        docker_answer3 = data_from_file(os.path.join(str(datafiles), "releasedockerhub_dockertags-gizmo2.json"))
+
+        responses.add(responses.GET, catalog_url, body=catalog_answer, status=200)
 
         rdh.NexusCatalog = []
         rdh.projects = []
@@ -709,20 +800,20 @@ class TestFetchAllTagsAndUpdate:
         rdh.projects = []
         self.counter.pull = self.counter.tag = self.counter.push = self.counter.cleanup = 0
 
-    def test_fetch_all_tags(self, responses, mocker):
-        self.initiate_test_fetch(responses, mocker)
+    def test_fetch_all_tags(self, responses, datafiles, mocker):
+        self.initiate_test_fetch(responses, datafiles, mocker)
         rdh.initialize("onap")
         rdh.get_nexus3_catalog("onap")
         rdh.fetch_all_tags()
         assert len(rdh.NexusCatalog) == 3
         assert len(rdh.projects) == 3
-        assert len(rdh.projects[0].tags_2_copy.valid) == 1
-        assert len(rdh.projects[1].tags_2_copy.valid) == 0
-        assert len(rdh.projects[2].tags_2_copy.valid) == 2
+        assert len(rdh.projects[0].tags_2_copy.valid) == 0
+        assert len(rdh.projects[1].tags_2_copy.valid) == 2
+        assert len(rdh.projects[2].tags_2_copy.valid) == 1
 
-        assert rdh.projects[0].tags_2_copy.valid[0] == "1.4.0"
-        assert rdh.projects[2].tags_2_copy.valid[0] == "1.3.1"
-        assert rdh.projects[2].tags_2_copy.valid[1] == "1.3.2"
+        assert rdh.projects[1].tags_2_copy.valid[0] == "1.3.1"
+        assert rdh.projects[1].tags_2_copy.valid[1] == "1.3.2"
+        assert rdh.projects[2].tags_2_copy.valid[0] == "1.4.0"
 
     def test_fetch_from_bogus_orgs(self, responses, mocker):
         self.initiate_bogus_org_test_fetch(responses, "bogus_org321")
@@ -731,8 +822,8 @@ class TestFetchAllTagsAndUpdate:
         assert len(rdh.NexusCatalog) == 0
         assert len(rdh.projects) == 0
 
-    def test_copy(self, responses, mocker):
-        self.initiate_test_fetch(responses, mocker)
+    def test_copy(self, responses, datafiles, mocker):
+        self.initiate_test_fetch(responses, datafiles, mocker)
         rdh.initialize("onap")
         rdh.get_nexus3_catalog("onap")
         rdh.fetch_all_tags()
@@ -742,33 +833,33 @@ class TestFetchAllTagsAndUpdate:
         assert self.counter.push == 3
         assert self.counter.cleanup == 3
 
-    def test_start_no_copy(self, responses, mocker):
-        self.initiate_test_fetch(responses, mocker)
+    def test_start_no_copy(self, responses, datafiles, mocker):
+        self.initiate_test_fetch(responses, datafiles, mocker)
         rdh.start_point("onap", "", False, False)
         assert self.counter.pull == 0
         assert self.counter.tag == 0
         assert self.counter.push == 0
         assert self.counter.cleanup == 0
 
-    def test_start_copy(self, responses, mocker):
-        self.initiate_test_fetch(responses, mocker)
+    def test_start_copy(self, responses, datafiles, mocker):
+        self.initiate_test_fetch(responses, datafiles, mocker)
         rdh.start_point("onap", "", False, False, False, True)
         assert len(rdh.NexusCatalog) == 3
         assert len(rdh.projects) == 3
-        assert len(rdh.projects[0].tags_2_copy.valid) == 1
-        assert len(rdh.projects[1].tags_2_copy.valid) == 0
-        assert len(rdh.projects[2].tags_2_copy.valid) == 2
-        assert rdh.projects[0].tags_2_copy.valid[0] == "1.4.0"
-        assert rdh.projects[2].tags_2_copy.valid[0] == "1.3.1"
-        assert rdh.projects[2].tags_2_copy.valid[1] == "1.3.2"
+        assert len(rdh.projects[0].tags_2_copy.valid) == 0
+        assert len(rdh.projects[1].tags_2_copy.valid) == 2
+        assert len(rdh.projects[2].tags_2_copy.valid) == 1
+        assert rdh.projects[1].tags_2_copy.valid[0] == "1.3.1"
+        assert rdh.projects[1].tags_2_copy.valid[1] == "1.3.2"
+        assert rdh.projects[2].tags_2_copy.valid[0] == "1.4.0"
         assert self.counter.pull == 3
         assert self.counter.tag == 3
         assert self.counter.push == 3
         assert self.counter.cleanup == 3
 
-    def test_start_copy_repo(self, responses, mocker):
-        self.initiate_test_fetch(responses, mocker, "sanity")
-        rdh.start_point("onap", "sanity", False, False, False, True)
+    def test_start_copy_repo(self, responses, datafiles, mocker):
+        self.initiate_test_fetch(responses, datafiles, mocker, "sanity")
+        rdh.start_point("onap", "validator", False, False, False, True)
         assert len(rdh.NexusCatalog) == 1
         assert len(rdh.projects) == 1
         assert len(rdh.projects[0].tags_2_copy.valid) == 1
@@ -783,3 +874,8 @@ class TestFetchAllTagsAndUpdate:
         rdh.start_point("bogus_org321")
         assert len(rdh.NexusCatalog) == 0
         assert len(rdh.projects) == 0
+
+
+@pytest.mark.skip("reason for skipping")
+def test_calculate_docker_project_name():
+    assert test_proj.calc_docker_project_name() == "sdc-helm-validator"
