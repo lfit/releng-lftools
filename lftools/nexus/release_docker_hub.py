@@ -52,6 +52,7 @@ import docker
 import requests
 import tqdm
 import urllib3
+import json
 
 log = logging.getLogger(__name__)
 
@@ -269,14 +270,18 @@ class DockerTagClass(TagClass):
     This class fetches and stores all docker tags for a repository.
 
     Doing this manually from command line, you will give this command:
-        curl -s https://registry.hub.docker.com/v1/repositories/onap/base_sdc-sanity/tags
-    which gives you the following output:
-        {"layer": "", "name": "latest"}, {"layer": "", "name": "1.3.0"},
-        {"layer": "", "name": "1.3.1"}, {"layer": "", "name": "1.4.0"},
-        {"layer": "", "name": "1.4.1"}, {"layer": "", "name": "v1.0.0"}]
+        curl -s https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/base_sdc-sanity/tags 
+    which gives you a json output. Just looking for the tag names we do this
+        curl -s https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/base_sdc-sanity/tags | jq -r ".results[].name"
+            latest
+            1.7.0
+            1.6.0
+            1.4.1
+            1.4.0
+            1.3.1
+            1.3.0
+            v1.0.0
 
-    When we fetch the tags from the docker repository url, they are returned like
-        [{"layer": "", "name": "latest"}, {"layer": "", "name": "v1.0.0"}]
     Hence, we need to extract all the tags, and add them to our list of valid or
     invalid tags.
     If we fail to collect the tags, we set the repository_exist flag to false.
@@ -292,7 +297,7 @@ class DockerTagClass(TagClass):
         If no repository is found, self.repository_exist will be set to False.
     """
 
-    _docker_base = "https://registry.hub.docker.com/v1/repositories"
+    _docker_base_start = "https://registry.hub.docker.com:443/v2/namespaces/"
 
     def __init__(self, org_name, repo_name, repo_from_file):
         """Initialize this class."""
@@ -302,10 +307,12 @@ class DockerTagClass(TagClass):
         else:
             combined_repo_name = "{}/{}".format(org_name, repo_name)
         log.debug("Fetching docker tags for {}".format(combined_repo_name))
+        _docker_base=self._docker_base_start + "{}/repositories".format(org_name)
         retries = 0
         while retries < 20:
             try:
-                r = _request_get(self._docker_base + "/" + combined_repo_name + "/tags")
+                log.debug("URL={}".format(_docker_base + "/" + repo_name + "/tags"))
+                r = _request_get(_docker_base + "/" + repo_name + "/tags")
                 if r.status_code == 429:
                     # Docker returns 429 if we access it too fast too many times.
                     # If it happends, delay 60 seconds, and try again, up to 19 times.
@@ -330,19 +337,12 @@ class DockerTagClass(TagClass):
                 "Speed throttling in effect. To fast accessing dockerhub for tags.\n {}".format(r.text)
             )
         if r.status_code == requests.codes.ok:
-            raw_tags = r.text
-            raw_tags = raw_tags.replace("}]", "")
-            raw_tags = raw_tags.replace("[{", "")
-            raw_tags = raw_tags.replace("{", "")
-            raw_tags = raw_tags.replace('"', "")
-            raw_tags = raw_tags.replace(" ", "")
-            TmpSplittedTuple = raw_tags.split("}")
-            if len(TmpSplittedTuple) > 0:
-                for tuple in TmpSplittedTuple:
-                    tmp_tuple = tuple.split(":")
-                    if len(tmp_tuple) > 1:
-                        self.add_tag(tmp_tuple[2].strip())
-                        log.debug("Docker {} has tag {}".format(combined_repo_name, tmp_tuple[2]))
+            raw_json = json.loads(r.text)
+
+            for k in range(raw_json['count']):
+                tag_name=raw_json['results'][k]['name']
+                self.add_tag(tag_name)
+                log.debug("Docker {} has tag {}".format(combined_repo_name, tag_name))
         else:
             self.repository_exist = False
 
