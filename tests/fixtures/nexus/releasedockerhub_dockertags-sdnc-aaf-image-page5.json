@@ -1,0 +1,69 @@
+{
+  "count": 42,
+  "next": null,
+  "previous": "https://registry.hub.docker.com/v2/namespaces/onap/repositories/sdnc-aaf-image/tags?page=4",
+  "results": [
+    {
+      "creator": 4339606,
+      "id": 57694535,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:0e01ba850ed37e4d89e5122e3698e1646cd2bbf1be6d89321255a7f588592710",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 1569924376,
+          "status": "active",
+          "last_pulled": "2022-02-02T13:32:22.413626Z",
+          "last_pushed": "2022-11-16T13:06:46.573469Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:06:46.573469Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "1.5.2",
+      "repository": 7064140,
+      "full_size": 1569924376,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": "2022-02-02T13:32:22.413626Z",
+      "tag_last_pushed": "2022-11-16T13:06:46.573469Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:0e01ba850ed37e4d89e5122e3698e1646cd2bbf1be6d89321255a7f588592710"
+    },
+    {
+      "creator": 4339606,
+      "id": 54428440,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:9ea6e1cb24d152c06e70fd22c8861ace254e4f1f9fae0803cc1afd7f4cbfa967",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 1565679062,
+          "status": "active",
+          "last_pulled": "2022-02-04T13:10:58.69163Z",
+          "last_pushed": "2022-11-16T13:05:54.608807Z"
+        }
+      ],
+      "last_updated": "2022-11-16T13:05:54.608807Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "1.5.1",
+      "repository": 7064140,
+      "full_size": 1565679062,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": "2022-02-04T13:10:58.69163Z",
+      "tag_last_pushed": "2022-11-16T13:05:54.608807Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:9ea6e1cb24d152c06e70fd22c8861ace254e4f1f9fae0803cc1afd7f4cbfa967"
+    }
+  ]
+}
