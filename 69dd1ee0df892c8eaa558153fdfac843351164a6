@@ -16,6 +16,23 @@
       "message": "Catch bad attribute as string during exception handling and report.",
       "revId": "69dd1ee0df892c8eaa558153fdfac843351164a6",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aeaec3c_5844c9cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-11-24T21:50:46Z",
+      "side": 1,
+      "message": "is the commit comment accurate for the patch?",
+      "revId": "69dd1ee0df892c8eaa558153fdfac843351164a6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
