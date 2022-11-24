@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c856634_320f3872",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2022-11-24T15:02:56Z",
+      "side": 1,
+      "message": "Catch bad attribute as string during exception handling and report.",
+      "revId": "69dd1ee0df892c8eaa558153fdfac843351164a6",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}

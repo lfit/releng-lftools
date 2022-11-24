@@ -24,6 +24,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12fb6b26_2669f48d",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2022-11-24T15:02:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c9970c8_563148d8",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 4
+      },
+      "revId": "36e1641ccc01fb99c749b223846098f94ec99b07",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aca9638e_fb581552",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-08T11:38:42Z",
       "side": 1,
       "message": "Pls print a warning in the log, that the exception was caught with a specific var being deprecated.",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 28
+      },
+      "revId": "36e1641ccc01fb99c749b223846098f94ec99b07",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f5aaee_d24d1671",
+        "filename": "lftools/openstack/image.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2022-11-24T15:02:56Z",
+      "side": 1,
+      "message": "This is in the code here:\n\n    if exception_caught \u003d\u003d True:\n        log.warning(\"exception(s) related to (potentially duplicate/deprecated) attributes occurred\")",
+      "parentUuid": "aca9638e_fb581552",
       "range": {
         "startLine": 52,
         "startChar": 12,
