@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "138d365e_9bea176c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2022-11-25T08:44:51Z",
+      "side": 1,
+      "message": "Updated commit message to better reflect change purpose",
+      "revId": "32fac03d7ed38c98dce96dba13a7d9aa9913cb93",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
