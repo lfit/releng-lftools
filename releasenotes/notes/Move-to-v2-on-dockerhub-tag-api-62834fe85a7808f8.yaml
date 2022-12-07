@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Dockerhub retired the v1 version of the dockerhub api, which was used
+    to collect the existing tag information. This patch replaces v1 with v2
+    which is using json files.

@@ -1,0 +1,38 @@
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "creator": 4339606,
+      "id": 38205809,
+      "images": [
+        {
+          "architecture": "amd64",
+          "features": "",
+          "variant": null,
+          "digest": "sha256:af7298b66c480407d7a8bc650b3122b3c0180038f59c57eaa6903786823ded4b",
+          "os": "linux",
+          "os_features": "",
+          "os_version": null,
+          "size": 335766308,
+          "status": "active",
+          "last_pulled": "2022-01-18T13:34:41.188991Z",
+          "last_pushed": "2022-11-16T12:00:32.417426Z"
+        }
+      ],
+      "last_updated": "2022-11-16T12:00:32.417426Z",
+      "last_updater": 2325232,
+      "last_updater_username": "onapdockerhub",
+      "name": "1.2.1",
+      "repository": 6189598,
+      "full_size": 335766308,
+      "v2": true,
+      "tag_status": "active",
+      "tag_last_pulled": "2022-01-18T13:34:41.188991Z",
+      "tag_last_pushed": "2022-11-16T12:00:32.417426Z",
+      "media_type": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:af7298b66c480407d7a8bc650b3122b3c0180038f59c57eaa6903786823ded4b"
+    }
+   ]
+}
