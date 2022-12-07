@@ -294,6 +294,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5114ca6_91ff2f9a",
+        "filename": "releasenotes/notes/Move-to-v2-on-dockerhub-tag-api-62834fe85a7808f8.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-12-07T06:29:52Z",
+      "side": 1,
+      "message": "Ah, my daughter just told me the correct word is indeed deprecated...",
+      "parentUuid": "822f388c_1d62b1ee",
+      "range": {
+        "startLine": 4,
+        "startChar": 14,
+        "endLine": 4,
+        "endChar": 25
+      },
+      "revId": "cb4b9ed39b6977592f166c7c8fbf2feb36f6b7a3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10204cdd_d0e7c93c",
