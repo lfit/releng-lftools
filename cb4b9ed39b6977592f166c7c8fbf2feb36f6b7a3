@@ -105,6 +105,54 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "350b3d76_ebc4afbc",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-12-07T05:15:01Z",
+      "side": 1,
+      "message": "Ok",
+      "parentUuid": "73e93412_743c39e8",
+      "range": {
+        "startLine": 300,
+        "startChar": 25,
+        "endLine": 300,
+        "endChar": 77
+      },
+      "revId": "cb4b9ed39b6977592f166c7c8fbf2feb36f6b7a3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d8a658_ace90769",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-12-07T05:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a761c2b_53f9206b",
+      "range": {
+        "startLine": 300,
+        "startChar": 57,
+        "endLine": 300,
+        "endChar": 61
+      },
+      "revId": "cb4b9ed39b6977592f166c7c8fbf2feb36f6b7a3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a7f0b36_631dec12",
@@ -118,6 +166,30 @@
       "writtenOn": "2022-11-29T18:04:16Z",
       "side": 1,
       "message": "As long as we\u0027re in here, this should be cleaned up. It should be \"too\" rather than \"to\", and the wording could be less awkward in general.",
+      "range": {
+        "startLine": 340,
+        "startChar": 49,
+        "endLine": 340,
+        "endChar": 85
+      },
+      "revId": "cb4b9ed39b6977592f166c7c8fbf2feb36f6b7a3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03b200d3_024d13cf",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-12-07T05:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a7f0b36_631dec12",
       "range": {
         "startLine": 340,
         "startChar": 49,
@@ -151,6 +223,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8724043_ef9cf204",
+        "filename": "lftools/nexus/release_docker_hub.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-12-07T05:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d10dc065_4016e838",
+      "range": {
+        "startLine": 346,
+        "startChar": 20,
+        "endLine": 347,
+        "endChar": 65
+      },
+      "revId": "cb4b9ed39b6977592f166c7c8fbf2feb36f6b7a3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f893e87_eb5dd437",
@@ -164,6 +260,30 @@
       "writtenOn": "2022-11-29T18:04:16Z",
       "side": 1,
       "message": "*deprecated",
+      "range": {
+        "startLine": 4,
+        "startChar": 14,
+        "endLine": 4,
+        "endChar": 25
+      },
+      "revId": "cb4b9ed39b6977592f166c7c8fbf2feb36f6b7a3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "822f388c_1d62b1ee",
+        "filename": "releasenotes/notes/Move-to-v2-on-dockerhub-tag-api-62834fe85a7808f8.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-12-07T05:15:01Z",
+      "side": 1,
+      "message": "I think depreciated is the correct word, but decided to use retired instead. Hope this one is better.",
+      "parentUuid": "9f893e87_eb5dd437",
       "range": {
         "startLine": 4,
         "startChar": 14,
@@ -197,6 +317,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc164b30_b6853350",
+        "filename": "releasenotes/notes/Move-to-v2-on-dockerhub-tag-api-62834fe85a7808f8.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-12-07T05:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10204cdd_d0e7c93c",
+      "range": {
+        "startLine": 5,
+        "startChar": 75,
+        "endLine": 5,
+        "endChar": 76
+      },
+      "revId": "cb4b9ed39b6977592f166c7c8fbf2feb36f6b7a3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fabcefec_7e6e5acc",
@@ -220,6 +364,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3d78d0f_ad4147b3",
+        "filename": "tests/test_release_docker_hub.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-12-07T05:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fabcefec_7e6e5acc",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 23
+      },
+      "revId": "cb4b9ed39b6977592f166c7c8fbf2feb36f6b7a3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55a4e9ae_e6939d2e",
@@ -233,6 +401,30 @@
       "writtenOn": "2022-11-29T18:04:16Z",
       "side": 1,
       "message": "Dangling whitespace.",
+      "range": {
+        "startLine": 883,
+        "startChar": 0,
+        "endLine": 883,
+        "endChar": 4
+      },
+      "revId": "cb4b9ed39b6977592f166c7c8fbf2feb36f6b7a3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0e3f621_294b7925",
+        "filename": "tests/test_release_docker_hub.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2022-12-07T05:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55a4e9ae_e6939d2e",
       "range": {
         "startLine": 883,
         "startChar": 0,
