@@ -351,7 +351,7 @@ class DockerTagClass(TagClass):
                     log.debug("Issue fetching tags for {}".format(combined_repo_name))
             else:
                 self.repository_exist = False
-            if raw_json["next"]:
+            if self.repository_exist and raw_json["next"]:
                 docker_tag_url = raw_json["next"]
                 still_more = True
             else:

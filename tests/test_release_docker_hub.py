@@ -111,6 +111,28 @@ def test_docker_tag_class(responses, datafiles):
 @pytest.mark.datafiles(
     os.path.join(FIXTURE_DIR, "nexus"),
 )
+def test_docker_tag_class_no_tags(responses, datafiles):
+    """Test DockerTagClass"""
+    org = "onap"
+    repo = "sdc-helm-validator"
+    repo_from_file = False
+    url = "https://registry.hub.docker.com/v2/namespaces/onap/repositories/sdc-helm-validator/tags"
+    answer = data_from_file(os.path.join(str(datafiles), "releasedockerhub_dockertags-sdc-helm-validator.json"))
+    answer_valid_tags = []
+    answer_invalid_tags = []
+    responses.add(responses.GET, url, body=answer, status=404)
+    rdh.initialize(org)
+    test_tags = rdh.DockerTagClass(org, repo, repo_from_file)
+    for tag in answer_valid_tags:
+        assert tag in test_tags.valid
+    for tag in answer_invalid_tags:
+        assert tag in test_tags.invalid
+    assert len(test_tags.valid) == len(answer_valid_tags)
+    assert len(test_tags.invalid) == len(answer_invalid_tags)
+    
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "nexus"),
+)
 def test_multiple_pages_4_dockertags(responses, datafiles):
     org = "onap"
     repo = "sdnc-aaf-image"
