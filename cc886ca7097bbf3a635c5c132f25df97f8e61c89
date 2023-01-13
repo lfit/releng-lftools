@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b70ffc3_f107e825",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2023-01-13T07:51:12Z",
+      "side": 1,
+      "message": "Does not have to be uppercase\n\nFix: ...\n\nor \n\nfix: ...",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "cc886ca7097bbf3a635c5c132f25df97f8e61c89",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c82842c5_1aba645e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2023-01-13T07:51:12Z",
+      "side": 1,
+      "message": "minor nits",
+      "revId": "cc886ca7097bbf3a635c5c132f25df97f8e61c89",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ff853a5_dc35685f",
+        "filename": "tests/test_release_docker_hub.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2023-01-13T07:51:12Z",
+      "side": 1,
+      "message": "rm ws",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 4
+      },
+      "revId": "cc886ca7097bbf3a635c5c132f25df97f8e61c89",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
