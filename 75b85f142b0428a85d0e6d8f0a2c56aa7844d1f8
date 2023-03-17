@@ -33,6 +33,52 @@
       "message": "type should be \"Fix:\"",
       "revId": "75b85f142b0428a85d0e6d8f0a2c56aa7844d1f8",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac134eb_36df3fcd",
+        "filename": "releasenotes/notes/Migrate-away-from-depreciated-shade-library-516eaec59f1922dd.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2023-03-17T16:10:04Z",
+      "side": 1,
+      "message": "remove ws",
+      "range": {
+        "startLine": 4,
+        "startChar": 50,
+        "endLine": 4,
+        "endChar": 51
+      },
+      "revId": "75b85f142b0428a85d0e6d8f0a2c56aa7844d1f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71ebf600_a75e4325",
+        "filename": "releasenotes/notes/Migrate-away-from-depreciated-shade-library-516eaec59f1922dd.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2023-03-17T16:10:04Z",
+      "side": 1,
+      "message": "remove ws",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 4
+      },
+      "revId": "75b85f142b0428a85d0e6d8f0a2c56aa7844d1f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
