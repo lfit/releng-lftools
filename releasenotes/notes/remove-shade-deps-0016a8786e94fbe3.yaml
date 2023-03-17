@@ -1,0 +1,7 @@
+---
+deprecations:
+  - |
+    Shade libs are deprecated therefore no longer required
+    to be installed.
+
+    https://docs.openstack.org/releasenotes/shade/stein.html
