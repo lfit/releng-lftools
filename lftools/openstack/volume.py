@@ -35,7 +35,7 @@ def _filter_volumes(volumes, days=0):
 
 def list(os_cloud, days=0):
     """List volumes found according to parameters."""
-    cloud = openstack.connection.from_config(cloud=os_cloud)    
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     volumes = cloud.list_volumes()
 
     filtered_volumes = _filter_volumes(volumes, days)
