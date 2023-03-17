@@ -20,7 +20,8 @@ import urllib.request
 from datetime import datetime
 
 import openstack
-import shade
+import openstack.config
+from openstack.cloud.exc import OpenStackCloudHTTPError
 
 from lftools.jenkins import Jenkins
 
@@ -29,7 +30,7 @@ log = logging.getLogger(__name__)
 
 def create(os_cloud, name, template_file, parameter_file, timeout=900, tries=2):
     """Create a heat stack from a template_file and a parameter_file."""
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     stack_success = False
 
     print("Creating stack {}".format(name))
@@ -38,7 +39,7 @@ def create(os_cloud, name, template_file, parameter_file, timeout=900, tries=2):
             stack = cloud.create_stack(
                 name, template_file=template_file, environment_files=[parameter_file], timeout=timeout, rollback=False
             )
-        except shade.exc.OpenStackCloudHTTPError as e:
+        except OpenStackCloudHTTPError as e:
             if cloud.search_stacks(name):
                 print("Stack with name {} already exists.".format(name))
             else:
@@ -132,7 +133,7 @@ def delete(os_cloud, name_or_id, force, timeout=900):
 
     Return True if delete was successful.
     """
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     print("Deleting stack {}".format(name_or_id))
     cloud.delete_stack(name_or_id)
 
@@ -166,7 +167,7 @@ def delete_stale(os_cloud, jenkins_servers):
     An orphaned stack is a stack that is not known in any of the Jenkins
     servers passed into this function.
     """
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     stacks = cloud.search_stacks()
     if not stacks:
         log.debug("No stacks to delete.")

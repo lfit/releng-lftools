@@ -1,0 +1,8 @@
+---
+other:
+  - |
+    The shade library for openstack is deprecated. 
+    https://docs.openstack.org/releasenotes/shade/stein.html
+    
+    We are switching to the openstacksdk for all remaining openstack commands.
+
