@@ -15,7 +15,9 @@ __author__ = "Anil Belur"
 import sys
 from datetime import datetime, timedelta
 
-import shade
+import openstack
+import openstack.config
+from openstack.cloud.exc import OpenStackCloudException
 
 
 def _filter_servers(servers, days=0):
@@ -31,7 +33,7 @@ def _filter_servers(servers, days=0):
 
 def list(os_cloud, days=0):
     """List servers found according to parameters."""
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     servers = cloud.list_servers()
 
     filtered_servers = _filter_servers(servers, days)
@@ -51,7 +53,7 @@ def cleanup(os_cloud, days=0):
         for server in servers:
             try:
                 result = cloud.delete_server(server.name)
-            except shade.exc.OpenStackCloudException as e:
+            except OpenStackCloudException as e:
                 if str(e).startswith("Multiple matches found for"):
                     print("WARNING: {}. Skipping server...".format(str(e)))
                     continue
@@ -68,7 +70,7 @@ def cleanup(os_cloud, days=0):
             else:
                 print('Removed "{}" from {}.'.format(server.name, cloud.cloud_config.name))
 
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     servers = cloud.list_servers()
     filtered_servers = _filter_servers(servers, days)
     _remove_servers_from_cloud(filtered_servers, cloud)
@@ -80,7 +82,7 @@ def remove(os_cloud, server_name, minutes=0):
     :arg str os_cloud: Cloud name as defined in OpenStack clouds.yaml.
     :arg int minutes: Only delete server if it is older than number of minutes.
     """
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     server = cloud.get_server(server_name)
 
     if not server:
