@@ -15,7 +15,9 @@ __author__ = "Thanh Ha"
 import sys
 from datetime import datetime, timedelta
 
-import shade
+import openstack
+import openstack.config
+from openstack.cloud.exc import OpenStackCloudException
 
 
 def _filter_volumes(volumes, days=0):
@@ -33,7 +35,7 @@ def _filter_volumes(volumes, days=0):
 
 def list(os_cloud, days=0):
     """List volumes found according to parameters."""
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)    
     volumes = cloud.list_volumes()
 
     filtered_volumes = _filter_volumes(volumes, days)
@@ -53,7 +55,7 @@ def cleanup(os_cloud, days=0):
         for volume in volumes:
             try:
                 result = cloud.delete_volume(volume.name)
-            except shade.exc.OpenStackCloudException as e:
+            except OpenStackCloudException as e:
                 if str(e).startswith("Multiple matches found for"):
                     print("WARNING: {}. Skipping volume...".format(str(e)))
                     continue
@@ -70,7 +72,7 @@ def cleanup(os_cloud, days=0):
             else:
                 print('Removed "{}" from {}.'.format(volume.name, cloud.cloud_config.name))
 
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     volumes = cloud.list_volumes()
     filtered_volumes = _filter_volumes(volumes, days)
     _remove_volumes_from_cloud(filtered_volumes, cloud)
@@ -83,7 +85,7 @@ def remove(os_cloud, volume_id, minutes=0):
     :arg str volume_id: Volume ID to delete
     :arg int minutes: Only delete volume if it is older than number of minutes.
     """
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     volume = cloud.get_volume_by_id(volume_id)
 
     if not volume:
