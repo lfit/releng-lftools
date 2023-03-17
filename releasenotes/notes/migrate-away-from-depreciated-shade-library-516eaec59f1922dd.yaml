@@ -1,0 +1,7 @@
+---
+Fix:
+  - |
+    The shade library for openstacksdk is deprecated.
+    https://docs.openstack.org/releasenotes/shade/stein.html
+
+    Switch to the openstacksdk to replace shade.
