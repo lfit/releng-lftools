@@ -16,6 +16,23 @@
       "message": "Tested on sandbox https://jenkins.opendaylight.org/sandbox/view/All/job/bgpcep-csit-1node-bgp-ingest-mixed-all-argon/13/console",
       "revId": "75b85f142b0428a85d0e6d8f0a2c56aa7844d1f8",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dccfbad5_20e008a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2023-03-17T16:09:27Z",
+      "side": 1,
+      "message": "type should be \"Fix:\"",
+      "revId": "75b85f142b0428a85d0e6d8f0a2c56aa7844d1f8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
