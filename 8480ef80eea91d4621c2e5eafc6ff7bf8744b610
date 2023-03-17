@@ -22,6 +22,30 @@
       },
       "revId": "8480ef80eea91d4621c2e5eafc6ff7bf8744b610",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e03d7dba_05a29384",
+        "filename": "releasenotes/notes/Migrate-away-from-depreciated-shade-library-516eaec59f1922dd.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 214
+      },
+      "writtenOn": "2023-03-17T12:54:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57610dd7_67b8e32b",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 0
+      },
+      "revId": "8480ef80eea91d4621c2e5eafc6ff7bf8744b610",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
