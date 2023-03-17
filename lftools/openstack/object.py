@@ -12,12 +12,13 @@
 
 __author__ = "Thanh Ha"
 
-import shade
+import openstack
+import openstack.config
 
 
 def list_containers(os_cloud):
     """List volumes found according to parameters."""
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     containers = cloud.list_containers()
 
     for container in containers:

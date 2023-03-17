@@ -20,7 +20,8 @@ import urllib.request
 from datetime import datetime
 
 import openstack
-import shade
+import openstack.config
+from openstack.cloud.exc import OpenStackCloudHTTPError
 
 from lftools.jenkins import Jenkins
 
@@ -29,7 +30,7 @@ log = logging.getLogger(__name__)
 
 def create(os_cloud, name, template_file, parameter_file, timeout=900, tries=2):
     """Create a heat stack from a template_file and a parameter_file."""
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     stack_success = False
 
     print("Creating stack {}".format(name))
@@ -38,7 +39,7 @@ def create(os_cloud, name, template_file, parameter_file, timeout=900, tries=2):
             stack = cloud.create_stack(
                 name, template_file=template_file, environment_files=[parameter_file], timeout=timeout, rollback=False
             )
-        except shade.exc.OpenStackCloudHTTPError as e:
+        except OpenStackCloudHTTPError as e:
             if cloud.search_stacks(name):
                 print("Stack with name {} already exists.".format(name))
             else:
@@ -51,18 +52,18 @@ def create(os_cloud, name, template_file, parameter_file, timeout=900, tries=2):
             time.sleep(10)
             stack = cloud.get_stack(stack_id)
 
-            if stack.stack_status == "CREATE_IN_PROGRESS":
+            if stack.status == "CREATE_IN_PROGRESS":
                 print("Waiting to initialize infrastructure...")
-            elif stack.stack_status == "CREATE_COMPLETE":
+            elif stack.status == "CREATE_COMPLETE":
                 print("Stack initialization successful.")
                 stack_success = True
                 break
-            elif stack.stack_status == "CREATE_FAILED":
-                print("WARN: Failed to initialize stack. Reason: {}".format(stack.stack_status_reason))
+            elif stack.status == "CREATE_FAILED":
+                print("WARN: Failed to initialize stack. Reason: {}".format(stack.status_reason))
                 if delete(os_cloud, stack_id):
                     break
             else:
-                print("Unexpected status: {}".format(stack.stack_status))
+                print("Unexpected status: {}".format(stack.status))
 
         if stack_success:
             break
@@ -132,7 +133,7 @@ def delete(os_cloud, name_or_id, force, timeout=900):
 
     Return True if delete was successful.
     """
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     print("Deleting stack {}".format(name_or_id))
     cloud.delete_stack(name_or_id)
 
@@ -141,17 +142,17 @@ def delete(os_cloud, name_or_id, force, timeout=900):
         time.sleep(10)
         stack = cloud.get_stack(name_or_id)
 
-        if not stack or stack.stack_status == "DELETE_COMPLETE":
+        if not stack or stack.status == "DELETE_COMPLETE":
             print("Successfully deleted stack {}".format(name_or_id))
             return True
-        elif stack.stack_status == "DELETE_IN_PROGRESS":
+        elif stack.status == "DELETE_IN_PROGRESS":
             print("Waiting for stack to delete...")
-        elif stack.stack_status == "DELETE_FAILED":
-            print("WARN: Failed to delete $STACK_NAME. Reason: {}".format(stack.stack_status_reason))
+        elif stack.status == "DELETE_FAILED":
+            print("WARN: Failed to delete $STACK_NAME. Reason: {}".format(stack.status_reason))
             print("Retrying delete...")
             cloud.delete_stack(name_or_id)
         else:
-            print("WARN: Unexpected delete status: {}".format(stack.stack_status))
+            print("WARN: Unexpected delete status: {}".format(stack.status))
             print("Retrying delete...")
             cloud.delete_stack(name_or_id)
 
@@ -166,7 +167,7 @@ def delete_stale(os_cloud, jenkins_servers):
     An orphaned stack is a stack that is not known in any of the Jenkins
     servers passed into this function.
     """
-    cloud = shade.openstack_cloud(cloud=os_cloud)
+    cloud = openstack.connection.from_config(cloud=os_cloud)
     stacks = cloud.search_stacks()
     if not stacks:
         log.debug("No stacks to delete.")
@@ -196,13 +197,13 @@ def delete_stale(os_cloud, jenkins_servers):
     log.debug("Active stacks")
     for stack in stacks:
         if (
-            stack.stack_status == "CREATE_COMPLETE"
-            or stack.stack_status == "CREATE_FAILED"
-            or stack.stack_status == "DELETE_FAILED"
+            stack.status == "CREATE_COMPLETE"
+            or stack.status == "CREATE_FAILED"
+            or stack.status == "DELETE_FAILED"
         ):
             log.debug("    {}".format(stack.stack_name))
 
-            if stack.stack_status == "DELETE_FAILED":
+            if stack.status == "DELETE_FAILED":
                 cloud.pprint(stack)
 
             if stack.stack_name not in builds:
