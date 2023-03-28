@@ -155,6 +155,8 @@ class Gerrit:
         if not agent:
             if fqdn == "gerrit.o-ran-sc.org":
                 buildnode = "centos7-builder-1c-1g"
+            elif fqdn == "gerrit.onap.org":
+                buildnode = "centos8-builder-2c-1g"
             else:
                 buildnode = "centos7-builder-2c-1g"
 
