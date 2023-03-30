@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a3181c3_886f54ef",
+        "filename": "lftools/api/endpoints/gerrit.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2023-03-30T05:27:49Z",
+      "side": 1,
+      "message": "CR LGTM, the comment is a scope creep: We want all these values to be read from a .yaml/.ini instead of hardcoding into the code, while its a good practice for the config to be kept separate from code.",
+      "range": {
+        "startLine": 126,
+        "startChar": 1,
+        "endLine": 132,
+        "endChar": 0
+      },
+      "revId": "6da6d587bb1d0772160968712e029f9ba5d0285c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
