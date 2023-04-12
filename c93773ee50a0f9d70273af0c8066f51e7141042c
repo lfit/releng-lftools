@@ -22,6 +22,30 @@
       },
       "revId": "c93773ee50a0f9d70273af0c8066f51e7141042c",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e24908_ec160a76",
+        "filename": "tox.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-04-12T17:13:25Z",
+      "side": 1,
+      "message": "It\u0027s intentional. The -- tells tox to stop processing the following as arguments to tox and to pass the rest as args to the environment in question",
+      "parentUuid": "0a75b812_6f310518",
+      "range": {
+        "startLine": 107,
+        "startChar": 48,
+        "endLine": 107,
+        "endChar": 53
+      },
+      "revId": "c93773ee50a0f9d70273af0c8066f51e7141042c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
