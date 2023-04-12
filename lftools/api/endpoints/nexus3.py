@@ -374,7 +374,10 @@ class Nexus3(client.RestApi):
             "repository": repository,
         }
         json_data = json.dumps(data)
-        result = self.get("v1/search/assets?q={}&repository={}".format(query, repository), data=json_data,)[
+        result = self.get(
+            "v1/search/assets?q={}&repository={}".format(query, repository),
+            data=json_data,
+        )[
             1
         ]["items"]
         list_of_assets = []

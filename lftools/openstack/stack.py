@@ -196,11 +196,7 @@ def delete_stale(os_cloud, jenkins_servers):
 
     log.debug("Active stacks")
     for stack in stacks:
-        if (
-            stack.status == "CREATE_COMPLETE"
-            or stack.status == "CREATE_FAILED"
-            or stack.status == "DELETE_FAILED"
-        ):
+        if stack.status == "CREATE_COMPLETE" or stack.status == "CREATE_FAILED" or stack.status == "DELETE_FAILED":
             log.debug("    {}".format(stack.stack_name))
 
             if stack.status == "DELETE_FAILED":

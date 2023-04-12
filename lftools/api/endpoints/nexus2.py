@@ -183,7 +183,6 @@ class Nexus2(client.RestApi):
 
         role_list = []
         for role in result["data"]:
-
             # wacky string concat is to provide the right format
             # so that tabulate will iterate the string at the newline
             # breaks and show multiline columns in a nice way

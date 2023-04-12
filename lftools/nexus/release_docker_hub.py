@@ -272,7 +272,8 @@ class DockerTagClass(TagClass):
     Doing this manually from command line, you will give this command:
         curl -s https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/base_sdc-sanity/tags
     which gives you a json output. Just looking for the tag names we do this
-        curl -s https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/base_sdc-sanity/tags | jq -r ".results[].name"
+        curl -s https://registry.hub.docker.com:443/v2/namespaces/onap/repositories/base_sdc-sanity/tags | \
+                jq -r ".results[].name"
             latest
             1.7.0
             1.6.0
@@ -336,9 +337,7 @@ class DockerTagClass(TagClass):
             log.debug("r.status_code = {}, ok={}".format(r.status_code, r.status_code == requests.codes.ok))
             if r.status_code == 429:
                 # Speed throttling in effect. Cancel program
-                raise requests.HTTPError(
-                    "Dockerhub throttling at tag fetching.\n {}".format(r.text)
-                )
+                raise requests.HTTPError("Dockerhub throttling at tag fetching.\n {}".format(r.text))
             if r.status_code == requests.codes.ok:
                 raw_json = json.loads(r.text)
 
@@ -347,7 +346,7 @@ class DockerTagClass(TagClass):
                         tag_name = result["name"]
                         self.add_tag(tag_name)
                         log.debug("Docker {} has tag {}".format(combined_repo_name, tag_name))
-                except:
+                except Exception:
                     log.debug("Issue fetching tags for {}".format(combined_repo_name))
             else:
                 self.repository_exist = False
