@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a75b812_6f310518",
+        "filename": "tox.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2023-04-12T17:12:18Z",
+      "side": 1,
+      "message": "Is this a duplicate \"--\" or is it on purpose due to how it get\u0027s translated?",
+      "range": {
+        "startLine": 107,
+        "startChar": 48,
+        "endLine": 107,
+        "endChar": 53
+      },
+      "revId": "c93773ee50a0f9d70273af0c8066f51e7141042c",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
