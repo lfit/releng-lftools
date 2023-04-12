@@ -47,10 +47,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  prepare:
+  clear-vote:
     runs-on: ubuntu-latest
-    outputs:
-      wheel-distribution: ${{ steps.wheel-distribution.outputs.path }}
     steps:
       - name: Clear votes
         uses: lfit/gerrit-review-action@v0.3
@@ -62,6 +60,14 @@ jobs:
           gerrit-change-number: ${{ inputs.GERRIT_CHANGE_NUMBER }}
           gerrit-patchset-number: ${{ inputs.GERRIT_PATCHSET_NUMBER }}
           vote-type: clear
+
+
+  prepare:
+    needs: clear-vote
+    runs-on: ubuntu-latest
+    outputs:
+      wheel-distribution: ${{ steps.wheel-distribution.outputs.path }}
+    steps:
       - name: Checkout change
         uses: lfit/checkout-gerrit-change-action@v0.3
         with:
@@ -70,8 +76,6 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.7'
-      - name: Run static analysis and format checkers
-        run: pipx run pre-commit run --all-files --show-diff-on-failure
       - name: Build package distribution files
         run: >-
           pipx run tox -e clean,build
@@ -86,6 +90,20 @@ jobs:
           name: python-distribution-files
           path: dist/
           retention-days: 1
+
+  pre-commit:
+    needs: clear-vote
+    runs-on: ubuntu-latest
+      - name: Checkout change
+        uses: lfit/checkout-gerrit-change-action@v0.3
+        with:
+          gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
+      - name: Configure Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.7'
+      - name: Run static analysis and format checkers
+        run: pipx run pre-commit run --all-files --show-diff-on-failure
 
   test:
     needs: prepare
@@ -119,8 +137,9 @@ jobs:
           tox --installpkg '${{ needs.prepare.outputs.wheel-distribution }}'
           -- -rFEx --durations 10 --color yes  # pytest args
 
+
   docs:
-    needs: prepare
+    needs: clear-vote
     runs-on: ubuntu-latest
     steps:
       - name: Checkout change
@@ -136,11 +155,50 @@ jobs:
           python-version: "3.7"
       - name: Run docs tests
         run: >-
-          pipx run tox -e docs,docs-linkcheck,license
+          pipx run tox -e docs
+
+
+  docs-linkcheck:
+    needs: clear-vote
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout change
+        uses: lfit/checkout-gerrit-change-action@v0.3
+        with:
+          gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
+          delay: "0s"
+          fetch-depth: "0"
+      - name: Configure Python
+        uses: actions/setup-python@v4
+        id: setup-python
+        with:
+          python-version: "3.7"
+      - name: Run docs-linkcheck tests
+        run: >-
+          pipx run tox -e docs-linkcheck
+
+  license:
+    needs: clear-vote
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout change
+        uses: lfit/checkout-gerrit-change-action@v0.3
+        with:
+          gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
+          delay: "0s"
+          fetch-depth: "0"
+      - name: Configure Python
+        uses: actions/setup-python@v4
+        id: setup-python
+        with:
+          python-version: "3.7"
+      - name: Run license tests
+        run: >-
+          pipx run tox -e license
 
   vote:
     if: ${{ always() }}
-    needs: [prepare, test, docs]
+    needs: [prepare, pre-commit, test, docs, docs-linkcheck, license]
     runs-on: ubuntu-latest
     steps:
       - name: Get workflow conclusion
