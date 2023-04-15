@@ -36,7 +36,7 @@ jobs:
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ vars.MAIL_SERVER }}
-          server_port: ${{ variables.MAIL_SERVER_PORT }}
+          server_port: ${{ vars.MAIL_SERVER_PORT }}
           secure: true
           username: ${{ secrets.MAIL_USER }}
           password: ${{ secrets.MAIL_PASSWORD }}
