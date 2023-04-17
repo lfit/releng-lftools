@@ -94,6 +94,7 @@ jobs:
   pre-commit:
     needs: clear-vote
     runs-on: ubuntu-latest
+    steps:
       - name: Checkout change
         uses: lfit/checkout-gerrit-change-action@v0.3
         with:
