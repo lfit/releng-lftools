@@ -27,7 +27,7 @@ jobs:
           pipx run tox -e publish -- --repository pypi
       - name: Get tag
         id: tag
-        uses: evops-actions/action-get-tag@1.0.1
+        uses: devops-actions/action-get-tag@1.0.2
       - name: Convert tag
         run: >-
           VER=$(echo "${{ steps.tag.outputs.tag }}" | tr . -)
