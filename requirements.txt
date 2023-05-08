@@ -42,7 +42,7 @@ soupsieve
 tabulate
 toml
 tqdm
-urllib3
+urllib3<2.0.0
 websocket-client
 wrapt
 xdg
