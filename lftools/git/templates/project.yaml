@@ -13,3 +13,4 @@
     branch: {{ default_branch }}
     jobs:
       - gerrit-info-yaml-verify
+

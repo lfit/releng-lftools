@@ -3,3 +3,4 @@ host={{ fqdn }}
 port=29418
 project={{ project_name }}
 defaultbranch={{ default_branch }}
+
