@@ -1,0 +1,5 @@
+---
+fixes:
+  - |
+    Adds new lines at EOF of templates used by lftools to generate automated
+    Gerrit changes after a new INFO.yaml is merged.
