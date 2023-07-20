@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d150086_81a6ade4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-07-20T12:36:40Z",
+      "side": 1,
+      "message": "We\u0027re ending up with 2 new lines in all of these files. I suspect the problem may be what is using these templates to generate files isn\u0027t creating well formed yaml itself.",
+      "revId": "1722b971d86fb717a02787825ab7dee818dca0d7",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
