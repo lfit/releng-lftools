@@ -11,6 +11,7 @@
 
 from __future__ import print_function
 
+import logging
 import sys
 
 import click
@@ -18,6 +19,8 @@ from github import Github, GithubException
 
 from lftools import config
 from lftools.github_helper import helper_list, helper_user_github, prvotes
+
+log = logging.getLogger(__name__)
 
 
 @click.group()
@@ -44,16 +47,16 @@ def submit_pr(ctx, organization, repo, pr):
     try:
         org = g.get_organization(orgName)
     except GithubException as ghe:
-        print(ghe)
+        log.error(ghe)
 
     repo = org.get_repo(repo)
     pr_mergable = repo.get_pull(pr).mergeable
 
     if pr_mergable:
-        print(pr_mergable)
+        log.info(pr_mergable)
         repo.get_pull(pr).merge(commit_message="Vote Completed, merging INFO file")
     else:
-        print("PR NOT MERGABLE {}".format(pr_mergable))
+        log.error("PR NOT MERGABLE {}".format(pr_mergable))
         sys.exit(1)
 
 
@@ -65,7 +68,7 @@ def submit_pr(ctx, organization, repo, pr):
 def votes(ctx, organization, repo, pr):
     """Helper for votes."""
     approval_list = prvotes(organization, repo, pr)
-    print("Approvals:", approval_list)
+    log.info("Approvals:", approval_list)
 
 
 @click.command(name="list")
@@ -106,15 +109,15 @@ def createrepo(ctx, organization, repository, description, has_issues, has_proje
     has_issues = has_issues or False
     has_wiki = has_wiki or False
     has_projects = has_projects or False
-    print("Creating repo under organization: ", orgName)
+    log.info("Creating repo under organization: ", orgName)
     try:
         org = g.get_organization(orgName)
     except GithubException as ghe:
-        print(ghe)
+        log.error(ghe)
     repos = org.get_repos()
     for repo in repos:
         if repo.name == repository:
-            print("repo already exists")
+            log.error("repo already exists")
             sys.exit(1)
     try:
         org.create_repo(
@@ -128,7 +131,7 @@ def createrepo(ctx, organization, repository, description, has_issues, has_proje
             private=False,
         )
     except GithubException as ghe:
-        print(ghe)
+        log.error(ghe)
 
 
 @click.command(name="update-repo")
@@ -160,7 +163,7 @@ def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki
     try:
         org = g.get_organization(orgName)
     except GithubException as ghe:
-        print(ghe)
+        log.error(ghe)
 
     repos = org.get_repos()
 
@@ -181,16 +184,16 @@ def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki
         try:
             repo_actual
         except NameError:
-            print("repo not found")
+            log.error("repo not found")
             exit(1)
 
         for team in teams():
             if team.name == add_team:
-                print(team.id)
+                log.info(team.id)
                 team.add_to_repos(repo_actual)
                 team.set_repo_permission(repo_actual, "write")
             if team.name == remove_team:
-                print(team.id)
+                log.info(team.id)
                 team.remove_from_repos(repo_actual)
 
 
@@ -213,49 +216,49 @@ def createteam(ctx, organization, name, repo, privacy):
 
     g = Github(token)
     orgName = organization
-    print("Creating team {} for repo {} under organization {} ".format(name, repo, orgName))
+    log.info("Creating team {} for repo {} under organization {} ".format(name, repo, orgName))
     try:
         org = g.get_organization(orgName)
     except GithubException as ghe:
-        print(ghe)
+        log.error(ghe)
 
     if repo:
         try:
             repos = org.get_repos
         except GithubException as ghe:
-            print(ghe)
+            log.error(ghe)
 
         my_repos = [repo]
         repos = [repo for repo in repos() if repo.name in my_repos]
         for repo in repos:
-            print(repo)
+            log.info(repo)
         if repos:
-            print("repo found")
+            log.info("repo found")
         else:
-            print("repo not found")
+            log.error("repo not found")
             sys.exit(1)
 
     try:
         teams = org.get_teams
     except GithubException as ghe:
-        print(ghe)
+        log.error(ghe)
 
     for team in teams():
         if team.name == name:
-            print("team {} already exists".format(team))
+            log.error("team {} already exists".format(team))
             sys.exit(1)
 
     if repo:
         try:
             org.create_team(name=name, repo_names=repos, privacy=privacy)
         except GithubException as ghe:
-            print(ghe)
+            log.error(ghe)
 
     if not repo:
         try:
             org.create_team(name=name, privacy=privacy)
         except GithubException as ghe:
-            print(ghe)
+            log.error(ghe)
 
 
 @click.command(name="user")
