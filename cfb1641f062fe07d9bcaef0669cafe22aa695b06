@@ -1,0 +1,225 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90988d4c_5a789ddd",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "if logging an exception it should be log.error, not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b87ee1_46e596c9",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "Your logging out an error, it should be log.error not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c666dea8_f1754c40",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "if logging an exception it should be log.error, not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2fe6956_dbe4ca2d",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "if logging an exception it should be log.error, not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ba1b392_310d8eeb",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "if logging an exception it should be log.error, not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18800270_4567a5a8",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "if logging an exception it should be log.error, not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5197c9db_78055dfd",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "if logging an exception it should be log.error, not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77687a70_5e30f863",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "if logging an exception it should be log.error, not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d984bf5_1e0954da",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "You\u0027re logging an error, it should be log.error not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a5f44b3_bda170d0",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "if logging an exception it should be log.error, not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e7f84ad_2ede58cd",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "You\u0027re logging an error, it should be log.error not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cec1f7a6_e38cb230",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "if logging an exception it should be log.error, not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "355dda42_c19048a5",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:10:24Z",
+      "side": 1,
+      "message": "if logging an exception it should be log.error, not log.info",
+      "revId": "cfb1641f062fe07d9bcaef0669cafe22aa695b06",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
