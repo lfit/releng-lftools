@@ -24,6 +24,7 @@ lxml
 multi-key-dict
 nodeenv
 oauth2client
+openstacksdk<1.5.0
 pbr
 pyasn1
 pyasn1-modules
