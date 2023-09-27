@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53755cb4_c0cbf614",
+        "filename": "lftools/cli/github_cli.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-27T21:11:33Z",
+      "side": 1,
+      "message": "You\u0027re logging an exception. It should be log.error not log.info",
+      "revId": "2df856a223ca628c0cf52684689de8d1e6d24c74",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
