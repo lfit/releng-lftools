@@ -175,7 +175,7 @@ def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki
                 repo.edit(has_wiki=has_projects)
 
     if add_team or remove_team:
-        teams = org.get_teams
+        teams = org.get_teams()
 
         for repo in repos:
             if repo.name == repository:
@@ -187,13 +187,13 @@ def updaterepo(ctx, organization, repository, has_issues, has_projects, has_wiki
             log.error("repo not found")
             exit(1)
 
-        for team in teams():
+        for team in teams:
             if team.name == add_team:
-                log.info(team.id)
+                log.info("Adding team {}".format(team.id))
                 team.add_to_repos(repo_actual)
-                team.set_repo_permission(repo_actual, "write")
-            if team.name == remove_team:
-                log.info(team.id)
+                team.update_team_repository(repo_actual, "push")
+            elif team.name == remove_team:
+                log.info("Removing team {}".format(team.id))
                 team.remove_from_repos(repo_actual)
 
 

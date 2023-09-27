@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Replace deprecated ``set_repo_permission`` method with ``update_team_repository``.
+    The latter has the same signature, but uses "pull" and "push" rather than
+    "read" and "write" as the permission strings.
