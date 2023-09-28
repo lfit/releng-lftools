@@ -16,6 +16,24 @@
       "message": "Pulling back to openstacksdk\u003c1.5.0 fixes the failure we\u0027re seeing in py37 tests. Python 3.7 is EOL, so we should probably actually update our test envs, but for now, this is a simpler fix for pending changes.",
       "revId": "885a4fa3e36ab4cc5ed08e2c9e3815b5f7d8fcb2",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dd85e9a_9b685b72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-09-28T17:11:44Z",
+      "side": 1,
+      "message": "I agree we should get things updated. We do, however, actually have an issue in that our jenkins nodes all use lftools and python 3.6 is the latest python we have there. There\u0027s no way to get any python better than that without using pyenv and all the puppet modules I\u0027ve looked at for pyenv have a conflict with the other python management module we\u0027re using 😞\n\nThat being said, python 3.10 will be the best we can move to for Centos7 which our Jenkins is currently running on. 3.11 requires newer libraries than we can get installed.",
+      "parentUuid": "8c7a4b5a_05e023d4",
+      "revId": "885a4fa3e36ab4cc5ed08e2c9e3815b5f7d8fcb2",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
