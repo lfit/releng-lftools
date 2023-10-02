@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62535100_af5eb2e2",
+        "filename": ".github/workflows/gerrit-verify.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2023-10-02T22:23:23Z",
+      "side": 1,
+      "message": "I believe this version should be removed here, if it\u0027s no longer on the env list.",
+      "range": {
+        "startLine": 115,
+        "startChar": 10,
+        "endLine": 115,
+        "endChar": 17
+      },
+      "revId": "7d414efe5674ea94a4d0b621d56d4a8108932e52",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "644d9114_8066e4ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2023-10-02T22:23:23Z",
+      "side": 1,
+      "message": "Besides my one comment, the change looks good. But why not include newer versions as well? Seems to me that 3.10 and 3.11 should also be tested, so that we can correct any incompatibilities that crop up before we end up needing to move the min version forward.",
+      "revId": "7d414efe5674ea94a4d0b621d56d4a8108932e52",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
