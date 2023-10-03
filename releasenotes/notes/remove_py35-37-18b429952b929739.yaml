@@ -1,0 +1,4 @@
+---
+other:
+  - |
+    Python 3.5, 3.6, and 3.7 support is officially dropped from lftools
