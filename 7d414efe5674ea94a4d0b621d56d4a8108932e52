@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4ddc75e3_d498cbc4",
+        "filename": ".github/workflows/gerrit-verify.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-10-03T14:42:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62535100_af5eb2e2",
+      "range": {
+        "startLine": 115,
+        "startChar": 10,
+        "endLine": 115,
+        "endChar": 17
+      },
+      "revId": "7d414efe5674ea94a4d0b621d56d4a8108932e52",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "644d9114_8066e4ea",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -54,6 +78,24 @@
       "writtenOn": "2023-10-02T22:24:27Z",
       "side": 1,
       "message": "(changing vote to -1 until 3.7 is removed from the GHA workflow)",
+      "revId": "7d414efe5674ea94a4d0b621d56d4a8108932e52",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ab6f75e_364e6181",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-10-03T14:42:24Z",
+      "side": 1,
+      "message": "I tried adding those and testing locally. Had some major bombs. So, I would like to get this fixed first and then we can see about figuring out what\u0027s wrong with py310 and py311.",
+      "parentUuid": "644d9114_8066e4ea",
       "revId": "7d414efe5674ea94a4d0b621d56d4a8108932e52",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
