@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2d289db_6e3c1c23",
+        "filename": ".github/workflows/gerrit-verify.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2023-10-03T21:46:55Z",
+      "side": 1,
+      "message": "Also, does this need to be changed? It appears several times throughout this workflow.",
+      "range": {
+        "startLine": 78,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 31
+      },
+      "revId": "5f728f9f4c5f8d2799881c23cfe06139bf3227bb",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
