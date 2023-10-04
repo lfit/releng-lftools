@@ -75,7 +75,7 @@ jobs:
       - name: Configure Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.7'
+          python-version: '3.8'
       - name: Build package distribution files
         run: >-
           pipx run tox -e clean,build
@@ -102,7 +102,7 @@ jobs:
       - name: Configure Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.7'
+          python-version: '3.8'
       - name: Run static analysis and format checkers
         run: pipx run pre-commit run --all-files --show-diff-on-failure
 
@@ -153,7 +153,7 @@ jobs:
         uses: actions/setup-python@v4
         id: setup-python
         with:
-          python-version: "3.7"
+          python-version: "3.8"
       - name: Run docs tests
         run: >-
           pipx run tox -e docs
@@ -173,7 +173,7 @@ jobs:
         uses: actions/setup-python@v4
         id: setup-python
         with:
-          python-version: "3.7"
+          python-version: "3.8"
       - name: Run docs-linkcheck tests
         run: >-
           pipx run tox -e docs-linkcheck
@@ -192,7 +192,7 @@ jobs:
         uses: actions/setup-python@v4
         id: setup-python
         with:
-          python-version: "3.7"
+          python-version: "3.8"
       - name: Run license tests
         run: >-
           pipx run tox -e license
