@@ -1,6 +1,0 @@
-include etc/logging.ini
-include README.md
-include requirements.txt
-include requirements-docs.txt
-include requirements-openstack.txt
-
