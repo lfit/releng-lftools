@@ -1,6 +1,150 @@
+[build-system]
+requires = ["setuptools>=46.1.0", "setuptools_scm[toml]>=5"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lftools"
+dynamic = ["version"]
+description = "Linux Foundation Release Engineering Tools"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "EPL-1.0"}
+
+authors = [
+    {name = "LF Release Engineering", email = "releng@linuxfoundation.org"},
+]
+
+maintainers = [
+    {name = "LF Release Engineering", email = "releng@linuxfoundation.org"},
+]
+
+# Add here all kinds of additional classifiers as defined under
+# https://pypi.org/classifiers/
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: Eclipse Public License 1.0 (EPL-1.0)",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9"
+]
+
+dependencies = [
+    "appdirs",
+    "aspy.yaml",
+    "attrs",
+    "beautifulsoup4",
+    "boto3",
+    "bs4",
+    "certifi",
+    "cfgv",
+    "chardet",
+    "click",
+    "defusedxml",
+    "Deprecated",
+    "dnspython",
+    "docker==4.2.2",
+    "email-validator",
+    "filelock",
+    "GitPython",
+    "httplib2",
+    "identify",
+    "idna",
+    "jinja2",
+    "jsonschema",
+    "lxml",
+    "multi-key-dict",
+    "nodeenv",
+    "oauth2client",
+    "openstacksdk<1.5.0",
+    "pbr",
+    "pyasn1",
+    "pyasn1-modules",
+    "pygerrit2",
+    "PyGithub",
+    "PyJWT",
+    "pyrsistent",
+    "python-jenkins",
+    "PyYAML",
+    "requests",
+    "rsa",
+    "ruamel.yaml",
+    "ruamel.yaml.clib",
+    "six",
+    "soupsieve",
+    "tabulate",
+    "toml",
+    "tqdm",
+    "urllib3<2.0.0",
+    "websocket-client",
+    "wrapt",
+    "xdg"
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy"
+]
+
+docs = [
+    "lfdocs-conf",
+    "reno",
+    "sphinxcontrib-programoutput"
+]
+
+ldap = [
+    "python-ldap~=3.1.0"
+]
+
+openstack = [
+    "osc-lib~=2.2.0"
+]
+
+test = [
+    "pytest==5.3.5",
+    "pytest-click==0.3",
+    "pytest-datafiles==2.0",
+    "pytest-mock==2.0.0",
+    "pytest-responses==0.4.0"
+]
+
+[project.urls]
+"Homepage" = "https://docs.releng.linuxfoundation.org/projects/lftools"
+"Bug Tracker" = "https://github.com/lfit/releng-tools/issues"
+"Documentation" = "https://docs.releng.linuxfoundation.org/projects/lftools"
+"Source Code" = "https://github.com/lfit/releng-lftools"
+
+[project.scripts]
+lftools = "lftools.cli:main"
+
+[tool.setuptools]
+platforms = ["linux"]
+script-files = [
+    "shell/deploy",
+    "shell/gerrit_create",
+    "shell/inactivecommitters",
+    "shell/sign",
+    "shell/version",
+    "shell/yaml4info",
+    "shell/autocorrectinfofile"
+]
+
+[tool.setuptools.packages.find]
+where = ["lftools"]
+exclude = ["tests*"]
+
+
+[tool.setuptools_scm]
+# For smarter version schemes and other configuration options,
+# check out https://github.com/pypa/setuptools_scm
+local_scheme = "no-local-version"
+version_scheme = "python-simplified-semver"
+
+
 [tool.black]
 line-length = 120
-target-version = ['py36']
+target-version = ['py38']
 exclude = '''
 /(
     \.venv
