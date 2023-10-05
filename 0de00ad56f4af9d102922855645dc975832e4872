@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d988030c_05596d3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2023-10-05T19:49:23Z",
+      "side": 1,
+      "message": "Missed this by about 20 minutes, but just want to add that I was able to successfully build and install the package locally, so lgtm too.",
+      "revId": "0de00ad56f4af9d102922855645dc975832e4872",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
