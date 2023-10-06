@@ -1,4 +1,0 @@
--r requirements.txt
-lfdocs-conf
-reno
-sphinxcontrib-programoutput

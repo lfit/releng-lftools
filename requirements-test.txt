@@ -1,6 +1,0 @@
--r requirements.txt
-pytest==5.3.5
-pytest-click==0.3
-pytest-datafiles==2.0
-pytest-mock==2.0.0
-pytest-responses==0.4.0
