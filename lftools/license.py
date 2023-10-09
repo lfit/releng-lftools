@@ -9,6 +9,7 @@
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
 """Scans code for a valid license header."""
+from __future__ import annotations
 
 __author__ = "Thanh Ha"
 
@@ -17,11 +18,12 @@ import logging
 import os
 import re
 import sys
+from typing import List, Optional
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
-def get_header_text(_file):
+def get_header_text(_file: str) -> str:
     """Scan a file and pulls out the license header.
 
     Returns a string containing the license header with newlines and copyright
@@ -29,14 +31,14 @@ def get_header_text(_file):
 
     Note: This function only supports '#' comments for license headers.
     """
-    text = ""
+    text: str = ""
     with open(_file, "r") as data:
-        lines = data.readlines()
+        lines: List[str] = data.readlines()
         for line in lines:
-            result = re.search(r"\s*[#]", line)
+            result: Optional[re.Match] = re.search(r"\s*[#]", line)
             if not result:
                 break
-            string = re.sub(r"^\s*#+", "", line).strip()
+            string: str = re.sub(r"^\s*#+", "", line).strip()
             if bool(re.match("Copyright", string, re.I)) or bool(  # Ignore the Copyright line
                 re.match("^#!", line, re.I)
             ):  # Ignore #! shebang lines
@@ -47,14 +49,14 @@ def get_header_text(_file):
     return text
 
 
-def check_license(license_file, code_file):
+def check_license(license_file: str, code_file: str) -> int:
     """Compare a file with the provided license header.
 
     Reports if license header is missing or does not match the text of
     license_file.
     """
-    license_header = get_header_text(license_file)
-    code_header = get_header_text(code_file)
+    license_header: str = get_header_text(license_file)
+    code_header: str = get_header_text(code_file)
 
     if license_header not in code_header:
         log.error("{} is missing or has incorrect license header.".format(code_file))
@@ -63,9 +65,9 @@ def check_license(license_file, code_file):
     return 0
 
 
-def check_license_directory(license_file, directory, regex=r".+\.py$"):
+def check_license_directory(license_file: str, directory: str, regex: str = r".+\.py$") -> None:
     """Search a directory for files and calls check_license()."""
-    missing_license = False
+    missing_license: bool = False
 
     for root, dirs, files in os.walk(directory):
         for f in files:
