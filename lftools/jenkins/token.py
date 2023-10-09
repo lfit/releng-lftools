@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: EPL-1.0
 ##############################################################################
-# Copyright (c) 2018 The Linux Foundation and others.
+# Copyright (c) 2018, 2023 The Linux Foundation and others.
 #
 # All rights reserved. This program and the accompanying materials
 # are made available under the terms of the Eclipse Public License v1.0
@@ -8,6 +8,7 @@
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
 """Jenkins token functions."""
+from __future__ import annotations
 
 __author__ = "Thanh Ha"
 
@@ -15,10 +16,10 @@ import logging
 
 import jenkins
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
-def get_token(name, url, username, password, change=False):
+def get_token(name: str, url: str, username: str, password: str, change: bool = False) -> str:
     """Get API token.
 
     This function uses the global username / password for Jenkins from
@@ -30,9 +31,9 @@ def get_token(name, url, username, password, change=False):
     else:
         log.debug("Fetching Jenkins API token from {}".format(url))
 
-    server = jenkins.Jenkins(url, username=username, password=password)
+    server: jenkins.Jenkins = jenkins.Jenkins(url, username=username, password=password)  # type: ignore
 
-    get_token = """
+    get_token: str = """
 import hudson.model.*
 import jenkins.model.*
 import jenkins.security.*
@@ -45,5 +46,5 @@ println token.plainValue
         username, name
     )
 
-    token = server.run_script(get_token)
+    token: str = str(server.run_script(get_token))
     return token
