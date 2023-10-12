@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: EPL-1.0
 ##############################################################################
-# Copyright (c) 2017 The Linux Foundation and others.
+# Copyright (c) 2017, 2023 The Linux Foundation and others.
 #
 # All rights reserved. This program and the accompanying materials
 # are made available under the terms of the Eclipse Public License v1.0
@@ -8,9 +8,9 @@
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
 """Version bump script for Maven based projects."""
+from __future__ import annotations
 
 __author__ = "Thanh Ha"
-
 
 import logging
 import os
@@ -19,12 +19,12 @@ import sys
 
 import click
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 @click.group()
 @click.pass_context
-def version(ctx):
+def version(ctx) -> None:
     """Version bump script for Maven based projects.
 
     In general, versions should be: <major>.<minor>.<micro>[-<human-readable-tag>]
@@ -58,7 +58,7 @@ def version(ctx):
 @click.command()
 @click.argument("release-tag")
 @click.pass_context
-def bump(ctx, release_tag):
+def bump(ctx, release_tag: str) -> None:
     """Version bump pom files in a Maven project by x.(y+1).z or x.y.(z+1).
 
     This script performs version bumping as follows:
@@ -69,20 +69,20 @@ def bump(ctx, release_tag):
     3. Change x.y.z-SNAPSHOT versions to x.(y+1).0-SNAPSHOT
     4. Change x.y.z-RELEASE_TAG versions to x.y.(z+1)-SNAPSHOT and
     """
-    status = subprocess.call(["version", "bump", release_tag])
+    status: int = subprocess.call(["version", "bump", release_tag])
     sys.exit(status)
 
 
 @click.command()
 @click.argument("release-tag")
 @click.pass_context
-def release(ctx, release_tag):
+def release(ctx, release_tag: str) -> None:
     """Version bump pom files in a Maven project from SNAPSHOT to RELEASE_TAG.
 
     Searches poms for all instances of SNAPSHOT version and changes it to
     RELEASE_TAG.
     """
-    status = subprocess.call(["version", "release", release_tag])
+    status: int = subprocess.call(["version", "release", release_tag])
     sys.exit(status)
 
 
@@ -91,7 +91,7 @@ def release(ctx, release_tag):
 @click.argument("patch-dir")
 @click.option("--project", default="OpenDaylight", help="Project name to use when tagging. (Default: OpenDaylight)")
 @click.pass_context
-def patch(ctx, release_tag, patch_dir, project):
+def patch(ctx, release_tag: str, patch_dir: str, project: str) -> None:
     """Patch a project with git.bundles and then version bump.
 
     Applies git.bundle patches to the project and then performs a version bump
@@ -101,7 +101,7 @@ def patch(ctx, release_tag, patch_dir, project):
         log.error("{} is not a valid directory.".format(patch_dir))
         sys.exit(404)
     # due to the nature of the subprocess call, this is not testable so disable coverage
-    status = subprocess.call(["version", "patch", release_tag, patch_dir, project])  # pragma: no cover
+    status: int = subprocess.call(["version", "patch", release_tag, patch_dir, project])  # pragma: no cover
     sys.exit(status)  # pragma: no cover
 
 
