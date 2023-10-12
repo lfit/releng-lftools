@@ -100,8 +100,9 @@ def patch(ctx, release_tag, patch_dir, project):
     if not os.path.isdir(patch_dir):
         log.error("{} is not a valid directory.".format(patch_dir))
         sys.exit(404)
-    status = subprocess.call(["version", "patch", release_tag, patch_dir, project])
-    sys.exit(status)
+    # due to the nature of the subprocess call, this is not testable so disable coverage
+    status = subprocess.call(["version", "patch", release_tag, patch_dir, project])  # pragma: no cover
+    sys.exit(status)  # pragma: no cover
 
 
 version.add_command(bump)
