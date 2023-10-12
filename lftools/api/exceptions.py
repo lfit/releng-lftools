@@ -8,11 +8,12 @@
 # http://www.eclipse.org/legal/epl-v10.html
 ##############################################################################
 """Exceptions for the API client."""
+from __future__ import annotations
 
 
 class UnsupportedRequestType(Exception):
     """Except on an unknown request."""
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Except unknown return type."""
         return "Unknown request type"
