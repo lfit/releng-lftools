@@ -51,3 +51,13 @@ def test_version_release(cli_runner, datafiles):
         expected_pom = str(_file) + "/pom.xml.expected"
         # noqa: B101 .
         assert filecmp.cmp(pom, expected_pom)
+
+
+@pytest.mark.datafiles(
+    os.path.join(FIXTURE_DIR, "version_bump", "release"),
+)
+def test_patch(cli_runner, datafiles):
+    """Test patch command."""
+    os.chdir(str(datafiles))
+    result = cli_runner.invoke(cli.cli, ["version", "patch", "TestRelease", os.path.join(datafiles, "README")], obj={})
+    assert result.exit_code == 404
