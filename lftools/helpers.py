@@ -9,12 +9,13 @@
 ##############################################################################
 
 """Nexus3 REST API interface."""
+from __future__ import annotations
 
 import random
 import string
 
 
-def generate_password(length=12):
-    punctuation = "!#$%&()*+,-.:;<=>?@[]^_{|}~"
-    password_characters = string.ascii_letters + string.digits + punctuation
+def generate_password(length: int = 12) -> str:
+    punctuation: str = "!#$%&()*+,-.:;<=>?@[]^_{|}~"
+    password_characters: str = string.ascii_letters + string.digits + punctuation
     return "".join(random.choice(password_characters) for _ in range(length))
