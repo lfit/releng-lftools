@@ -408,6 +408,16 @@ def add_str_if_not_exist(new_str, existing_str_lst):
     return addthis
 
 
+def find_release_time(events):
+    """Returns the time when a repository was released, or None if it has not been released yet."""
+    for event in events:
+        name = event.find("name")
+        stopped = event.find("stopped")
+        if name.text == "release" and stopped is not None:
+            return stopped.text
+    return None
+
+
 def release_staging_repos(repos, verify, nexus_url=""):
     """Release one or more staging repos.
 
@@ -504,22 +514,31 @@ def release_staging_repos(repos, verify, nexus_url=""):
 
             # Hang out until the repo is fully released
             log.info("Waiting for Nexus to complete releasing {}".format(str(repo)))
-            released = False
             wait_seconds = 20
             wait_iteration = 0
+            consecutive_failures = 0
             activity_url = "{}/staging/repository/{}/activity".format(_nexus.baseurl, repo)
             sleep(5)  # Quick sleep to allow small repos to release.
-            while released is False:
-                response = requests.get(activity_url, auth=_nexus.auth).text
-                root = et.fromstring(response)  # nosec
-                events = root.findall("./stagingActivity")
-                for event in events:
-                    name = event.find("name")
-                    stopped = event.find("stopped")
-                    if name.text == "release" and stopped is not None:
-                        log.info("Repo released at: {}".format(stopped.text))
-                        released = True
-                if not released:
-                    sleep(wait_seconds)
-                    wait_iteration += 1
-                    log.info("Still waiting... {:>4d} seconds gone".format(wait_seconds * wait_iteration))
+            while True:
+                try:
+                    response = requests.get(activity_url, auth=_nexus.auth).text
+                    consecutive_failures = 0
+                    root = et.fromstring(response)  # nosec
+                    time = find_release_time(root.findall("./stagingActivity"))
+                    if time is not None:
+                        log.info("Repo released at: {}".format(time))
+                        break
+
+                except requests.exceptions.ConnectionError as e:
+                    # Ignore failures unless they pile up. We do this because we seem to be facing transient
+                    # issues (like DNS failures) and completing repository release here is absolutely critical,
+                    # as otherwise this can lead to failing to perform post-release steps, which cannot be
+                    # manually recovered.
+                    consecutive_failures += 1
+                    if consecutive_failures > 50:
+                        raise e
+                    log.warn(e, stack_info=True, exc_info=True)
+
+                sleep(wait_seconds)
+                wait_iteration += 1
+                log.info("Still waiting... {:>4d} seconds gone".format(wait_seconds * wait_iteration))
