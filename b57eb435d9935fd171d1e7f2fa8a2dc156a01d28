@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a57854_16ecbcf7",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-10-30T18:01:36Z",
+      "side": 1,
+      "message": "This was just set on line 509... why is it being reset on _every_ loop through? The exit raise at line 530 will never be reached with this here.",
+      "revId": "b57eb435d9935fd171d1e7f2fa8a2dc156a01d28",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
