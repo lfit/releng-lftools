@@ -16,6 +16,24 @@
       "message": "This was just set on line 509... why is it being reset on _every_ loop through? The exit raise at line 530 will never be reached with this here.",
       "revId": "b57eb435d9935fd171d1e7f2fa8a2dc156a01d28",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3325334d_ee355018",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 112
+      },
+      "writtenOn": "2023-10-30T19:38:14Z",
+      "side": 1,
+      "message": "as the variable name would suggest, this counts the number of times requests.get() raises an exception without an intervening success. hence every time it does *not*, we reset it to zero, so this should work like\n\nsuccess (\u003d 0)\nfailure (\u003d 1)\nfailure (\u003d 2)\nsuccess (\u003d 0)\nfailure (\u003d 1)\nfailure (\u003d 2)\nfailure (\u003d 3)\n...\nfailure (\u003d 51 -\u003e terminate via \u0027raise e\u0027)",
+      "parentUuid": "e2a57854_16ecbcf7",
+      "revId": "b57eb435d9935fd171d1e7f2fa8a2dc156a01d28",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
