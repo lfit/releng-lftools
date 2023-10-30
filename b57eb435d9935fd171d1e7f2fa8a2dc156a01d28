@@ -18,6 +18,41 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5973df03_344555bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-10-30T21:38:36Z",
+      "side": 1,
+      "message": "It\u0027s essentially timing out on the py38 test (likely in the py39 test as well) for the release_staging_repos method that you are modifying. It\u0027s doing the same thing on my local system.\n\nThe test in tests/test_nexus.py from lines 58 - 81 is what I think is having an issue. I\u0027m not 100% certain as these module and tests are written by an engineer no longer with us. Additionally, the lines that you\u0027re modifying were not even covered by tests previously so it\u0027s super hard to determine how it\u0027s breaking.",
+      "parentUuid": "6698579c_0d13d4a2",
+      "revId": "b57eb435d9935fd171d1e7f2fa8a2dc156a01d28",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3996926_86ab0e2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-10-30T21:38:36Z",
+      "side": 1,
+      "message": "Ok, the change is likely correct, but since the tests are essentially failing I\u0027m going to have to still say no. Granted, the lines of code you\u0027re changing have not been historically covered in tests (yes, I know that\u0027s horrible). If you can fix up the tests we can see about accepting it.\n\nThe tests are failing the same way for me locally using py38 and py39.\n\n`tox -e py38` gets me the same hanging that is being seen by GHA.",
+      "revId": "b57eb435d9935fd171d1e7f2fa8a2dc156a01d28",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2a57854_16ecbcf7",
@@ -67,6 +102,24 @@
       "side": 1,
       "message": "oh btw, and we do this only for requests.exceptions.ConnectionError, any other exception causes an immediate termination, just as it does today",
       "parentUuid": "3325334d_ee355018",
+      "revId": "b57eb435d9935fd171d1e7f2fa8a2dc156a01d28",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "190d514b_cb8fa36d",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2023-10-30T21:38:36Z",
+      "side": 1,
+      "message": "Thanks for pointing it out. I was misreading what was happening.",
+      "parentUuid": "c7e6cb7f_2166423a",
       "revId": "b57eb435d9935fd171d1e7f2fa8a2dc156a01d28",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
