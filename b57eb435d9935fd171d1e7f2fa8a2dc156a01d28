@@ -34,6 +34,24 @@
       "parentUuid": "e2a57854_16ecbcf7",
       "revId": "b57eb435d9935fd171d1e7f2fa8a2dc156a01d28",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7e6cb7f_2166423a",
+        "filename": "lftools/nexus/cmd.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 112
+      },
+      "writtenOn": "2023-10-30T20:04:19Z",
+      "side": 1,
+      "message": "oh btw, and we do this only for requests.exceptions.ConnectionError, any other exception causes an immediate termination, just as it does today",
+      "parentUuid": "3325334d_ee355018",
+      "revId": "b57eb435d9935fd171d1e7f2fa8a2dc156a01d28",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
