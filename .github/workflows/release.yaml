@@ -11,9 +11,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 30
-          fetch-tags: true
       - name: Configure Python
         uses: actions/setup-python@v4
         with:
@@ -57,7 +54,9 @@ jobs:
             Cheers,
             LF Release Engineering
       - name: Generate reno report
-        run: >-
+        run: |
+          # fetch last 30 changes
+          git fetch --depth=30
           pipx run tox -e reno -- report \
             --version "${{ steps.tag.outputs.tag }}" \
             2>/dev/null > reno-notes.md || true
@@ -73,7 +72,7 @@ jobs:
             sed '1d' > modified-reno-notes.md
           fi
       - name: Create Release Notes
-        run: >-
+        run: |
           gh release create ${{ steps.tag.outputs.tag }} --generate-notes \
             -F modified-reno-notes.md
         env:
