@@ -260,7 +260,7 @@ class Gerrit:
         )
         log.debug("config-params.yaml contents:\n{}".format(server_creds_content))
 
-        config_path = "jenkins-config/managed-config-files/mavenSettings/{}".format(project_dashed)
+        config_path = "jenkins-config/managed-config-files/mavenSettings/{}-settings".format(project_dashed)
         try:
             os.makedirs(config_path)
         except FileExistsError:

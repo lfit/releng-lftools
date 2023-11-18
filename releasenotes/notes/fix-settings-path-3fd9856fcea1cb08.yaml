@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Correct path for Jenkins settings files.
+
+    The correct path should be "<repo>-settings", but was previously set
+    to just "<repo>". This was causing problems in our JCASC and other
+    automation.
