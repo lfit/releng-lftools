@@ -12,12 +12,12 @@ from __future__ import annotations
 
 __author__ = "Thanh Ha"
 
+import configparser
 import logging
 import os
 from typing import Optional
 
 import jenkins
-from six.moves import configparser
 
 log: logging.Logger = logging.getLogger(__name__)
 
@@ -56,7 +56,7 @@ class Jenkins:
         if "://" not in server:
             if self.config_file:
                 log.debug("Using config from {}".format(self.config_file))
-                config: configparser.SafeConfigParser = configparser.SafeConfigParser()
+                config: configparser.ConfigParser = configparser.ConfigParser()
                 config.read(self.config_file)
                 if config.has_section(server):
                     user = config.get(server, "user")
