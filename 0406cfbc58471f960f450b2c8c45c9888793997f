@@ -16,6 +16,24 @@
       "message": "Should this have a release note?",
       "revId": "0406cfbc58471f960f450b2c8c45c9888793997f",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06c56ec9_57c3d439",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2024-01-08T21:27:08Z",
+      "side": 1,
+      "message": "It\u0027s a refactor so I\u0027m not 100% certain it needs one. There\u0027s going to be a bunch of these as we scrub `six` from the code base. I suppose I can put a small one in here. So I\u0027ve gone ahead and done that.",
+      "parentUuid": "2eebefa8_077617dc",
+      "revId": "0406cfbc58471f960f450b2c8c45c9888793997f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
