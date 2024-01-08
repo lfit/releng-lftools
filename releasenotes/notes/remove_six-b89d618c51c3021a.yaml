@@ -1,0 +1,7 @@
+---
+deprecations:
+  - |
+    The six module is being phased out of use as Python 2 support has been
+    dropped. This release is the first in which one (or more) transitions have
+    happened. There should be no issues related to this transition but bugs may
+    creep in.
