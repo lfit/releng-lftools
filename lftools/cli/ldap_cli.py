@@ -102,7 +102,7 @@ def csv(ctx, ldap_server, ldap_group_base, ldap_user_base, groups):
             ldap_object.protocol_version = ldap.VERSION3
             ldap_object.simple_bind_s()
         except ldap.LDAPError as e:
-            if type(e.message) == dict and "desc" in e.message:
+            if type(e.message) is dict and "desc" in e.message:
                 print(e.message["desc"])
             else:
                 print(e)

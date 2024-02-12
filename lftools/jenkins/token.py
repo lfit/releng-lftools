@@ -33,7 +33,8 @@ def get_token(name: str, url: str, username: str, password: str, change: bool = 
 
     server: jenkins.Jenkins = jenkins.Jenkins(url, username=username, password=password)  # type: ignore
 
-    get_token: str = """
+    get_token: str = (
+        """
 import hudson.model.*
 import jenkins.model.*
 import jenkins.security.*
@@ -43,7 +44,8 @@ ApiTokenProperty t = u.getProperty(ApiTokenProperty.class)
 def token = t.tokenStore.generateNewToken("{}")
 println token.plainValue
 """.format(
-        username, name
+            username, name
+        )
     )
 
     token: str = str(server.run_script(get_token))
