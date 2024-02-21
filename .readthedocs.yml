@@ -27,6 +27,6 @@ build:
 python:
   install:
     - extra_requirements:
-        - .[docs]
+        - docs
       path: .
       method: pip
