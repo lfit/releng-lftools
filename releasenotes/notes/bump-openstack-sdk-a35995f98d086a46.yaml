@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    Updated openstacksdk to >=2.1.0 to address dependency conflicts.
+    Also updated linting tool versions with pre-commit autoupdate.
+    Addressed minor type checking issue flagged by flake8.
+    Minor file formatting changes implemented via linting.
