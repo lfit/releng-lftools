@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    Undo the urllib3 version pin now python-jenkins no longer breaks.
+    It was previous pinned at <2.0.0, but we can now update to <2.1.0.
+    There are still some issues with the latest release 2.1.0.
+
