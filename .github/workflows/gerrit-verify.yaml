@@ -73,7 +73,7 @@ jobs:
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
       - name: Configure Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.8'
       - name: Build package distribution files
@@ -85,7 +85,7 @@ jobs:
       - name: Store the distribution files for use in other stages
         # `tests` and `publish` will use the same pre-built distributions,
         # so we make sure to release the exact same package that was tested
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: python-distribution-files
           path: dist/
@@ -100,7 +100,7 @@ jobs:
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
       - name: Configure Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.8'
       - name: Run static analysis and format checkers
@@ -121,12 +121,12 @@ jobs:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
           delay: "0s"
       - name: Configure Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         id: setup-python
         with:
           python-version: ${{ matrix.python }}
       - name: Retrieve pre-built distribution files
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with: {name: python-distribution-files, path: dist/}
       - name: Enable sar
         run: |
@@ -150,7 +150,7 @@ jobs:
           delay: "0s"
           fetch-depth: "0"
       - name: Configure Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         id: setup-python
         with:
           python-version: "3.8"
@@ -170,7 +170,7 @@ jobs:
           delay: "0s"
           fetch-depth: "0"
       - name: Configure Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         id: setup-python
         with:
           python-version: "3.8"
@@ -189,7 +189,7 @@ jobs:
           delay: "0s"
           fetch-depth: "0"
       - name: Configure Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         id: setup-python
         with:
           python-version: "3.8"
