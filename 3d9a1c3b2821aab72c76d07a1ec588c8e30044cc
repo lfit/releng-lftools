@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56d2cbb2_d346437d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2024-03-12T12:31:10Z",
+      "side": 1,
+      "message": "Since the recent Openstack SDK version change, cleanup jobs are failing, e.g. here:\nhttps://jenkins.onap.org/job/ci-management-openstack-cron/43405/console\nThis seem to be another issue with an undeclared dependency somewhere.\nI\u0027ve tested a fix in ONAP sandbox here:\nhttps://jenkins.onap.org/sandbox/job/ci-management-openstack-cron/1/console",
+      "revId": "3d9a1c3b2821aab72c76d07a1ec588c8e30044cc",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
