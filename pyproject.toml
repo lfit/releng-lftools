@@ -55,6 +55,7 @@ dependencies = [
     "jsonschema",
     "lxml",
     "multi-key-dict",
+    "munch",
     "nodeenv",
     "oauth2client",
     "openstacksdk>=2.1.0",

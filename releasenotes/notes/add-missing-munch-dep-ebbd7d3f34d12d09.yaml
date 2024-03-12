@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Add missing Python module dependency "munch" causing Openstack job failures
