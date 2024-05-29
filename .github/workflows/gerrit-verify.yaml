@@ -43,7 +43,8 @@ on:
         type: string
 
 concurrency:
-  group: ${{ github.event.inputs.GERRIT_CHANGE_ID || github.run_id }}
+  # yamllint disable-line rule:line-length
+  group: ${{ github.workflow }}-${{ github.event.inputs.GERRIT_BRANCH}}-${{ github.event.inputs.GERRIT_CHANGE_ID || github.run_id }}
   cancel-in-progress: true
 
 jobs:
@@ -51,7 +52,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clear votes
-        uses: lfit/gerrit-review-action@v0.3
+        # yamllint disable-line rule:line-length
+        uses: lfit/gerrit-review-action@9627b9a144f2a2cad70707ddfae87c87dce60729  # v0.8
         with:
           host: ${{ vars.LFIT_GERRIT_SERVER }}
           username: ${{ vars.LFIT_GERRIT_SSH_USER }}
@@ -61,6 +63,21 @@ jobs:
           gerrit-patchset-number: ${{ inputs.GERRIT_PATCHSET_NUMBER }}
           vote-type: clear
 
+
+  lint:
+    needs: clear-vote
+    # yamllint disable-line rule:line-length
+    uses: lfit/releng-reusable-workflows/.github/workflows/compose-repo-linting.yaml@main
+    with:
+      GERRIT_BRANCH: ${{ inputs.GERRIT_BRANCH }}
+      GERRIT_CHANGE_ID: ${{ inputs.GERRIT_CHANGE_ID }}
+      GERRIT_CHANGE_NUMBER: ${{ inputs.GERRIT_CHANGE_NUMBER }}
+      GERRIT_CHANGE_URL: ${{ inputs.GERRIT_CHANGE_URL }}
+      GERRIT_EVENT_TYPE: ${{ inputs.GERRIT_EVENT_TYPE }}
+      GERRIT_PATCHSET_NUMBER: ${{ inputs.GERRIT_PATCHSET_NUMBER }}
+      GERRIT_PATCHSET_REVISION: ${{ inputs.GERRIT_PATCHSET_REVISION }}
+      GERRIT_PROJECT: ${{ inputs.GERRIT_PROJECT }}
+      GERRIT_REFSPEC: ${{ inputs.GERRIT_REFSPEC }}
 
   prepare:
     needs: clear-vote
@@ -81,7 +98,7 @@ jobs:
           pipx run tox -e clean,build
       - name: Record the path of wheel distribution
         id: wheel-distribution
-        run: echo "path=$(ls dist/*.whl)" >> $GITHUB_OUTPUT
+        run: echo "path=$(ls dist/*.whl)" >> "$GITHUB_OUTPUT"
       - name: Store the distribution files for use in other stages
         # `tests` and `publish` will use the same pre-built distributions,
         # so we make sure to release the exact same package that was tested
@@ -90,21 +107,6 @@ jobs:
           name: python-distribution-files
           path: dist/
           retention-days: 1
-
-  pre-commit:
-    needs: clear-vote
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout change
-        uses: lfit/checkout-gerrit-change-action@v0.3
-        with:
-          gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
-      - name: Configure Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.8'
-      - name: Run static analysis and format checkers
-        run: pipx run pre-commit run --all-files --show-diff-on-failure
 
   test:
     needs: prepare
@@ -116,9 +118,12 @@ jobs:
           - "3.9"
     steps:
       - name: Checkout change
-        uses: lfit/checkout-gerrit-change-action@v0.3
+        # yamllint disable-line rule:line-length
+        uses: lfit/checkout-gerrit-change-action@54d751e8bd167bc91f7d665dabe33fae87aaaa63  # v0.9
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
+          gerrit-project: ${{ inputs.GERRIT_PROJECT }}
+          gerrit-url: ${{ vars.GERRIT_URL }}
           delay: "0s"
       - name: Configure Python
         uses: actions/setup-python@v5
@@ -144,11 +149,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout change
-        uses: lfit/checkout-gerrit-change-action@v0.3
+        # yamllint disable-line rule:line-length
+        uses: lfit/checkout-gerrit-change-action@54d751e8bd167bc91f7d665dabe33fae87aaaa63  # v0.9
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
+          gerrit-project: ${{ inputs.GERRIT_PROJECT }}
+          gerrit-url: ${{ vars.GERRIT_URL }}
           delay: "0s"
-          fetch-depth: "0"
       - name: Configure Python
         uses: actions/setup-python@v5
         id: setup-python
@@ -164,11 +171,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout change
-        uses: lfit/checkout-gerrit-change-action@v0.3
+        # yamllint disable-line rule:line-length
+        uses: lfit/checkout-gerrit-change-action@54d751e8bd167bc91f7d665dabe33fae87aaaa63  # v0.9
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
+          gerrit-project: ${{ inputs.GERRIT_PROJECT }}
+          gerrit-url: ${{ vars.GERRIT_URL }}
           delay: "0s"
-          fetch-depth: "0"
       - name: Configure Python
         uses: actions/setup-python@v5
         id: setup-python
@@ -183,11 +192,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout change
-        uses: lfit/checkout-gerrit-change-action@v0.3
+        # yamllint disable-line rule:line-length
+        uses: lfit/checkout-gerrit-change-action@54d751e8bd167bc91f7d665dabe33fae87aaaa63  # v0.9
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
+          gerrit-project: ${{ inputs.GERRIT_PROJECT }}
+          gerrit-url: ${{ vars.GERRIT_URL }}
           delay: "0s"
-          fetch-depth: "0"
       - name: Configure Python
         uses: actions/setup-python@v5
         id: setup-python
@@ -199,7 +210,7 @@ jobs:
 
   vote:
     if: ${{ always() }}
-    needs: [prepare, pre-commit, test, docs, docs-linkcheck, license]
+    needs: [prepare, test, docs, docs-linkcheck, license, lint]
     runs-on: ubuntu-latest
     steps:
       - name: Get workflow conclusion

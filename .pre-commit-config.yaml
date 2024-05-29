@@ -21,7 +21,7 @@ repos:
   - repo: https://github.com/ambv/black
     rev: 24.4.2
     hooks:
-    - id: black
+      - id: black
 
   - repo: https://github.com/PyCQA/isort
     rev: 5.13.2
@@ -43,3 +43,8 @@ repos:
           - types-requests
           - types-six
           - types-PyYAML
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: ea8102762106cdca9c88829f1295b39a544706f3  # frozen: v1.6.26
+    hooks:
+      - id: actionlint

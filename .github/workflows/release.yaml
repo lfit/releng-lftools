@@ -20,8 +20,8 @@ jobs:
           pipx run tox -e clean,build
       - name: Configure TWINE
         run: |
-          echo "TWINE_USERNAME=__token__" >> $GITHUB_ENV
-          echo "TWINE_PASSWORD=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
+          echo "TWINE_USERNAME=__token__" >> "$GITHUB_ENV"
+          echo "TWINE_PASSWORD=${{ secrets.PYPI_API_TOKEN }}" >> "$GITHUB_ENV"
       - name: Publish to PyPI
         run: >-
           pipx run tox -e publish -- --repository pypi
@@ -29,9 +29,9 @@ jobs:
         id: tag
         uses: devops-actions/action-get-tag@v1.0.2
       - name: Convert tag
-        run: >-
+        run: |
           VER=$(echo "${{ steps.tag.outputs.tag }}" | tr . -)
-          echo "ANCHOR=${VER}" >> $GITHUB_ENV
+          echo "ANCHOR=${VER}" >> "$GITHUB_ENV"
       - name: Generate reno report
         run: |
           # fetch last 30 changes
