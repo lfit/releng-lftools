@@ -5,7 +5,7 @@ repos:
   ###########
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: trailing-whitespace
 
@@ -19,7 +19,7 @@ repos:
   ##########
 
   - repo: https://github.com/ambv/black
-    rev: 24.1.1
+    rev: 24.4.2
     hooks:
     - id: black
 
@@ -35,7 +35,7 @@ repos:
         args: ["--max-line-length=120"]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.8.0
+    rev: v1.10.0
     hooks:
       - id: mypy
         additional_dependencies:
