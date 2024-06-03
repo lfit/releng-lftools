@@ -156,6 +156,7 @@ jobs:
           gerrit-project: ${{ inputs.GERRIT_PROJECT }}
           gerrit-url: ${{ vars.GERRIT_URL }}
           delay: "0s"
+          fetch-depth: 0
       - name: Configure Python
         uses: actions/setup-python@v5
         id: setup-python
@@ -178,6 +179,7 @@ jobs:
           gerrit-project: ${{ inputs.GERRIT_PROJECT }}
           gerrit-url: ${{ vars.GERRIT_URL }}
           delay: "0s"
+          fetch-depth: 0
       - name: Configure Python
         uses: actions/setup-python@v5
         id: setup-python
