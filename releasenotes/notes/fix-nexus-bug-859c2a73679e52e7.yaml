@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Initialize raw_json variable before first usage otherwise we will get
+    UnboundLocalError. Additionally move some logic using the raw_json to
+    a position where it makes more sense.
+    Pytest configuration was outdated so it was required to upgrade plugin
+    versions and tests code in order to get a healthy Gerrit change.
