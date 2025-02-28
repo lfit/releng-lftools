@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Initialize raw_json variable before first usage otherwise we will get
+    UnboundLocalError. Additionally move some logic using the raw_json to
+    a position where it makes more sense.

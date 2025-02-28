@@ -312,6 +312,7 @@ class DockerTagClass(TagClass):
         still_more = True
         docker_tag_url = _docker_base + "/" + repo_name + "/tags"
         while still_more:
+            raw_json = None
             retries = 0
             while retries < 20:
                 try:
@@ -346,15 +347,17 @@ class DockerTagClass(TagClass):
                         tag_name = result["name"]
                         self.add_tag(tag_name)
                         log.debug("Docker {} has tag {}".format(combined_repo_name, tag_name))
+
+                    if raw_json["next"]:
+                        docker_tag_url = raw_json["next"]
+                        still_more = True
+                    else:
+                        still_more = False
                 except Exception:
                     log.debug("Issue fetching tags for {}".format(combined_repo_name))
             else:
                 self.repository_exist = False
-            if raw_json["next"]:
-                docker_tag_url = raw_json["next"]
-                still_more = True
-            else:
-                still_more = False
+                return
 
 
 class ProjectClass:
