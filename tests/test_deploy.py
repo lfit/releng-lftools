@@ -55,7 +55,8 @@ def test_copy_archive_dir(cli_runner, datafiles):
     """Test copy_archives() command to ensure archives dir is copied."""
     os.chdir(str(datafiles))
     workspace_dir = os.path.join(str(datafiles), "workspace")
-    stage_dir = str(datafiles.mkdir("stage_archive"))
+    stage_dir = os.path.join(str(datafiles), "stage_archive")
+    os.mkdir(stage_dir)
 
     os.chdir(stage_dir)
     result = cli_runner.invoke(cli.cli, ["--debug", "deploy", "copy-archives", workspace_dir], obj={})
@@ -71,7 +72,8 @@ def test_copy_archive_pattern(cli_runner, datafiles):
     """Test copy_archives() command to ensure glob patterns are copied."""
     os.chdir(str(datafiles))
     workspace_dir = os.path.join(str(datafiles), "workspace")
-    stage_dir = str(datafiles.mkdir("stage_archive"))
+    stage_dir = os.path.join(str(datafiles), "stage_archive")
+    os.mkdir(stage_dir)
 
     os.chdir(stage_dir)
     result = cli_runner.invoke(cli.cli, ["--debug", "deploy", "copy-archives", workspace_dir, "**/*.txt"], obj={})
