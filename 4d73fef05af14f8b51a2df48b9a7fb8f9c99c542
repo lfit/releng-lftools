@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44386843_06a139de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2025-03-01T23:49:33Z",
+      "side": 1,
+      "message": "Please add a release notes file on the issue.\n\nIs this breaking somewhere? I think this can be tested using the lftools cli ... for instance you can create a python3 venv locally and build and install lftools locally into the venv for testing.\n\n1. cd lftools\n2. make changes to your path/file\n3. python3 -m pip install --quiet -r requirements.txt -e . \n4. lftools dev cli can be used normally for testing",
+      "revId": "4d73fef05af14f8b51a2df48b9a7fb8f9c99c542",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
