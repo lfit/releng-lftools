@@ -68,7 +68,7 @@ dependencies = [
     "pyrsistent",
     "python-jenkins",
     "PyYAML",
-    "requests",
+    "requests==2.31.0",
     "rsa",
     "ruamel.yaml",
     "ruamel.yaml.clib",
@@ -103,12 +103,12 @@ openstack = [
 ]
 
 test = [
-    "pytest==5.3.5",
-    "pytest-click==0.3",
-    "pytest-cov",
-    "pytest-datafiles==2.0",
-    "pytest-mock==2.0.0",
-    "pytest-responses==0.4.0"
+    "pytest==8.3.5",
+    "pytest-click==1.1.0",
+    "pytest-cov==5.0.0",
+    "pytest-datafiles==3.0.0",
+    "pytest-mock==3.14.0",
+    "pytest-responses==0.5.1"
 ]
 
 [project.urls]
