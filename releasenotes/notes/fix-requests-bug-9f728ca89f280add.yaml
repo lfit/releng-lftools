@@ -1,0 +1,6 @@
+---
+fixes:
+  - |
+    Pin requests Python package to version <2.32.0 to avoid bug in newer version
+    "urllib3.exceptions.URLSchemeUnknown: Not supported URL scheme http+docker".
+    Also sync Pytest versions at pyproject.toml with the ones from tox.ini.
