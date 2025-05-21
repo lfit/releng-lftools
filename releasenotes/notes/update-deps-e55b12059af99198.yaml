@@ -1,0 +1,4 @@
+---
+fixes:
+  - |
+    Fix issues related to previous change/73430 URL schema and requests/docker.
