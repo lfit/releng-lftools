@@ -102,6 +102,8 @@ openstack = [
     "osc-lib~=2.2.0"
 ]
 
+
+
 test = [
     "pytest==8.3.5",
     "pytest-click==1.1.0",
@@ -109,7 +111,14 @@ test = [
     "pytest-datafiles==3.0.0",
     "pytest-mock==3.14.0",
     "pytest-responses==0.5.1"
+    "attrs<23.0.0",
+    "certifi<2024.0.0",
+    "typing-extensions<4.10.0",
+    "jsonschema<4.20.0",
 ]
+# Note: 2025-05-25
+# Constrain problematic packages for Python 3.8 compatibility
+# Pins attrs -> jsonschema above
 
 [project.urls]
 "Homepage" = "https://docs.releng.linuxfoundation.org/projects/lftools"

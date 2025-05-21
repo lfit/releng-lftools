@@ -1,0 +1,7 @@
+---
+fixes:
+  - |
+    Fix issues related to previous change/73430 URL schema and requests/docker.
+    Pins for problematic Python 3.8 packages: attrs<23.0.0, certifi<2024.0.0,
+    typing-extensions<4.10.0, jsonschema<4.20.0 in tox.ini [testenv] stanza and
+    test section of pyproject.toml.
