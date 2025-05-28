@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "719788cd_09da2677",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2025-05-28T16:58:36Z",
+      "side": 1,
+      "message": "I\u0027ve checked the docker-py release notes:\n\nhttps://github.com/docker/docker-py/releases\n\n7.0.0 only just removed support for Python 3.7; there is no mention of them removing any support for Python 3.8, in fact there are no hits for it searching the page. It was the docker module whose URLs the requests library was not parsing correctly. Wehn I researched this, one of the suggested fixes was rather than downgrade requests, upgrade the docker module. We also inadvertently introduced a security issue, since requests \u003c2.32.0 has known security problems, but since we weren\u0027t auditing our changes in CI/CD pipeline this is easy to miss.",
+      "revId": "fd899b3f455c94a5c909feebd03e81c47b14f2e3",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
