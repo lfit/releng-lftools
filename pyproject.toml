@@ -8,8 +8,8 @@ dynamic = ["version"]
 description = "Linux Foundation Release Engineering Tools"
 readme = "README.md"
 requires-python = ">=3.8"
-license = {text = "EPL-1.0"}
-
+license = "EPL-1.0"
+license-files = ["LICENSES/Apache-2.0.txt"]
 authors = [
     {name = "LF Release Engineering", email = "releng@linuxfoundation.org"},
 ]
