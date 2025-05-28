@@ -44,7 +44,7 @@ dependencies = [
     "defusedxml",
     "Deprecated",
     "dnspython",
-    "docker",
+    "docker==7.1.0",
     "email-validator",
     "filelock",
     "GitPython",
