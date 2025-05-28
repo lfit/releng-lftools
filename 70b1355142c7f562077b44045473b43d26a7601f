@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c75af564_7412cab6",
+        "filename": ".github/workflows/gerrit-verify.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-05-28T12:48:32Z",
+      "side": 1,
+      "message": "This is a workflow for a Gerrit based repository. The `lfit/checkout-gerrit-change-action` must be used",
+      "revId": "70b1355142c7f562077b44045473b43d26a7601f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "765f10a5_b6c4a032",
+        "filename": ".github/workflows/gerrit-verify.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-05-28T12:48:32Z",
+      "side": 1,
+      "message": "This is a workflow for a Gerrit based repository. The `lfit/checkout-gerrit-change-action` must be used",
+      "revId": "70b1355142c7f562077b44045473b43d26a7601f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cde73461_e7337971",
@@ -14,6 +48,23 @@
       "writtenOn": "2025-05-28T09:46:34Z",
       "side": 1,
       "message": "rerun-gha",
+      "revId": "70b1355142c7f562077b44045473b43d26a7601f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f2876e9_bdfbed22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-05-28T12:48:32Z",
+      "side": 1,
+      "message": "I see `permissions` being set in the new jobs, but a default permission set is not currently defined at the top level of the workflow.",
       "revId": "70b1355142c7f562077b44045473b43d26a7601f",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
