@@ -13,6 +13,7 @@
 import concurrent.futures
 import datetime
 import errno
+import fnmatch
 import glob
 import gzip
 import io
@@ -26,6 +27,7 @@ import subprocess
 import sys
 import tempfile
 import zipfile
+from pathlib import Path
 
 import boto3
 import requests
@@ -260,12 +262,48 @@ def copy_archives(workspace, pattern=None):
     no_dups_pattern = _remove_duplicates_and_sort(pattern)
 
     paths = []
+
+    # Debug: List all files in workspace for troubleshooting
+    log.debug("Workspace contents before pattern matching:")
+    for root, dirs, files in os.walk(workspace):
+        for file in files:
+            rel_path = os.path.relpath(os.path.join(root, file), workspace)
+            log.debug("  {}".format(rel_path))
+
+    # Use pathlib for more reliable pattern matching across Python versions
+    workspace_path = Path(workspace)
+
     for p in no_dups_pattern:
         if p == "":  # Skip empty patterns as they are invalid
             continue
 
-        search = os.path.join(workspace, p)
-        paths.extend(glob.glob(search, recursive=True))
+        log.debug("Searching for pattern: {}".format(p))
+
+        # Handle recursive patterns with pathlib.rglob() for better Python 3.8 compatibility
+        if p.startswith("**/"):
+            # Use rglob for recursive patterns like "**/*.txt"
+            pattern_suffix = p[3:]  # Remove "**/" prefix
+            found_paths = list(workspace_path.rglob(pattern_suffix))
+            log.debug("Using rglob for pattern '{}' -> rglob('{}')".format(p, pattern_suffix))
+        elif "**" in p:
+            # For other recursive patterns, fall back to manual traversal with fnmatch
+            found_paths = []
+            for file_path in workspace_path.rglob("*"):
+                if file_path.is_file():
+                    relative_path = file_path.relative_to(workspace_path)
+                    if fnmatch.fnmatch(str(relative_path), p):
+                        found_paths.append(file_path)
+            log.debug("Using fnmatch for complex pattern '{}'".format(p))
+        else:
+            # For simple patterns without **, use glob
+            found_paths = list(workspace_path.glob(p))
+            log.debug("Using glob for simple pattern '{}'".format(p))
+
+        # Convert to absolute string paths
+        absolute_paths = [str(path) for path in found_paths if path.is_file()]
+        log.debug("Found files for pattern '{}': {}".format(p, absolute_paths))
+        paths.extend(absolute_paths)
+
     log.debug("Files found: {}".format(paths))
 
     no_dups_paths = _remove_duplicates_and_sort(paths)
