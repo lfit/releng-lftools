@@ -47,9 +47,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.inputs.GERRIT_BRANCH}}-${{ github.event.inputs.GERRIT_CHANGE_ID || github.run_id }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   clear-vote:
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - name: Clear votes
         # yamllint disable-line rule:line-length
@@ -68,6 +71,7 @@ jobs:
     needs: clear-vote
     # yamllint disable-line rule:line-length
     uses: lfit/releng-reusable-workflows/.github/workflows/compose-repo-linting.yaml@main
+    permissions: {}
     with:
       GERRIT_BRANCH: ${{ inputs.GERRIT_BRANCH }}
       GERRIT_CHANGE_ID: ${{ inputs.GERRIT_CHANGE_ID }}
@@ -79,74 +83,92 @@ jobs:
       GERRIT_PROJECT: ${{ inputs.GERRIT_PROJECT }}
       GERRIT_REFSPEC: ${{ inputs.GERRIT_REFSPEC }}
 
-  prepare:
+  python-build:
+    name: 'Python Build'
     needs: clear-vote
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-latest'
     outputs:
-      wheel-distribution: ${{ steps.wheel-distribution.outputs.path }}
+      matrix_json: "${{ steps.python-build.outputs.matrix_json }}"
+      artefact_name: "${{ steps.python-build.outputs.artefact_name }}"
+      artefact_path: "${{ steps.python-build.outputs.artefact_path }}"
+    permissions:
+      contents: write
+    timeout-minutes: 12
+    env:
+      GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
     steps:
-      - name: Checkout change
-        uses: lfit/checkout-gerrit-change-action@54d751e8bd167bc91f7d665dabe33fae87aaaa63  # v0.9
+      # Harden the runner used by this workflow
+      - uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
         with:
-          gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
-      - name: Configure Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.8'
-      - name: Build package distribution files
-        run: >-
-          pipx run tox -e clean,build
-      - name: Record the path of wheel distribution
-        id: wheel-distribution
-        run: echo "path=$(ls dist/*.whl)" >> "$GITHUB_OUTPUT"
-      - name: Store the distribution files for use in other stages
-        # `tests` and `publish` will use the same pre-built distributions,
-        # so we make sure to release the exact same package that was tested
-        uses: actions/upload-artifact@v4
-        with:
-          name: python-distribution-files
-          path: dist/
-          retention-days: 1
+          egress-policy: 'audit'
 
-  test:
-    needs: prepare
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python:
-          - "3.8"
-          - "3.9"
-    steps:
-      - name: Checkout change
+      - uses: lfit/checkout-gerrit-change-action@54d751e8bd167bc91f7d665dabe33fae87aaaa63  # v0.9
+
+      - name: 'Build Python project'
+        id: python-build
         # yamllint disable-line rule:line-length
-        uses: lfit/checkout-gerrit-change-action@54d751e8bd167bc91f7d665dabe33fae87aaaa63  # v0.9
-        with:
-          gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
-          gerrit-project: ${{ inputs.GERRIT_PROJECT }}
-          gerrit-url: ${{ vars.GERRIT_URL }}
-          delay: "0s"
-      - name: Configure Python
-        uses: actions/setup-python@v5
-        id: setup-python
-        with:
-          python-version: ${{ matrix.python }}
-      - name: Retrieve pre-built distribution files
-        uses: actions/download-artifact@v4
-        with: {name: python-distribution-files, path: dist/}
-      - name: Enable sar
-        run: |
-          sudo systemctl start sysstat
-      - name: Run tests
-        run: >-
-          TOX_SKIP_ENV='(docs*|license|pre-commit)'
-          pipx run --python '${{ steps.setup-python.outputs.python-path }}'
-          tox --installpkg '${{ needs.prepare.outputs.wheel-distribution }}'
-          -- -rFEx --durations 10 --color yes  # pytest args
+        uses: lfreleng-actions/python-build-action@a9d0ef8a2324ac76e798ad6dc306f08b83b5b213 # v0.1.11
 
+  python-tests:
+    name: 'Python Tests'
+    runs-on: 'ubuntu-latest'
+    needs:
+      - clear-vote
+      - python-build
+    # Matrix job
+    strategy:
+      fail-fast: false
+      matrix: "${{ fromJson(needs.python-build.outputs.matrix_json) }}"
+    permissions:
+      contents: read
+    timeout-minutes: 12
+    steps:
+      # Harden the runner used by this workflow
+      - uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        with:
+          egress-policy: audit
+
+      - uses: lfit/checkout-gerrit-change-action@54d751e8bd167bc91f7d665dabe33fae87aaaa63  # v0.9
+
+      - name: "Python tests [pytest] ${{ matrix.python-version }}"
+        # yamllint disable-line rule:line-length
+        uses: lfreleng-actions/python-test-action@16adb21ca4866bebc75e7b35203ce5b376b01430 # v0.1.7
+        with:
+          python_version: ${{ matrix.python-version }}
+
+  python-audit:
+    name: 'Python Audit'
+    needs:
+      - clear-vote
+      - python-build
+    runs-on: ubuntu-latest
+    # Matrix job
+    strategy:
+      fail-fast: false
+      matrix: "${{ fromJson(needs.python-build.outputs.matrix_json) }}"
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    steps:
+      # Harden the runner used by this workflow
+      - uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        with:
+          egress-policy: 'audit'
+
+      - uses: lfit/checkout-gerrit-change-action@54d751e8bd167bc91f7d665dabe33fae87aaaa63  # v0.9
+
+      - name: "Audit dependencies ${{ matrix.python-version }}"
+        # yamllint disable-line rule:line-length
+        uses: lfreleng-actions/python-audit-action@4c51bc76f9876b4f294f8afa4bb002b0b89aec68 # v0.1.3
+        with:
+          python_version: "${{ matrix.python-version }}"
+          never_fail: true
 
   docs:
     needs: clear-vote
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout change
         # yamllint disable-line rule:line-length
@@ -158,8 +180,7 @@ jobs:
           delay: "0s"
           fetch-depth: 0
       - name: Configure Python
-        uses: actions/setup-python@v5
-        id: setup-python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.8"
       - name: Run docs tests
@@ -170,6 +191,8 @@ jobs:
   docs-linkcheck:
     needs: clear-vote
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout change
         # yamllint disable-line rule:line-length
@@ -181,8 +204,7 @@ jobs:
           delay: "0s"
           fetch-depth: 0
       - name: Configure Python
-        uses: actions/setup-python@v5
-        id: setup-python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.8"
       - name: Run docs-linkcheck tests
@@ -192,6 +214,8 @@ jobs:
   license:
     needs: clear-vote
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout change
         # yamllint disable-line rule:line-length
@@ -202,8 +226,7 @@ jobs:
           gerrit-url: ${{ vars.GERRIT_URL }}
           delay: "0s"
       - name: Configure Python
-        uses: actions/setup-python@v5
-        id: setup-python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.8"
       - name: Run license tests
@@ -212,8 +235,9 @@ jobs:
 
   vote:
     if: ${{ always() }}
-    needs: [prepare, test, docs, docs-linkcheck, license, lint]
+    needs: [clear-vote, python-build, python-tests, python-audit, docs, docs-linkcheck, license, lint]
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - name: Get workflow conclusion
         # yamllint disable-line rule:line-length
