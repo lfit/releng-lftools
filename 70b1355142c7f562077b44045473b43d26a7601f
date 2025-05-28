@@ -18,6 +18,24 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "743a9812_cbdf5e1c",
+        "filename": ".github/workflows/gerrit-verify.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-05-28T16:07:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c75af564_7412cab6",
+      "revId": "70b1355142c7f562077b44045473b43d26a7601f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "765f10a5_b6c4a032",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-28T12:48:32Z",
       "side": 1,
       "message": "This is a workflow for a Gerrit based repository. The `lfit/checkout-gerrit-change-action` must be used",
+      "revId": "70b1355142c7f562077b44045473b43d26a7601f",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dd4ca9e_a96f8830",
+        "filename": ".github/workflows/gerrit-verify.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-05-28T16:07:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "765f10a5_b6c4a032",
       "revId": "70b1355142c7f562077b44045473b43d26a7601f",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
