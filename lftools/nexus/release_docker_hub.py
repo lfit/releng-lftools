@@ -378,7 +378,7 @@ class ProjectClass:
     Main external function is docker_pull_tag_push
     """
 
-    def __init__(self, nexus_proj):
+    def __init__(self, nexus_proj, docker_client=None):
         """Initialize this class."""
         self.org_name = nexus_proj[0]
         self.nexus_repo_name = nexus_proj[1]
@@ -391,7 +391,7 @@ class ProjectClass:
         self.docker_tags = DockerTagClass(self.org_name, self.docker_repo_name, repo_from_file)
         self.tags_2_copy = TagClass(self.org_name, self.nexus_repo_name, repo_from_file)
         self._populate_tags_to_copy()
-        self.docker_client = docker.from_env()
+        self.docker_client = docker_client if docker_client is not None else docker.from_env()
 
     def __lt__(self, other):
         """Implement sort order base on Nexus3 repo name."""
@@ -663,7 +663,7 @@ def get_nexus3_catalog(org_name="", find_pattern="", exact_match=False, repo_is_
     return True
 
 
-def fetch_all_tags(progbar=False):
+def fetch_all_tags(progbar=False, docker_client=None):
     """Fetch all tags function.
 
     This function will use multi-threading to fetch all tags for all projects in
@@ -689,7 +689,7 @@ def fetch_all_tags(progbar=False):
                 proj : Tuple with 'org' and 'repo'
                     ('onap', 'aaf/aaf_service')
         """
-        new_proj = ProjectClass(proj)
+        new_proj = ProjectClass(proj, docker_client)
         projects.append(new_proj)
         if progbar:
             pbar.update(1)
@@ -887,6 +887,7 @@ def start_point(
     progbar=False,
     repofile=False,
     version_regexp="",
+    docker_client=None,
 ):
     """Main function."""
     # Verify find_pattern and specified_repo are not both used.
@@ -901,7 +902,7 @@ def start_point(
         log.info("Could not get any catalog from Nexus3 with org = {}".format(org_name))
         return
 
-    fetch_all_tags(progbar)
+    fetch_all_tags(progbar, docker_client)
     if verbose:
         print_nexus_docker_proj_names()
         print_nexus_valid_tags()

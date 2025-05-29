@@ -421,6 +421,7 @@ class TestProjectClass:
 
     def test_ProjectClass_2_missing(self, responses, datafiles, mocker):
         """Test ProjectClass"""
+        mocker.patch("docker.from_env")
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_pull", side_effect=self.mocked_docker_pull)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_tag", side_effect=self.mocked_docker_tag)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_push", side_effect=self.mocked_docker_push)
@@ -473,6 +474,7 @@ class TestProjectClass:
 
     def test_ProjectClass_1_missing(self, responses, datafiles, mocker):
         """Test ProjectClass"""
+        mocker.patch("docker.from_env")
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_pull", side_effect=self.mocked_docker_pull)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_tag", side_effect=self.mocked_docker_tag)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_push", side_effect=self.mocked_docker_push)
@@ -527,6 +529,7 @@ class TestProjectClass:
 
     def test_ProjectClass_socket_timeout(self, responses, datafiles, mocker):
         """Test ProjectClass"""
+        mocker.patch("docker.from_env")
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_pull", side_effect=self.mocked_docker_pull)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_tag", side_effect=self.mocked_docker_tag)
         mocker.patch("lftools.nexus.release_docker_hub.ProjectClass._docker_push", side_effect=self.mocked_docker_push)
@@ -799,9 +802,10 @@ class TestFetchAllTagsAndUpdate:
 
     def test_fetch_all_tags(self, responses, datafiles, mocker):
         self.initiate_test_fetch(responses, datafiles, mocker)
+        mock_docker_client = mocker.MagicMock()
         rdh.initialize("onap")
         rdh.get_nexus3_catalog("onap")
-        rdh.fetch_all_tags()
+        rdh.fetch_all_tags(docker_client=mock_docker_client)
         assert len(rdh.NexusCatalog) == 3
         assert len(rdh.projects) == 3
         assert len(rdh.projects[0].tags_2_copy.valid) == 0
@@ -821,9 +825,10 @@ class TestFetchAllTagsAndUpdate:
 
     def test_copy(self, responses, datafiles, mocker):
         self.initiate_test_fetch(responses, datafiles, mocker)
+        mock_docker_client = mocker.MagicMock()
         rdh.initialize("onap")
         rdh.get_nexus3_catalog("onap")
-        rdh.fetch_all_tags()
+        rdh.fetch_all_tags(docker_client=mock_docker_client)
         rdh.copy_from_nexus_to_docker()
         assert self.counter.pull == 3
         assert self.counter.tag == 3
@@ -832,7 +837,8 @@ class TestFetchAllTagsAndUpdate:
 
     def test_start_no_copy(self, responses, datafiles, mocker):
         self.initiate_test_fetch(responses, datafiles, mocker)
-        rdh.start_point("onap", "", False, False)
+        mock_docker_client = mocker.MagicMock()
+        rdh.start_point("onap", "", False, False, docker_client=mock_docker_client)
         assert self.counter.pull == 0
         assert self.counter.tag == 0
         assert self.counter.push == 0
@@ -840,7 +846,8 @@ class TestFetchAllTagsAndUpdate:
 
     def test_start_copy(self, responses, datafiles, mocker):
         self.initiate_test_fetch(responses, datafiles, mocker)
-        rdh.start_point("onap", "", False, False, False, True)
+        mock_docker_client = mocker.MagicMock()
+        rdh.start_point("onap", "", False, False, False, True, docker_client=mock_docker_client)
         assert len(rdh.NexusCatalog) == 3
         assert len(rdh.projects) == 3
         assert len(rdh.projects[0].tags_2_copy.valid) == 0
@@ -856,7 +863,8 @@ class TestFetchAllTagsAndUpdate:
 
     def test_start_copy_repo(self, responses, datafiles, mocker):
         self.initiate_test_fetch(responses, datafiles, mocker, "sanity")
-        rdh.start_point("onap", "validator", False, False, False, True)
+        mock_docker_client = mocker.MagicMock()
+        rdh.start_point("onap", "validator", False, False, False, True, docker_client=mock_docker_client)
         assert len(rdh.NexusCatalog) == 1
         assert len(rdh.projects) == 1
         assert len(rdh.projects[0].tags_2_copy.valid) == 1
@@ -873,7 +881,8 @@ class TestFetchAllTagsAndUpdate:
         assert len(rdh.projects) == 0
 
 
-def test_calculate_docker_project_name():
+def test_calculate_docker_project_name(mocker):
+    mocker.patch("docker.from_env")
     project = ["onap", "this/is/a-test_project", ""]
     rdh.initialize("onap")
     test_proj = rdh.ProjectClass(project)
