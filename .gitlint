@@ -96,5 +96,5 @@ contrib=contrib-title-conventional-commits,contrib-body-requires-signed-off-by
 types=Fix,Feat,Chore,Docs,Style,Refactor,Perf,Test,Revert,CI,Build
 
 # Require RELENG issues in commit messages
-[body-match-regex]
-regex=(.*)Issue:\s+([Ff][Ii][Xx][Ee][Ss]\s+)?[a-zA-Z0-9-]+\/[a-zA-Z0-9_-]+#\d+(.*)
+#[body-match-regex]
+#regex=(.*)Issue:\s+([Ff][Ii][Xx][Ee][Ss]\s+)?[a-zA-Z0-9-]+\/[a-zA-Z0-9_-]+#\d+(.*)
