@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d63266cb_1a5a8f22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 577
+      },
+      "writtenOn": "2025-09-10T23:13:34Z",
+      "side": 1,
+      "message": "It is missing release notes",
+      "revId": "99321dbe17ddfbdb6168cdf2c77760ba2401a75a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
