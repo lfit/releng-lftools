@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fce7b813_70bc8ef0",
+        "filename": ".github/workflows/release.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-09-10T15:09:22Z",
+      "side": 1,
+      "message": "Do we really need this? AFAIK we have no Jupyter Notebooks in lftools",
+      "revId": "6d5389afc2021b256ec9e52d2f30e5083de8acce",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cd37c8e_120ca7da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-09-10T15:09:22Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this Jupyter Notebooks step in here. We don\u0027t have notebook tests AFAIK",
+      "revId": "6d5389afc2021b256ec9e52d2f30e5083de8acce",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
