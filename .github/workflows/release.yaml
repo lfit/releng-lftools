@@ -194,38 +194,6 @@ jobs:
           attestations: true
           tag: "${{ needs.tag-validate.outputs.tag }}"
 
-  promote-release:
-    name: 'Promote Draft Release'
-    # yamllint disable-line rule:line-length
-    if: startsWith(github.ref, 'refs/tags/')
-    needs:
-      - 'tag-validate'
-      - 'pypi'
-    runs-on: 'ubuntu-latest'
-    permissions:
-      contents: write # IMPORTANT: needed to edit a draft release and promote it
-    timeout-minutes: 2
-    outputs:
-      release_url: "${{ steps.promote-release.outputs.release_url }}"
-    steps:
-      # Harden the runner used by this workflow
-      # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
-        with:
-          egress-policy: 'audit'
-
-      # yamllint disable-line rule:line-length
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - name: 'Promote draft release'
-        id: 'promote-release'
-        # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/draft-release-promote-action@d7e7df12e32fa26b28dbc2f18a12766482785399 # v0.1.2
-        with:
-          token: "${{ secrets.GITHUB_TOKEN }}"
-          tag: "${{ needs.tag-validate.outputs.tag }}"
-          latest: true
-
   # Need to attach build artefacts to the release
   # This step could potentially be moved
   # (May be better to when/where the release is still in draft state)
@@ -235,7 +203,6 @@ jobs:
     needs:
       - 'tag-validate'
       - 'python-build'
-      - 'promote-release'
     permissions:
       contents: write # IMPORTANT: needed to edit release, attach artefacts
     timeout-minutes: 5
