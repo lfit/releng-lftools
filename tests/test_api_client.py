@@ -27,7 +27,7 @@ def test_get():
 @responses.activate
 def test_patch():
     responses.add(
-        responses.PATCH, url="https://fakeurl/", json={"success": "patch"}, status=204, match_querystring=True
+        responses.PATCH, url="https://fakeurl/", json={"success": "patch"}, status=200, match_querystring=True
     )
     resp = c.patch("https://fakeurl/")
     assert resp[1] == {"success": "patch"}

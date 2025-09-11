@@ -94,7 +94,7 @@ def test_project_version_update():
         responses.PATCH,
         url="https://readthedocs.org/api/v3/projects/TestProject1/versions/latest/",  # noqa
         json=data,
-        status=204,
+        status=200,
     )
     assert rtd.project_version_update("TestProject1", "latest", "True")
 
