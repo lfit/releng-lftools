@@ -16,6 +16,24 @@
       "message": "It is missing release notes",
       "revId": "99321dbe17ddfbdb6168cdf2c77760ba2401a75a",
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c869f5d3_7a65a370",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-09-11T12:44:35Z",
+      "side": 1,
+      "message": "No release notes needed for a CI only change.",
+      "parentUuid": "d63266cb_1a5a8f22",
+      "revId": "99321dbe17ddfbdb6168cdf2c77760ba2401a75a",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     }
   ]
 }
