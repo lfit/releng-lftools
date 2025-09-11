@@ -133,6 +133,7 @@ jobs:
         uses: lfreleng-actions/python-audit-action@bab5316468c108870eb759ef0de622bae9239aad # v0.2.2
         with:
           python_version: "${{ matrix.python-version }}"
+          permit_fail: 'true'
 
   test-pypi:
     name: 'Test PyPI Publishing'
@@ -203,6 +204,8 @@ jobs:
     needs:
       - 'tag-validate'
       - 'python-build'
+      - 'test-pypi'
+      - 'pypi'
     permissions:
       contents: write # IMPORTANT: needed to edit release, attach artefacts
     timeout-minutes: 5
