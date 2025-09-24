@@ -164,6 +164,7 @@ jobs:
         with:
           environment: 'development'
           tag: "${{ needs.tag-validate.outputs.tag }}"
+          pypi_credential: "${{ secrets.TEST_PYPI_CREDENTIAL }}"
 
   pypi:
     name: 'Release PyPI Package'
@@ -194,6 +195,7 @@ jobs:
           environment: 'production'
           attestations: true
           tag: "${{ needs.tag-validate.outputs.tag }}"
+          pypi_credential: "${{ secrets.PYPI_CREDENTIAL }}"
 
   # Need to attach build artefacts to the release
   # This step could potentially be moved
