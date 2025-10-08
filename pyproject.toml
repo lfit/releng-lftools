@@ -7,7 +7,7 @@ name = "lftools"
 dynamic = ["version"]
 description = "Linux Foundation Release Engineering Tools"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.8,<3.14"
 license = {text = "EPL-1.0"}
 
 authors = [
@@ -23,11 +23,14 @@ maintainers = [
 classifiers = [
     "Intended Audience :: Developers",
     "Intended Audience :: Information Technology",
-    "License :: OSI Approved :: Eclipse Public License 1.0 (EPL-1.0)",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9"
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13"
 ]
 
 dependencies = [

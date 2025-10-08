@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Fix Python build failure with version 3.14
+
+    Pin Python version to <3.14, as builds fail with new release.
+    pyproject.toml also needed updating for modern PEP standards.
+    Changes were needed to the license declarations.
