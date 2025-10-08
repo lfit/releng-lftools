@@ -1,0 +1,39 @@
+---
+fixes:
+  - |
+    Add timeout handling to ``lftools openstack stack cost`` command to
+    prevent indefinite hangs when retrieving stack costs from OpenStack
+    and pricing APIs.
+
+    The cost() function now accepts a ``--timeout`` option (default: 60
+    seconds) that applies to all network operations. When a timeout occurs,
+    the command gracefully degrades by returning 0 cost instead of hanging
+    indefinitely.
+
+    This fixes the issue where Jenkins jobs would hang at "INFO: Retrieving
+    stack cost for: <stack-name>" when the VEXXHOST pricing API is slow or
+    unresponsive, or when OpenStack API queries take too long with nested
+    stacks.
+
+    Key changes:
+
+    - Added timeout parameter to urllib.request.urlopen() calls
+    - Wrapped network operations in try/except blocks to catch
+      urllib.error.URLError and socket.timeout exceptions
+    - Returns 0.0 cost for individual servers that timeout
+    - Returns "total: 0.0" if the entire operation fails
+    - Added --timeout CLI option (default: 60 seconds)
+    - Enhanced logging with warning/error messages for debugging
+
+    Usage examples:
+
+    .. code-block:: bash
+
+       # Use default 60-second timeout
+       lftools openstack --os-cloud vexx stack cost my-stack-name
+
+       # Use custom 30-second timeout
+       lftools openstack --os-cloud vexx stack cost --timeout 30 my-stack-name
+
+       # Use longer timeout for complex nested stacks
+       lftools openstack --os-cloud vexx stack cost --timeout 120 my-stack-name
