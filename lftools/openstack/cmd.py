@@ -194,10 +194,11 @@ def delete(ctx, name_or_id, force, timeout):
 
 @click.command()
 @click.argument("stack_name")
+@click.option("--timeout", type=int, default=60, help="Timeout in seconds for cost retrieval operations (default: 60)")
 @click.pass_context
-def cost(ctx, stack_name):
+def cost(ctx, stack_name, timeout):
     """Get Total Stack Cost."""
-    os_stack.cost(ctx.obj["os_cloud"], stack_name)
+    os_stack.cost(ctx.obj["os_cloud"], stack_name, timeout=timeout)
 
 
 @click.command(name="delete-stale")

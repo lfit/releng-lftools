@@ -75,18 +75,32 @@ def create(os_cloud, name, template_file, parameter_file, timeout=900, tries=2):
     print("------------------------------------")
 
 
-def cost(os_cloud, stack_name):
+def cost(os_cloud, stack_name, timeout=60):
     """Get current cost info for the stack.
 
     Return the cost in dollars & cents (x.xx).
+
+    Args:
+        os_cloud: OpenStack cloud name from clouds.yaml
+        stack_name: Name of the stack to calculate cost for
+        timeout: Timeout in seconds for network operations (default: 60)
     """
+    import socket
 
     def get_server_cost(server_id):
-        flavor, seconds = get_server_info(server_id)
-        url = "https://pricing.vexxhost.net/v1/pricing/%s/cost?seconds=%d"
-        with urllib.request.urlopen(url % (flavor, seconds)) as response:  # nosec
-            data = json.loads(response.read())
-        return data["cost"]
+        try:
+            flavor, seconds = get_server_info(server_id)
+            url = "https://pricing.vexxhost.net/v1/pricing/%s/cost?seconds=%d"
+            with urllib.request.urlopen(url % (flavor, seconds), timeout=timeout) as response:  # nosec
+                data = json.loads(response.read())
+            return data["cost"]
+        except (urllib.error.URLError, socket.timeout) as e:
+            log.warning("Failed to get cost for server %s: %s", server_id, e)
+            log.warning("Returning 0 cost for this server")
+            return 0.0
+        except Exception as e:
+            log.error("Unexpected error getting cost for server %s: %s", server_id, e)
+            return 0.0
 
     def parse_iso8601_time(time):
         return datetime.strptime(time, "%Y-%m-%dT%H:%M:%S.%f")
@@ -122,10 +136,22 @@ def cost(os_cloud, stack_name):
 
     cloud = openstack.connect(os_cloud)
 
-    total_cost = 0.0
-    for server in get_server_ids(stack_name):
-        total_cost += get_server_cost(server)
-    print("total: " + str(total_cost))
+    try:
+        total_cost = 0.0
+        server_ids = get_server_ids(stack_name)
+
+        if not server_ids:
+            log.info("No servers found in stack %s", stack_name)
+            print("total: 0.0")
+            return
+
+        for server in server_ids:
+            total_cost += get_server_cost(server)
+        print("total: " + str(total_cost))
+    except Exception as e:
+        log.error("Error calculating stack cost: %s", e)
+        log.warning("Returning 0 total cost due to error")
+        print("total: 0.0")
 
 
 def delete(os_cloud, name_or_id, force, timeout=900):
