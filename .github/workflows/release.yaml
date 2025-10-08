@@ -23,6 +23,7 @@ jobs:
     timeout-minutes: 1
     outputs:
       tag: "${{ steps.tag-validate.outputs.tag }}"
+      should_promote: "${{ steps.check-release.outputs.should_promote }}"
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
@@ -46,6 +47,32 @@ jobs:
           echo "Development tag pushed; aborting release workflow 🛑" \
             >> "$GITHUB_STEP_SUMMARY"
           exit 1
+
+      - name: 'Check if release exists'
+        id: 'check-release'
+        shell: bash
+        env:
+          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: |
+          TAG="${{ steps.tag-validate.outputs.tag }}"
+
+          # Check if release exists and get its draft status
+          if RELEASE_INFO=$(gh release view "$TAG" --json isDraft \
+              2>/dev/null); then
+            IS_DRAFT=$(echo "$RELEASE_INFO" | jq -r '.isDraft')
+            if [ "$IS_DRAFT" = "false" ]; then
+              echo "should_promote=false" >> "$GITHUB_OUTPUT"
+              echo "Published release already exists for tag $TAG, " \
+                   "skipping promotion"
+            else
+              echo "should_promote=true" >> "$GITHUB_OUTPUT"
+              echo "Draft release exists for tag $TAG, " \
+                   "will proceed with promotion"
+            fi
+          else
+            echo "should_promote=true" >> "$GITHUB_OUTPUT"
+            echo "No release found for tag $TAG, will proceed with promotion"
+          fi
 
   python-build:
     name: 'Python Build'
@@ -133,7 +160,6 @@ jobs:
         uses: lfreleng-actions/python-audit-action@bab5316468c108870eb759ef0de622bae9239aad # v0.2.2
         with:
           python_version: "${{ matrix.python-version }}"
-          permit_fail: 'true'
 
   test-pypi:
     name: 'Test PyPI Publishing'
@@ -197,6 +223,67 @@ jobs:
           tag: "${{ needs.tag-validate.outputs.tag }}"
           pypi_credential: "${{ secrets.PYPI_CREDENTIAL }}"
 
+
+  promote-release:
+    name: 'Promote Draft Release'
+    # yamllint disable-line rule:line-length
+    if: needs.tag-validate.outputs.should_promote == 'true'
+    needs:
+      - 'tag-validate'
+      - 'pypi'
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: write # IMPORTANT: needed to edit a draft release and promote it
+    timeout-minutes: 2
+    outputs:
+      release_url: "${{ steps.promote-release.outputs.release_url }}"
+    steps:
+      # Harden the runner used by this workflow
+      # yamllint disable-line rule:line-length
+      - uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: 'audit'
+
+      # yamllint disable-line rule:line-length
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: 'Check if release is already promoted'
+        id: 'check-promoted'
+        shell: bash
+        env:
+          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: |
+          TAG="${{ needs.tag-validate.outputs.tag }}"
+          if gh release view "$TAG" --json isDraft --jq '.isDraft' \
+              2>/dev/null | grep -q "false"; then
+            echo "Release $TAG is already promoted, skipping promotion"
+            echo "already_promoted=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Release $TAG is draft or doesn't exist, " \
+                 "proceeding with promotion"
+            echo "already_promoted=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 'Promote draft release'
+        id: 'promote-release'
+        if: steps.check-promoted.outputs.already_promoted == 'false'
+        # yamllint disable-line rule:line-length
+        uses: lfreleng-actions/draft-release-promote-action@d7e7df12e32fa26b28dbc2f18a12766482785399 # v0.1.2
+        with:
+          token: "${{ secrets.GITHUB_TOKEN }}"
+          tag: "${{ needs.tag-validate.outputs.tag }}"
+          latest: true
+
+      - name: 'Set release URL for already promoted release'
+        if: steps.check-promoted.outputs.already_promoted == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: |
+          TAG="${{ needs.tag-validate.outputs.tag }}"
+          RELEASE_URL=$(gh release view "$TAG" --json url --jq '.url')
+          echo "release_url=$RELEASE_URL" >> "$GITHUB_OUTPUT"
+
   # Need to attach build artefacts to the release
   # This step could potentially be moved
   # (May be better to when/where the release is still in draft state)
@@ -206,8 +293,9 @@ jobs:
     needs:
       - 'tag-validate'
       - 'python-build'
-      - 'test-pypi'
-      - 'pypi'
+      - 'promote-release'
+    # yamllint disable-line rule:line-length
+    if: always() && (needs.promote-release.result == 'success' || needs.promote-release.result == 'skipped')
     permissions:
       contents: write # IMPORTANT: needed to edit release, attach artefacts
     timeout-minutes: 5

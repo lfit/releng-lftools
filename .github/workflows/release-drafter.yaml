@@ -1,0 +1,71 @@
+---
+# SPDX-FileCopyrightText: 2025 The Linux Foundation
+# SPDX-License-Identifier: Apache-2.0
+
+name: 'Release Drafter'
+
+"on":
+  push:
+    branches:
+      - main
+      - master
+  # pull_request is required for autolabeler
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  #  pull_request_target is required for autolabeler on PRs from forks
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions: {}
+
+concurrency:
+  # yamllint disable-line rule:line-length
+  group: >-
+    rd-${{ github.event_name }}-${{ github.event.number }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  show_concurrency_group:
+    name: 'Concurrency Group'
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 2
+    steps:
+      - name: 'Concurrency Group'
+        shell: bash
+        # yamllint disable rule:line-length
+        run: |
+          #  Concurrency Group
+          echo "Concurrency group: rd-${{ github.event_name }}-${{ github.event.number }}-${{ github.ref }}"
+          #  shellcheck disable=SC2129
+          echo "## Release Drafter" \
+            >> "$GITHUB_STEP_SUMMARY"
+          echo "Concurrency group: rd-${{ github.event_name }}-${{ github.event.number }}-${{ github.ref }}" \
+            >> "$GITHUB_STEP_SUMMARY"
+
+  # yamllint enable rule:line-length
+  update_release_draft:
+    name: 'Update Release Draft'
+    permissions:
+      # write permission is required to create releases
+      contents: write
+      # write permission is required for autolabeler
+      pull-requests: write
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 3
+    steps:
+      # Harden the runner used by this workflow
+      # yamllint disable-line rule:line-length
+      - uses: step-security/harden-runner@ec9f2d5744a09debf3a187a3f4f675c53b671911 # v2.13.0
+        with:
+          egress-policy: 'audit'
+
+      # yamllint disable-line rule:line-length
+      - uses: release-drafter/release-drafter@b1476f6e6eb133afa41ed8589daba6dc69b4d3f5 # v6.1.0
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
