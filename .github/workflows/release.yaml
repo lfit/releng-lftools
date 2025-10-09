@@ -145,6 +145,7 @@ jobs:
     permissions:
       contents: read
     timeout-minutes: 10
+    continue-on-error: true
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
