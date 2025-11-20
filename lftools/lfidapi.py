@@ -178,7 +178,8 @@ def helper_match_ldap_to_info(info_file, group, githuborg, noop):
     all_users = ldap_committers + info_committers
 
     if not githuborg:
-        all_users.remove("lfservices_releng")
+        if "lfservices_releng" in all_users:
+            all_users.remove("lfservices_releng")
 
     log.info("All users in org group")
     all_users = sorted(set(all_users))

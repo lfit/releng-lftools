@@ -1,0 +1,12 @@
+---
+fixes:
+  - |
+    Fix ValueError in match-ldap-to-info when lfservices_releng missing.
+
+    The code unconditionally tried to remove 'lfservices_releng' from
+    the user list, causing a ValueError when it doesn't exist in the
+    LDAP group (common in production environments).
+
+    This was causing info-merge-master jobs to fail.
+
+    Now checks if the user exists before attempting removal.
