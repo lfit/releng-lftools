@@ -1,0 +1,25 @@
+---
+features:
+  - |
+    Add OpenStack COE cluster cleanup command to lftools.
+
+    New cluster subcommand under 'lftools openstack' with:
+
+    - cluster list: List all COE (Container Orchestration Engine) clusters
+      on a cloud with details including UUID, name, status, and health status.
+
+    - cluster cleanup: Remove orphaned Kubernetes clusters that are not in
+      use by Jenkins builds. The cleanup command checks Jenkins URLs for
+      active builds to avoid deleting clusters currently in use, preserves
+      managed clusters (containing -managed-prod-k8s- or -managed-test-k8s-),
+      and uses OpenStack CLI commands via subprocess for COE operations.
+
+    This implements the functionality previously only available in global-jjb
+    shell scripts, making it reusable across different automation contexts
+    including GitHub Actions workflows and other CI/CD pipelines.
+
+    Usage:
+      lftools openstack --os-cloud <cloud> cluster list
+      lftools openstack --os-cloud <cloud> cluster cleanup --jenkins <urls>
+
+    Issue: LF-0000

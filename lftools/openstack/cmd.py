@@ -18,6 +18,7 @@ import subprocess
 
 import click
 
+from lftools.openstack import cluster as os_cluster
 from lftools.openstack import image as os_image
 from lftools.openstack import object as os_object
 from lftools.openstack import server as os_server
@@ -255,3 +256,38 @@ def volume_remove(ctx, volume_id, minutes):
 volume.add_command(volume_cleanup, "cleanup")
 volume.add_command(volume_list, "list")
 volume.add_command(volume_remove, "remove")
+
+
+@openstack.group()
+@click.pass_context
+def cluster(ctx):
+    """Command for manipulating COE clusters."""
+    pass
+
+
+@click.command()
+@click.option(
+    "--jenkins",
+    type=str,
+    default=None,
+    help="Space-separated list of Jenkins URLs to check for active builds.",
+)
+@click.pass_context
+def cluster_cleanup(ctx, jenkins):
+    """Cleanup orphaned COE clusters.
+
+    Removes clusters not in use by active Jenkins builds.
+    Preserves managed clusters (names containing -managed-prod-k8s- or -managed-test-k8s-).
+    """
+    os_cluster.cleanup(ctx.obj["os_cloud"], jenkins_urls=jenkins)
+
+
+@click.command()
+@click.pass_context
+def cluster_list(ctx):
+    """List COE clusters."""
+    os_cluster.list(ctx.obj["os_cloud"])
+
+
+cluster.add_command(cluster_cleanup, "cleanup")
+cluster.add_command(cluster_list, "list")
