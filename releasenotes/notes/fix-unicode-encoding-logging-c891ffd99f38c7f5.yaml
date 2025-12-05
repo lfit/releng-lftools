@@ -1,0 +1,15 @@
+---
+fixes:
+  - |
+    Fix UnicodeEncodeError in Gerrit API requests when responses contain
+    Unicode characters. JSON string data is now properly encoded as UTF-8
+    in the RestApi._request() method, preventing 'latin-1' codec errors
+    when user names or group names contain special characters (e.g., 'š').
+
+    This fixes failures in commands like:
+      lftools gerrit addgithubrights <fqdn> <project>
+
+  - |
+    Fix logging TypeError in GitHub create-repo command. Changed from
+    using comma-separated arguments (which caused format string errors)
+    to using f-string formatting for proper message construction.
