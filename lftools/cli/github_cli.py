@@ -109,7 +109,7 @@ def createrepo(ctx, organization, repository, description, has_issues, has_proje
     has_issues = has_issues or False
     has_wiki = has_wiki or False
     has_projects = has_projects or False
-    log.info("Creating repo under organization: ", orgName)
+    log.info(f"Creating repo under organization: {orgName}")
     try:
         org = g.get_organization(orgName)
     except GithubException as ghe:
