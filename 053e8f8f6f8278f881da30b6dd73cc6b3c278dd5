@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c8816fc_1657952c",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2025-12-05T08:15:02Z",
+      "side": 1,
+      "message": "Copilot reviews flagged this line should be:\n\n# -*- coding: utf-8 -*-",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "053e8f8f6f8278f881da30b6dd73cc6b3c278dd5",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
