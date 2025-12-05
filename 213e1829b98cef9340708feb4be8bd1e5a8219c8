@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0d6e447_0f7f188a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 605
+      },
+      "writtenOn": "2025-12-05T07:30:51Z",
+      "side": 1,
+      "message": "Great to see fixes going in, but there are apparently more of these problems lurking in the lftools codebase: https://github.com/modeseven-lfit/lftools-uv/pull/52/files",
+      "revId": "213e1829b98cef9340708feb4be8bd1e5a8219c8",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
