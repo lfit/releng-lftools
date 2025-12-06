@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3e7ab89_46597093",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2025-12-06T02:00:47Z",
+      "side": 1,
+      "message": "Is there a reason not to use requests here?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 13
+      },
+      "revId": "2a530acad7f9358dcd25b5662ac4e641cda8db46",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0f8c6d2_695fdab8",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2025-12-06T02:00:47Z",
+      "side": 1,
+      "message": "Please import logging and replace prints with logs.",
+      "range": {
+        "startLine": 54,
+        "startChar": 16,
+        "endLine": 54,
+        "endChar": 68
+      },
+      "revId": "2a530acad7f9358dcd25b5662ac4e641cda8db46",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eedb43b_1cb45358",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2025-12-06T02:00:47Z",
+      "side": 1,
+      "message": "What exactly is this supposed to be checking for? If you\u0027re trying to separate, say, \"jenkins.onap.org\" and \"jenkins.onap.org/sandbox\", this would return \"production\" for both. So if that\u0027s the intent, it\u0027ll need to be fixed.",
+      "range": {
+        "startLine": 64,
+        "startChar": 12,
+        "endLine": 68,
+        "endChar": 45
+      },
+      "revId": "2a530acad7f9358dcd25b5662ac4e641cda8db46",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d28efc9e_5a18bab0",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2025-12-06T02:00:47Z",
+      "side": 1,
+      "message": "Can this be done with the openstack library, as we\u0027re doing in the other openstack commands?",
+      "range": {
+        "startLine": 109,
+        "startChar": 5,
+        "endLine": 131,
+        "endChar": 9
+      },
+      "revId": "2a530acad7f9358dcd25b5662ac4e641cda8db46",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da344c63_fcef4e18",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2025-12-06T02:00:47Z",
+      "side": 1,
+      "message": "Again, can this be done with the openstack library?",
+      "range": {
+        "startLine": 171,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 29
+      },
+      "revId": "2a530acad7f9358dcd25b5662ac4e641cda8db46",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
