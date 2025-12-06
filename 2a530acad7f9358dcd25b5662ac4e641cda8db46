@@ -24,6 +24,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed4ed751_2fe9bc1e",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2025-12-06T22:26:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c3e7ab89_46597093",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 13
+      },
+      "revId": "2a530acad7f9358dcd25b5662ac4e641cda8db46",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0f8c6d2_695fdab8",
@@ -70,6 +94,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7565646_86c9d63e",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2025-12-06T22:26:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6eedb43b_1cb45358",
+      "range": {
+        "startLine": 64,
+        "startChar": 12,
+        "endLine": 68,
+        "endChar": 45
+      },
+      "revId": "2a530acad7f9358dcd25b5662ac4e641cda8db46",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d28efc9e_5a18bab0",
@@ -93,6 +141,30 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ccd0f3e_4547c35c",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2025-12-06T22:26:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d28efc9e_5a18bab0",
+      "range": {
+        "startLine": 109,
+        "startChar": 5,
+        "endLine": 131,
+        "endChar": 9
+      },
+      "revId": "2a530acad7f9358dcd25b5662ac4e641cda8db46",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da344c63_fcef4e18",
@@ -106,6 +178,30 @@
       "writtenOn": "2025-12-06T02:00:47Z",
       "side": 1,
       "message": "Again, can this be done with the openstack library?",
+      "range": {
+        "startLine": 171,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 29
+      },
+      "revId": "2a530acad7f9358dcd25b5662ac4e641cda8db46",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c554d195_fb6b24d9",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 29
+      },
+      "writtenOn": "2025-12-06T22:26:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "da344c63_fcef4e18",
       "range": {
         "startLine": 171,
         "startChar": 8,
