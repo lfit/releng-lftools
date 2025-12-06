@@ -18,6 +18,7 @@ import subprocess
 
 import click
 
+from lftools.openstack import cluster as os_cluster
 from lftools.openstack import image as os_image
 from lftools.openstack import object as os_object
 from lftools.openstack import server as os_server
@@ -255,3 +256,49 @@ def volume_remove(ctx, volume_id, minutes):
 volume.add_command(volume_cleanup, "cleanup")
 volume.add_command(volume_list, "list")
 volume.add_command(volume_remove, "remove")
+
+
+@openstack.group()
+@click.pass_context
+def cluster(ctx):
+    """Command for manipulating COE clusters."""
+    pass
+
+
+@click.command(name="cleanup")
+@click.option("--days", type=int, default=0, help="Find clusters older than or equal to days.")
+@click.pass_context
+def cluster_cleanup(ctx, days):
+    """Cleanup old COE clusters."""
+    os_cluster.cleanup(ctx.obj["os_cloud"], days=days)
+
+
+@click.command()
+@click.option("--days", type=int, default=0, help="Find clusters older than or equal to days.")
+@click.pass_context
+def cluster_list(ctx, days):
+    """List COE clusters."""
+    os_cluster.list(ctx.obj["os_cloud"], days=days)
+
+
+@click.command()
+@click.argument("cluster_name")
+@click.option("--minutes", type=int, default=0, help="Delete cluster if older than x minutes.")
+@click.pass_context
+def cluster_remove(ctx, cluster_name, minutes):
+    """Remove COE cluster."""
+    os_cluster.remove(ctx.obj["os_cloud"], cluster_name=cluster_name, minutes=minutes)
+
+
+@click.command()
+@click.argument("cluster_name")
+@click.pass_context
+def cluster_show(ctx, cluster_name):
+    """Show COE cluster details."""
+    os_cluster.show(ctx.obj["os_cloud"], cluster_name)
+
+
+cluster.add_command(cluster_cleanup, "cleanup")
+cluster.add_command(cluster_list, "list")
+cluster.add_command(cluster_remove, "remove")
+cluster.add_command(cluster_show, "show")

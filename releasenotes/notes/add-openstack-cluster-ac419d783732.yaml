@@ -1,0 +1,32 @@
+---
+features:
+  - |
+    Add OpenStack COE cluster management commands to lftools.
+
+    New commands:
+
+    * ``lftools openstack cluster list`` - List COE clusters
+    * ``lftools openstack cluster show`` - Show cluster details
+    * ``lftools openstack cluster remove`` - Remove a specific cluster
+    * ``lftools openstack cluster cleanup`` - Cleanup old clusters
+
+    All commands use the OpenStack SDK Python library for direct API
+    interaction, following the same patterns as other lftools openstack
+    subcommands (server, volume, stack, image).
+
+    Example usage::
+
+        # List all clusters
+        lftools openstack --os-cloud mycloud cluster list
+
+        # List clusters older than 30 days
+        lftools openstack --os-cloud mycloud cluster list --days 30
+
+        # Show cluster details
+        lftools openstack --os-cloud mycloud cluster show my-cluster-name
+
+        # Remove a specific cluster (only if older than 60 minutes)
+        lftools openstack --os-cloud mycloud cluster remove my-cluster --minutes 60
+
+        # Cleanup clusters older than 90 days
+        lftools openstack --os-cloud mycloud cluster cleanup --days 90
