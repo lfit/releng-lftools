@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48d53179_f408c66b",
+        "filename": "lftools/openstack/cluster.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 192
+      },
+      "writtenOn": "2025-12-09T02:22:51Z",
+      "side": 1,
+      "message": "Still using print rather than logging. Also, why the change f-strings to using .format? I believe f-strings are the preferred way to do this now.",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 71,
+        "endChar": 93
+      },
+      "revId": "01a44301e798bce44b31908e955b070330241f4e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    }
+  ]
+}
