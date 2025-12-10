@@ -18,6 +18,23 @@
       "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a7bd60_06cc9796",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1
+      },
+      "writtenOn": "2025-12-10T23:39:24Z",
+      "side": 1,
+      "message": "Eric called out that you should be logging instead of using print statements and I agree. We already do this everywhere else in lftools. There is no reason to go to using print statements when we already have an established pattern for output.",
+      "revId": "01a44301e798bce44b31908e955b070330241f4e",
+      "serverId": "f2a2391d-0403-4fa5-b183-4056999a8a09"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48d53179_f408c66b",
