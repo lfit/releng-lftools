@@ -24,7 +24,9 @@ def _filter_servers(servers, days=0):
     """Filter server data and return list."""
     filtered = []
     for server in servers:
-        if days and (datetime.strptime(server.created, "%Y-%m-%dT%H:%M:%SZ") >= datetime.now() - timedelta(days=days)):
+        if days and (
+            datetime.strptime(server.created_at, "%Y-%m-%dT%H:%M:%SZ") >= datetime.now() - timedelta(days=days)
+        ):
             continue
 
         filtered.append(server)
@@ -89,7 +91,7 @@ def remove(os_cloud, server_name, minutes=0):
         print("ERROR: Server not found.")
         sys.exit(1)
 
-    if datetime.strptime(server.created, "%Y-%m-%dT%H:%M:%SZ") >= datetime.utcnow() - timedelta(minutes=minutes):
+    if datetime.strptime(server.created_at, "%Y-%m-%dT%H:%M:%SZ") >= datetime.utcnow() - timedelta(minutes=minutes):
         print('WARN: Server "{}" is not older than {} minutes.'.format(server.name, minutes))
     else:
         cloud.delete_server(server.name)
