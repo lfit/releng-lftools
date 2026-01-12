@@ -80,7 +80,7 @@ dependencies = [
     "tabulate",
     "toml",
     "tqdm",
-    "urllib3<2.1.0",
+    "urllib3>=1.26.15,<3.0.0",
     "websocket-client",
     "wrapt",
     "xdg"
