@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    Fix ``TypeError: delete() missing 1 required positional argument: 'force'``
+    in ``lftools openstack stack delete-stale``. The ``delete()`` function in
+    ``stack.py`` required ``force`` as a positional argument, but callers at
+    lines 63 and 233 did not pass it. Changed ``force`` to a keyword argument
+    with default value ``False``.

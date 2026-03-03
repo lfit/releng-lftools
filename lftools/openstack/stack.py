@@ -154,7 +154,7 @@ def cost(os_cloud, stack_name, timeout=60):
         print("total: 0.0")
 
 
-def delete(os_cloud, name_or_id, force, timeout=900):
+def delete(os_cloud, name_or_id, force=False, timeout=900):
     """Delete a stack.
 
     Return True if delete was successful.
