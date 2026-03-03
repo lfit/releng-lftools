@@ -10,6 +10,7 @@
 ##############################################################################
 """Contains functions for various Nexus tasks."""
 
+import configparser
 import csv
 import logging
 import re
@@ -20,7 +21,6 @@ from time import sleep
 import bs4
 import requests
 import yaml
-from six.moves import configparser
 
 from lftools import config
 from lftools.nexus import Nexus, util

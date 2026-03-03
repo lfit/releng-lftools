@@ -1,0 +1,19 @@
+---
+deprecations:
+  - |
+    Remove ``six`` Python 2 compatibility library. All ``six.moves``
+    imports replaced with Python 3 stdlib equivalents:
+
+    - ``six.moves.configparser`` → ``configparser``
+    - ``six.moves.urllib`` → ``urllib.parse`` / ``urllib.request``
+    - ``six.moves.urllib.error`` → ``urllib.error``
+    - ``six.moves.input`` → builtin ``input``
+    - ``six.text_type`` → ``str``
+
+    Affected modules: ``deploy.py``, ``lfidapi.py``, ``nexus/cmd.py``,
+    ``cli/__init__.py``, ``cli/config.py``, ``cli/jenkins/__init__.py``,
+    ``cli/jenkins/token.py``.
+
+    The ``six`` package is removed from project dependencies in
+    ``pyproject.toml`` and ``types-six`` removed from pre-commit mypy
+    configuration.

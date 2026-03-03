@@ -15,7 +15,6 @@ import getpass
 import logging
 
 import click
-from six.moves import input
 
 from lftools import config as conf
 from lftools.cli.config import config_sys

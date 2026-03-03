@@ -75,7 +75,6 @@ dependencies = [
     "rsa",
     "ruamel.yaml",
     "ruamel.yaml.clib",
-    "six",
     "soupsieve",
     "tabulate",
     "toml",

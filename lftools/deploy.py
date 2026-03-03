@@ -31,7 +31,6 @@ from pathlib import Path
 
 import boto3
 import requests
-import six
 from botocore.exceptions import ClientError
 from defusedxml.minidom import parseString
 
@@ -436,11 +435,11 @@ def deploy_logs(nexus_url, nexus_path, build_url):
 
     resp = requests.get("{}/consoleText".format(_format_url(build_url)))
     with io.open("console.log", "w+", encoding="utf-8") as f:
-        f.write(six.text_type(resp.content.decode("utf-8").split(MAGIC_STRING)[0]))
+        f.write(resp.content.decode("utf-8").split(MAGIC_STRING)[0])
 
     resp = requests.get("{}/timestamps?time=HH:mm:ss&appendLog".format(_format_url(build_url)))
     with io.open("console-timestamp.log", "w+", encoding="utf-8") as f:
-        f.write(six.text_type(resp.content.decode("utf-8").split(MAGIC_STRING)[0]))
+        f.write(resp.content.decode("utf-8").split(MAGIC_STRING)[0])
 
     _compress_text(work_dir)
 
@@ -581,12 +580,12 @@ def deploy_s3(s3_bucket, s3_path, build_url, workspace, pattern=None):
 
     resp = requests.get("{}/consoleText".format(_format_url(build_url)))
     with open("console.log", "w+", encoding="utf-8") as f:
-        f.write(six.text_type(resp.content.decode("utf-8").split(MAGIC_STRING)[0]))
+        f.write(resp.content.decode("utf-8").split(MAGIC_STRING)[0])
         f.close()
 
     resp = requests.get("{}/timestamps?time=HH:mm:ss&appendLog".format(_format_url(build_url)))
     with open("console-timestamp.log", "w+", encoding="utf-8") as f:
-        f.write(six.text_type(resp.content.decode("utf-8").split(MAGIC_STRING)[0]))
+        f.write(resp.content.decode("utf-8").split(MAGIC_STRING)[0])
         f.close()
 
     # Create _tmpfile

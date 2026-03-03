@@ -41,7 +41,6 @@ repos:
         additional_dependencies:
           - types-tabulate
           - types-requests
-          - types-six
           - types-PyYAML
 
   - repo: https://github.com/rhysd/actionlint

@@ -12,11 +12,11 @@
 import json
 import logging
 import sys
+import urllib.parse
 
 import requests
 import yaml
 from email_validator import validate_email
-from six.moves import urllib
 
 from lftools.github_helper import helper_list, helper_user_github
 from lftools.oauth2_helper import oauth_helper

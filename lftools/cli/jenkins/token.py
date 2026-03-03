@@ -11,13 +11,13 @@
 
 __author__ = "Thanh Ha"
 
+import configparser
 import logging
 import os
 import sys
 
 import click
 import requests
-from six.moves import configparser
 
 from lftools import config as lftools_cfg
 from lftools.jenkins.token import get_token

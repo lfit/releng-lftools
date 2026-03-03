@@ -13,9 +13,9 @@ __author__ = "Trevor Bramwell"
 
 
 import logging
+from urllib.error import HTTPError
 
 import click
-from six.moves.urllib.error import HTTPError
 
 from lftools.cli.jenkins.builds import builds
 from lftools.cli.jenkins.jobs import jobs
