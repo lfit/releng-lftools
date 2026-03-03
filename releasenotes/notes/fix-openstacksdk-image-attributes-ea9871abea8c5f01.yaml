@@ -1,0 +1,17 @@
+---
+fixes:
+  - |
+    Fix deprecated openstacksdk image attributes for compatibility with
+    openstacksdk >= 2.x. Three issues resolved in ``image.py``:
+
+    1. Replace ``image.is_public`` (removed) with
+       ``image.visibility == "public"``
+    2. Replace ``image.metadata.get()`` (returns None in SDK 4.x) with
+       ``(image.properties or {}).get()`` for ci_managed filtering
+    3. Remove ``image.protected`` fallback that generated noisy warnings
+       (``WARNING: Use of image.protected resulted in an exception``) on
+       every image. Use ``image.is_protected`` directly which is the
+       correct attribute in openstacksdk >= 2.x.
+
+    Also replaces ``six.moves.urllib`` import with stdlib
+    ``urllib.request`` in the same module.

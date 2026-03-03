@@ -17,12 +17,12 @@ import re
 import subprocess
 import sys
 import tempfile
+import urllib.request
 from datetime import datetime, timedelta
 
 import openstack
 import openstack.config
 from openstack.cloud.exc import OpenStackCloudException
-from six.moves import urllib
 
 log = logging.getLogger(__name__)
 
@@ -35,31 +35,19 @@ def _filter_images(images, days=0, hide_public=False, ci_managed=True):
     :arg bool hide_public: Whether or not to include public images.
     """
     filtered = []
-    bad_attribute = ""
     for image in images:
-        if hide_public and image.is_public:
+        if hide_public and image.visibility == "public":
             continue
-        if ci_managed and image.metadata.get("ci_managed", None) != "yes":
+        if ci_managed and (image.properties or {}).get("ci_managed", None) != "yes":
             continue
-        # Safely handle potentially problematic attributes
-        try:
-            if image.is_protected:
-                continue
-        except AttributeError:
-            bad_attribute = "image.is_protected"
-        try:
-            if image.protected:
-                continue
-        except AttributeError:
-            bad_attribute = "image.protected"
+        if image.is_protected:
+            continue
         if days and (
             datetime.strptime(image.created_at, "%Y-%m-%dT%H:%M:%SZ") >= datetime.now() - timedelta(days=days)
         ):
             continue
 
         filtered.append(image)
-    if bad_attribute:
-        log.warning("Use of " + bad_attribute + " resulted in an exception")
     return filtered
 
 
@@ -85,27 +73,13 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
         from. Otherwise os_cloud will be used.
     """
 
-    def _log_bad_attribute(attribute):
-        """Log a bad attribute."""
-        log.warning("Use of " + attribute + " resulted in an exception")
-
     def _remove_images_from_cloud(images, cloud):
         log.info("Removing {} images from {}.".format(len(images), cloud.config._name))
         project_info = cloud._get_project_info()
         for image in images:
-            # Safely handle potentially problematic attributes
-            try:
-                if image.is_protected:
-                    log.warning("Image {} is protected. Cannot remove...".format(image.name))
-                    continue
-            except AttributeError:
-                _log_bad_attribute("image.is_protected")
-            try:
-                if image.protected:
-                    log.warning("Image {} is protected. Cannot remove...".format(image.name))
-                    continue
-            except AttributeError:
-                _log_bad_attribute("image.protected")
+            if image.is_protected:
+                log.warning("Image {} is protected. Cannot remove...".format(image.name))
+                continue
 
             if image.visibility == "shared":
                 log.warning("Image {} is shared. Cannot remove...".format(image.name))
