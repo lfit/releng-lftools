@@ -41,6 +41,12 @@ def jjb_ini() -> str | None:
 
 JJB_INI: str | None = jjb_ini()
 
+# Some Jenkins servers sit behind a WAF/CDN (e.g. Cloudflare) that blocks the
+# default python-requests/python-jenkins User-Agent as suspected bot traffic.
+# Sending a browser-like User-Agent avoids these bot-detection challenges.
+# The value can be overridden via the LFTOOLS_JENKINS_USER_AGENT env variable.
+DEFAULT_USER_AGENT: str = "Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0"
+
 
 class Jenkins:
     """lftools Jenkins object."""
@@ -69,5 +75,11 @@ class Jenkins:
                 server = "https://localhost:8080"
 
         self.server: jenkins.Jenkins = jenkins.Jenkins(server, username=user, password=password)  # type: ignore
+
+        # Override the default User-Agent so requests are not flagged as bot
+        # traffic by WAF/CDN layers (e.g. Cloudflare) in front of Jenkins.
+        user_agent: str = os.environ.get("LFTOOLS_JENKINS_USER_AGENT", DEFAULT_USER_AGENT)
+        if user_agent:
+            self.server._session.headers["User-Agent"] = user_agent
 
         self.url: str = server
