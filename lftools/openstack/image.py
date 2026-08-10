@@ -90,7 +90,10 @@ def cleanup(os_cloud, days=0, hide_public=False, ci_managed=True, clouds=None):
                 continue
 
             try:
-                result = cloud.delete_image(image.name)
+                # ponytail: delete by id, not name. Names are not unique in
+                # Glance, and a duplicate name made the lookup ambiguous and
+                # skipped the image forever.
+                result = cloud.delete_image(image.id)
             except OpenStackCloudException as e:
                 error_msg = str(e)
                 if error_msg.startswith("Multiple matches found for") or error_msg.startswith(
