@@ -1,0 +1,9 @@
+---
+fixes:
+  - |
+    ``lftools openstack image cleanup`` now deletes images by ID instead of by
+    name. Image names are not unique in Glance, so any image sharing its name
+    with another was reported as ``More than one Image exists with the name
+    '...'`` and skipped. Nothing in the cleanup path removed either copy, so
+    the ambiguity persisted and the same images were selected and skipped on
+    every subsequent run, never ageing out of the cloud.
