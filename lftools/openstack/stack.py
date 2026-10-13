@@ -223,14 +223,16 @@ def delete_stale(os_cloud, jenkins_servers):
     log.debug("Active stacks")
     for stack in stacks:
         if stack.status == "CREATE_COMPLETE" or stack.status == "CREATE_FAILED" or stack.status == "DELETE_FAILED":
-            log.debug("    {}".format(stack.stack_name))
+            # openstacksdk exposes the Heat "stack_name" field as ``name``;
+            # ``stack.stack_name`` is always None on Stack resources.
+            log.debug("    {}".format(stack.name))
 
             if stack.status == "DELETE_FAILED":
                 cloud.pprint(stack)
 
-            if stack.stack_name not in builds:
+            if stack.name not in builds:
                 log.debug("        >>>> Marked for deletion <<<<")
-                delete(os_cloud, stack.stack_name)
+                delete(os_cloud, stack.id)
 
         else:
             continue

@@ -1,0 +1,10 @@
+---
+fixes:
+  - |
+    Fix ``lftools openstack stack delete-stale`` never deleting orphaned
+    stacks. The command read ``stack.stack_name``, which is always ``None`` on
+    openstacksdk Stack resources, so every stack was treated as orphaned and the
+    first deletion failed with ``Deleting stack None`` /
+    ``InvalidRequest: Request requires an ID but none was found``, aborting the
+    cleanup. Use ``stack.name`` to match running Jenkins builds and delete
+    stale stacks by ``stack.id``.
