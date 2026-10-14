@@ -5,6 +5,7 @@
 ##############################################################################
 """Unit tests for openstack stack commands."""
 
+from datetime import datetime, timedelta, timezone
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -13,9 +14,15 @@ from openstack.orchestration.v1.stack import Stack
 from lftools.openstack import stack
 
 
-def _stack(stack_id, name, status="CREATE_COMPLETE"):
+def _stack(stack_id, name, status="CREATE_COMPLETE", age_hours=48):
     """Build a real openstacksdk Stack resource as returned by search_stacks()."""
-    return Stack.existing(id=stack_id, stack_name=name, stack_status=status)
+    created = datetime.now(timezone.utc) - timedelta(hours=age_hours)
+    return Stack.existing(
+        id=stack_id,
+        stack_name=name,
+        stack_status=status,
+        creation_time=created.strftime("%Y-%m-%dT%H:%M:%SZ"),
+    )
 
 
 @pytest.fixture
@@ -56,6 +63,44 @@ class TestStackDeleteStale:
         deleted = [c.args[1] for c in mock_delete.call_args_list]
         assert deleted == ["id-orphan", "id-failed"]
         assert None not in deleted
+
+    def test_delete_stale_protects_young_stacks(self, mock_cloud, mock_jenkins):
+        """A stack younger than min_age_hours is never reaped.
+
+        get_running_builds() silently drops nodes that 500 or disappear, so an
+        unreported build must not cost a live stack its VMs.
+        """
+        mock_cloud.search_stacks.return_value = [
+            _stack("id-young", "releng-job-b-2", age_hours=1),
+            _stack("id-old", "releng-job-c-3", age_hours=48),
+        ]
+
+        with patch("lftools.openstack.stack.delete") as mock_delete:
+            stack.delete_stale("test-cloud", ["https://jenkins.example.org/releng"])
+
+        assert [c.args[1] for c in mock_delete.call_args_list] == ["id-old"]
+
+    def test_delete_stale_skips_unknown_age(self, mock_cloud, mock_jenkins):
+        """A stack whose creation time cannot be determined is left alone.
+
+        Covers both reasons an age is unknown: Heat omitted the field
+        entirely, and Heat returned a timestamp that will not parse. Either
+        way the stack could belong to a running build, so keep it.
+        """
+        mock_cloud.search_stacks.return_value = [
+            Stack.existing(id="id-noage", stack_name="releng-job-b-2", stack_status="CREATE_COMPLETE"),
+            Stack.existing(
+                id="id-badage",
+                stack_name="releng-job-b-3",
+                stack_status="CREATE_COMPLETE",
+                creation_time="not-a-timestamp",
+            ),
+        ]
+
+        with patch("lftools.openstack.stack.delete") as mock_delete:
+            stack.delete_stale("test-cloud", ["https://jenkins.example.org/releng"])
+
+        mock_delete.assert_not_called()
 
     def test_delete_stale_no_stacks(self, mock_cloud):
         """Exit cleanly when there are no stacks."""

@@ -1,0 +1,15 @@
+---
+upgrade:
+  - |
+    ``lftools openstack stack delete-stale`` now protects stacks younger than
+    24 hours from deletion. Override with ``--min-age-hours``. The default
+    covers the longest Jenkins ``build-timeout`` in use so that a stack
+    belonging to a running build is never reaped.
+fixes:
+  - |
+    Fixed ``lftools openstack stack delete-stale`` deleting stacks that belong
+    to running Jenkins builds. python-jenkins ``get_running_builds()`` silently
+    treats a node as idle when the node query returns HTTP 500 or when the node
+    disappears mid-query, both of which are routine with ephemeral cloud
+    agents. The resulting short build list made live stacks look orphaned.
+    Stacks are now also required to exceed a minimum age before deletion.
