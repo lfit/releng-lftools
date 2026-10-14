@@ -204,15 +204,22 @@ def cost(ctx, stack_name, timeout):
 
 @click.command(name="delete-stale")
 @click.argument("jenkins_urls", nargs=-1)
+@click.option(
+    "--min-age-hours",
+    type=int,
+    default=os_stack.STALE_MIN_AGE_HOURS,
+    show_default=True,
+    help="Protect stacks younger than this many hours from deletion.",
+)
 @click.pass_context
-def delete_stale(ctx, jenkins_urls):
+def delete_stale(ctx, jenkins_urls, min_age_hours):
     """Delete stale stacks.
 
     This command checks Jenkins and OpenStack for stacks that do not appear in
     both places. If a stack is no longer available in Jenkins but is in
     OpenStack then it is considered stale. Stale stacks are then deleted.
     """
-    os_stack.delete_stale(ctx.obj["os_cloud"], jenkins_urls)
+    os_stack.delete_stale(ctx.obj["os_cloud"], jenkins_urls, min_age_hours=min_age_hours)
 
 
 stack.add_command(create)
