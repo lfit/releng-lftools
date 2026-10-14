@@ -63,3 +63,26 @@ class TestStackDeleteStale:
         with pytest.raises(SystemExit) as exc_info:
             stack.delete_stale("test-cloud", ["https://jenkins.example.org/releng"])
         assert exc_info.value.code == 0
+
+
+class TestStackCreate:
+    """Test stack create command."""
+
+    @staticmethod
+    def _run(mock_cloud, statuses):
+        mock_cloud.create_stack.return_value = Stack.existing(id="id-1", stack_name="releng-job-a-1")
+        mock_cloud.get_stack.side_effect = [
+            Stack.existing(id="id-1", stack_name="releng-job-a-1", stack_status=s) for s in statuses
+        ]
+        with patch("lftools.openstack.stack.time.sleep"), patch("lftools.openstack.stack.delete", return_value=True):
+            stack.create("test-cloud", "releng-job-a-1", "template.yaml", "params.yaml", tries=2)
+
+    def test_create_exits_nonzero_when_all_tries_fail(self, mock_cloud):
+        """Quota-exceeded CREATE_FAILED on every try must exit non-zero."""
+        with pytest.raises(SystemExit) as exc_info:
+            self._run(mock_cloud, ["CREATE_FAILED", "CREATE_FAILED"])
+        assert exc_info.value.code == 1
+
+    def test_create_succeeds_without_exit(self, mock_cloud):
+        """A successful create returns normally."""
+        self._run(mock_cloud, ["CREATE_IN_PROGRESS", "CREATE_COMPLETE"])

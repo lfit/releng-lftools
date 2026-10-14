@@ -1,0 +1,8 @@
+---
+fixes:
+  - |
+    ``lftools openstack stack create`` now exits non-zero when stack creation
+    fails on every try. Previously the command printed the failure reason and
+    exited 0, so a Jenkins job whose Heat stack hit "Quota exceeded for ram"
+    continued running against zero VMs and failed much later with unrelated
+    errors instead of failing fast at the stack-create step.

@@ -74,6 +74,10 @@ def create(os_cloud, name, template_file, parameter_file, timeout=900, tries=2):
     cloud.pprint(stack)
     print("------------------------------------")
 
+    if not stack_success:
+        print("ERROR: Failed to create stack {} after {} tries.".format(name, tries))
+        sys.exit(1)
+
 
 def cost(os_cloud, stack_name, timeout=60):
     """Get current cost info for the stack.
