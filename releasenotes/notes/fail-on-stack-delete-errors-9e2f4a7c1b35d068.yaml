@@ -1,0 +1,25 @@
+---
+upgrade:
+  - |
+    ``lftools openstack stack delete`` and ``lftools openstack stack
+    delete-stale`` can now exit non-zero where they previously exited 0. A
+    pipeline that relied on these commands always succeeding will now see real
+    failures.
+  - |
+    ``lftools openstack stack delete-stale`` now requires at least one Jenkins
+    URL. Calling it with no arguments is a usage error instead of a run that
+    treats every stack as stale.
+fixes:
+  - |
+    Fixed ``lftools openstack stack delete`` exiting 0 when the delete timed
+    out, for example a stack stuck in ``DELETE_FAILED``. It now exits 1.
+    ``--force`` still ignores the timeout as documented.
+  - |
+    Fixed ``lftools openstack stack delete-stale`` exiting 0 when a stale stack
+    could not be deleted. Every stack is still attempted, and the command now
+    exits 1 at the end naming the stacks left behind, so a cleanup cron no
+    longer reports success while orphans keep consuming quota.
+  - |
+    Fixed ``lftools openstack stack delete-stale`` accepting no Jenkins URLs.
+    With no servers to query the build list is empty, so every stack past the
+    minimum age looked orphaned and was deleted.
