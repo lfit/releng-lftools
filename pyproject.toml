@@ -40,7 +40,7 @@ dependencies = [
     "beautifulsoup4",
     "boto3",
     "bs4",
-    "certifi",
+    "certifi>=2026.10.23",
     "cfgv",
     "chardet",
     "click",
