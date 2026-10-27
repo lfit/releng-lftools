@@ -1,0 +1,34 @@
+---
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 The Linux Foundation
+
+# Dependabot keeps GitHub Actions pins (SHA + version comment) and
+# other dependencies current. The cooldown avoids churn from releases
+# that are retracted or superseded shortly after they ship.
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "CI(actions)"
+    cooldown:
+      default-days: 7
+    groups:
+      actions-deps:
+        patterns:
+          - "*"
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "Chore(pip)"
+    cooldown:
+      default-days: 7
+    groups:
+      pip-deps:
+        patterns:
+          - "*"
