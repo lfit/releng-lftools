@@ -9,10 +9,10 @@
 ##############################################################################
 """CLI main for lftools."""
 
-
 import configparser
 import getpass
 import logging
+import os
 
 import click
 
@@ -36,6 +36,12 @@ from lftools.cli.utils import utils
 from lftools.cli.version import version
 
 log = logging.getLogger(__name__)
+
+DEPRECATION_NOTICE = (
+    "DEPRECATION NOTICE: lftools is no longer maintained and will be archived.\n"
+    "Migrate to lftools-uv: https://github.com/lfreleng-actions/lftools-uv\n"
+    "Set LFTOOLS_SUPPRESS_DEPRECATION=1 to silence this notice."
+)
 
 
 @click.group()
@@ -117,6 +123,9 @@ except ImportError:
 
 def main():
     """Entry point for lftools CLI."""
+    # Written to stderr so scripts parsing lftools stdout are unaffected.
+    if os.environ.get("LFTOOLS_SUPPRESS_DEPRECATION") != "1":
+        click.echo(DEPRECATION_NOTICE, err=True)
     cli(obj={})
 
 

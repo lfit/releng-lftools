@@ -1,5 +1,23 @@
 # LF Tools
 
+> **DEPRECATED: lftools is no longer maintained**
+>
+> This repository will be archived and made read-only. No further
+> features, bug fixes or security updates will be released.
+>
+> The replacement is **lftools-uv**:
+>
+> - Source: <https://github.com/lfreleng-actions/lftools-uv>
+> - PyPI: <https://pypi.org/project/lftools-uv/>
+> - Documentation: <https://lftools-uv.readthedocs.io>
+>
+> To migrate, install with `pip install lftools-uv` (or run without
+> installing via `uvx lftools-uv`) and invoke `lftools-uv` in place of
+> `lftools`. lftools-uv requires Python 3.11 or newer and reads the
+> same `~/.config/lftools/` configuration files.
+>
+> Please raise issues and contributions against lftools-uv.
+
 This project's documentation is available on ReadTheDocs (RTD)
 
 <https://lf-releng-tools.readthedocs.io>

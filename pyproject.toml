@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "lftools"
 dynamic = ["version"]
-description = "Linux Foundation Release Engineering Tools"
+description = "Linux Foundation Release Engineering Tools (DEPRECATED: use lftools-uv)"
 readme = "README.md"
 requires-python = ">=3.8,<3.14"
 license = {text = "EPL-1.0"}
@@ -21,6 +21,7 @@ maintainers = [
 # Add here all kinds of additional classifiers as defined under
 # https://pypi.org/classifiers/
 classifiers = [
+    "Development Status :: 7 - Inactive",
     "Intended Audience :: Developers",
     "Intended Audience :: Information Technology",
     "Operating System :: POSIX :: Linux",
@@ -118,6 +119,7 @@ test = [
 "Bug Tracker" = "https://github.com/lfit/releng-tools/issues"
 "Documentation" = "https://docs.releng.linuxfoundation.org/projects/lftools"
 "Source Code" = "https://github.com/lfit/releng-lftools"
+"Replacement" = "https://github.com/lfreleng-actions/lftools-uv"
 
 [project.scripts]
 lftools = "lftools.cli:main"

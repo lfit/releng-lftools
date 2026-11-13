@@ -6,6 +6,17 @@
 LF Tools
 ========
 
+.. warning::
+
+    **lftools is deprecated and no longer maintained.** The repository will
+    be archived and made read-only, and no further releases will follow.
+
+    Please migrate to the replacement, lftools-uv:
+
+    * Source: https://github.com/lfreleng-actions/lftools-uv
+    * PyPI: https://pypi.org/project/lftools-uv/
+    * Documentation: https://lftools-uv.readthedocs.io
+
 Linux Foundation Release Engineering Tools.
 
 This software is a collection of scripts written in a variety of
