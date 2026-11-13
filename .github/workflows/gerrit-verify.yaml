@@ -51,7 +51,7 @@ permissions: {}
 
 jobs:
   clear-vote:
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-24.04'
     permissions: {}
     steps:
       - name: Clear votes
@@ -86,7 +86,7 @@ jobs:
   python-build:
     name: 'Python Build'
     needs: clear-vote
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-24.04'
     outputs:
       matrix_json: "${{ steps.python-build.outputs.matrix_json }}"
       artefact_name: "${{ steps.python-build.outputs.artefact_name }}"
@@ -119,7 +119,7 @@ jobs:
 
   python-tests:
     name: 'Python Tests'
-    runs-on: 'ubuntu-latest'
+    runs-on: 'ubuntu-24.04'
     needs:
       - clear-vote
       - python-build
@@ -157,7 +157,7 @@ jobs:
     needs:
       - clear-vote
       - python-build
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-24.04'
     # Matrix job
     strategy:
       fail-fast: false
@@ -182,7 +182,7 @@ jobs:
 
   docs:
     needs: clear-vote
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-24.04'
     permissions:
       contents: read
     steps:
@@ -206,7 +206,7 @@ jobs:
 
   docs-linkcheck:
     needs: clear-vote
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-24.04'
     permissions:
       contents: read
     steps:
@@ -229,7 +229,7 @@ jobs:
 
   license:
     needs: clear-vote
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-24.04'
     permissions:
       contents: read
     steps:
@@ -252,7 +252,7 @@ jobs:
   vote:
     if: ${{ always() }}
     needs: [clear-vote, python-build, python-tests, python-audit, docs, docs-linkcheck, license, lint]
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-24.04'
     permissions: {}
     steps:
       - name: Get workflow conclusion
