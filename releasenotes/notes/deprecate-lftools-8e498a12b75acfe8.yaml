@@ -1,0 +1,17 @@
+---
+prelude: >
+    lftools is deprecated and no longer maintained. This is the final
+    release; the repository will be archived and made read-only. Migrate
+    to the replacement project, lftools-uv:
+    https://github.com/lfreleng-actions/lftools-uv
+deprecations:
+  - |
+    lftools is deprecated in favour of lftools-uv, available on PyPI as
+    ``lftools-uv`` (https://pypi.org/project/lftools-uv/). lftools-uv
+    requires Python 3.11 or newer, installs a ``lftools-uv`` command in
+    place of ``lftools`` and reads the same ``~/.config/lftools/``
+    configuration files.
+
+    The ``lftools`` command now prints a deprecation notice to stderr on
+    every invocation. Standard output is unchanged. Set the environment
+    variable ``LFTOOLS_SUPPRESS_DEPRECATION=1`` to silence the notice.

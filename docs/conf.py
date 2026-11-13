@@ -24,6 +24,9 @@ import sphinx_bootstrap_theme  # noqa
 
 sys.path.insert(0, os.path.abspath(".."))
 
+# Keep the CLI deprecation notice out of program-output blocks.
+os.environ["LFTOOLS_SUPPRESS_DEPRECATION"] = "1"
+
 from docs_conf.conf import *  # noqa
 from pbr.version import VersionInfo  # noqa
 

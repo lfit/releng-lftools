@@ -1,5 +1,10 @@
 # Contributing to lftools
 
+> **DEPRECATED: lftools is no longer maintained and will be archived.**
+>
+> Please send contributions and bug reports to the replacement project,
+> lftools-uv: <https://github.com/lfreleng-actions/lftools-uv>
+
 Thank you for your interest in the LF Tools project. This is a project repo
 for one of the Linux Foundation Release Engineering team's tools projects.
 

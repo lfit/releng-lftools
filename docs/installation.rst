@@ -2,6 +2,19 @@
 Installation
 ############
 
+.. warning::
+
+    lftools is deprecated. New installations should use lftools-uv instead,
+    which requires Python 3.11 or newer::
+
+        pip install lftools-uv
+        # or, without installing:
+        uvx lftools-uv --help
+
+    Invoke ``lftools-uv`` in place of ``lftools``. It reads the same
+    ``~/.config/lftools/`` configuration files. See
+    https://lftools-uv.readthedocs.io for details.
+
 .. note::
 
     LFtools requires python3 (3.6+) virtual environment.
