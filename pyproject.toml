@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=46.1.0", "setuptools_scm[toml]>=5"]
+requires = ["setuptools>=84.2.1", "setuptools_scm[toml]>=10.3.4"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -52,7 +52,7 @@ dependencies = [
     "email-validator",
     "filelock",
     "GitPython",
-    "httplib2<0.31.0",
+    "httplib2<0.33.0",
     "identify",
     "idna",
     "jinja2",
@@ -62,7 +62,7 @@ dependencies = [
     "munch",
     "nodeenv",
     "oauth2client",
-    "openstacksdk>=2.1.0",
+    "openstacksdk>=4.13.0",
     "pbr",
     "pyasn1",
     "pyasn1-modules",
@@ -72,7 +72,7 @@ dependencies = [
     "pyrsistent",
     "python-jenkins",
     "PyYAML",
-    "requests>=2.32.0",
+    "requests>=2.34.2",
     "rsa",
     "ruamel.yaml",
     "ruamel.yaml.clib",
@@ -80,7 +80,7 @@ dependencies = [
     "tabulate",
     "toml",
     "tqdm",
-    "urllib3>=1.26.15,<3.0.0",
+    "urllib3>=2.8.0,<3.0.0",
     "websocket-client",
     "wrapt",
     "xdg"
@@ -98,20 +98,20 @@ docs = [
 ]
 
 ldap = [
-    "python-ldap~=3.1.0"
+    "python-ldap~=3.4.8"
 ]
 
 openstack = [
-    "osc-lib~=2.2.0"
+    "osc-lib~=4.6.0"
 ]
 
 test = [
-    "pytest==8.3.5",
+    "pytest==9.2.0",
     "pytest-click==1.1.0",
-    "pytest-cov==5.0.0",
-    "pytest-datafiles==3.0.0",
-    "pytest-mock==3.14.0",
-    "pytest-responses==0.5.1"
+    "pytest-cov==7.1.0",
+    "pytest-datafiles==3.0.1",
+    "pytest-mock==3.17.0",
+    "pytest-responses==0.6.0"
 ]
 
 [project.urls]
