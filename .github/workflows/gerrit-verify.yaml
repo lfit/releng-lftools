@@ -56,7 +56,7 @@ jobs:
     steps:
       - name: Clear votes
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/gerrit-review-action@d56b0b5c81402f8cb435aaca513bebdea3be951e  # v1.2.0
+        uses: lfreleng-actions/gerrit-review-action@31093af31cec3755c34d8563ee54e2b7eb3a4eac  # v1.3.1
         with:
           host: ${{ vars.LFIT_GERRIT_SERVER }}
           username: ${{ vars.LFIT_GERRIT_SSH_USER }}
@@ -70,7 +70,7 @@ jobs:
   lint:
     needs: clear-vote
     # yamllint disable-line rule:line-length
-    uses: lfit/releng-reusable-workflows/.github/workflows/compose-repo-linting.yaml@e3bb02dd0d2e5027cde63732fe00f591d6ecec03 # v0.11.0
+    uses: lfit/releng-reusable-workflows/.github/workflows/compose-repo-linting.yaml@fc3aea6f1ec56737c3cdd8fe1c46cbbb7209394b # v0.11.1
     permissions: {}
     with:
       GERRIT_BRANCH: ${{ inputs.GERRIT_BRANCH }}
@@ -99,12 +99,12 @@ jobs:
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2  # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a  # v2.22.4
         with:
           egress-policy: 'audit'
 
       # yamllint disable-line rule:line-length
-      - uses: lfreleng-actions/checkout-gerrit-change-action@35e98c8043ec411611e464e296bcfb441a5c5093  # v1.1.2
+      - uses: lfreleng-actions/checkout-gerrit-change-action@8721c15dacdd703064df5ade1416f7e5590b65f3  # v1.4.1
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
           gerrit-project: ${{ inputs.GERRIT_PROJECT }}
@@ -115,7 +115,7 @@ jobs:
       - name: 'Build Python project'
         id: python-build
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/python-build-action@3cdb6f8e3b9c6c8fb21cce123f7b873b3620273d # v2.1.1
+        uses: lfreleng-actions/python-build-action@3a996fe53edf0117e283b9fef8d3aacaa9adaf02 # v2.1.2
 
   python-tests:
     name: 'Python Tests'
@@ -133,12 +133,12 @@ jobs:
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2  # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a  # v2.22.4
         with:
           egress-policy: audit
 
       # yamllint disable-line rule:line-length
-      - uses: lfreleng-actions/checkout-gerrit-change-action@35e98c8043ec411611e464e296bcfb441a5c5093  # v1.1.2
+      - uses: lfreleng-actions/checkout-gerrit-change-action@8721c15dacdd703064df5ade1416f7e5590b65f3  # v1.4.1
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
           gerrit-project: ${{ inputs.GERRIT_PROJECT }}
@@ -148,7 +148,7 @@ jobs:
 
       - name: "Python tests [pytest] ${{ matrix.python-version }}"
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/python-test-action@0c2fe7546faea2321e003c1c3b26a9156a7bc432 # v1.3.1
+        uses: lfreleng-actions/python-test-action@644a2008072617b9cf4846ca2b9d385691f9dc67 # v1.3.3
         with:
           python_version: ${{ matrix.python-version }}
 
@@ -167,15 +167,15 @@ jobs:
     timeout-minutes: 10
     steps:
       # Harden the runner used by this workflow
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: 'audit'
 
-      - uses: lfreleng-actions/checkout-gerrit-change-action@35e98c8043ec411611e464e296bcfb441a5c5093  # v1.1.2
+      - uses: lfreleng-actions/checkout-gerrit-change-action@8721c15dacdd703064df5ade1416f7e5590b65f3  # v1.4.1
 
       - name: "Audit dependencies ${{ matrix.python-version }}"
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/python-audit-action@47af793a2a28882b10ceb9109646cbbcecc2e7b0 # v0.6.1
+        uses: lfreleng-actions/python-audit-action@379a6a772cdf47b130bae3ab47718a22518bb83c # v0.6.4
         with:
           python_version: "${{ matrix.python-version }}"
           permit_fail: true
@@ -188,7 +188,7 @@ jobs:
     steps:
       - name: Checkout change
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/checkout-gerrit-change-action@35e98c8043ec411611e464e296bcfb441a5c5093  # v1.1.2
+        uses: lfreleng-actions/checkout-gerrit-change-action@8721c15dacdd703064df5ade1416f7e5590b65f3  # v1.4.1
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
           gerrit-project: ${{ inputs.GERRIT_PROJECT }}
@@ -212,7 +212,7 @@ jobs:
     steps:
       - name: Checkout change
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/checkout-gerrit-change-action@35e98c8043ec411611e464e296bcfb441a5c5093  # v1.1.2
+        uses: lfreleng-actions/checkout-gerrit-change-action@8721c15dacdd703064df5ade1416f7e5590b65f3  # v1.4.1
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
           gerrit-project: ${{ inputs.GERRIT_PROJECT }}
@@ -235,7 +235,7 @@ jobs:
     steps:
       - name: Checkout change
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/checkout-gerrit-change-action@35e98c8043ec411611e464e296bcfb441a5c5093  # v1.1.2
+        uses: lfreleng-actions/checkout-gerrit-change-action@8721c15dacdd703064df5ade1416f7e5590b65f3  # v1.4.1
         with:
           gerrit-refspec: ${{ inputs.GERRIT_REFSPEC }}
           gerrit-project: ${{ inputs.GERRIT_PROJECT }}
@@ -259,7 +259,7 @@ jobs:
         # yamllint disable-line rule:line-length
         uses: im-open/workflow-conclusion@8eac7f17381a6917bc04fec3e2c92e70ebc37526  # v3.0.0
       - name: Set vote
-        uses: lfreleng-actions/gerrit-review-action@d56b0b5c81402f8cb435aaca513bebdea3be951e  # v1.2.0
+        uses: lfreleng-actions/gerrit-review-action@31093af31cec3755c34d8563ee54e2b7eb3a4eac  # v1.3.1
         with:
           host: ${{ vars.LFIT_GERRIT_SERVER }}
           username: ${{ vars.LFIT_GERRIT_SSH_USER }}

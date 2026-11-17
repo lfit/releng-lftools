@@ -27,14 +27,14 @@ jobs:
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: 'audit'
 
       - name: 'Verify Pushed Tag'
         id: 'tag-validate'
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/tag-push-verify-action@004d5d7ae24ed32b3e57648caa2e47c176ad2aca # v0.1.4
+        uses: lfreleng-actions/tag-push-verify-action@cdf153720558395a1a9003785a3f8f9393c5d195 # v0.1.6
         with:
           versioning: 'semver'
 
@@ -92,7 +92,7 @@ jobs:
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: 'audit'
 
@@ -102,7 +102,7 @@ jobs:
       - name: 'Build Python project'
         id: 'python-build'
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/python-build-action@3cdb6f8e3b9c6c8fb21cce123f7b873b3620273d # v2.1.1
+        uses: lfreleng-actions/python-build-action@3a996fe53edf0117e283b9fef8d3aacaa9adaf02 # v2.1.2
         with:
           sigstore_sign: true
           attestations: true
@@ -121,7 +121,7 @@ jobs:
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: 'audit'
 
@@ -130,7 +130,7 @@ jobs:
 
       - name: 'Test Python project [PYTEST]'
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/python-test-action@0c2fe7546faea2321e003c1c3b26a9156a7bc432 # v1.3.1
+        uses: lfreleng-actions/python-test-action@644a2008072617b9cf4846ca2b9d385691f9dc67 # v1.3.3
         with:
           python_version: "${{ matrix.python-version }}"
 
@@ -149,7 +149,7 @@ jobs:
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: 'audit'
 
@@ -158,7 +158,7 @@ jobs:
 
       - name: 'Audit Python project'
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/python-audit-action@47af793a2a28882b10ceb9109646cbbcecc2e7b0 # v0.6.1
+        uses: lfreleng-actions/python-audit-action@379a6a772cdf47b130bae3ab47718a22518bb83c # v0.6.4
         with:
           python_version: "${{ matrix.python-version }}"
 
@@ -178,7 +178,7 @@ jobs:
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: 'audit'
 
@@ -187,7 +187,7 @@ jobs:
 
       - name: 'Test PyPI publishing'
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/pypi-publish-action@95a73a3d8f8a665d0816d35fcd6a75a2508e9aeb # v0.2.1
+        uses: lfreleng-actions/pypi-publish-action@b60c42d3d7b32ccf4c851d9e2995530965a6e9cd # v0.2.4
         with:
           environment: 'development'
           tag: "${{ needs.tag-validate.outputs.tag }}"
@@ -208,7 +208,7 @@ jobs:
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: 'audit'
 
@@ -217,7 +217,7 @@ jobs:
 
       - name: 'PyPI release'
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/pypi-publish-action@95a73a3d8f8a665d0816d35fcd6a75a2508e9aeb # v0.2.1
+        uses: lfreleng-actions/pypi-publish-action@b60c42d3d7b32ccf4c851d9e2995530965a6e9cd # v0.2.4
         with:
           environment: 'production'
           attestations: true
@@ -241,7 +241,7 @@ jobs:
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: 'audit'
 
@@ -269,7 +269,7 @@ jobs:
         id: 'promote-release'
         if: steps.check-promoted.outputs.already_promoted == 'false'
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/draft-release-promote-action@358264a2efca5ac359a90718373cbce18016bd27 # v0.1.7
+        uses: lfreleng-actions/draft-release-promote-action@b9e1fbf7c3ca0049dabc1a6d26f0be68a6bd99d8 # v0.1.8
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
           tag: "${{ needs.tag-validate.outputs.tag }}"
@@ -303,7 +303,7 @@ jobs:
     steps:
       # Harden the runner used by this workflow
       # yamllint disable-line rule:line-length
-      - uses: step-security/harden-runner@dc2769abcc0fcfbadfc1df54081c1608579ef6b2 # v2.22.2
+      - uses: step-security/harden-runner@1d88384fd173af6ecb012dfd0264a306b711241a # v2.22.4
         with:
           egress-policy: 'audit'
 
