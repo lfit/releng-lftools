@@ -20,8 +20,6 @@
 import os
 import sys
 
-import sphinx_bootstrap_theme  # noqa
-
 sys.path.insert(0, os.path.abspath(".."))
 
 # Keep the CLI deprecation notice out of program-output blocks.
